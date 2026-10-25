@@ -358,7 +358,29 @@ async function runTests() {
   assert.ok(auraRes.xaiPassport && auraRes.xaiPassport.passportId, 'AURA converse turn missing automated XAI passport');
   console.log(`✓ Layer 20: Regulatory Explainability & XAI Decision Passport Engine (EU AI Act Art. 13/14, LGPD Art. 20, NIST AI RMF, ISO 42001 & SHA-256 Merkle Seal) verified (${regulatoryEngine.passports.size} passports issued)`);
 
-  console.log('=== ALL 20 ARCHITECTURAL, REGULATORY EXPLAINABILITY, LENNOX GUARDIAN, IDENTITY/AUTH & MASTER C2 LAYERS PASSED 100% ===');
+  // 21. Test Institutional Assets, Articles, Interactive FAQ, About Us, and Mobile Navigation Architecture
+  const currentHtml = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
+  assert.ok(currentHtml.includes('id="articles"'), 'index.html missing articles section');
+  assert.ok(currentHtml.includes('id="faq"'), 'index.html missing FAQ section');
+  assert.ok(currentHtml.includes('id="about"'), 'index.html missing About Us section');
+  assert.ok(currentHtml.includes('id="mobile-menu-btn"'), 'index.html missing mobile hamburger menu button');
+  assert.ok(currentHtml.includes('id="mobile-drawer"'), 'index.html missing mobile slide-in drawer');
+  assert.ok(currentHtml.includes('class="mobile-bottom-dock"'), 'index.html missing mobile bottom dock');
+  assert.ok(currentHtml.includes('global-footer-corporate'), 'index.html missing 4-column global footer');
+  assert.ok(currentHtml.includes('id="faq-search-input"'), 'index.html missing FAQ interactive search bar');
+
+  const serverSrc = fs.readFileSync(path.join(rootDir, 'server.js'), 'utf8');
+  assert.ok(serverSrc.includes("'/articles'") && serverSrc.includes("'/faq'") && serverSrc.includes("'/about'"), 'server.js missing SPA routing for articles, faq, and about');
+
+  const appSrc = fs.readFileSync(path.join(rootDir, 'app.js'), 'utf8');
+  assert.ok(appSrc.includes("'articles'") && appSrc.includes("'faq'") && appSrc.includes("'about'"), 'app.js missing route handler for articles, faq, and about');
+  assert.ok(appSrc.includes('mobile-drawer'), 'app.js missing mobile drawer logic');
+
+  const i18nSrc = fs.readFileSync(path.join(rootDir, 'i18n.js'), 'utf8');
+  assert.ok(i18nSrc.includes('navArticles') && i18nSrc.includes('navFaq') && i18nSrc.includes('navAbout'), 'i18n.js missing bilingual definitions for articles, faq, and about');
+  console.log('✓ Layer 21: Institutional Central (/articles, /faq, /about, Global Footer & Full Mobile Navigation Drawer) verified');
+
+  console.log('=== ALL 21 ARCHITECTURAL, INSTITUTIONAL, MOBILE UX & COMPLIANCE LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

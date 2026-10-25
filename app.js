@@ -57,7 +57,10 @@ const NexusRouter = (() => {
     'knowledge',
     'studio',
     'proofs',
-    'guide'
+    'guide',
+    'articles',
+    'faq',
+    'about'
   ]);
 
   const ALIAS_MAP = {
@@ -81,7 +84,15 @@ const NexusRouter = (() => {
     'research': 'proofs',
     'metrics': 'proofs',
     'guide': 'guide',
-    'guia': 'guide'
+    'guia': 'guide',
+    'articles': 'articles',
+    'artigos': 'articles',
+    'faq': 'faq',
+    'duvidas': 'faq',
+    'perguntas': 'faq',
+    'about': 'about',
+    'sobre': 'about',
+    'sobre-nos': 'about'
   };
 
   const ROUTE_PATHS = {
@@ -93,7 +104,10 @@ const NexusRouter = (() => {
     'knowledge': '/knowledge',
     'studio': '/studio',
     'proofs': '/proofs',
-    'guide': '/guide'
+    'guide': '/guide',
+    'articles': '/articles',
+    'faq': '/faq',
+    'about': '/about'
   };
 
   const initializedModules = new Set();
@@ -319,6 +333,67 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === installModal) installModal.classList.remove('open');
     });
   }
+
+  // Mobile Navigation Drawer Handlers
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const drawerOverlay = document.getElementById('mobile-drawer-overlay');
+  const openDrawerBtn = document.getElementById('mobile-menu-btn');
+  const dockMenuBtn = document.getElementById('dock-menu-btn');
+  const closeDrawerBtn = document.getElementById('mobile-drawer-close');
+
+  function openDrawer() {
+    if (mobileDrawer) mobileDrawer.classList.add('open');
+    if (drawerOverlay) drawerOverlay.classList.add('open');
+  }
+
+  function closeDrawer() {
+    if (mobileDrawer) mobileDrawer.classList.remove('open');
+    if (drawerOverlay) drawerOverlay.classList.remove('open');
+  }
+
+  if (openDrawerBtn) openDrawerBtn.addEventListener('click', openDrawer);
+  if (dockMenuBtn) dockMenuBtn.addEventListener('click', (e) => { e.preventDefault(); openDrawer(); });
+  if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
+  if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+
+  document.querySelectorAll('#mobile-drawer [data-route-link]').forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+
+  // Interactive FAQ Accordion & Live Filter
+  document.querySelectorAll('.faq-accordion-header').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parent = btn.closest('.faq-item');
+      if (parent) parent.classList.toggle('active');
+    });
+  });
+
+  const faqSearch = document.getElementById('faq-search-input');
+  if (faqSearch) {
+    faqSearch.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(q) ? 'block' : 'none';
+      });
+    });
+  }
+
+  // Articles Filter Chips
+  document.querySelectorAll('.article-filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.article-filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const tag = chip.getAttribute('data-tag');
+      document.querySelectorAll('.article-card').forEach(card => {
+        if (!tag || tag === 'all' || card.getAttribute('data-category') === tag) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
 
   // Handle Schema.org SearchAction (?q=...) for direct search engine deep-linking into /knowledge
   const params = new URLSearchParams(window.location.search);

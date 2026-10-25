@@ -964,7 +964,7 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 7. Static File Serving + Clean SPA Route Fallback (/aura, /neural, /agents, /knowledge, /studio, /proofs, /guide)
+  // 7. Static File Serving + Clean SPA Route Fallback (/aura, /neural, /agents, /knowledge, /studio, /proofs, /guide, /articles, /faq, /about)
   const SPA_ROUTES = new Set([
     '/',
     '/home',
@@ -983,7 +983,13 @@ const server = http.createServer(async (req, res) => {
     '/proofs',
     '/research',
     '/guide',
-    '/guia'
+    '/guia',
+    '/articles',
+    '/artigos',
+    '/faq',
+    '/about',
+    '/sobre',
+    '/sobre-nos'
   ]);
   let filePath = SPA_ROUTES.has(pathname) ? '/index.html' : pathname;
   const resolvedPath = path.normalize(path.join(__dirname, filePath));

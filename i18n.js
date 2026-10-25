@@ -27,6 +27,9 @@ const I18nEngine = (() => {
       navStudio: '🎨 Estúdio',
       navProofs: '🏛️ Provas',
       navGuide: '📖 Guia',
+      navArticles: '📚 Artigos',
+      navFaq: '❓ FAQ',
+      navAbout: '🏢 Sobre Nós',
 
       navInstallApp: '📲 Instalar App',
       navSignIn: '👤 Entrar',
@@ -161,6 +164,9 @@ const I18nEngine = (() => {
       navStudio: '🎨 Studio',
       navProofs: '🏛️ Proofs',
       navGuide: '📖 Guide',
+      navArticles: '📚 Articles',
+      navFaq: '❓ FAQ',
+      navAbout: '🏢 About Us',
 
       navInstallApp: '📲 Install App',
       navSignIn: '👤 Sign In',
@@ -308,8 +314,8 @@ const I18nEngine = (() => {
       langBtn.title = t.langTitle;
     }
 
-    // 2. Navigation Bar Links
-    const navLinks = document.querySelectorAll('.nav-links .nav-link');
+    // 2. Navigation Bar & Mobile Drawer Links
+    const navLinks = document.querySelectorAll('.nav-links .nav-link, #mobile-drawer .nav-link');
     navLinks.forEach(link => {
       const route = link.getAttribute('data-route-link');
       if (route === 'home') link.textContent = t.navHome;
@@ -321,6 +327,9 @@ const I18nEngine = (() => {
       else if (route === 'studio') link.textContent = t.navStudio;
       else if (route === 'proofs') link.textContent = t.navProofs;
       else if (route === 'guide') link.textContent = t.navGuide;
+      else if (route === 'articles') link.textContent = t.navArticles;
+      else if (route === 'faq') link.textContent = t.navFaq;
+      else if (route === 'about') link.textContent = t.navAbout;
     });
 
     // 3. Navigation Bar Action Buttons

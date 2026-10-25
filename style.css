@@ -1319,27 +1319,153 @@ body {
   .graph-canvas-wrap { height: 400px; }
 }
 @media (max-width: 860px) {
-  .nav-center { display: none; }
+  .nav-center { display: none !important; }
+  .mobile-only-btn { display: inline-flex !important; }
+  .nav-status #key-btn { display: none; }
+  .nav-status #pwa-install-btn { display: none; }
+  .nav-status #key-status { display: none; }
 }
 @media (max-width: 768px) {
-  body { padding-bottom: 72px; }
-  #nav { padding: 0 1rem; height: 64px; }
-  .section { padding: 80px 1rem 50px; }
+  body { padding-bottom: 84px !important; }
+  #nav { padding: 0 0.85rem; height: 62px; }
+  .nav-brand-text .logo-text { font-size: 1.15rem; }
+  .section { padding: 75px 1rem 50px; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .gauge-row { grid-template-columns: 1fr; }
-  .nav-center { display: none; }
-  .nav-links { display: none; }
-  .logo-tag { display: none; }
-  .mobile-bottom-dock { display: flex; }
+  .nav-center { display: none !important; }
+  .nav-links { display: none !important; }
+  .logo-tag { display: none !important; }
+  .mobile-bottom-dock { display: flex !important; }
   .aura-style-strip { flex-direction: column; align-items: stretch; }
   .cc-omni-bar { flex-direction: column; align-items: stretch; }
   .task-planner-bar, .task-add-row { flex-wrap: wrap; }
   .hero-stat-row { flex-wrap: wrap; justify-content: center; }
+  .exec-dashboard-wrap { padding: 0 1rem 2.5rem; }
+  .exec-hub-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
   .metrics-grid { grid-template-columns: 1fr; }
-  .hero-title { font-size: 2.2rem; }
-  .msg-content { max-width: 90%; }
+  .hero-title { font-size: 1.85rem; line-height: 1.15; }
+  .hero-desc { font-size: 0.95rem; line-height: 1.6; }
+  .msg-content { max-width: 92%; }
+  .hero-cta-row > div { flex-direction: column; width: 100%; }
+  .hero-cta-row button { width: 100%; justify-content: center; }
+  .aura-voice-controls { width: 100%; justify-content: space-between; }
+  .nav-status .btn-primary, .nav-status .btn-secondary {
+    padding: 0 0.5rem !important;
+    font-size: 0.70rem !important;
+    height: 32px;
+  }
+}
+
+/* ── Mobile Navigation Drawer & Hamburger ───────────── */
+.mobile-only-btn {
+  display: none;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(0, 245, 255, 0.35);
+  color: var(--cyan);
+  font-size: 1.25rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  line-height: 1;
+}
+.mobile-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.mobile-drawer-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 86%;
+  max-width: 360px;
+  z-index: 2001;
+  background: rgba(4, 8, 20, 0.97);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-left: 1px solid rgba(0, 245, 255, 0.25);
+  box-shadow: -8px 0 36px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  padding: 1.25rem;
+}
+.mobile-drawer.open {
+  transform: translateX(0);
+}
+.mobile-drawer .nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  border-radius: 8px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.mobile-drawer .nav-link:hover, .mobile-drawer .nav-link.active {
+  color: var(--cyan);
+  background: rgba(0, 245, 255, 0.1);
+  border-color: rgba(0, 245, 255, 0.3);
+}
+
+/* ── Interactive FAQ Accordion Styles ───────────────── */
+.faq-item {
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.faq-item.active {
+  border-color: rgba(0, 245, 255, 0.4) !important;
+  background: rgba(15, 23, 42, 0.85) !important;
+}
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.32s cubic-bezier(0.16, 1, 0.3, 1), padding 0.32s ease;
+  padding: 0 1.2rem;
+}
+.faq-item.active .faq-content {
+  max-height: 480px;
+  padding: 0 1.2rem 1.2rem;
+}
+.faq-icon {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+/* ── Article Filter Chips ───────────────────────────── */
+.article-filter-chip {
+  padding: 0.45rem 1rem !important;
+  font-size: 0.78rem !important;
+  border-radius: 9999px !important;
+  white-space: nowrap;
+}
+.article-filter-chip.active {
+  background: rgba(0, 245, 255, 0.15) !important;
+  border-color: var(--cyan) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 14px rgba(0, 245, 255, 0.25);
 }
 
 /* ── Modular Route-Based SPA & Executive Home Dashboard ── */
