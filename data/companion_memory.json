@@ -6,6 +6,27 @@
   ],
   "dailyJournal": [
     {
+      "id": "4002670f-5074-4b78-b722-998cee69b783",
+      "date": "2026-10-25",
+      "time": "00:45:31",
+      "insight": "Explorou \"Eu prefiro aprender com histórias visuais e sem medo de erra\" usando a lente [Visual, Lúdico & Histórias Criativas]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "c6a6d95f-fa88-4eb1-886c-b348fc8bc840",
+      "date": "2026-10-25",
+      "time": "00:45:31",
+      "insight": "Perspectiva compartilhada pelo usuário: \"Eu prefiro aprender com histórias visuais e sem medo de errar\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "78044f59-fb07-458b-a7f7-73653eccd5e0",
+      "date": "2026-10-25",
+      "time": "00:42:12",
+      "insight": "O usuário demonstra que prefere converter dados científicos densos em metáforas narrativas para facilitar a internalização do conceito.",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "38f2a6db-5d84-4e81-9972-c822251495b4",
       "date": "2026-10-25",
       "time": "00:38:55",
@@ -20,5 +41,5 @@
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 1
+  "interactionCount": 3
 }

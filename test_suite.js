@@ -97,7 +97,13 @@ async function runTests() {
   assert.ok(teaRes.content.includes('História Social') || teaRes.content.length > 100, 'TEA Ludic Literature generation failed');
   console.log(`✓ Layer 8: Cooperative Controlled Release Gate & TEA Inclusive Pedagogy verified (${gateEval.releaseGate}, ${gateEval.sustainability.requestJoules}J)`);
 
-  // 9. Test Sovereign Security Controller & Master AI Kill-Switch
+  // 9. Test Sovereign Security Controller, Owner-Only Admin Auth & Master AI Kill-Switch
+  const badAuth = securityController.login('wrong-key');
+  assert.equal(badAuth, null, 'Security controller accepted invalid passkey');
+  const validToken = securityController.login(process.env.NEXUS_ADMIN_KEY || 'NEXUS-SOVEREIGN-2026');
+  assert.ok(typeof validToken === 'string' && validToken.length === 64, 'Security controller failed to issue admin session token');
+  assert.equal(securityController.verifyAdminToken(validToken), true, 'Admin Bearer token verification failed');
+
   securityController.engageKillSwitch('Unit Test Emergency Stop');
   assert.equal(securityController.emergencyLockdown, true, 'Kill-Switch failed to engage');
   let blockedError = null;
@@ -110,7 +116,7 @@ async function runTests() {
   securityController.disengageKillSwitch();
   assert.equal(securityController.emergencyLockdown, false, 'Kill-Switch failed to restore');
   assert.equal(securityController.assertAllowed('llm'), true, 'System did not restore access after disengage');
-  console.log(`✓ Layer 9: Sovereign Security Dashboard & Master Kill-Switch verified (${securityController.getState().blockedAttempts} blocked attempt recorded)`);
+  console.log(`✓ Layer 9: Owner-Only Sovereign Security Plane & Master Kill-Switch verified (${securityController.getState().blockedAttempts} blocked attempt recorded)`);
 
   // 10. Test AURA Daily-Learning Companion Agent & Pluralistic Philosophy Engine
   const auraRes = await companionEngine.converse({

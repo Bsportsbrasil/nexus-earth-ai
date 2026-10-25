@@ -53,7 +53,6 @@
       <ul class="nav-links">
         <li><a href="#companion" class="nav-link active" data-section="companion">✨ AURA Live</a></li>
         <li><a href="#command-center" class="nav-link" data-section="command-center">⚡ Command Center</a></li>
-        <li><a href="#security" class="nav-link" data-section="security">🛡️ Security &amp; Kill-Switch</a></li>
         <li><a href="#cooperative" class="nav-link" data-section="cooperative">🌱 Cooperative &amp; TEA</a></li>
         <li><a href="#assistant" class="nav-link" data-section="assistant">📅 Assistant &amp; Studio</a></li>
         <li><a href="#neural" class="nav-link" data-section="neural">Neural</a></li>
@@ -64,7 +63,6 @@
       </ul>
       <div class="nav-status">
         <span id="key-status" class="key-status demo">DEMO MODE</span>
-        <button id="nav-kill-btn" class="btn-kill-mini" title="Parada de Emergência Total da IA (Kill-Switch)">🛑 STOP AI</button>
         <button id="key-btn" class="btn-secondary">🔑 API Key</button>
       </div>
     </div>
@@ -263,74 +261,6 @@
         </div>
         <div class="cc-broker-log" id="cc-broker-log">
           <div class="broker-line">[SYSTEM] RFC 6455 WebSocket &amp; MessageBroker initialized.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sovereign Security Governance & Emergency Kill-Switch Dashboard -->
-  <section id="security" class="section">
-    <div class="section-header">
-      <div class="section-tag">Sovereign Human Control</div>
-      <h2 class="section-title">Security Governance &amp; Master AI Kill-Switch</h2>
-      <p class="section-desc">Total human sovereignty over the superintelligence platform. Freeze individual subsystems, purge runtime credentials from memory, or engage the Master Kill-Switch to immediately cut all AI inference and external access.</p>
-    </div>
-
-    <div class="security-dashboard-grid">
-      <!-- Master Kill-Switch Card -->
-      <div class="panel glass-panel sec-master-card" id="sec-master-card">
-        <div class="cc-pane-header">
-          <span class="panel-title">🛑 Master Emergency Stop (Hard Circuit Breaker)</span>
-          <span class="agent-badge DONE" id="sec-status-badge">SYSTEM ARMED &amp; SAFE</span>
-        </div>
-        <p class="sec-desc">O botão abaixo corta instantaneamente no servidor (`HTTP 423 Locked` + bloqueio de WebSockets) todo o acesso do modelo LLM, dos Agentes Autônomos, do GraphRAG e do Estúdio.</p>
-        <div class="kill-switch-actions">
-          <button class="btn-kill-master" id="sec-kill-btn">🛑 PARAR COMPLETAMENTE O ACESSO DA IA (KILL-SWITCH)</button>
-          <button class="btn-restore-master" id="sec-restore-btn" style="display:none">✅ RESTAURAR E REAUTORIZAR ACESSO DA IA</button>
-        </div>
-        <div class="sec-quick-actions">
-          <button class="btn-secondary" id="sec-purge-keys-btn" style="flex:1;justify-content:center">🧹 Purge Runtime API Keys (Limpar Chave da Memória)</button>
-        </div>
-      </div>
-
-      <!-- Granular Subsystem Circuit Breakers -->
-      <div class="panel glass-panel sec-breakers-card">
-        <div class="cc-pane-header">
-          <span class="panel-title">🎛️ Disjuntores por Subsistema (Circuit Breakers)</span>
-          <span class="agent-badge IDLE" id="sec-blocked-counter">0 Blocked</span>
-        </div>
-        <div class="breaker-list" id="sec-breaker-list">
-          <div class="breaker-row">
-            <div><strong>Frontier LLM Core (`gemini-3-flash`)</strong><small>Inferência generativa e extração de pensamento</small></div>
-            <button class="breaker-btn on" data-mod="llm">ONLINE</button>
-          </div>
-          <div class="breaker-row">
-            <div><strong>Autonomous Multi-Agent DAG</strong><small>Orquestração Planner, Critic, Executor, Verifier</small></div>
-            <button class="breaker-btn on" data-mod="agents">ONLINE</button>
-          </div>
-          <div class="breaker-row">
-            <div><strong>External GraphRAG &amp; Web Ingestion</strong><small>Acesso externo à Wikipedia REST &amp; Crossref DOI</small></div>
-            <button class="breaker-btn on" data-mod="graphrag">ONLINE</button>
-          </div>
-          <div class="breaker-row">
-            <div><strong>Multimodal Visual &amp; Report Studio</strong><small>Síntese de imagens, diagramas SVG e apresentações</small></div>
-            <button class="breaker-btn on" data-mod="studio">ONLINE</button>
-          </div>
-          <div class="breaker-row">
-            <div><strong>Task &amp; Calendar Automation</strong><small>Agendamento automático de rotinas e exportação .ICS</small></div>
-            <button class="breaker-btn on" data-mod="tasks">ONLINE</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Real-Time Security Audit Log -->
-      <div class="panel glass-panel sec-audit-card">
-        <div class="cc-pane-header">
-          <span class="panel-title">🔒 Real-Time Security &amp; Access Audit Log</span>
-          <span class="agent-badge DONE">LIVE AUDIT</span>
-        </div>
-        <div class="cc-broker-log" id="sec-events-log" style="min-height:220px">
-          <div class="broker-line">[SECURITY] All AI circuit breakers armed and monitored.</div>
         </div>
       </div>
     </div>
@@ -778,7 +708,7 @@
     <a href="#command-center" class="dock-item" data-section="command-center"><span>⚡</span><small>Control</small></a>
     <a href="#cooperative" class="dock-item" data-section="cooperative"><span>🌱</span><small>TEA/Ética</small></a>
     <a href="#assistant" class="dock-item" data-section="assistant"><span>📅</span><small>Agenda</small></a>
-    <a href="#security" class="dock-item dock-stop" data-section="security"><span>🛑</span><small>Segurança</small></a>
+    <a href="#chat" class="dock-item" data-section="chat"><span>💬</span><small>Chat</small></a>
   </div>
 
   <!-- API Key Modal -->
@@ -805,7 +735,6 @@
   <script src="metrics.js"></script>
   <script src="companion_ui.js"></script>
   <script src="command_center.js"></script>
-  <script src="security_ui.js"></script>
   <script src="cooperative_ui.js"></script>
   <script src="assistant_studio.js"></script>
   <script src="app.js"></script>

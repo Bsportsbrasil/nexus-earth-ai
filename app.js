@@ -1,6 +1,6 @@
 // App bootstrap + nav highlighting
 document.addEventListener('DOMContentLoaded', () => {
-  [CompanionUI, CommandCenter, SecurityUI, CooperativeUI, AssistantStudio, NeuralViz, Agents, Graph, Chat, Metrics].forEach(m => {
+  [CompanionUI, CommandCenter, CooperativeUI, AssistantStudio, NeuralViz, Agents, Graph, Chat, Metrics].forEach(m => {
     try { m.init(); } catch (e) { console.error(e); }
   });
   const links = document.querySelectorAll('.nav-link');

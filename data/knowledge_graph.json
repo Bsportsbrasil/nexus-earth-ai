@@ -53,7 +53,7 @@
         "defined": 0.09449111825230687,
         "goals": 0.09449111825230687
       },
-      "updatedAt": 1792899265395
+      "updatedAt": 1792899567162
     },
     {
       "id": "15.ai",
@@ -62,7 +62,7 @@
       "summary": "",
       "url": "",
       "vector": {},
-      "updatedAt": 1792899265642
+      "updatedAt": 1792899567392
     },
     {
       "id": "1x technologies",
@@ -73,7 +73,7 @@
       "vector": {
         "technologies": 1
       },
-      "updatedAt": 1792899265643
+      "updatedAt": 1792899567392
     },
     {
       "id": "2024 indian general election",
@@ -87,7 +87,7 @@
         "general": 0.5,
         "election": 0.5
       },
-      "updatedAt": 1792899265643
+      "updatedAt": 1792899567392
     },
     {
       "id": "3d optical data storage",
@@ -100,7 +100,7 @@
         "data": 0.5773502691896258,
         "storage": 0.5773502691896258
       },
-      "updatedAt": 1792899265643
+      "updatedAt": 1792899567392
     },
     {
       "id": "a* search algorithm",
@@ -112,7 +112,7 @@
         "search": 0.7071067811865476,
         "algorithm": 0.7071067811865476
       },
-      "updatedAt": 1792899265643
+      "updatedAt": 1792899567392
     },
     {
       "id": "a.i. artificial intelligence",
@@ -124,7 +124,7 @@
         "artificial": 0.7071067811865476,
         "intelligence": 0.7071067811865476
       },
-      "updatedAt": 1792899265643
+      "updatedAt": 1792899567392
     },
     {
       "id": "aaai",
@@ -135,7 +135,7 @@
       "vector": {
         "aaai": 1
       },
-      "updatedAt": 1792899265643
+      "updatedAt": 1792899567392
     },
     {
       "id": "abb",
@@ -146,7 +146,7 @@
       "vector": {
         "abb": 1
       },
-      "updatedAt": 1792899265643
+      "updatedAt": 1792899567392
     },
     {
       "id": "acm computing classification system",
@@ -160,7 +160,7 @@
         "classification": 0.5,
         "system": 0.5
       },
-      "updatedAt": 1792899265643
+      "updatedAt": 1792899567392
     },
     {
       "id": "acm sigevo",
@@ -172,7 +172,7 @@
         "acm": 0.7071067811865476,
         "sigevo": 0.7071067811865476
       },
-      "updatedAt": 1792899265643
+      "updatedAt": 1792899567392
     },
     {
       "id": "paper:10.3403/30483942u",
@@ -195,7 +195,7 @@
         "org": 0.19999999999999998,
         "30483942u": 0.19999999999999998
       },
-      "updatedAt": 1792899266239
+      "updatedAt": 1792899567819
     },
     {
       "id": "paper:10.1093/hesc/9780198557364.003.0001",
@@ -222,7 +222,7 @@
         "003": 0.1856953381770518,
         "0001": 0.1856953381770518
       },
-      "updatedAt": 1792899266239
+      "updatedAt": 1792899567819
     },
     {
       "id": "paper:10.3403/30483942",
@@ -245,7 +245,7 @@
         "https": 0.19999999999999998,
         "org": 0.19999999999999998
       },
-      "updatedAt": 1792899266239
+      "updatedAt": 1792899567819
     },
     {
       "id": "2025 portuguese legislative election",
@@ -838,7 +838,7 @@
         "attention": 0.22360679774997896,
         "mechanism": 0.22360679774997896
       },
-      "updatedAt": 1792899533346
+      "updatedAt": 1792899929259
     },
     {
       "id": "self-attention",
@@ -856,7 +856,7 @@
         "single": 0.3015113445777636,
         "sequence": 0.3015113445777636
       },
-      "updatedAt": 1792899533346
+      "updatedAt": 1792899929260
     },
     {
       "id": "paper:10.21711/2319023x2026/pmo1429",
@@ -941,6 +941,250 @@
         "v1i12": 0.1924500897298752
       },
       "updatedAt": 1792898788267
+    },
+    {
+      "id": "zimbra (banda)",
+      "label": "Zimbra (banda)",
+      "category": "Root",
+      "summary": "Zimbra é uma banda de pop rock santista, composta por Rafael Costa, ou Bola, Vitor Fernandes, Guilherme Goes (baixo) e Pedro Furtado (bateria). A banda tomou uma proporção nacional, chegando a tocar em festivais grandes, como Lollapalooza de 2015 e no Rock In Rio de 2019. A banda também fez parte da trilha sonora da série original Globoplay \"Shippados\", com a música \"Me Mude\".",
+      "url": "https://pt.wikipedia.org/wiki/Zimbra_(banda)",
+      "vector": {
+        "2015": 0.12216944435630532,
+        "2019": 0.12216944435630532,
+        "zimbra": 0.24433888871261064,
+        "banda": 0.4886777774252213,
+        "uma": 0.24433888871261064,
+        "pop": 0.12216944435630532,
+        "rock": 0.24433888871261064,
+        "santista": 0.12216944435630532,
+        "composta": 0.12216944435630532,
+        "por": 0.12216944435630532,
+        "rafael": 0.12216944435630532,
+        "costa": 0.12216944435630532,
+        "bola": 0.12216944435630532,
+        "vitor": 0.12216944435630532,
+        "fernandes": 0.12216944435630532,
+        "guilherme": 0.12216944435630532,
+        "goes": 0.12216944435630532,
+        "baixo": 0.12216944435630532,
+        "pedro": 0.12216944435630532,
+        "furtado": 0.12216944435630532,
+        "bateria": 0.12216944435630532,
+        "tomou": 0.12216944435630532,
+        "proporção": 0.12216944435630532,
+        "nacional": 0.12216944435630532,
+        "chegando": 0.12216944435630532,
+        "tocar": 0.12216944435630532,
+        "festivais": 0.12216944435630532,
+        "grandes": 0.12216944435630532,
+        "como": 0.12216944435630532,
+        "lollapalooza": 0.12216944435630532,
+        "rio": 0.12216944435630532,
+        "também": 0.12216944435630532,
+        "fez": 0.12216944435630532,
+        "parte": 0.12216944435630532,
+        "trilha": 0.12216944435630532,
+        "sonora": 0.12216944435630532,
+        "série": 0.12216944435630532,
+        "original": 0.12216944435630532,
+        "globoplay": 0.12216944435630532,
+        "shippados": 0.12216944435630532,
+        "com": 0.12216944435630532,
+        "música": 0.12216944435630532,
+        "mude": 0.12216944435630532
+      },
+      "updatedAt": 1792899723729
+    },
+    {
+      "id": "2010",
+      "label": "2010",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2010": 1
+      },
+      "updatedAt": 1792899723954
+    },
+    {
+      "id": "2012",
+      "label": "2012",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2012": 1
+      },
+      "updatedAt": 1792899723954
+    },
+    {
+      "id": "2013",
+      "label": "2013",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2013": 1
+      },
+      "updatedAt": 1792899723955
+    },
+    {
+      "id": "2014",
+      "label": "2014",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2014": 1
+      },
+      "updatedAt": 1792899723955
+    },
+    {
+      "id": "2015",
+      "label": "2015",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2015": 1
+      },
+      "updatedAt": 1792899723955
+    },
+    {
+      "id": "2016",
+      "label": "2016",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2016": 1
+      },
+      "updatedAt": 1792899723955
+    },
+    {
+      "id": "2017",
+      "label": "2017",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2017": 1
+      },
+      "updatedAt": 1792899723955
+    },
+    {
+      "id": "2019",
+      "label": "2019",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2019": 1
+      },
+      "updatedAt": 1792899723955
+    },
+    {
+      "id": "2020",
+      "label": "2020",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2020": 1
+      },
+      "updatedAt": 1792899723955
+    },
+    {
+      "id": "2022",
+      "label": "2022",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2022": 1
+      },
+      "updatedAt": 1792899723955
+    },
+    {
+      "id": "paper:10.4324/9780203132708-1",
+      "label": "Oi, tudo bem? (2003)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Colloquial Portuguese of Brazil (2003). DOI: https://doi.org/10.4324/9780203132708-1",
+      "url": "https://doi.org/10.4324/9780203132708-1",
+      "vector": {
+        "2003": 0.4364357804719848,
+        "4324": 0.2182178902359924,
+        "tudo": 0.2182178902359924,
+        "bem": 0.2182178902359924,
+        "peer": 0.2182178902359924,
+        "reviewed": 0.2182178902359924,
+        "study": 0.2182178902359924,
+        "published": 0.2182178902359924,
+        "colloquial": 0.2182178902359924,
+        "portuguese": 0.2182178902359924,
+        "brazil": 0.2182178902359924,
+        "doi": 0.4364357804719848,
+        "https": 0.2182178902359924,
+        "org": 0.2182178902359924,
+        "9780203132708": 0.2182178902359924
+      },
+      "updatedAt": 1792899724690
+    },
+    {
+      "id": "paper:10.4324/9780203889183-6",
+      "label": "Oi, tudo bern? Hi, is everything OK? (2014)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Colloquial Portuguese of Brazil (2014). DOI: https://doi.org/10.4324/9780203889183-6",
+      "url": "https://doi.org/10.4324/9780203889183-6",
+      "vector": {
+        "2014": 0.42640143271122083,
+        "4324": 0.21320071635561041,
+        "tudo": 0.21320071635561041,
+        "bern": 0.21320071635561041,
+        "everything": 0.21320071635561041,
+        "peer": 0.21320071635561041,
+        "reviewed": 0.21320071635561041,
+        "study": 0.21320071635561041,
+        "published": 0.21320071635561041,
+        "colloquial": 0.21320071635561041,
+        "portuguese": 0.21320071635561041,
+        "brazil": 0.21320071635561041,
+        "doi": 0.42640143271122083,
+        "https": 0.21320071635561041,
+        "org": 0.21320071635561041,
+        "9780203889183": 0.21320071635561041
+      },
+      "updatedAt": 1792899724690
+    },
+    {
+      "id": "paper:10.23911/apoo_25anos_2020_1",
+      "label": "O que faz bem ao osso faz bem a tudo (2020)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Revista de Medicina Desportiva informa (2020). DOI: https://doi.org/10.23911/apoo_25anos_2020_1",
+      "url": "https://doi.org/10.23911/apoo_25anos_2020_1",
+      "vector": {
+        "2020": 0.49319696191607176,
+        "23911": 0.16439898730535724,
+        "que": 0.16439898730535724,
+        "faz": 0.32879797461071447,
+        "bem": 0.32879797461071447,
+        "osso": 0.16439898730535724,
+        "tudo": 0.16439898730535724,
+        "peer": 0.16439898730535724,
+        "reviewed": 0.16439898730535724,
+        "study": 0.16439898730535724,
+        "published": 0.16439898730535724,
+        "revista": 0.16439898730535724,
+        "medicina": 0.16439898730535724,
+        "desportiva": 0.16439898730535724,
+        "informa": 0.16439898730535724,
+        "doi": 0.32879797461071447,
+        "https": 0.16439898730535724,
+        "org": 0.16439898730535724,
+        "apoo": 0.16439898730535724,
+        "25anos": 0.16439898730535724
+      },
+      "updatedAt": 1792899724690
     }
   ],
   "edges": [
@@ -1105,6 +1349,84 @@
       "target": "self-attention",
       "type": "USES_MECHANISM",
       "weight": 0.98
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "2010",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "2012",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "2013",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "2014",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "2015",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "2016",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "2017",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "2019",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "2020",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "2022",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "paper:10.4324/9780203132708-1",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "paper:10.4324/9780203889183-6",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "zimbra (banda)",
+      "target": "paper:10.23911/apoo_25anos_2020_1",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
     }
   ]
 }

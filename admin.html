@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUS — Sovereign Owner Control Plane (Restricted)</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body style="min-height:100vh;display:flex;flex-direction:column">
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Top Bar -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span class="logo-text">NEXUS</span>
+        <span class="logo-tag" style="border-color:var(--rose);color:var(--rose)">OWNER SOVEREIGN CONSOLE</span>
+      </div>
+      <div class="nav-status">
+        <a href="/" class="btn-secondary" style="text-decoration:none">↗ Ver Plataforma dos Usuários</a>
+        <button id="admin-logout-btn" class="btn-secondary" style="display:none">🔒 Sair</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Authentication Gate (Shown when not logged in) -->
+  <section id="admin-auth-gate" class="section" style="margin:auto;max-width:460px;width:100%">
+    <div class="panel glass-panel" style="padding:2rem;display:flex;flex-direction:column;gap:1rem;text-align:center">
+      <div class="section-tag" style="margin:0 auto">Acesso Restrito à Criadora</div>
+      <h2 style="font-family:var(--font-display);font-size:1.5rem">Sovereign Control Plane</h2>
+      <p style="font-size:0.84rem;color:var(--text-secondary)">Este painel é totalmente separado da área pública dos usuários. Insira sua Chave Mestra de Administradora (`NEXUS_ADMIN_KEY`) para gerenciar os disjuntores e o Master Kill-Switch.</p>
+      <input type="password" id="admin-pass-input" class="text-input" placeholder="Chave Mestra de Administradora..." style="text-align:center;font-family:var(--font-mono)" />
+      <div id="admin-auth-error" style="color:var(--rose);font-size:0.78rem;display:none"></div>
+      <button class="btn-primary full-width" id="admin-login-btn">🔓 Desbloquear Painel Soberano</button>
+    </div>
+  </section>
+
+  <!-- Sovereign Dashboard (Shown only after valid token authentication) -->
+  <section id="admin-dashboard" class="section" style="display:none;width:100%">
+    <div class="section-header">
+      <div class="section-tag">Exclusive Owner Governance</div>
+      <h2 class="section-title">Master AI Kill-Switch &amp; System Control Dashboard</h2>
+      <p class="section-desc">Controle exclusivo sobre toda a plataforma NEXUS. Os usuários públicos não têm acesso nem visibilidade sobre esta página.</p>
+    </div>
+
+    <div class="security-dashboard-grid">
+      <!-- 1. Master Kill-Switch -->
+      <div class="panel glass-panel sec-master-card" id="sec-master-card">
+        <div class="cc-pane-header">
+          <span class="panel-title">🛑 Master Emergency Stop (Kill-Switch)</span>
+          <span class="agent-badge DONE" id="sec-status-badge">SYSTEM ARMED &amp; SAFE</span>
+        </div>
+        <p class="sec-desc">Corta imediatamente em nível de servidor (`HTTP 423 Locked` + WebSockets) todo o acesso da IA, da AURA, dos Agentes, do GraphRAG e do Estúdio para todos os usuários.</p>
+        <div class="kill-switch-actions">
+          <button class="btn-kill-master" id="sec-kill-btn">🛑 PARAR COMPLETAMENTE O ACESSO DA IA (KILL-SWITCH)</button>
+          <button class="btn-restore-master" id="sec-restore-btn" style="display:none">✅ RESTAURAR E REAUTORIZAR ACESSO DA IA</button>
+        </div>
+        <div class="sec-quick-actions">
+          <button class="btn-secondary" id="sec-purge-keys-btn" style="flex:1;justify-content:center">🧹 Purge Runtime API Keys (Limpar Chave Gemini da Memória)</button>
+        </div>
+      </div>
+
+      <!-- 2. Granular Subsystem Circuit Breakers -->
+      <div class="panel glass-panel sec-breakers-card">
+        <div class="cc-pane-header">
+          <span class="panel-title">🎛️ Disjuntores por Subsistema</span>
+          <span class="agent-badge IDLE" id="sec-blocked-counter">0 Blocked</span>
+        </div>
+        <div class="breaker-list" id="sec-breaker-list">
+          <div class="breaker-row">
+            <div><strong>Frontier LLM &amp; AURA (`gemini-3-flash`)</strong><small>Conversação AURA, Chat e raciocínio generativo</small></div>
+            <button class="breaker-btn on" data-mod="llm">ONLINE</button>
+          </div>
+          <div class="breaker-row">
+            <div><strong>Autonomous Multi-Agent DAG</strong><small>Orquestração Planner, Critic, Executor, Verifier</small></div>
+            <button class="breaker-btn on" data-mod="agents">ONLINE</button>
+          </div>
+          <div class="breaker-row">
+            <div><strong>External GraphRAG &amp; Web Ingestion</strong><small>Consultas externas à Wikipedia REST &amp; Crossref DOI</small></div>
+            <button class="breaker-btn on" data-mod="graphrag">ONLINE</button>
+          </div>
+          <div class="breaker-row">
+            <div><strong>Multimodal Visual &amp; Report Studio</strong><small>Síntese de imagens, diagramas SVG e apresentações</small></div>
+            <button class="breaker-btn on" data-mod="studio">ONLINE</button>
+          </div>
+          <div class="breaker-row">
+            <div><strong>Task &amp; Calendar Automation</strong><small>Agendamento automático de rotinas e exportação .ICS</small></div>
+            <button class="breaker-btn on" data-mod="tasks">ONLINE</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Real-Time Security Audit & Telemetry -->
+      <div class="panel glass-panel sec-audit-card">
+        <div class="cc-pane-header">
+          <span class="panel-title">🔒 Auditoria de Segurança &amp; Telemetria do Servidor</span>
+          <span class="agent-badge DONE">OWNER ONLY</span>
+        </div>
+        <div class="cc-telemetry-strip">
+          <div class="cc-mini-stat"><span id="adm-cpu">--%</span><small>CPU</small></div>
+          <div class="cc-mini-stat"><span id="adm-ram">-- GB</span><small>RAM</small></div>
+          <div class="cc-mini-stat"><span id="adm-tokens">0</span><small>Tokens</small></div>
+          <div class="cc-mini-stat"><span id="adm-calls">0</span><small>API Calls</small></div>
+        </div>
+        <div class="cc-broker-log" id="sec-events-log" style="min-height:200px"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="particles.js"></script>
+  <script src="security_ui.js"></script>
+</body>
+</html>

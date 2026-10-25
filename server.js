@@ -185,17 +185,39 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
-  // 2b. Sovereign Security & Kill-Switch Governance Endpoint (/api/security)
+  // 2b. Sovereign Admin Authentication & Security Governance Endpoint (/api/admin/login, /api/security)
+  if (req.method === 'POST' && pathname === '/api/admin/login') {
+    try {
+      const body = await parseJsonBody(req);
+      const token = securityController.login(body.passkey);
+      if (!token) {
+        return jsonResponse(res, 401, { error: 'Chave de Administradora inválida. Acesso negado.' });
+      }
+      return jsonResponse(res, 200, { token, state: securityController.getState() });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
   if (pathname === '/api/security') {
+    const authHeader = req.headers['authorization'] || '';
+    if (!securityController.verifyAdminToken(authHeader)) {
+      return jsonResponse(res, 401, { error: 'UNAUTHORIZED_ADMIN_ONLY: Apenas a administradora possui acesso a este painel.' });
+    }
     if (req.method === 'GET') {
-      return jsonResponse(res, 200, securityController.getState());
+      const gStats = { totalNodes: graphDB.nodes.size, totalEdges: graphDB.edges.length };
+      const bStats = broker.getStats();
+      return jsonResponse(res, 200, {
+        ...securityController.getState(),
+        telemetry: telemetry.getSnapshot(gStats, bStats)
+      });
     }
     if (req.method === 'POST') {
       try {
         const body = await parseJsonBody(req);
         let state;
         if (body.action === 'kill_switch') {
-          state = securityController.engageKillSwitch(body.reason || 'Acionado pelo Operador Humano');
+          state = securityController.engageKillSwitch(body.reason || 'Acionado pela Administradora');
         } else if (body.action === 'restore') {
           state = securityController.disengageKillSwitch();
         } else if (body.action === 'toggle_module') {
@@ -205,7 +227,7 @@ const server = http.createServer(async (req, res) => {
         } else {
           state = securityController.getState();
         }
-        broadcastWs({ type: 'security_state', data: state });
+        broadcastWs({ type: 'security_state', data: { emergencyLockdown: state.emergencyLockdown, modules: state.modules } });
         return jsonResponse(res, 200, state);
       } catch (e) {
         return jsonResponse(res, 400, { error: e.message });
