@@ -135,6 +135,21 @@ const SupervisorWorkspace = (function () {
   }
 
   // --- Dialogue with Supreme Supervisor Agent ---
+  function showSupervisorTyping() {
+    const box = document.getElementById('sup-lead-messages');
+    if (!box) return;
+    const b = document.createElement('div');
+    b.id = 'sup-lead-typing';
+    b.className = 'dash-chat-bubble agent';
+    b.innerHTML = '<div class="bubble-header">🛡️ LENNOX SUPREME OVERSIGHT <span class="bubble-time">pensando...</span></div><div class="bubble-body" style="color:var(--cyan);font-style:italic">⚡ Raciocinando e analisando diretrizes...</div>';
+    box.appendChild(b);
+    box.scrollTop = box.scrollHeight;
+  }
+  function removeSupervisorTyping() {
+    const el = document.getElementById('sup-lead-typing');
+    if (el) el.remove();
+  }
+
   async function sendToSupervisor(text) {
     const clean = (text || '').trim();
     if (!clean) return;
@@ -142,6 +157,7 @@ const SupervisorWorkspace = (function () {
     appendSupervisorBubble('creator', clean);
     const input = document.getElementById('sup-lead-input');
     if (input) input.value = '';
+    showSupervisorTyping();
 
     try {
       const res = await fetch('/api/supervisor/converse', {
@@ -153,14 +169,16 @@ const SupervisorWorkspace = (function () {
           clientTemporal: getClientTemporal()
         })
       });
+      removeSupervisorTyping();
       const data = await res.json();
       if (res.ok) {
         appendSupervisorBubble('supervisor', data.reply);
-        if (ttsEnabled && data.voiceText) speak(data.voiceText);
+        if (ttsEnabled && data.voiceText) speak(data.voiceText, { persona: 'supervisor' });
       } else {
         appendSupervisorBubble('supervisor', `Erro do Supervisor: ${data.error}`);
       }
     } catch (e) {
+      removeSupervisorTyping();
       appendSupervisorBubble('supervisor', `Falha de conexão: ${e.message}`);
     }
   }
@@ -180,6 +198,22 @@ const SupervisorWorkspace = (function () {
   }
 
   // --- Dialogue with Subordinate Agent ---
+  function showSubordinateTyping() {
+    const box = document.getElementById('sup-sub-messages');
+    if (!box) return;
+    const ag = getSelectedSubordinate();
+    const b = document.createElement('div');
+    b.id = 'sup-sub-typing';
+    b.className = 'dash-chat-bubble agent';
+    b.innerHTML = `<div class="bubble-header">🤖 ${esc(ag?.name || 'Agente')} <span class="bubble-time">digitando...</span></div><div class="bubble-body" style="color:var(--text-secondary);font-style:italic">✨ Consultando memória vetorial e formulando resposta...</div>`;
+    box.appendChild(b);
+    box.scrollTop = box.scrollHeight;
+  }
+  function removeSubordinateTyping() {
+    const el = document.getElementById('sup-sub-typing');
+    if (el) el.remove();
+  }
+
   async function sendToSubordinate(text) {
     const clean = (text || '').trim();
     if (!clean) return;
@@ -187,11 +221,13 @@ const SupervisorWorkspace = (function () {
     appendSubordinateBubble('creator', clean);
     const input = document.getElementById('sup-sub-input');
     if (input) input.value = '';
+    showSubordinateTyping();
 
     try {
+      const authHeaders = getAuthHeaders();
       const res = await fetch('/api/agents/converse', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...authHeaders, 'Content-Type': 'application/json' },
         body: JSON.stringify({
           agentId: selectedSubordinateId,
           message: clean,
@@ -200,10 +236,12 @@ const SupervisorWorkspace = (function () {
           clientTemporal: getClientTemporal()
         })
       });
+      removeSubordinateTyping();
       const data = await res.json();
       if (res.ok) {
         appendSubordinateBubble('agent', data.reply);
-        if (ttsEnabled && data.voiceText) speak(data.voiceText);
+        const persona = selectedSubordinateId === 'aura' ? 'aura' : 'neutral';
+        if (ttsEnabled && data.voiceText) speak(data.voiceText, { persona });
 
         // Display supervisor real-time evaluation feedback
         if (data.supervisorFeedback) {
@@ -214,6 +252,7 @@ const SupervisorWorkspace = (function () {
         appendSubordinateBubble('agent', `Erro: ${data.error}`);
       }
     } catch (e) {
+      removeSubordinateTyping();
       appendSubordinateBubble('agent', `Falha de rede: ${e.message}`);
     }
   }
@@ -390,10 +429,10 @@ const SupervisorWorkspace = (function () {
     }
   }
 
-  function speak(text) {
+  function speak(text, options = {}) {
     if (!ttsEnabled) return;
     if (window.VoiceEngine) {
-      VoiceEngine.speak(text, { persona: 'supervisor', rate: 0.96, pitch: 1.0 });
+      VoiceEngine.speak(text, { persona: options.persona || 'supervisor', rate: 0.98, pitch: 1.0 });
       return;
     }
     if (!('speechSynthesis' in window)) return;

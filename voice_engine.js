@@ -40,57 +40,42 @@ const VoiceEngine = (function () {
    */
   function getRankedPtVoices(persona = 'aura') {
     const all = cachedVoices.length ? cachedVoices : loadVoices();
-    const ptVoices = all.filter(v => /pt[-_]?br|portugu/i.test(v.lang + ' ' + v.name));
+    let ptVoices = all.filter(v => /pt[-_]?br|pt[-_]?pt|portugu/i.test((v.lang || '') + ' ' + (v.name || '')));
+    if (!ptVoices.length) {
+      ptVoices = all.filter(v => (v.lang || '').toLowerCase().startsWith('pt'));
+    }
 
-    // Priority lists by persona
-    const femalePriorities = [
-      /francisca.*natural/i,
-      /thalita.*natural/i,
-      /brenda.*natural/i,
-      /leila.*natural/i,
-      /google.*portugu.*brasil/i,
-      /google.*portugu/i,
-      /online.*natural/i,
-      /natural/i,
-      /luciana/i,
-      /joana/i,
-      /maria.*natural/i,
-      /female|feminina/i
-    ];
+    const naturalKeywords = /natural|neural|online|google|cloud|network/i;
+    const femaleFavs = [/francisca/i, /thalita/i, /brenda/i, /leila/i, /google.*portugu/i, /maria/i, /female|feminina/i];
+    const maleFavs = [/antonio/i, /donato/i, /nicolau/i, /google.*portugu/i, /felipe/i, /male|masculin/i];
+    const targetFavs = persona === 'supervisor' ? maleFavs : femaleFavs;
 
-    const malePriorities = [
-      /antonio.*natural/i,
-      /donato.*natural/i,
-      /nicolau.*natural/i,
-      /google.*portugu.*brasil/i,
-      /google.*portugu/i,
-      /online.*natural/i,
-      /natural/i,
-      /felipe/i,
-      /male|masculin/i
-    ];
-
-    const priorityList = persona === 'supervisor' ? malePriorities : femalePriorities;
-
-    // Sort: Preferred user voice first, then natural/online, avoid 'Desktop'/'SAPI' formants
     return [...ptVoices].sort((a, b) => {
       if (preferredVoiceName && a.name === preferredVoiceName) return -1;
       if (preferredVoiceName && b.name === preferredVoiceName) return 1;
 
-      // Penalize legacy robotic Desktop SAPI voices
-      const aIsDesktop = /desktop|sapi/i.test(a.name);
-      const bIsDesktop = /desktop|sapi/i.test(b.name);
-      if (!aIsDesktop && bIsDesktop) return -1;
-      if (aIsDesktop && !bIsDesktop) return 1;
+      // Neural/Natural/Online/Google voices ALWAYS beat robotic Desktop SAPI voices
+      const aIsNatural = naturalKeywords.test(a.name) && !/desktop|sapi/i.test(a.name);
+      const bIsNatural = naturalKeywords.test(b.name) && !/desktop|sapi/i.test(b.name);
+      if (aIsNatural && !bIsNatural) return -1;
+      if (!aIsNatural && bIsNatural) return 1;
 
-      let scoreA = 999;
-      let scoreB = 999;
-      priorityList.forEach((pat, idx) => {
-        if (scoreA === 999 && pat.test(a.name)) scoreA = idx;
-        if (scoreB === 999 && pat.test(b.name)) scoreB = idx;
+      // Match persona favorites
+      let scoreA = 99;
+      let scoreB = 99;
+      targetFavs.forEach((r, i) => {
+        if (scoreA === 99 && r.test(a.name)) scoreA = i;
+        if (scoreB === 99 && r.test(b.name)) scoreB = i;
       });
+      if (scoreA !== scoreB) return scoreA - scoreB;
 
-      return scoreA - scoreB;
+      // Prefer pt-BR over pt-PT
+      const aIsBr = /br/i.test(a.lang);
+      const bIsBr = /br/i.test(b.lang);
+      if (aIsBr && !bIsBr) return -1;
+      if (!aIsBr && bIsBr) return 1;
+
+      return 0;
     });
   }
 

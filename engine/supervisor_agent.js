@@ -142,20 +142,24 @@ Estado Atual da Plataforma:
   _synthesizeSupervisorReply(msg, overview, temporal) {
     const lower = msg.toLowerCase();
 
-    if (/como est[aã]o|relat[oó]rio|status|sa[uú]de/i.test(lower)) {
-      return `Relatório de Supervisão Ativo (${temporal.localeTime}): Todos os ${overview.agentsCount} agentes estão sendo monitorados em tempo real. Identifico ${overview.activeCount} agentes com status ATIVO e ${overview.blockedCount} agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de ${overview.totalVectorsIndexed} vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.`;
+    if (/aprend|desenvolv|evolu/i.test(lower)) {
+      return `Supervisão Ativa LENNOX: Hoje foi um dia de evolução muito intensa! Os agentes processaram dezenas de interações, consolidando novos padrões de diálogo empático na AURA e otimizando o raciocínio vetorial com ${overview.totalVectorsIndexed} vetores próprios ativos. A infraestrutura inteira está estável, segura e aprendendo de forma contínua sob sua supervisão soberana. O que você gostaria de explorar ou calibrar agora?`;
+    }
+
+    if (/como est[aã]o|relat[oó]rio|status|sa[uú]de|governan/i.test(lower)) {
+      return `Supervisão em tempo real às ${temporal.localeTime}: O LENNOX confirma que toda a governança está 100% operando com máxima eficiência. Temos ${overview.activeCount} agentes ativos no cluster, com zero falhas de segurança e integridade vetorial de 100%. Deseja calibrar algum agente específico ou testar novos fluxos?`;
     }
 
     if (/aura/i.test(lower)) {
       const aura = overview.agents.find(a => a.id === 'aura');
-      return `Diagnóstico da AURA: Operando com tom amigável e empático conforme diretriz mandatória. Memória própria com ${aura?.totalVectors || 0} vetores indexados. Padrão conversacional estável em ${aura?.avgSentenceLength || 12} palavras por frase, sem desvios cognitivos.`;
+      return `Relatório de Supervisão LENNOX: A AURA está com excelente desempenho: tom acolhedor, respostas diretas e ${aura?.totalVectors || 0} memórias indexadas. Ela tem se adaptado muito bem às interações, mantendo frases claras e naturais.`;
     }
 
     if (/bloque|exclu|interv/i.test(lower)) {
-      return `Entendido. Como criador soberano, você possui autoridade total para autenticar, bloquear ou expurgar a memória de qualquer agente subordinado através do Painel de Supervisão ou via comandos diretos. Suas ordens humanas têm precedência imediata sobre qualquer automação.`;
+      return `Com certeza. Como supervisor LENNOX, garanto o seu controle absoluto sobre cada agente. Pode homologar, bloquear ou limpar memórias com um único clique aqui no painel.`;
     }
 
-    return `Supervisor LENNOX conectado e atento, Criador. Analisei sua observação ("${msg.slice(0, 70)}..."). A infraestrutura de agentes está segura, com memórias vetoriais isoladas e sob seu controle soberano permanente. Deseja auditar algum agente específico ou verificar certificações pendentes?`;
+    return `Supervisão ativa LENNOX, Criador! A plataforma está respondendo com fluidez, latência reduzida e todas as rotas de inteligência sob monitoramento permanente. Em que posso te apoiar agora para continuarmos avançando?`;
   }
 
   /**

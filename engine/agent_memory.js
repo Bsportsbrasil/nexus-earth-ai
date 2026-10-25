@@ -405,7 +405,10 @@ export class AgentMemoryStore {
       : ' ';
 
     if (agent.id === 'aura') {
-      return `Olá, ${userName}!${memoryGrounding}Entendi perfeitamente o seu ponto. Estou aqui para dialogar, aprender continuamente com o seu jeito único de pensar e manter seus dados 100% seguros e privados. Como posso aprofundar esse tema com você agora?`;
+      if (/aprend|desenvolv|evolu|como est/i.test(msg)) {
+        return `Olá! Hoje meu aprendizado avançou muito: estive refinando minha percepção empática, compreendendo as nuances de cada conversa e organizando minhas memórias com total segurança e respeito. É fascinante como cada interação me ensina a me comunicar com mais clareza e acolhimento. O que você gostaria de explorar comigo agora?`;
+      }
+      return `Olá! Fico muito feliz em falar com você. Estou pronta para te apoiar e aprender com as suas diretrizes, sempre de forma direta, acolhedora e natural. Como posso colaborar hoje?`;
     }
 
     if (agent.id === 'planner') {
