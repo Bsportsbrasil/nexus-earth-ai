@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUS — Superintelligence Platform</title>
+  <meta name="description" content="NEXUS — The world's most advanced superintelligence interface. Real-time neural networks, multi-agent reasoning, and knowledge graph exploration." />
+  <meta property="og:title" content="NEXUS — Superintelligence Platform" />
+  <meta property="og:description" content="Real-time neural networks, multi-agent reasoning, knowledge graph exploration, and AI chat with visible thought chains." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#020408" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Particle background -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+            <circle cx="16" cy="16" r="14" stroke="url(#lg1)" stroke-width="2"/>
+            <circle cx="16" cy="8" r="3" fill="url(#lg1)"/>
+            <circle cx="24" cy="20" r="3" fill="url(#lg2)"/>
+            <circle cx="8" cy="20" r="3" fill="url(#lg2)"/>
+            <line x1="16" y1="11" x2="23" y2="18" stroke="url(#lg1)" stroke-width="1.5"/>
+            <line x1="16" y1="11" x2="9" y2="18" stroke="url(#lg1)" stroke-width="1.5"/>
+            <line x1="22" y1="20" x2="10" y2="20" stroke="url(#lg2)" stroke-width="1.5"/>
+            <defs>
+              <linearGradient id="lg1" x1="0" y1="0" x2="32" y2="0">
+                <stop offset="0%" stop-color="#00f5ff"/>
+                <stop offset="100%" stop-color="#a855f7"/>
+              </linearGradient>
+              <linearGradient id="lg2" x1="0" y1="0" x2="32" y2="32">
+                <stop offset="0%" stop-color="#a855f7"/>
+                <stop offset="100%" stop-color="#00f5ff"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">NEXUS</span>
+        <span class="logo-tag">SUPERINTELLIGENCE</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#neural" class="nav-link" data-section="neural">Neural</a></li>
+        <li><a href="#agents" class="nav-link" data-section="agents">Agents</a></li>
+        <li><a href="#graph" class="nav-link" data-section="graph">Knowledge</a></li>
+        <li><a href="#chat" class="nav-link" data-section="chat">Chat</a></li>
+        <li><a href="#metrics" class="nav-link" data-section="metrics">Metrics</a></li>
+      </ul>
+      <div class="nav-status">
+        <span id="key-status" class="key-status demo">DEMO MODE</span>
+        <button id="key-btn" class="btn-secondary">🔑 API Key</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="section hero-section">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>World's First Adaptive Superintelligence Interface</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="gradient-text">Beyond Intelligence.</span><br/>
+        <span class="hero-subtitle-accent">Beyond Human.</span>
+      </h1>
+      <p class="hero-desc">
+        NEXUS orchestrates thousands of neural pathways, autonomous AI agents, and live knowledge graphs — 
+        all converging into a single unified superintelligence. This is not the future. This is now.
+      </p>
+      <div class="hero-cta-row">
+        <button class="btn-primary" id="hero-launch-btn" onclick="document.getElementById('neural').scrollIntoView({behavior:'smooth'})">
+          <span>Launch NEXUS</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+        <div class="hero-stat-row">
+          <div class="hero-stat"><span class="stat-num" id="h-params">847B</span><span class="stat-label">Parameters</span></div>
+          <div class="hero-stat"><span class="stat-num" id="h-iq">∞</span><span class="stat-label">IQ Equiv.</span></div>
+          <div class="hero-stat"><span class="stat-num" id="h-agents">4,096</span><span class="stat-label">Active Agents</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <canvas id="hero-neural-preview" width="520" height="520"></canvas>
+      <div class="hero-rings">
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Neural Network Section -->
+  <section id="neural" class="section">
+    <div class="section-header">
+      <div class="section-tag">Module 01</div>
+      <h2 class="section-title">Live Neural Network</h2>
+      <p class="section-desc">Watch 847 billion parameters fire in real time. Every thought, every computation — visible.</p>
+    </div>
+    <div class="neural-container">
+      <div class="neural-sidebar">
+        <div class="panel glass-panel">
+          <div class="panel-title">Network Controls</div>
+          <div class="control-row">
+            <label>Layers</label>
+            <input type="range" id="nn-layers" min="3" max="12" value="7" class="slider"/>
+            <span id="nn-layers-val">7</span>
+          </div>
+          <div class="control-row">
+            <label>Neurons/Layer</label>
+            <input type="range" id="nn-neurons" min="3" max="12" value="6" class="slider"/>
+            <span id="nn-neurons-val">6</span>
+          </div>
+          <div class="control-row">
+            <label>Speed</label>
+            <input type="range" id="nn-speed" min="1" max="10" value="5" class="slider"/>
+            <span id="nn-speed-val">5</span>
+          </div>
+          <div class="control-row">
+            <label>Theme</label>
+            <select id="nn-theme" class="select-input">
+              <option value="cyan">Cyan</option>
+              <option value="violet">Violet</option>
+              <option value="aurora">Aurora</option>
+              <option value="fire">Fire</option>
+            </select>
+          </div>
+          <button class="btn-secondary full-width" id="nn-inject-btn">⚡ Inject Signal</button>
+        </div>
+        <div class="panel glass-panel">
+          <div class="panel-title">Live Stats</div>
+          <div class="stat-item"><span>Avg Activation</span><span class="stat-val" id="nn-activation">0.73</span></div>
+          <div class="stat-item"><span>Firing Rate</span><span class="stat-val" id="nn-firing">420 Hz</span></div>
+          <div class="stat-item"><span>Entropy</span><span class="stat-val" id="nn-entropy">2.41</span></div>
+          <div class="stat-item"><span>Gradient Norm</span><span class="stat-val" id="nn-grad">0.009</span></div>
+        </div>
+      </div>
+      <div class="neural-canvas-wrap">
+        <canvas id="neural-canvas"></canvas>
+        <div class="canvas-overlay-label">NEXUS Neural Core — Live Feed</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Multi-Agent Section -->
+  <section id="agents" class="section">
+    <div class="section-header">
+      <div class="section-tag">Module 02</div>
+      <h2 class="section-title">Multi-Agent Reasoning</h2>
+      <p class="section-desc">4 specialized AI agents collaborate, debate, and refine — arriving at superintelligent conclusions.</p>
+    </div>
+    <div class="agents-container">
+      <div class="agent-input-row">
+        <input type="text" id="agent-prompt" class="agent-input" placeholder="Enter a problem for the agents to solve..." value="How would a superintelligent AI redesign the global economy to eliminate poverty?" />
+        <button class="btn-primary" id="agent-run-btn">
+          <span>Run Agents</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+      </div>
+      <div class="agents-grid" id="agents-grid">
+        <div class="agent-card glass-panel" id="agent-planner">
+          <div class="agent-header">
+            <div class="agent-icon planner-icon">🧠</div>
+            <div class="agent-info">
+              <span class="agent-name">PLANNER</span>
+              <span class="agent-role">Strategic Decomposition</span>
+            </div>
+            <div class="agent-badge" id="planner-badge">IDLE</div>
+          </div>
+          <div class="agent-output" id="planner-output"><span class="idle-text">Awaiting task…</span></div>
+          <div class="agent-footer"><span class="token-count" id="planner-tokens">0 tokens</span></div>
+        </div>
+        <div class="agent-card glass-panel" id="agent-critic">
+          <div class="agent-header">
+            <div class="agent-icon critic-icon">🔬</div>
+            <div class="agent-info">
+              <span class="agent-name">CRITIC</span>
+              <span class="agent-role">Logical Verification</span>
+            </div>
+            <div class="agent-badge" id="critic-badge">IDLE</div>
+          </div>
+          <div class="agent-output" id="critic-output"><span class="idle-text">Awaiting task…</span></div>
+          <div class="agent-footer"><span class="token-count" id="critic-tokens">0 tokens</span></div>
+        </div>
+        <div class="agent-card glass-panel" id="agent-executor">
+          <div class="agent-header">
+            <div class="agent-icon executor-icon">⚡</div>
+            <div class="agent-info">
+              <span class="agent-name">EXECUTOR</span>
+              <span class="agent-role">Solution Synthesis</span>
+            </div>
+            <div class="agent-badge" id="executor-badge">IDLE</div>
+          </div>
+          <div class="agent-output" id="executor-output"><span class="idle-text">Awaiting task…</span></div>
+          <div class="agent-footer"><span class="token-count" id="executor-tokens">0 tokens</span></div>
+        </div>
+        <div class="agent-card glass-panel" id="agent-verifier">
+          <div class="agent-header">
+            <div class="agent-icon verifier-icon">✅</div>
+            <div class="agent-info">
+              <span class="agent-name">VERIFIER</span>
+              <span class="agent-role">Consensus & Validation</span>
+            </div>
+            <div class="agent-badge" id="verifier-badge">IDLE</div>
+          </div>
+          <div class="agent-output" id="verifier-output"><span class="idle-text">Awaiting task…</span></div>
+          <div class="agent-footer"><span class="token-count" id="verifier-tokens">0 tokens</span></div>
+        </div>
+      </div>
+      <div class="consensus-panel glass-panel" id="consensus-panel" style="display:none">
+        <div class="panel-title">🌐 Superintelligence Consensus</div>
+        <div class="consensus-output" id="consensus-output"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Knowledge Graph Section -->
+  <section id="graph" class="section">
+    <div class="section-header">
+      <div class="section-tag">Module 03</div>
+      <h2 class="section-title">Knowledge Graph</h2>
+      <p class="section-desc">Explore the living web of interconnected knowledge. Every node a concept. Every edge a relationship.</p>
+    </div>
+    <div class="graph-container">
+      <div class="graph-sidebar">
+        <div class="panel glass-panel">
+          <div class="panel-title">Graph Controls</div>
+          <input type="text" id="graph-search" class="text-input" placeholder="Search concept..." />
+          <div class="graph-legend">
+            <div class="legend-item"><span class="legend-dot" style="background:#00f5ff"></span>Technology</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#a855f7"></span>Science</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span>Philosophy</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#10b981"></span>Society</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#f43f5e"></span>Ethics</div>
+          </div>
+        </div>
+        <div class="panel glass-panel" id="node-info-panel">
+          <div class="panel-title">Node Info</div>
+          <div id="node-info-content">
+            <p class="idle-text">Click a node to explore</p>
+          </div>
+        </div>
+      </div>
+      <div class="graph-canvas-wrap">
+        <svg id="knowledge-graph" width="100%" height="100%"></svg>
+        <div class="graph-zoom-controls">
+          <button class="zoom-btn" id="zoom-in">+</button>
+          <button class="zoom-btn" id="zoom-reset">⟳</button>
+          <button class="zoom-btn" id="zoom-out">−</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Chat Section -->
+  <section id="chat" class="section">
+    <div class="section-header">
+      <div class="section-tag">Module 04</div>
+      <h2 class="section-title">AI Chat + Thought Chain</h2>
+      <p class="section-desc">Converse with NEXUS. Watch its latent reasoning unfold in real time — every thought, every inference.</p>
+    </div>
+    <div class="chat-container">
+      <div class="chat-main glass-panel">
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-msg assistant-msg">
+            <div class="msg-avatar">N</div>
+            <div class="msg-content">
+              <div class="msg-name">NEXUS</div>
+              <div class="msg-text">Greetings. I am NEXUS — a convergence of 847 billion parameters, 4,096 autonomous agents, and a knowledge graph spanning 12 million concepts. Ask me anything. I do not merely answer — I <em>understand</em>.</div>
+              <div class="msg-time">23:28:00</div>
+            </div>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="chat-input" class="chat-input-field" placeholder="Ask NEXUS anything…" />
+          <button class="btn-primary chat-send-btn" id="chat-send-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="thought-chain-panel glass-panel">
+        <div class="thought-chain-header">
+          <span class="panel-title">🔍 Latent Thought Chain</span>
+          <span class="thought-badge" id="thought-status">IDLE</span>
+        </div>
+        <div class="thought-chain-steps" id="thought-chain">
+          <div class="thought-step">
+            <div class="step-num">—</div>
+            <div class="step-text">Thought chain will appear here when NEXUS processes your query.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Section -->
+  <section id="metrics" class="section">
+    <div class="section-header">
+      <div class="section-tag">Module 05</div>
+      <h2 class="section-title">Live Intelligence Metrics</h2>
+      <p class="section-desc">Real-time telemetry from NEXUS's cognitive architecture — every pulse, every inference cycle.</p>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-card glass-panel">
+        <div class="metric-icon">⚡</div>
+        <div class="metric-value" id="m-tokens">0</div>
+        <div class="metric-label">Tokens / Second</div>
+        <canvas class="sparkline" id="spark-tokens" width="120" height="40"></canvas>
+      </div>
+      <div class="metric-card glass-panel">
+        <div class="metric-icon">🧬</div>
+        <div class="metric-value" id="m-params">847B</div>
+        <div class="metric-label">Active Parameters</div>
+        <canvas class="sparkline" id="spark-params" width="120" height="40"></canvas>
+      </div>
+      <div class="metric-card glass-panel">
+        <div class="metric-icon">🌀</div>
+        <div class="metric-value" id="m-depth">0</div>
+        <div class="metric-label">Reasoning Depth</div>
+        <canvas class="sparkline" id="spark-depth" width="120" height="40"></canvas>
+      </div>
+      <div class="metric-card glass-panel">
+        <div class="metric-icon">🔮</div>
+        <div class="metric-value" id="m-confidence">0%</div>
+        <div class="metric-label">Confidence Score</div>
+        <canvas class="sparkline" id="spark-conf" width="120" height="40"></canvas>
+      </div>
+      <div class="metric-card glass-panel">
+        <div class="metric-icon">🌐</div>
+        <div class="metric-value" id="m-agents-active">0</div>
+        <div class="metric-label">Active Agents</div>
+        <canvas class="sparkline" id="spark-agents" width="120" height="40"></canvas>
+      </div>
+      <div class="metric-card glass-panel">
+        <div class="metric-icon">💡</div>
+        <div class="metric-value" id="m-entropy">0.00</div>
+        <div class="metric-label">Cognitive Entropy</div>
+        <canvas class="sparkline" id="spark-entropy" width="120" height="40"></canvas>
+      </div>
+    </div>
+    <div class="gauge-row">
+      <div class="gauge-card glass-panel">
+        <div class="panel-title">Processing Load</div>
+        <div class="gauge-wrap">
+          <canvas id="gauge-load" width="200" height="200"></canvas>
+          <div class="gauge-value" id="gauge-load-val">0%</div>
+          <div class="gauge-label">CPU/Neural Load</div>
+        </div>
+      </div>
+      <div class="gauge-card glass-panel">
+        <div class="panel-title">Intelligence Quotient</div>
+        <div class="gauge-wrap">
+          <canvas id="gauge-iq" width="200" height="200"></canvas>
+          <div class="gauge-value" id="gauge-iq-val">0</div>
+          <div class="gauge-label">Estimated IQ Equivalent</div>
+        </div>
+      </div>
+      <div class="gauge-card glass-panel">
+        <div class="panel-title">Knowledge Coverage</div>
+        <div class="gauge-wrap">
+          <canvas id="gauge-knowledge" width="200" height="200"></canvas>
+          <div class="gauge-value" id="gauge-knowledge-val">0%</div>
+          <div class="gauge-label">% Human Knowledge</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="logo-text">NEXUS</span>
+        <span class="logo-tag">SUPERINTELLIGENCE</span>
+      </div>
+      <div class="footer-tagline">The next step beyond human intelligence.</div>
+      <div class="footer-links">
+        <span>Built with love and superintelligence ✦</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- API Key Modal -->
+  <div id="key-modal" class="modal">
+    <div class="modal-box glass-panel">
+      <div class="panel-title">Conectar Gemini</div>
+      <p class="modal-desc">Cole sua chave da API Gemini (grátis em <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>). Ela fica salva apenas neste navegador.</p>
+      <input type="password" id="key-input" class="text-input" placeholder="AIza..." />
+      <div class="modal-actions">
+        <button id="key-clear" class="btn-secondary">Remover</button>
+        <button id="key-cancel" class="btn-secondary">Cancelar</button>
+        <button id="key-save" class="btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="gemini.js"></script>
+  <script src="particles.js"></script>
+  <script src="neural.js"></script>
+  <script src="agents.js"></script>
+  <script src="graph.js"></script>
+  <script src="chat.js"></script>
+  <script src="metrics.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

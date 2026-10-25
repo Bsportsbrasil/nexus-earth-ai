@@ -1,0 +1,14 @@
+{
+  "name": "nexus-superintelligence-platform",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "NEXUS — Superintelligence Platform with live neural network visualization, multi-agent reasoning, knowledge graph, and secure serverless Gemini AI backend",
+  "scripts": {
+    "start": "npx serve . -l 5173",
+    "dev": "npx vercel dev"
+  },
+  "dependencies": {
+    "@google/genai": "^1.0.0"
+  }
+}
