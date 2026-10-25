@@ -86,6 +86,10 @@ class TelemetryCollector {
     }
   }
 
+  recordCall(modelName, latencyMs) {
+    this.recordApiCall(latencyMs);
+  }
+
   getSnapshot(graphStats = { totalNodes: 0, totalEdges: 0 }, brokerStats = { published: 0 }) {
     const cur = this._readCpuTotals();
     const idleDelta = cur.idle - this.prevCpuTimes.idle;

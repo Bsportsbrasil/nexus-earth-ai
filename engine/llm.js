@@ -152,7 +152,13 @@ export async function streamWithThinking({
       }
 
       const totalLatencyMs = Math.round(performance.now() - t0);
-      telemetry.recordCall(modelName, totalLatencyMs);
+      try {
+        if (telemetry && typeof telemetry.recordCall === 'function') {
+          telemetry.recordCall(modelName, totalLatencyMs);
+        } else if (telemetry && typeof telemetry.recordApiCall === 'function') {
+          telemetry.recordApiCall(totalLatencyMs);
+        }
+      } catch (_) {}
 
       return {
         model: modelName,
