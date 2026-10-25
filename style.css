@@ -1330,9 +1330,9 @@ html, body {
 @media (max-width: 960px) {
   .nav-center { display: none !important; }
   .mobile-only-btn { display: inline-flex !important; }
-  .nav-status #key-btn { display: none; }
-  .nav-status #pwa-install-btn { display: none; }
-  .nav-status #key-status { display: none; }
+  .nav-status #key-btn { display: none !important; }
+  .nav-status #pwa-install-btn { display: none !important; }
+  .nav-status #key-status { display: none !important; }
 }
 
 @media (max-width: 768px) {
@@ -1342,24 +1342,50 @@ html, body {
   
   /* Compact Native Header */
   #nav {
-    padding: 0 0.65rem !important;
-    height: 54px !important;
+    padding: 0 0.5rem !important;
+    height: 52px !important;
   }
   .nav-inner {
     height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100% !important;
+  }
+  .nav-left {
+    flex-shrink: 0;
   }
   .nav-brand-text .logo-text {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
   .nav-status {
     gap: 0.35rem !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    flex-shrink: 0;
   }
   .nav-status .nav-btn,
   .nav-status .btn-secondary,
   .nav-status .btn-primary {
     height: 32px !important;
-    padding: 0 0.5rem !important;
+    padding: 0 0.45rem !important;
     font-size: 0.72rem !important;
+    flex-shrink: 0 !important;
+  }
+  #pwa-install-btn,
+  #key-btn,
+  #key-status {
+    display: none !important;
+  }
+  #mobile-menu-btn {
+    display: inline-flex !important;
+    flex-shrink: 0 !important;
+    width: 34px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
   #current-lang-code {
     font-size: 0.72rem !important;
@@ -1606,6 +1632,32 @@ html, body {
   .msg-content { max-width: 92%; }
   .hero-cta-row > div { flex-direction: column; width: 100%; }
   .hero-cta-row button { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 420px) {
+  #nav {
+    padding: 0 0.35rem !important;
+  }
+  .nav-brand-text .logo-tag {
+    display: none !important;
+  }
+  .logo-text {
+    font-size: 0.98rem !important;
+  }
+  .nav-status {
+    gap: 0.25rem !important;
+  }
+  #lang-toggle-btn {
+    padding: 0 0.35rem !important;
+  }
+  #nav-auth-btn {
+    padding: 0 0.45rem !important;
+    min-width: 32px !important;
+    justify-content: center !important;
+  }
+  #nav-auth-btn span {
+    display: none !important;
+  }
 }
 
 

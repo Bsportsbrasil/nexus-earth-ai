@@ -22,7 +22,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredInstallPrompt = e;
   const installBtn = document.getElementById('pwa-install-btn');
-  if (installBtn) {
+  if (installBtn && window.innerWidth > 768) {
     installBtn.style.display = 'inline-flex';
     installBtn.textContent = '📲 Instalar App';
   }

@@ -288,7 +288,13 @@ const Graph = (function () {
       });
       g.setAttribute('transform', `translate(${tx},${ty}) scale(${scale})`);
     }
-    requestAnimationFrame(tick);
+    const sec = document.getElementById('graph');
+    const isVisible = sec && (sec.classList.contains('route-active') || sec.style.display !== 'none');
+    if (isVisible && !document.hidden) {
+      requestAnimationFrame(tick);
+    } else {
+      setTimeout(() => requestAnimationFrame(tick), 600);
+    }
   }
 
   return { init, fetchWikiTopic, loadTopic, onRouteShow };

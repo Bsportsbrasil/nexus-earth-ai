@@ -150,7 +150,13 @@ const NeuralViz = (function () {
       const idx = (stepTick / 15 | 0) % nodes[0].length;
       spawnFrom(nodes[0][idx], 0);
     }
-    requestAnimationFrame(frame);
+    const sec = document.getElementById('neural');
+    const isVisible = sec && (sec.classList.contains('route-active') || sec.style.display !== 'none');
+    if (isVisible && !document.hidden) {
+      requestAnimationFrame(frame);
+    } else {
+      setTimeout(() => requestAnimationFrame(frame), 600);
+    }
   }
 
   function bindControls() {
@@ -205,28 +211,30 @@ const NeuralViz = (function () {
     });
     let ang = 0;
     (function loop() {
-      if (hc && hc.offsetParent !== null) {
-        ang += .004;
-        h.clearRect(0, 0, 520, 520);
-        const proj = pts.map(([x, y, z]) => {
-          const X = x * Math.cos(ang) - z * Math.sin(ang), Z = x * Math.sin(ang) + z * Math.cos(ang);
-          const Y = y * Math.cos(ang * .6) - Z * Math.sin(ang * .6), Z2 = y * Math.sin(ang * .6) + Z * Math.cos(ang * .6);
-          return [260 + X * 180, 260 + Y * 180, Z2];
-        });
-        for (let i = 0; i < proj.length; i++) for (let j = i + 1; j < proj.length; j++) {
-          const d = Math.hypot(proj[i][0] - proj[j][0], proj[i][1] - proj[j][1]);
-          if (d < 48) {
-            h.strokeStyle = `rgba(0,245,255,${(1 - d / 48) * .25 * ((proj[i][2] + 1.5) / 2.5)})`;
-            h.beginPath(); h.moveTo(proj[i][0], proj[i][1]); h.lineTo(proj[j][0], proj[j][1]); h.stroke();
-          }
-        }
-        for (const [x, y, z] of proj) {
-          h.fillStyle = z > 0 ? '#00f5ff' : '#a855f7';
-          h.globalAlpha = .4 + (z + 1) * .3;
-          h.beginPath(); h.arc(x, y, 1.5 + (z + 1), 0, 7); h.fill();
-        }
-        h.globalAlpha = 1;
+      if (!hc || hc.offsetParent === null || document.hidden) {
+        setTimeout(() => requestAnimationFrame(loop), 600);
+        return;
       }
+      ang += .004;
+      h.clearRect(0, 0, 520, 520);
+      const proj = pts.map(([x, y, z]) => {
+        const X = x * Math.cos(ang) - z * Math.sin(ang), Z = x * Math.sin(ang) + z * Math.cos(ang);
+        const Y = y * Math.cos(ang * .6) - Z * Math.sin(ang * .6), Z2 = y * Math.sin(ang * .6) + Z * Math.cos(ang * .6);
+        return [260 + X * 180, 260 + Y * 180, Z2];
+      });
+      for (let i = 0; i < proj.length; i++) for (let j = i + 1; j < proj.length; j++) {
+        const d = Math.hypot(proj[i][0] - proj[j][0], proj[i][1] - proj[j][1]);
+        if (d < 48) {
+          h.strokeStyle = `rgba(0,245,255,${(1 - d / 48) * .25 * ((proj[i][2] + 1.5) / 2.5)})`;
+          h.beginPath(); h.moveTo(proj[i][0], proj[i][1]); h.lineTo(proj[j][0], proj[j][1]); h.stroke();
+        }
+      }
+      for (const [x, y, z] of proj) {
+        h.fillStyle = z > 0 ? '#00f5ff' : '#a855f7';
+        h.globalAlpha = .4 + (z + 1) * .3;
+        h.beginPath(); h.arc(x, y, 1.5 + (z + 1), 0, 7); h.fill();
+      }
+      h.globalAlpha = 1;
       requestAnimationFrame(loop);
     })();
   }

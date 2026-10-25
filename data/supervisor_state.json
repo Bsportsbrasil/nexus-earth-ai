@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T19:01:43.977Z",
+  "updatedAt": "2026-10-25T19:28:50.729Z",
   "certifications": {
     "aura": {
       "certified": true,
@@ -30,8 +30,8 @@
       "status": "CERTIFICADO_PELO_CRIADOR",
       "agentId": "executor",
       "certifiedBy": "Criador Soberano",
-      "timestamp": "2026-10-25T19:01:43.977Z",
-      "certHash": "57d6f95fd8cbbaca9cdf8b6d8cff607618d4e6e6bc132a66168213888d88eb8a",
+      "timestamp": "2026-10-25T19:28:50.728Z",
+      "certHash": "4961e9163dfcd60c9234bbfb206c284167080d47b6ee550d1f155a0b79c58e86",
       "note": "Re-homologado"
     },
     "verifier": {
@@ -44,6 +44,18 @@
     }
   },
   "feedbackHistory": [
+    {
+      "id": "fb_1792956530708_a5cd",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T19:28:50.709Z"
+    },
     {
       "id": "fb_1792954903948_378a",
       "agentId": "aura",
@@ -274,16 +286,6 @@
     }
   ],
   "supervisorHistory": [
-    {
-      "role": "creator",
-      "text": "quero vozes mais humanas",
-      "timestamp": "2026-10-25T14:45:14.624Z"
-    },
-    {
-      "role": "supervisor",
-      "text": "Compreendido, Criador. Ajustando os parâmetros de síntese vocal para eliminar qualquer resquício de cadência mecânica. O perfil de modulação agora prioriza pausas naturais, inflexão orgânica e menor densidade sintática. \n\nComo deseja que eu reconfigure a diretriz de humanização para os demais agentes da rede?",
-      "timestamp": "2026-10-25T14:45:14.624Z"
-    },
     {
       "role": "creator",
       "text": "da maneira mais segura e ultil para a plataforma",
@@ -523,6 +525,16 @@
       "role": "supervisor",
       "text": "Relatório de Supervisão Ativo (16:01:43): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 112 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
       "timestamp": "2026-10-25T19:01:43.946Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T19:28:50.706Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (16:28:50): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 117 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T19:28:50.706Z"
     }
   ]
 }

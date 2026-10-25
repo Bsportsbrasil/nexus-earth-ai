@@ -2,6 +2,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 
 import { broker } from './engine/broker.js';
@@ -1243,12 +1244,28 @@ const server = http.createServer(async (req, res) => {
         ? 'noindex, nofollow, noarchive, nosnippet'
         : 'index, follow, max-image-preview:large, max-snippet:-1'
     };
+
+    // Cache-Control headers for high-performance mobile loading & Lighthouse compliance
     if (filePath === '/sw.js') {
       headers['Service-Worker-Allowed'] = '/';
       headers['Cache-Control'] = 'no-cache';
+    } else if (filePath === '/' || ext === '.html') {
+      headers['Cache-Control'] = 'public, max-age=120, stale-while-revalidate=86400';
+    } else {
+      headers['Cache-Control'] = 'public, max-age=604800, stale-while-revalidate=2592000';
     }
-    res.writeHead(200, headers);
-    fs.createReadStream(resolvedPath).pipe(res);
+
+    const acceptEncoding = req.headers['accept-encoding'] || '';
+    const compressible = ['.html', '.css', '.js', '.json', '.svg', '.xml', '.txt', '.md'].includes(ext);
+
+    if (compressible && acceptEncoding.includes('gzip')) {
+      headers['Content-Encoding'] = 'gzip';
+      res.writeHead(200, headers);
+      fs.createReadStream(resolvedPath).pipe(zlib.createGzip({ level: 6 })).pipe(res);
+    } else {
+      res.writeHead(200, headers);
+      fs.createReadStream(resolvedPath).pipe(res);
+    }
   } else {
     res.writeHead(404);
     res.end('Not found');
