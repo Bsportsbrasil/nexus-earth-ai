@@ -195,7 +195,7 @@
         "org": 0.19999999999999998,
         "30483942u": 0.19999999999999998
       },
-      "updatedAt": 1792900760768
+      "updatedAt": 1792902292889
     },
     {
       "id": "paper:10.1093/hesc/9780198557364.003.0001",
@@ -222,7 +222,7 @@
         "003": 0.1856953381770518,
         "0001": 0.1856953381770518
       },
-      "updatedAt": 1792900760768
+      "updatedAt": 1792902292889
     },
     {
       "id": "paper:10.3403/30483942",
@@ -245,7 +245,7 @@
         "https": 0.19999999999999998,
         "org": 0.19999999999999998
       },
-      "updatedAt": 1792900760768
+      "updatedAt": 1792902292889
     },
     {
       "id": "2025 portuguese legislative election",
@@ -838,7 +838,7 @@
         "attention": 0.22360679774997896,
         "mechanism": 0.22360679774997896
       },
-      "updatedAt": 1792902221464
+      "updatedAt": 1792903318349
     },
     {
       "id": "self-attention",
@@ -856,7 +856,7 @@
         "single": 0.3015113445777636,
         "sequence": 0.3015113445777636
       },
-      "updatedAt": 1792902221464
+      "updatedAt": 1792903318349
     },
     {
       "id": "paper:10.21711/2319023x2026/pmo1429",
@@ -2290,6 +2290,198 @@
         "b978": 0.19245008972987526
       },
       "updatedAt": 1792902148160
+    },
+    {
+      "id": "inteligência artificial",
+      "label": "Inteligência artificial",
+      "category": "Root",
+      "summary": "Inteligência artificial é, de forma genérica, a capacidade de máquinas demonstrarem inteligência, raciocínio e aprendizado de forma semelhante ao pensamento humano. O campo busca desenvolver máquinas autónomas ou sistemas especialistas capazes de simular o comportamento humano e realizar tarefas complexas de forma independente. Trata-se de um sistema que permite aos computadores executar funções avançadas, como a análise de dados em grande escala e a formulação de previsões ou recomendações. Como campo de pesquisa na ciência da computação, dedica-se ao estudo e desenvolvimento de métodos e softwares que capacitam as máquinas a perceberem o seu ambiente e a utilizarem o aprendizado para tomar ações que maximizem as hipóteses de atingir objetivos definidos.",
+      "url": "https://pt.wikipedia.org/wiki/Intelig%C3%AAncia_artificial",
+      "vector": {
+        "inteligência": 0.2860387767736777,
+        "artificial": 0.1906925178491185,
+        "forma": 0.2860387767736777,
+        "genérica": 0.09534625892455925,
+        "capacidade": 0.09534625892455925,
+        "máquinas": 0.2860387767736777,
+        "demonstrarem": 0.09534625892455925,
+        "raciocínio": 0.09534625892455925,
+        "aprendizado": 0.1906925178491185,
+        "semelhante": 0.09534625892455925,
+        "pensamento": 0.09534625892455925,
+        "humano": 0.1906925178491185,
+        "campo": 0.1906925178491185,
+        "busca": 0.09534625892455925,
+        "desenvolver": 0.09534625892455925,
+        "autónomas": 0.09534625892455925,
+        "sistemas": 0.09534625892455925,
+        "especialistas": 0.09534625892455925,
+        "capazes": 0.09534625892455925,
+        "simular": 0.09534625892455925,
+        "comportamento": 0.09534625892455925,
+        "realizar": 0.09534625892455925,
+        "tarefas": 0.09534625892455925,
+        "complexas": 0.09534625892455925,
+        "independente": 0.09534625892455925,
+        "trata": 0.09534625892455925,
+        "sistema": 0.09534625892455925,
+        "que": 0.2860387767736777,
+        "permite": 0.09534625892455925,
+        "aos": 0.09534625892455925,
+        "computadores": 0.09534625892455925,
+        "executar": 0.09534625892455925,
+        "funções": 0.09534625892455925,
+        "avançadas": 0.09534625892455925,
+        "como": 0.1906925178491185,
+        "análise": 0.09534625892455925,
+        "dados": 0.09534625892455925,
+        "grande": 0.09534625892455925,
+        "escala": 0.09534625892455925,
+        "formulação": 0.09534625892455925,
+        "previsões": 0.09534625892455925,
+        "recomendações": 0.09534625892455925,
+        "pesquisa": 0.09534625892455925,
+        "ciência": 0.09534625892455925,
+        "computação": 0.09534625892455925,
+        "dedica": 0.09534625892455925,
+        "estudo": 0.09534625892455925,
+        "desenvolvimento": 0.09534625892455925,
+        "métodos": 0.09534625892455925,
+        "softwares": 0.09534625892455925,
+        "capacitam": 0.09534625892455925,
+        "perceberem": 0.09534625892455925,
+        "seu": 0.09534625892455925,
+        "ambiente": 0.09534625892455925,
+        "utilizarem": 0.09534625892455925,
+        "para": 0.09534625892455925,
+        "tomar": 0.09534625892455925,
+        "ações": 0.09534625892455925,
+        "maximizem": 0.09534625892455925,
+        "hipóteses": 0.09534625892455925,
+        "atingir": 0.09534625892455925,
+        "objetivos": 0.09534625892455925,
+        "definidos": 0.09534625892455925
+      },
+      "updatedAt": 1792902292262
+    },
+    {
+      "id": "1956",
+      "label": "1956",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1956": 1
+      },
+      "updatedAt": 1792902292490
+    },
+    {
+      "id": "a.i. - inteligência artificial",
+      "label": "A.I. - Inteligência Artificial",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "inteligência": 0.7071067811865476,
+        "artificial": 0.7071067811865476
+      },
+      "updatedAt": 1792902292490
+    },
+    {
+      "id": "a priori",
+      "label": "A priori",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "priori": 1
+      },
+      "updatedAt": 1792902292490
+    },
+    {
+      "id": "ablação (inteligência artificial)",
+      "label": "Ablação (inteligência artificial)",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "ablação": 0.5773502691896258,
+        "inteligência": 0.5773502691896258,
+        "artificial": 0.5773502691896258
+      },
+      "updatedAt": 1792902292490
+    },
+    {
+      "id": "academia",
+      "label": "Academia",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "academia": 1
+      },
+      "updatedAt": 1792902292490
+    },
+    {
+      "id": "agente inteligente",
+      "label": "Agente inteligente",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "agente": 0.7071067811865476,
+        "inteligente": 0.7071067811865476
+      },
+      "updatedAt": 1792902292490
+    },
+    {
+      "id": "alan turing",
+      "label": "Alan Turing",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "alan": 0.7071067811865476,
+        "turing": 0.7071067811865476
+      },
+      "updatedAt": 1792902292490
+    },
+    {
+      "id": "alexandre, o grande",
+      "label": "Alexandre, o Grande",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "alexandre": 0.7071067811865476,
+        "grande": 0.7071067811865476
+      },
+      "updatedAt": 1792902292490
+    },
+    {
+      "id": "alfa-sinucleína",
+      "label": "Alfa-sinucleína",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "alfa": 0.7071067811865476,
+        "sinucleína": 0.7071067811865476
+      },
+      "updatedAt": 1792902292490
+    },
+    {
+      "id": "alfred north whitehead",
+      "label": "Alfred North Whitehead",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "alfred": 0.5773502691896258,
+        "north": 0.5773502691896258,
+        "whitehead": 0.5773502691896258
+      },
+      "updatedAt": 1792902292490
     }
   ],
   "edges": [
@@ -2842,6 +3034,84 @@
     {
       "source": "visionquest",
       "target": "paper:10.1016/b978-85-352-5226-2.50018-2",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "1956",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "a.i. - inteligência artificial",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "a priori",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "ablação (inteligência artificial)",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "academia",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "agente inteligente",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "alan turing",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "alexandre, o grande",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "alfa-sinucleína",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "alfred north whitehead",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "paper:10.3403/30483942u",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "paper:10.1093/hesc/9780198557364.003.0001",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "inteligência artificial",
+      "target": "paper:10.3403/30483942",
       "type": "CITED_IN_LITERATURE",
       "weight": 0.95
     }

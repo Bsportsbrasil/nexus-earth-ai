@@ -1,10 +1,40 @@
 {
+  "userName": "Ana",
   "learningStyle": "Visual, Lúdico & Histórias Criativas",
+  "lastDetectedEmotion": "🤝 Conexão Natural & Empática",
   "perspectiveNotes": [
     "Todo ser vivente enxerga o mundo de um jeito único.",
     "Aprender envolve escolhas: se um caminho não funcionar, tentamos outro com respeito e alegria."
   ],
   "dailyJournal": [
+    {
+      "id": "7312c91d-8086-4949-96b3-f380c8b16d5d",
+      "date": "2026-10-25",
+      "time": "01:42:00",
+      "insight": "Ana consultou data/hora em tempo real (01:42:00)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "a0f564ab-db96-46c2-9528-86637a150172",
+      "date": "2026-10-25",
+      "time": "01:42:00",
+      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "527300cf-47f6-43fa-8672-af843fd9ae02",
+      "date": "2026-10-25",
+      "time": "01:42:00",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "7a98ed77-cc51-41f4-be64-14874c0ee647",
+      "date": "2026-10-25",
+      "time": "01:30:31",
+      "insight": "Explorou \"O que faz bem ao osso faz bem a tudo (2020)\" às 01:30:29 no estilo [Visual, Lúdico & Histórias Criativas]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
     {
       "id": "20487a91-4637-4f08-a442-1f0321c75034",
       "date": "2026-10-25",
@@ -111,5 +141,5 @@
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 11
+  "interactionCount": 14
 }

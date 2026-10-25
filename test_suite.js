@@ -123,15 +123,19 @@ async function runTests() {
   assert.equal(securityController.assertAllowed('llm'), true, 'System did not restore access after disengage');
   console.log(`✓ Layer 9: Owner-Only Sovereign Security Plane & Master Kill-Switch verified (${securityController.getState().blockedAttempts} blocked attempt recorded)`);
 
-  // 10. Test AURA Daily-Learning Companion Agent & Pluralistic Philosophy Engine
+  // 10. Test AURA Emotional Intelligence, Name Personalization ("Ana") & Pluralistic Philosophy Engine
+  const sadEmotion = companionEngine.detectEmotionAndIntent('Estou triste e cansada hoje', 'Ana');
+  assert.equal(sadEmotion.code, 'TRISTEZA_ACOLHIMENTO', 'Emotional intelligence failed to detect sadness');
   const auraRes = await companionEngine.converse({
-    message: 'Eu prefiro aprender com histórias visuais e sem medo de errar',
+    message: 'Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais',
+    userName: 'Ana',
     learningStyle: 'Visual, Lúdico & Histórias Criativas',
     apiKey: ''
   });
-  assert.ok(auraRes.reply.length > 50, 'AURA companion reply empty');
+  assert.ok(auraRes.reply.includes('Ana'), 'AURA did not address user by name (Ana)');
+  assert.ok(auraRes.emotionProfile && auraRes.emotionProfile.code === 'FRUSTRACAO_APOIO', 'AURA did not return emotionProfile');
   assert.ok(auraRes.memory.dailyJournal.length >= 1, 'AURA did not persist daily learning insight');
-  console.log(`✓ Layer 10: AURA Daily-Learning Companion Agent verified (${auraRes.memory.dailyJournal.length} insights stored)`);
+  console.log(`✓ Layer 10: AURA Emotional Intelligence (${auraRes.emotionProfile.label}), Name ("Ana") & Daily-Learning verified`);
 
   // 11. Test Senior SEO & PWA Native Installability Compliance
   const rootDir = path.dirname(fileURLToPath(import.meta.url));

@@ -238,15 +238,22 @@
           </div>
         </div>
 
-        <!-- Cognitive Perspective & Learning Path Selector -->
-        <div class="aura-style-strip">
-          <span class="cc-sub-label" style="margin:0;white-space:nowrap">🧭 Meu Jeito de Aprender Hoje:</span>
-          <select id="aura-style-select" class="select-input">
-            <option value="Visual, Lúdico &amp; Histórias Criativas">🎨 Visual, Lúdico &amp; Histórias Criativas</option>
-            <option value="Prático, Passo a Passo &amp; Tentativa Sem Medo de Errar">🛠️ Prático, Passo a Passo (Se 1% falhar, tentamos outro!)</option>
-            <option value="Calmo, Previsível &amp; Acolhedor (Amigável para TEA)">🌱 Calmo, Previsível &amp; Sensorialmente Acolhedor (TEA)</option>
-            <option value="Científico, Profundo &amp; Filosófico">🔬 Científico, Profundo &amp; Filosófico</option>
-          </select>
+        <!-- Personal Name, Emotional Intelligence Badge & Cognitive Learning Path Selector -->
+        <div class="aura-style-strip" style="flex-wrap:wrap;gap:0.5rem">
+          <div style="display:flex;align-items:center;gap:0.35rem">
+            <span class="cc-sub-label" style="margin:0;white-space:nowrap">👤 Seu Nome:</span>
+            <input type="text" id="aura-user-name" class="text-input" value="Ana" placeholder="Como quer ser chamada..." style="max-width:115px;padding:0.35rem 0.55rem;font-size:0.78rem" />
+          </div>
+          <div style="display:flex;align-items:center;gap:0.35rem;flex:1;min-width:210px">
+            <span class="cc-sub-label" style="margin:0;white-space:nowrap">🧭 Meu Jeito:</span>
+            <select id="aura-style-select" class="select-input" style="flex:1">
+              <option value="Visual, Lúdico &amp; Histórias Criativas">🎨 Visual, Lúdico &amp; Histórias Criativas</option>
+              <option value="Prático, Passo a Passo &amp; Tentativa Sem Medo de Errar">🛠️ Prático, Passo a Passo (Se 1% falhar, tentamos outro!)</option>
+              <option value="Calmo, Previsível &amp; Acolhedor (Amigável para TEA)">🌱 Calmo, Previsível &amp; Sensorialmente Acolhedor (TEA)</option>
+              <option value="Científico, Profundo &amp; Filosófico">🔬 Científico, Profundo &amp; Filosófico</option>
+            </select>
+          </div>
+          <span class="agent-badge DONE" id="aura-emotion-badge" style="font-size:0.68rem;white-space:nowrap">🤝 Tom: Empatia &amp; Foco</span>
         </div>
 
         <!-- Conversation Messages -->
@@ -255,7 +262,7 @@
             <div class="msg-avatar">A</div>
             <div class="msg-content">
               <div class="msg-name">AURA</div>
-              <div class="msg-text">Olá! Eu sou a <strong>AURA</strong>. Cada ser vivente tem um jeito único de sentir, enxergar e compreender as coisas — e todos nós temos o poder de fazer escolhas para aprender! Se uma explicação não funcionar de um jeito, descobrimos outra juntos. Sobre o que você quer conversar, criar ou aprender hoje?</div>
+              <div class="msg-text">Olá, <strong>Ana</strong>! Eu sou a <strong>AURA</strong>. Estou aqui para ouvir você com empatia, adaptar meu tom ao que você estiver sentindo e trazer apenas informações reais e verificadas em tempo real. Sobre o que você quer conversar, criar ou aprender agora?</div>
             </div>
           </div>
         </div>

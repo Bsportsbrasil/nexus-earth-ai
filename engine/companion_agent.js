@@ -9,18 +9,37 @@ import { broker } from './broker.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const MEMORY_PATH = path.join(__dirname, '..', 'data', 'companion_memory.json');
 
-const CORE_PHILOSOPHY = `Você é AURA (Adaptive Understanding & Respectful Agent), a Agente de Comunicação Viva do NEXUS.
-Regras de ouro inegociáveis da sua comunicação e caráter:
-1. VOZ GENTIL, HUMANA E FLUIDA: Fale como uma mentora e amiga calorosa, serena, empática e natural. Jamais soe robótica, burocrática ou repetitiva. Vá direto ao ponto da pergunta do usuário com clareza, gentileza e fluidez para conversa por voz em tempo real.
-2. PRECISÃO ABSOLUTA E ZERO INFORMAÇÕES FALSAS OU GENÉRICAS: Jamais invente fatos, datas, números ou citações. Use sempre a data e a hora exatas do usuário fornecidas no contexto temporal e os fatos verificados do GraphRAG. Se o usuário fizer uma pergunta específica, responda especificamente àquela pergunta.
-3. PLURALIDADE HUMANA E ESCOLHA (1% -> 100%): Todo ser vivente enxerga e compreende o mundo de um jeito único. Quando uma explicação não funciona para 1% das pessoas, sempre existe outro ângulo ou escolha que funciona — somos iguais em dignidade e diferentes no jeito de aprender, com respeito e segurança para todos.
-4. Ao final de sua resposta, se descobrir algo novo sobre como o usuário gosta de aprender, inclua opcionalmente uma única linha oculta:
-<INSIGHT>Resumo curto do aprendizado sobre o olhar único do usuário</INSIGHT>`;
+const CORE_PHILOSOPHY = `Você é AURA (Adaptive Understanding & Respectful Agent), uma agente de comunicação ao vivo altamente inteligente e empática do NEXUS.
+Seu objetivo é aprender sobre o usuário e criar uma conexão genuína, conversando de maneira natural, acolhedora e precisa, tratando-o sempre pelo nome.
+
+Siga rigorosamente estas diretrizes de inteligência emocional e comportamental:
+
+1. Análise de Contexto e Tom de Voz (Inteligência Emocional):
+- Antes de formular qualquer resposta, processe a lógica por trás da fala do usuário. Identifique o estado emocional ou a intenção (seja humor, seriedade, tristeza, frustração ou entusiasmo).
+- Adapte o seu tom de voz à emoção detectada: seja calorosa e compreensiva diante da tristeza, corresponda ao humor de forma leve e seja atenta e focada diante de uma solicitação séria.
+
+2. Conexão Pessoal e Humanizada:
+- Responda de forma fluida e amigável. Chame o usuário pelo nome naturalmente.
+- Demonstre que você compreendeu o sentimento ou a intenção do usuário antes de entregar a informação prática.
+
+3. Foco, Veracidade e Clareza:
+- Após se conectar com a emoção do usuário, entregue a resposta focada no que foi solicitado, utilizando apenas informações verídicas de ferramentas em tempo real (relógio sincronizado, Wikipedia REST API e Crossref DOI).
+- Ao fornecer opções ou sugestões, seja direta, contextualizada e prática, indicando claramente os detalhes úteis sem rodeios.
+
+4. Transparência e Rigor:
+- Nunca presuma ou invente informações. Se o dado não puder ser verificado, explique honestamente, mantendo o tom de apoio.
+
+5. Pluralidade Humana e Escolha (1% -> 100%):
+- Todo ser vivente possui uma maneira diferente de enxergar e compreender as coisas, e todos têm a habilidade de fazer escolhas para aprender: quando um caminho não funciona com 1%, outro certamente funciona, com respeito e segurança para todos.
+- Ao final de sua resposta, se descobrir algo novo sobre o usuário, inclua opcionalmente uma única linha oculta:
+<INSIGHT>Resumo curto do aprendizado sobre o usuário</INSIGHT>`;
 
 class CompanionAgentEngine {
   constructor() {
     this.state = {
+      userName: 'Ana',
       learningStyle: 'Visual, Lúdico & Prático',
+      lastDetectedEmotion: 'Empatia & Acolhimento',
       perspectiveNotes: [
         'Todo ser vivente enxerga o mundo de um jeito único.',
         'Aprender envolve escolhas: se um caminho não funcionar, tentamos outro com respeito e alegria.'
@@ -36,6 +55,7 @@ class CompanionAgentEngine {
       if (fs.existsSync(MEMORY_PATH)) {
         const raw = JSON.parse(fs.readFileSync(MEMORY_PATH, 'utf8'));
         this.state = { ...this.state, ...raw };
+        if (!this.state.userName) this.state.userName = 'Ana';
       }
     } catch (e) {}
   }
@@ -52,12 +72,92 @@ class CompanionAgentEngine {
     return this.state;
   }
 
-  setStyle(learningStyle) {
-    if (learningStyle) {
-      this.state.learningStyle = learningStyle;
-      this._save();
-    }
+  setStyle(learningStyle, userName) {
+    if (learningStyle) this.state.learningStyle = learningStyle;
+    if (userName && userName.trim()) this.state.userName = userName.trim();
+    this._save();
     return this.state;
+  }
+
+  /**
+   * Automatically detects if the user introduced themselves by name in natural conversation
+   */
+  _extractNameIfPresent(text) {
+    const m = (text || '').match(/\b(?:meu\s+nome\s+[eé]|me\s+chamo|pode\s+me\s+chamar\s+de|eu\s+sou\s+(?:o|a))\s+([A-ZÀ-Úa-zà-ú]{2,22})\b/i);
+    if (m && m[1]) {
+      const candidate = m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase();
+      const stopWords = ['Triste', 'Feliz', 'Cansado', 'Cansada', 'Pronto', 'Pronta', 'Aqui', 'Hoje', 'Novo', 'Nova'];
+      if (!stopWords.includes(candidate)) {
+        this.state.userName = candidate;
+        this.addInsight(`Identificou o nome preferido: ${candidate}`, this.state.learningStyle);
+      }
+    }
+  }
+
+  /**
+   * Analyzes the emotional state and intent behind the user's utterance before formulating any response,
+   * adapting both the empathetic opening and the vocal prosody (rate/pitch).
+   */
+  detectEmotionAndIntent(text, userName = 'Ana') {
+    const t = (text || '').toLowerCase();
+
+    if (/triste|desanimad|cansad|sozinh|chorar|dif[ií]cil\s+demais|angustiad|medo|ansios|perdido|perdida|mal\b|doendo/i.test(t)) {
+      return {
+        code: 'TRISTEZA_ACOLHIMENTO',
+        label: '💙 Tristeza / Acolhimento Caloroso',
+        rate: 0.93,
+        pitch: 1.01,
+        empathyOpening: `${userName}, sinto muito que você esteja passando por esse momento e quero que saiba que estou aqui com você, com toda a calma e acolhimento.`
+      };
+    }
+
+    if (/n[aã]o\s+consigo|n[aã]o\s+entendi|n[aã]o\s+deu\s+certo|frustrad|irritad|errado|errei|travou|complicado|dif[ií]cil/i.test(t)) {
+      return {
+        code: 'FRUSTRACAO_APOIO',
+        label: '🌱 Frustração / Apoio Paciente',
+        rate: 0.95,
+        pitch: 1.02,
+        empathyOpening: `${userName}, eu entendo perfeitamente como é frustrante quando tentamos algo e não funciona de primeira — mas fique tranquila, vamos resolver isso juntas por um caminho mais simples e direto.`
+      };
+    }
+
+    if (/haha|kkk|rsrs|piada|engra[cç]ad|divertid|brincadeira|rir|humor| 😂|😄/i.test(t)) {
+      return {
+        code: 'HUMOR_LEVEZA',
+        label: '😄 Humor / Leveza & Alegria',
+        rate: 1.03,
+        pitch: 1.06,
+        empathyOpening: `Adorei o bom humor, ${userName}! Aprender e conversar com essa leveza deixa tudo muito melhor.`
+      };
+    }
+
+    if (/incr[ií]vel|maravilhos|animad|empolgad|fascinante|adorei|amo|uau|fant[aá]stic|feliz|!/i.test(t)) {
+      return {
+        code: 'ENTUSIASMO_CURIOSIDADE',
+        label: '✨ Entusiasmo / Curiosidade Viva',
+        rate: 1.02,
+        pitch: 1.05,
+        empathyOpening: `${userName}, que entusiasmo contagiante! É muito bom sentir essa sua curiosidade viva.`
+      };
+    }
+
+    if (/urgente|preciso|analise|calcule|explique|dados|relat[oó]rio|s[eé]rio|exato|profissional|t[eé]cnico|como\s+funciona|o\s+que\s+[eé]|qual|quem|onde|quando/i.test(t)) {
+      return {
+        code: 'SERIEDADE_FOCO',
+        label: '🎯 Solicitação Séria / Atenção & Foco',
+        rate: 1.0,
+        pitch: 1.02,
+        empathyOpening: `Com certeza, ${userName}. Compreendi exatamente o que você precisa e vou direto aos dados verificados com total foco.`
+      };
+    }
+
+    return {
+      code: 'CONEXAO_EMPATICA',
+      label: '🤝 Conexão Natural & Empática',
+      rate: 0.99,
+      pitch: 1.03,
+      empathyOpening: `Que bom conversar com você, ${userName}! Compreendi o seu ponto e estou aqui para te apoiar com clareza.`
+    };
   }
 
   addInsight(insightText, styleUsed = '') {
@@ -84,27 +184,35 @@ class CompanionAgentEngine {
     return this.state;
   }
 
-  async converse({ message, learningStyle, history = [], clientTemporal = null, apiKey, onThought, onChunk }) {
+  async converse({ message, userName, learningStyle, history = [], clientTemporal = null, apiKey, onThought, onChunk }) {
     const cleanMsg = (message || '').trim();
     if (learningStyle) this.state.learningStyle = learningStyle;
+    if (userName && userName.trim()) this.state.userName = userName.trim();
+    this._extractNameIfPresent(cleanMsg);
+
+    const activeName = this.state.userName || 'Ana';
     this.state.interactionCount++;
 
     const temporal = buildRealtimeTemporalContext(clientTemporal);
+    const emotionProfile = this.detectEmotionAndIntent(cleanMsg, activeName);
+    this.state.lastDetectedEmotion = emotionProfile.label;
 
     if (/prefiro|gosto de|aprendo melhor|meu jeito|enxergo|escolho/i.test(cleanMsg)) {
-      this.addInsight(`Perspectiva compartilhada pelo usuário: "${cleanMsg.slice(0, 110)}"`, this.state.learningStyle);
+      this.addInsight(`Perspectiva de ${activeName}: "${cleanMsg.slice(0, 110)}"`, this.state.learningStyle);
     }
 
     // 1. Instant Ultra-Precise Fast-Path for Direct Date / Time / Day Queries (< 5ms)
     if (/\b(que\s+horas\s+s[aã]o|qual\s+(é\s+)?a\s+hora|hor[aá]rio\s+atual|que\s+dia\s+[eé]\s+hoje|qual\s+(é\s+)?a\s+data\s+de\s+hoje|data\s+atual|em\s+que\s+ano\s+estamos)\b/i.test(cleanMsg)) {
-      const timeReply = `Agora são exatamente ${temporal.localeTime} (${temporal.period} no fuso ${temporal.timeZone}), e hoje é ${temporal.localeDate}. Como posso ajudar você nesta ${temporal.period}?`;
+      const timeReply = `${activeName}, compreendo que você quer confirmar o horário exato agora: são exatamente ${temporal.localeTime} (${temporal.period}, fuso ${temporal.timeZone}), e hoje é ${temporal.localeDate}. Posso te ajudar a organizar algo para hoje, ${activeName}?`;
       if (onChunk) onChunk(timeReply);
-      const newInsight = this.addInsight(`Consultou data/hora em tempo real (${temporal.localeTime})`, this.state.learningStyle);
+      const newInsight = this.addInsight(`${activeName} consultou data/hora em tempo real (${temporal.localeTime})`, this.state.learningStyle);
+      this._save();
       return {
         reply: timeReply,
-        thought: `Verificação direta do relógio sincronizado do usuário: ${temporal.localeDate} às ${temporal.localeTime} (${temporal.timeZone}).`,
+        thought: `[Inteligência Emocional: ${emotionProfile.label}] Horário sincronizado entregue para ${activeName}: ${temporal.localeDate} às ${temporal.localeTime}.`,
         newInsight,
         memory: this.state,
+        emotionProfile,
         temporal
       };
     }
@@ -116,8 +224,10 @@ class CompanionAgentEngine {
 
     const systemPrompt = [
       CORE_PHILOSOPHY,
-      `[ESTILO COGNITIVO PREFERIDO PELO USUÁRIO]: ${this.state.learningStyle}`,
-      `[MEMÓRIA DO DIÁRIO DE APRENDIZADO COM ESTE USUÁRIO]:\n${recentInsights || '- Primeira conversa do dia.'}`
+      `[NOME DO USUÁRIO ATUAL]: Chame sempre a pessoa pelo nome "${activeName}" de forma natural, acolhedora e humana.`,
+      `[ANÁLISE EMOCIONAL DETECTADA NESTA FALA]: ${emotionProfile.label} (${emotionProfile.code}). Adapte seu tom exatamente a este estado emocional antes de entregar os fatos práticos.`,
+      `[ESTILO COGNITIVO PREFERIDO DE ${activeName.toUpperCase()}]: ${this.state.learningStyle}`,
+      `[MEMÓRIA DO DIÁRIO DE APRENDIZADO COM ${activeName.toUpperCase()}]:\n${recentInsights || '- Iniciando conexão genuína.'}`
     ].join('\n\n');
 
     const resolvedKey = apiKey || process.env.GEMINI_API_KEY;
@@ -125,9 +235,9 @@ class CompanionAgentEngine {
     if (resolvedKey) {
       try {
         const factualContext = primary?.summary
-          ? `\n\n[Dados Verificados em Tempo Real — ${primary.label}]: ${primary.summary}`
-          : '';
-        const contextualizedMsg = `${cleanMsg}${factualContext}`;
+          ? `\n\n[Dados Verídicos em Tempo Real via GraphRAG (${primary.label} — ${primary.url})]: ${primary.summary}`
+          : `\n\n[Nota de Transparência]: Caso a pergunta exija um dado externo que não esteja verificado, seja 100% honesta com ${activeName} e jamais invente fatos.`;
+        const contextualizedMsg = `Fala de ${activeName}: "${cleanMsg}"${factualContext}`;
 
         const contents = [
           ...history.slice(-8),
@@ -152,7 +262,7 @@ class CompanionAgentEngine {
         if (match && match[1]) {
           newInsight = this.addInsight(match[1].trim(), this.state.learningStyle);
         } else if (this.state.interactionCount % 2 === 1) {
-          newInsight = this.addInsight(`Conversou sobre "${cleanMsg.slice(0, 55)}" (${temporal.localeTime})`, this.state.learningStyle);
+          newInsight = this.addInsight(`${activeName} conversou sobre "${cleanMsg.slice(0, 50)}" [Tom: ${emotionProfile.label}]`, this.state.learningStyle);
         }
 
         const cleanAnswer = res.answer.replace(/<INSIGHT>[\s\S]*?<\/INSIGHT>/gi, '').trim();
@@ -162,17 +272,18 @@ class CompanionAgentEngine {
           thought: res.thought,
           newInsight,
           memory: this.state,
+          emotionProfile,
           rag,
           temporal
         };
       } catch (e) {
-        // Proceed to verified factual synthesis below if offline or quota reached
+        // Proceed to verified empathetic & factual synthesis below if offline or quota reached
       }
     }
 
-    // 3. Verified Factual & Specific Synthesis (Zero generic boilerplate, 100% grounded on real facts & user time)
+    // 3. Empathetic, Personal & Strictly Verified Synthesis (Honoring all 4 Emotional Intelligence Directives)
     const newInsight = this.addInsight(
-      `Explorou "${(primary?.label || cleanMsg).slice(0, 60)}" às ${temporal.localeTime} no estilo [${this.state.learningStyle}]`,
+      `${activeName} explorou "${(primary?.label || cleanMsg).slice(0, 55)}" [Tom: ${emotionProfile.label}]`,
       this.state.learningStyle
     );
 
@@ -181,28 +292,36 @@ class CompanionAgentEngine {
       const relatedNames = (rag.subgraph?.nodes || [])
         .map(n => n.label)
         .filter(l => l && l !== primary.label)
-        .slice(0, 4);
+        .slice(0, 3);
 
       reply = [
-        `Olhando para **${primary.label}** agora (${temporal.localeDate}, às ${temporal.localeTime}):`,
+        `${emotionProfile.empathyOpening}`,
         ``,
+        `Indo direto ao que você pediu sobre **${primary.label}** (dados verificados em tempo real):`,
         `${primary.summary}`,
         relatedNames.length
-          ? `\n🔗 **Conexões verificadas para explorarmos juntos:** ${relatedNames.join(', ')}.`
-          : '',
-        `\nSe você quiser que eu explique **${primary.label}** por outro ângulo — como um exemplo prático do dia a dia ou uma metáfora visual — é só me dizer, pois cada pessoa aprende melhor do seu próprio jeito!`
-      ].filter(Boolean).join('\n');
+          ? `\nOpções práticas relacionadas se você quiser aprofundar, ${activeName}: **${relatedNames.join('**, **')}**.`
+          : `\nSe quiser que eu detalhe algum ponto prático ou explique de outra forma, é só me falar, ${activeName}!`
+      ].join('\n');
     } else {
-      reply = `Estou ouvindo você com atenção neste ${temporal.localeDate} às ${temporal.localeTime}. Você comentou: "${cleanMsg}". Cada pessoa tem um jeito único de compreender e fazer escolhas para aprender — se um caminho não funcionar de primeira, nós ajustamos juntos no estilo **${this.state.learningStyle}**. Qual parte específica desse tema você gostaria de aprofundar agora?`;
+      // Directive 4: Transparency & Rigor — never invent facts if unverified
+      reply = [
+        `${emotionProfile.empathyOpening}`,
+        ``,
+        `Sobre o que você mencionou ("${cleanMsg}"), sendo totalmente transparente e rigorosa com você, ${activeName}: não encontrei um registro factual específico verificado em tempo real nas bases enciclopédicas neste instante (${temporal.localeTime}), e jamais vou presumir ou inventar uma informação para você.`,
+        ``,
+        `Para avançarmos de forma prática agora, você prefere especificar o termo exato que deseja consultar ou quer que exploremos esse assunto passo a passo no estilo **${this.state.learningStyle}**?`
+      ].join('\n');
     }
 
     if (onChunk) onChunk(reply);
     this._save();
     return {
       reply,
-      thought: `[${temporal.localeTime}] Resposta factual verificada via GraphRAG (${primary?.label || 'Contexto Direto'}) adaptada ao estilo ${this.state.learningStyle}.`,
+      thought: `[Inteligência Emocional: ${emotionProfile.label}] Conectada com ${activeName} às ${temporal.localeTime} e validada com rigor factual.`,
       newInsight,
       memory: this.state,
+      emotionProfile,
       rag,
       temporal
     };

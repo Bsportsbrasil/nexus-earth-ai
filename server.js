@@ -589,7 +589,7 @@ const server = http.createServer(async (req, res) => {
           return jsonResponse(res, 200, companionEngine.clearMemory());
         }
         if (body.action === 'set_style') {
-          return jsonResponse(res, 200, companionEngine.setStyle(body.learningStyle));
+          return jsonResponse(res, 200, companionEngine.setStyle(body.learningStyle, body.userName));
         }
         c2Engine.inspectAndFilterRequest({
           accountId: body.accountId || 'acc_public_live',
@@ -603,6 +603,7 @@ const server = http.createServer(async (req, res) => {
         }
         const resCompanion = await companionEngine.converse({
           message: body.message,
+          userName: body.userName,
           learningStyle: body.learningStyle,
           history: body.history || [],
           clientTemporal: body.clientTemporal,

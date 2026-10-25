@@ -62,6 +62,16 @@ const CompanionUI = (function () {
     const countEl = document.getElementById('aura-count');
     if (countEl) countEl.textContent = memory.interactionCount || 0;
 
+    const nameInp = document.getElementById('aura-user-name');
+    if (nameInp && memory.userName && document.activeElement !== nameInp) {
+      nameInp.value = memory.userName;
+    }
+
+    const emoBadge = document.getElementById('aura-emotion-badge');
+    if (emoBadge && memory.lastDetectedEmotion) {
+      emoBadge.textContent = memory.lastDetectedEmotion;
+    }
+
     const list = document.getElementById('aura-journal-list');
     if (!list) return;
     list.innerHTML = '';
@@ -105,7 +115,7 @@ const CompanionUI = (function () {
    * Speaks AURA's response with natural, gentle human prosody and automatically
    * resumes hands-free microphone listening the moment she finishes speaking.
    */
-  function speakAura(text, onDoneSpeaking) {
+  function speakAura(text, onDoneSpeaking, emotionProfile = null) {
     const orb = document.getElementById('aura-orb');
     const stateLabel = document.getElementById('aura-state-label');
 
@@ -136,6 +146,8 @@ const CompanionUI = (function () {
     isAuraSpeaking = true;
     const sentences = clean.match(/[^.!?]+[.!?]*/g) || [clean];
     const voice = pickGentleHumanizedVoice();
+    const targetRate = emotionProfile?.rate || 1.0;
+    const targetPitch = emotionProfile?.pitch || 1.03;
 
     sentences.forEach((sentence, idx) => {
       const phrase = sentence.trim();
@@ -143,9 +155,9 @@ const CompanionUI = (function () {
       const u = new SpeechSynthesisUtterance(phrase);
       u.lang = 'pt-BR';
       if (voice) u.voice = voice;
-      // Natural human conversational flow (not slow/robotic, not rushed, warm pitch)
-      u.rate = 1.0;
-      u.pitch = 1.03;
+      // Emotionally-adapted natural human prosody
+      u.rate = targetRate;
+      u.pitch = targetPitch;
       u.volume = 1.0;
 
       if (idx === 0) {
@@ -191,13 +203,14 @@ const CompanionUI = (function () {
     isProcessingTurn = true;
 
     const learningStyle = styleSel?.value || 'Visual, Lúdico & Histórias Criativas';
+    const userName = (document.getElementById('aura-user-name')?.value || 'Ana').trim() || 'Ana';
     const clientTemporal = getClientTemporal();
 
     addAuraMessage('user', esc(msg));
     const replyEl = addAuraMessage('assistant', '<span class="typing-cursor"></span>');
 
     if (orb) orb.classList.add('speaking');
-    if (stateLabel) stateLabel.textContent = `⚡ Respondendo em tempo real (${clientTemporal.localeTime})...`;
+    if (stateLabel) stateLabel.textContent = `⚡ Analisando contexto emocional de ${userName} (${clientTemporal.localeTime})...`;
 
     try {
       const resp = await fetch('/api/companion', {
@@ -205,6 +218,7 @@ const CompanionUI = (function () {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: msg,
+          userName,
           learningStyle,
           history,
           clientTemporal,
@@ -226,14 +240,14 @@ const CompanionUI = (function () {
       if (data.memory) renderJournal(data.memory);
       isProcessingTurn = false;
 
-      // Speak response and automatically re-open microphone when finished if live session is active!
+      // Speak response with emotionally adapted vocal prosody and automatically re-open microphone when finished if live session is active!
       speakAura(data.reply, () => {
         if (liveSessionActive) {
           startListeningTurn();
         } else if (stateLabel) {
-          stateLabel.textContent = `Sincronizada (${getClientTemporal().localeTime}) • Pronta para conversar ✨`;
+          stateLabel.textContent = `Sincronizada com ${data.memory?.userName || userName} (${getClientTemporal().localeTime}) ✨`;
         }
-      });
+      }, data.emotionProfile);
     } catch (e) {
       isProcessingTurn = false;
       if (orb) orb.classList.remove('speaking');
