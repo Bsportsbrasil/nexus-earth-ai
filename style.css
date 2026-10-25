@@ -101,29 +101,38 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
+  height: 68px;
   padding: 0 1.5rem;
-  background: rgba(2, 4, 10, 0.88);
+  background: rgba(2, 4, 10, 0.90);
   backdrop-filter: blur(22px) saturate(180%);
   -webkit-backdrop-filter: blur(22px) saturate(180%);
   border-bottom: 1px solid rgba(99, 130, 200, 0.16);
   box-shadow: 0 4px 28px rgba(0, 0, 0, 0.45);
-  transition: background var(--transition), border-color var(--transition);
-}
-.nav-inner {
-  width: 100%;
-  max-width: 1560px;
-  margin: 0 auto;
-  min-height: 70px;
-  padding: 0.45rem 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.25rem;
+  transition: background var(--transition), border-color var(--transition);
 }
-/* 1. Left: Brand Logo & Tag */
-.nav-logo {
-  display: inline-flex;
+
+/* Main Container: Strict flex-row, items vertically centered, generous spacing */
+.nav-inner {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.75rem, 1.8vw, 1.75rem);
+}
+
+/* 1. Left Section: Logo & Brand Identity */
+.nav-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
   gap: 0.65rem;
   flex-shrink: 0;
   text-decoration: none;
@@ -138,12 +147,13 @@ body {
 @keyframes logo-spin { to { transform: rotate(360deg); } }
 .nav-brand-text {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.5rem;
 }
 .logo-text {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   line-height: 1;
@@ -165,38 +175,43 @@ body {
   border-radius: 6px;
   white-space: nowrap;
 }
-/* 2. Center: Navigation Links Pill Bar */
+
+/* 2. Center Section: Modular Navigation Links */
 .nav-links {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
   list-style: none;
   margin: 0 auto;
-  padding: 0.3rem 0.45rem;
+  padding: 0.28rem 0.5rem;
   background: rgba(15, 22, 41, 0.65);
   border: 1px solid rgba(99, 130, 200, 0.16);
   border-radius: 999px;
+  flex-shrink: 1;
+  min-width: 0;
   overflow-x: auto;
-  max-width: 100%;
   scrollbar-width: none;
 }
 .nav-links::-webkit-scrollbar { display: none; }
 .nav-links li {
   display: flex;
+  flex-direction: row;
   align-items: center;
   flex-shrink: 0;
 }
 .nav-link {
   display: inline-flex;
+  flex-direction: row;
   align-items: center;
   gap: 0.35rem;
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.79rem;
   font-weight: 600;
   line-height: 1;
-  padding: 0.48rem 0.8rem;
+  padding: 0.45rem 0.72rem;
   border-radius: 999px;
   transition: all 0.2s ease;
   border: 1px solid transparent;
@@ -212,9 +227,11 @@ body {
   background: rgba(0, 245, 255, 0.14);
   box-shadow: 0 0 16px rgba(0, 245, 255, 0.15);
 }
-/* 3. Right: Action & Status Group */
+
+/* 3. Right Section: Action, Language & Profile Controls */
 .nav-status {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-end;
   gap: 0.55rem;
@@ -224,14 +241,15 @@ body {
 .nav-status .btn-secondary,
 .nav-status .btn-primary {
   height: 34px;
-  padding: 0 0.78rem !important;
-  font-size: 0.75rem !important;
+  padding: 0 0.75rem !important;
+  font-size: 0.74rem !important;
   font-weight: 600;
   line-height: 1;
   border-radius: 8px;
   white-space: nowrap;
   flex-shrink: 0;
   display: inline-flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
@@ -1179,7 +1197,7 @@ body {
 @media (max-width: 1380px) {
   .logo-tag { display: none; }
   .nav-inner { gap: 0.75rem; }
-  .nav-link { padding: 0.42rem 0.62rem; font-size: 0.76rem; }
+  .nav-link { padding: 0.42rem 0.6rem; font-size: 0.75rem; }
   .nav-status { gap: 0.4rem; }
   .nav-status .nav-btn,
   .nav-status .btn-secondary,
@@ -1187,23 +1205,6 @@ body {
     padding: 0 0.6rem !important;
     font-size: 0.72rem !important;
   }
-}
-@media (max-width: 1120px) {
-  .nav-inner {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    gap: 0.5rem;
-  }
-  .nav-links {
-    order: 3;
-    width: 100%;
-    justify-content: flex-start;
-    border-radius: 12px;
-    padding: 0.3rem 0.5rem;
-  }
-  .section { padding-top: 125px; }
-  .hero-section { padding-top: 135px; }
 }
 @media (max-width: 1024px) {
   .hero-section { flex-direction: column; text-align: center; }
