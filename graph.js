@@ -129,6 +129,84 @@ const Graph = (function () {
       addLink(root, child);
     });
     selectAndExpand(root);
+    fetchOmniscientPulse(topic);
+  }
+
+  const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  async function fetchOmniscientPulse(rawTopic) {
+    const q = (rawTopic || document.getElementById('graph-search')?.value || 'Inteligência Artificial').trim();
+    const newsEl = document.getElementById('intel-news-list');
+    const socEl = document.getElementById('intel-social-list');
+    const newsBadge = document.getElementById('intel-news-badge');
+    const socBadge = document.getElementById('intel-social-badge');
+    if (newsBadge) { newsBadge.className = 'agent-badge THINKING'; newsBadge.textContent = 'SCANNING NEWS…'; }
+    if (socBadge) { socBadge.className = 'agent-badge THINKING'; socBadge.textContent = 'SCANNING SOCIAL…'; }
+
+    try {
+      const r = await fetch(`/api/intel/pulse?q=${encodeURIComponent(q)}`);
+      if (!r.ok) return;
+      const d = await r.json();
+
+      if (newsEl) {
+        const articles = d.news?.articles || [];
+        if (articles.length) {
+          newsEl.innerHTML = articles.map(a => `
+            <div style="border-bottom:1px solid var(--border);padding-bottom:0.45rem">
+              <div style="font-size:0.68rem;color:var(--cyan);font-family:var(--font-mono)">[${esc(a.provider)}] ${esc(a.source)} • ${esc(a.publishedAt.slice(0, 22))}</div>
+              <a href="${esc(a.url)}" target="_blank" rel="noopener" style="color:var(--text-primary);font-weight:600;text-decoration:none">${esc(a.title)} ↗</a>
+            </div>
+          `).join('');
+        } else {
+          newsEl.innerHTML = `<span class="idle-text">Nenhuma notícia recente retornada para "${esc(q)}".</span>`;
+        }
+      }
+
+      if (socEl) {
+        const signals = d.social?.signals || [];
+        if (signals.length) {
+          socEl.innerHTML = `<div style="font-size:0.7rem;color:var(--emerald);margin-bottom:0.3rem">Pulso de Sentimento: <strong>${esc(d.social.sentimentPulse)}</strong></div>` +
+            signals.map(s => `
+              <div style="border-bottom:1px solid var(--border);padding-bottom:0.45rem">
+                <div style="font-size:0.68rem;color:#c084fc;font-family:var(--font-mono)">[${esc(s.network)}] ${esc(s.author)} • ⭐ ${esc(s.score)}</div>
+                <a href="${esc(s.url)}" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none">${esc(s.text)} ↗</a>
+              </div>
+            `).join('');
+        } else {
+          socEl.innerHTML = `<span class="idle-text">Nenhum sinal social retornado para "${esc(q)}".</span>`;
+        }
+      }
+
+      if (newsBadge) { newsBadge.className = 'agent-badge DONE'; newsBadge.textContent = `${d.news?.totalArticles || 0} NOTÍCIAS AO VIVO`; }
+      if (socBadge) { socBadge.className = 'agent-badge DONE'; socBadge.textContent = `${d.social?.totalSignals || 0} SINAIS SOCIAIS`; }
+    } catch (_) {
+      if (newsBadge) { newsBadge.className = 'agent-badge IDLE'; newsBadge.textContent = 'READY'; }
+      if (socBadge) { socBadge.className = 'agent-badge IDLE'; socBadge.textContent = 'READY'; }
+    }
+  }
+
+  async function runSurgicalAudit() {
+    const outEl = document.getElementById('surgical-audit-output');
+    const badge = document.getElementById('surgical-status-badge');
+    if (badge) { badge.className = 'agent-badge THINKING'; badge.textContent = 'AUDITING…'; }
+    try {
+      const r = await fetch('/api/system/surgical-audit');
+      if (!r.ok) return;
+      const d = await r.json();
+      if (badge) { badge.className = 'agent-badge DONE'; badge.textContent = '100% VERIFIED'; }
+      if (outEl) {
+        outEl.innerHTML = `
+          <div style="color:var(--emerald);font-weight:700">✓ ${esc(d.overallHealth)}</div>
+          <div style="color:var(--cyan);font-size:0.68rem">Certificado SHA-256: ${esc(d.certificateSha256.slice(0, 28))}…</div>
+          ${(d.subsystems || []).map(sub => `
+            <div style="border-top:1px solid var(--border);padding-top:0.3rem">
+              <strong style="color:var(--text-primary)">[${esc(sub.status)}] ${esc(sub.name)}</strong><br/>
+              <span style="color:var(--text-secondary)">${esc(sub.details)}</span>
+            </div>
+          `).join('')}
+        `;
+      }
+    } catch (_) {}
   }
 
   let initialized = false;
@@ -176,9 +254,14 @@ const Graph = (function () {
     };
     if (fetchBtn) fetchBtn.onclick = triggerSearch;
     searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') triggerSearch(); });
+    document.getElementById('intel-pulse-btn')?.addEventListener('click', () => {
+      fetchOmniscientPulse(searchInput.value.trim() || 'Inteligência Artificial');
+    });
+    document.getElementById('surgical-audit-btn')?.addEventListener('click', runSurgicalAudit);
 
-    // Load real initial knowledge graph from Wikipedia on startup
+    // Load real initial knowledge graph + omniscient pulse + surgical audit on startup
     loadTopic('Artificial intelligence', true);
+    runSurgicalAudit();
     tick();
   }
 

@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { streamWithThinking, buildRealtimeTemporalContext } from './llm.js';
 import { graphDB } from './graph_db.js';
 import { broker } from './broker.js';
+import { globalIntel } from './global_intelligence.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const MEMORY_PATH = path.join(__dirname, '..', 'data', 'companion_memory.json');
@@ -217,10 +218,23 @@ class CompanionAgentEngine {
       };
     }
 
-    // 2. Query Verified GraphRAG (Portuguese & English Wikipedia + Crossref DOIs)
-    const rag = await graphDB.queryGraphRAG(cleanMsg, 3);
+    // 2. Query Verified GraphRAG + Real-Time Global News & Social Media Pulse in parallel
+    const wantsLiveNewsOrSocial = /\b(not[ií]cia|hoje|atual|atuais|agora|rede\s+social|redes\s+sociais|reddit|bluesky|github|tend[eê]ncia|mundo|jornal|acontecendo|avan[cç]o| novidade)\b/i.test(cleanMsg);
+    const [rag, liveIntel] = await Promise.all([
+      graphDB.queryGraphRAG(cleanMsg, 3),
+      wantsLiveNewsOrSocial ? globalIntel.queryOmniscientIntelligence(cleanMsg).catch(() => null) : Promise.resolve(null)
+    ]);
     const primary = rag.seedNodes[0];
     const recentInsights = this.state.dailyJournal.slice(0, 5).map(j => `- [${j.date} ${j.time || ''}] ${j.insight}`).join('\n');
+
+    const liveNewsSnippet = liveIntel?.news?.articles?.length
+      ? `\n\n[Notícias Globais Atuais em Tempo Real]:\n` +
+        liveIntel.news.articles.slice(0, 3).map(a => `• ${a.title} (${a.source} — ${a.publishedAt})`).join('\n')
+      : '';
+    const liveSocialSnippet = liveIntel?.social?.signals?.length
+      ? `\n\n[Pulso de Redes Sociais & Comunidades (Proxy Anônimo Seguro)]:\n` +
+        liveIntel.social.signals.slice(0, 3).map(s => `• [${s.network} ${s.author}]: ${s.text}`).join('\n')
+      : '';
 
     const systemPrompt = [
       CORE_PHILOSOPHY,
@@ -234,9 +248,9 @@ class CompanionAgentEngine {
 
     if (resolvedKey) {
       try {
-        const factualContext = primary?.summary
+        const factualContext = (primary?.summary
           ? `\n\n[Dados Verídicos em Tempo Real via GraphRAG (${primary.label} — ${primary.url})]: ${primary.summary}`
-          : `\n\n[Nota de Transparência]: Caso a pergunta exija um dado externo que não esteja verificado, seja 100% honesta com ${activeName} e jamais invente fatos.`;
+          : `\n\n[Nota de Transparência]: Caso a pergunta exija um dado externo que não esteja verificado, seja 100% honesta com ${activeName} e jamais invente fatos.`) + liveNewsSnippet + liveSocialSnippet;
         const contextualizedMsg = `Fala de ${activeName}: "${cleanMsg}"${factualContext}`;
 
         const contents = [
@@ -299,10 +313,12 @@ class CompanionAgentEngine {
         ``,
         `Indo direto ao que você pediu sobre **${primary.label}** (dados verificados em tempo real):`,
         `${primary.summary}`,
+        liveNewsSnippet ? `${liveNewsSnippet}` : '',
+        liveSocialSnippet ? `${liveSocialSnippet}` : '',
         relatedNames.length
           ? `\nOpções práticas relacionadas se você quiser aprofundar, ${activeName}: **${relatedNames.join('**, **')}**.`
           : `\nSe quiser que eu detalhe algum ponto prático ou explique de outra forma, é só me falar, ${activeName}!`
-      ].join('\n');
+      ].filter(Boolean).join('\n');
     } else {
       // Directive 4: Transparency & Rigor — never invent facts if unverified
       reply = [

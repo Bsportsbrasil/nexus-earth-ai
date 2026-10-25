@@ -15,6 +15,7 @@ import { companionEngine } from './engine/companion_agent.js';
 import { c2Engine } from './engine/c2_sovereign.js';
 import { buildRealtimeTemporalContext } from './engine/llm.js';
 import { cloudVault } from './engine/cloud_connectors.js';
+import { globalIntel } from './engine/global_intelligence.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -219,7 +220,17 @@ async function runTests() {
   assert.equal(gateProbe.instrumentation, 'REAL_CPU_MICROSECOND_AND_CLOCK_PROBE', 'Hardware microsecond energy probe not active');
   console.log('✓ Layer 15: 5 Real Backend Engines (TransformerLens Attention Hooks, Durable WAL Agent Mailboxes, 128D HNSW Vector+EuropePMC ETL, Zero-Trust AES-256-GCM Cloud Vault & CPU-Microsecond Joule Probe) verified');
 
-  console.log('=== ALL 15 ARCHITECTURAL, REAL BACKEND ENGINES, MODULAR UI/UX, MASTER C2, RESEARCH, SEO, PWA, COMPANION & COOPERATIVE LAYERS PASSED 100% ===');
+  // 16. Test Omniscient Global News, Search Engines, Social Media Pulse (Zero-Trust Proxy) & Surgical Platform Audit
+  const cleanUrl = globalIntel.sanitizeUrl('https://news.ycombinator.com/item?id=1&utm_source=tracker&fbclid=12345');
+  assert.ok(!cleanUrl.includes('utm_source') && !cleanUrl.includes('fbclid'), 'Zero-Trust URL tracker stripper failed');
+  const surgicalAudit = globalIntel.runSurgicalPlatformAudit();
+  assert.equal(surgicalAudit.overallHealth, '100% SURGICALLY VERIFIED & HARDENED', 'Surgical platform audit failed');
+  assert.equal(surgicalAudit.subsystems.length, 7, 'All 7 architectural pillars must be audited');
+  const intelPulse = await globalIntel.queryOmniscientIntelligence('Artificial Intelligence');
+  assert.ok(intelPulse.privacyProtection.includes('Zero-Cookie Anonymized Proxy'), 'Zero-Trust social/news proxy shield missing');
+  console.log(`✓ Layer 16: Omniscient Global News, Search Engines, Social Media Pulse & Surgical Platform Auditor verified (${surgicalAudit.totalEngineModules} engine modules SHA-256 verified)`);
+
+  console.log('=== ALL 16 ARCHITECTURAL, OMNISCIENT NEWS/SOCIAL, REAL BACKEND ENGINES, MODULAR UI/UX, MASTER C2, RESEARCH, SEO, PWA & COMPANION LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

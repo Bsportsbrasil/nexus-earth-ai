@@ -17,6 +17,7 @@ import { securityController } from './engine/security_control.js';
 import { companionEngine } from './engine/companion_agent.js';
 import { c2Engine } from './engine/c2_sovereign.js';
 import { cloudVault } from './engine/cloud_connectors.js';
+import { globalIntel } from './engine/global_intelligence.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -732,6 +733,33 @@ const server = http.createServer(async (req, res) => {
         return jsonResponse(res, 200, gcalRes);
       }
       return jsonResponse(res, 400, { error: 'Unknown cloud channel' });
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
+  // 6e. Omniscient Global News, Search Engines & Social Media Pulse (/api/intel/pulse)
+  if (req.method === 'GET' && pathname === '/api/intel/pulse') {
+    try {
+      const q = parsedUrl.searchParams.get('q') || 'Inteligência Artificial Superinteligência';
+      c2Engine.inspectAndFilterRequest({
+        accountId: 'acc_public_live',
+        ip: req.socket.remoteAddress || '127.0.0.1',
+        endpoint: '/api/intel/pulse',
+        payloadText: q
+      });
+      const pulseData = await globalIntel.queryOmniscientIntelligence(q);
+      return jsonResponse(res, 200, pulseData);
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
+  // 6f. Surgical Self-Diagnostics & Platform Integrity Auditor (/api/system/surgical-audit)
+  if (req.method === 'GET' && pathname === '/api/system/surgical-audit') {
+    try {
+      const auditReport = globalIntel.runSurgicalPlatformAudit();
+      return jsonResponse(res, 200, auditReport);
     } catch (e) {
       return jsonResponse(res, 500, { error: e.message });
     }
