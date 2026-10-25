@@ -8,6 +8,27 @@
   ],
   "dailyJournal": [
     {
+      "id": "33591b70-253b-46ee-9329-b18da8b53113",
+      "date": "2026-10-25",
+      "time": "14:09:37",
+      "insight": "Ana consultou data/hora em tempo real (14:09:37)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "7b8a48fb-fcd3-420d-acb0-9d9f5682827a",
+      "date": "2026-10-25",
+      "time": "14:09:37",
+      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "35a73dfd-bcca-46a1-b757-84e19ccef8a1",
+      "date": "2026-10-25",
+      "time": "14:09:37",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "ab23f57e-41a6-4018-959d-0cd9a38c8fd9",
       "date": "2026-10-25",
       "time": "13:52:24",
@@ -335,28 +356,7 @@
       "time": "03:25:53",
       "insight": "Ana explorou \"Roma Antiga\" [Tom: 🤝 Conexão Natural & Empática]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "bf980d5b-998a-4e76-9d86-67c192ac6ede",
-      "date": "2026-10-25",
-      "time": "03:24:58",
-      "insight": "Ana explorou \"Roma Antiga\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "9c8a2994-3285-46b7-be93-ebc60e3ee047",
-      "date": "2026-10-25",
-      "time": "03:11:42",
-      "insight": "Ana consultou data/hora em tempo real (03:11:42)",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "91a43179-1ee8-4065-8ca2-042afa3cf408",
-      "date": "2026-10-25",
-      "time": "03:11:42",
-      "insight": "Ana explorou \"VisionQuest\" [Tom: 🌱 Frustração / Apoio Paciente]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 130
+  "interactionCount": 132
 }

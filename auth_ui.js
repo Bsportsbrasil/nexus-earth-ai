@@ -66,6 +66,13 @@ const AuthUI = (function () {
         ).join('');
       }
 
+      // Toggle Master C2 link strictly for Admin/Owner
+      const adminLinkRow = document.getElementById('acct-admin-link-row');
+      if (adminLinkRow) {
+        const isAdmin = user.role === 'OWNER' || user.role === 'ADMIN' || (user.email && user.email.toLowerCase().includes('admin'));
+        adminLinkRow.style.display = isAdmin ? 'block' : 'none';
+      }
+
       // Sync authenticated user name directly with AURA Companion input
       const auraNameInput = document.getElementById('aura-user-name');
       if (auraNameInput) {

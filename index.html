@@ -1918,11 +1918,11 @@
       <!-- FAQ Item 6 -->
       <div class="glass-panel faq-item" style="border-radius:12px;overflow:hidden;border:1px solid var(--border)">
         <button class="faq-accordion-header" style="width:100%;text-align:left;background:transparent;border:none;padding:1.2rem;color:var(--text-primary);font-family:var(--font-display);font-size:1.05rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;cursor:pointer">
-          <span>Qual é a senha do Painel Administrativo Master Soberano?</span>
+          <span>Como funciona a segurança e a privacidade dos meus dados na plataforma?</span>
           <span class="faq-icon" style="color:var(--cyan);font-size:1.25rem">▾</span>
         </button>
         <div class="faq-content" style="padding:0 1.2rem 1.2rem;font-size:0.86rem;color:var(--text-secondary);line-height:1.7;border-top:1px solid rgba(255,255,255,0.06)">
-          A credencial soberana exclusiva da proprietária para acesso ao console <code>/admin.html</code> é <code>NEXUS-SOVEREIGN-2026</code>. Para login comum de usuário na interface pública, utilize o e-mail <code>ana@nexus.ai</code> com a senha <code>Nexus@2026</code>.
+          O NEXUS opera sob o protocolo Zero-Mobile-Data e Criptografia Ponta a Ponta (AES-256-GCM). Suas conversas, preferências e chaves de API nunca são compartilhadas ou vendidas para terceiros, cumprindo integralmente as exigências da LGPD (Art. 20) e do Regulamento Europeu de Inteligência Artificial (EU AI Act).
         </div>
       </div>
     </div>
@@ -2036,13 +2036,13 @@
           </ul>
         </div>
 
-        <!-- Col 4: Governança & Legal -->
+        <!-- Col 4: Termos & Conformidade Legal Pública -->
         <div>
-          <h4 style="font-family:var(--font-display);font-size:0.92rem;color:var(--text-primary);letter-spacing:0.08em;margin-bottom:1rem">SOBERANIA &amp; LEGAL</h4>
+          <h4 style="font-family:var(--font-display);font-size:0.92rem;color:var(--text-primary);letter-spacing:0.08em;margin-bottom:1rem">TERMOS &amp; PRIVACIDADE</h4>
           <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.55rem;font-size:0.82rem">
-            <li><a href="/admin.html" style="color:var(--cyan);text-decoration:none;font-weight:600">🛡️ Console Soberano (Master C2)</a></li>
-            <li><a href="/guide" data-route-link="guide" style="color:var(--text-secondary);text-decoration:none">📜 Passaportes XAI (EU AI Act)</a></li>
-            <li><a href="/guide" data-route-link="guide" style="color:var(--text-secondary);text-decoration:none">⚖️ Conformidade LGPD Art. 20</a></li>
+            <li><a href="/guide" data-route-link="guide" style="color:var(--text-secondary);text-decoration:none">📜 Termos de Serviço</a></li>
+            <li><a href="/guide" data-route-link="guide" style="color:var(--text-secondary);text-decoration:none">🔒 Política de Privacidade &amp; LGPD</a></li>
+            <li><a href="/guide" data-route-link="guide" style="color:var(--text-secondary);text-decoration:none">⚖️ Transparência Algorítmica (EU AI Act)</a></li>
             <li><a href="/sitemap.xml" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none">🌐 Mapa do Site (Sitemap)</a></li>
             <li><a href="/robots.txt" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none">🤖 Diretrizes de Crawling (Robots)</a></li>
           </ul>
@@ -2127,10 +2127,6 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <span>Minha Conta / Entrar</span>
       </button>
-      <a href="/admin.html" class="btn-secondary full-width" style="text-decoration:none;justify-content:center;border-color:rgba(244,63,94,0.3);color:var(--rose)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>Console Soberano (Master C2)</span>
-      </a>
     </div>
   </aside>
 
@@ -2249,6 +2245,14 @@
         <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.25rem">
           <button class="btn-secondary" id="acct-logout-all-btn" style="flex:1;justify-content:center;font-size:0.76rem">🔒 Deslogar Todos Dispositivos</button>
           <button class="btn-primary" id="acct-logout-btn" style="flex:1;justify-content:center;font-size:0.76rem;background:linear-gradient(135deg,#f43f5e,#e11d48)">🚪 Sair (Logout)</button>
+        </div>
+
+        <!-- Master C2 Exclusive Access Button (Visible ONLY to Owner/Admin) -->
+        <div id="acct-admin-link-row" style="display:none;margin-top:0.5rem">
+          <a href="/admin.html" class="btn-primary full-width" style="text-decoration:none;justify-content:center;background:linear-gradient(135deg,rgba(0,245,255,0.25),rgba(244,63,94,0.35));border:1px solid var(--rose);color:#fff;font-weight:700;font-size:0.82rem;display:flex;align-items:center;gap:0.4rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>🛡️ Painel Administrativo Master Soberano (C2)</span>
+          </a>
         </div>
       </div>
 
