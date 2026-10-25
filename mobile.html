@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>NEXUS Mobile — Superinteligência Cooperativa & AURA Companion</title>
+
+  <!-- PWA & Mobile Meta Tags -->
+  <meta name="theme-color" content="#030712" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="NEXUS AI" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- Icons & Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/mobile.css" />
+</head>
+<body>
+
+  <div id="app-viewport">
+
+    <!-- Top App Bar (Header) -->
+    <header class="mobile-header">
+      <div class="brand-wrapper">
+        <div class="brand-logo-glow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="brand-title">
+          NEXUS <span>MOBILE</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="status-indicator-pill">
+          <div class="pulse-dot"></div>
+          <span>Online</span>
+        </div>
+        <a href="/" class="icon-btn-header" title="Versão Completa para Desktop" aria-label="Versão Desktop">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Views Viewport (Content) -->
+    <main class="views-container" id="views-container">
+
+      <!-- ================= TAB 1: INÍCIO (HOME) ================= -->
+      <section id="view-home" class="tab-view active">
+
+        <!-- Install Floating Banner (Conditional) -->
+        <div id="install-banner" class="install-floating-banner" style="display: none;">
+          <div class="install-banner-text">
+            <div class="install-banner-title">📲 Instalar NEXUS no Celular</div>
+            <div class="install-banner-desc">Adicione à tela inicial com experiência 100% nativa sem barra de navegação.</div>
+          </div>
+          <button id="btn-install-pwa" class="btn-primary-mobile">Instalar</button>
+        </div>
+
+        <!-- Hero Card -->
+        <div class="mobile-card glow-cyan">
+          <div class="card-title-row">
+            <div class="card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Superinteligência Soberana
+            </div>
+            <span class="agent-badge-pill DONE">Ativa</span>
+          </div>
+          <p class="card-subtitle">
+            Ecossistema de IA de Fronteira com orquestração Multi-Agente DAG, GraphRAG 128D, pedagógica inclusiva TEA e governança regulatória EU AI Act.
+          </p>
+
+          <!-- Telemetry Grid -->
+          <div class="stats-grid-2x2">
+            <div class="stat-pill-box">
+              <div class="stat-label">Hardware VPS</div>
+              <div class="stat-val" id="telemetry-cpu">AMD Epyc</div>
+            </div>
+            <div class="stat-pill-box">
+              <div class="stat-label">RAM Alocada</div>
+              <div class="stat-val" id="telemetry-ram">7.8 GB</div>
+            </div>
+            <div class="stat-pill-box">
+              <div class="stat-label">Grafo Neural</div>
+              <div class="stat-val" id="telemetry-nodes">181 Nós</div>
+            </div>
+            <div class="stat-pill-box">
+              <div class="stat-label">Latência Gemini</div>
+              <div class="stat-val">~850 ms</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Tiles Grid -->
+        <h4 style="font-size: 0.88rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.05em;">Acesso Rápido</h4>
+        <div class="action-tiles-grid">
+          <div class="action-tile" onclick="NexusMobile.switchTab('aura')">
+            <div class="action-tile-icon" style="background: rgba(6, 182, 212, 0.15); color: var(--cyan);">
+              💬
+            </div>
+            <div class="action-tile-title">AURA Companion</div>
+            <div class="action-tile-desc">Conversa natural, suporte diário & inclusão TEA.</div>
+          </div>
+
+          <div class="action-tile" onclick="NexusMobile.switchTab('agents')">
+            <div class="action-tile-icon" style="background: rgba(139, 92, 246, 0.15); color: var(--purple);">
+              ⚡
+            </div>
+            <div class="action-tile-title">Consenso DAG</div>
+            <div class="action-tile-desc">Planner, Critic, Executor e Verifier.</div>
+          </div>
+
+          <div class="action-tile" onclick="NexusMobile.switchTab('supervisor')">
+            <div class="action-tile-icon" style="background: rgba(16, 185, 129, 0.15); color: var(--emerald);">
+              🛡️
+            </div>
+            <div class="action-tile-title">Supervisão</div>
+            <div class="action-tile-desc">Console de governança do Criador.</div>
+          </div>
+
+          <a href="/earth" class="action-tile" style="text-decoration: none;">
+            <div class="action-tile-icon" style="background: rgba(245, 158, 11, 0.15); color: var(--amber);">
+              🌐
+            </div>
+            <div class="action-tile-title">NEXUS Earth</div>
+            <div class="action-tile-desc">Geointeligência 3D e solarimetria.</div>
+          </a>
+        </div>
+
+        <!-- Open Architecture Card -->
+        <div class="mobile-card">
+          <div class="card-title">
+            <span>📡</span>
+            API Aberta & Documentação
+          </div>
+          <p class="card-subtitle" style="margin-top: 6px;">
+            A NEXUS disponibiliza especificações abertas OpenAPI 3.0.3 e telemetria de cluster para integração de agentes de terceiros.
+          </p>
+          <div style="display: flex; gap: 8px; margin-top: 10px;">
+            <a href="/openapi.json" target="_blank" class="btn-primary-mobile" style="background: rgba(255, 255, 255, 0.08); text-decoration: none; font-size: 0.8rem;">
+              Especificação OpenAPI
+            </a>
+            <a href="/api/health" target="_blank" class="btn-primary-mobile" style="background: rgba(255, 255, 255, 0.08); text-decoration: none; font-size: 0.8rem;">
+              Telemetria JSON
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= TAB 2: AURA COMPANION & VOZ ================= -->
+      <section id="view-aura" class="tab-view">
+
+        <!-- Chat Scroll Area -->
+        <div class="chat-scroll-area" id="aura-chat-area">
+          <div class="message-bubble aura">
+            <div class="bubble-text">
+              Olá! Eu sou a <strong>AURA</strong>, sua companion de inteligência e aprendizado diário no NEXUS. Como posso te apoiar hoje? Você pode digitar ou falar tocando no microfone.
+            </div>
+            <div class="bubble-meta">
+              <span>AURA 🌱</span>
+              <span>•</span>
+              <span>Agora</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prompt Suggestions Scroller -->
+        <div class="chips-scroller">
+          <div class="prompt-chip" data-prompt="Me ajude com uma pesquisa da escola sobre física quântica">🔬 Física Quântica</div>
+          <div class="prompt-chip" data-prompt="Como funciona a superinteligência cooperativa do NEXUS?">🧠 Superinteligência NEXUS</div>
+          <div class="prompt-chip" data-prompt="Estou me sentindo cansado e sobrecarregado, pode me orientar?">🌱 Apoio e Acolhimento</div>
+          <div class="prompt-chip" data-prompt="Quais são as diretrizes de transparência do EU AI Act?">⚖️ EU AI Act & XAI</div>
+        </div>
+
+        <!-- Input Bar Fixed -->
+        <div class="chat-input-bar">
+          <button id="aura-mic-btn" class="mic-btn" title="Gravar por voz" aria-label="Microfone">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </button>
+          <input type="text" id="aura-input" class="chat-input" placeholder="Mensagem para AURA..." autocomplete="off" />
+          <button id="aura-send-btn" class="send-btn" title="Enviar mensagem" aria-label="Enviar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+
+      </section>
+
+      <!-- ================= TAB 3: AGENTES DAG ================= -->
+      <section id="view-agents" class="tab-view">
+
+        <div class="mobile-card glow-purple">
+          <div class="card-title">
+            <span>⚡</span>
+            Orquestração Multi-Agente DAG
+          </div>
+          <p class="card-subtitle">
+            Submeta qualquer problema ou pesquisa para deliberação coordenada entre os 4 agentes epistêmicos autônomos.
+          </p>
+
+          <input type="text" id="dag-query-input" class="mobile-text-input" placeholder="Ex: Me ajude com uma pesquisa sobre buracos negros..." />
+          <button id="btn-run-dag" class="btn-primary-mobile" style="width: 100%; margin-top: 12px; padding: 12px; font-size: 0.95rem;">
+            ⚡ Executar Consenso Multi-Agente
+          </button>
+        </div>
+
+        <!-- DAG Agent Steps -->
+        <div class="agent-step-card" id="card-planner">
+          <div class="agent-header">
+            <div class="agent-name">1. PLANNER (Arquiteto)</div>
+            <span class="agent-badge-pill QUEUED" id="agent-badge-planner">QUEUED</span>
+          </div>
+          <div class="agent-output-text" id="agent-output-planner">Aguardando disparo do consenso...</div>
+        </div>
+
+        <div class="agent-step-card" id="card-critic">
+          <div class="agent-header">
+            <div class="agent-name">2. CRITIC (Auditor)</div>
+            <span class="agent-badge-pill QUEUED" id="agent-badge-critic">QUEUED</span>
+          </div>
+          <div class="agent-output-text" id="agent-output-critic">Aguardando análise adversarial...</div>
+        </div>
+
+        <div class="agent-step-card" id="card-executor">
+          <div class="agent-header">
+            <div class="agent-name">3. EXECUTOR (Sintetizador)</div>
+            <span class="agent-badge-pill QUEUED" id="agent-badge-executor">QUEUED</span>
+          </div>
+          <div class="agent-output-text" id="agent-output-executor">Aguardando síntese operacional...</div>
+        </div>
+
+        <div class="agent-step-card" id="card-verifier">
+          <div class="agent-header">
+            <div class="agent-name">4. VERIFIER (Portão de Consenso)</div>
+            <span class="agent-badge-pill QUEUED" id="agent-badge-verifier">QUEUED</span>
+          </div>
+          <div class="agent-output-text" id="agent-output-verifier">Aguardando validação epistêmica...</div>
+        </div>
+
+        <!-- Final Consensus Result Card -->
+        <div class="mobile-card glow-cyan" id="dag-consensus-card" style="display: none; margin-top: 16px;">
+          <div class="card-title-row">
+            <div class="card-title">
+              <span>🎯</span>
+              Consenso Final Aprovado
+            </div>
+            <div style="display: flex; gap: 6px;">
+              <button id="btn-copy-consensus" class="btn-primary-mobile" style="padding: 4px 10px; font-size: 0.75rem; background: rgba(255, 255, 255, 0.1);">
+                📋 Copiar
+              </button>
+              <button id="btn-share-consensus" class="btn-primary-mobile" style="padding: 4px 10px; font-size: 0.75rem;">
+                Compartilhar
+              </button>
+            </div>
+          </div>
+          <div id="dag-consensus-text" style="font-size: 0.92rem; line-height: 1.5; color: #f8fafc; white-space: pre-wrap; margin-top: 8px;"></div>
+        </div>
+
+      </section>
+
+      <!-- ================= TAB 4: SUPERVISOR LENNOX ================= -->
+      <section id="view-supervisor" class="tab-view">
+
+        <!-- Auth Gate for Master Creator -->
+        <div id="supervisor-auth-gate" class="mobile-card glow-purple">
+          <div class="card-title">
+            <span>🛡️</span>
+            Acesso Restrito ao Criador
+          </div>
+          <p class="card-subtitle">
+            Informe a chave mestra soberana de administração para acessar o canal direto com LENNOX.
+          </p>
+          <input type="password" id="supervisor-passkey" class="mobile-text-input" placeholder="Chave Mestra de Administração" />
+          <button id="btn-unlock-supervisor" class="btn-primary-mobile" style="width: 100%; margin-top: 12px; padding: 10px;">
+            Desbloquear Painel de Supervisão
+          </button>
+        </div>
+
+        <!-- Supervisor Console (Unlocked) -->
+        <div id="supervisor-console-area" style="display: none;">
+          <div class="mobile-card glow-cyan">
+            <div class="card-title-row">
+              <div class="card-title">
+                <span>🛡️</span>
+                LENNOX Supreme Supervisor
+              </div>
+              <span class="agent-badge-pill DONE">Auditoria Ativa</span>
+            </div>
+            <p class="card-subtitle">
+              Canal de supervisão executiva, governança de modelos, telemetria de anomalias e controle de desligamento emergencial.
+            </p>
+
+            <div id="supervisor-reply-area" style="display: flex; flex-direction: column; gap: 10px; max-height: 280px; overflow-y: auto; margin-bottom: 12px;">
+              <div class="message-bubble aura">
+                Supervisão ativa LENNOX, Criador! A plataforma está respondendo com fluidez, latência reduzida e todas as rotas de inteligência sob monitoramento permanente. Em que posso te apoiar agora?
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="supervisor-input" class="mobile-text-input" placeholder="Diretriz para o Supervisor..." style="margin-top: 0;" />
+              <button id="supervisor-send-btn" class="send-btn" style="flex-shrink: 0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= TAB 5: CONFIGURAÇÕES & LGPD ================= -->
+      <section id="view-settings" class="tab-view">
+
+        <div class="settings-group">
+          <div class="settings-label">Aplicativo & PWA</div>
+          <div class="settings-row">
+            <div>
+              <div class="settings-row-label">Instalação no Celular</div>
+              <div class="settings-row-desc">Adicione como app nativo na tela inicial.</div>
+            </div>
+            <button id="settings-install-btn" class="btn-primary-mobile" style="font-size: 0.78rem;">Instalar PWA</button>
+          </div>
+          <div class="settings-row">
+            <div>
+              <div class="settings-row-label">Voz Neural (Áudio)</div>
+              <div class="settings-row-desc">Reproduzir respostas em áudio natural.</div>
+            </div>
+            <input type="checkbox" id="toggle-tts" checked style="width: 20px; height: 20px; accent-color: var(--cyan);" />
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-label">Chave Opcional Gemini</div>
+          <div class="mobile-card" style="padding: 12px;">
+            <div class="settings-row-desc" style="margin-bottom: 6px;">
+              Por padrão, o cluster NEXUS utiliza as credenciais soberanas da VPS. Você pode inserir sua própria chave caso deseje cotas dedicadas.
+            </div>
+            <input type="password" id="settings-gemini-key" class="mobile-text-input" placeholder="Cole sua chave Gemini (Opcional)" />
+            <button id="btn-save-key" class="btn-primary-mobile" style="margin-top: 10px; width: 100%;">
+              Salvar Chave Localmente
+            </button>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-label">Privacidade & LGPD</div>
+          <div class="settings-row">
+            <div>
+              <div class="settings-row-label">Histórico Local</div>
+              <div class="settings-row-desc">Limpar mensagens e cache armazenados neste aparelho.</div>
+            </div>
+            <button id="btn-clear-local-data" class="btn-primary-mobile" style="background: rgba(244, 63, 94, 0.2); color: var(--rose); font-size: 0.78rem;">
+              Limpar Dados
+            </button>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <div class="settings-label">Sobre o NEXUS</div>
+          <div class="mobile-card" style="padding: 12px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
+            <strong>NEXUS Superintelligence Platform</strong><br />
+            Versão Mobile 1.0 (PWA & TWA Ready)<br />
+            Cluster VPS KVM Enterprise (AMD Epyc Dedicado)<br />
+            Conformidade: EU AI Act Art. 13/14, LGPD Art. 20, NIST AI RMF.<br />
+            <div style="margin-top: 8px;">
+              <a href="/" style="color: var(--cyan); text-decoration: none;">Alternar para Versão Completa (Desktop) →</a>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Dock -->
+    <nav class="bottom-dock" id="bottom-dock">
+      <button class="dock-item active" id="dock-home" aria-label="Início">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span class="dock-item-label">Início</span>
+      </button>
+
+      <button class="dock-item" id="dock-aura" aria-label="AURA">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <span class="dock-item-label">AURA</span>
+      </button>
+
+      <button class="dock-item" id="dock-agents" aria-label="Agentes">
+        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        <span class="dock-item-label">Agentes</span>
+      </button>
+
+      <button class="dock-item" id="dock-supervisor" aria-label="Supervisão">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        <span class="dock-item-label">Supervisão</span>
+      </button>
+
+      <button class="dock-item" id="dock-settings" aria-label="Ajustes">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span class="dock-item-label">Ajustes</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <script src="/mobile.js"></script>
+</body>
+</html>

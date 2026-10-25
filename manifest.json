@@ -48,6 +48,13 @@
   ],
   "shortcuts": [
     {
+      "name": "NEXUS Mobile App",
+      "short_name": "App Mobile",
+      "description": "Abrir aplicativo mobile dedicado de alta velocidade",
+      "url": "/mobile",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
       "name": "AURA Live Companion",
       "short_name": "AURA Live",
       "description": "Conversar e aprender diariamente com a agente AURA",

@@ -1,0 +1,42 @@
+{
+  "packageId": "com.nexusearthai.app",
+  "host": "nexusearthai.com",
+  "name": "NEXUS AI",
+  "launcherName": "NEXUS AI",
+  "themeColor": "#030712",
+  "navigationColor": "#030712",
+  "backgroundColor": "#030712",
+  "startUrl": "/mobile",
+  "iconUrl": "https://nexusearthai.com/icon-512.png",
+  "maskableIconUrl": "https://nexusearthai.com/icon-512.png",
+  "appVersionName": "1.0.0",
+  "appVersionCode": 1,
+  "shortcuts": [
+    {
+      "name": "AURA Live",
+      "shortName": "AURA",
+      "url": "https://nexusearthai.com/mobile#aura",
+      "icon": "https://nexusearthai.com/icon-192.png"
+    },
+    {
+      "name": "Consenso Agentes",
+      "shortName": "Agentes",
+      "url": "https://nexusearthai.com/mobile#agents",
+      "icon": "https://nexusearthai.com/icon-192.png"
+    }
+  ],
+  "webManifestUrl": "https://nexusearthai.com/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {
+    "locationDelegation": {
+      "enabled": true
+    },
+    "playBilling": {
+      "enabled": false
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableNotifications": true
+}

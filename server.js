@@ -1301,7 +1301,13 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(302, { 'Location': '/admin.html#tab-supervisor' });
     return res.end();
   }
-  let filePath = SPA_ROUTES.has(pathname) ? '/index.html' : pathname;
+  // Mobile Native Experience Route
+  let filePath = pathname;
+  if (pathname === '/mobile' || pathname === '/m' || pathname === '/app') {
+    filePath = '/mobile.html';
+  } else if (SPA_ROUTES.has(pathname)) {
+    filePath = '/index.html';
+  }
   const resolvedPath = path.normalize(path.join(__dirname, filePath));
   if (!resolvedPath.startsWith(__dirname)) {
     res.writeHead(403);

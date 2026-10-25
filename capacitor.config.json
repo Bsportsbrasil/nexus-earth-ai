@@ -1,0 +1,13 @@
+{
+  "appId": "com.nexusearthai.app",
+  "appName": "NEXUS AI",
+  "webDir": "public",
+  "server": {
+    "url": "https://nexusearthai.com/mobile",
+    "cleartext": false
+  },
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#030712"
+  }
+}
