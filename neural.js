@@ -73,6 +73,9 @@ const NeuralViz = (function () {
   }
 
   function inject() {
+    if (window.NexusWS && NexusWS.isOpen()) {
+      NexusWS.send({ action: 'tensor_step', layers: cfg.layers, neurons: cfg.neurons, input: 'inject_' + Date.now() });
+    }
     const t = performance.now() * 0.005;
     const vec = nodes[0].map((_, i) => sigmoid(Math.cos(t + i * 1.4) * 2.5));
     forwardPass(vec);
@@ -154,6 +157,16 @@ const NeuralViz = (function () {
     });
     document.getElementById('nn-theme').addEventListener('change', e => cfg.theme = e.target.value);
     document.getElementById('nn-inject-btn').addEventListener('click', inject);
+    if (window.NexusWS) {
+      NexusWS.onMessage((msg) => {
+        if (msg.type === 'tensor_state' && msg.data?.telemetry) {
+          const tel = msg.data.telemetry;
+          document.getElementById('nn-activation').textContent = tel.meanActivation.toFixed(3);
+          document.getElementById('nn-entropy').textContent = tel.shannonEntropy.toFixed(2) + ' bits';
+          document.getElementById('nn-grad').textContent = tel.gradNorm.toFixed(4);
+        }
+      });
+    }
     setInterval(updateRealTelemetry, 400);
   }
 

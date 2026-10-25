@@ -1,11 +1,10 @@
-import { GoogleGenAI } from '@google/genai';
+// NEXUS Enterprise Serverless API Gateway (Vercel / Cloud Production)
+import { streamWithThinking } from '../engine/llm.js';
+import { graphDB } from '../engine/graph_db.js';
 
-const MODEL = 'gemini-3-flash-preview';
-
-// Simple in-memory sliding-window rate limiter per IP (protects your quota)
 const hits = new Map();
 const WINDOW_MS = 60_000;
-const MAX_REQ_PER_MIN = 20;
+const MAX_REQ_PER_MIN = 25;
 
 function checkRateLimit(ip) {
   const now = Date.now();
@@ -27,34 +26,42 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Rate limit exceeded. Try again in a minute.' });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
+  const { contents, systemInstruction, apiKey: clientKey } = req.body || {};
+  const apiKey = clientKey || process.env.GEMINI_API_KEY;
+
+  if (!contents) {
+    if (process.env.GEMINI_API_KEY) {
+      return res.status(400).json({ error: 'Missing contents', serverKeyConfigured: true });
+    }
     return res.status(503).json({
       error: 'SERVER_KEY_NOT_CONFIGURED',
-      message: 'Configure GEMINI_API_KEY nas Environment Variables da Vercel ou insira uma chave local.'
+      message: 'Configure GEMINI_API_KEY nas Environment Variables da Vercel ou insira sua chave em 🔑 API Key.'
     });
   }
 
-  try {
-    const { contents, systemInstruction } = req.body || {};
-    if (!contents) {
-      return res.status(400).json({ error: 'Missing contents' });
-    }
+  if (!apiKey) {
+    return res.status(503).json({ error: 'SERVER_KEY_NOT_CONFIGURED' });
+  }
 
-    // Input size guard
+  try {
     const serialized = JSON.stringify(contents);
-    if (serialized.length > 32_000) {
+    if (serialized.length > 48_000) {
       return res.status(413).json({ error: 'Payload too large' });
     }
 
-    const ai = new GoogleGenAI({ apiKey });
-    const response = await ai.models.generateContent({
-      model: MODEL,
+    const result = await streamWithThinking({
+      apiKey,
       contents,
-      config: systemInstruction ? { systemInstruction } : undefined
+      systemInstruction,
+      thinkingLevel: 'MEDIUM'
     });
 
-    return res.status(200).json({ text: response.text || '' });
+    return res.status(200).json({
+      text: result.answer,
+      thought: result.thought,
+      latencyMs: result.latencyMs,
+      graphNodes: graphDB.nodes.size
+    });
   } catch (err) {
     console.error('Gemini API error:', err);
     return res.status(500).json({ error: err.message || 'Internal inference error' });

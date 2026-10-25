@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexus-superintelligence-core
+  labels:
+    app: nexus-core
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nexus-core
+  template:
+    metadata:
+      labels:
+        app: nexus-core
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5173"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: nexus-core
+          image: nexus-superintelligence:1.0.0
+          ports:
+            - containerPort: 5173
+          env:
+            - name: PORT
+              value: "5173"
+            - name: GEMINI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: nexus-secrets
+                  key: gemini-api-key
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "2000m"
+              memory: "2Gi"
+          readinessProbe:
+            httpGet:
+              path: /api/telemetry
+              port: 5173
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexus-core-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: nexus-core
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5173
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nexus-core-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nexus-superintelligence-core
+  minReplicas: 3
+  maxReplicas: 20
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70

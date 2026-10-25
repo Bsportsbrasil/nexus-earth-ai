@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  nexus-core:
+    build: .
+    container_name: nexus-core
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=production
+      - PORT=5173
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - nexus-graph-data:/app/data
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: nexus-prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      - nexus-core
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: nexus-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=nexus_admin
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  nexus-graph-data:

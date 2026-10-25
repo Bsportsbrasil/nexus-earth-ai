@@ -1,14 +1,15 @@
 {
   "name": "nexus-superintelligence-platform",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "NEXUS — Superintelligence Platform with live neural network visualization, multi-agent reasoning, knowledge graph, and secure serverless Gemini AI backend",
+  "description": "NEXUS — Full-Stack AI & GraphRAG Platform with WebSocket Reasoning Streams, Event-Driven Multi-Agent DAG, Persistent GraphDB, Tensor Engine, and Prometheus Telemetry",
   "scripts": {
-    "start": "npx serve . -l 5173",
-    "dev": "npx vercel dev"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test_suite.js"
   },
-  "dependencies": {
-    "@google/genai": "^1.0.0"
+  "engines": {
+    "node": ">=20.0.0"
   }
 }

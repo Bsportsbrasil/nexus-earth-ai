@@ -1,12 +1,12 @@
-// Hybrid Gemini client:
-// 1. Server-side secure proxy (/api/gemini) using Vercel Environment Variable GEMINI_API_KEY (Silicon Valley production standard — never exposes key to the browser).
-// 2. Optional BYOK (Bring Your Own Key) fallback stored in sessionStorage for local testing.
+// NEXUS Client Core: Real-time WebSocket Stream + Gemini Thinking Extraction + Serverless Fallback
 import { GoogleGenAI } from 'https://esm.run/@google/genai';
 
 const KEY = 'nexus_gemini_key';
 const MODEL = 'gemini-3-flash-preview';
 let ai = null;
-let serverAvailable = null; // null = unknown, true = server has GEMINI_API_KEY, false = not configured
+let serverAvailable = null;
+let ws = null;
+const wsListeners = new Set();
 
 function getLocalKey() {
   return sessionStorage.getItem(KEY);
@@ -19,20 +19,47 @@ function client() {
   return ai;
 }
 
-async function streamText(fullText, onChunk) {
-  if (!onChunk) return fullText;
-  const step = Math.max(2, Math.ceil(fullText.length / 60));
-  for (let i = step; i < fullText.length; i += step) {
-    onChunk(fullText.slice(0, i));
-    await new Promise(r => setTimeout(r, 14));
-  }
-  onChunk(fullText);
-  return fullText;
+function connectWebSocket() {
+  try {
+    const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+    ws = new WebSocket(`${proto}//${location.host}/ws`);
+    ws.addEventListener('open', () => {
+      refresh();
+    });
+    ws.addEventListener('message', (ev) => {
+      try {
+        const msg = JSON.parse(ev.data);
+        for (const fn of wsListeners) fn(msg);
+      } catch (e) {}
+    });
+    ws.addEventListener('close', () => {
+      ws = null;
+      setTimeout(connectWebSocket, 3000);
+    });
+  } catch (e) {}
 }
+
+connectWebSocket();
+
+window.NexusWS = {
+  onMessage(fn) {
+    wsListeners.add(fn);
+    return () => wsListeners.delete(fn);
+  },
+  send(obj) {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify(obj));
+      return true;
+    }
+    return false;
+  },
+  isOpen: () => !!(ws && ws.readyState === WebSocket.OPEN)
+};
 
 window.Gemini = {
   model: MODEL,
   hasKey: () => serverAvailable === true || !!getLocalKey(),
+  getKey: () => getLocalKey() || '',
   setKey(k) {
     if (k && k.trim()) {
       sessionStorage.setItem(KEY, k.trim());
@@ -41,20 +68,31 @@ window.Gemini = {
     }
     ai = null;
   },
-  async stream(contents, systemInstruction, onChunk) {
-    // 1. If user didn't force a local key, try secure backend proxy first
+  /**
+   * Streams both Reasoning Tokens (Chain-of-Thought) and Answer Tokens.
+   * Supports onChunk(fullAnswer) and optional onThought(fullThought).
+   */
+  async stream(contents, systemInstruction, onChunk, onThought) {
+    // 1. If local key is NOT set, try backend /api/gemini (which also streams over WebSocket)
     if (!getLocalKey() && serverAvailable !== false) {
+      const unsub = window.NexusWS.onMessage((msg) => {
+        if (msg.type === 'chat_thought' && onThought) onThought(msg.fullThought);
+        if (msg.type === 'chat_answer' && onChunk) onChunk(msg.fullAnswer);
+      });
       try {
         const resp = await fetch('/api/gemini', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ contents, systemInstruction })
         });
+        unsub();
         if (resp.ok) {
           serverAvailable = true;
           refresh();
           const data = await resp.json();
-          return await streamText(data.text || '', onChunk);
+          if (data.thought && onThought) onThought(data.thought);
+          if (onChunk) onChunk(data.text || '');
+          return data.text || '';
         }
         const errData = await resp.json().catch(() => ({}));
         if (resp.status === 503 && errData.error === 'SERVER_KEY_NOT_CONFIGURED') {
@@ -64,26 +102,43 @@ window.Gemini = {
           throw new Error(errData.error || `HTTP ${resp.status}`);
         }
       } catch (e) {
+        unsub();
         if (serverAvailable === true) throw e;
         serverAvailable = false;
         refresh();
       }
     }
 
-    // 2. Fallback to browser BYOK key (if provided)
+    // 2. Direct Browser SDK with Native Thinking Extraction (`includeThoughts: true`)
     const c = client();
     if (!c) throw new Error('NO_KEY');
     const res = await c.models.generateContentStream({
       model: MODEL,
       contents,
-      config: systemInstruction ? { systemInstruction } : undefined
+      config: {
+        systemInstruction,
+        thinkingConfig: {
+          includeThoughts: true,
+          thinkingLevel: 'MEDIUM'
+        }
+      }
     });
-    let full = '';
+    let fullAnswer = '';
+    let fullThought = '';
     for await (const chunk of res) {
-      full += chunk.text || '';
-      onChunk && onChunk(full);
+      const parts = chunk.candidates?.[0]?.content?.parts || [];
+      for (const part of parts) {
+        if (!part.text) continue;
+        if (part.thought) {
+          fullThought += part.text;
+          onThought && onThought(fullThought);
+        } else {
+          fullAnswer += part.text;
+          onChunk && onChunk(fullAnswer);
+        }
+      }
     }
-    return full;
+    return fullAnswer;
   }
 };
 
@@ -94,8 +149,11 @@ const status = document.getElementById('key-status');
 
 function refresh() {
   const on = serverAvailable === true || !!getLocalKey();
-  status.textContent = serverAvailable === true ? 'CLOUD SECURE' : (on ? 'GEMINI LIVE' : 'DEMO MODE');
-  status.className = 'key-status ' + (on ? 'live' : 'demo');
+  const wsActive = window.NexusWS && window.NexusWS.isOpen();
+  status.textContent = serverAvailable === true
+    ? 'CLOUD SECURE'
+    : (on ? 'GEMINI LIVE' : (wsActive ? 'ENGINE ONLINE' : 'GRAPHRAG READY'));
+  status.className = 'key-status ' + (on || wsActive ? 'live' : 'demo');
 }
 
 document.getElementById('key-btn').onclick = () => {
@@ -115,18 +173,12 @@ document.getElementById('key-clear').onclick = () => {
   refresh();
 };
 
-// Probe server endpoint passively on load
 fetch('/api/gemini', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({})
 }).then(r => {
-  if (r.status === 400) {
-    // 400 Missing contents means the server IS configured with GEMINI_API_KEY
-    serverAvailable = true;
-  } else {
-    serverAvailable = false;
-  }
+  serverAvailable = (r.status === 400);
   refresh();
 }).catch(() => {
   serverAvailable = false;

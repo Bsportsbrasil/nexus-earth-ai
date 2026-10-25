@@ -1,4 +1,4 @@
-// 100% Real System, Hardware, Render, and API Telemetry (Zero random numbers)
+// Real-time Telemetry Dashboard connected to Backend OS/Prometheus Telemetry via WebSockets + Browser Performance APIs
 const Metrics = (function () {
   const hist = {};
   const keys = ['tokens', 'params', 'depth', 'conf', 'agents', 'entropy'];
@@ -10,14 +10,15 @@ const Metrics = (function () {
   let measuredFps = 60;
   let maxFrameDurationMs = 4;
   let totalTokens = 0;
-  let recentTokensWindow = []; // [{ t, count }]
-  let lastLatencyMs = null;
+  let recentTokensWindow = [];
+  let lastLatencyMs = 0;
   let apiCallsCount = 0;
   let graphNodesCount = 0;
+  let hostCpuLoadPct = null;
+  let hostRamPct = null;
+  let hostRamUsedGB = null;
+  let hostCores = navigator.hardwareConcurrency || 4;
 
-  const cores = navigator.hardwareConcurrency || 4;
-
-  // Measure real render frame rate & frame time via requestAnimationFrame
   function frameProbe(now) {
     frameCount++;
     const dt = now - lastFrameTime;
@@ -32,6 +33,37 @@ const Metrics = (function () {
     requestAnimationFrame(frameProbe);
   }
 
+  function applyServerSnapshot(snap) {
+    if (!snap) return;
+    if (snap.cpu) {
+      hostCores = snap.cpu.cores || hostCores;
+      hostCpuLoadPct = snap.cpu.loadPct;
+    }
+    if (snap.memory) {
+      hostRamPct = snap.memory.ramPct;
+      hostRamUsedGB = snap.memory.ramUsedGB;
+    }
+    if (snap.ai) {
+      if (snap.ai.totalTokens > totalTokens) totalTokens = snap.ai.totalTokens;
+      if (snap.ai.totalApiCalls > apiCallsCount) apiCallsCount = snap.ai.totalApiCalls;
+      if (snap.ai.lastLatencyMs) lastLatencyMs = snap.ai.lastLatencyMs;
+    }
+    if (snap.graph && typeof snap.graph.totalNodes === 'number') {
+      graphNodesCount = Math.max(graphNodesCount, snap.graph.totalNodes);
+    }
+  }
+
+  function bindWs() {
+    if (!window.NexusWS) return;
+    NexusWS.onMessage((msg) => {
+      if (msg.type === 'welcome' && msg.telemetry) {
+        applyServerSnapshot(msg.telemetry);
+      } else if (msg.type === 'telemetry') {
+        applyServerSnapshot(msg.data);
+      }
+    });
+  }
+
   function recordTokens(charCount) {
     const tok = Math.max(1, Math.ceil(charCount / 4));
     totalTokens += tok;
@@ -43,12 +75,10 @@ const Metrics = (function () {
     if (typeof latencyMs === 'number' && latencyMs >= 0) {
       lastLatencyMs = Math.round(latencyMs);
     }
-    const hAgents = document.getElementById('h-agents');
-    if (hAgents) hAgents.textContent = apiCallsCount.toLocaleString();
   }
 
   function setGraphNodes(count) {
-    graphNodesCount = count;
+    graphNodesCount = Math.max(graphNodesCount, count);
   }
 
   function spark(id, arr) {
@@ -84,49 +114,48 @@ const Metrics = (function () {
 
   function update() {
     const now = performance.now();
-    // Tokens/sec over the last 3 seconds
     recentTokensWindow = recentTokensWindow.filter(e => now - e.t <= 3000);
     const tokensPerSec = Math.round(recentTokensWindow.reduce((s, e) => s + e.count, 0) / 3);
 
-    // Network RTT from browser Network Information API or measured API latency
     const netRtt = (navigator.connection && typeof navigator.connection.rtt === 'number')
       ? navigator.connection.rtt
-      : null;
-    const latency = lastLatencyMs !== null ? lastLatencyMs : (netRtt !== null ? netRtt : 0);
+      : 0;
+    const latency = lastLatencyMs > 0 ? lastLatencyMs : netRtt;
 
-    // Real JS Heap Memory (Chromium/Edge) or DOM node count fallback
-    let usedHeapMB = 0;
-    let heapRatio = 0;
-    if (performance.memory && performance.memory.usedJSHeapSize) {
-      usedHeapMB = +(performance.memory.usedJSHeapSize / 1048576).toFixed(1);
-      heapRatio = performance.memory.usedJSHeapSize / (performance.memory.totalJSHeapSize || 1);
-    } else {
-      const domNodes = document.getElementsByTagName('*').length;
-      usedHeapMB = +(domNodes * 0.015).toFixed(1);
-      heapRatio = Math.min(1, domNodes / 2000);
+    let memLabel = '0 MB';
+    let memNumeric = 0;
+    let memRatio = 0;
+    if (hostRamUsedGB !== null) {
+      memLabel = hostRamUsedGB + ' GB';
+      memNumeric = hostRamUsedGB;
+      memRatio = (hostRamPct || 50) / 100;
+    } else if (performance.memory && performance.memory.usedJSHeapSize) {
+      memNumeric = +(performance.memory.usedJSHeapSize / 1048576).toFixed(1);
+      memLabel = memNumeric + ' MB';
+      memRatio = performance.memory.usedJSHeapSize / (performance.memory.totalJSHeapSize || 1);
     }
 
-    // Frame budget load: how much of a 16.67ms frame budget was consumed
-    const frameBudgetPct = Math.min(100, Math.round((maxFrameDurationMs / 16.67) * 50));
-    maxFrameDurationMs = 1; // reset for next window
+    const cpuPct = hostCpuLoadPct !== null
+      ? hostCpuLoadPct
+      : Math.min(100, Math.round((maxFrameDurationMs / 16.67) * 50));
+    maxFrameDurationMs = 1;
 
     hist.tokens.push(tokensPerSec); hist.tokens.shift();
-    hist.params.push(cores); hist.params.shift();
+    hist.params.push(hostCores); hist.params.shift();
     hist.depth.push(latency); hist.depth.shift();
     hist.conf.push(measuredFps); hist.conf.shift();
-    hist.agents.push(usedHeapMB); hist.agents.shift();
+    hist.agents.push(memNumeric); hist.agents.shift();
     hist.entropy.push(totalTokens); hist.entropy.shift();
 
     const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
     set('m-tokens', tokensPerSec.toLocaleString());
-    set('m-params', cores);
+    set('m-params', hostCores);
     set('m-depth', latency + ' ms');
     set('m-confidence', measuredFps + ' FPS');
-    set('m-agents-active', usedHeapMB + ' MB');
+    set('m-agents-active', memLabel);
     set('m-entropy', totalTokens.toLocaleString());
 
-    // Hero live telemetry
-    set('h-params', cores);
+    set('h-params', hostCores);
     set('h-iq', measuredFps);
     set('h-agents', apiCallsCount.toLocaleString());
 
@@ -137,25 +166,25 @@ const Metrics = (function () {
     spark('spark-agents', hist.agents);
     spark('spark-entropy', hist.entropy);
 
-    gauge('gauge-load', frameBudgetPct / 100);
-    set('gauge-load-val', frameBudgetPct + '%');
+    gauge('gauge-load', cpuPct / 100);
+    set('gauge-load-val', cpuPct + '%');
 
-    const heapPct = Math.round(heapRatio * 100);
-    gauge('gauge-iq', heapRatio);
-    set('gauge-iq-val', heapPct + '%');
+    const ramPctDisplay = Math.round(memRatio * 100);
+    gauge('gauge-iq', memRatio);
+    set('gauge-iq-val', ramPctDisplay + '%');
 
     gauge('gauge-knowledge', Math.min(1, graphNodesCount / 40));
     set('gauge-knowledge-val', graphNodesCount);
   }
 
   function boost() {
-    // Triggered when user runs an action; records activity timestamp
     recordApiCall(lastLatencyMs);
   }
 
   function init() {
     const wt = document.getElementById('welcome-time');
     if (wt) wt.textContent = new Date().toTimeString().slice(0, 8);
+    bindWs();
     requestAnimationFrame(frameProbe);
     update();
     setInterval(update, 1000);
