@@ -162,7 +162,43 @@ const I18nEngine = (() => {
       earthMenuView: 'Visualizar ▾',
       earthMenuAdd: 'Adicionar ▾',
       earthMenuTools: 'Ferramentas ▾',
-      earthMenuHelp: 'Ajuda ▾'
+      earthMenuHelp: 'Ajuda ▾',
+      neuralTag: 'Interpretabilidade Mecanística & Teoria da Informação',
+      neuralTitle: 'Monitoramento de Tensores & Entropia de Shannon',
+      neuralDesc: 'Inspeção viva camada a camada dos pesos de atenção e divergência de entropia em tempo real.',
+      agentsTag: 'Consenso Multi-Agente & Orquestração LangGraph',
+      agentsTitle: 'Grafo Multi-Agente Autônomo com Filas de Correio Duráveis',
+      agentsDesc: 'Quatro personas cognitivas (Planner, Critic, Executor, Verifier) operando com verificação formal e barramento durável.',
+      researchTag: 'Hub de Pesquisa Científica & GraphRAG HNSW',
+      researchTitle: 'Base de Conhecimento Vetorial & Artigos Revisados por Pares',
+      researchDesc: 'Indexação híbrida de vetores 128D, busca semântica e citações formais Crossref DOI.',
+      assistantTag: 'Estúdio Multimodal & Síntese de Slides',
+      assistantTitle: 'Estúdio Criativo e Documental',
+      assistantDesc: 'Geração autônoma de apresentações vetoriais SVG, infográficos científicos e literatura inclusiva.',
+      guideTag: 'Manual Oficial do Usuário & Governança',
+      guideTitle: 'Manual de Instruções e Diretrizes da Plataforma',
+      guideDesc: 'Passo a passo completo para utilizar com segurança todos os recursos e inteligências do NEXUS.',
+      articlesTag: 'Biblioteca Científica & Artigos Técnicos Sênior',
+      articlesTitle: 'Central de Artigos & Insights de Fronteira',
+      articlesDesc: 'Publicações técnicas revisadas por pares documentando a arquitetura glass-box e conformidade ética.',
+      faqTag: 'Central de Ajuda & Dúvidas Frequentes',
+      faqTitle: 'Perguntas Frequentes (FAQ)',
+      faqDesc: 'Tudo o que você precisa saber sobre privacidade, segurança, soberania e uso da plataforma.',
+      aboutTag: 'Institucional • Manifesto Soberano',
+      aboutTitle: 'Sobre o Ecossistema NEXUS',
+      aboutDesc: 'O primeiro projeto de Superinteligência cooperativa, inclusiva e auditável do mundo.',
+      faqQ1: 'Como o NEXUS protege meus dados e privacidade?',
+      faqA1: 'Todos os seus dados são criptografados com padrão militar AES-256-GCM. Nenhum dado é compartilhado ou vendido a terceiros, em estrita conformidade com a LGPD e o EU AI Act.',
+      faqQ2: 'O que é a Superinteligência Cooperativa Glass-Box?',
+      faqA2: 'É uma arquitetura aberta e auditável onde você visualiza exatamente o raciocínio, os pesos de atenção e as fontes verificadas de cada resposta, sem caixas-pretas.',
+      faqQ3: 'Como funciona a AURA Live?',
+      faqA3: 'AURA é uma companheira empática de comunicação contínua por voz e texto, adaptada à diversidade cognitiva (TEA) e orientada por pedagogia empática.',
+      faqQ4: 'O módulo Earth Geo substitui o Google Earth?',
+      faqA4: 'O NEXUS Earth oferece paridade funcional completa com o Google Earth Pro e Web, permitindo importação e exportação de KML/GeoJSON, medições geodésicas e análise de satélite.',
+      faqQ5: 'Como utilizar o Consenso Multi-Agente DAG?',
+      faqA5: 'Basta enviar uma diretriz no painel de Agentes para que Planner, Critic, Executor e Verifier colaborem através de filas duráveis e cheguem a uma decisão consensual fundamentada.',
+      faqQ6: 'Como a plataforma lida com termos e privacidade institucional?',
+      faqA6: 'Seguimos os mais rigorosos padrões globais de transparência institucional, anonimização zero-trust e passaportes criptográficos rastreáveis por SHA-256.',
     },
 
     en: {
@@ -1437,6 +1473,8 @@ const I18nEngine = (() => {
     }
 
     // Dispatch custom event for submodules (AURA, Earth, etc.)
+    applyDeepSectionTranslations(t);
+
     window.dispatchEvent(new CustomEvent('nexus:languageChanged', { 
       detail: { 
         lang: currentLang, 
@@ -1460,6 +1498,70 @@ const I18nEngine = (() => {
     });
 
     applyLanguage(currentLang);
+  }
+
+  
+  function applyDeepSectionTranslations(t) {
+    if (!t) return;
+
+    function updateSectionHeader(sectionId, tag, title, desc) {
+      const sec = document.getElementById(sectionId);
+      if (!sec) return;
+      const h = sec.querySelector('.section-header');
+      if (!h) return;
+      const tagEl = h.querySelector('.section-tag');
+      const titleEl = h.querySelector('.section-title');
+      const descEl = h.querySelector('.section-desc');
+      if (tagEl && tag) tagEl.textContent = tag;
+      if (titleEl && title) titleEl.textContent = title;
+      if (descEl && desc) descEl.textContent = desc;
+    }
+
+    // 11. Neural Network Section
+    updateSectionHeader('neural', t.neuralTag, t.neuralTitle, t.neuralDesc);
+
+    // 12. Multi-Agent DAG Section
+    updateSectionHeader('agents', t.agentsTag, t.agentsTitle, t.agentsDesc);
+
+    // 13. Research Hub & GraphRAG
+    updateSectionHeader('research', t.researchTag, t.researchTitle, t.researchDesc);
+
+    // 14. Assistant & Slide Studio
+    updateSectionHeader('assistant', t.assistantTag, t.assistantTitle, t.assistantDesc);
+
+    // 15. User Guide & Governance
+    updateSectionHeader('guide', t.guideTag, t.guideTitle, t.guideDesc);
+
+    // 16. Articles Central
+    updateSectionHeader('articles', t.articlesTag, t.articlesTitle, t.articlesDesc);
+
+    // 17. FAQ Central
+    updateSectionHeader('faq', t.faqTag, t.faqTitle, t.faqDesc);
+
+    // 18. About Manifesto
+    updateSectionHeader('about', t.aboutTag, t.aboutTitle, t.aboutDesc);
+
+    // Update FAQ Items (1 to 6)
+    const faqSec = document.getElementById('faq');
+    if (faqSec) {
+      const faqItems = faqSec.querySelectorAll('.faq-item, details');
+      const pairs = [
+        { q: t.faqQ1, a: t.faqA1 },
+        { q: t.faqQ2, a: t.faqA2 },
+        { q: t.faqQ3, a: t.faqA3 },
+        { q: t.faqQ4, a: t.faqA4 },
+        { q: t.faqQ5, a: t.faqA5 },
+        { q: t.faqQ6, a: t.faqA6 }
+      ];
+      faqItems.forEach((el, i) => {
+        if (pairs[i]) {
+          const sum = el.querySelector('summary, .faq-question');
+          const ans = el.querySelector('.faq-answer, p');
+          if (sum && pairs[i].q) sum.textContent = pairs[i].q;
+          if (ans && pairs[i].a) ans.textContent = pairs[i].a;
+        }
+      });
+    }
   }
 
   return {

@@ -2376,3 +2376,70 @@ section.hero-section[data-route].route-active {
   text-align: right;
 }
 
+/* ==========================================================================
+   ENTERPRISE ADMIN C2 LEFT SIDEBAR NAVIGATION
+   ========================================================================== */
+.c2-enterprise-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-top: 1.25rem;
+}
+
+.c2-enterprise-sidebar {
+  width: 310px;
+  min-width: 310px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 80px;
+  border-radius: 12px;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  border: 1px solid rgba(0, 245, 255, 0.25);
+  background: rgba(4, 8, 20, 0.94);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(24px);
+  z-index: 100;
+}
+
+.c2-enterprise-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.c2-enterprise-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(0, 245, 255, 0.25);
+  border-radius: 4px;
+}
+
+.c2-enterprise-main {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .c2-enterprise-layout {
+    flex-direction: column !important;
+  }
+  .c2-enterprise-sidebar {
+    width: 100% !important;
+    min-width: 100% !important;
+    position: static !important;
+    max-height: none !important;
+  }
+  .c2-tabs {
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .c2-tab-btn {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+

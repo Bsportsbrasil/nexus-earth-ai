@@ -113,18 +113,61 @@
     </div>
 
     <!-- Master C2 Navigation Tabs (6 Pillars) -->
-    <div class="c2-tabs">
-      <button class="c2-tab-btn active" data-tab="tab-accounts">👥 1. Contas, Clientes VIP &amp; RBAC</button>
-      <button class="c2-tab-btn" data-tab="tab-agents">🧠 2. Governança de Agentes, Intervenção Cognitiva &amp; Kill-Switch</button>
-      <button class="c2-tab-btn" data-tab="tab-sandbox">🛡️ 3. Sandbox, Guardrails &amp; Tool Allowlists</button>
-      <button class="c2-tab-btn" data-tab="tab-waf">🚨 4. WAF, Radar de Más Intenções, Pentest &amp; Backups</button>
-      <button class="c2-tab-btn" data-tab="tab-mlsecops">🧬 5. MLSecOps (Pesos IP, Anti-Poisoning &amp; CI/CD)</button>
-      <button class="c2-tab-btn" data-tab="tab-audit">📜 6. Logs de Auditoria Imutáveis (SHA-256)</button>
-      <button class="c2-tab-btn" data-tab="tab-directives" style="border-color:var(--cyan);color:var(--cyan)">🎙️ 7. Conselheiro de Diretrizes (Voz Direta) &amp; Conhecimento dos Agentes</button>
-      <button class="c2-tab-btn" data-tab="tab-lennox" style="border-color:var(--rose);color:var(--rose);font-weight:700">🛡️ 8. LENNOX — Guardião Soberano, Socorro &amp; Documentos Internos ([IMPORTANTE &amp; RELEVANTE])</button>
-      <button class="c2-tab-btn" data-tab="tab-regulatory" style="border-color:var(--emerald);color:var(--emerald);font-weight:700">📜 9. Dossiês de Explicabilidade Regulatória (EU AI Act &amp; LGPD)</button>
-      <button class="c2-tab-btn" data-tab="tab-supervisor" style="border-color:var(--cyan);color:var(--cyan);font-weight:700">🛡️ 10. Supervisão Suprema &amp; Homologação de Agentes (HITL)</button>
-    </div>
+    <!-- Master C2 Enterprise Layout: Left Sidebar Navigation & Right Workspace -->
+    <div class="c2-enterprise-layout" style="display:flex;gap:1.5rem;align-items:flex-start;margin-top:1.25rem;">
+      
+      <!-- 1. Left Navigation Sidebar (Enterprise Standard) -->
+      <aside class="c2-enterprise-sidebar glass-panel" style="width:310px;min-width:310px;flex-shrink:0;position:sticky;top:80px;border-radius:12px;padding:0.85rem;display:flex;flex-direction:column;gap:0.4rem;max-height:calc(100vh - 100px);overflow-y:auto;border:1px solid rgba(0,245,255,0.25);background:rgba(4,8,20,0.94);box-shadow:0 12px 35px rgba(0,0,0,0.7);backdrop-filter:blur(24px);z-index:100;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0.4rem 0.6rem 0.65rem;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:0.4rem">
+          <span style="font-family:var(--font-display);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;color:var(--cyan);text-transform:uppercase">MÓDULOS CORPORATIVOS</span>
+          <span class="agent-badge DONE" style="font-size:0.62rem">C2 SOBERANO</span>
+        </div>
+        <div class="c2-tabs" style="display:flex;flex-direction:column;gap:0.35rem;margin:0;">
+          <button class="c2-tab-btn active" data-tab="tab-accounts" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
+            <span>👥</span>
+            <span>1. Contas, Clientes VIP &amp; RBAC</span>
+          </button>
+          <button class="c2-tab-btn" data-tab="tab-agents" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
+            <span>🧠</span>
+            <span>2. Governança &amp; Kill-Switch</span>
+          </button>
+          <button class="c2-tab-btn" data-tab="tab-sandbox" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
+            <span>🛡️</span>
+            <span>3. Sandbox &amp; Guardrails</span>
+          </button>
+          <button class="c2-tab-btn" data-tab="tab-waf" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
+            <span>🚨</span>
+            <span>4. WAF, Radar &amp; Backups</span>
+          </button>
+          <button class="c2-tab-btn" data-tab="tab-mlsecops" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
+            <span>🧬</span>
+            <span>5. MLSecOps &amp; Anti-Poisoning</span>
+          </button>
+          <button class="c2-tab-btn" data-tab="tab-audit" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
+            <span>📜</span>
+            <span>6. Auditoria Imutável (SHA-256)</span>
+          </button>
+          <button class="c2-tab-btn" data-tab="tab-directives" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;border-color:var(--cyan);color:var(--cyan);">
+            <span>🎙️</span>
+            <span>7. Conselheiro de Diretrizes</span>
+          </button>
+          <button class="c2-tab-btn" data-tab="tab-lennox" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;border-color:var(--rose);color:var(--rose);font-weight:700;">
+            <span>🛡️</span>
+            <span>8. LENNOX — Guardião Soberano</span>
+          </button>
+          <button class="c2-tab-btn" data-tab="tab-regulatory" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;border-color:var(--emerald);color:var(--emerald);font-weight:700;">
+            <span>📜</span>
+            <span>9. Dossiês XAI (EU AI Act &amp; LGPD)</span>
+          </button>
+          <button class="c2-tab-btn" data-tab="tab-supervisor" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;border-color:var(--cyan);color:var(--cyan);font-weight:700;">
+            <span>🛡️</span>
+            <span>10. Supervisão Suprema (HITL)</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- 2. Main Management Workspace on the Right -->
+      <main class="c2-enterprise-main" style="flex:1;min-width:0;">
 
     <!-- ═══════════════════════════════════════════════════════════════════════
          PILLAR 1: CONTAS, EMPRESAS, ATIVAÇÃO VIP DIRETA & RBAC
@@ -809,6 +852,9 @@
           </div>
         </div>
       </div>
+    </div>
+
+    </main>
     </div>
 
     <!-- Formal Legal / Technical Markdown Dossier Viewer Modal -->

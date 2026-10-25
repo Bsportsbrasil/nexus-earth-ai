@@ -7,6 +7,7 @@ const CompanionUI = (function () {
   let liveSessionActive = false;
   let isAuraSpeaking = false;
   let isProcessingTurn = false;
+  let lastAuraSpokenText = "";
   let activeRecognizer = null;
   let cachedVoices = [];
   let userCadence = Number(localStorage.getItem('nexus_aura_voice_rate') || 1.0);
@@ -169,6 +170,7 @@ const CompanionUI = (function () {
     }
 
     isAuraSpeaking = true;
+    lastAuraSpokenText = clean.toLowerCase();
     const voice = pickGentleHumanizedVoice();
     const targetRate = Math.min(1.8, Math.max(0.6, (emotionProfile?.rate || 1.0) * userCadence));
     const targetPitch = emotionProfile?.pitch || 1.03;
@@ -186,7 +188,9 @@ const CompanionUI = (function () {
             ? '🎙️ AURA ouvindo continuamente você agora (fale livremente)...'
             : 'Pronta para conversar e aprender com você hoje';
         }
-        if (onDoneSpeaking) onDoneSpeaking();
+        setTimeout(() => {
+          if (onDoneSpeaking) onDoneSpeaking();
+        }, 700);
         return;
       }
 
@@ -274,11 +278,14 @@ const CompanionUI = (function () {
 
       let formatted = esc(data.reply || '').replace(/\n/g, '<br>');
       const lowerQ = msg.toLowerCase();
-      if (lowerQ.includes('localiza') || lowerQ.includes('mercado') || lowerQ.includes('onde') || lowerQ.includes('mapa') || lowerQ.includes('earth') || lowerQ.includes('distancia') || lowerQ.includes('coordenada')) {
+      const hasGeoIntent = lowerQ.includes('localiza') || lowerQ.includes('mercado') || lowerQ.includes('onde') || lowerQ.includes('mapa') || lowerQ.includes('earth') || lowerQ.includes('distancia') || lowerQ.includes('coordenada') || lowerQ.includes('pipa') || lowerQ.includes('restaurante') || lowerQ.includes('praia') || lowerQ.includes('hotel') || lowerQ.includes('comer') || (data.reply && data.reply.includes('/earth#'));
+      if (hasGeoIntent) {
+        const earthMatch = data.reply && data.reply.match(/\(\/earth#[^\)]+\)/);
+        const earthUrl = earthMatch ? earthMatch[1] : '/earth';
         formatted += `<div style="margin-top:0.65rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
-          <a href="/earth" class="aura-chip" style="text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem;border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,255,0.12)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            🌍 Abrir Módulo Earth Geo (Mapeamento 4K &amp; Geodésico)
+          <a href="${earthUrl}" class="aura-chip" style="text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem;border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,255,0.12);font-weight:600">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+            🌍 Abrir Módulo Earth Geo (Mapeamento 3D &amp; Satélite HD)
           </a>
         </div>`;
       }
@@ -372,13 +379,19 @@ const CompanionUI = (function () {
     rec.onend = () => {
       activeRecognizer = null;
       const spoken = finalTranscript.trim();
-      if (spoken && liveSessionActive && !isProcessingTurn) {
+      const lower = spoken.toLowerCase();
+      const isEcho = lastAuraSpokenText && (
+        lower.length < 4 ||
+        lastAuraSpokenText.includes(lower) ||
+        (lower.length > 15 && lastAuraSpokenText.includes(lower.slice(0, 25)))
+      );
+      if (spoken && !isEcho && liveSessionActive && !isProcessingTurn) {
         sendToAura(spoken);
       } else if (liveSessionActive && !isAuraSpeaking && !isProcessingTurn) {
         // Keep listening seamlessly without requiring the user to press the button again
         setTimeout(() => {
           if (liveSessionActive && !isAuraSpeaking && !isProcessingTurn) startListeningTurn();
-        }, 250);
+        }, 350);
       } else if (!liveSessionActive && orb) {
         orb.classList.remove('speaking');
       }

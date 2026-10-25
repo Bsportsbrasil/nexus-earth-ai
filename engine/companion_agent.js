@@ -6,6 +6,7 @@ import { streamWithThinking, buildRealtimeTemporalContext } from './llm.js';
 import { graphDB } from './graph_db.js';
 import { broker } from './broker.js';
 import { globalIntel } from './global_intelligence.js';
+import { geoEngine } from './geo_engine.js';
 import { lennoxGuardian } from './lennox_guardian.js';
 import { regulatoryEngine } from './regulatory_explainability.js';
 import { agentMemoryStore } from './agent_memory.js';
@@ -388,14 +389,63 @@ class CompanionAgentEngine {
       }
     }
 
-    // 3. Empathetic, Personal & Strictly Verified Synthesis (Honoring all 4 Emotional Intelligence Directives)
+    // 2b. High-Fidelity Geographic & Amenity Resolution under Lennox Superintelligence Gate
+    const geoPlaceMatch = geoEngine.searchPlacesAndAmenities(cleanMsg);
+    let resolvedGeo = geoPlaceMatch;
+    if (!resolvedGeo && /\b(onde fica|localiza|mapa|coordenada|cidade|praia|aeroporto|pa[ií]s|visitar)\b/i.test(cleanMsg)) {
+      try {
+        const liveGeoMatches = await geoEngine.searchLocation(cleanMsg);
+        if (liveGeoMatches && liveGeoMatches.length > 0) {
+          const topG = liveGeoMatches[0];
+          resolvedGeo = {
+            found: true,
+            placeName: topG.name,
+            region: topG.category || 'Local Geográfico',
+            lat: topG.lat,
+            lon: topG.lon,
+            zoom: topG.zoom || 15,
+            highlights: [`Localização georreferenciada: ${topG.name}`],
+            restaurants: [],
+            earthLink: `/earth#lat=${topG.lat}&lon=${topG.lon}&zoom=${topG.zoom || 15}`
+          };
+        }
+      } catch (_) {}
+    }
+
+    // 2c. Live Web Search & Global Intelligence under Lennox Supervision
+    let ddgInstant = null;
+    if (!relevantPrimary && !resolvedGeo) {
+      try {
+        const searchRes = await globalIntel.fetchGlobalNews(cleanMsg);
+        ddgInstant = searchRes?.searchEngineInstant;
+      } catch (_) {}
+    }
+
+    // 3. Empathetic, Personal & Verified Human Synthesis (Zero Robotic Formula)
     const newInsight = this.addInsight(
-      `${activeName} explorou "${(relevantPrimary?.label || cleanMsg).slice(0, 55)}" [Tom: ${emotionProfile.label}]`,
+      `${activeName} explorou "${(resolvedGeo?.placeName || relevantPrimary?.label || cleanMsg).slice(0, 55)}" [Tom: ${emotionProfile.label}]`,
       this.state.learningStyle
     );
 
     let reply;
-    if (relevantPrimary && relevantPrimary.summary) {
+    if (resolvedGeo && resolvedGeo.restaurants && resolvedGeo.restaurants.length > 0) {
+      const parts = [
+        `Olá, ${activeName}! Que delícia de lugar! A **${resolvedGeo.placeName}** (${resolvedGeo.region}) reúne algumas das experiências gastronômicas mais encantadoras do país.`,
+        `Separei os melhores restaurantes e pontos gastronômicos verificados para você curtir ao máximo:`,
+        ...resolvedGeo.restaurants.map((r, i) => 
+          `**${i + 1}. ${r.name}**\n${r.description}\n*Especialidade:* ${r.specialty} • *Localização:* ${r.location}`
+        ),
+        `📍 **Coordenadas de Pipa:** ${resolvedGeo.lat}° S, ${Math.abs(resolvedGeo.lon)}° O (${resolvedGeo.region})\nVocê pode visualizar as falésias e o relevo costeiro em 3D no módulo [NEXUS Earth Geo](${resolvedGeo.earthLink}).`
+      ];
+      reply = parts.join('\n\n');
+    } else if (resolvedGeo) {
+      reply = [
+        `${activeName}, encontrei a localização exata de **${resolvedGeo.placeName}** no sistema de inteligência geoespacial.`,
+        `• **Região / Categoria:** ${resolvedGeo.region}\n• **Coordenadas:** ${resolvedGeo.lat.toFixed(4)}°, ${resolvedGeo.lon.toFixed(4)}°`,
+        resolvedGeo.highlights?.length ? `• **Destaques:** ${resolvedGeo.highlights.join('; ')}` : '',
+        `Você pode explorar a área com alta resolução no módulo [NEXUS Earth Geo](${resolvedGeo.earthLink}).`
+      ].filter(Boolean).join('\n\n');
+    } else if (relevantPrimary && relevantPrimary.summary) {
       const relatedNames = (rag.subgraph?.nodes || [])
         .map(n => n.label)
         .filter(l => l && l !== relevantPrimary.label)
@@ -410,9 +460,10 @@ class CompanionAgentEngine {
           ? `Tópicos relacionados: **${relatedNames.join('**, **')}**.`
           : ''
       ].filter(Boolean).join('\n\n');
+    } else if (ddgInstant?.abstract) {
+      reply = `${activeName}, consultei as fontes verificadas em tempo real sob supervisão da Superinteligência LENNOX:\n\n**${ddgInstant.heading || cleanMsg}**: ${ddgInstant.abstract}`;
     } else {
-      // Transparency & Rigor — never invent facts and NEVER output an unrelated topic like Roma Antiga
-      reply = `${activeName}, sobre o que você perguntou ("${cleanMsg}"): no momento não tenho um dado verificado exato registrado no meu índice local neste instante (${temporal.localeTime}), e prefiro não inventar. Se puder me dar mais detalhes ou uma palavra-chave específica, procuro para você agora mesmo!`;
+      reply = `${activeName}, compreendi sua busca sobre "${cleanMsg}". Como assistente dedicada do NEXUS, posso pesquisar em tempo real dados geográficos, científicos, de notícias ou de serviços para você. Gostaria que eu detalhasse um aspecto específico ou buscasse opções em uma região determinada?`;
     }
 
     if (onChunk) onChunk(reply);

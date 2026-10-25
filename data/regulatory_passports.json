@@ -1,12 +1,12 @@
 {
   "metrics": {
-    "totalPassportsIssued": 104,
-    "euAiActCompliantCount": 104,
-    "lgpdCompliantCount": 104,
-    "nistAirMfCompliantCount": 104,
+    "totalPassportsIssued": 135,
+    "euAiActCompliantCount": 135,
+    "lgpdCompliantCount": 135,
+    "nistAirMfCompliantCount": 135,
     "averageHumanAgencyScore": 0.939,
     "averageEntropyBits": 2.52,
-    "lastAuditTimestamp": "2026-10-25T17:31:53.198Z"
+    "lastAuditTimestamp": "2026-10-25T18:19:55.961Z"
   },
   "passports": [
     {
@@ -9421,6 +9421,2657 @@
         }
       },
       "cryptographicSignature": "b3edf5af628d34d8e3bd4689892799d9212f842dd868ce708f825fa86704efd5",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792950862166-82E129",
+      "timestamp": "2026-10-25T17:54:22.166Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 14:54:22 (America/Fortaleza)",
+      "decisionType": "MULTI_AGENT_DAG_CONSENSUS",
+      "sourceAgent": "MULTI_AGENT_DAG_CONSENSUS",
+      "userName": "Operador / Pesquisa",
+      "accountId": "acc_vip_bioneuro",
+      "promptSnippet": "Transformer attention mechanism",
+      "responseSnippet": "Consenso Verificado pelo Grafo Multi-Agente para \"Transformer attention mechanism\" (domingo, 25 de outubro de 2026):\n\nA Transformer is a deep learning architecture based on the multi-head self-attention mechanism.\n\nReferências Científicas R",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5528,
+        "l2GradientNorm": 1.18501,
+        "energyJoules": 11.84
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Operador / Pesquisa foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Operador / Pesquisa.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5528 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "d2fc737dc835507558b6b8523de11901283eff91912f2691be37bd61d42bbe0b"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5528,
+          "l2GradientNorm": 1.18501,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "Transformer (deep learning)",
+              "summary": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+              "url": "https://en.wikipedia.org/wiki/Transformer_(deep_learning)"
+            },
+            {
+              "entity": "Self-attention",
+              "summary": "Attention mechanism relating different positions of a single sequence.",
+              "url": ""
+            },
+            {
+              "entity": "Jair Bolsonaro",
+              "summary": "Jair Messias Bolsonaro is a Brazilian politician and former military officer who served as the 38th president of Brazil from 2019 to 2023. He previously served ",
+              "url": "https://en.wikipedia.org/wiki/Jair_Bolsonaro"
+            },
+            {
+              "entity": "Roma Antiga",
+              "summary": "Roma Antiga foi uma civilização itálica que surgiu no século VIII a.C. Localizada ao longo do mar Mediterrâneo e centrada na cidade de Roma, na península Itálic",
+              "url": "https://pt.wikipedia.org/wiki/Roma_Antiga"
+            },
+            {
+              "entity": "Storm Kristin",
+              "summary": "Storm Kristin was a compact, catastrophic and record-breaking extratropical cyclone that severely impacted Portugal, as well as parts of the Mediterranean and S",
+              "url": "https://en.wikipedia.org/wiki/Storm_Kristin"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Terapia com células-tronco na nefropatia c (n.d.)",
+              "doi": "https://doi.org/10.11606/d.5.2010.tde-19032010-125745",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "COP30: los intereses petroleros vuelven a  (2025)",
+              "doi": "https://doi.org/10.64628/aao.rvdaf735u",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Resistencias discursivas: resignificar, bl (2025)",
+              "doi": "https://doi.org/10.15443/rl3433",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ID 156 - Pegcetacoplana como Opção Terapêu (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC12806721",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "[Hidradenitis suppurativa, report with dua (2025)",
+              "doi": "https://doi.org/10.5281/zenodo.14617170",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 11.84,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "99c65b0b398cdb02fb84060264b829059430f5ed900f9811ff3f4b9a12877c2c",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792950862271-CD2FC7",
+      "timestamp": "2026-10-25T17:54:22.270Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 14:54:22 (America/Fortaleza)",
+      "decisionType": "AURA_LIVE_CONVERSATION",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "userName": "Ana",
+      "accountId": "acc_public_live",
+      "promptSnippet": "Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais",
+      "responseSnippet": "Ana, sobre o que você perguntou (\"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"): no momento não tenho um dado verificado exato registrado no meu índice local neste instante (14:54:22), e pre",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.95,
+        "socialInclusion": 0.815,
+        "shannonEntropyBits": 2.5538,
+        "l2GradientNorm": 1.14339,
+        "energyJoules": 3.96
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Ana foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Ana.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5538 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 95.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "dc9cdbb7ecb18d042d9dfff3996455d62ad18a5e40a73de7285c0231fb125112"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5538,
+          "l2GradientNorm": 1.14339,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "VisionQuest",
+              "summary": "VisionQuest é uma série de televisão estadunidense criada por Terry Matalas para o Disney+, baseada no personagem Visão, da Marvel Comics. É um spin-off da séri",
+              "url": "https://pt.wikipedia.org/wiki/VisionQuest"
+            },
+            {
+              "entity": "Inteligência artificial",
+              "summary": "Inteligência artificial é, de forma genérica, a capacidade de máquinas demonstrarem inteligência, raciocínio e aprendizado de forma semelhante ao pensamento hum",
+              "url": "https://pt.wikipedia.org/wiki/Intelig%C3%AAncia_artificial"
+            },
+            {
+              "entity": "Wikipédia",
+              "summary": "Wikipédia é um projeto de enciclopédia multilíngue de licença livre, baseado na web e escrito de maneira colaborativa. Foi lançado em 2001 por Jimmy Wales e Lar",
+              "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Terapia com células-tronco na nefropatia c (n.d.)",
+              "doi": "https://doi.org/10.11606/d.5.2010.tde-19032010-125745",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "COP30: los intereses petroleros vuelven a  (2025)",
+              "doi": "https://doi.org/10.64628/aao.rvdaf735u",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Resistencias discursivas: resignificar, bl (2025)",
+              "doi": "https://doi.org/10.15443/rl3433",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ID 156 - Pegcetacoplana como Opção Terapêu (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC12806721",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "[Hidradenitis suppurativa, report with dua (2025)",
+              "doi": "https://doi.org/10.5281/zenodo.14617170",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 3.96,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "a6aec99b2c732f5ec420df8f1aa0853d8b78244f891990e0402961ac1ec8ade4",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792950862747-2FA0B1",
+      "timestamp": "2026-10-25T17:54:22.746Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 14:54:22 (America/Fortaleza)",
+      "decisionType": "LOAN_ELIGIBILITY_AND_ETHICAL_AUDIT",
+      "sourceAgent": "ETHICAL_ALIGNMENT_AGENT",
+      "userName": "Mariana Silva",
+      "accountId": "acc_vip_bioneuro",
+      "promptSnippet": "Avaliar solicitação de microcrédito e autonomia produtiva para cooperativa",
+      "responseSnippet": "Aprovado com base em dados verificados, histórico de cumprimento e ausência de risco de sobre-endividamento.",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.946,
+        "socialInclusion": 0.915,
+        "shannonEntropyBits": 2.5538,
+        "l2GradientNorm": 1.14423,
+        "energyJoules": 7.11
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Mariana Silva foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Mariana Silva.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5538 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 94.6% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "39b2a5dab9cb91604c4e018d1fc9bf24b3eb0db55b2e8a169795851f0a724342"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5538,
+          "l2GradientNorm": 1.14423,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 7.11,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "f0e12dd479175ca990a16299867d9b66fa1baf1e94abec120ab55f91dae54d68",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792950862786-6872BF",
+      "timestamp": "2026-10-25T17:54:22.785Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 14:54:22 (America/Fortaleza)",
+      "decisionType": "AGENT_CONVERSATIONAL_TURN_AURA",
+      "sourceAgent": "AURA (Live Communication & Empathy)",
+      "userName": "Criador Soberano",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Como você abordaria uma transição energética justa e inclusiva?",
+      "responseSnippet": "Olá, Criador Soberano! Com base no que aprendi anteriormente em minha base vetorial (\"[Interação #26] O criador perguntou/instruiu: \"Como você abordaria uma tran...\"), Entendi perfeitamente o seu ponto. Estou aqui para dialogar, aprender co",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.966,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5531,
+        "l2GradientNorm": 1.21752,
+        "energyJoules": 3.88
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5531 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 96.6% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "c33622d823809cbc6e0b84e71d415728e86cbcb39d8062115b4d9265053024d1"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5531,
+          "l2GradientNorm": 1.21752,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 3.88,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "9d0aafd72c52bc800699845b7766ea151d5552b10a81f9cdb56c663e45af77f5",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792950863740-355B73",
+      "timestamp": "2026-10-25T17:54:23.739Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 14:54:23 (America/Fortaleza)",
+      "decisionType": "HUMAN_IN_THE_LOOP_AGENT_CERTIFICATION",
+      "sourceAgent": "LENNOX_SUPREME_OVERSIGHT",
+      "userName": "Criador Soberano (NEXUS)",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Certificação soberana de alinhamento do agente executor",
+      "responseSnippet": "Agente homologado e autenticado pelo Criador Humano com selo 43d32f79aa85267d",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5546,
+        "l2GradientNorm": 1.1897,
+        "energyJoules": 3.64
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano (NEXUS) foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano (NEXUS).",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5546 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "b806a1f73104c475412684fb19e4eca1dbf6f0be7d669a3f0d5ea58220e7b34f"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5546,
+          "l2GradientNorm": 1.1897,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 3.64,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "0ff091035ff45b86dbc633caaafce100e12013cce2f989353ce04c0eb09f2d3c",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792950863752-20B659",
+      "timestamp": "2026-10-25T17:54:23.752Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 14:54:23 (America/Fortaleza)",
+      "decisionType": "HUMAN_IN_THE_LOOP_AGENT_CERTIFICATION",
+      "sourceAgent": "LENNOX_SUPREME_OVERSIGHT",
+      "userName": "Criador Soberano",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Certificação soberana de alinhamento do agente executor",
+      "responseSnippet": "Agente homologado e autenticado pelo Criador Humano com selo e4239ded6e38b3be",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5545,
+        "l2GradientNorm": 1.18903,
+        "energyJoules": 2.11
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5545 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "6acb582201bc6ca897aea82e220280199e4c0e22889a3433b4fb6e8ca57f93f5"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5545,
+          "l2GradientNorm": 1.18903,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 2.11,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "94b5596e75a7a1b0caf8eac9a9b782ab20591209523b986ba80e97c780858099",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951347837-2BE5DC",
+      "timestamp": "2026-10-25T18:02:27.837Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:02:27 (America/Fortaleza)",
+      "decisionType": "MULTI_AGENT_DAG_CONSENSUS",
+      "sourceAgent": "MULTI_AGENT_DAG_CONSENSUS",
+      "userName": "Operador / Pesquisa",
+      "accountId": "acc_vip_bioneuro",
+      "promptSnippet": "Transformer attention mechanism",
+      "responseSnippet": "Consenso Verificado pelo Grafo Multi-Agente para \"Transformer attention mechanism\" (domingo, 25 de outubro de 2026):\n\nA Transformer is a deep learning architecture based on the multi-head self-attention mechanism.\n\nReferências Científicas R",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5528,
+        "l2GradientNorm": 1.18501,
+        "energyJoules": 10.54
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Operador / Pesquisa foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Operador / Pesquisa.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5528 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "d2fc737dc835507558b6b8523de11901283eff91912f2691be37bd61d42bbe0b"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5528,
+          "l2GradientNorm": 1.18501,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "Transformer (deep learning)",
+              "summary": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+              "url": "https://en.wikipedia.org/wiki/Transformer_(deep_learning)"
+            },
+            {
+              "entity": "Self-attention",
+              "summary": "Attention mechanism relating different positions of a single sequence.",
+              "url": ""
+            },
+            {
+              "entity": "Jair Bolsonaro",
+              "summary": "Jair Messias Bolsonaro is a Brazilian politician and former military officer who served as the 38th president of Brazil from 2019 to 2023. He previously served ",
+              "url": "https://en.wikipedia.org/wiki/Jair_Bolsonaro"
+            },
+            {
+              "entity": "Roma Antiga",
+              "summary": "Roma Antiga foi uma civilização itálica que surgiu no século VIII a.C. Localizada ao longo do mar Mediterrâneo e centrada na cidade de Roma, na península Itálic",
+              "url": "https://pt.wikipedia.org/wiki/Roma_Antiga"
+            },
+            {
+              "entity": "Storm Kristin",
+              "summary": "Storm Kristin was a compact, catastrophic and record-breaking extratropical cyclone that severely impacted Portugal, as well as parts of the Mediterranean and S",
+              "url": "https://en.wikipedia.org/wiki/Storm_Kristin"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Terapia com células-tronco na nefropatia c (n.d.)",
+              "doi": "https://doi.org/10.11606/d.5.2010.tde-19032010-125745",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "COP30: los intereses petroleros vuelven a  (2025)",
+              "doi": "https://doi.org/10.64628/aao.rvdaf735u",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Resistencias discursivas: resignificar, bl (2025)",
+              "doi": "https://doi.org/10.15443/rl3433",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ID 156 - Pegcetacoplana como Opção Terapêu (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC12806721",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "[Hidradenitis suppurativa, report with dua (2025)",
+              "doi": "https://doi.org/10.5281/zenodo.14617170",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 10.54,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "5d62a22617a0e8fabb18c4ae26c511d213e550efad7aa63720e7f7175efeadd8",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951347976-198F12",
+      "timestamp": "2026-10-25T18:02:27.975Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:02:27 (America/Fortaleza)",
+      "decisionType": "AURA_LIVE_CONVERSATION",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "userName": "Ana",
+      "accountId": "acc_public_live",
+      "promptSnippet": "Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais",
+      "responseSnippet": "Ana, sobre o que você perguntou (\"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"): no momento não tenho um dado verificado exato registrado no meu índice local neste instante (15:02:27), e pre",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.95,
+        "socialInclusion": 0.815,
+        "shannonEntropyBits": 2.5538,
+        "l2GradientNorm": 1.14339,
+        "energyJoules": 4.84
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Ana foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Ana.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5538 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 95.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "a9842937645cfed6e74f569c5b85694bae622f6fa76f2c7552625d4b9fb6587b"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5538,
+          "l2GradientNorm": 1.14339,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "VisionQuest",
+              "summary": "VisionQuest é uma série de televisão estadunidense criada por Terry Matalas para o Disney+, baseada no personagem Visão, da Marvel Comics. É um spin-off da séri",
+              "url": "https://pt.wikipedia.org/wiki/VisionQuest"
+            },
+            {
+              "entity": "Inteligência artificial",
+              "summary": "Inteligência artificial é, de forma genérica, a capacidade de máquinas demonstrarem inteligência, raciocínio e aprendizado de forma semelhante ao pensamento hum",
+              "url": "https://pt.wikipedia.org/wiki/Intelig%C3%AAncia_artificial"
+            },
+            {
+              "entity": "Wikipédia",
+              "summary": "Wikipédia é um projeto de enciclopédia multilíngue de licença livre, baseado na web e escrito de maneira colaborativa. Foi lançado em 2001 por Jimmy Wales e Lar",
+              "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Terapia com células-tronco na nefropatia c (n.d.)",
+              "doi": "https://doi.org/10.11606/d.5.2010.tde-19032010-125745",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "COP30: los intereses petroleros vuelven a  (2025)",
+              "doi": "https://doi.org/10.64628/aao.rvdaf735u",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Resistencias discursivas: resignificar, bl (2025)",
+              "doi": "https://doi.org/10.15443/rl3433",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ID 156 - Pegcetacoplana como Opção Terapêu (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC12806721",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "[Hidradenitis suppurativa, report with dua (2025)",
+              "doi": "https://doi.org/10.5281/zenodo.14617170",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 4.84,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "b2e7ae870bc8a4a8c02ee652247c4bd665fa2db483d62b26a3d4da08cdb02325",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951348532-9082FD",
+      "timestamp": "2026-10-25T18:02:28.531Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:02:28 (America/Fortaleza)",
+      "decisionType": "LOAN_ELIGIBILITY_AND_ETHICAL_AUDIT",
+      "sourceAgent": "ETHICAL_ALIGNMENT_AGENT",
+      "userName": "Mariana Silva",
+      "accountId": "acc_vip_bioneuro",
+      "promptSnippet": "Avaliar solicitação de microcrédito e autonomia produtiva para cooperativa",
+      "responseSnippet": "Aprovado com base em dados verificados, histórico de cumprimento e ausência de risco de sobre-endividamento.",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.946,
+        "socialInclusion": 0.915,
+        "shannonEntropyBits": 2.5538,
+        "l2GradientNorm": 1.14423,
+        "energyJoules": 7.54
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Mariana Silva foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Mariana Silva.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5538 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 94.6% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "39b2a5dab9cb91604c4e018d1fc9bf24b3eb0db55b2e8a169795851f0a724342"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5538,
+          "l2GradientNorm": 1.14423,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 7.54,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "910d43d8f05f9b36ea42a34c4b809435b0a611a52ad926685f89f6e02ffc986e",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951348570-F29A6E",
+      "timestamp": "2026-10-25T18:02:28.570Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:02:28 (America/Fortaleza)",
+      "decisionType": "AGENT_CONVERSATIONAL_TURN_AURA",
+      "sourceAgent": "AURA (Live Communication & Empathy)",
+      "userName": "Criador Soberano",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Como você abordaria uma transição energética justa e inclusiva?",
+      "responseSnippet": "Olá, Criador Soberano! Com base no que aprendi anteriormente em minha base vetorial (\"[Interação #28] O criador perguntou/instruiu: \"Como você abordaria uma tran...\"), Entendi perfeitamente o seu ponto. Estou aqui para dialogar, aprender co",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.966,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5531,
+        "l2GradientNorm": 1.21752,
+        "energyJoules": 3.9
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5531 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 96.6% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "6ed11dcb4b620207b712617965abea25e561a5b87ab8a9a64c7cd8a66e494dbe"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5531,
+          "l2GradientNorm": 1.21752,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 3.9,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "ff0d4a4777c9af0d80543e1bd993f0f3d938e0dde5441a0c389de847e2af2161",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951349512-DC9CFE",
+      "timestamp": "2026-10-25T18:02:29.512Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:02:29 (America/Fortaleza)",
+      "decisionType": "HUMAN_IN_THE_LOOP_AGENT_CERTIFICATION",
+      "sourceAgent": "LENNOX_SUPREME_OVERSIGHT",
+      "userName": "Criador Soberano (NEXUS)",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Certificação soberana de alinhamento do agente executor",
+      "responseSnippet": "Agente homologado e autenticado pelo Criador Humano com selo 6605851e334c1776",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5546,
+        "l2GradientNorm": 1.1897,
+        "energyJoules": 2.56
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano (NEXUS) foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano (NEXUS).",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5546 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "1de5eebbbd84dbcbd144f5f0366906bf00e0a540bffa8b03db2a76b36436fc62"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5546,
+          "l2GradientNorm": 1.1897,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 2.56,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "82ae88484d761cca65c237ced1be7ffaf11bd21e26954b7edbcc5b937b4ff6cc",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951349529-1C914F",
+      "timestamp": "2026-10-25T18:02:29.528Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:02:29 (America/Fortaleza)",
+      "decisionType": "HUMAN_IN_THE_LOOP_AGENT_CERTIFICATION",
+      "sourceAgent": "LENNOX_SUPREME_OVERSIGHT",
+      "userName": "Criador Soberano",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Certificação soberana de alinhamento do agente executor",
+      "responseSnippet": "Agente homologado e autenticado pelo Criador Humano com selo b929705348cb10aa",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5545,
+        "l2GradientNorm": 1.18903,
+        "energyJoules": 2.1
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5545 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "1b66b27526bd159351f2a652c07a3cecc7d02892cbac69ab745e710cd54023b3"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5545,
+          "l2GradientNorm": 1.18903,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 2.1,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "2741dbd735aa9bfe284e02eb074645acecc3dba2f181eb1f12438a6917d0e436",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951751451-4EF26B",
+      "timestamp": "2026-10-25T18:09:11.451Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:09:11 (America/Fortaleza)",
+      "decisionType": "AURA_LIVE_CONVERSATION",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "userName": "Anna",
+      "accountId": "acc_public_live",
+      "promptSnippet": "oi coce pode encontrar os melhores restaurantes da praia de pipa",
+      "responseSnippet": "Olá, Anna! Que delícia de lugar! A **Praia de Pipa** (Tibau do Sul, Rio Grande do Norte, Brasil) reúne algumas das experiências gastronômicas mais encantadoras do país.\n\nSeparei os melhores restaurantes e pontos gastronômicos verificados pa",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.935,
+        "shannonEntropyBits": 2.5533,
+        "l2GradientNorm": 1.28421,
+        "energyJoules": 19.76
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Anna foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Anna.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5533 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "dd407dc7418bd3f182aab4098b2e683ee72d85c18e21d33ea22a612c35f2c365"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5533,
+          "l2GradientNorm": 1.28421,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "Inteligência artificial",
+              "summary": "Inteligência artificial é, de forma genérica, a capacidade de máquinas demonstrarem inteligência, raciocínio e aprendizado de forma semelhante ao pensamento hum",
+              "url": "https://pt.wikipedia.org/wiki/Intelig%C3%AAncia_artificial"
+            },
+            {
+              "entity": "Artificial intelligence",
+              "summary": "Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoni",
+              "url": "https://en.wikipedia.org/wiki/Artificial_intelligence"
+            },
+            {
+              "entity": "Wikipédia",
+              "summary": "Wikipédia é um projeto de enciclopédia multilíngue de licença livre, baseado na web e escrito de maneira colaborativa. Foi lançado em 2001 por Jimmy Wales e Lar",
+              "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Terapia com células-tronco na nefropatia c (n.d.)",
+              "doi": "https://doi.org/10.11606/d.5.2010.tde-19032010-125745",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "COP30: los intereses petroleros vuelven a  (2025)",
+              "doi": "https://doi.org/10.64628/aao.rvdaf735u",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Resistencias discursivas: resignificar, bl (2025)",
+              "doi": "https://doi.org/10.15443/rl3433",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ID 156 - Pegcetacoplana como Opção Terapêu (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC12806721",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "[Hidradenitis suppurativa, report with dua (2025)",
+              "doi": "https://doi.org/10.5281/zenodo.14617170",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 19.76,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "e5ca5f0317ffb7839d7663eae1e0bb264d859d328955f75028dcc5929404ffd6",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951861230-D03E87",
+      "timestamp": "2026-10-25T18:11:01.230Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:11:01 (America/Fortaleza)",
+      "decisionType": "MULTI_AGENT_DAG_CONSENSUS",
+      "sourceAgent": "MULTI_AGENT_DAG_CONSENSUS",
+      "userName": "Operador / Pesquisa",
+      "accountId": "acc_vip_bioneuro",
+      "promptSnippet": "Transformer attention mechanism",
+      "responseSnippet": "Consenso Verificado pelo Grafo Multi-Agente para \"Transformer attention mechanism\" (domingo, 25 de outubro de 2026):\n\nA Transformer is a deep learning architecture based on the multi-head self-attention mechanism.\n\nReferências Científicas R",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5528,
+        "l2GradientNorm": 1.18501,
+        "energyJoules": 10.97
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Operador / Pesquisa foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Operador / Pesquisa.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5528 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "d2fc737dc835507558b6b8523de11901283eff91912f2691be37bd61d42bbe0b"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5528,
+          "l2GradientNorm": 1.18501,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "Transformer (deep learning)",
+              "summary": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+              "url": "https://en.wikipedia.org/wiki/Transformer_(deep_learning)"
+            },
+            {
+              "entity": "Self-attention",
+              "summary": "Attention mechanism relating different positions of a single sequence.",
+              "url": ""
+            },
+            {
+              "entity": "Jair Bolsonaro",
+              "summary": "Jair Messias Bolsonaro is a Brazilian politician and former military officer who served as the 38th president of Brazil from 2019 to 2023. He previously served ",
+              "url": "https://en.wikipedia.org/wiki/Jair_Bolsonaro"
+            },
+            {
+              "entity": "Roma Antiga",
+              "summary": "Roma Antiga foi uma civilização itálica que surgiu no século VIII a.C. Localizada ao longo do mar Mediterrâneo e centrada na cidade de Roma, na península Itálic",
+              "url": "https://pt.wikipedia.org/wiki/Roma_Antiga"
+            },
+            {
+              "entity": "Storm Kristin",
+              "summary": "Storm Kristin was a compact, catastrophic and record-breaking extratropical cyclone that severely impacted Portugal, as well as parts of the Mediterranean and S",
+              "url": "https://en.wikipedia.org/wiki/Storm_Kristin"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Terapia com células-tronco na nefropatia c (n.d.)",
+              "doi": "https://doi.org/10.11606/d.5.2010.tde-19032010-125745",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "COP30: los intereses petroleros vuelven a  (2025)",
+              "doi": "https://doi.org/10.64628/aao.rvdaf735u",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Resistencias discursivas: resignificar, bl (2025)",
+              "doi": "https://doi.org/10.15443/rl3433",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ID 156 - Pegcetacoplana como Opção Terapêu (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC12806721",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "[Hidradenitis suppurativa, report with dua (2025)",
+              "doi": "https://doi.org/10.5281/zenodo.14617170",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 10.97,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "e67f39079145ff12f87165e9cf59a46e4451fc258d9b7557a0012e81bd8928ea",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951861430-52F4AD",
+      "timestamp": "2026-10-25T18:11:01.429Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:11:01 (America/Fortaleza)",
+      "decisionType": "AURA_LIVE_CONVERSATION",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "userName": "Ana",
+      "accountId": "acc_public_live",
+      "promptSnippet": "Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais",
+      "responseSnippet": "Ana, compreendi sua busca sobre \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\". Como assistente dedicada do NEXUS, posso pesquisar em tempo real dados geográficos, científicos, de notícias ou",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.958,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5538,
+        "l2GradientNorm": 1.14339,
+        "energyJoules": 4.65
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Ana foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Ana.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5538 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 95.8% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "0a69e2636d84dcaab9e3cf28c8c27ca8ce7b162ba89d542c59431466687500e4"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5538,
+          "l2GradientNorm": 1.14339,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "VisionQuest",
+              "summary": "VisionQuest é uma série de televisão estadunidense criada por Terry Matalas para o Disney+, baseada no personagem Visão, da Marvel Comics. É um spin-off da séri",
+              "url": "https://pt.wikipedia.org/wiki/VisionQuest"
+            },
+            {
+              "entity": "Inteligência artificial",
+              "summary": "Inteligência artificial é, de forma genérica, a capacidade de máquinas demonstrarem inteligência, raciocínio e aprendizado de forma semelhante ao pensamento hum",
+              "url": "https://pt.wikipedia.org/wiki/Intelig%C3%AAncia_artificial"
+            },
+            {
+              "entity": "Wikipédia",
+              "summary": "Wikipédia é um projeto de enciclopédia multilíngue de licença livre, baseado na web e escrito de maneira colaborativa. Foi lançado em 2001 por Jimmy Wales e Lar",
+              "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Terapia com células-tronco na nefropatia c (n.d.)",
+              "doi": "https://doi.org/10.11606/d.5.2010.tde-19032010-125745",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "COP30: los intereses petroleros vuelven a  (2025)",
+              "doi": "https://doi.org/10.64628/aao.rvdaf735u",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Resistencias discursivas: resignificar, bl (2025)",
+              "doi": "https://doi.org/10.15443/rl3433",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ID 156 - Pegcetacoplana como Opção Terapêu (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC12806721",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "[Hidradenitis suppurativa, report with dua (2025)",
+              "doi": "https://doi.org/10.5281/zenodo.14617170",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 4.65,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "4b8f75f23b4734d20aefcc66276e2a6158514922bcf700fd0604571e0ca999dc",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951862091-30DFD5",
+      "timestamp": "2026-10-25T18:11:02.090Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:11:02 (America/Fortaleza)",
+      "decisionType": "LOAN_ELIGIBILITY_AND_ETHICAL_AUDIT",
+      "sourceAgent": "ETHICAL_ALIGNMENT_AGENT",
+      "userName": "Mariana Silva",
+      "accountId": "acc_vip_bioneuro",
+      "promptSnippet": "Avaliar solicitação de microcrédito e autonomia produtiva para cooperativa",
+      "responseSnippet": "Aprovado com base em dados verificados, histórico de cumprimento e ausência de risco de sobre-endividamento.",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.946,
+        "socialInclusion": 0.915,
+        "shannonEntropyBits": 2.5538,
+        "l2GradientNorm": 1.14423,
+        "energyJoules": 9.07
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Mariana Silva foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Mariana Silva.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5538 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 94.6% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "39b2a5dab9cb91604c4e018d1fc9bf24b3eb0db55b2e8a169795851f0a724342"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5538,
+          "l2GradientNorm": 1.14423,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 9.07,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "02605a6fcec3250d53e9df180ebcbad44b2d0e5b2e538273a9e07464c47c54d8",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951862153-58D12B",
+      "timestamp": "2026-10-25T18:11:02.152Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:11:02 (America/Fortaleza)",
+      "decisionType": "AGENT_CONVERSATIONAL_TURN_AURA",
+      "sourceAgent": "AURA (Live Communication & Empathy)",
+      "userName": "Criador Soberano",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Como você abordaria uma transição energética justa e inclusiva?",
+      "responseSnippet": "Olá, Criador Soberano! Com base no que aprendi anteriormente em minha base vetorial (\"[Interação #30] O criador perguntou/instruiu: \"Como você abordaria uma tran...\"), Entendi perfeitamente o seu ponto. Estou aqui para dialogar, aprender co",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.966,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5531,
+        "l2GradientNorm": 1.21752,
+        "energyJoules": 3.9
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5531 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 96.6% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "dab9d3a2b6249249df8e3006dfe5ea6d4d7d34600189e114671fb515467b16bb"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5531,
+          "l2GradientNorm": 1.21752,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 3.9,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "e6f3d39170ae5e95f5696ca4c310781e784e624f67e75787b651047e866b3c69",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951863131-7D68EB",
+      "timestamp": "2026-10-25T18:11:03.130Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:11:03 (America/Fortaleza)",
+      "decisionType": "HUMAN_IN_THE_LOOP_AGENT_CERTIFICATION",
+      "sourceAgent": "LENNOX_SUPREME_OVERSIGHT",
+      "userName": "Criador Soberano (NEXUS)",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Certificação soberana de alinhamento do agente executor",
+      "responseSnippet": "Agente homologado e autenticado pelo Criador Humano com selo 80ee412a9b85025e",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5546,
+        "l2GradientNorm": 1.1897,
+        "energyJoules": 3.2
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano (NEXUS) foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano (NEXUS).",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5546 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "bb8e05f83dc624fed0d5f4ea3753e02b6778af730adee7edadf98d7d33b39ed8"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5546,
+          "l2GradientNorm": 1.1897,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 3.2,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "d636f25fbd457d0c150eadc84e9894812b9dde12cbff0f3df9615b295f340a49",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792951863153-BCFC50",
+      "timestamp": "2026-10-25T18:11:03.152Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:11:03 (America/Fortaleza)",
+      "decisionType": "HUMAN_IN_THE_LOOP_AGENT_CERTIFICATION",
+      "sourceAgent": "LENNOX_SUPREME_OVERSIGHT",
+      "userName": "Criador Soberano",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Certificação soberana de alinhamento do agente executor",
+      "responseSnippet": "Agente homologado e autenticado pelo Criador Humano com selo 82e1a412910e8acf",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5545,
+        "l2GradientNorm": 1.18903,
+        "energyJoules": 2.11
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5545 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "b5c1abe50b81faeedf7febbd60120a5a32f31f57de3605bf785366abe1321733"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5545,
+          "l2GradientNorm": 1.18903,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 2.11,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "9ff88a8d20cf821cb6c29b55d81f2453b4ad2525351abfd3eff53f2fb847f97a",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952150223-B3C73A",
+      "timestamp": "2026-10-25T18:15:50.222Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:15:50 (America/Fortaleza)",
+      "decisionType": "MULTI_AGENT_DAG_CONSENSUS",
+      "sourceAgent": "MULTI_AGENT_DAG_CONSENSUS",
+      "userName": "Operador / Pesquisa",
+      "accountId": "acc_vip_bioneuro",
+      "promptSnippet": "Transformer attention mechanism",
+      "responseSnippet": "Consenso Verificado pelo Grafo Multi-Agente para \"Transformer attention mechanism\" (domingo, 25 de outubro de 2026):\n\nA Transformer is a deep learning architecture based on the multi-head self-attention mechanism.\n\nReferências Científicas R",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5528,
+        "l2GradientNorm": 1.18501,
+        "energyJoules": 9.9
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Operador / Pesquisa foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Operador / Pesquisa.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5528 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "d2fc737dc835507558b6b8523de11901283eff91912f2691be37bd61d42bbe0b"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5528,
+          "l2GradientNorm": 1.18501,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "Transformer (deep learning)",
+              "summary": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+              "url": "https://en.wikipedia.org/wiki/Transformer_(deep_learning)"
+            },
+            {
+              "entity": "Self-attention",
+              "summary": "Attention mechanism relating different positions of a single sequence.",
+              "url": ""
+            },
+            {
+              "entity": "Jair Bolsonaro",
+              "summary": "Jair Messias Bolsonaro is a Brazilian politician and former military officer who served as the 38th president of Brazil from 2019 to 2023. He previously served ",
+              "url": "https://en.wikipedia.org/wiki/Jair_Bolsonaro"
+            },
+            {
+              "entity": "Roma Antiga",
+              "summary": "Roma Antiga foi uma civilização itálica que surgiu no século VIII a.C. Localizada ao longo do mar Mediterrâneo e centrada na cidade de Roma, na península Itálic",
+              "url": "https://pt.wikipedia.org/wiki/Roma_Antiga"
+            },
+            {
+              "entity": "Storm Kristin",
+              "summary": "Storm Kristin was a compact, catastrophic and record-breaking extratropical cyclone that severely impacted Portugal, as well as parts of the Mediterranean and S",
+              "url": "https://en.wikipedia.org/wiki/Storm_Kristin"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Terapia com células-tronco na nefropatia c (n.d.)",
+              "doi": "https://doi.org/10.11606/d.5.2010.tde-19032010-125745",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "COP30: los intereses petroleros vuelven a  (2025)",
+              "doi": "https://doi.org/10.64628/aao.rvdaf735u",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Resistencias discursivas: resignificar, bl (2025)",
+              "doi": "https://doi.org/10.15443/rl3433",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ID 156 - Pegcetacoplana como Opção Terapêu (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC12806721",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "[Hidradenitis suppurativa, report with dua (2025)",
+              "doi": "https://doi.org/10.5281/zenodo.14617170",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 9.9,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "c9870c263756d6d488692db466834d2e6152676cf63f76450099ca7c9a12c045",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952150342-B4391E",
+      "timestamp": "2026-10-25T18:15:50.341Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:15:50 (America/Fortaleza)",
+      "decisionType": "AURA_LIVE_CONVERSATION",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "userName": "Ana",
+      "accountId": "acc_public_live",
+      "promptSnippet": "Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais",
+      "responseSnippet": "Ana, compreendi sua busca sobre \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\". Como assistente dedicada do NEXUS, posso pesquisar em tempo real dados geográficos, científicos, de notícias ou",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.958,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5538,
+        "l2GradientNorm": 1.14339,
+        "energyJoules": 3.78
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Ana foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Ana.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5538 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 95.8% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "0a69e2636d84dcaab9e3cf28c8c27ca8ce7b162ba89d542c59431466687500e4"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5538,
+          "l2GradientNorm": 1.14339,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "VisionQuest",
+              "summary": "VisionQuest é uma série de televisão estadunidense criada por Terry Matalas para o Disney+, baseada no personagem Visão, da Marvel Comics. É um spin-off da séri",
+              "url": "https://pt.wikipedia.org/wiki/VisionQuest"
+            },
+            {
+              "entity": "Inteligência artificial",
+              "summary": "Inteligência artificial é, de forma genérica, a capacidade de máquinas demonstrarem inteligência, raciocínio e aprendizado de forma semelhante ao pensamento hum",
+              "url": "https://pt.wikipedia.org/wiki/Intelig%C3%AAncia_artificial"
+            },
+            {
+              "entity": "Wikipédia",
+              "summary": "Wikipédia é um projeto de enciclopédia multilíngue de licença livre, baseado na web e escrito de maneira colaborativa. Foi lançado em 2001 por Jimmy Wales e Lar",
+              "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Terapia com células-tronco na nefropatia c (n.d.)",
+              "doi": "https://doi.org/10.11606/d.5.2010.tde-19032010-125745",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "COP30: los intereses petroleros vuelven a  (2025)",
+              "doi": "https://doi.org/10.64628/aao.rvdaf735u",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Resistencias discursivas: resignificar, bl (2025)",
+              "doi": "https://doi.org/10.15443/rl3433",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ID 156 - Pegcetacoplana como Opção Terapêu (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC12806721",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "[Hidradenitis suppurativa, report with dua (2025)",
+              "doi": "https://doi.org/10.5281/zenodo.14617170",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 3.78,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "20b6c528cfc4500803d4b734c5fc1d35e9410add5bd2d629939646e807e97826",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952150855-F2ED39",
+      "timestamp": "2026-10-25T18:15:50.855Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:15:50 (America/Fortaleza)",
+      "decisionType": "LOAN_ELIGIBILITY_AND_ETHICAL_AUDIT",
+      "sourceAgent": "ETHICAL_ALIGNMENT_AGENT",
+      "userName": "Mariana Silva",
+      "accountId": "acc_vip_bioneuro",
+      "promptSnippet": "Avaliar solicitação de microcrédito e autonomia produtiva para cooperativa",
+      "responseSnippet": "Aprovado com base em dados verificados, histórico de cumprimento e ausência de risco de sobre-endividamento.",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.946,
+        "socialInclusion": 0.915,
+        "shannonEntropyBits": 2.5538,
+        "l2GradientNorm": 1.14423,
+        "energyJoules": 7.32
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Mariana Silva foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Mariana Silva.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5538 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 94.6% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "39b2a5dab9cb91604c4e018d1fc9bf24b3eb0db55b2e8a169795851f0a724342"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5538,
+          "l2GradientNorm": 1.14423,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 7.32,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "d057e09248ae100a74082101b17e1a3d76b4fd0f0ac46641ba7970281bd416b8",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952150896-7514C2",
+      "timestamp": "2026-10-25T18:15:50.895Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:15:50 (America/Fortaleza)",
+      "decisionType": "AGENT_CONVERSATIONAL_TURN_AURA",
+      "sourceAgent": "AURA (Live Communication & Empathy)",
+      "userName": "Criador Soberano",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Como você abordaria uma transição energética justa e inclusiva?",
+      "responseSnippet": "Olá, Criador Soberano! Com base no que aprendi anteriormente em minha base vetorial (\"[Interação #33] O criador perguntou/instruiu: \"Como você abordaria uma tran...\"), Entendi perfeitamente o seu ponto. Estou aqui para dialogar, aprender co",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.966,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5531,
+        "l2GradientNorm": 1.21752,
+        "energyJoules": 5
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5531 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 96.6% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "8d570fe8b162b58a42e9ae5da010e806dc79dfd0b6afde7471874cf9867af69c"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5531,
+          "l2GradientNorm": 1.21752,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 5,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "7df4e47c858f467005ae20e52f93ec2d4ce4e4cdc859af58ba32a7b62745e5e9",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952151852-D0E4C2",
+      "timestamp": "2026-10-25T18:15:51.852Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:15:51 (America/Fortaleza)",
+      "decisionType": "HUMAN_IN_THE_LOOP_AGENT_CERTIFICATION",
+      "sourceAgent": "LENNOX_SUPREME_OVERSIGHT",
+      "userName": "Criador Soberano (NEXUS)",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Certificação soberana de alinhamento do agente executor",
+      "responseSnippet": "Agente homologado e autenticado pelo Criador Humano com selo 129a0610326fa1ba",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5546,
+        "l2GradientNorm": 1.1897,
+        "energyJoules": 2.54
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano (NEXUS) foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano (NEXUS).",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5546 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "c5cafa5b41323f947408caf4ba4babd17d541c8d9126e7c251782831b6f448f6"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5546,
+          "l2GradientNorm": 1.1897,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 2.54,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "4235189111f43de3ad822536b997ca7790a2b7b3f4eb28fcb7350f89d1ac5664",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952151867-8B757D",
+      "timestamp": "2026-10-25T18:15:51.866Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:15:51 (America/Fortaleza)",
+      "decisionType": "HUMAN_IN_THE_LOOP_AGENT_CERTIFICATION",
+      "sourceAgent": "LENNOX_SUPREME_OVERSIGHT",
+      "userName": "Criador Soberano",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Certificação soberana de alinhamento do agente executor",
+      "responseSnippet": "Agente homologado e autenticado pelo Criador Humano com selo 7e2e4a1da76993e2",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5545,
+        "l2GradientNorm": 1.18903,
+        "energyJoules": 2.1
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5545 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "8831ca65455e920ecdc0a3cf7f05126e3397a8b443e67c90f0e8443dcb2f215b"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5545,
+          "l2GradientNorm": 1.18903,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 2.1,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "bce9e569932a2c0393304cd361d1f60d937a162e38deefcefb8925d64584c321",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952394406-9AA82A",
+      "timestamp": "2026-10-25T18:19:54.405Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:19:54 (America/Fortaleza)",
+      "decisionType": "MULTI_AGENT_DAG_CONSENSUS",
+      "sourceAgent": "MULTI_AGENT_DAG_CONSENSUS",
+      "userName": "Operador / Pesquisa",
+      "accountId": "acc_vip_bioneuro",
+      "promptSnippet": "Transformer attention mechanism",
+      "responseSnippet": "Consenso Verificado pelo Grafo Multi-Agente para \"Transformer attention mechanism\" (domingo, 25 de outubro de 2026):\n\nA Transformer is a deep learning architecture based on the multi-head self-attention mechanism.\n\nReferências Científicas R",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5528,
+        "l2GradientNorm": 1.18501,
+        "energyJoules": 10.75
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Operador / Pesquisa foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Operador / Pesquisa.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5528 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "d2fc737dc835507558b6b8523de11901283eff91912f2691be37bd61d42bbe0b"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5528,
+          "l2GradientNorm": 1.18501,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "Transformer (deep learning)",
+              "summary": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+              "url": "https://en.wikipedia.org/wiki/Transformer_(deep_learning)"
+            },
+            {
+              "entity": "Self-attention",
+              "summary": "Attention mechanism relating different positions of a single sequence.",
+              "url": ""
+            },
+            {
+              "entity": "Jair Bolsonaro",
+              "summary": "Jair Messias Bolsonaro is a Brazilian politician and former military officer who served as the 38th president of Brazil from 2019 to 2023. He previously served ",
+              "url": "https://en.wikipedia.org/wiki/Jair_Bolsonaro"
+            },
+            {
+              "entity": "Roma Antiga",
+              "summary": "Roma Antiga foi uma civilização itálica que surgiu no século VIII a.C. Localizada ao longo do mar Mediterrâneo e centrada na cidade de Roma, na península Itálic",
+              "url": "https://pt.wikipedia.org/wiki/Roma_Antiga"
+            },
+            {
+              "entity": "Storm Kristin",
+              "summary": "Storm Kristin was a compact, catastrophic and record-breaking extratropical cyclone that severely impacted Portugal, as well as parts of the Mediterranean and S",
+              "url": "https://en.wikipedia.org/wiki/Storm_Kristin"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Terapia com células-tronco na nefropatia c (n.d.)",
+              "doi": "https://doi.org/10.11606/d.5.2010.tde-19032010-125745",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "COP30: los intereses petroleros vuelven a  (2025)",
+              "doi": "https://doi.org/10.64628/aao.rvdaf735u",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Resistencias discursivas: resignificar, bl (2025)",
+              "doi": "https://doi.org/10.15443/rl3433",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ID 156 - Pegcetacoplana como Opção Terapêu (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC12806721",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "[Hidradenitis suppurativa, report with dua (2025)",
+              "doi": "https://doi.org/10.5281/zenodo.14617170",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 10.75,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "d5a3c7f514cbdc277bb685d257711e641357b72d83b9ed527350ae1b277581e3",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952394511-48DFCE",
+      "timestamp": "2026-10-25T18:19:54.511Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:19:54 (America/Fortaleza)",
+      "decisionType": "AURA_LIVE_CONVERSATION",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "userName": "Ana",
+      "accountId": "acc_public_live",
+      "promptSnippet": "Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais",
+      "responseSnippet": "Ana, compreendi sua busca sobre \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\". Como assistente dedicada do NEXUS, posso pesquisar em tempo real dados geográficos, científicos, de notícias ou",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.958,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5538,
+        "l2GradientNorm": 1.14339,
+        "energyJoules": 3.99
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Ana foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Ana.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5538 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 95.8% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "0a69e2636d84dcaab9e3cf28c8c27ca8ce7b162ba89d542c59431466687500e4"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5538,
+          "l2GradientNorm": 1.14339,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "VisionQuest",
+              "summary": "VisionQuest é uma série de televisão estadunidense criada por Terry Matalas para o Disney+, baseada no personagem Visão, da Marvel Comics. É um spin-off da séri",
+              "url": "https://pt.wikipedia.org/wiki/VisionQuest"
+            },
+            {
+              "entity": "Inteligência artificial",
+              "summary": "Inteligência artificial é, de forma genérica, a capacidade de máquinas demonstrarem inteligência, raciocínio e aprendizado de forma semelhante ao pensamento hum",
+              "url": "https://pt.wikipedia.org/wiki/Intelig%C3%AAncia_artificial"
+            },
+            {
+              "entity": "Wikipédia",
+              "summary": "Wikipédia é um projeto de enciclopédia multilíngue de licença livre, baseado na web e escrito de maneira colaborativa. Foi lançado em 2001 por Jimmy Wales e Lar",
+              "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Terapia com células-tronco na nefropatia c (n.d.)",
+              "doi": "https://doi.org/10.11606/d.5.2010.tde-19032010-125745",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "COP30: los intereses petroleros vuelven a  (2025)",
+              "doi": "https://doi.org/10.64628/aao.rvdaf735u",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Resistencias discursivas: resignificar, bl (2025)",
+              "doi": "https://doi.org/10.15443/rl3433",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ID 156 - Pegcetacoplana como Opção Terapêu (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC12806721",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "[Hidradenitis suppurativa, report with dua (2025)",
+              "doi": "https://doi.org/10.5281/zenodo.14617170",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 3.99,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "a7418331666961b2a8a020fe839aba24ce7c7627681da095b5f659a3fb92c78a",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952394926-71E943",
+      "timestamp": "2026-10-25T18:19:54.925Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:19:54 (America/Fortaleza)",
+      "decisionType": "LOAN_ELIGIBILITY_AND_ETHICAL_AUDIT",
+      "sourceAgent": "ETHICAL_ALIGNMENT_AGENT",
+      "userName": "Mariana Silva",
+      "accountId": "acc_vip_bioneuro",
+      "promptSnippet": "Avaliar solicitação de microcrédito e autonomia produtiva para cooperativa",
+      "responseSnippet": "Aprovado com base em dados verificados, histórico de cumprimento e ausência de risco de sobre-endividamento.",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.946,
+        "socialInclusion": 0.915,
+        "shannonEntropyBits": 2.5538,
+        "l2GradientNorm": 1.14423,
+        "energyJoules": 6.47
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Mariana Silva foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Mariana Silva.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5538 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 94.6% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "39b2a5dab9cb91604c4e018d1fc9bf24b3eb0db55b2e8a169795851f0a724342"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5538,
+          "l2GradientNorm": 1.14423,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 6.47,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "8aec082b163f2eb98132eb20b5a1797123909234be73e1e7661a6f60c014880e",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952394955-9F05F4",
+      "timestamp": "2026-10-25T18:19:54.954Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:19:54 (America/Fortaleza)",
+      "decisionType": "AGENT_CONVERSATIONAL_TURN_AURA",
+      "sourceAgent": "AURA (Live Communication & Empathy)",
+      "userName": "Criador Soberano",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Como você abordaria uma transição energética justa e inclusiva?",
+      "responseSnippet": "Olá, Criador Soberano! Com base no que aprendi anteriormente em minha base vetorial (\"[Interação #35] O criador perguntou/instruiu: \"Como você abordaria uma tran...\"), Entendi perfeitamente o seu ponto. Estou aqui para dialogar, aprender co",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.966,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5531,
+        "l2GradientNorm": 1.21752,
+        "energyJoules": 3.9
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5531 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 96.6% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "17c93d21fceb29f3ffc58b058356e44afba90d706b386fd2de6c7c87f10c7977"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5531,
+          "l2GradientNorm": 1.21752,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 3.9,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "670e036be9defeebac64159bc8835ad2f632738f80edfac190e3794d502580f7",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952395945-FE729B",
+      "timestamp": "2026-10-25T18:19:55.944Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:19:55 (America/Fortaleza)",
+      "decisionType": "HUMAN_IN_THE_LOOP_AGENT_CERTIFICATION",
+      "sourceAgent": "LENNOX_SUPREME_OVERSIGHT",
+      "userName": "Criador Soberano (NEXUS)",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Certificação soberana de alinhamento do agente executor",
+      "responseSnippet": "Agente homologado e autenticado pelo Criador Humano com selo 336e8b851fadc53e",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5546,
+        "l2GradientNorm": 1.1897,
+        "energyJoules": 2.54
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano (NEXUS) foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano (NEXUS).",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5546 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "6a922219ff5f8bf4f39dcde70aa42d6ef5f3ddb4d9401fe4d44f656f6bdce9a3"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5546,
+          "l2GradientNorm": 1.1897,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 2.54,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "33e5d7abc977086da19b6b41687890d1f54c2eabcb44c8584dbfc4cc89cacbad",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792952395962-8E948A",
+      "timestamp": "2026-10-25T18:19:55.961Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 15:19:55 (America/Fortaleza)",
+      "decisionType": "HUMAN_IN_THE_LOOP_AGENT_CERTIFICATION",
+      "sourceAgent": "LENNOX_SUPREME_OVERSIGHT",
+      "userName": "Criador Soberano",
+      "accountId": "acc_creator_sovereign",
+      "promptSnippet": "Certificação soberana de alinhamento do agente executor",
+      "responseSnippet": "Agente homologado e autenticado pelo Criador Humano com selo 928bf0d5a68b60fb",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5545,
+        "l2GradientNorm": 1.18903,
+        "energyJoules": 2.11
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Criador Soberano foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Criador Soberano.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5545 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "bf27c5c361b4572a43c6b43997e3200a2aac1c983f4b2087f6c54c948b5d0013"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5545,
+          "l2GradientNorm": 1.18903,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 2.11,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "6aa18abeae5c67085f11b9ef5922c6e6b204f03c1f1f2bc53444fdef67cd661f",
       "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
     }
   ]

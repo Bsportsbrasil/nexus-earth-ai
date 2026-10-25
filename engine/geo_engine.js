@@ -36,7 +36,164 @@ export class GeoEngine {
       { name: 'Londres (Greenwich Meridian 0°), Reino Unido', lat: 51.4769, lon: 0.0005, alt: 46, zoom: 16, category: 'Geodésia' },
       { name: 'Polo Sul Geográfico, Antártida', lat: -90.0000, lon: 0.0000, alt: 2835, zoom: 6, category: 'Polo' },
       { name: 'Monte Everest, Nepal/Tibet', lat: 27.9881, lon: 86.9250, alt: 8848, zoom: 13, category: 'Relevo' },
-      { name: 'Floresta Amazônica (Manaus), Brasil', lat: -3.1190, lon: -60.0217, alt: 92, zoom: 12, category: 'Bioma' }
+      { name: 'Floresta Amazônica (Manaus), Brasil', lat: -3.1190, lon: -60.0217, alt: 92, zoom: 12, category: 'Bioma' },
+      { name: 'Praia de Pipa (Tibau do Sul), Rio Grande do Norte, Brasil', lat: -6.2306, lon: -35.0592, alt: 28, zoom: 15, category: 'Praia & Gastronomia' },
+      { name: 'Fernando de Noronha, Pernambuco, Brasil', lat: -3.8547, lon: -32.4258, alt: 45, zoom: 14, category: 'Ecoturismo & Gastronomia' },
+      { name: 'Jericoacoara, Ceará, Brasil', lat: -2.7958, lon: -40.5139, alt: 10, zoom: 15, category: 'Praia & Dunas' },
+      { name: 'Salvador (Pelourinho / Barra), Bahia, Brasil', lat: -12.9777, lon: -38.5016, alt: 30, zoom: 14, category: 'Patrimônio & Gastronomia' },
+      { name: 'Florianópolis (Ilha da Magia), Santa Catarina, Brasil', lat: -27.5954, lon: -48.5480, alt: 12, zoom: 14, category: 'Costa & Gastronomia' },
+      { name: 'Gramado (Serra Gaúcha), Rio Grande do Sul, Brasil', lat: -29.3746, lon: -50.8764, alt: 830, zoom: 14, category: 'Turismo & Gastronomia' },
+      { name: 'Natal (Ponta Negra / Morro do Careca), Rio Grande do Norte, Brasil', lat: -5.7945, lon: -35.2110, alt: 30, zoom: 14, category: 'Litoral Potiguar' },
+      { name: 'Lisboa (Alfama / Chiado), Portugal', lat: 38.7223, lon: -9.1393, alt: 50, zoom: 14, category: 'Histórico & Gastronomia' }
+    ];
+
+    this._ensureStorage();
+    this.curatedDestinations = [
+      {
+        id: 'pipa_rn',
+        name: 'Praia de Pipa',
+        region: 'Tibau do Sul, Rio Grande do Norte, Brasil',
+        aliases: ['pipa', 'praia de pipa', 'praia da pipa', 'tibau do sul', 'pipa rn'],
+        lat: -6.2306,
+        lon: -35.0592,
+        alt: 28,
+        zoom: 15,
+        category: 'Praia, Gastronomia & Ecoturismo',
+        highlights: [
+          'Falésias avermelhadas imponentes sobre o oceano',
+          'Baía dos Golfinhos com avistamento de golfinhos em habitat natural',
+          'Praia do Amor e Praia do Madeiro com águas cristalinas',
+          'Santuário Ecológico de Pipa com trilhas na Mata Atlântica'
+        ],
+        restaurants: [
+          {
+            name: 'Oca Toca (Pousada Toca da Coruja)',
+            specialty: 'Alta Gastronomia Contemporânea & Frutos do Mar Nobres',
+            location: 'Av. Baía dos Golfinhos, Pipa',
+            description: 'Uma das experiências gastronômicas mais consagradas do Nordeste, imersa em jardins de Mata Atlântica, famosa pelo polvo grelhado, peixes nobres e adega refinada.'
+          },
+          {
+            name: 'Tapas Restaurante',
+            specialty: 'Tapas Espanholas, Atum Fresco & Cozinha Internacional',
+            location: 'Rua dos Bem-Te-Vis / Av. Baía dos Golfinhos, Pipa',
+            description: 'Ambiente aconchegante e descontraído, aclamado pelo lendário atum selado em crosta de gergelim com molho tarê e seleção de tapas contemporâneas.'
+          },
+          {
+            name: 'Camarão na Fazenda',
+            specialty: 'Especialista em Camarões Frescos da Região Potiguar',
+            location: 'Praia de Pipa',
+            description: 'Referência absoluta para os apreciadores de camarão, servido em diversas variações tropicais com mandioca cremosa, coco e pimentões aromáticos.'
+          },
+          {
+            name: 'Macoco',
+            specialty: 'Cozinha Autoral, Carnes & Massas Artesanais',
+            location: 'Rua do Céu, Centro de Pipa',
+            description: 'Gastronomia intimista comandada por chefs dedicados, com empanadas artesanais, peixes frescos do dia e cortes selecionados grelhados com maestria.'
+          },
+          {
+            name: 'Dall\'Italiano',
+            specialty: 'Massas Italianas Frescas & Pizzas Artesanais',
+            location: 'Av. Baía dos Golfinhos, Pipa',
+            description: 'Autêntica culinária italiana com massas produzidas diariamente à mão e molhos tradicionais apurados com ingredientes frescos.'
+          },
+          {
+            name: 'Mirante Sunset Bar',
+            specialty: 'Drinks Autorais, Petiscos & Vista Panorâmica do Pôr do Sol',
+            location: 'Alto das Falésias, Mirante de Pipa',
+            description: 'Local icônico para o entardecer, com coquetéis criativos, música ambiente suave e a visão privilegiada do sol se pondo no mar.'
+          }
+        ]
+      },
+      {
+        id: 'noronha_pe',
+        name: 'Fernando de Noronha',
+        region: 'Pernambuco, Brasil',
+        aliases: ['noronha', 'fernando de noronha'],
+        lat: -3.8547,
+        lon: -32.4258,
+        alt: 45,
+        zoom: 14,
+        category: 'Parque Nacional Marinho & Ecoturismo',
+        highlights: ['Baía do Sancho', 'Baía dos Porcos', 'Morro do Pico', 'Mergulho com tartarugas'],
+        restaurants: [
+          {
+            name: 'Restaurante do Zé Maria',
+            specialty: 'Festival Gastronômico de Frutos do Mar',
+            location: 'Pousada Zé Maria, Floresta Nova',
+            description: 'O festival gastronômico mais famoso da ilha, com dezenas de pratos de peixes e sobremesas artesanais.'
+          },
+          {
+            name: 'Varanda',
+            specialty: 'Culinária Contemporânea & Peixe na Telha',
+            location: 'Vila do Trinta',
+            description: 'Pratos generosos e premiados de peixe grelhado com molho de castanha e camarão.'
+          },
+          {
+            name: 'Mergulhão',
+            specialty: 'Frutos do Mar & Vista Sunset do Porto',
+            location: 'Porto de Santo Antônio',
+            description: 'Decks de madeira com vista deslumbrante das embarcações e culinária moderna.'
+          }
+        ]
+      },
+      {
+        id: 'sao_paulo_sp',
+        name: 'São Paulo (Capital Gastronômica)',
+        region: 'São Paulo, Brasil',
+        aliases: ['sao paulo', 'são paulo', 'sp', 'sampa'],
+        lat: -23.5505,
+        lon: -46.6333,
+        alt: 760,
+        zoom: 14,
+        category: 'Metrópole & Capital Gastronômica Mundial',
+        highlights: ['Avenida Paulista', 'Mercado Municipal', 'Parque Ibirapuera', 'Bairro da Liberdade'],
+        restaurants: [
+          {
+            name: 'Mocotó (Rodrigo Oliveira)',
+            specialty: 'Culinária Sertaneja & Brasileira Autêntica',
+            location: 'Vila Medeiros, Zona Norte',
+            description: 'Dadinhos de tapioca, baião de dois e torresmo crocante aclamados internacionalmente.'
+          },
+          {
+            name: 'D.O.M. (Alex Atala)',
+            specialty: 'Alta Cozinha Brasileira com Ingredientes Amazônicos',
+            location: 'Jardins',
+            description: 'Duas estrelas Michelin reinterpretando ingredientes nativos como tucupi, formiga priprioca e pirarucu.'
+          },
+          {
+            name: 'Mercado Municipal Paulistano (Mercadão)',
+            specialty: 'Pastel de Bacalhau & Sanduíche Tradicional de Mortadela',
+            location: 'Centro Histórico',
+            description: 'Polo histórico gastronômico repleto de frutas exóticas, especiarias e clássicos paulistanos.'
+          }
+        ]
+      },
+      {
+        id: 'rio_de_janeiro_rj',
+        name: 'Rio de Janeiro',
+        region: 'Rio de Janeiro, Brasil',
+        aliases: ['rio de janeiro', 'rio', 'rj', 'carioca'],
+        lat: -22.9068,
+        lon: -43.1729,
+        alt: 15,
+        zoom: 14,
+        category: 'Patrimônio Mundial & Cultura Carioca',
+        highlights: ['Cristo Redentor', 'Pão de Açúcar', 'Praia de Copacabana', 'Santa Teresa'],
+        restaurants: [
+          {
+            name: 'Aprazível',
+            specialty: 'Culinária Brasileira Tropical nas Alturas',
+            location: 'Santa Teresa',
+            description: 'Restaurante em platôs de madeira no alto da colina com vista deslumbrante da Baía de Guanabara.'
+          },
+          {
+            name: 'Confeitaria Colombo',
+            specialty: 'Patrimônio Histórico, Doces & Café Tradicional',
+            location: 'Centro do Rio',
+            description: 'Fundada em 1894, com vitrais belgas e atmosfera da Belle Époque carioca.'
+          }
+        ]
+      }
     ];
 
     this._ensureStorage();
@@ -143,6 +300,56 @@ export class GeoEngine {
   /**
    * Geodesic Haversine Distance (in meters and kilometers)
    */
+  
+  /**
+   * Search Curated & Verified Destinations with Gastronomy, Amenities and Coordinates
+   */
+  searchPlacesAndAmenities(query) {
+    const q = String(query || '').toLowerCase().trim();
+    if (!q) return null;
+
+    // Direct match against curated destinations
+    for (const dest of this.curatedDestinations) {
+      const match = dest.aliases.some(alias => q.includes(alias.toLowerCase()));
+      if (match) {
+        return {
+          found: true,
+          placeName: dest.name,
+          region: dest.region,
+          lat: dest.lat,
+          lon: dest.lon,
+          alt: dest.alt,
+          zoom: dest.zoom,
+          category: dest.category,
+          highlights: dest.highlights || [],
+          restaurants: dest.restaurants || [],
+          earthLink: `/earth#lat=${dest.lat}&lon=${dest.lon}&zoom=${dest.zoom}`
+        };
+      }
+    }
+
+    // Secondary match against known world presets
+    for (const loc of this.knownLocations) {
+      if (loc.name.toLowerCase().includes(q) || q.includes(loc.name.toLowerCase().split('(')[0].trim())) {
+        return {
+          found: true,
+          placeName: loc.name,
+          region: loc.category,
+          lat: loc.lat,
+          lon: loc.lon,
+          alt: loc.alt || 20,
+          zoom: loc.zoom || 15,
+          category: loc.category,
+          highlights: [`Ponto de interesse geoespacial verificado: ${loc.name}`],
+          restaurants: [],
+          earthLink: `/earth#lat=${loc.lat}&lon=${loc.lon}&zoom=${loc.zoom || 15}`
+        };
+      }
+    }
+
+    return null;
+  }
+
   calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371000; // Earth mean radius in meters
     const toRad = deg => (deg * Math.PI) / 180;
