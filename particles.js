@@ -63,6 +63,9 @@
   }
 
   window.addEventListener('resize', resize, { passive: true });
-  resize();
-  requestAnimationFrame(draw);
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => { resize(); requestAnimationFrame(draw); }, { timeout: 1200 });
+  } else {
+    setTimeout(() => { resize(); requestAnimationFrame(draw); }, 600);
+  }
 })();

@@ -27,7 +27,7 @@
 
   --text-primary:    #f1f5f9;
   --text-secondary:  #94a3b8;
-  --text-muted:      #475569;
+  --text-muted:      #94a3b8;
 
   --border:          rgba(99, 130, 200, 0.12);
   --border-glow:     rgba(0, 245, 255, 0.25);
@@ -435,7 +435,7 @@ body {
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.stat-label { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; }
+.stat-label { font-size: 0.72rem; color: #94a3b8; font-weight: 500; letter-spacing: 0.08em; }
 
 .hero-visual {
   flex: 1; max-width: 520px;

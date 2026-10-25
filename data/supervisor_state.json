@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T19:28:50.729Z",
+  "updatedAt": "2026-10-25T19:46:30.195Z",
   "certifications": {
     "aura": {
       "certified": true,
@@ -30,8 +30,8 @@
       "status": "CERTIFICADO_PELO_CRIADOR",
       "agentId": "executor",
       "certifiedBy": "Criador Soberano",
-      "timestamp": "2026-10-25T19:28:50.728Z",
-      "certHash": "4961e9163dfcd60c9234bbfb206c284167080d47b6ee550d1f155a0b79c58e86",
+      "timestamp": "2026-10-25T19:46:30.195Z",
+      "certHash": "69ea0d329eedbf7f108ab7606845b1970ca452043be8531aef4d23373a5d589d",
       "note": "Re-homologado"
     },
     "verifier": {
@@ -44,6 +44,18 @@
     }
   },
   "feedbackHistory": [
+    {
+      "id": "fb_1792957590180_ab14",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T19:46:30.180Z"
+    },
     {
       "id": "fb_1792956530708_a5cd",
       "agentId": "aura",
@@ -288,16 +300,6 @@
   "supervisorHistory": [
     {
       "role": "creator",
-      "text": "da maneira mais segura e ultil para a plataforma",
-      "timestamp": "2026-10-25T14:45:58.904Z"
-    },
-    {
-      "role": "supervisor",
-      "text": "Para garantir a máxima humanização sem comprometer o rigor técnico, apliquei uma nova diretriz de síntese em toda a rede. \n\nOs agentes internos — Aura, Planner, Critic, Executor e Verifier — passam a operar com perfis de fala que reduzem a densidade sintática, eliminam fórmulas robóticas de transição e incorporam pausas naturais de respiração. \n\nO ecossistema está estável, com 6 agentes ativos e 19 vetores próprios indexados. Como deseja estruturar a expansão ou o ajuste fino dos próximos parâmetros, Criador?",
-      "timestamp": "2026-10-25T14:45:58.904Z"
-    },
-    {
-      "role": "creator",
       "text": "a voz da aura e a sua ainda estou roboticas",
       "timestamp": "2026-10-25T14:47:09.978Z"
     },
@@ -535,6 +537,16 @@
       "role": "supervisor",
       "text": "Relatório de Supervisão Ativo (16:28:50): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 117 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
       "timestamp": "2026-10-25T19:28:50.706Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T19:46:30.179Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (16:46:30): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 122 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T19:46:30.179Z"
     }
   ]
 }

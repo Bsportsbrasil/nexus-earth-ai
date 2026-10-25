@@ -1252,7 +1252,7 @@ const server = http.createServer(async (req, res) => {
     } else if (filePath === '/' || ext === '.html') {
       headers['Cache-Control'] = 'public, max-age=120, stale-while-revalidate=86400';
     } else {
-      headers['Cache-Control'] = 'public, max-age=604800, stale-while-revalidate=2592000';
+      headers['Cache-Control'] = 'public, max-age=31536000, immutable';
     }
 
     const acceptEncoding = req.headers['accept-encoding'] || '';
