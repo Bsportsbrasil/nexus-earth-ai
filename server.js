@@ -24,6 +24,7 @@ import { lennoxGuardian } from './engine/lennox_guardian.js';
 import { regulatoryEngine } from './engine/regulatory_explainability.js';
 import { agentMemoryStore } from './engine/agent_memory.js';
 import { supremeSupervisor } from './engine/supervisor_agent.js';
+import { geoEngine } from './engine/geo_engine.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -1103,7 +1104,76 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 7. Static File Serving + Clean SPA Route Fallback (/aura, /neural, /agents, /knowledge, /studio, /proofs, /guide, /articles, /faq, /about)
+  // 6i. Sovereign Geospatial & Earth Intelligence (Google Earth Web/Pro Parity & KML/GeoJSON)
+  if (pathname.startsWith('/api/geo/')) {
+    try {
+      if (req.method === 'GET' && pathname === '/api/geo/geocode') {
+        const q = url.searchParams.get('q') || '';
+        const results = await geoEngine.searchLocation(q);
+        return jsonResponse(res, 200, results);
+      }
+
+      if (req.method === 'GET' && pathname === '/api/geo/reverse') {
+        const lat = url.searchParams.get('lat') || 0;
+        const lon = url.searchParams.get('lon') || 0;
+        const rev = await geoEngine.reverseGeocode(lat, lon);
+        return jsonResponse(res, 200, rev);
+      }
+
+      if (req.method === 'GET' && pathname === '/api/geo/projects') {
+        return jsonResponse(res, 200, geoEngine.listProjects());
+      }
+
+      if (req.method === 'POST' && pathname === '/api/geo/projects') {
+        const body = await parseJsonBody(req);
+        const saved = geoEngine.saveProject(body);
+        return jsonResponse(res, 200, saved);
+      }
+
+      if (req.method === 'DELETE' && pathname.startsWith('/api/geo/projects/')) {
+        const projId = pathname.slice('/api/geo/projects/'.length).trim();
+        return jsonResponse(res, 200, geoEngine.deleteProject(projId));
+      }
+
+      if (req.method === 'POST' && pathname === '/api/geo/export/kml') {
+        const body = await parseJsonBody(req);
+        const kmlDoc = geoEngine.generateKml(body);
+        res.writeHead(200, {
+          'Content-Type': 'application/vnd.google-earth.kml+xml; charset=utf-8',
+          'Content-Disposition': 'attachment; filename="nexus_earth_project.kml"'
+        });
+        return res.end(kmlDoc);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/geo/import/kml') {
+        const body = await parseJsonBody(req);
+        const features = geoEngine.parseKml(body.kml || '');
+        return jsonResponse(res, 200, { features, count: features.length });
+      }
+
+      if (req.method === 'POST' && pathname === '/api/geo/distance') {
+        const body = await parseJsonBody(req);
+        const dist = geoEngine.calculateDistance(body.lat1, body.lon1, body.lat2, body.lon2);
+        return jsonResponse(res, 200, dist);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/geo/area') {
+        const body = await parseJsonBody(req);
+        const area = geoEngine.calculatePolygonArea(body.coordinates);
+        return jsonResponse(res, 200, area);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/geo/analyze') {
+        const body = await parseJsonBody(req);
+        const analysis = geoEngine.analyzeRegion(body);
+        return jsonResponse(res, 200, analysis);
+      }
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
+  // 7. Static File Serving + Clean SPA Route Fallback (/aura, /neural, /agents, /knowledge, /studio, /proofs, /guide, /articles, /faq, /about, /earth)
   const SPA_ROUTES = new Set([
     '/',
     '/home',
@@ -1131,7 +1201,10 @@ const server = http.createServer(async (req, res) => {
     '/faq',
     '/about',
     '/sobre',
-    '/sobre-nos'
+    '/sobre-nos',
+    '/earth',
+    '/geo',
+    '/geolocalizacao'
   ]);
 
   // Creator-Only Redirect: /supervisor navigates to Master C2 Tab 10

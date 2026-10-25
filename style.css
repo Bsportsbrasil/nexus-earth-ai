@@ -1981,3 +1981,99 @@ section.hero-section[data-route].route-active {
   width: 20px;
   height: 20px;
 }
+
+/* ── Google Earth Desktop & Sovereign Geospatial Suite ────────────────── */
+.earth-desktop-window {
+  position: relative;
+  width: 100%;
+}
+.earth-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 260px;
+  background: rgba(15, 23, 42, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  border-radius: 8px;
+  padding: 0.4rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 2100;
+  animation: fadeIn 0.15s ease;
+}
+.earth-dropdown-menu.open {
+  display: flex;
+}
+.earth-dd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.earth-dd-item:hover {
+  background: rgba(0, 245, 255, 0.12);
+  color: #fff;
+  transform: translateX(2px);
+}
+.earth-dd-item kbd {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background: rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: #94a3b8;
+  margin-left: 0.75rem;
+}
+.earth-dd-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 4px 0;
+}
+.earth-dd-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  padding: 4px 8px 2px;
+}
+.earth-search-results-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(15, 23, 42, 0.98);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  border-radius: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 2200;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+.earth-search-item:hover {
+  background: rgba(0, 245, 255, 0.1);
+}
+@media (max-width: 768px) {
+  #earth-sidebar-drawer {
+    display: none !important;
+  }
+  .earth-presets-strip {
+    display: none !important;
+  }
+  .earth-menu-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

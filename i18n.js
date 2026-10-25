@@ -21,6 +21,7 @@ const I18nEngine = (() => {
       navHome: 'Início',
       navAura: 'AURA Live',
       navCommand: 'Comando',
+      navEarth: 'Earth Geo',
       navNeural: 'Neural',
       navAgents: 'Agentes',
       navSupervisor: 'Supervisor',
@@ -159,6 +160,7 @@ const I18nEngine = (() => {
       navHome: 'Home',
       navAura: 'AURA Live',
       navCommand: 'Command',
+      navEarth: 'Earth Geo',
       navNeural: 'Neural',
       navAgents: 'Agents',
       navSupervisor: 'Supervisor',
@@ -321,6 +323,7 @@ const I18nEngine = (() => {
       home: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
       aura: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg>`,
       'command-center': `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+      earth: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
       neural: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="12" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="10.5"/><line x1="8.5" y1="16.5" x2="15.5" y2="13.5"/></svg>`,
       agents: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="16" y1="16" x2="16.01" y2="16"/></svg>`,
       supervisor: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>`,
@@ -342,6 +345,7 @@ const I18nEngine = (() => {
       if (route === 'home') text = t.navHome;
       else if (route === 'aura') text = t.navAura;
       else if (route === 'command-center') text = t.navCommand;
+      else if (route === 'earth') text = t.navEarth;
       else if (route === 'neural') text = t.navNeural;
       else if (route === 'agents') text = t.navAgents;
       else if (route === 'supervisor') text = t.navSupervisor;

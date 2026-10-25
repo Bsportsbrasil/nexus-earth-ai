@@ -8,6 +8,27 @@
   ],
   "dailyJournal": [
     {
+      "id": "cd3e6cac-6548-4819-9503-9b19f745b07a",
+      "date": "2026-10-25",
+      "time": "12:29:19",
+      "insight": "Ana consultou data/hora em tempo real (12:29:19)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "e723e1b9-fe1a-4542-987f-b0d552045ce5",
+      "date": "2026-10-25",
+      "time": "12:29:19",
+      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "2a06a92e-9dfa-4055-b52c-bce0514ad27f",
+      "date": "2026-10-25",
+      "time": "12:29:19",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "37eeac11-8962-4000-a9fc-19324ccbb129",
       "date": "2026-10-25",
       "time": "12:15:38",
@@ -335,28 +356,7 @@
       "time": "02:45:05",
       "insight": "Ana consultou data/hora em tempo real (02:45:05)",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "ac19051e-b6dd-4ade-97bc-8e3522ae33ad",
-      "date": "2026-10-25",
-      "time": "02:45:05",
-      "insight": "Ana explorou \"VisionQuest\" [Tom: 🌱 Frustração / Apoio Paciente]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "8039cfd2-47ad-4645-8cf7-c10b7fd1b281",
-      "date": "2026-10-25",
-      "time": "02:45:05",
-      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "3dffb0cd-1de1-4d01-a23d-68a5c0811651",
-      "date": "2026-10-25",
-      "time": "02:36:34",
-      "insight": "Ana explorou \"VisionQuest\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 122
+  "interactionCount": 124
 }

@@ -115,6 +115,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <!-- Leaflet 4K Satellite & Geospatial Mapping Engine -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -161,6 +164,7 @@
           <li><a href="/" class="nav-link active" data-route-link="home"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></a></li>
           <li><a href="/aura" class="nav-link" data-route-link="aura" data-section="companion"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg><span>AURA Live</span></a></li>
           <li><a href="/command-center" class="nav-link" data-route-link="command-center" data-section="command-center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span>Comando C2</span></a></li>
+          <li><a href="/earth" class="nav-link" data-route-link="earth" data-section="earth" style="color:var(--cyan)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span>Earth Geo</span></a></li>
           <li><a href="/agents" class="nav-link" data-route-link="agents" data-section="agents"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="16" y1="16" x2="16.01" y2="16"/></svg><span>Agentes</span></a></li>
           <li><a href="/knowledge" class="nav-link" data-route-link="knowledge" data-section="graph"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span>Conhecimento</span></a></li>
           <li><a href="/guide" class="nav-link" data-route-link="guide" data-section="guide"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Guia &amp; Artigos</span></a></li>
@@ -935,6 +939,269 @@
         <div class="consensus-panel glass-panel" id="consensus-panel" style="display:none">
           <div class="panel-title">🌐 Superintelligence Consensus</div>
           <div class="consensus-output" id="consensus-output"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXUS Earth & Geospatial Intelligence Section (Google Earth Web Parity & KML Engine) -->
+  <section id="earth" class="section" data-route="earth">
+    <div class="section-header">
+      <div class="section-tag" style="display:inline-flex;align-items:center;gap:0.4rem">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Sovereign Geospatial • Google Earth Parity &amp; Planetary AI
+      </div>
+      <h2 class="section-title">NEXUS Earth &amp; Inteligência Geoespacial Soberana</h2>
+      <p class="section-desc">Ambiente planetário de alta precisão inspirado no Google Earth Pro e Web: imagens de satélite 4K, geolocalização avançada, importação e exportação de arquivos KML/GeoJSON, régua geodésica e análise territorial por Superinteligência.</p>
+    </div>
+
+    <!-- Google Earth Desktop-Grade Window Frame -->
+    <div class="earth-desktop-window glass-panel" style="border-radius:12px;overflow:hidden;border:1px solid rgba(0,245,255,0.25);background:rgba(2,6,23,0.85);box-shadow:0 12px 40px rgba(0,0,0,0.6)">
+      
+      <!-- 1. Top Menu Bar (Arquivo, Editar, Visualizar, Adicionar, Ferramentas, Ajuda) -->
+      <div class="earth-menu-bar" style="display:flex;align-items:center;justify-content:space-between;padding:0.45rem 0.85rem;background:rgba(15,23,42,0.95);border-bottom:1px solid rgba(255,255,255,0.1);flex-wrap:wrap;gap:0.5rem">
+        <div style="display:flex;align-items:center;gap:0.75rem">
+          <!-- Earth Brand Glyph -->
+          <div style="display:flex;align-items:center;gap:0.4rem;padding-right:0.75rem;border-right:1px solid rgba(255,255,255,0.12)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--cyan)"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <strong style="font-family:var(--font-display);font-size:0.9rem;background:linear-gradient(135deg,#00f5ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent">EARTH</strong>
+          </div>
+
+          <!-- Dropdown Menus -->
+          <div class="earth-menu-dropdowns" style="display:flex;align-items:center;gap:0.25rem">
+            <!-- Menu: Arquivo -->
+            <div class="earth-menu-container" style="position:relative">
+              <button class="earth-menu-trigger btn-secondary" data-menu="arquivo" style="padding:0.3rem 0.65rem;font-size:0.78rem">Arquivo ▾</button>
+              <div id="earth-menu-dd-arquivo" class="earth-dropdown-menu">
+                <div class="earth-dd-item" onclick="GeoEarth.openProjectsModal()">
+                  <span>📁 Ver todos os projetos de mapa</span>
+                  <kbd>Ctrl+O</kbd>
+                </div>
+                <div class="earth-dd-divider"></div>
+                <div class="earth-dd-label">Salvo na Nuvem / Local</div>
+                <div class="earth-dd-item" onclick="GeoEarth.newProject()">
+                  <span>🗺️ Novo projeto de mapa</span>
+                  <kbd>Ctrl+J</kbd>
+                </div>
+                <div class="earth-dd-item" onclick="document.getElementById('earth-file-input').click()">
+                  <span>📥 Importar arquivo (KML, GeoJSON, CSV)</span>
+                  <span class="agent-badge DONE" style="font-size:0.58rem;padding:1px 4px">NOVO</span>
+                </div>
+                <div class="earth-dd-divider"></div>
+                <div class="earth-dd-label">Arquivos KML &amp; GeoJSON</div>
+                <div class="earth-dd-item" onclick="GeoEarth.exportKml()">
+                  <span>💾 Exportar como arquivo KML</span>
+                  <kbd>Ctrl+E</kbd>
+                </div>
+                <div class="earth-dd-item" onclick="GeoEarth.exportGeoJson()">
+                  <span>📤 Exportar como GeoJSON</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu: Editar -->
+            <div class="earth-menu-container" style="position:relative">
+              <button class="earth-menu-trigger btn-secondary" data-menu="editar" style="padding:0.3rem 0.65rem;font-size:0.78rem">Editar ▾</button>
+              <div id="earth-menu-dd-editar" class="earth-dropdown-menu">
+                <div class="earth-dd-item" onclick="GeoEarth.undo()">
+                  <span>↩️ Desfazer</span>
+                  <kbd>Ctrl+Z</kbd>
+                </div>
+                <div class="earth-dd-item" onclick="GeoEarth.redo()">
+                  <span>↪️ Refazer</span>
+                  <kbd>Ctrl+Y</kbd>
+                </div>
+                <div class="earth-dd-divider"></div>
+                <div class="earth-dd-item" onclick="GeoEarth.clearAllFeatures()" style="color:#f43f5e">
+                  <span>🗑️ Limpar todos os elementos</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu: Visualizar -->
+            <div class="earth-menu-container" style="position:relative">
+              <button class="earth-menu-trigger btn-secondary" data-menu="visualizar" style="padding:0.3rem 0.65rem;font-size:0.78rem">Visualizar ▾</button>
+              <div id="earth-menu-dd-visualizar" class="earth-dropdown-menu">
+                <div class="earth-dd-item" onclick="GeoEarth.setLayerMode('hybrid')">
+                  <span>🛰️ Satélite Híbrido (Ruas &amp; Rótulos)</span>
+                </div>
+                <div class="earth-dd-item" onclick="GeoEarth.setLayerMode('satellite')">
+                  <span>🌍 Satélite 4K HD (Esri World Imagery)</span>
+                </div>
+                <div class="earth-dd-item" onclick="GeoEarth.setLayerMode('osm')">
+                  <span>🗺️ Vetor Cartográfico (OpenStreetMap)</span>
+                </div>
+                <div class="earth-dd-item" onclick="GeoEarth.setLayerMode('topo')">
+                  <span>⛰️ Relevo Topográfico (OpenTopoMap)</span>
+                </div>
+                <div class="earth-dd-item" onclick="GeoEarth.setLayerMode('dark')">
+                  <span>🌃 Luzes Noturnas da Terra (Dark Canvas)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu: Adicionar -->
+            <div class="earth-menu-container" style="position:relative">
+              <button class="earth-menu-trigger btn-secondary" data-menu="adicionar" style="padding:0.3rem 0.65rem;font-size:0.78rem">Adicionar ▾</button>
+              <div id="earth-menu-dd-adicionar" class="earth-dropdown-menu">
+                <div class="earth-dd-item" onclick="GeoEarth.setActiveTool('add_marker')">
+                  <span>📍 Novo Marcador / Placemark</span>
+                  <kbd>Ctrl+P</kbd>
+                </div>
+                <div class="earth-dd-item" onclick="GeoEarth.setActiveTool('add_path')">
+                  <span>〰️ Traçar Linha de Trajeto / Rota</span>
+                </div>
+                <div class="earth-dd-item" onclick="GeoEarth.setActiveTool('add_poly')">
+                  <span>🔷 Desenhar Polígono / Área KML</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu: Ferramentas -->
+            <div class="earth-menu-container" style="position:relative">
+              <button class="earth-menu-trigger btn-secondary" data-menu="ferramentas" style="padding:0.3rem 0.65rem;font-size:0.78rem">Ferramentas ▾</button>
+              <div id="earth-menu-dd-ferramentas" class="earth-dropdown-menu">
+                <div class="earth-dd-item" onclick="GeoEarth.setActiveTool('measure_dist')">
+                  <span>📏 Régua de Medição (Distância Geodésica)</span>
+                </div>
+                <div class="earth-dd-item" onclick="GeoEarth.setActiveTool('measure_area')">
+                  <span>📐 Calcular Área de Polígono (Superfície)</span>
+                </div>
+                <div class="earth-dd-item" onclick="GeoEarth.locateUser()">
+                  <span>🎯 Localizar Minha Posição GPS</span>
+                </div>
+                <div class="earth-dd-item" onclick="GeoEarth.flyTo(-37.81365318, 144.96255856, 16)">
+                  <span>✈️ Voo Rápido: Melbourne, Austrália (Ref. Google Earth)</span>
+                </div>
+                <div class="earth-dd-divider"></div>
+                <div class="earth-dd-item" onclick="GeoEarth.runAiAnalysis()">
+                  <span>🧠 Análise Territorial com Superinteligência</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Search Bar & GPS Locate on the Right -->
+        <div style="display:flex;align-items:center;gap:0.4rem;position:relative;flex:1;max-width:440px">
+          <input type="text" id="earth-search-input" class="text-input" placeholder="Pesquisar cidade, local ou coordenadas (-37.8136, 144.9625)..." style="font-size:0.76rem;height:32px;padding:0 0.6rem;flex:1" />
+          <button id="earth-search-btn" class="btn-primary" style="height:32px;padding:0 0.75rem;font-size:0.76rem">Ir</button>
+          <button id="earth-gps-btn" class="btn-secondary" onclick="GeoEarth.locateUser()" title="Localizar GPS" style="height:32px;padding:0 0.6rem;font-size:0.74rem">📍 GPS</button>
+          
+          <!-- Search Autocomplete Dropdown -->
+          <div id="earth-search-dropdown" class="earth-search-results-menu" style="display:none"></div>
+        </div>
+      </div>
+
+      <!-- Quick Action Toolbar Strip -->
+      <div class="earth-quick-toolbar" style="display:flex;align-items:center;justify-content:space-between;padding:0.4rem 0.85rem;background:rgba(2,6,23,0.9);border-bottom:1px solid rgba(255,255,255,0.06);flex-wrap:wrap;gap:0.4rem">
+        <div style="display:flex;align-items:center;gap:0.35rem;flex-wrap:wrap">
+          <span style="font-size:0.7rem;color:var(--text-secondary);font-weight:600;margin-right:4px">CAMADAS:</span>
+          <button class="btn-secondary active" data-layer-mode="hybrid" style="padding:2px 8px;font-size:0.72rem">🛰️ Híbrido</button>
+          <button class="btn-secondary" data-layer-mode="satellite" style="padding:2px 8px;font-size:0.72rem">🌍 Satélite 4K</button>
+          <button class="btn-secondary" data-layer-mode="osm" style="padding:2px 8px;font-size:0.72rem">🗺️ Vetor</button>
+          <button class="btn-secondary" data-layer-mode="topo" style="padding:2px 8px;font-size:0.72rem">⛰️ Relevo</button>
+          <button class="btn-secondary" data-layer-mode="dark" style="padding:2px 8px;font-size:0.72rem">🌃 Noite</button>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:0.35rem;flex-wrap:wrap">
+          <span style="font-size:0.7rem;color:var(--text-secondary);font-weight:600;margin-right:4px">FERRAMENTAS:</span>
+          <button class="btn-secondary" data-earth-tool="pan" style="padding:2px 8px;font-size:0.72rem" title="Mover Câmera">✋ Navegar</button>
+          <button class="btn-secondary" data-earth-tool="add_marker" style="padding:2px 8px;font-size:0.72rem" title="Inserir Marcador">📍 Marcador</button>
+          <button class="btn-secondary" data-earth-tool="measure_dist" style="padding:2px 8px;font-size:0.72rem" title="Medir Distância">📏 Régua</button>
+          <button class="btn-secondary" data-earth-tool="measure_area" style="padding:2px 8px;font-size:0.72rem" title="Calcular Área">📐 Área</button>
+          <button class="btn-primary" onclick="GeoEarth.runAiAnalysis()" style="padding:2px 10px;font-size:0.72rem;background:linear-gradient(135deg,#00f5ff,#a855f7)">🧠 IA Espacial</button>
+        </div>
+      </div>
+
+      <!-- Main Workstation Layout: Left Drawer (KML Layers) + Center Map + Floating HUD -->
+      <div style="display:flex;position:relative;height:620px;overflow:hidden">
+        
+        <!-- Left Collapsible Layers & KML Tree -->
+        <div id="earth-sidebar-drawer" style="width:260px;background:rgba(15,23,42,0.95);border-right:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;flex-shrink:0;z-index:10">
+          <div style="padding:0.6rem 0.8rem;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center">
+            <strong style="font-size:0.78rem;color:var(--text-primary)" id="earth-project-title">Projeto Melbourne</strong>
+            <button class="btn-secondary" onclick="document.getElementById('earth-file-input').click()" style="padding:2px 6px;font-size:0.68rem" title="Importar KML/GeoJSON">➕ KML</button>
+          </div>
+
+          <div style="flex:1;overflow-y:auto;padding:0.6rem" id="earth-layers-tree">
+            <!-- Populated dynamically with placemarks, lines, polygons -->
+          </div>
+
+          <!-- Bottom Action Buttons inside Drawer -->
+          <div style="padding:0.6rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:0.4rem">
+            <button class="btn-secondary full-width" onclick="GeoEarth.exportKml()" style="justify-content:center;font-size:0.72rem">💾 Salvar KML</button>
+            <button class="btn-secondary full-width" onclick="GeoEarth.exportGeoJson()" style="justify-content:center;font-size:0.72rem">📤 GeoJSON</button>
+          </div>
+        </div>
+
+        <!-- Center Leaflet Map Viewport -->
+        <div style="flex:1;position:relative;overflow:hidden">
+          <div id="earth-map-container" style="width:100%;height:100%;background:#020617"></div>
+
+          <!-- Active Tool Banner (Click to place) -->
+          <div id="earth-tool-banner" style="position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:1000;background:rgba(2,6,23,0.92);border:1px solid var(--cyan);border-radius:20px;padding:6px 16px;display:none;align-items:center;gap:0.6rem;box-shadow:0 6px 20px rgba(0,0,0,0.5)">
+            <span id="earth-tool-banner-text" style="font-size:0.78rem;color:#f8fafc">📍 Ferramenta Ativa</span>
+            <button class="btn-secondary" onclick="GeoEarth.setActiveTool('pan')" style="padding:2px 8px;font-size:0.7rem">Cancelar</button>
+          </div>
+
+          <!-- Measurement Result Overlay Banner -->
+          <div id="earth-measure-banner" style="position:absolute;bottom:54px;left:50%;transform:translateX(-50%);z-index:1000;background:rgba(2,6,23,0.94);border:1px solid var(--emerald);border-radius:10px;padding:8px 16px;display:none;align-items:center;gap:0.8rem;box-shadow:0 8px 24px rgba(0,0,0,0.6)">
+            <span id="earth-measure-result" style="font-size:0.82rem;color:var(--text-primary)">📏 Distância: 0 km</span>
+            <button class="btn-primary" onclick="GeoEarth.finishMeasurement()" style="padding:3px 10px;font-size:0.72rem">Concluir</button>
+          </div>
+
+          <!-- Preset Fly-To Locations Strip (Bottom Center) -->
+          <div class="earth-presets-strip" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:0.35rem;background:rgba(2,6,23,0.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);padding:4px 8px;border-radius:20px">
+            <button class="btn-secondary" onclick="GeoEarth.flyTo(-37.81365318, 144.96255856, 17)" style="padding:2px 8px;font-size:0.7rem;border-color:var(--cyan);color:var(--cyan)">🇦🇺 Melbourne</button>
+            <button class="btn-secondary" onclick="GeoEarth.flyTo(-23.5505, -46.6333, 15)" style="padding:2px 8px;font-size:0.7rem">🇧🇷 São Paulo</button>
+            <button class="btn-secondary" onclick="GeoEarth.flyTo(37.4220, -122.0841, 16)" style="padding:2px 8px;font-size:0.7rem">🇺🇸 Vale do Silício</button>
+            <button class="btn-secondary" onclick="GeoEarth.flyTo(46.2330, 6.0557, 15)" style="padding:2px 8px;font-size:0.7rem">🇨🇭 CERN Genebra</button>
+            <button class="btn-secondary" onclick="GeoEarth.flyTo(35.6595, 139.7005, 16)" style="padding:2px 8px;font-size:0.7rem">🇯🇵 Tóquio</button>
+            <button class="btn-secondary" onclick="GeoEarth.flyTo(27.9881, 86.9250, 13)" style="padding:2px 8px;font-size:0.7rem">🏔️ Everest</button>
+          </div>
+
+          <!-- Live Google Earth HUD (Bottom Left) -->
+          <div class="earth-hud-badge" style="position:absolute;bottom:12px;left:12px;z-index:1000;background:rgba(2,6,23,0.88);border:1px solid rgba(0,245,255,0.25);border-radius:6px;padding:4px 10px;font-family:var(--font-mono);font-size:0.68rem;color:var(--cyan);display:flex;gap:0.75rem;align-items:center;pointer-events:none">
+            <span id="earth-hud-coords">-37.813653° S, 144.962559° E</span>
+            <span id="earth-hud-zoom" style="color:var(--text-secondary)">Zoom 16x</span>
+            <span id="earth-hud-alt" style="color:var(--purple)">Altitude Olho: 1.250 m</span>
+          </div>
+
+          <!-- Superintelligence Spatial AI Insights Side Panel -->
+          <div id="earth-ai-panel" class="panel glass-panel" style="position:absolute;top:12px;right:12px;width:340px;max-height:480px;overflow-y:auto;z-index:1000;display:none;background:rgba(2,6,23,0.92);border:1px solid var(--cyan);box-shadow:0 8px 30px rgba(0,0,0,0.7)">
+            <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:0.4rem;margin-bottom:0.6rem">
+              <strong style="color:var(--cyan);font-size:0.82rem;display:flex;align-items:center;gap:0.35rem">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Diagnóstico Geoespacial Superinteligente
+              </strong>
+              <button onclick="document.getElementById('earth-ai-panel').style.display='none'" class="btn-secondary" style="padding:1px 6px;font-size:0.7rem">✕</button>
+            </div>
+            <div id="earth-ai-content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden Input for File Upload -->
+    <input type="file" id="earth-file-input" style="display:none" accept=".kml,.kmz,.geojson,.json,.csv" />
+
+    <!-- Modal: Projects Explorer (Ctrl+O) -->
+    <div id="earth-projects-modal" class="modal">
+      <div class="modal-box glass-panel" style="max-width:520px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem">
+          <strong style="color:var(--text-primary);font-size:0.95rem">📁 Projetos de Mapa Geoespacial</strong>
+          <button onclick="document.getElementById('earth-projects-modal').classList.remove('open')" class="btn-secondary" style="padding:2px 8px;font-size:0.76rem">✕</button>
+        </div>
+        <p style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:0.75rem">
+          Selecione um projeto salvo localmente ou crie uma nova exploração planetária:
+        </p>
+        <select id="earth-projects-select" class="select-input" style="width:100%;font-size:0.8rem;margin-bottom:0.75rem">
+          <!-- Populated dynamically -->
+        </select>
+        <div style="display:flex;gap:0.5rem;justify-content:flex-end">
+          <button class="btn-secondary" onclick="GeoEarth.newProject();document.getElementById('earth-projects-modal').classList.remove('open')" style="font-size:0.76rem">➕ Novo Projeto</button>
+          <button class="btn-primary" onclick="document.getElementById('earth-projects-modal').classList.remove('open')" style="font-size:0.76rem">Abrir Projeto</button>
         </div>
       </div>
     </div>
@@ -1997,6 +2264,7 @@
   <script src="research_hub.js"></script>
   <script src="auth_ui.js"></script>
   <script src="agent_dashboard_ui.js"></script>
+  <script src="geo_earth.js"></script>
   <script src="i18n.js"></script>
   <script src="app.js"></script>
 </body>

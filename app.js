@@ -60,7 +60,8 @@ const NexusRouter = (() => {
     'guide',
     'articles',
     'faq',
-    'about'
+    'about',
+    'earth'
   ]);
 
   const ALIAS_MAP = {
@@ -78,6 +79,11 @@ const NexusRouter = (() => {
     'agentes': 'agents',
     'agents-dashboard': 'agents',
     'agentes-dashboard': 'agents',
+    'earth': 'earth',
+    'geo': 'earth',
+    'map': 'earth',
+    'mapa': 'earth',
+    'geolocalizacao': 'earth',
     'knowledge': 'knowledge',
     'graph': 'knowledge',
     'studio': 'studio',
@@ -104,6 +110,7 @@ const NexusRouter = (() => {
     'command-center': '/command-center',
     'neural': '/neural',
     'agents': '/agents',
+    'earth': '/earth',
     'knowledge': '/knowledge',
     'studio': '/studio',
     'proofs': '/proofs',
@@ -172,6 +179,11 @@ const NexusRouter = (() => {
       case 'proofs':
         if (typeof Metrics !== 'undefined') ensureModuleInit('Metrics', Metrics);
         if (typeof ResearchHub !== 'undefined') ensureModuleInit('ResearchHub', ResearchHub);
+        break;
+      case 'earth':
+        if (typeof GeoEarth !== 'undefined') {
+          ensureModuleInit('GeoEarth', GeoEarth);
+        }
         break;
     }
   }

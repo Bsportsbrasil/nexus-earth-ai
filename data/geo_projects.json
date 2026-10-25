@@ -1,0 +1,94 @@
+[
+  {
+    "id": "proj_default_melbourne",
+    "title": "Exploração Urbana Melbourne (Google Earth)",
+    "description": "Referência geoespacial com marcadores de alta resolução.",
+    "created": "2026-10-25T15:29:15.449Z",
+    "updated": "2026-10-25T15:29:15.449Z",
+    "center": {
+      "lat": -37.81365318,
+      "lon": 144.96255856,
+      "zoom": 16
+    },
+    "features": [
+      {
+        "id": "feat_1",
+        "type": "Point",
+        "name": "Ponto Central Melbourne",
+        "coordinates": [
+          144.96255856,
+          -37.81365318,
+          21.5
+        ],
+        "description": "Coordenadas exatas da visualização do Google Earth Web.",
+        "color": "#00f5ff"
+      },
+      {
+        "id": "feat_2",
+        "type": "LineString",
+        "name": "Eixo Fluvial Yarra River",
+        "coordinates": [
+          [
+            144.96,
+            -37.818
+          ],
+          [
+            144.965,
+            -37.82
+          ],
+          [
+            144.972,
+            -37.819
+          ]
+        ],
+        "description": "Vetor de navegação e fluxo hídrico.",
+        "color": "#38bdf8"
+      }
+    ]
+  },
+  {
+    "id": "proj_1792942160673_2g8dt",
+    "title": "Projeto Salvo via Teste",
+    "description": "",
+    "created": "2026-10-25T15:29:20.673Z",
+    "updated": "2026-10-25T15:29:20.673Z",
+    "center": {
+      "lat": -37.81365318,
+      "lon": 144.96255856,
+      "zoom": 15
+    },
+    "features": [
+      {
+        "id": "kml_1792942160672_0",
+        "type": "Point",
+        "name": "Vértice Central",
+        "description": "Ponto de referência KML",
+        "coordinates": [
+          144.96255856,
+          -37.81365318,
+          25
+        ],
+        "color": "#00f5ff"
+      },
+      {
+        "id": "kml_line_1792942160672_1",
+        "type": "LineString",
+        "name": "Trajeto de Teste",
+        "description": "",
+        "coordinates": [
+          [
+            144.96,
+            -37.815,
+            0
+          ],
+          [
+            144.965,
+            -37.816,
+            0
+          ]
+        ],
+        "color": "#38bdf8"
+      }
+    ]
+  }
+]

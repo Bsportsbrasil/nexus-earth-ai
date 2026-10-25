@@ -22,6 +22,7 @@ import { lennoxGuardian } from './engine/lennox_guardian.js';
 import { regulatoryEngine } from './engine/regulatory_explainability.js';
 import { agentMemoryStore } from './engine/agent_memory.js';
 import { supremeSupervisor } from './engine/supervisor_agent.js';
+import { geoEngine } from './engine/geo_engine.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -524,7 +525,92 @@ async function runTests() {
 
   console.log(`✓ Layer 23: Supreme Supervisor Agent (Creator-Exclusive C2 Dashboard Isolation, Dual-Canvas Testing, Human-in-the-Loop Certification & Natural Neural Voice Engine) verified (${supOverview.stats.totalAgents} agents under oversight)`);
 
-  console.log('=== ALL 23 ARCHITECTURAL, INSTITUTIONAL, MULTI-AGENT SUPERVISION & COMPLIANCE LAYERS PASSED 100% ===');
+  // ═════════════════════════════════════════════════════════════════════════
+  // LAYER 24: Sovereign Geospatial Intelligence, Google Earth Parity & OGC KML/GeoJSON Processing
+  // ═════════════════════════════════════════════════════════════════════════
+  // 1. Geodesic distance calculation (Melbourne to Sydney ~713 km)
+  const melbourne = { lat: -37.81365318, lon: 144.96255856 };
+  const sydney = { lat: -33.8688, lon: 151.2093 };
+  const dist = geoEngine.calculateDistance(melbourne.lat, melbourne.lon, sydney.lat, sydney.lon);
+  assert.ok(dist.kilometers > 700 && dist.kilometers < 730, `Geodesic distance calculation inaccurate: ${dist.kilometers} km`);
+
+  // 2. Geodesic polygon area
+  const triangleCoords = [
+    [144.9600, -37.8100],
+    [144.9700, -37.8100],
+    [144.9650, -37.8200]
+  ];
+  const polyArea = geoEngine.calculatePolygonArea(triangleCoords);
+  assert.ok(polyArea.squareMeters > 0, 'Polygon area must be greater than zero');
+  assert.ok(polyArea.hectares > 0, 'Polygon area in hectares must be positive');
+
+  // 3. Search & Coordinate matching
+  const searchCoordRes = await geoEngine.searchLocation('-37.813653, 144.962558');
+  assert.ok(searchCoordRes.length > 0, 'Coordinate search failed');
+  assert.equal(searchCoordRes[0].category, 'Ponto Geográfico Exato');
+
+  const searchPresetRes = await geoEngine.searchLocation('Melbourne');
+  assert.ok(searchPresetRes.length > 0 && searchPresetRes[0].name.includes('Melbourne'), 'Preset search failed');
+
+  // 4. KML 2.2 XML Generation & Parsing roundtrip
+  const testProject = {
+    title: 'Missão Melbourne 2026',
+    description: 'Teste automatizado de interoperabilidade Google Earth KML',
+    features: [
+      {
+        id: 'p_1',
+        type: 'Point',
+        name: 'Vértice Central',
+        description: 'Ponto de referência KML',
+        coordinates: [144.96255856, -37.81365318, 25.0],
+        color: '#00f5ff'
+      },
+      {
+        id: 'l_1',
+        type: 'LineString',
+        name: 'Trajeto de Teste',
+        coordinates: [
+          [144.9600, -37.8150, 0],
+          [144.9650, -37.8160, 0]
+        ],
+        color: '#38bdf8'
+      }
+    ]
+  };
+
+  const generatedKml = geoEngine.generateKml(testProject);
+  assert.ok(generatedKml.includes('<kml xmlns="http://www.opengis.net/kml/2.2">'), 'Generated KML missing root namespace');
+  assert.ok(generatedKml.includes('<Placemark'), 'Generated KML missing placemarks');
+  assert.ok(generatedKml.includes('144.96255856,-37.81365318,25'), 'Generated KML missing coordinate string');
+
+  const parsedFeats = geoEngine.parseKml(generatedKml);
+  assert.equal(parsedFeats.length, 2, `Expected 2 features parsed from KML, got ${parsedFeats.length}`);
+  assert.equal(parsedFeats[0].name, 'Vértice Central');
+
+  // 5. Superintelligence Geospatial Terrain Analysis
+  const geoAnalysis = geoEngine.analyzeRegion({ lat: -37.81365318, lon: 144.96255856, zoom: 16 });
+  assert.equal(geoAnalysis.hemisphere, 'Hemisfério Sul');
+  assert.ok(geoAnalysis.insights.length >= 4, 'Expected at least 4 geospatial insights');
+
+  // 6. Project persistence
+  const savedProj = geoEngine.saveProject({
+    title: 'Projeto Salvo via Teste',
+    features: parsedFeats
+  });
+  assert.ok(savedProj.id, 'Failed to save geo project');
+  assert.ok(geoEngine.getProject(savedProj.id), 'Project not retrievable from memory');
+
+  // 7. Verify DOM Integration & Google Earth desktop toolbar in index.html
+  assert.ok(finalHtml.includes('id="earth"'), 'index.html missing #earth section');
+  assert.ok(finalHtml.includes('data-route="earth"'), 'index.html missing earth route attribute');
+  assert.ok(finalHtml.includes('id="earth-map-container"'), 'index.html missing map viewport container');
+  assert.ok(finalHtml.includes('earth-menu-bar'), 'index.html missing Google Earth desktop menu bar');
+  assert.ok(finalHtml.includes('src="geo_earth.js"'), 'index.html missing geo_earth.js script tag');
+  assert.ok(finalHtml.includes('leaflet.js'), 'index.html missing Leaflet map engine script');
+
+  console.log(`✓ Layer 24: Sovereign Geospatial Intelligence, Google Earth Parity & OGC KML/GeoJSON Processing verified (${geoEngine.listProjects().length} saved projects, ${geoAnalysis.solarPotentialKwhM2} kWh/m² solar potential)`);
+
+  console.log('=== ALL 24 ARCHITECTURAL, GEOSPATIAL, INSTITUTIONAL & COMPLIANCE LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {
