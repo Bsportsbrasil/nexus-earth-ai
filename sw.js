@@ -13,6 +13,7 @@ const CORE_ASSETS = [
   '/command_center.js',
   '/cooperative_ui.js',
   '/assistant_studio.js',
+  '/research_hub.js',
   '/neural.js',
   '/agents.js',
   '/graph.js',

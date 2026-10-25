@@ -104,17 +104,26 @@ export class GraphDatabase {
     }
   }
 
+  _extractSubjectQuery(rawQuery) {
+    const cleaned = (rawQuery || '')
+      .replace(/[?!.,;:"']/g, ' ')
+      .replace(/\b(me\s+ensine(\s+algo(\s+fascinante)?)?(\s+sobre)?|o\s+que\s+(é|são|significa)|como\s+funciona(m)?|quem\s+(foi|é|descobriu|inventou)|fale\s+sobre|explique(\s+sobre)?|qual\s+(é|a|o)|por\s+que|de\s+um\s+jeito\s+divertido(\s+e\s+visual)?|para\s+mim|por\s+favor|hoje|agora)\b/gi, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    return cleaned.length >= 2 ? cleaned : (rawQuery || '').trim();
+  }
+
   /**
    * Live ingestion from Wikipedia REST + MediaWiki Action API + Crossref Academic DOI Registry
    */
   async ingestTopic(query) {
-    const clean = (query || '').trim();
+    const clean = this._extractSubjectQuery(query);
     if (!clean) return null;
 
     let ingestedRoot = null;
 
-    // 1. Wikipedia REST & Links ingestion
-    for (const lang of ['en', 'pt']) {
+    // 1. Wikipedia REST & Links ingestion (Portuguese first for PT-BR precision, then English)
+    for (const lang of ['pt', 'en']) {
       try {
         const searchUrl = `https://${lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(clean)}&utf8=&format=json&origin=*&srlimit=2`;
         const sr = await fetch(searchUrl);

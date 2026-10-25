@@ -251,5 +251,71 @@
     "status": "SCHEDULED",
     "notes": "Verificar indicadores e consolidar entregáveis do dia.",
     "createdAt": 1792900675740
+  },
+  {
+    "id": "b2f9971b-02e9-48ba-bc94-e5720e1af30d",
+    "title": "Briefing & Leitura Técnica: Transformer (deep learning)",
+    "date": "2026-10-25",
+    "time": "08:00",
+    "category": "Briefing",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+    "createdAt": 1792901131524
+  },
+  {
+    "id": "336f0381-9dc5-43e6-9e88-94b1592bcc1d",
+    "title": "Bloco de Execução Prática: Transformer Deep Learning Study",
+    "date": "2026-10-25",
+    "time": "10:30",
+    "category": "Execution",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "Aplicar diretrizes extraídas de 0 artigos científicos indexados.",
+    "createdAt": 1792901131526
+  },
+  {
+    "id": "d305852a-997d-4dc4-ae67-5a00dd61e543",
+    "title": "Auditoria de Métricas & Revisão de Progresso",
+    "date": "2026-10-25",
+    "time": "14:30",
+    "category": "Review",
+    "priority": "MEDIUM",
+    "status": "SCHEDULED",
+    "notes": "Verificar indicadores e consolidar entregáveis do dia.",
+    "createdAt": 1792901131530
+  },
+  {
+    "id": "9bed3daf-fc0d-4a48-ab5d-d8c6d3098763",
+    "title": "Briefing & Leitura Técnica: Transformer (deep learning)",
+    "date": "2026-10-25",
+    "time": "08:00",
+    "category": "Briefing",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+    "createdAt": 1792902223565
+  },
+  {
+    "id": "83cb8c3f-2412-42fb-983b-0c41a80d0a14",
+    "title": "Bloco de Execução Prática: Transformer Deep Learning Study",
+    "date": "2026-10-25",
+    "time": "10:30",
+    "category": "Execution",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "Aplicar diretrizes extraídas de 0 artigos científicos indexados.",
+    "createdAt": 1792902223569
+  },
+  {
+    "id": "e1070a8e-a361-4348-896a-4cf66457e3c4",
+    "title": "Auditoria de Métricas & Revisão de Progresso",
+    "date": "2026-10-25",
+    "time": "14:30",
+    "category": "Review",
+    "priority": "MEDIUM",
+    "status": "SCHEDULED",
+    "notes": "Verificar indicadores e consolidar entregáveis do dia.",
+    "createdAt": 1792902223570
   }
 ]

@@ -1,6 +1,6 @@
 import { broker } from './broker.js';
 import { graphDB } from './graph_db.js';
-import { streamWithThinking } from './llm.js';
+import { streamWithThinking, buildRealtimeTemporalContext } from './llm.js';
 import { tensorEngine } from './tensor.js';
 
 const AGENT_PROMPTS = {
@@ -18,14 +18,15 @@ Valide a consistência lógica entre PLANNER, CRITIC e EXECUTOR. Emita um JSON n
  * Orchestrated Multi-Agent DAG Engine communicating over MessageBroker topics
  * Each agent publishes state events to `agent.<role>` and triggers tensor forward passes.
  */
-export async function executeAgentDAG({ query, apiKey, emitWs }) {
+export async function executeAgentDAG({ query, apiKey, clientTemporal = null, emitWs }) {
   const runId = `dag_${Date.now()}`;
+  const temporal = buildRealtimeTemporalContext(clientTemporal);
   const notify = (event, data) => {
     const msg = broker.publish(`dag.${event}`, { runId, ...data });
     if (emitWs) emitWs({ type: 'dag_event', event, msg });
   };
 
-  notify('started', { query });
+  notify('started', { query, temporal });
 
   // Step 1: Retrieve real GraphRAG subgraph & peer-reviewed papers
   notify('graphrag.lookup', { status: 'retrieving', query });
@@ -47,7 +48,7 @@ export async function executeAgentDAG({ query, apiKey, emitWs }) {
 
   const hasLlmKey = !!(apiKey || process.env.GEMINI_API_KEY);
   const agentOutputs = {};
-  let sharedMemory = `PROBLEMA: ${query}\n\n[CONTEXTO GRAPHRAG VERIFICADO]:\n${evidenceContext || 'Sem nós prévios.'}`;
+  let sharedMemory = `${temporal.promptHeader}\n\nPROBLEMA: ${query}\n\n[CONTEXTO GRAPHRAG VERIFICADO]:\n${evidenceContext || 'Sem nós prévios.'}`;
 
   const order = ['planner', 'critic', 'executor', 'verifier'];
 
@@ -55,33 +56,43 @@ export async function executeAgentDAG({ query, apiKey, emitWs }) {
     notify('agent.status', { role, status: 'THINKING' });
     tensorEngine.forwardAndStep(`${role}:${query}`);
 
+    let usedLlm = false;
     if (hasLlmKey) {
-      let accText = '';
-      const res = await streamWithThinking({
-        apiKey,
-        contents: sharedMemory,
-        systemInstruction: AGENT_PROMPTS[role],
-        thinkingLevel: 'LOW',
-        onThoughtChunk: (delta, fullThought) => {
-          emitWs && emitWs({ type: 'agent_thought', runId, role, delta, fullThought });
-        },
-        onAnswerChunk: (delta, fullAnswer) => {
-          accText = fullAnswer;
-          emitWs && emitWs({
-            type: 'agent_stream',
-            runId,
-            role,
-            text: fullAnswer,
-            tokens: Math.ceil(fullAnswer.length / 4)
-          });
+      try {
+        let accText = '';
+        const res = await streamWithThinking({
+          apiKey,
+          contents: sharedMemory,
+          systemInstruction: AGENT_PROMPTS[role],
+          clientTemporal,
+          onThoughtChunk: (delta, fullThought) => {
+            emitWs && emitWs({ type: 'agent_thought', runId, role, delta, fullThought });
+          },
+          onAnswerChunk: (delta, fullAnswer) => {
+            accText = fullAnswer;
+            emitWs && emitWs({
+              type: 'agent_stream',
+              runId,
+              role,
+              text: fullAnswer,
+              tokens: Math.ceil(fullAnswer.length / 4)
+            });
+          }
+        });
+        if (res.answer || accText) {
+          agentOutputs[role] = res.answer || accText;
+          usedLlm = true;
         }
-      });
-      agentOutputs[role] = res.answer || accText;
-    } else {
-      // Deterministic GraphRAG analytical synthesis when no Gemini key is supplied
+      } catch (e) {
+        usedLlm = false;
+      }
+    }
+
+    if (!usedLlm) {
+      // Deterministic GraphRAG analytical synthesis grounded on real facts & exact user time
       const primary = rag.seedNodes[0];
       const fallbackMap = {
-        planner: `[GraphRAG Decomposition — ${rag.subgraph.nodes.length} nós indexados]\n` +
+        planner: `[GraphRAG Decomposition — ${temporal.localeDate} às ${temporal.localeTime} — ${rag.subgraph.nodes.length} nós indexados]\n` +
           (primary?.summary
             ? `1. Base Conceitual (${primary.label}): ${primary.summary}\n2. Mapear ${rag.subgraph.edges.length} relações semânticas extraídas.\n3. Cruzar com ${rag.papers.length} estudos revisados por pares.`
             : `1. Ingerir entidades para "${query}".\n2. Mapear topologia no GraphDB.`),

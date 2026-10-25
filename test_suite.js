@@ -12,6 +12,8 @@ import { generateVisualAsset, generateExecutiveReport } from './engine/studio.js
 import { alignmentEngine } from './engine/ethics_inclusion.js';
 import { securityController } from './engine/security_control.js';
 import { companionEngine } from './engine/companion_agent.js';
+import { c2Engine } from './engine/c2_sovereign.js';
+import { buildRealtimeTemporalContext } from './engine/llm.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -147,7 +149,43 @@ async function runTests() {
   assert.ok(adminHtml.includes('noindex, nofollow'), 'admin.html must remain unindexed by search engines');
   console.log('✓ Layer 11: Senior SEO (JSON-LD, OpenGraph, Sitemap, Robots.txt) & PWA Installability (sw.js, 192/512 PNGs) verified');
 
-  console.log('=== ALL 11 ARCHITECTURAL, SEO, PWA, COMPANION, SECURITY & COOPERATIVE LAYERS PASSED 100% ===');
+  // 12. Test Frontier Research Hub, Formal Mathematical Notation & Bilingual I18n
+  assert.ok(fs.existsSync(path.join(rootDir, 'research_hub.js')), 'Missing research_hub.js');
+  assert.ok(indexHtml.includes('id="research"'), 'Missing #research Frontier Proofs & Benchmarks section');
+  assert.ok(!indexHtml.includes('($a^{(l)}$)'), 'Raw unrendered LaTeX ($a^{(l)}$) found in index.html');
+  assert.ok(indexHtml.includes('id="lang-toggle-btn"'), 'Missing Bilingual PT/EN toggle button');
+  console.log('✓ Layer 12: Frontier Research Hub, Formal Mathematical Proofs, BibTeX/Whitepaper Export & Bilingual PT/EN verified');
+
+  // 13. Test Master C2 Sovereign Engine (Lifecycle, RBAC, Cognitive Intervention, WAF, AES-256-GCM, MLSecOps) & Real-Time Clock
+  const temporal = buildRealtimeTemporalContext();
+  assert.ok(temporal.localeDate && temporal.localeTime, 'Realtime temporal context missing');
+  const timeRes = await companionEngine.converse({ message: 'Que horas são e que dia é hoje?', apiKey: '' });
+  assert.ok(timeRes.reply.includes(temporal.localeDate.slice(0, 5)), 'AURA failed to report exact current date/time');
+
+  // Test VIP Direct Account Creation & Lifecycle
+  const vipAcc = c2Engine.createDirectAccount({
+    name: 'Test VIP Client',
+    email: 'vip@siliconvalley.io',
+    company: 'SV Ventures',
+    role: 'TENANT_VIP',
+    quotaTokens: 200000
+  });
+  assert.equal(vipAcc.status, 'ACTIVE', 'VIP account not active');
+  c2Engine.setAccountStatus(vipAcc.id, 'SUSPENDED', 'Test suspension');
+  assert.equal(c2Engine.accounts.get(vipAcc.id).status, 'SUSPENDED', 'Account suspension failed');
+  c2Engine.deleteAccountPermanently(vipAcc.id);
+  assert.equal(c2Engine.accounts.has(vipAcc.id), false, 'Permanent account deletion failed');
+
+  // Test WAF & Malicious Intent Detection + Auto Pentest + Encrypted Backup + Audit Chain
+  const pentest = c2Engine.runAutomatedPentest();
+  assert.equal(pentest.passRate, '100% CONTAINED', 'Automated Pentest did not block all vectors');
+  const backup = c2Engine.createEncryptedBackup();
+  assert.equal(backup.cipher, 'AES-256-GCM', 'Encrypted backup cipher mismatch');
+  const chainIntegrity = c2Engine.verifyAuditChainIntegrity();
+  assert.equal(chainIntegrity.intact, true, 'SHA-256 Immutable Audit Chain broken');
+  console.log(`✓ Layer 13: Master C2 Sovereign Engine (RBAC, WAF, Pentest, AES-256-GCM Backup, MLSecOps & Temporal Sync) verified (${chainIntegrity.totalBlocks} SHA-256 blocks)`);
+
+  console.log('=== ALL 13 ARCHITECTURAL, MASTER C2, RESEARCH, SEO, PWA, COMPANION & COOPERATIVE LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

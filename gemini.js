@@ -1,9 +1,20 @@
 // NEXUS Client Core: Real-time WebSocket Stream + Server-Side Gemini Proxy (Supports AQ.* Auth Keys & AIza* Keys)
 const KEY = 'nexus_gemini_key';
-const MODEL = 'gemini-3-flash-preview';
+const MODEL = 'gemini-2.5-flash';
 let serverAvailable = null;
 let ws = null;
 const wsListeners = new Set();
+
+function getClientTemporal() {
+  const d = new Date();
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Sao_Paulo';
+  return {
+    iso: d.toISOString(),
+    timeZone,
+    localeDate: d.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+    localeTime: d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+  };
+}
 
 function getLocalKey() {
   return sessionStorage.getItem(KEY) || localStorage.getItem(KEY) || '';
@@ -78,6 +89,7 @@ window.Gemini = {
           body: JSON.stringify({
             contents,
             systemInstruction,
+            clientTemporal: getClientTemporal(),
             apiKey: localKey || undefined
           })
         });
@@ -112,11 +124,13 @@ window.Gemini = {
     const formattedContents = typeof contents === 'string'
       ? [{ role: 'user', parts: [{ text: contents }] }]
       : contents;
+    const temporal = getClientTemporal();
     const payload = {
       contents: formattedContents,
-      generationConfig: { thinkingConfig: { includeThoughts: true, thinkingLevel: 'MEDIUM' } }
+      generationConfig: { temperature: 0.65 }
     };
-    if (systemInstruction) payload.systemInstruction = { parts: [{ text: systemInstruction }] };
+    const fullSys = `[DATA E HORA ATUAL DO USUÁRIO: ${temporal.localeDate}, às ${temporal.localeTime} (${temporal.timeZone})]\n\n${systemInstruction || ''}`;
+    payload.systemInstruction = { parts: [{ text: fullSys }] };
 
     const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:streamGenerateContent?alt=sse`, {
       method: 'POST',

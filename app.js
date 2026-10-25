@@ -28,7 +28,7 @@ if ('serviceWorker' in navigator) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  [CompanionUI, CommandCenter, CooperativeUI, AssistantStudio, NeuralViz, Agents, Graph, Chat, Metrics].forEach(m => {
+  [CompanionUI, CommandCenter, CooperativeUI, AssistantStudio, NeuralViz, Agents, Graph, Chat, Metrics, ResearchHub].forEach(m => {
     try { m.init(); } catch (e) { console.error(e); }
   });
 
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const searchQuery = params.get('q');
   if (searchQuery) {
-    const graphInput = document.getElementById('graph-search-input');
+    const graphInput = document.getElementById('graph-search');
     if (graphInput && typeof Graph !== 'undefined' && Graph.loadTopic) {
       graphInput.value = searchQuery;
       Graph.loadTopic(searchQuery);

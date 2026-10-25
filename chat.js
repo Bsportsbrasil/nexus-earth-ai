@@ -104,13 +104,28 @@ const Chat = (function () {
 
     const el = addMsg('assistant', '<span class="typing-cursor"></span>');
 
+    // Direct fast-path for Date / Time / Weekday queries in Chat
+    if (/\b(que\s+horas\s+s[aã]o|qual\s+(é\s+)?a\s+hora|hor[aá]rio\s+atual|que\s+dia\s+[eé]\s+hoje|qual\s+(é\s+)?a\s+data\s+de\s+hoje|data\s+atual|em\s+que\s+ano\s+estamos)\b/i.test(q)) {
+      const d = new Date();
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Sao_Paulo';
+      const lDate = d.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      const lTime = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      setStep(chain, 3, `Synchronized with user system clock (${tz})`, false);
+      el.innerHTML = `Agora são exatamente <strong>${esc(lTime)}</strong> (fuso horário <code>${esc(tz)}</code>), e hoje é <strong>${esc(lDate)}</strong>.`;
+      st.className = 'thought-badge'; st.textContent = 'VERIFIED';
+      return;
+    }
+
     if (window.Gemini && Gemini.hasKey()) {
       st.textContent = 'REASONING';
-      const thoughtEl = setStep(chain, 3, 'Streaming native reasoning tokens (thinkingConfig.includeThoughts=true)...', true);
+      const thoughtEl = setStep(chain, 3, 'Streaming native reasoning tokens...', true);
+      const d = new Date();
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Sao_Paulo';
+      const timeStr = `${d.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} às ${d.toLocaleTimeString('pt-BR')}`;
       const groundedPrompt = facts && facts.extract
-        ? `Pergunta do usuário: ${q}\n\n[Evidências Verificadas do GraphRAG — Fonte: ${facts.title} (${facts.url})]:\n${facts.extract}\n` +
+        ? `[Data/Hora Atual do Usuário: ${timeStr} (${tz})]\nPergunta do usuário: ${q}\n\n[Evidências Verificadas do GraphRAG — Fonte: ${facts.title} (${facts.url})]:\n${facts.extract}\n` +
           (facts.papers?.length ? `Artigos Científicos:\n` + facts.papers.map(p => `- ${p.title} (${p.year}) ${p.doi}`).join('\n') : '')
-        : q;
+        : `[Data/Hora Atual do Usuário: ${timeStr} (${tz})]\nPergunta do usuário: ${q}`;
 
       history.push({ role: 'user', parts: [{ text: groundedPrompt }] });
       const t0 = performance.now();
@@ -127,7 +142,6 @@ const Chat = (function () {
             el.closest('.chat-messages').scrollTop = 1e9;
           },
           thoughtText => {
-            // Stream actual LLM thinking tokens into the Latent Thought Chain panel!
             thoughtEl.innerHTML = `<strong>[LLM Reasoning Trace]:</strong><br>${esc(thoughtText).replace(/\n/g, '<br>')}`;
             chain.scrollTop = chain.scrollHeight;
           }
@@ -140,13 +154,17 @@ const Chat = (function () {
         history.push({ role: 'model', parts: [{ text: full }] });
         setStep(chain, 4, `Inference verified in ${Math.round(performance.now() - t0)} ms (${Math.ceil(full.length / 4)} tokens)`, false);
         st.className = 'thought-badge'; st.textContent = 'DONE';
+        return;
       } catch (e) {
         history.pop();
-        el.classList.add('error');
-        el.textContent = 'Erro ao chamar o Gemini: ' + e.message + ' — verifique sua chave em 🔑 API Key.';
-        st.className = 'thought-badge'; st.textContent = 'ERROR';
+        if (!facts || !facts.extract) {
+          el.classList.add('error');
+          el.textContent = e.message;
+          st.className = 'thought-badge'; st.textContent = 'ERROR';
+          return;
+        }
+        // If facts exist, seamlessly fall through to verified GraphRAG synthesis below
       }
-      return;
     }
 
     if (facts && facts.extract) {

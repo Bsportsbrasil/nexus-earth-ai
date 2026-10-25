@@ -53,7 +53,7 @@
         "defined": 0.09449111825230687,
         "goals": 0.09449111825230687
       },
-      "updatedAt": 1792900063484
+      "updatedAt": 1792900759868
     },
     {
       "id": "15.ai",
@@ -62,7 +62,7 @@
       "summary": "",
       "url": "",
       "vector": {},
-      "updatedAt": 1792900063726
+      "updatedAt": 1792900760088
     },
     {
       "id": "1x technologies",
@@ -73,7 +73,7 @@
       "vector": {
         "technologies": 1
       },
-      "updatedAt": 1792900063726
+      "updatedAt": 1792900760088
     },
     {
       "id": "2024 indian general election",
@@ -87,7 +87,7 @@
         "general": 0.5,
         "election": 0.5
       },
-      "updatedAt": 1792900063726
+      "updatedAt": 1792900760088
     },
     {
       "id": "3d optical data storage",
@@ -100,7 +100,7 @@
         "data": 0.5773502691896258,
         "storage": 0.5773502691896258
       },
-      "updatedAt": 1792900063727
+      "updatedAt": 1792900760088
     },
     {
       "id": "a* search algorithm",
@@ -112,7 +112,7 @@
         "search": 0.7071067811865476,
         "algorithm": 0.7071067811865476
       },
-      "updatedAt": 1792900063727
+      "updatedAt": 1792900760088
     },
     {
       "id": "a.i. artificial intelligence",
@@ -124,7 +124,7 @@
         "artificial": 0.7071067811865476,
         "intelligence": 0.7071067811865476
       },
-      "updatedAt": 1792900063727
+      "updatedAt": 1792900760088
     },
     {
       "id": "aaai",
@@ -135,7 +135,7 @@
       "vector": {
         "aaai": 1
       },
-      "updatedAt": 1792900063727
+      "updatedAt": 1792900760088
     },
     {
       "id": "abb",
@@ -146,7 +146,7 @@
       "vector": {
         "abb": 1
       },
-      "updatedAt": 1792900063727
+      "updatedAt": 1792900760088
     },
     {
       "id": "acm computing classification system",
@@ -160,7 +160,7 @@
         "classification": 0.5,
         "system": 0.5
       },
-      "updatedAt": 1792900063727
+      "updatedAt": 1792900760089
     },
     {
       "id": "acm sigevo",
@@ -172,7 +172,7 @@
         "acm": 0.7071067811865476,
         "sigevo": 0.7071067811865476
       },
-      "updatedAt": 1792900063727
+      "updatedAt": 1792900760089
     },
     {
       "id": "paper:10.3403/30483942u",
@@ -195,7 +195,7 @@
         "org": 0.19999999999999998,
         "30483942u": 0.19999999999999998
       },
-      "updatedAt": 1792900064155
+      "updatedAt": 1792900760768
     },
     {
       "id": "paper:10.1093/hesc/9780198557364.003.0001",
@@ -222,7 +222,7 @@
         "003": 0.1856953381770518,
         "0001": 0.1856953381770518
       },
-      "updatedAt": 1792900064155
+      "updatedAt": 1792900760768
     },
     {
       "id": "paper:10.3403/30483942",
@@ -245,7 +245,7 @@
         "https": 0.19999999999999998,
         "org": 0.19999999999999998
       },
-      "updatedAt": 1792900064155
+      "updatedAt": 1792900760768
     },
     {
       "id": "2025 portuguese legislative election",
@@ -838,7 +838,7 @@
         "attention": 0.22360679774997896,
         "mechanism": 0.22360679774997896
       },
-      "updatedAt": 1792900673804
+      "updatedAt": 1792902221464
     },
     {
       "id": "self-attention",
@@ -856,7 +856,7 @@
         "single": 0.3015113445777636,
         "sequence": 0.3015113445777636
       },
-      "updatedAt": 1792900673804
+      "updatedAt": 1792902221464
     },
     {
       "id": "paper:10.21711/2319023x2026/pmo1429",
@@ -1037,7 +1037,7 @@
       "vector": {
         "2014": 1
       },
-      "updatedAt": 1792899723955
+      "updatedAt": 1792901490981
     },
     {
       "id": "2015",
@@ -1048,7 +1048,7 @@
       "vector": {
         "2015": 1
       },
-      "updatedAt": 1792899723955
+      "updatedAt": 1792901490981
     },
     {
       "id": "2016",
@@ -1059,7 +1059,7 @@
       "vector": {
         "2016": 1
       },
-      "updatedAt": 1792899723955
+      "updatedAt": 1792901490981
     },
     {
       "id": "2017",
@@ -1185,6 +1185,1111 @@
         "25anos": 0.16439898730535724
       },
       "updatedAt": 1792899724690
+    },
+    {
+      "id": "jair bolsonaro",
+      "label": "Jair Bolsonaro",
+      "category": "Root",
+      "summary": "Jair Messias Bolsonaro is a Brazilian politician and former military officer who served as the 38th president of Brazil from 2019 to 2023. He previously served as a member of the Chamber of Deputies from 1991 to 2019.",
+      "url": "https://en.wikipedia.org/wiki/Jair_Bolsonaro",
+      "vector": {
+        "1991": 0.1561737618886061,
+        "2019": 0.3123475237772122,
+        "2023": 0.1561737618886061,
+        "jair": 0.3123475237772122,
+        "bolsonaro": 0.3123475237772122,
+        "messias": 0.1561737618886061,
+        "brazilian": 0.1561737618886061,
+        "politician": 0.1561737618886061,
+        "and": 0.1561737618886061,
+        "former": 0.1561737618886061,
+        "military": 0.1561737618886061,
+        "officer": 0.1561737618886061,
+        "who": 0.1561737618886061,
+        "served": 0.3123475237772122,
+        "the": 0.3123475237772122,
+        "38th": 0.1561737618886061,
+        "president": 0.1561737618886061,
+        "brazil": 0.1561737618886061,
+        "from": 0.3123475237772122,
+        "previously": 0.1561737618886061,
+        "member": 0.1561737618886061,
+        "chamber": 0.1561737618886061,
+        "deputies": 0.1561737618886061
+      },
+      "updatedAt": 1792901353929
+    },
+    {
+      "id": "1937 brazilian coup d'état",
+      "label": "1937 Brazilian coup d'état",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1937": 0.5,
+        "brazilian": 0.5,
+        "coup": 0.5,
+        "état": 0.5
+      },
+      "updatedAt": 1792901354173
+    },
+    {
+      "id": "1945 brazilian coup d'état",
+      "label": "1945 Brazilian coup d'état",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1945": 0.5,
+        "brazilian": 0.5,
+        "coup": 0.5,
+        "état": 0.5
+      },
+      "updatedAt": 1792901354173
+    },
+    {
+      "id": "1964 brazilian coup d'état",
+      "label": "1964 Brazilian coup d'état",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1964": 0.5,
+        "brazilian": 0.5,
+        "coup": 0.5,
+        "état": 0.5
+      },
+      "updatedAt": 1792901354173
+    },
+    {
+      "id": "1988 brazilian constitution",
+      "label": "1988 Brazilian Constitution",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1988": 0.5773502691896258,
+        "brazilian": 0.5773502691896258,
+        "constitution": 0.5773502691896258
+      },
+      "updatedAt": 1792901354173
+    },
+    {
+      "id": "1990 brazilian parliamentary election",
+      "label": "1990 Brazilian parliamentary election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1990": 0.5,
+        "brazilian": 0.5,
+        "parliamentary": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792901354174
+    },
+    {
+      "id": "1992 peruvian constitutional crisis",
+      "label": "1992 Peruvian constitutional crisis",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1992": 0.5,
+        "peruvian": 0.5,
+        "constitutional": 0.5,
+        "crisis": 0.5
+      },
+      "updatedAt": 1792901354174
+    },
+    {
+      "id": "2008 financial crisis",
+      "label": "2008 financial crisis",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2008": 0.5773502691896258,
+        "financial": 0.5773502691896258,
+        "crisis": 0.5773502691896258
+      },
+      "updatedAt": 1792901354174
+    },
+    {
+      "id": "2014 brazilian economic crisis",
+      "label": "2014 Brazilian economic crisis",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2014": 0.5,
+        "brazilian": 0.5,
+        "economic": 0.5,
+        "crisis": 0.5
+      },
+      "updatedAt": 1792901354174
+    },
+    {
+      "id": "2018 brazilian general election",
+      "label": "2018 Brazilian general election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2018": 0.5,
+        "brazilian": 0.5,
+        "general": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792901354174
+    },
+    {
+      "id": "2018 brazilian presidential election",
+      "label": "2018 Brazilian presidential election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2018": 0.5,
+        "brazilian": 0.5,
+        "presidential": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792901354174
+    },
+    {
+      "id": "paper:10.52521/geouece.v13i25.12489",
+      "label": "“Hoje em dia, tudo mudou porque não há mai (2025)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Revista GeoUECE (2025). DOI: https://doi.org/10.52521/geouece.v13i25.12489",
+      "url": "https://doi.org/10.52521/geouece.v13i25.12489",
+      "vector": {
+        "2025": 0.3713906763541037,
+        "12489": 0.18569533817705186,
+        "52521": 0.18569533817705186,
+        "hoje": 0.18569533817705186,
+        "dia": 0.18569533817705186,
+        "tudo": 0.18569533817705186,
+        "mudou": 0.18569533817705186,
+        "porque": 0.18569533817705186,
+        "não": 0.18569533817705186,
+        "mai": 0.18569533817705186,
+        "peer": 0.18569533817705186,
+        "reviewed": 0.18569533817705186,
+        "study": 0.18569533817705186,
+        "published": 0.18569533817705186,
+        "revista": 0.18569533817705186,
+        "geouece": 0.3713906763541037,
+        "doi": 0.3713906763541037,
+        "https": 0.18569533817705186,
+        "org": 0.18569533817705186,
+        "v13i25": 0.18569533817705186
+      },
+      "updatedAt": 1792901354595
+    },
+    {
+      "id": "paper:10.7476/9786556309316.0003",
+      "label": "Breve anotação sobre o não-retrato na foto (2025)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Potencialidades da fotografia hoje (2025). DOI: https://doi.org/10.7476/9786556309316.0003",
+      "url": "https://doi.org/10.7476/9786556309316.0003",
+      "vector": {
+        "2025": 0.3922322702763681,
+        "7476": 0.19611613513818404,
+        "breve": 0.19611613513818404,
+        "anotação": 0.19611613513818404,
+        "sobre": 0.19611613513818404,
+        "não": 0.19611613513818404,
+        "retrato": 0.19611613513818404,
+        "foto": 0.19611613513818404,
+        "peer": 0.19611613513818404,
+        "reviewed": 0.19611613513818404,
+        "study": 0.19611613513818404,
+        "published": 0.19611613513818404,
+        "potencialidades": 0.19611613513818404,
+        "fotografia": 0.19611613513818404,
+        "hoje": 0.19611613513818404,
+        "doi": 0.3922322702763681,
+        "https": 0.19611613513818404,
+        "org": 0.19611613513818404,
+        "9786556309316": 0.19611613513818404,
+        "0003": 0.19611613513818404
+      },
+      "updatedAt": 1792901354595
+    },
+    {
+      "id": "paper:10.15448/1984-7726.2015.3.21123",
+      "label": "Análise argumentativa da ironia standard e (2015)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Letras de Hoje (2015). DOI: https://doi.org/10.15448/1984-7726.2015.3.21123",
+      "url": "https://doi.org/10.15448/1984-7726.2015.3.21123",
+      "vector": {
+        "1984": 0.1856953381770518,
+        "2015": 0.5570860145311555,
+        "7726": 0.1856953381770518,
+        "15448": 0.1856953381770518,
+        "21123": 0.1856953381770518,
+        "análise": 0.1856953381770518,
+        "argumentativa": 0.1856953381770518,
+        "ironia": 0.1856953381770518,
+        "standard": 0.1856953381770518,
+        "peer": 0.1856953381770518,
+        "reviewed": 0.1856953381770518,
+        "study": 0.1856953381770518,
+        "published": 0.1856953381770518,
+        "letras": 0.1856953381770518,
+        "hoje": 0.1856953381770518,
+        "doi": 0.3713906763541036,
+        "https": 0.1856953381770518,
+        "org": 0.1856953381770518
+      },
+      "updatedAt": 1792901354596
+    },
+    {
+      "id": "ios",
+      "label": "IOS",
+      "category": "Root",
+      "summary": "iOS é um sistema operacional móvel da Apple Inc. desenvolvido para a linha de smartphones iPhone. Foi revelado em janeiro de 2007, junto com o iPhone, e lançado em junho de 2007. As versões principais do iOS são lançadas anualmente.",
+      "url": "https://pt.wikipedia.org/wiki/IOS",
+      "vector": {
+        "2007": 0.3244428422615251,
+        "ios": 0.48666426339228763,
+        "sistema": 0.16222142113076254,
+        "operacional": 0.16222142113076254,
+        "móvel": 0.16222142113076254,
+        "apple": 0.16222142113076254,
+        "inc": 0.16222142113076254,
+        "desenvolvido": 0.16222142113076254,
+        "para": 0.16222142113076254,
+        "linha": 0.16222142113076254,
+        "smartphones": 0.16222142113076254,
+        "iphone": 0.3244428422615251,
+        "foi": 0.16222142113076254,
+        "revelado": 0.16222142113076254,
+        "janeiro": 0.16222142113076254,
+        "junto": 0.16222142113076254,
+        "com": 0.16222142113076254,
+        "lançado": 0.16222142113076254,
+        "junho": 0.16222142113076254,
+        "versões": 0.16222142113076254,
+        "principais": 0.16222142113076254,
+        "são": 0.16222142113076254,
+        "lançadas": 0.16222142113076254,
+        "anualmente": 0.16222142113076254
+      },
+      "updatedAt": 1792901490754
+    },
+    {
+      "id": "10 de março",
+      "label": "10 de março",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "março": 1
+      },
+      "updatedAt": 1792901490981
+    },
+    {
+      "id": "13 de abril",
+      "label": "13 de abril",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "abril": 1
+      },
+      "updatedAt": 1792901490981
+    },
+    {
+      "id": "13 de junho",
+      "label": "13 de junho",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "junho": 1
+      },
+      "updatedAt": 1792901490981
+    },
+    {
+      "id": "13 de setembro",
+      "label": "13 de setembro",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "setembro": 1
+      },
+      "updatedAt": 1792901490981
+    },
+    {
+      "id": "16 de setembro",
+      "label": "16 de setembro",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "setembro": 1
+      },
+      "updatedAt": 1792901490981
+    },
+    {
+      "id": "1984 (publicidade)",
+      "label": "1984 (Publicidade)",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1984": 0.7071067811865476,
+        "publicidade": 0.7071067811865476
+      },
+      "updatedAt": 1792901490981
+    },
+    {
+      "id": "2007",
+      "label": "2007",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2007": 1
+      },
+      "updatedAt": 1792901490981
+    },
+    {
+      "id": "paper:10.48021/978-65-270-3662-3",
+      "label": "Esconderam de Você: o dia e a hora / Apoca (2024)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (2024). DOI: https://doi.org/10.48021/978-65-270-3662-3",
+      "url": "https://doi.org/10.48021/978-65-270-3662-3",
+      "vector": {
+        "270": 0.18257418583505536,
+        "978": 0.18257418583505536,
+        "2024": 0.3651483716701107,
+        "3662": 0.18257418583505536,
+        "48021": 0.18257418583505536,
+        "esconderam": 0.18257418583505536,
+        "você": 0.18257418583505536,
+        "dia": 0.18257418583505536,
+        "hora": 0.18257418583505536,
+        "apoca": 0.18257418583505536,
+        "peer": 0.3651483716701107,
+        "reviewed": 0.3651483716701107,
+        "study": 0.18257418583505536,
+        "published": 0.18257418583505536,
+        "journal": 0.18257418583505536,
+        "doi": 0.3651483716701107,
+        "https": 0.18257418583505536,
+        "org": 0.18257418583505536
+      },
+      "updatedAt": 1792901491544
+    },
+    {
+      "id": "paper:10.47749/t/unicamp.2013.914214",
+      "label": "Notícias, informação e território (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.47749/t/unicamp.2013.914214",
+      "url": "https://doi.org/10.47749/t/unicamp.2013.914214",
+      "vector": {
+        "2013": 0.2041241452319315,
+        "47749": 0.2041241452319315,
+        "914214": 0.2041241452319315,
+        "notícias": 0.2041241452319315,
+        "informação": 0.2041241452319315,
+        "território": 0.2041241452319315,
+        "peer": 0.408248290463863,
+        "reviewed": 0.408248290463863,
+        "study": 0.2041241452319315,
+        "published": 0.2041241452319315,
+        "journal": 0.2041241452319315,
+        "doi": 0.408248290463863,
+        "https": 0.2041241452319315,
+        "org": 0.2041241452319315,
+        "unicamp": 0.2041241452319315
+      },
+      "updatedAt": 1792901491544
+    },
+    {
+      "id": "paper:10.26512/2016.03.d.21329",
+      "label": "O marketing das notícias : consumo de info (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.26512/2016.03.d.21329",
+      "url": "https://doi.org/10.26512/2016.03.d.21329",
+      "vector": {
+        "2016": 0.2,
+        "21329": 0.2,
+        "26512": 0.2,
+        "marketing": 0.2,
+        "das": 0.2,
+        "notícias": 0.2,
+        "consumo": 0.2,
+        "info": 0.2,
+        "peer": 0.4,
+        "reviewed": 0.4,
+        "study": 0.2,
+        "published": 0.2,
+        "journal": 0.2,
+        "doi": 0.4,
+        "https": 0.2,
+        "org": 0.2
+      },
+      "updatedAt": 1792901491544
+    },
+    {
+      "id": "storm kristin",
+      "label": "Storm Kristin",
+      "category": "Root",
+      "summary": "Storm Kristin was a compact, catastrophic and record-breaking extratropical cyclone that severely impacted Portugal, as well as parts of the Mediterranean and Southeastern Europe in late January 2026. Storm Kristin was the twenty-sixth storm of the 2025–26 European windstorm season, and the eleventh to be named by the south-western naming group, which consists of France, Spain, Portugal, Belgium, and Luxembourg. Kristin was named by the IPMA on 27 January, as a significant impact was forecast. The impact of Kristin and its successors was described as a humanitarian crisis by a researcher in extreme weather and climate change.",
+      "url": "https://en.wikipedia.org/wiki/Storm_Kristin",
+      "vector": {
+        "2025": 0.06851887098275311,
+        "2026": 0.06851887098275311,
+        "storm": 0.27407548393101244,
+        "kristin": 0.34259435491376555,
+        "was": 0.34259435491376555,
+        "compact": 0.06851887098275311,
+        "catastrophic": 0.06851887098275311,
+        "and": 0.41111322589651866,
+        "record": 0.06851887098275311,
+        "breaking": 0.06851887098275311,
+        "extratropical": 0.06851887098275311,
+        "cyclone": 0.06851887098275311,
+        "that": 0.06851887098275311,
+        "severely": 0.06851887098275311,
+        "impacted": 0.06851887098275311,
+        "portugal": 0.13703774196550622,
+        "well": 0.06851887098275311,
+        "parts": 0.06851887098275311,
+        "the": 0.4796320968792718,
+        "mediterranean": 0.06851887098275311,
+        "southeastern": 0.06851887098275311,
+        "europe": 0.06851887098275311,
+        "late": 0.06851887098275311,
+        "january": 0.13703774196550622,
+        "twenty": 0.06851887098275311,
+        "sixth": 0.06851887098275311,
+        "european": 0.06851887098275311,
+        "windstorm": 0.06851887098275311,
+        "season": 0.06851887098275311,
+        "eleventh": 0.06851887098275311,
+        "named": 0.13703774196550622,
+        "south": 0.06851887098275311,
+        "western": 0.06851887098275311,
+        "naming": 0.06851887098275311,
+        "group": 0.06851887098275311,
+        "which": 0.06851887098275311,
+        "consists": 0.06851887098275311,
+        "france": 0.06851887098275311,
+        "spain": 0.06851887098275311,
+        "belgium": 0.06851887098275311,
+        "luxembourg": 0.06851887098275311,
+        "ipma": 0.06851887098275311,
+        "significant": 0.06851887098275311,
+        "impact": 0.13703774196550622,
+        "forecast": 0.06851887098275311,
+        "its": 0.06851887098275311,
+        "successors": 0.06851887098275311,
+        "described": 0.06851887098275311,
+        "humanitarian": 0.06851887098275311,
+        "crisis": 0.06851887098275311,
+        "researcher": 0.06851887098275311,
+        "extreme": 0.06851887098275311,
+        "weather": 0.06851887098275311,
+        "climate": 0.06851887098275311,
+        "change": 0.06851887098275311
+      },
+      "updatedAt": 1792901895960
+    },
+    {
+      "id": "1941 cyclone",
+      "label": "1941 cyclone",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1941": 0.7071067811865476,
+        "cyclone": 0.7071067811865476
+      },
+      "updatedAt": 1792901896178
+    },
+    {
+      "id": "1968 scotland storm",
+      "label": "1968 Scotland storm",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1968": 0.5773502691896258,
+        "scotland": 0.5773502691896258,
+        "storm": 0.5773502691896258
+      },
+      "updatedAt": 1792901896178
+    },
+    {
+      "id": "1992 new year's day storm",
+      "label": "1992 New Year's Day Storm",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1992": 0.4472135954999579,
+        "new": 0.4472135954999579,
+        "year": 0.4472135954999579,
+        "day": 0.4472135954999579,
+        "storm": 0.4472135954999579
+      },
+      "updatedAt": 1792901896178
+    },
+    {
+      "id": "2017–18 european windstorm season",
+      "label": "2017–18 European windstorm season",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2017": 0.5,
+        "european": 0.5,
+        "windstorm": 0.5,
+        "season": 0.5
+      },
+      "updatedAt": 1792901896178
+    },
+    {
+      "id": "2018–19 european windstorm season",
+      "label": "2018–19 European windstorm season",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2018": 0.5,
+        "european": 0.5,
+        "windstorm": 0.5,
+        "season": 0.5
+      },
+      "updatedAt": 1792901896178
+    },
+    {
+      "id": "2019–20 european windstorm season",
+      "label": "2019–20 European windstorm season",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2019": 0.5,
+        "european": 0.5,
+        "windstorm": 0.5,
+        "season": 0.5
+      },
+      "updatedAt": 1792901896178
+    },
+    {
+      "id": "2020–21 european windstorm season",
+      "label": "2020–21 European windstorm season",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2020": 0.5,
+        "european": 0.5,
+        "windstorm": 0.5,
+        "season": 0.5
+      },
+      "updatedAt": 1792901896178
+    },
+    {
+      "id": "2021–22 european windstorm season",
+      "label": "2021–22 European windstorm season",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2021": 0.5,
+        "european": 0.5,
+        "windstorm": 0.5,
+        "season": 0.5
+      },
+      "updatedAt": 1792901896178
+    },
+    {
+      "id": "2022–23 european windstorm season",
+      "label": "2022–23 European windstorm season",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2022": 0.5,
+        "european": 0.5,
+        "windstorm": 0.5,
+        "season": 0.5
+      },
+      "updatedAt": 1792901896178
+    },
+    {
+      "id": "2023–24 european windstorm season",
+      "label": "2023–24 European windstorm season",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2023": 0.5,
+        "european": 0.5,
+        "windstorm": 0.5,
+        "season": 0.5
+      },
+      "updatedAt": 1792901896178
+    },
+    {
+      "id": "paper:10.64628/ade.9urcy9cr9",
+      "label": "A busca pelo “planeta nove”: por que ainda (2025)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (2025). DOI: https://doi.org/10.64628/ade.9urcy9cr9",
+      "url": "https://doi.org/10.64628/ade.9urcy9cr9",
+      "vector": {
+        "2025": 0.3592106040535498,
+        "64628": 0.1796053020267749,
+        "busca": 0.1796053020267749,
+        "pelo": 0.1796053020267749,
+        "planeta": 0.1796053020267749,
+        "nove": 0.1796053020267749,
+        "por": 0.1796053020267749,
+        "que": 0.1796053020267749,
+        "ainda": 0.1796053020267749,
+        "peer": 0.3592106040535498,
+        "reviewed": 0.3592106040535498,
+        "study": 0.1796053020267749,
+        "published": 0.1796053020267749,
+        "journal": 0.1796053020267749,
+        "doi": 0.3592106040535498,
+        "https": 0.1796053020267749,
+        "org": 0.1796053020267749,
+        "ade": 0.1796053020267749,
+        "9urcy9cr9": 0.1796053020267749
+      },
+      "updatedAt": 1792901896948
+    },
+    {
+      "id": "paper:10.17771/pucrio.ana.31543",
+      "label": "O DEUS QUE PODE AINDA NOS SALVAR (2017)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in ANALÓGOS (2017). DOI: https://doi.org/10.17771/pucrio.ana.31543",
+      "url": "https://doi.org/10.17771/pucrio.ana.31543",
+      "vector": {
+        "2017": 0.3999999999999999,
+        "17771": 0.19999999999999996,
+        "31543": 0.19999999999999996,
+        "deus": 0.19999999999999996,
+        "que": 0.19999999999999996,
+        "pode": 0.19999999999999996,
+        "ainda": 0.19999999999999996,
+        "nos": 0.19999999999999996,
+        "salvar": 0.19999999999999996,
+        "peer": 0.19999999999999996,
+        "reviewed": 0.19999999999999996,
+        "study": 0.19999999999999996,
+        "published": 0.19999999999999996,
+        "analógos": 0.19999999999999996,
+        "doi": 0.3999999999999999,
+        "https": 0.19999999999999996,
+        "org": 0.19999999999999996,
+        "pucrio": 0.19999999999999996,
+        "ana": 0.19999999999999996
+      },
+      "updatedAt": 1792901896948
+    },
+    {
+      "id": "paper:10.1590/s2179-83972009000300004",
+      "label": "Intervenção coronária percutânea no mundo  (2009)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Revista Brasileira de Cardiologia Invasiva (2009). DOI: https://doi.org/10.1590/s2179-83972009000300004",
+      "url": "https://doi.org/10.1590/s2179-83972009000300004",
+      "vector": {
+        "1590": 0.19999999999999996,
+        "2009": 0.3999999999999999,
+        "intervenção": 0.19999999999999996,
+        "coronária": 0.19999999999999996,
+        "percutânea": 0.19999999999999996,
+        "mundo": 0.19999999999999996,
+        "peer": 0.19999999999999996,
+        "reviewed": 0.19999999999999996,
+        "study": 0.19999999999999996,
+        "published": 0.19999999999999996,
+        "revista": 0.19999999999999996,
+        "brasileira": 0.19999999999999996,
+        "cardiologia": 0.19999999999999996,
+        "invasiva": 0.19999999999999996,
+        "doi": 0.3999999999999999,
+        "https": 0.19999999999999996,
+        "org": 0.19999999999999996,
+        "s2179": 0.19999999999999996,
+        "83972009000300004": 0.19999999999999996
+      },
+      "updatedAt": 1792901896949
+    },
+    {
+      "id": "paper:10.11606/t.76.2025.tde-15052025-092053",
+      "label": "Transistores orgânicos por efeito de campo (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.11606/t.76.2025.tde-15052025-092053",
+      "url": "https://doi.org/10.11606/t.76.2025.tde-15052025-092053",
+      "vector": {
+        "2025": 0.19245008972987523,
+        "11606": 0.19245008972987523,
+        "15052025": 0.19245008972987523,
+        "transistores": 0.19245008972987523,
+        "orgânicos": 0.19245008972987523,
+        "por": 0.19245008972987523,
+        "efeito": 0.19245008972987523,
+        "campo": 0.19245008972987523,
+        "peer": 0.38490017945975047,
+        "reviewed": 0.38490017945975047,
+        "study": 0.19245008972987523,
+        "published": 0.19245008972987523,
+        "journal": 0.19245008972987523,
+        "doi": 0.38490017945975047,
+        "https": 0.19245008972987523,
+        "org": 0.19245008972987523,
+        "tde": 0.19245008972987523,
+        "092053": 0.19245008972987523
+      },
+      "updatedAt": 1792902036637
+    },
+    {
+      "id": "paper:10.11606/t.8.2001.tde-23112007-150002",
+      "label": "Bases teóricas e metodológicas da abordage (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.11606/t.8.2001.tde-23112007-150002",
+      "url": "https://doi.org/10.11606/t.8.2001.tde-23112007-150002",
+      "vector": {
+        "2001": 0.19611613513818404,
+        "11606": 0.19611613513818404,
+        "150002": 0.19611613513818404,
+        "23112007": 0.19611613513818404,
+        "bases": 0.19611613513818404,
+        "teóricas": 0.19611613513818404,
+        "metodológicas": 0.19611613513818404,
+        "abordage": 0.19611613513818404,
+        "peer": 0.3922322702763681,
+        "reviewed": 0.3922322702763681,
+        "study": 0.19611613513818404,
+        "published": 0.19611613513818404,
+        "journal": 0.19611613513818404,
+        "doi": 0.3922322702763681,
+        "https": 0.19611613513818404,
+        "org": 0.19611613513818404,
+        "tde": 0.19611613513818404
+      },
+      "updatedAt": 1792902036637
+    },
+    {
+      "id": "paper:10.11606/t.82.2019.tde-29102021-174335",
+      "label": "Métodos para melhorar a semântica em busca (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.11606/t.82.2019.tde-29102021-174335",
+      "url": "https://doi.org/10.11606/t.82.2019.tde-29102021-174335",
+      "vector": {
+        "2019": 0.19245008972987523,
+        "11606": 0.19245008972987523,
+        "174335": 0.19245008972987523,
+        "29102021": 0.19245008972987523,
+        "métodos": 0.19245008972987523,
+        "para": 0.19245008972987523,
+        "melhorar": 0.19245008972987523,
+        "semântica": 0.19245008972987523,
+        "busca": 0.19245008972987523,
+        "peer": 0.38490017945975047,
+        "reviewed": 0.38490017945975047,
+        "study": 0.19245008972987523,
+        "published": 0.19245008972987523,
+        "journal": 0.19245008972987523,
+        "doi": 0.38490017945975047,
+        "https": 0.19245008972987523,
+        "org": 0.19245008972987523,
+        "tde": 0.19245008972987523
+      },
+      "updatedAt": 1792902036637
+    },
+    {
+      "id": "visionquest",
+      "label": "VisionQuest",
+      "category": "Root",
+      "summary": "VisionQuest é uma série de televisão estadunidense criada por Terry Matalas para o Disney+, baseada no personagem Visão, da Marvel Comics. É um spin-off da série WandaVision (2021) e será a décima oitava série de televisão do Universo Cinematográfico Marvel (MCU) produzida pela Marvel Studios, por meio de seu selo Marvel Television. A série compartilha continuidade com os filmes da franquia. A história acompanha o sintetizoide Visão em sua tentativa de compreender quem é, comunicando-se com personas de IA incorporadas à sua programação, e mostra sua fuga ao lado de um adolescente misterioso que pode ser seu filho reencarnado. Matalas é o showrunner e o diretor.",
+      "url": "https://pt.wikipedia.org/wiki/VisionQuest",
+      "vector": {
+        "2021": 0.09128709291752769,
+        "visionquest": 0.18257418583505539,
+        "uma": 0.09128709291752769,
+        "série": 0.36514837167011077,
+        "televisão": 0.18257418583505539,
+        "estadunidense": 0.09128709291752769,
+        "criada": 0.09128709291752769,
+        "por": 0.18257418583505539,
+        "terry": 0.09128709291752769,
+        "matalas": 0.18257418583505539,
+        "para": 0.09128709291752769,
+        "disney": 0.09128709291752769,
+        "baseada": 0.09128709291752769,
+        "personagem": 0.09128709291752769,
+        "visão": 0.18257418583505539,
+        "marvel": 0.36514837167011077,
+        "comics": 0.09128709291752769,
+        "spin": 0.09128709291752769,
+        "off": 0.09128709291752769,
+        "wandavision": 0.09128709291752769,
+        "será": 0.09128709291752769,
+        "décima": 0.09128709291752769,
+        "oitava": 0.09128709291752769,
+        "universo": 0.09128709291752769,
+        "cinematográfico": 0.09128709291752769,
+        "mcu": 0.09128709291752769,
+        "produzida": 0.09128709291752769,
+        "pela": 0.09128709291752769,
+        "studios": 0.09128709291752769,
+        "meio": 0.09128709291752769,
+        "seu": 0.18257418583505539,
+        "selo": 0.09128709291752769,
+        "television": 0.09128709291752769,
+        "compartilha": 0.09128709291752769,
+        "continuidade": 0.09128709291752769,
+        "com": 0.18257418583505539,
+        "filmes": 0.09128709291752769,
+        "franquia": 0.09128709291752769,
+        "história": 0.09128709291752769,
+        "acompanha": 0.09128709291752769,
+        "sintetizoide": 0.09128709291752769,
+        "sua": 0.2738612787525831,
+        "tentativa": 0.09128709291752769,
+        "compreender": 0.09128709291752769,
+        "quem": 0.09128709291752769,
+        "comunicando": 0.09128709291752769,
+        "personas": 0.09128709291752769,
+        "incorporadas": 0.09128709291752769,
+        "programação": 0.09128709291752769,
+        "mostra": 0.09128709291752769,
+        "fuga": 0.09128709291752769,
+        "lado": 0.09128709291752769,
+        "adolescente": 0.09128709291752769,
+        "misterioso": 0.09128709291752769,
+        "que": 0.09128709291752769,
+        "pode": 0.09128709291752769,
+        "ser": 0.09128709291752769,
+        "filho": 0.09128709291752769,
+        "reencarnado": 0.09128709291752769,
+        "showrunner": 0.09128709291752769,
+        "diretor": 0.09128709291752769
+      },
+      "updatedAt": 1792902147503
+    },
+    {
+      "id": "12 monkeys (série de televisão)",
+      "label": "12 Monkeys (série de televisão)",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "monkeys": 0.5773502691896258,
+        "série": 0.5773502691896258,
+        "televisão": 0.5773502691896258
+      },
+      "updatedAt": 1792902147736
+    },
+    {
+      "id": "4k",
+      "label": "4K",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {},
+      "updatedAt": 1792902147736
+    },
+    {
+      "id": "a thousand blows",
+      "label": "A Thousand Blows",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "thousand": 0.7071067811865476,
+        "blows": 0.7071067811865476
+      },
+      "updatedAt": 1792902147736
+    },
+    {
+      "id": "agatha (série de televisão)",
+      "label": "Agatha (série de televisão)",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "agatha": 0.5773502691896258,
+        "série": 0.5773502691896258,
+        "televisão": 0.5773502691896258
+      },
+      "updatedAt": 1792902147737
+    },
+    {
+      "id": "agatha all along",
+      "label": "Agatha All Along",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "agatha": 0.5773502691896258,
+        "all": 0.5773502691896258,
+        "along": 0.5773502691896258
+      },
+      "updatedAt": 1792902147737
+    },
+    {
+      "id": "agatha all along (série de televisão)",
+      "label": "Agatha All Along (série de televisão)",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "agatha": 0.4472135954999579,
+        "all": 0.4472135954999579,
+        "along": 0.4472135954999579,
+        "série": 0.4472135954999579,
+        "televisão": 0.4472135954999579
+      },
+      "updatedAt": 1792902147737
+    },
+    {
+      "id": "agatha harkness",
+      "label": "Agatha Harkness",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "agatha": 0.7071067811865476,
+        "harkness": 0.7071067811865476
+      },
+      "updatedAt": 1792902147737
+    },
+    {
+      "id": "agent carter",
+      "label": "Agent Carter",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "agent": 0.7071067811865476,
+        "carter": 0.7071067811865476
+      },
+      "updatedAt": 1792902147737
+    },
+    {
+      "id": "agent carter (1.ª temporada)",
+      "label": "Agent Carter (1.ª temporada)",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "agent": 0.5773502691896258,
+        "carter": 0.5773502691896258,
+        "temporada": 0.5773502691896258
+      },
+      "updatedAt": 1792902147737
+    },
+    {
+      "id": "agent carter (2.ª temporada)",
+      "label": "Agent Carter (2.ª temporada)",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "agent": 0.5773502691896258,
+        "carter": 0.5773502691896258,
+        "temporada": 0.5773502691896258
+      },
+      "updatedAt": 1792902147737
+    },
+    {
+      "id": "paper:10.24824/978854440465.2",
+      "label": "SÓ CONSEGUE ALCANÇAR SEU OBJETIVO QUEM TEM (2015)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (2015). DOI: https://doi.org/10.24824/978854440465.2",
+      "url": "https://doi.org/10.24824/978854440465.2",
+      "vector": {
+        "2015": 0.37139067635410367,
+        "24824": 0.18569533817705183,
+        "consegue": 0.18569533817705183,
+        "alcançar": 0.18569533817705183,
+        "seu": 0.18569533817705183,
+        "objetivo": 0.18569533817705183,
+        "quem": 0.18569533817705183,
+        "tem": 0.18569533817705183,
+        "peer": 0.37139067635410367,
+        "reviewed": 0.37139067635410367,
+        "study": 0.18569533817705183,
+        "published": 0.18569533817705183,
+        "journal": 0.18569533817705183,
+        "doi": 0.37139067635410367,
+        "https": 0.18569533817705183,
+        "org": 0.18569533817705183,
+        "978854440465": 0.18569533817705183
+      },
+      "updatedAt": 1792902148160
+    },
+    {
+      "id": "paper:10.64628/ade.7vm46yhyq",
+      "label": "O que acontece no seu cérebro quando você  (2026)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (2026). DOI: https://doi.org/10.64628/ade.7vm46yhyq",
+      "url": "https://doi.org/10.64628/ade.7vm46yhyq",
+      "vector": {
+        "2026": 0.3651483716701107,
+        "64628": 0.18257418583505536,
+        "que": 0.18257418583505536,
+        "acontece": 0.18257418583505536,
+        "seu": 0.18257418583505536,
+        "cérebro": 0.18257418583505536,
+        "quando": 0.18257418583505536,
+        "você": 0.18257418583505536,
+        "peer": 0.3651483716701107,
+        "reviewed": 0.3651483716701107,
+        "study": 0.18257418583505536,
+        "published": 0.18257418583505536,
+        "journal": 0.18257418583505536,
+        "doi": 0.3651483716701107,
+        "https": 0.18257418583505536,
+        "org": 0.18257418583505536,
+        "ade": 0.18257418583505536,
+        "7vm46yhyq": 0.18257418583505536
+      },
+      "updatedAt": 1792902148160
+    },
+    {
+      "id": "paper:10.1016/b978-85-352-5226-2.50018-2",
+      "label": "Enterre o seu passado, antes que ele faça  (2012)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Coach (2012). DOI: https://doi.org/10.1016/b978-85-352-5226-2.50018-2",
+      "url": "https://doi.org/10.1016/b978-85-352-5226-2.50018-2",
+      "vector": {
+        "352": 0.19245008972987526,
+        "1016": 0.19245008972987526,
+        "2012": 0.3849001794597505,
+        "5226": 0.19245008972987526,
+        "50018": 0.19245008972987526,
+        "enterre": 0.19245008972987526,
+        "seu": 0.19245008972987526,
+        "passado": 0.19245008972987526,
+        "antes": 0.19245008972987526,
+        "que": 0.19245008972987526,
+        "ele": 0.19245008972987526,
+        "faça": 0.19245008972987526,
+        "peer": 0.19245008972987526,
+        "reviewed": 0.19245008972987526,
+        "study": 0.19245008972987526,
+        "published": 0.19245008972987526,
+        "coach": 0.19245008972987526,
+        "doi": 0.3849001794597505,
+        "https": 0.19245008972987526,
+        "org": 0.19245008972987526,
+        "b978": 0.19245008972987526
+      },
+      "updatedAt": 1792902148160
     }
   ],
   "edges": [
@@ -1425,6 +2530,318 @@
     {
       "source": "zimbra (banda)",
       "target": "paper:10.23911/apoo_25anos_2020_1",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "1937 brazilian coup d'état",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "1945 brazilian coup d'état",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "1964 brazilian coup d'état",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "1988 brazilian constitution",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "1990 brazilian parliamentary election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "1992 peruvian constitutional crisis",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "2008 financial crisis",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "2014 brazilian economic crisis",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "2018 brazilian general election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "2018 brazilian presidential election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "paper:10.52521/geouece.v13i25.12489",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "paper:10.7476/9786556309316.0003",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "jair bolsonaro",
+      "target": "paper:10.15448/1984-7726.2015.3.21123",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "ios",
+      "target": "10 de março",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "ios",
+      "target": "13 de abril",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "ios",
+      "target": "13 de junho",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "ios",
+      "target": "13 de setembro",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "ios",
+      "target": "16 de setembro",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "ios",
+      "target": "1984 (publicidade)",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "ios",
+      "target": "2007",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "ios",
+      "target": "2014",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "ios",
+      "target": "2015",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "ios",
+      "target": "2016",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "ios",
+      "target": "paper:10.48021/978-65-270-3662-3",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "ios",
+      "target": "paper:10.47749/t/unicamp.2013.914214",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "ios",
+      "target": "paper:10.26512/2016.03.d.21329",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "storm kristin",
+      "target": "1941 cyclone",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "storm kristin",
+      "target": "1968 scotland storm",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "storm kristin",
+      "target": "1992 new year's day storm",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "storm kristin",
+      "target": "2017–18 european windstorm season",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "storm kristin",
+      "target": "2018–19 european windstorm season",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "storm kristin",
+      "target": "2019–20 european windstorm season",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "storm kristin",
+      "target": "2020–21 european windstorm season",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "storm kristin",
+      "target": "2021–22 european windstorm season",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "storm kristin",
+      "target": "2022–23 european windstorm season",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "storm kristin",
+      "target": "2023–24 european windstorm season",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "storm kristin",
+      "target": "paper:10.64628/ade.9urcy9cr9",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "storm kristin",
+      "target": "paper:10.17771/pucrio.ana.31543",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "storm kristin",
+      "target": "paper:10.1590/s2179-83972009000300004",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "visionquest",
+      "target": "12 monkeys (série de televisão)",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "visionquest",
+      "target": "4k",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "visionquest",
+      "target": "a thousand blows",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "visionquest",
+      "target": "agatha (série de televisão)",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "visionquest",
+      "target": "agatha all along",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "visionquest",
+      "target": "agatha all along (série de televisão)",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "visionquest",
+      "target": "agatha harkness",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "visionquest",
+      "target": "agent carter",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "visionquest",
+      "target": "agent carter (1.ª temporada)",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "visionquest",
+      "target": "agent carter (2.ª temporada)",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "visionquest",
+      "target": "paper:10.24824/978854440465.2",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "visionquest",
+      "target": "paper:10.64628/ade.7vm46yhyq",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "visionquest",
+      "target": "paper:10.1016/b978-85-352-5226-2.50018-2",
       "type": "CITED_IN_LITERATURE",
       "weight": 0.95
     }

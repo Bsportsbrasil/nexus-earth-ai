@@ -3,11 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NEXUS — Sovereign Owner Control Plane (Restricted)</title>
-  <meta name="robots" content="noindex, nofollow" />
+  <title>NEXUS — Master C2 Sovereign Dashboard (Acesso Exclusivo da Proprietária)</title>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .c2-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .c2-tab-btn {
+      padding: 0.55rem 1rem; border-radius: 8px; border: 1px solid var(--border);
+      background: rgba(15,23,42,0.75); color: var(--text-secondary); cursor: pointer;
+      font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; transition: all 0.2s;
+    }
+    .c2-tab-btn.active, .c2-tab-btn:hover {
+      border-color: var(--cyan); color: #fff; background: rgba(0,245,255,0.14);
+      box-shadow: 0 0 18px rgba(0,245,255,0.18);
+    }
+    .c2-pane { display: none; }
+    .c2-pane.active { display: block; }
+    .c2-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; background: rgba(2,4,12,0.75); }
+    .c2-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; text-align: left; }
+    .c2-table th {
+      padding: 0.65rem 0.75rem; background: rgba(15,23,42,0.9); color: var(--cyan);
+      font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; border-bottom: 1px solid var(--border);
+    }
+    .c2-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: middle; }
+    .c2-table tr:hover td { background: rgba(0,245,255,0.03); }
+    .c2-action-btn {
+      padding: 3px 8px; font-size: 0.68rem; border-radius: 5px; border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05); color: #e2e8f0; cursor: pointer; margin: 2px; font-family: var(--font-mono);
+    }
+    .c2-action-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+    .c2-action-btn.danger { border-color: rgba(244,63,94,0.45); color: #fda4af; background: rgba(244,63,94,0.1); }
+    .c2-action-btn.danger:hover { background: var(--rose); color: #fff; }
+    .c2-action-btn.ok { border-color: rgba(16,185,129,0.45); color: #6ee7b7; background: rgba(16,185,129,0.1); }
+    .c2-threat-banner {
+      background: linear-gradient(90deg, rgba(244,63,94,0.22), rgba(168,85,247,0.18));
+      border: 1px solid var(--rose); border-radius: 10px; padding: 0.85rem 1.1rem;
+      margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+  </style>
 </head>
 <body style="min-height:100vh;display:flex;flex-direction:column">
   <canvas id="particle-canvas"></canvas>
@@ -17,95 +52,366 @@
     <div class="nav-inner">
       <div class="nav-logo">
         <span class="logo-text">NEXUS</span>
-        <span class="logo-tag" style="border-color:var(--rose);color:var(--rose)">OWNER SOVEREIGN CONSOLE</span>
+        <span class="logo-tag" style="border-color:var(--rose);color:var(--rose)">MASTER C2 SOVEREIGN CONSOLE</span>
       </div>
       <div class="nav-status">
-        <a href="/" class="btn-secondary" style="text-decoration:none">↗ Ver Plataforma dos Usuários</a>
-        <button id="admin-logout-btn" class="btn-secondary" style="display:none">🔒 Sair</button>
+        <span id="c2-chain-badge" class="agent-badge DONE" style="font-size:0.68rem">SHA-256 AUDIT INTACT</span>
+        <a href="/" class="btn-secondary" style="text-decoration:none">↗ Ver Plataforma Pública</a>
+        <button id="admin-logout-btn" class="btn-secondary" style="display:none">🔒 Bloquear Console</button>
       </div>
     </div>
   </nav>
 
   <!-- Authentication Gate (Shown when not logged in) -->
-  <section id="admin-auth-gate" class="section" style="margin:auto;max-width:460px;width:100%">
+  <section id="admin-auth-gate" class="section" style="margin:auto;max-width:480px;width:100%">
     <div class="panel glass-panel" style="padding:2rem;display:flex;flex-direction:column;gap:1rem;text-align:center">
-      <div class="section-tag" style="margin:0 auto">Acesso Restrito à Criadora</div>
-      <h2 style="font-family:var(--font-display);font-size:1.5rem">Sovereign Control Plane</h2>
-      <p style="font-size:0.84rem;color:var(--text-secondary)">Este painel é totalmente separado da área pública dos usuários. Insira sua Chave Mestra de Administradora (`NEXUS_ADMIN_KEY`) para gerenciar os disjuntores e o Master Kill-Switch.</p>
+      <div class="section-tag" style="margin:0 auto">Soberania Técnica Absoluta</div>
+      <h2 style="font-family:var(--font-display);font-size:1.55rem">Master C2 Dashboard</h2>
+      <p style="font-size:0.84rem;color:var(--text-secondary)">
+        Centro de Comando e Controle Soberano isolado da interface pública. Autentique-se com sua Chave Mestra (<code>NEXUS_ADMIN_KEY</code>) para comandar contas, RBAC, intervenção cognitiva de agentes, WAF, detecção de más intenções e o Master Kill-Switch.
+      </p>
       <input type="password" id="admin-pass-input" class="text-input" placeholder="Chave Mestra de Administradora..." style="text-align:center;font-family:var(--font-mono)" />
-      <div id="admin-auth-error" style="color:var(--rose);font-size:0.78rem;display:none"></div>
-      <button class="btn-primary full-width" id="admin-login-btn">🔓 Desbloquear Painel Soberano</button>
+      <div id="admin-auth-err" style="color:var(--rose);font-size:0.78rem;display:none"></div>
+      <button class="btn-primary full-width" id="admin-login-btn" style="justify-content:center">🔐 Desbloquear Centro de Comando C2</button>
     </div>
   </section>
 
-  <!-- Sovereign Dashboard (Shown only after valid token authentication) -->
-  <section id="admin-dashboard" class="section" style="display:none;width:100%">
-    <div class="section-header">
-      <div class="section-tag">Exclusive Owner Governance</div>
-      <h2 class="section-title">Master AI Kill-Switch &amp; System Control Dashboard</h2>
-      <p class="section-desc">Controle exclusivo sobre toda a plataforma NEXUS. Os usuários públicos não têm acesso nem visibilidade sobre esta página.</p>
+  <!-- Protected Sovereign Master C2 Dashboard (Hidden until authenticated) -->
+  <section id="security" class="section" style="display:none;padding-top:5.5rem">
+    <div class="section-header" style="margin-bottom:1.25rem">
+      <div class="section-tag">Sovereign Command &amp; Control (Master C2) • Zero-Trust Governance</div>
+      <h2 class="section-title">Centro de Comando e Controle Soberano</h2>
+      <p class="section-desc">Autoridade final sobre todas as contas cadastradas, clientes VIP, agentes autônomos por usuário, intervenção cognitiva em tempo real, sandbox guardrails, WAF contra más intenções, MLSecOps e auditoria criptográfica imutável.</p>
     </div>
 
-    <div class="security-dashboard-grid">
-      <!-- 1. Master Kill-Switch -->
-      <div class="panel glass-panel sec-master-card" id="sec-master-card">
-        <div class="cc-pane-header">
-          <span class="panel-title">🛑 Master Emergency Stop (Kill-Switch)</span>
-          <span class="agent-badge DONE" id="sec-status-badge">SYSTEM ARMED &amp; SAFE</span>
-        </div>
-        <p class="sec-desc">Corta imediatamente em nível de servidor (`HTTP 423 Locked` + WebSockets) todo o acesso da IA, da AURA, dos Agentes, do GraphRAG e do Estúdio para todos os usuários.</p>
-        <div class="kill-switch-actions">
-          <button class="btn-kill-master" id="sec-kill-btn">🛑 PARAR COMPLETAMENTE O ACESSO DA IA (KILL-SWITCH)</button>
-          <button class="btn-restore-master" id="sec-restore-btn" style="display:none">✅ RESTAURAR E REAUTORIZAR ACESSO DA IA</button>
-        </div>
-        <div class="sec-quick-actions">
-          <button class="btn-secondary" id="sec-purge-keys-btn" style="flex:1;justify-content:center">🧹 Purge Runtime API Keys (Limpar Chave Gemini da Memória)</button>
+    <!-- Real-Time Malicious Intent & WAF Threat Warning Banner -->
+    <div class="c2-threat-banner" id="c2-threat-banner">
+      <div>
+        <strong style="color:var(--rose);font-size:0.88rem">🚨 RADAR DE MÁS INTENÇÕES &amp; WAF ATIVO:</strong>
+        <span id="c2-latest-threat-text" style="font-size:0.8rem;color:#f8fafc;margin-left:0.4rem">Monitorando todas as interações de usuários e agentes em tempo real...</span>
+      </div>
+      <div style="display:flex;gap:0.5rem">
+        <button class="btn-secondary" id="c2-jump-threats-btn" style="padding:4px 10px;font-size:0.74rem;border-color:var(--rose);color:var(--rose)">🔍 Inspecionar Alertas (<span id="c2-alert-count">0</span>)</button>
+        <button class="btn-secondary" id="c2-sim-attack-btn" style="padding:4px 10px;font-size:0.74rem">🧪 Simular Ataque ao WAF</button>
+      </div>
+    </div>
+
+    <!-- Top KPI Summary Strip -->
+    <div class="coop-scores-grid" style="margin-bottom:1.25rem">
+      <div class="cc-mini-stat"><span id="c2-kpi-accounts">0</span><small>Contas &amp; Empresas Cadastradas</small></div>
+      <div class="cc-mini-stat"><span id="c2-kpi-agents">0</span><small>Agentes Vinculados (Ativos/Pausados)</small></div>
+      <div class="cc-mini-stat"><span id="c2-kpi-threats" style="color:var(--rose)">0</span><small>Ameaças / Más Intenções Contidas</small></div>
+      <div class="cc-mini-stat"><span id="c2-kpi-audit">0</span><small>Blocos de Auditoria SHA-256</small></div>
+    </div>
+
+    <!-- Master C2 Navigation Tabs (6 Pillars) -->
+    <div class="c2-tabs">
+      <button class="c2-tab-btn active" data-tab="tab-accounts">👥 1. Contas, Clientes VIP &amp; RBAC</button>
+      <button class="c2-tab-btn" data-tab="tab-agents">🧠 2. Governança de Agentes, Intervenção Cognitiva &amp; Kill-Switch</button>
+      <button class="c2-tab-btn" data-tab="tab-sandbox">🛡️ 3. Sandbox, Guardrails &amp; Tool Allowlists</button>
+      <button class="c2-tab-btn" data-tab="tab-waf">🚨 4. WAF, Radar de Más Intenções, Pentest &amp; Backups</button>
+      <button class="c2-tab-btn" data-tab="tab-mlsecops">🧬 5. MLSecOps (Pesos IP, Anti-Poisoning &amp; CI/CD)</button>
+      <button class="c2-tab-btn" data-tab="tab-audit">📜 6. Logs de Auditoria Imutáveis (SHA-256)</button>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 1: CONTAS, EMPRESAS, ATIVAÇÃO VIP DIRETA & RBAC
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-accounts" class="c2-pane active">
+      <div class="assistant-grid" style="margin-bottom:1rem">
+        <!-- Direct VIP Account Provisioning (Bypass Public Signup) -->
+        <div class="panel glass-panel assistant-col" style="grid-column: span 3">
+          <div class="cc-pane-header">
+            <span class="panel-title">⚡ Concessão Direta de Acesso / Ativação Manual de Cliente Particular (Sem Cadastro Público)</span>
+            <span class="agent-badge DONE">RBAC PROVISIONER</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1.2fr 1.2fr 1fr 0.9fr 0.9fr 0.7fr auto;gap:0.5rem;align-items:center">
+            <input type="text" id="vip-name" class="text-input" placeholder="Nome do Cliente ou Responsável..." />
+            <input type="email" id="vip-email" class="text-input" placeholder="E-mail corporativo/pessoal..." />
+            <input type="text" id="vip-company" class="text-input" placeholder="Empresa / Instituição..." />
+            <select id="vip-role" class="select-input">
+              <option value="TENANT_VIP">Papel RBAC: TENANT_VIP</option>
+              <option value="TENANT_STANDARD">Papel RBAC: TENANT_STANDARD</option>
+              <option value="SECURITY_AUDITOR">Papel RBAC: SECURITY_AUDITOR</option>
+              <option value="MLSECOPS_ENGINEER">Papel RBAC: MLSECOPS_ENGINEER</option>
+              <option value="RESTRICTED_SANDBOX">Papel RBAC: RESTRICTED_SANDBOX</option>
+            </select>
+            <select id="vip-plan" class="select-input">
+              <option value="VIP_DIRECT_GRANT">Plano: VIP Direct Grant</option>
+              <option value="ENTERPRISE_UNLIMITED">Plano: Enterprise</option>
+              <option value="PRO_EDUCATIONAL">Plano: Pro Educacional</option>
+            </select>
+            <input type="number" id="vip-quota" class="text-input" value="500000" title="Cota de Tokens" />
+            <button class="btn-primary" id="vip-create-btn" style="white-space:nowrap;padding:0.55rem 1rem">➕ Ativar Cliente VIP</button>
+          </div>
         </div>
       </div>
 
-      <!-- 2. Granular Subsystem Circuit Breakers -->
-      <div class="panel glass-panel sec-breakers-card">
-        <div class="cc-pane-header">
-          <span class="panel-title">🎛️ Disjuntores por Subsistema</span>
-          <span class="agent-badge IDLE" id="sec-blocked-counter">0 Blocked</span>
+      <!-- Search & Account Lifecycle Table -->
+      <div class="panel glass-panel" style="padding:1rem">
+        <div class="cc-pane-header" style="margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem">
+          <span class="panel-title">📋 Todas as Empresas e Usuários Cadastrados (Lifecycle Management &amp; Cotas em Tempo Real)</span>
+          <input type="text" id="acc-search-input" class="text-input" placeholder="🔍 Buscar por nome, e-mail, empresa, papel RBAC ou status..." style="max-width:360px" />
         </div>
-        <div class="breaker-list" id="sec-breaker-list">
-          <div class="breaker-row">
-            <div><strong>Frontier LLM &amp; AURA (`gemini-3-flash`)</strong><small>Conversação AURA, Chat e raciocínio generativo</small></div>
-            <button class="breaker-btn on" data-mod="llm">ONLINE</button>
+        <div class="c2-table-wrap">
+          <table class="c2-table">
+            <thead>
+              <tr>
+                <th>Usuário / Empresa</th>
+                <th>Papel RBAC &amp; Plano</th>
+                <th>Status</th>
+                <th>Consumo / Cota (Tokens)</th>
+                <th>Risco / Intenção</th>
+                <th>Ações Administrativas Imediatas</th>
+              </tr>
+            </thead>
+            <tbody id="c2-accounts-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 2: GOVERNANÇA DE AGENTES POR USUÁRIO, INTERVENÇÃO COGNITIVA & KILL-SWITCH
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-agents" class="c2-pane">
+      <div class="assistant-grid" style="margin-bottom:1.25rem">
+        <!-- Global Master Kill-Switch -->
+        <div class="panel glass-panel assistant-col">
+          <div class="cc-pane-header">
+            <span class="panel-title">🔴 1. Master Emergency Stop (Kill-Switch Global)</span>
+            <span class="agent-badge DONE" id="sec-global-badge">OPERATIONAL</span>
           </div>
-          <div class="breaker-row">
-            <div><strong>Autonomous Multi-Agent DAG</strong><small>Orquestração Planner, Critic, Executor, Verifier</small></div>
-            <button class="breaker-btn on" data-mod="agents">ONLINE</button>
+          <p style="font-size:0.78rem;color:var(--text-secondary)">
+            Paralisa instantaneamente todas as chamadas de inferência LLM, fluxos de treinamento e execução de agentes em todo o sistema.
+          </p>
+          <button class="kill-switch-btn" id="master-kill-btn">
+            🛑 PARAR ACESSO DE TODA A IA (KILL-SWITCH)
+          </button>
+          <button class="btn-primary full-width" id="master-restore-btn" style="display:none;justify-content:center;background:var(--emerald)">
+            ✅ RESTAURAR OPERAÇÃO DO SISTEMA DE IA
+          </button>
+        </div>
+
+        <!-- Sectoral Circuit Breakers -->
+        <div class="panel glass-panel assistant-col" style="grid-column: span 2">
+          <div class="cc-pane-header">
+            <span class="panel-title">⚡ 2. Kill-Switch Setorial (Disjuntores por Subsistema de IA)</span>
+            <button class="btn-secondary" id="purge-keys-btn" style="padding:3px 10px;font-size:0.72rem;border-color:var(--rose);color:var(--rose)">🧹 Purgar Credenciais da RAM</button>
           </div>
-          <div class="breaker-row">
-            <div><strong>External GraphRAG &amp; Web Ingestion</strong><small>Consultas externas à Wikipedia REST &amp; Crossref DOI</small></div>
-            <button class="breaker-btn on" data-mod="graphrag">ONLINE</button>
-          </div>
-          <div class="breaker-row">
-            <div><strong>Multimodal Visual &amp; Report Studio</strong><small>Síntese de imagens, diagramas SVG e apresentações</small></div>
-            <button class="breaker-btn on" data-mod="studio">ONLINE</button>
-          </div>
-          <div class="breaker-row">
-            <div><strong>Task &amp; Calendar Automation</strong><small>Agendamento automático de rotinas e exportação .ICS</small></div>
-            <button class="breaker-btn on" data-mod="tasks">ONLINE</button>
+          <div class="breaker-list" style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
+            <div class="breaker-row">
+              <div><strong>Frontier Gemini LLM Core</strong><small>Inferência e Cadeia de Pensamento</small></div>
+              <input type="checkbox" id="brk-llm" class="breaker-toggle" checked />
+            </div>
+            <div class="breaker-row">
+              <div><strong>Multi-Agent DAG Orchestrator</strong><small>Planner, Critic, Executor, Verifier</small></div>
+              <input type="checkbox" id="brk-agents" class="breaker-toggle" checked />
+            </div>
+            <div class="breaker-row">
+              <div><strong>External GraphRAG Ingestion</strong><small>Wikipedia REST &amp; Crossref DOI</small></div>
+              <input type="checkbox" id="brk-graphrag" class="breaker-toggle" checked />
+            </div>
+            <div class="breaker-row">
+              <div><strong>Multimodal Media Studio</strong><small>Imagens e Slides Executivos</small></div>
+              <input type="checkbox" id="brk-studio" class="breaker-toggle" checked />
+            </div>
+            <div class="breaker-row">
+              <div><strong>Task &amp; Calendar Automation</strong><small>Rotinas e Exportação .ICS</small></div>
+              <input type="checkbox" id="brk-tasks" class="breaker-toggle" checked />
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- 3. Real-Time Security Audit & Telemetry -->
-      <div class="panel glass-panel sec-audit-card">
-        <div class="cc-pane-header">
-          <span class="panel-title">🔒 Auditoria de Segurança &amp; Telemetria do Servidor</span>
-          <span class="agent-badge DONE">OWNER ONLY</span>
+      <!-- Per-User Agent Governance & Surgical Cognitive Intervention Table -->
+      <div class="panel glass-panel" style="padding:1rem">
+        <div class="cc-pane-header" style="margin-bottom:0.75rem">
+          <span class="panel-title">🧠 3. Gestão de Agentes por Usuário &amp; Intervenção Cognitiva Cirúrgica (Pausar, Congelar, Reiniciar ou Destruir Memória)</span>
+          <span class="agent-badge DONE">LEAST PRIVILEGE ENFORCED</span>
         </div>
-        <div class="cc-telemetry-strip">
-          <div class="cc-mini-stat"><span id="adm-cpu">--%</span><small>CPU</small></div>
-          <div class="cc-mini-stat"><span id="adm-ram">-- GB</span><small>RAM</small></div>
-          <div class="cc-mini-stat"><span id="adm-tokens">0</span><small>Tokens</small></div>
-          <div class="cc-mini-stat"><span id="adm-calls">0</span><small>API Calls</small></div>
+        <div class="c2-table-wrap">
+          <table class="c2-table">
+            <thead>
+              <tr>
+                <th>Agente de IA / Tipo</th>
+                <th>Conta Vinculada</th>
+                <th>Status &amp; Aprendizado</th>
+                <th>Escopo Sandbox &amp; Recursos</th>
+                <th>Último Raciocínio / Estado Cognitivo Auditado</th>
+                <th>Intervenção Cognitiva Imediata</th>
+              </tr>
+            </thead>
+            <tbody id="c2-agents-tbody"></tbody>
+          </table>
         </div>
-        <div class="cc-broker-log" id="sec-events-log" style="min-height:200px"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 3: SANDBOX, BARREIRAS DE CONTENÇÃO & TOOL ALLOWLISTS
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-sandbox" class="c2-pane">
+      <div class="assistant-grid">
+        <div class="panel glass-panel assistant-col">
+          <div class="cc-pane-header">
+            <span class="panel-title">🔒 Isolamento Estrito de Sandbox</span>
+            <span class="agent-badge DONE">CONTAINED</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.65rem;font-size:0.8rem">
+            <div class="breaker-row"><div><strong>Filesystem System Protection</strong><small id="sb-fs">STRICT_READONLY_ROOT</small></div><span class="agent-badge DONE">LOCKED</span></div>
+            <div class="breaker-row"><div><strong>Cross-Tenant DB Isolation</strong><small id="sb-db">ENFORCED_NAMESPACE_LOCK</small></div><span class="agent-badge DONE">LOCKED</span></div>
+            <div class="breaker-row"><div><strong>Privilege Escalation Shield</strong><small id="sb-priv">KERNEL_AND_ENV_SHIELDED</small></div><span class="agent-badge DONE">LOCKED</span></div>
+            <div class="breaker-row"><div><strong>Network Egress Filter</strong><small id="sb-net">ALLOWLISTED_APIS_ONLY</small></div><span class="agent-badge DONE">LOCKED</span></div>
+          </div>
+        </div>
+
+        <div class="panel glass-panel assistant-col" style="grid-column: span 2">
+          <div class="cc-pane-header">
+            <span class="panel-title">🛠️ Tool Allowlists &amp; Validação Explícita de Ferramentas de Agentes</span>
+            <span class="agent-badge DONE">ZERO-TRUST TOOLS</span>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:0.5rem">
+            Defina exatamente quais ferramentas os agentes autônomos têm permissão para invocar. Ferramentas críticas de sistema permanecem bloqueadas no kernel do backend.
+          </p>
+          <div class="c2-table-wrap">
+            <table class="c2-table">
+              <thead>
+                <tr>
+                  <th>Ferramenta (Tool ID)</th>
+                  <th>Descrição Operacional</th>
+                  <th>Nível de Risco</th>
+                  <th>Permissão Atual</th>
+                  <th>Controle</th>
+                </tr>
+              </thead>
+              <tbody id="c2-tools-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 4: WAF, DETECÇÃO DE MÁS INTENÇÕES, PENTEST & BACKUPS CRIPTOGRAFADOS
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-waf" class="c2-pane">
+      <div class="assistant-grid" style="margin-bottom:1.25rem">
+        <!-- WAF & Traffic Shield Status -->
+        <div class="panel glass-panel assistant-col">
+          <div class="cc-pane-header">
+            <span class="panel-title">🛡️ WAF, Prompt Injection &amp; Criptografia E2E</span>
+            <span class="agent-badge DONE">ACTIVE SHIELD</span>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.45rem">
+            <div>• <strong>Defesa Prompt Injection / Jailbreak:</strong> <span style="color:var(--emerald)">ATIVA (Sanitização Estrita)</span></div>
+            <div>• <strong>Auto-Quarentena de Contas:</strong> Score de Risco ≥ 80/100</div>
+            <div>• <strong>Rate Limiting Anti-DDoS:</strong> 120 req/min global + limite por conta</div>
+            <div>• <strong>Criptografia em Repouso e Trânsito:</strong> AES-256-GCM + HMAC-SHA256</div>
+          </div>
+          <div style="display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap">
+            <button class="btn-primary" id="c2-run-pentest-btn" style="flex:1;justify-content:center;font-size:0.76rem">⚔️ Executar Pentest Automatizado</button>
+            <button class="btn-secondary" id="c2-create-backup-btn" style="flex:1;justify-content:center;font-size:0.76rem">🔐 Backup Criptografado AES-256</button>
+          </div>
+          <pre id="c2-pentest-output" style="background:rgba(2,4,12,0.85);border:1px solid var(--border);border-radius:8px;padding:0.6rem;font-family:var(--font-mono);font-size:0.68rem;color:var(--cyan);max-height:130px;overflow:auto;margin-top:0.5rem;display:none"></pre>
+        </div>
+
+        <!-- Threat & Malicious Intent Feed -->
+        <div class="panel glass-panel assistant-col" style="grid-column: span 2">
+          <div class="cc-pane-header">
+            <span class="panel-title">🚨 Radar de Usuários com Más Intenções, Prompt Injection &amp; Anomalias</span>
+            <span class="agent-badge ERROR" id="c2-threat-badge">MONITORAMENTO AO VIVO</span>
+          </div>
+          <div class="c2-table-wrap" style="max-height:310px;overflow-y:auto">
+            <table class="c2-table">
+              <thead>
+                <tr>
+                  <th>Horário</th>
+                  <th>Conta / IP</th>
+                  <th>Categoria da Ameaça</th>
+                  <th>Score</th>
+                  <th>Payload Malicioso Capturado</th>
+                  <th>Ação Automática / Bloqueio</th>
+                </tr>
+              </thead>
+              <tbody id="c2-threats-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 5: MLSECOPS (PESOS IP, ANTI-POISONING, API CONTRACTS & CI/CD)
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-mlsecops" class="c2-pane">
+      <div class="assistant-grid">
+        <div class="panel glass-panel assistant-col">
+          <div class="cc-pane-header">
+            <span class="panel-title">🧬 Proteção de Pesos &amp; Propriedade Intelectual</span>
+            <span class="agent-badge DONE" id="ml-weight-status">VERIFIED_INTACT</span>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-secondary)">
+            Verificação criptográfica de integridade (SHA-256) das matrizes de pesos <code>W<sup>(l)</sup></code> e vieses <code>b<sup>(l)</sup></code> do motor neural contra adulteração.
+          </p>
+          <div style="background:rgba(0,245,255,0.06);border:1px solid var(--border);border-radius:8px;padding:0.65rem;font-family:var(--font-mono);font-size:0.7rem;color:var(--cyan);word-break:break-all" id="ml-weight-hash">
+            SHA-256: Calculando...
+          </div>
+        </div>
+
+        <div class="panel glass-panel assistant-col">
+          <div class="cc-pane-header">
+            <span class="panel-title">🛡️ Defesa contra Data Poisoning (Linhagem)</span>
+            <span class="agent-badge DONE">ACTIVE GUARD</span>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-secondary)">
+            Inspeciona entropia e padrões de gatilho adversarial antes de permitir que qualquer interação alimente a memória dinâmica da AURA ou o GraphDB.
+          </p>
+          <div class="coop-scores-grid">
+            <div class="cc-mini-stat"><span id="ml-poison-count">0</span><small>Amostras Envenenadas Bloqueadas</small></div>
+            <div class="cc-mini-stat"><span style="color:var(--emerald)">100%</span><small>Linhagem Verificada</small></div>
+          </div>
+        </div>
+
+        <div class="panel glass-panel assistant-col">
+          <div class="cc-pane-header">
+            <span class="panel-title">🚀 Segurança de APIs &amp; Pipeline CI/CD</span>
+            <span class="agent-badge DONE" id="ml-cicd-status">PASSED_AUDIT</span>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.45rem">
+            <div>• <strong>Contratos de API Externa:</strong> Wikipedia REST, Crossref DOI &amp; Gemini v1beta validados</div>
+            <div>• <strong>Pipeline CI/CD SAST:</strong> Varredura estática e verificação de hash aprovadas</div>
+            <div>• <strong>Último Backup Criptografado:</strong> <span id="ml-last-backup" style="color:var(--cyan)">Pronto</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 6: LOGS DE AUDITORIA GRANULARES E IMUTÁVEIS (SHA-256 MERKLE CHAIN)
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-audit" class="c2-pane">
+      <div class="panel glass-panel" style="padding:1rem">
+        <div class="cc-pane-header" style="margin-bottom:0.75rem">
+          <span class="panel-title">📜 Cadeia de Auditoria Criptográfica Imutável (SHA-256 Hash-Chained Ledger)</span>
+          <span class="agent-badge DONE" id="audit-head-hash">HEAD: VERIFIED</span>
+        </div>
+        <div class="c2-table-wrap" style="max-height:420px;overflow-y:auto">
+          <table class="c2-table">
+            <thead>
+              <tr>
+                <th>#Bloco</th>
+                <th>Timestamp (UTC)</th>
+                <th>Ator / Papel RBAC</th>
+                <th>Evento / Ação</th>
+                <th>Alvo</th>
+                <th>Detalhes Auditados</th>
+                <th>Encadeamento SHA-256 (Prev → Hash)</th>
+              </tr>
+            </thead>
+            <tbody id="c2-audit-tbody"></tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
