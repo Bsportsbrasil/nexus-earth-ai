@@ -2077,3 +2077,51 @@ section.hero-section[data-route].route-active {
     align-items: stretch;
   }
 }
+
+/* ==========================================================================
+   GLOBAL MULTI-LANGUAGE (i18n) & RTL SUPPORT
+   ========================================================================== */
+.lang-selector-container {
+  position: relative;
+  display: inline-block;
+}
+
+#lang-dropdown-menu {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 245, 255, 0.4) transparent;
+}
+
+#lang-dropdown-menu::-webkit-scrollbar {
+  width: 5px;
+}
+
+#lang-dropdown-menu::-webkit-scrollbar-thumb {
+  background: rgba(0, 245, 255, 0.35);
+  border-radius: 4px;
+}
+
+.lang-dropdown-item:hover {
+  background: rgba(0, 245, 255, 0.12) !important;
+  color: var(--cyan) !important;
+  transform: translateX(2px);
+}
+
+[dir="rtl"] {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .nav-links {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .hero-actions {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .hero-title,
+[dir="rtl"] .section-title,
+[dir="rtl"] .section-desc {
+  text-align: right;
+}
+

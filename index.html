@@ -176,10 +176,17 @@
       <!-- 3. Right Section: Botões de Ação, Idioma & Perfil à Direita -->
       <div class="nav-right">
         <div class="nav-status">
-          <button id="lang-toggle-btn" class="btn-secondary nav-btn" title="Switch Language PT-BR / English (Silicon Valley &amp; Global Labs)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            <span>PT/EN</span>
-          </button>
+          <!-- Global Multi-Language Selector with Intelligent Auto-Detection -->
+          <div class="lang-selector-container" style="position:relative;display:inline-block;">
+            <button id="lang-toggle-btn" class="btn-secondary nav-btn" title="Selecionar Idioma Global (Auto-detectado)" aria-haspopup="true" aria-expanded="false" style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.35rem 0.65rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span id="current-lang-code">PT</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div id="lang-dropdown-menu" class="glass-panel" style="display:none;position:absolute;top:calc(100% + 6px);right:0;width:240px;max-height:360px;overflow-y:auto;background:rgba(10,15,30,0.96);border:1px solid rgba(0,245,255,0.3);border-radius:10px;padding:0.4rem;box-shadow:0 12px 35px rgba(0,0,0,0.8);backdrop-filter:blur(16px);z-index:99999;">
+              <!-- Populated dynamically by I18nEngine -->
+            </div>
+          </div>
           <span id="key-status" class="key-status demo">DEMO MODE</span>
           <button id="pwa-install-btn" class="btn-secondary nav-btn" title="Instalar NEXUS como Aplicativo no Celular ou Computador">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>

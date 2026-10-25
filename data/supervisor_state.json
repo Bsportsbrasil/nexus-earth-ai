@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T15:39:14.154Z",
+  "updatedAt": "2026-10-25T16:52:29.242Z",
   "certifications": {
     "aura": {
       "certified": true,
@@ -30,8 +30,8 @@
       "status": "CERTIFICADO_PELO_CRIADOR",
       "agentId": "executor",
       "certifiedBy": "Criador Soberano",
-      "timestamp": "2026-10-25T15:39:14.152Z",
-      "certHash": "963def33de2cae988b5a3b6d8c73d62c1fd322c406d05460d7a9d473ce7c06b1",
+      "timestamp": "2026-10-25T16:52:29.240Z",
+      "certHash": "a912bc8aeb86312e79d67ac9c13085db6b5fe69cbea8dedeadd26dfb5a43f989",
       "note": "Re-homologado"
     },
     "verifier": {
@@ -44,6 +44,30 @@
     }
   },
   "feedbackHistory": [
+    {
+      "id": "fb_1792947149028_7e2e",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication & Empathy)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication & Empathy) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T16:52:29.029Z"
+    },
+    {
+      "id": "fb_1792946862356_43a1",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication & Empathy)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication & Empathy) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T16:47:42.356Z"
+    },
     {
       "id": "fb_1792942754103_212f",
       "agentId": "aura",
@@ -281,6 +305,26 @@
       "role": "supervisor",
       "text": "Relatório de Supervisão Ativo (12:39:14): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 32 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
       "timestamp": "2026-10-25T15:39:14.098Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T16:47:42.350Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (13:47:42): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 37 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T16:47:42.350Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T16:52:29.021Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (13:52:29): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 42 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T16:52:29.021Z"
     }
   ]
 }
