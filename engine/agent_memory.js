@@ -538,6 +538,17 @@ export class AgentMemoryStore {
   }
 
   /**
+   * Return total count of vectors stored across all agent memory namespaces
+   */
+  getTotalVectorCount() {
+    let count = 0;
+    for (const store of this.vectorStores.values()) {
+      count += store.length;
+    }
+    return count;
+  }
+
+  /**
    * Overview of all agents for the dedicated Dashboard
    */
   getDashboardOverview() {

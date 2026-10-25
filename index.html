@@ -1553,6 +1553,34 @@
         </div>
       </div>
     </div>
+
+    <!-- Production Architecture: Frontier API Hybrid Edge Infrastructure Verification -->
+    <div class="panel glass-panel" style="margin-top:1.5rem;border-color:rgba(0,245,255,0.3);background:linear-gradient(135deg, rgba(2,4,12,0.95), rgba(0,245,255,0.04));box-shadow:0 8px 32px rgba(0,0,0,0.4)">
+      <div class="cc-pane-header">
+        <span class="panel-title" style="color:var(--cyan);font-weight:700">🏗️ Verificação de Arquitetura Real: Frontier API Hybrid Edge Model &amp; Open Telemetry</span>
+        <span class="agent-badge DONE" style="background:rgba(0,245,255,0.15);color:var(--cyan);border:1px solid var(--cyan)">HYBRID CLUSTER ACTIVE</span>
+      </div>
+      <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.65;margin-top:0.5rem">
+        Diferente de clusters monolíticos legados que exigem servidores GPU dedicados ociosos com alto custo térmico e operacional, o NEXUS opera no padrão de engenharia mais moderno do Vale do Silício: a <strong>Arquitetura Híbrida Desacoplada (Frontier API Hybrid Edge)</strong>. A inferência de pesos massivos (70B–405B parâmetros) é despachada sob demanda via credenciais cifradas em cofre AES-256-GCM para APIs Frontier (Google Gemini 2.5 / OpenAI / Anthropic), enquanto a orquestração distribuída, memória vetorial HNSW de 128 dimensões, consenso multi-agente DAG, interpretabilidade mecanística (TransformerLens hooks) e auditorias de explicabilidade EU AI Act (Merkle Passports) são processados integralmente no cluster soberano Hostinger KVM Enterprise em Node.js 22 LTS.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1rem">
+        <a href="/api/health" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;align-items:center;gap:0.4rem;padding:6px 14px;font-size:0.78rem;text-decoration:none">
+          🩺 <span>GET /api/health (CPU, RAM &amp; Cluster Live Telemetry)</span>
+        </a>
+        <a href="/openapi.json" target="_blank" rel="noopener" class="btn-secondary" style="display:inline-flex;align-items:center;gap:0.4rem;padding:6px 14px;font-size:0.78rem;text-decoration:none">
+          📋 <span>GET /openapi.json (OpenAPI 3.0.3 Specification)</span>
+        </a>
+        <a href="/metrics" target="_blank" rel="noopener" class="btn-secondary" style="display:inline-flex;align-items:center;gap:0.4rem;padding:6px 14px;font-size:0.78rem;text-decoration:none">
+          📊 <span>GET /metrics (Prometheus Exporter)</span>
+        </a>
+        <a href="/api/benchmark" target="_blank" rel="noopener" class="btn-secondary" style="display:inline-flex;align-items:center;gap:0.4rem;padding:6px 14px;font-size:0.78rem;text-decoration:none">
+          🔬 <span>GET /api/benchmark (Ablation Benchmark)</span>
+        </a>
+        <a href="/api/explainability/overview" target="_blank" rel="noopener" class="btn-secondary" style="display:inline-flex;align-items:center;gap:0.4rem;padding:6px 14px;font-size:0.78rem;text-decoration:none">
+          ⚖️ <span>GET /api/explainability/overview (EU AI Act Ledger)</span>
+        </a>
+      </div>
+    </div>
   </section>
 
   <!-- ROUTE: /guide (Senior Technical Educational Guide & Comprehensive Manual with Rich SEO) -->
@@ -2032,6 +2060,8 @@
             <li><a href="/proofs" data-route-link="proofs" style="color:var(--text-secondary);text-decoration:none">🏛️ Provas &amp; Whitepaper</a></li>
             <li><a href="/api/benchmark" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none">🔬 Testes de Latência SHA-256</a></li>
             <li><a href="/metrics" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none">📊 Métricas Prometheus</a></li>
+            <li><a href="/api/health" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none">🩺 Telemetria de Hardware (/api/health)</a></li>
+            <li><a href="/openapi.json" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none">📋 Especificação OpenAPI 3.0 (/openapi.json)</a></li>
           </ul>
         </div>
 
