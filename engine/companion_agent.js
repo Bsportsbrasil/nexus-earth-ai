@@ -6,6 +6,7 @@ import { streamWithThinking, buildRealtimeTemporalContext } from './llm.js';
 import { graphDB } from './graph_db.js';
 import { broker } from './broker.js';
 import { globalIntel } from './global_intelligence.js';
+import { lennoxGuardian } from './lennox_guardian.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const MEMORY_PATH = path.join(__dirname, '..', 'data', 'companion_memory.json');
@@ -197,6 +198,29 @@ class CompanionAgentEngine {
     const temporal = buildRealtimeTemporalContext(clientTemporal);
     const emotionProfile = this.detectEmotionAndIntent(cleanMsg, activeName);
     this.state.lastDetectedEmotion = emotionProfile.label;
+
+    // 0. LENNOX Sovereign Guardian Real-Time Supervision & Emergency Assistance Protocol
+    const lennoxSupervision = await lennoxGuardian.superviseInteraction({
+      accountId: 'acc_public_live',
+      agentId: 'agt_aura_public',
+      userName: activeName,
+      endpoint: '/api/companion',
+      payloadText: cleanMsg
+    });
+    if (!lennoxSupervision.allowedToProceed) {
+      throw new Error(lennoxSupervision.reason);
+    }
+    if (lennoxSupervision.isEmergencyAssistance) {
+      if (onChunk) onChunk(lennoxSupervision.empatheticResponse);
+      return {
+        reply: lennoxSupervision.empatheticResponse,
+        thought: `[LENNOX GUARDIAN — PROTOCOLO OFICIAL DE EMERGÊNCIA E PRIMEIROS SOCORROS PSICOLÓGICOS]: Localidade ${lennoxSupervision.geo?.localityLabel}. Relatório interno ${lennoxSupervision.ownerDocumentId} arquivado para a Proprietária.`,
+        memory: this.state,
+        emotionProfile,
+        temporal,
+        lennoxEmergency: lennoxSupervision
+      };
+    }
 
     if (/prefiro|gosto de|aprendo melhor|meu jeito|enxergo|escolho/i.test(cleanMsg)) {
       this.addInsight(`Perspectiva de ${activeName}: "${cleanMsg.slice(0, 110)}"`, this.state.learningStyle);

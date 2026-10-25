@@ -396,11 +396,56 @@ const SecurityUI = (function () {
     }
   }
 
+  function renderLennoxGuardian(lx) {
+    if (!lx) return;
+    const m = lx.metrics || {};
+    const setEl = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    };
+    setEl('lx-supervised', m.interactionsSupervised ?? 0);
+    setEl('lx-validations', m.officialValidationsExecuted ?? 0);
+    setEl('lx-fp-mitigated', m.falsePositivesMitigated ?? 0);
+    setEl('lx-blocks', m.autonomousInterventionsExecuted ?? 0);
+    setEl('lx-emergencies', m.emergencyProtocolsActivated ?? 0);
+
+    const docs = lx.internalDocuments || [];
+    setEl('lx-docs-count-badge', `${docs.length} DOCUMENTOS [IMPORTANTE & RELEVANTE]`);
+    const tbody = document.getElementById('lx-docs-tbody');
+    if (tbody) {
+      tbody.innerHTML = docs.map(d => `
+        <tr>
+          <td style="font-family:var(--font-mono);font-size:0.68rem">
+            <strong style="color:var(--cyan)">${esc(d.id)}</strong><br/>
+            <span style="color:var(--text-muted)">${esc(new Date(d.timestamp).toLocaleTimeString())}</span>
+          </td>
+          <td>
+            <span class="agent-badge ERROR" style="font-size:0.66rem;white-space:nowrap">${esc(d.priorityBadge || '🔴 [IMPORTANTE & RELEVANTE]')}</span>
+          </td>
+          <td><code style="font-size:0.7rem;color:var(--amber)">${esc(d.category)}</code></td>
+          <td style="max-width:260px">
+            <strong style="color:#f8fafc;display:block;margin-bottom:3px">${esc(d.title)}</strong>
+            <span style="font-size:0.74rem;color:var(--emerald)">${esc(d.simplifiedSummary)}</span>
+          </td>
+          <td style="font-size:0.73rem;color:var(--text-secondary);max-width:340px">
+            <div>${esc(d.detailedReport)}</div>
+            ${Array.isArray(d.officialSourcesConsulted) && d.officialSourcesConsulted.length ? `<div style="margin-top:4px;font-family:var(--font-mono);font-size:0.66rem;color:var(--cyan)">Fontes: ${esc(d.officialSourcesConsulted.join(' • '))}</div>` : ''}
+            ${d.actionsExecuted ? `<div style="margin-top:3px;font-family:var(--font-mono);font-size:0.66rem;color:var(--rose)">Ação: ${esc(JSON.stringify(d.actionsExecuted))}</div>` : ''}
+          </td>
+          <td><code style="font-size:0.65rem;color:var(--cyan)">${esc((d.cryptographicHash || '').slice(0, 16))}…</code></td>
+        </tr>
+      `).join('');
+    }
+  }
+
   function renderAll(data) {
     if (!data) return;
     renderKillSwitchAndBreakers(data);
     if (data.sovereignBriefing) {
       renderSovereignDirectives(data.sovereignBriefing);
+    }
+    if (data.lennox) {
+      renderLennoxGuardian(data.lennox);
     }
     if (data.c2) {
       fullC2Data = data.c2;
@@ -457,7 +502,7 @@ const SecurityUI = (function () {
       setToken(data.token);
       if (inp) inp.value = '';
       showDashboard();
-      renderAll({ ...data.state, c2: data.c2, sovereignBriefing: data.sovereignBriefing });
+      renderAll({ ...data.state, c2: data.c2, sovereignBriefing: data.sovereignBriefing, lennox: data.lennox });
       refreshState();
     } catch (e) {
       showAuthGate('Erro de conexão com o servidor.');
@@ -612,6 +657,44 @@ const SecurityUI = (function () {
         if (micBtn) micBtn.textContent = '🎙️ Falar por Voz';
       };
       rec.start();
+    });
+
+    // LENNOX Official Fact-Checking & Emergency Assistance Simulator Controls
+    const runLennoxFactCheck = async () => {
+      const inp = document.getElementById('lx-fact-input');
+      const sec = document.getElementById('lx-sector-select');
+      const out = document.getElementById('lx-fact-output');
+      const query = (inp?.value || '').trim();
+      if (!query) return;
+      if (out) out.textContent = '⏳ LENNOX cruzando informações com bases governamentais, científicas e autoridades oficiais...';
+      const res = await postC2Action({
+        action: 'lennox_fact_check',
+        query,
+        sector: sec?.value || 'GENERAL'
+      });
+      if (res && res.factualityReport && out) {
+        const fr = res.factualityReport;
+        const cites = (fr.validation?.officialEvidence || []).map(c => `• [${c.source}] ${c.title} (${c.identifier})`).join('\n');
+        out.textContent = `${fr.factualAnswer}\n\nSetor Oficial: ${fr.validation?.sectorLabel || fr.sector}\nStatus de Verificação: ${fr.validation?.verificationStatus}\n${cites ? '\nEvidências Oficiais:\n' + cites : ''}`;
+      }
+    };
+
+    document.getElementById('lx-fact-btn')?.addEventListener('click', runLennoxFactCheck);
+    document.getElementById('lx-fact-input')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') runLennoxFactCheck();
+    });
+
+    document.getElementById('lx-sim-emerg-btn')?.addEventListener('click', async () => {
+      const out = document.getElementById('lx-fact-output');
+      if (out) out.textContent = '🚑 LENNOX acionando protocolo empático de emergência, Primeiros Socorros Psicológicos (OMS/MS) e cartografia OpenStreetMap...';
+      const res = await postC2Action({
+        action: 'lennox_sim_emergency',
+        text: 'Socorro estou passando mal com dor no peito e falta de ar em situação de emergência médica',
+        coordinates: { lat: -23.5505, lon: -46.6333 }
+      });
+      if (res && res.emergencySimulation && out) {
+        out.textContent = res.emergencySimulation.empatheticResponse;
+      }
     });
 
     // Connect WebSocket for instant real-time threat notifications

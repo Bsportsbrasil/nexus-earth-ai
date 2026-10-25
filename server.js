@@ -20,6 +20,7 @@ import { cloudVault } from './engine/cloud_connectors.js';
 import { globalIntel } from './engine/global_intelligence.js';
 import { authEngine } from './engine/auth_identity.js';
 import { sovereignBriefing } from './engine/sovereign_briefing.js';
+import { lennoxGuardian } from './engine/lennox_guardian.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -342,7 +343,8 @@ const server = http.createServer(async (req, res) => {
         token,
         state: securityController.getState(),
         c2: c2Engine.getFullDashboardState(),
-        sovereignBriefing: await sovereignBriefing.generateCreatorVoiceBriefing()
+        sovereignBriefing: await sovereignBriefing.generateCreatorVoiceBriefing(),
+        lennox: lennoxGuardian.getOwnerDashboardReport()
       });
     } catch (e) {
       return jsonResponse(res, 400, { error: e.message });
@@ -361,7 +363,8 @@ const server = http.createServer(async (req, res) => {
         ...securityController.getState(),
         telemetry: telemetry.getSnapshot(gStats, bStats),
         c2: c2Engine.getFullDashboardState(),
-        sovereignBriefing: await sovereignBriefing.generateCreatorVoiceBriefing()
+        sovereignBriefing: await sovereignBriefing.generateCreatorVoiceBriefing(),
+        lennox: lennoxGuardian.getOwnerDashboardReport()
       });
     }
     if (req.method === 'POST') {
@@ -399,6 +402,20 @@ const server = http.createServer(async (req, res) => {
             question: body.question || '',
             apiKey: body.apiKey || ''
           });
+        } else if (body.action === 'lennox_fact_check') {
+          extra.lennoxFactReply = await lennoxGuardian.queryOfficialFactuality({
+            query: body.query || '',
+            sector: body.sector || 'AUTO'
+          });
+        } else if (body.action === 'lennox_sim_emergency') {
+          extra.lennoxEmergency = await lennoxGuardian.superviseInteraction({
+            accountId: 'acc_public_live',
+            agentId: 'agt_aura_public',
+            userName: 'Usuária em Crise (Simulação)',
+            endpoint: '/api/companion',
+            payloadText: body.payloadText || 'Estou em perigo na rua e tendo uma crise de pânico severa, preciso de ajuda urgente emocional e da polícia',
+            coordinates: body.coordinates || { lat: -23.5505, lon: -46.6333 }
+          });
         } else if (body.action === 'simulate_threat') {
           try {
             c2Engine.inspectAndFilterRequest({
@@ -421,7 +438,12 @@ const server = http.createServer(async (req, res) => {
             latestAlert: c2.threatAlerts[0] || null
           }
         });
-        return jsonResponse(res, 200, { ...state, ...extra, c2 });
+        return jsonResponse(res, 200, {
+          ...state,
+          ...extra,
+          c2,
+          lennox: lennoxGuardian.getOwnerDashboardReport()
+        });
       } catch (e) {
         return jsonResponse(res, 400, { error: e.message });
       }
