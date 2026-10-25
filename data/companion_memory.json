@@ -8,6 +8,27 @@
   ],
   "dailyJournal": [
     {
+      "id": "753c6b30-d5d4-44c7-81de-5d56a943b4c6",
+      "date": "2026-10-25",
+      "time": "01:52:18",
+      "insight": "Ana consultou data/hora em tempo real (01:52:18)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "549ddc5d-f92a-4b90-9615-dd7bae47d9b9",
+      "date": "2026-10-25",
+      "time": "01:52:18",
+      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "f3d300d2-ad3e-4163-b1e2-73d79c166464",
+      "date": "2026-10-25",
+      "time": "01:52:18",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "7312c91d-8086-4949-96b3-f380c8b16d5d",
       "date": "2026-10-25",
       "time": "01:42:00",
@@ -141,5 +162,5 @@
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 14
+  "interactionCount": 16
 }

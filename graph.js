@@ -131,7 +131,22 @@ const Graph = (function () {
     selectAndExpand(root);
   }
 
+  let initialized = false;
+  function onRouteShow() {
+    if (!svg) return;
+    const r = svg.getBoundingClientRect();
+    if (r.width > 100) {
+      W = r.width;
+      H = Math.max(460, r.height);
+    }
+  }
+
   function init() {
+    if (initialized) {
+      onRouteShow();
+      return;
+    }
+    initialized = true;
     svg = document.getElementById('knowledge-graph');
     const r = svg.getBoundingClientRect(); W = r.width || 800; H = r.height || 520;
     g = el('g');
@@ -168,27 +183,30 @@ const Graph = (function () {
   }
 
   function tick() {
-    for (const a of nodes) for (const b of nodes) if (a !== b) {
-      const dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy + .01, f = 1800 / d2;
-      a.vx += dx * f / Math.sqrt(d2); a.vy += dy * f / Math.sqrt(d2);
+    // Render-gate: pause O(N^2) force layout calculations when /knowledge route is hidden
+    if (svg && svg.offsetParent !== null) {
+      for (const a of nodes) for (const b of nodes) if (a !== b) {
+        const dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy + .01, f = 1800 / d2;
+        a.vx += dx * f / Math.sqrt(d2); a.vy += dy * f / Math.sqrt(d2);
+      }
+      for (const l of links) {
+        const a = l.a, b = l.b, dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1, f = (d - 115) * .012;
+        a.vx += dx / d * f; a.vy += dy / d * f; b.vx -= dx / d * f; b.vy -= dy / d * f;
+      }
+      for (const n of nodes) {
+        n.vx += (W / 2 - n.x) * .002; n.vy += (H / 2 - n.y) * .002;
+        if (n !== drag) { n.x += n.vx; n.y += n.vy; }
+        n.vx *= .85; n.vy *= .85;
+        n.g.setAttribute('transform', `translate(${n.x},${n.y})`);
+      }
+      links.forEach(l => {
+        l.el.setAttribute('x1', l.a.x); l.el.setAttribute('y1', l.a.y);
+        l.el.setAttribute('x2', l.b.x); l.el.setAttribute('y2', l.b.y);
+      });
+      g.setAttribute('transform', `translate(${tx},${ty}) scale(${scale})`);
     }
-    for (const l of links) {
-      const a = l.a, b = l.b, dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1, f = (d - 115) * .012;
-      a.vx += dx / d * f; a.vy += dy / d * f; b.vx -= dx / d * f; b.vy -= dy / d * f;
-    }
-    for (const n of nodes) {
-      n.vx += (W / 2 - n.x) * .002; n.vy += (H / 2 - n.y) * .002;
-      if (n !== drag) { n.x += n.vx; n.y += n.vy; }
-      n.vx *= .85; n.vy *= .85;
-      n.g.setAttribute('transform', `translate(${n.x},${n.y})`);
-    }
-    links.forEach(l => {
-      l.el.setAttribute('x1', l.a.x); l.el.setAttribute('y1', l.a.y);
-      l.el.setAttribute('x2', l.b.x); l.el.setAttribute('y2', l.b.y);
-    });
-    g.setAttribute('transform', `translate(${tx},${ty}) scale(${scale})`);
     requestAnimationFrame(tick);
   }
 
-  return { init, fetchWikiTopic };
+  return { init, fetchWikiTopic, loadTopic, onRouteShow };
 })();

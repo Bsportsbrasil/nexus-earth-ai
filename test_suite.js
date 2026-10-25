@@ -189,7 +189,18 @@ async function runTests() {
   assert.equal(chainIntegrity.intact, true, 'SHA-256 Immutable Audit Chain broken');
   console.log(`✓ Layer 13: Master C2 Sovereign Engine (RBAC, WAF, Pentest, AES-256-GCM Backup, MLSecOps & Temporal Sync) verified (${chainIntegrity.totalBlocks} SHA-256 blocks)`);
 
-  console.log('=== ALL 13 ARCHITECTURAL, MASTER C2, RESEARCH, SEO, PWA, COMPANION & COOPERATIVE LAYERS PASSED 100% ===');
+  // 14. Test Modular SPA Route Architecture, Executive Dashboard & Lazy-Loading Router
+  const requiredRoutes = ['home', 'aura', 'command-center', 'neural', 'agents', 'knowledge', 'studio', 'proofs'];
+  for (const r of requiredRoutes) {
+    assert.ok(indexHtml.includes(`data-route="${r}"`), `Missing modular route view data-route="${r}" in index.html`);
+    assert.ok(indexHtml.includes(`data-route-link="${r}"`), `Missing navigation link data-route-link="${r}" in index.html`);
+  }
+  assert.ok(indexHtml.includes('id="home-exec-dashboard"'), 'Missing Executive Home Dashboard (#home-exec-dashboard)');
+  const appJs = fs.readFileSync(path.join(rootDir, 'app.js'), 'utf8');
+  assert.ok(appJs.includes('NexusRouter') && appJs.includes('activateRouteModules'), 'Missing NexusRouter lazy-loading controller in app.js');
+  console.log('✓ Layer 14: Modular SPA Route Architecture (/home, /aura, /command-center, /neural, /agents, /knowledge, /studio, /proofs) & Lazy-Loading verified');
+
+  console.log('=== ALL 14 ARCHITECTURAL, MODULAR UI/UX, MASTER C2, RESEARCH, SEO, PWA, COMPANION & COOPERATIVE LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

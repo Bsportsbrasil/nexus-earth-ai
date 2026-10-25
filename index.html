@@ -150,16 +150,14 @@
         <span class="logo-tag">SUPERINTELLIGENCE</span>
       </div>
       <ul class="nav-links">
-        <li><a href="#companion" class="nav-link active" data-section="companion">✨ AURA Live</a></li>
-        <li><a href="#command-center" class="nav-link" data-section="command-center">⚡ Command Center</a></li>
-        <li><a href="#cooperative" class="nav-link" data-section="cooperative">🌱 Cooperative &amp; TEA</a></li>
-        <li><a href="#assistant" class="nav-link" data-section="assistant">📅 Assistant &amp; Studio</a></li>
-        <li><a href="#neural" class="nav-link" data-section="neural">Neural</a></li>
-        <li><a href="#agents" class="nav-link" data-section="agents">Agents</a></li>
-        <li><a href="#graph" class="nav-link" data-section="graph">Knowledge</a></li>
-        <li><a href="#chat" class="nav-link" data-section="chat">Chat</a></li>
-        <li><a href="#research" class="nav-link" data-section="research">🏛️ Proofs &amp; Lab</a></li>
-        <li><a href="#metrics" class="nav-link" data-section="metrics">Metrics</a></li>
+        <li><a href="/" class="nav-link active" data-route-link="home">🏠 Home</a></li>
+        <li><a href="/aura" class="nav-link" data-route-link="aura" data-section="companion">✨ AURA Live</a></li>
+        <li><a href="/command-center" class="nav-link" data-route-link="command-center" data-section="command-center">⚡ Command Center</a></li>
+        <li><a href="/neural" class="nav-link" data-route-link="neural" data-section="neural">🧠 Neural</a></li>
+        <li><a href="/agents" class="nav-link" data-route-link="agents" data-section="agents">🤖 Agents</a></li>
+        <li><a href="/knowledge" class="nav-link" data-route-link="knowledge" data-section="graph">🕸️ Knowledge</a></li>
+        <li><a href="/studio" class="nav-link" data-route-link="studio" data-section="assistant">🎨 Studio</a></li>
+        <li><a href="/proofs" class="nav-link" data-route-link="proofs" data-section="research">🏛️ Proofs</a></li>
       </ul>
       <div class="nav-status">
         <button id="lang-toggle-btn" class="btn-secondary" title="Switch Language PT-BR / English (Silicon Valley &amp; Global Labs)">🌐 PT ▾ (EN)</button>
@@ -170,8 +168,8 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section id="hero" class="section hero-section">
+  <!-- ROUTE: HOME (Minimalist Executive Dashboard + Telemetry Summary + Quick-Access Module Cards) -->
+  <section id="hero" class="section hero-section route-active" data-route="home">
     <div class="hero-content">
       <div class="hero-badge">
         <span class="badge-dot"></span>
@@ -182,17 +180,17 @@
         <span class="hero-subtitle-accent" id="hero-title-2">Alinhada à Pluralidade Humana.</span>
       </h1>
       <p class="hero-desc" id="hero-desc-text">
-        O NEXUS une Interpretabilidade Mecanística (entropia de Shannon e tensores de atenção ao vivo), Consenso Multi-Agente DAG, GraphRAG Vetorial (Wikipedia + Crossref DOIs) e a AURA — uma agente de aprendizado diário construída para a diversidade cognitiva e inclusão neurodivergente (TEA).
+        O NEXUS une Interpretabilidade Mecanística (entropia de Shannon e tensores de atenção ao vivo), Consenso Multi-Agente DAG, GraphRAG Vetorial (Wikipedia + Crossref DOIs) e a AURA — uma agente de comunicação ao vivo altamente empática construída para a diversidade cognitiva e inclusão neurodivergente (TEA).
       </p>
       <div class="hero-cta-row">
         <div style="display:flex;gap:0.65rem;flex-wrap:wrap">
-          <button class="btn-primary" onclick="document.getElementById('companion').scrollIntoView({behavior:'smooth'})">
+          <button class="btn-primary" data-goto-route="aura">
             <span id="hero-aura-btn">✨ Conversar com AURA Live</span>
           </button>
-          <button class="btn-secondary" id="hero-launch-btn" onclick="document.getElementById('command-center').scrollIntoView({behavior:'smooth'})">
+          <button class="btn-secondary" id="hero-launch-btn" data-goto-route="command-center">
             <span id="hero-launch-btn-text">⚡ Glass-Box Command Center</span>
           </button>
-          <button class="btn-secondary" onclick="document.getElementById('research').scrollIntoView({behavior:'smooth'})">
+          <button class="btn-secondary" data-goto-route="proofs">
             <span id="hero-bench-btn">🏛️ Whitepaper &amp; Benchmarks</span>
           </button>
         </div>
@@ -213,8 +211,126 @@
     </div>
   </section>
 
-  <!-- AURA: Real-Time Daily-Learning Companion Agent (Web & Mobile Optimized) -->
-  <section id="companion" class="section">
+  <!-- Executive Module Hub & Telemetry Summary (Visible only on Home '/') -->
+  <section id="home-exec-dashboard" class="route-active" data-route="home">
+    <div class="exec-dashboard-wrap">
+      <!-- Clean Executive Telemetry Summary Cards -->
+      <div class="exec-telemetry-strip">
+        <div class="exec-kpi-card glass-panel">
+          <strong id="home-kpi-nodes">115+</strong>
+          <span>Nós Verificados no GraphRAG</span>
+        </div>
+        <div class="exec-kpi-card glass-panel">
+          <strong id="home-kpi-entropy">2.58 bits</strong>
+          <span>Entropia de Shannon H(a)</span>
+        </div>
+        <div class="exec-kpi-card glass-panel">
+          <strong id="home-kpi-agency">96%</strong>
+          <span>Preservação de Agência Humana</span>
+        </div>
+        <div class="exec-kpi-card glass-panel">
+          <strong id="home-kpi-status" style="color:var(--green)">STAGE 4 SAFE</strong>
+          <span>Protocolo Ético &amp; Inclusão TEA</span>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-bottom:1.75rem">
+        <div class="section-tag">Arquitetura Desacoplada sob Demanda (Lazy-Loaded Modules)</div>
+        <h2 class="section-title">Ecossistema Modular NEXUS</h2>
+        <p class="section-desc">Selecione qualquer módulo especializado abaixo. Os motores gráficos pesados (Canvas 60 FPS e Grafo Vetorial SVG) são carregados e renderizados sob demanda exclusivamente quando você acessa sua rota dedicada.</p>
+      </div>
+
+      <!-- 7 Clean Glass-Box Quick-Access Module Cards -->
+      <div class="exec-hub-grid">
+        <div class="glass-panel exec-module-card" data-goto-route="aura">
+          <div>
+            <div class="exec-card-top">
+              <div class="exec-card-icon">✨</div>
+              <span class="exec-card-route">/aura</span>
+            </div>
+            <div class="exec-card-title" style="margin-top:0.85rem">AURA Live &amp; Pedagogia Inclusiva TEA</div>
+            <p class="exec-card-desc">Conversa contínua por voz (hands-free) com inteligência emocional que trata você pelo nome, Diário de Aprendizado Mútuo e Estúdio de Literatura Lúdica (Carol Gray) para TEA.</p>
+          </div>
+          <div class="exec-card-cta">Acessar AURA &amp; Inclusão TEA →</div>
+        </div>
+
+        <div class="glass-panel exec-module-card" data-goto-route="command-center">
+          <div>
+            <div class="exec-card-top">
+              <div class="exec-card-icon">⚡</div>
+              <span class="exec-card-route">/command-center</span>
+            </div>
+            <div class="exec-card-title" style="margin-top:0.85rem">Glass-Box Command Center &amp; Chat</div>
+            <p class="exec-card-desc">Convergência operacional dos 3 pilares (Mapa de Atenção + GraphRAG, Debate Multi-Agente e Barramento MessageBroker) integrada ao Chat com Cadeia de Pensamento.</p>
+          </div>
+          <div class="exec-card-cta">Abrir Command Center →</div>
+        </div>
+
+        <div class="glass-panel exec-module-card" data-goto-route="neural">
+          <div>
+            <div class="exec-card-top">
+              <div class="exec-card-icon">🧠</div>
+              <span class="exec-card-route">/neural</span>
+            </div>
+            <div class="exec-card-title" style="margin-top:0.85rem">Mechanistic Interpretability (MLP)</div>
+            <p class="exec-card-desc">Inspeção matemática em tempo real de propagação direta e reversa (a⁽ˡ⁾ = σ(W⁽ˡ⁾a⁽ˡ⁻¹⁾ + b⁽ˡ⁾)), Entropia de Shannon, norma L2 de gradientes e injetor de sinais.</p>
+          </div>
+          <div class="exec-card-cta">Inspecionar Rede Neural →</div>
+        </div>
+
+        <div class="glass-panel exec-module-card" data-goto-route="agents">
+          <div>
+            <div class="exec-card-top">
+              <div class="exec-card-icon">🤖</div>
+              <span class="exec-card-route">/agents</span>
+            </div>
+            <div class="exec-card-title" style="margin-top:0.85rem">Multi-Agent Reasoning (DAG)</div>
+            <p class="exec-card-desc">Orquestração autônoma de 4 agentes especializados (Planner, Critic, Executor e Verifier) que decompõem, auditam e validam problemas complexos até o consenso.</p>
+          </div>
+          <div class="exec-card-cta">Executar Pipeline de Agentes →</div>
+        </div>
+
+        <div class="glass-panel exec-module-card" data-goto-route="knowledge">
+          <div>
+            <div class="exec-card-top">
+              <div class="exec-card-icon">🕸️</div>
+              <span class="exec-card-route">/knowledge</span>
+            </div>
+            <div class="exec-card-title" style="margin-top:0.85rem">GraphRAG &amp; Live Wikipedia/DOI</div>
+            <p class="exec-card-desc">Explorador interativo do Grafo de Conhecimento em tempo real conectado à Wikipedia REST API e artigos científicos Crossref DOI com expansão de subgrafos 1-Hop.</p>
+          </div>
+          <div class="exec-card-cta">Explorar Grafo de Conhecimento →</div>
+        </div>
+
+        <div class="glass-panel exec-module-card" data-goto-route="studio">
+          <div>
+            <div class="exec-card-top">
+              <div class="exec-card-icon">🎨</div>
+              <span class="exec-card-route">/studio</span>
+            </div>
+            <div class="exec-card-title" style="margin-top:0.85rem">Task Automation &amp; Media Studio</div>
+            <p class="exec-card-desc">Planejador inteligente de rotinas com exportação de calendário RFC 5545 (.ICS), gerador de diagramas/imagens e slides executivos, tradutor neural e ponte WhatsApp/Telegram.</p>
+          </div>
+          <div class="exec-card-cta">Abrir Assistente &amp; Estúdio →</div>
+        </div>
+
+        <div class="glass-panel exec-module-card" data-goto-route="proofs">
+          <div>
+            <div class="exec-card-top">
+              <div class="exec-card-icon">🏛️</div>
+              <span class="exec-card-route">/proofs</span>
+            </div>
+            <div class="exec-card-title" style="margin-top:0.85rem">Proofs, Benchmarks &amp; Telemetry</div>
+            <p class="exec-card-desc">Fundamentos matemáticos formais, suíte de benchmark reprodutível assinada em SHA-256, exportação de Whitepaper (.MD) e citação BibTeX, além de telemetria Prometheus.</p>
+          </div>
+          <div class="exec-card-cta">Auditar Provas &amp; Telemetria →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUTE: /aura (AURA Live Companion + TEA Inclusive Pedagogy) -->
+  <section id="companion" class="section" data-route="aura">
     <div class="section-header">
       <div class="section-tag">AURA — Adaptive Understanding &amp; Respectful Agent</div>
       <h2 class="section-title">Daily-Learning Companion &amp; Pluralistic Empathy AI</h2>
@@ -298,7 +414,7 @@
   </section>
 
   <!-- Unified Glass-Box AI Control Center (3-Pillar Convergence) -->
-  <section id="command-center" class="section">
+  <section id="command-center" class="section" data-route="command-center">
     <div class="section-header">
       <div class="section-tag">Glass-Box AI Control Center</div>
       <h2 class="section-title">Unified Cognitive & Operational Convergence</h2>
@@ -382,7 +498,7 @@
   </section>
 
   <!-- Cooperative Superintelligence: Controlled Release, TEA Inclusive Pedagogy & Eco-Sustainability -->
-  <section id="cooperative" class="section">
+  <section id="cooperative" class="section" data-route="aura">
     <div class="section-header">
       <div class="section-tag">Cooperative Superintelligence Protocol</div>
       <h2 class="section-title">Controlled Release, Neurodivergent (TEA) Inclusion &amp; Eco-Governance</h2>
@@ -442,7 +558,7 @@
   </section>
 
   <!-- Practical Task Automation, Multimodal Media Studio & Omnichannel Hub -->
-  <section id="assistant" class="section">
+  <section id="assistant" class="section" data-route="studio">
     <div class="section-header">
       <div class="section-tag">Actionable Executive Suite</div>
       <h2 class="section-title">Task Automation, Visual Studio &amp; Omnichannel Voice Hub</h2>
@@ -525,7 +641,7 @@
   </section>
 
   <!-- Neural Network Section -->
-  <section id="neural" class="section">
+  <section id="neural" class="section" data-route="neural">
     <div class="section-header">
       <div class="section-tag">Module 01 — Mechanistic Interpretability</div>
       <h2 class="section-title">Live Multi-Layer Perceptron &amp; Activation Telemetry</h2>
@@ -577,7 +693,7 @@
   </section>
 
   <!-- Multi-Agent Section -->
-  <section id="agents" class="section">
+  <section id="agents" class="section" data-route="agents">
     <div class="section-header">
       <div class="section-tag">Module 02</div>
       <h2 class="section-title">Multi-Agent Reasoning</h2>
@@ -649,7 +765,7 @@
   </section>
 
   <!-- Knowledge Graph Section -->
-  <section id="graph" class="section">
+  <section id="graph" class="section" data-route="knowledge">
     <div class="section-header">
       <div class="section-tag">Module 03</div>
       <h2 class="section-title">Live Knowledge Graph (Wikipedia API)</h2>
@@ -688,7 +804,7 @@
   </section>
 
   <!-- AI Chat Section -->
-  <section id="chat" class="section">
+  <section id="chat" class="section" data-route="command-center">
     <div class="section-header">
       <div class="section-tag">Module 04</div>
       <h2 class="section-title">AI Chat + Thought Chain</h2>
@@ -731,7 +847,7 @@
   </section>
 
   <!-- Metrics Section -->
-  <section id="metrics" class="section">
+  <section id="metrics" class="section" data-route="proofs">
     <div class="section-header">
       <div class="section-tag">Module 05</div>
       <h2 class="section-title">100% Real System & API Telemetry</h2>
@@ -804,7 +920,7 @@
   </section>
 
   <!-- Frontier Research, Formal Mathematical Proofs & Reproducible Benchmarks (For Global AI Leaders & Labs) -->
-  <section id="research" class="section">
+  <section id="research" class="section" data-route="proofs">
     <div class="section-header">
       <div class="section-tag">Frontier Superintelligence Research &amp; Open Verification</div>
       <h2 class="section-title">Formal Mathematical Foundations &amp; Live Reproducible Benchmarks</h2>
@@ -913,10 +1029,14 @@
       </div>
       <div class="footer-tagline">Glass-Box Mechanistic Interpretability • Multi-Agent DAG • GraphRAG • AURA Pluralistic &amp; TEA Inclusion</div>
       <div class="footer-links" style="display:flex;gap:1rem;flex-wrap:wrap;font-size:0.78rem">
-        <a href="#companion" style="color:var(--cyan);text-decoration:none">✨ AURA Live</a>
-        <a href="#command-center" style="color:var(--text-secondary);text-decoration:none">⚡ Command Center</a>
-        <a href="#cooperative" style="color:var(--text-secondary);text-decoration:none">🌱 TEA &amp; Ethics</a>
-        <a href="#research" style="color:var(--text-secondary);text-decoration:none">🏛️ Proofs &amp; Benchmarks</a>
+        <a href="#home" data-route-link="home" style="color:var(--text-secondary);text-decoration:none">🏠 Home</a>
+        <a href="#aura" data-route-link="aura" style="color:var(--cyan);text-decoration:none">✨ /aura (AURA &amp; TEA)</a>
+        <a href="#command-center" data-route-link="command-center" style="color:var(--text-secondary);text-decoration:none">⚡ /command-center</a>
+        <a href="#neural" data-route-link="neural" style="color:var(--text-secondary);text-decoration:none">🔬 /neural</a>
+        <a href="#agents" data-route-link="agents" style="color:var(--text-secondary);text-decoration:none">🤖 /agents</a>
+        <a href="#knowledge" data-route-link="knowledge" style="color:var(--text-secondary);text-decoration:none">🕸️ /knowledge</a>
+        <a href="#studio" data-route-link="studio" style="color:var(--text-secondary);text-decoration:none">🎨 /studio</a>
+        <a href="#proofs" data-route-link="proofs" style="color:var(--text-secondary);text-decoration:none">🏛️ /proofs</a>
         <a href="/api/benchmark" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none">🔬 API Benchmark</a>
         <a href="/metrics" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none">📊 Prometheus</a>
       </div>
@@ -925,11 +1045,11 @@
 
   <!-- Mobile Bottom Navigation Dock (Native App Feel on Smartphones & Tablets) -->
   <div class="mobile-bottom-dock" id="mobile-dock">
-    <a href="#companion" class="dock-item active" data-section="companion"><span>✨</span><small>AURA</small></a>
-    <a href="#command-center" class="dock-item" data-section="command-center"><span>⚡</span><small>Control</small></a>
-    <a href="#cooperative" class="dock-item" data-section="cooperative"><span>🌱</span><small>TEA/Ética</small></a>
-    <a href="#assistant" class="dock-item" data-section="assistant"><span>📅</span><small>Agenda</small></a>
-    <a href="#chat" class="dock-item" data-section="chat"><span>💬</span><small>Chat</small></a>
+    <a href="#home" class="dock-item active" data-route-link="home" data-section="home"><span>🏠</span><small>Home</small></a>
+    <a href="#aura" class="dock-item" data-route-link="aura" data-section="companion"><span>✨</span><small>AURA</small></a>
+    <a href="#command-center" class="dock-item" data-route-link="command-center" data-section="command-center"><span>⚡</span><small>Control</small></a>
+    <a href="#studio" class="dock-item" data-route-link="studio" data-section="assistant"><span>🎨</span><small>Studio</small></a>
+    <a href="#proofs" class="dock-item" data-route-link="proofs" data-section="research"><span>🏛️</span><small>Proofs</small></a>
   </div>
 
   <!-- API Key Modal -->
