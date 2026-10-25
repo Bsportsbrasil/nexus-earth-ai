@@ -287,6 +287,9 @@ const NexusRouter = (() => {
 window.NexusRouter = NexusRouter;
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize Sovereign Bilingual I18n Engine
+  if (typeof I18nEngine !== 'undefined') I18nEngine.init();
+
   // Initialize Modular SPA Router (lazy-loads active route modules on demand)
   NexusRouter.init();
 

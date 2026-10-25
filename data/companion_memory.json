@@ -8,25 +8,39 @@
   ],
   "dailyJournal": [
     {
-      "id": "8c9b7188-eff7-42db-a8b3-991c5df92e1d",
+      "id": "b2b2930e-c2f8-4da1-bfbe-a74973ac9745",
       "date": "2026-10-25",
-      "time": "10:25:02",
-      "insight": "Ana consultou data/hora em tempo real (10:25:02)",
+      "time": "10:37:19",
+      "insight": "Ana conversou sobre \"Olá AURA, tudo bem?\" [Tom: 🤝 Conexão Natural & Empática]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
     },
     {
-      "id": "e4a1622a-fff1-42b5-9609-72313c7e5ae2",
+      "id": "01cd741f-7a14-425d-84b3-f7e1c1d9eed5",
       "date": "2026-10-25",
-      "time": "10:25:02",
+      "time": "10:35:18",
+      "insight": "Ana consultou data/hora em tempo real (10:35:18)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "413df3ad-c191-4de5-b4fc-6e013145ca4b",
+      "date": "2026-10-25",
+      "time": "10:35:18",
       "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
     },
     {
-      "id": "439b4c2a-28f0-484c-a0c0-e5c3508a2f1f",
+      "id": "bac3bf28-59a3-4c8f-9c4b-ca1d1710de8f",
       "date": "2026-10-25",
-      "time": "10:25:02",
+      "time": "10:35:18",
       "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "12f21be8-fbf4-4d2c-8850-161afb1d9489",
+      "date": "2026-10-25",
+      "time": "10:31:08",
+      "insight": "Ana prefere uma comunicação com tom humano e menos robótico.",
+      "styleUsed": "Calmo, Previsível & Acolhedor (Amigável para TEA)"
     },
     {
       "id": "28f10198-fc5f-48b3-9901-f9f109fd0486",
@@ -342,21 +356,7 @@
       "time": "02:10:44",
       "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🤝 Conexão Natural & Empática]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "cd8f9c9f-d38c-4e28-bb71-1e225f5cf36a",
-      "date": "2026-10-25",
-      "time": "02:10:37",
-      "insight": "Ana explorou \"Roma Antiga\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "4a6914a6-a6f9-4c91-b237-a2d9376a311a",
-      "date": "2026-10-25",
-      "time": "02:10:26",
-      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🎯 Solicitação Séria / Atenção & Foco]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 96
+  "interactionCount": 100
 }

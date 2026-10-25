@@ -715,7 +715,7 @@ const server = http.createServer(async (req, res) => {
 
   // 6b. Real Mechanistic Interpretability Hook Probe Endpoint (/api/neural/hooks)
   if (req.method === 'GET' && pathname === '/api/neural/hooks') {
-    const q = parsedUrl.searchParams.get('q') || 'Superintelligence Mechanistic Probe';
+    const q = url.searchParams.get('q') || 'Superintelligence Mechanistic Probe';
     const state = tensorEngine.forwardAndStep(q);
     broadcastWs({ type: 'tensor_state', data: state });
     return jsonResponse(res, 200, state);
@@ -787,7 +787,7 @@ const server = http.createServer(async (req, res) => {
   // 6e. Omniscient Global News, Search Engines & Social Media Pulse (/api/intel/pulse)
   if (req.method === 'GET' && pathname === '/api/intel/pulse') {
     try {
-      const q = parsedUrl.searchParams.get('q') || 'Inteligência Artificial Superinteligência';
+      const q = url.searchParams.get('q') || 'Inteligência Artificial Superinteligência';
       c2Engine.inspectAndFilterRequest({
         accountId: 'acc_public_live',
         ip: req.socket.remoteAddress || '127.0.0.1',
@@ -925,7 +925,7 @@ const server = http.createServer(async (req, res) => {
       }
 
       if (req.method === 'GET' && pathname === '/api/explainability/passports') {
-        const limit = Number(parsedUrl.searchParams.get('limit') || 40);
+        const limit = Number(url.searchParams.get('limit') || 40);
         return jsonResponse(res, 200, {
           overview: regulatoryEngine.getComplianceOverview(),
           passports: regulatoryEngine.getRecentPassports(limit)
@@ -934,7 +934,7 @@ const server = http.createServer(async (req, res) => {
 
       if (req.method === 'GET' && pathname.startsWith('/api/explainability/passport/')) {
         const passportId = pathname.slice('/api/explainability/passport/'.length).trim();
-        const format = parsedUrl.searchParams.get('format') || 'json';
+        const format = url.searchParams.get('format') || 'json';
         const passport = regulatoryEngine.getPassport(passportId);
         if (!passport) {
           return jsonResponse(res, 404, { error: `Passaporte XAI "${passportId}" não encontrado.` });
@@ -967,14 +967,21 @@ const server = http.createServer(async (req, res) => {
   // 7. Static File Serving + Clean SPA Route Fallback (/aura, /neural, /agents, /knowledge, /studio, /proofs, /guide)
   const SPA_ROUTES = new Set([
     '/',
+    '/home',
+    '/hero',
     '/aura',
+    '/companion',
     '/command-center',
+    '/chat',
     '/neural',
     '/agents',
     '/knowledge',
+    '/graph',
     '/studio',
     '/actions',
+    '/assistant',
     '/proofs',
+    '/research',
     '/guide',
     '/guia'
   ]);

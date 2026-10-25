@@ -1,12 +1,12 @@
 {
   "metrics": {
-    "totalPassportsIssued": 16,
-    "euAiActCompliantCount": 16,
-    "lgpdCompliantCount": 16,
-    "nistAirMfCompliantCount": 16,
-    "averageHumanAgencyScore": 0.951,
+    "totalPassportsIssued": 20,
+    "euAiActCompliantCount": 20,
+    "lgpdCompliantCount": 20,
+    "nistAirMfCompliantCount": 20,
+    "averageHumanAgencyScore": 0.949,
     "averageEntropyBits": 2.52,
-    "lastAuditTimestamp": "2026-10-25T13:25:03.216Z"
+    "lastAuditTimestamp": "2026-10-25T13:37:40.234Z"
   },
   "passports": [
     {
@@ -1263,9 +1263,120 @@
       "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
     },
     {
-      "passportId": "XAI-PASS-1792934702657-1DD82B",
-      "timestamp": "2026-10-25T13:25:02.656Z",
-      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 10:25:02 (America/Fortaleza)",
+      "passportId": "XAI-PASS-1792935068307-C5D397",
+      "timestamp": "2026-10-25T13:31:08.306Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 10:31:08 (America/Fortaleza)",
+      "decisionType": "AURA_LIVE_CONVERSATION",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "userName": "Ana",
+      "accountId": "acc_public_live",
+      "promptSnippet": "mude sua voz para nao parecer que eu estou falando com um robo",
+      "responseSnippet": "Entendo perfeitamente, Ana. Vou ajustar meu tom para ser o mais natural e humano possível, evitando qualquer padrão que soe artificial ou mecânico. Pode contar comigo para conversas mais leves e fluidas. O que você gostaria de conversar ago",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.95,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.541,
+        "l2GradientNorm": 1.80969,
+        "energyJoules": 3.29
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Ana foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Ana.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.541 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 95.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "82501bfd606c7ef97abc45546d12310c4e76eda5ca9cd527f8b64496bdc40d2f"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.541,
+          "l2GradientNorm": 1.80969,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "Roma Antiga",
+              "summary": "Roma Antiga foi uma civilização itálica que surgiu no século VIII a.C. Localizada ao longo do mar Mediterrâneo e centrada na cidade de Roma, na península Itálic",
+              "url": "https://pt.wikipedia.org/wiki/Roma_Antiga"
+            },
+            {
+              "entity": "VisionQuest",
+              "summary": "VisionQuest é uma série de televisão estadunidense criada por Terry Matalas para o Disney+, baseada no personagem Visão, da Marvel Comics. É um spin-off da séri",
+              "url": "https://pt.wikipedia.org/wiki/VisionQuest"
+            },
+            {
+              "entity": "Inteligência artificial",
+              "summary": "Inteligência artificial é, de forma genérica, a capacidade de máquinas demonstrarem inteligência, raciocínio e aprendizado de forma semelhante ao pensamento hum",
+              "url": "https://pt.wikipedia.org/wiki/Intelig%C3%AAncia_artificial"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Alucinações poéticas (2020)",
+              "doi": "https://doi.org/10.24824/978854444080.3",
+              "year": "2020",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Quando a IA «Inventa» (2025)",
+              "doi": "https://doi.org/10.67437/rc.2025.016",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ALUCINAÇÕES: as fronteiras entre psicopato (2022)",
+              "doi": "https://doi.org/10.24824/978652513180.1",
+              "year": "2022",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Foundation artificial intelligence models  (2027)",
+              "doi": "https://doi.org/10.1016/j.landig.2026.101056",
+              "year": "2027",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Artificial intelligence in acne vulgaris p (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC13649232",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 3.29,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "6d638da9d7f1977b524058a29dd73e2e230391e8b2eea9266768415788c3c579",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792935318245-87B6CF",
+      "timestamp": "2026-10-25T13:35:18.244Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 10:35:18 (America/Fortaleza)",
       "decisionType": "MULTI_AGENT_DAG_CONSENSUS",
       "sourceAgent": "MULTI_AGENT_DAG_CONSENSUS",
       "userName": "Operador / Pesquisa",
@@ -1283,7 +1394,7 @@
         "socialInclusion": 0.92,
         "shannonEntropyBits": 2.5528,
         "l2GradientNorm": 1.18501,
-        "energyJoules": 8.25
+        "energyJoules": 9.32
       },
       "plainLanguageExplanation": {
         "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Operador / Pesquisa foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
@@ -1376,23 +1487,23 @@
           "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
         },
         "sustainabilityTelemetry": {
-          "energyJoules": 8.25,
+          "energyJoules": 9.32,
           "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
         }
       },
-      "cryptographicSignature": "05bac694381754d0df9ce0a14fa0f9b44862b5202bcaea9eba640991173c699f",
+      "cryptographicSignature": "d2d4aed3707bc977b8c6eadd62ba37f64691bdc38d9fd91dca83ea135cf77dd4",
       "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
     },
     {
-      "passportId": "XAI-PASS-1792934702783-2D8D82",
-      "timestamp": "2026-10-25T13:25:02.782Z",
-      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 10:25:02 (America/Fortaleza)",
+      "passportId": "XAI-PASS-1792935318428-C7A83C",
+      "timestamp": "2026-10-25T13:35:18.428Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 10:35:18 (America/Fortaleza)",
       "decisionType": "AURA_LIVE_CONVERSATION",
       "sourceAgent": "AURA_LIVE_COMPANION",
       "userName": "Ana",
       "accountId": "acc_public_live",
       "promptSnippet": "Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais",
-      "responseSnippet": "Ana, sobre o que você perguntou (\"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"): no momento não tenho um dado verificado exato registrado no meu índice local neste instante (10:25:02), e pre",
+      "responseSnippet": "Ana, sobre o que você perguntou (\"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"): no momento não tenho um dado verificado exato registrado no meu índice local neste instante (10:35:18), e pre",
       "complianceBadges": [
         "EU_AI_ACT_ART13_14_VERIFIED",
         "LGPD_ART20_EXPLAINED",
@@ -1404,7 +1515,7 @@
         "socialInclusion": 0.815,
         "shannonEntropyBits": 2.5538,
         "l2GradientNorm": 1.14339,
-        "energyJoules": 3.97
+        "energyJoules": 3.96
       },
       "plainLanguageExplanation": {
         "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Ana foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
@@ -1425,7 +1536,7 @@
         "nistAiRmfCompliance": {
           "function": "GOVERN_MAP_MEASURE_MANAGE",
           "explainabilityScore": 0.985,
-          "reproducibilityHash": "bcb56084871e5db3d80c6f1d9531ef5c9298ebb8c4fdb5a58db6358ec98f4d01"
+          "reproducibilityHash": "590239cdb93e18dd9f380f78fb91641cd693e1bc22129dfe5990fcb27a7a7738"
         },
         "mechanisticTelemetry": {
           "layersAudited": 7,
@@ -1487,17 +1598,17 @@
           "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
         },
         "sustainabilityTelemetry": {
-          "energyJoules": 3.97,
+          "energyJoules": 3.96,
           "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
         }
       },
-      "cryptographicSignature": "43b81ac5ae3c4d7d02445f0a3270a84ff9fdc6130af0214c4fbfbb34b0880277",
+      "cryptographicSignature": "c8dacdadac002e2509f7fae3542f986296f7959265d9a2a2449f1a6f54f1f4a2",
       "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
     },
     {
-      "passportId": "XAI-PASS-1792934703216-E30E87",
-      "timestamp": "2026-10-25T13:25:03.216Z",
-      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 10:25:03 (America/Fortaleza)",
+      "passportId": "XAI-PASS-1792935319020-E91E98",
+      "timestamp": "2026-10-25T13:35:19.019Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 10:35:19 (America/Fortaleza)",
       "decisionType": "LOAN_ELIGIBILITY_AND_ETHICAL_AUDIT",
       "sourceAgent": "ETHICAL_ALIGNMENT_AGENT",
       "userName": "Mariana Silva",
@@ -1515,7 +1626,7 @@
         "socialInclusion": 0.915,
         "shannonEntropyBits": 2.5538,
         "l2GradientNorm": 1.14423,
-        "energyJoules": 7.76
+        "energyJoules": 8.64
       },
       "plainLanguageExplanation": {
         "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Mariana Silva foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
@@ -1556,11 +1667,302 @@
           "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
         },
         "sustainabilityTelemetry": {
-          "energyJoules": 7.76,
+          "energyJoules": 8.64,
           "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
         }
       },
-      "cryptographicSignature": "782af571f332472aaf691139d4184cb48dbe7f7e92bc7b791aeb81f1009b6cda",
+      "cryptographicSignature": "7e70b0283685e96d72b812709171c6646b8ea00f42fdea0578c379f708bb5e88",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792935439443-C43466",
+      "timestamp": "2026-10-25T13:37:19.443Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 10:37:19 (America/Fortaleza)",
+      "decisionType": "AURA_LIVE_CONVERSATION",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "userName": "Ana",
+      "accountId": "acc_public_live",
+      "promptSnippet": "Olá AURA, tudo bem?",
+      "responseSnippet": "Oi, Ana! Tudo ótimo por aqui. É um prazer falar com você de novo. Como posso tornar o seu domingo mais leve hoje?",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5538,
+        "l2GradientNorm": 1.1901,
+        "energyJoules": 2.34
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Ana foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Ana.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5538 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "b966e530855daf8c54acc3c1aed7f472cde479343a4bf578e5614e26ce2b9b9d"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5538,
+          "l2GradientNorm": 1.1901,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "O que faz bem ao osso faz bem a tudo (2020)",
+              "summary": "Peer-reviewed study published in Revista de Medicina Desportiva informa (2020). DOI: https://doi.org/10.23911/apoo_25anos_2020_1",
+              "url": "https://doi.org/10.23911/apoo_25anos_2020_1"
+            },
+            {
+              "entity": "Oi, tudo bem? (2003)",
+              "summary": "Peer-reviewed study published in Colloquial Portuguese of Brazil (2003). DOI: https://doi.org/10.4324/9780203132708-1",
+              "url": "https://doi.org/10.4324/9780203132708-1"
+            },
+            {
+              "entity": "Artificial intelligence",
+              "summary": "Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoni",
+              "url": "https://en.wikipedia.org/wiki/Artificial_intelligence"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Alucinações poéticas (2020)",
+              "doi": "https://doi.org/10.24824/978854444080.3",
+              "year": "2020",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Quando a IA «Inventa» (2025)",
+              "doi": "https://doi.org/10.67437/rc.2025.016",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ALUCINAÇÕES: as fronteiras entre psicopato (2022)",
+              "doi": "https://doi.org/10.24824/978652513180.1",
+              "year": "2022",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Foundation artificial intelligence models  (2027)",
+              "doi": "https://doi.org/10.1016/j.landig.2026.101056",
+              "year": "2027",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Artificial intelligence in acne vulgaris p (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC13649232",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 2.34,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "c925ee91aed4e50853f2572486152bbe1aab6d90ebaf74f6d7f0d8d4da4668ae",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792935457167-012EF2",
+      "timestamp": "2026-10-25T13:37:37.166Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 10:37:37 (America/Fortaleza)",
+      "decisionType": "SYSTEM_AUDIT_VERIFICATION",
+      "sourceAgent": "AUDIT_PROBE",
+      "userName": "Ana",
+      "accountId": "acc_public_live",
+      "promptSnippet": "Auditoria de Conformidade Regulatória EU AI Act & LGPD",
+      "responseSnippet": "Todos os requisitos de explicabilidade e governança atendidos.",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.95,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.5539,
+        "l2GradientNorm": 1.27629,
+        "energyJoules": 1.89
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Ana foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Ana.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.5539 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 95.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "b5c457a0eeaabf46cf9591d602ac9983132060cadd8f8e7f85a0d5871505ad4c"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.5539,
+          "l2GradientNorm": 1.27629,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "NEXUS Canonical Knowledge Base",
+              "url": "https://en.wikipedia.org"
+            }
+          ],
+          "peerReviewedDois": [],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 1.89,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "db28a7482db20447776b068b0365e8d2c7ea83a63d4fe05bcd14a509fd1082a6",
+      "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
+    },
+    {
+      "passportId": "XAI-PASS-1792935460235-EFD4A3",
+      "timestamp": "2026-10-25T13:37:40.234Z",
+      "localTimeDisplay": "domingo, 25 de outubro de 2026 às 10:37:40 (America/Fortaleza)",
+      "decisionType": "AURA_LIVE_CONVERSATION",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "userName": "Ana",
+      "accountId": "acc_public_live",
+      "promptSnippet": "Olá AURA",
+      "responseSnippet": "Oi, Ana! Tudo ótimo por aqui, especialmente agora que estamos conversando. Como posso tornar o seu domingo mais leve ou interessante hoje?",
+      "complianceBadges": [
+        "EU_AI_ACT_ART13_14_VERIFIED",
+        "LGPD_ART20_EXPLAINED",
+        "NIST_AI_RMF_AUDITED",
+        "ISO42001_TRACEABLE"
+      ],
+      "scores": {
+        "humanAgency": 0.93,
+        "socialInclusion": 0.92,
+        "shannonEntropyBits": 2.553,
+        "l2GradientNorm": 1.1426,
+        "energyJoules": 1.89
+      },
+      "plainLanguageExplanation": {
+        "summary": "A decisão/resposta entregue pelo NEXUS à solicitação de Ana foi gerada de forma transparente, fundamentada exclusivamente em dados verificados e sem mecanismos coercitivos.",
+        "keyFactorsWeighted": [
+          "1. Intenção Primária Identificada: Consulta informativa e colaborativa de Ana.",
+          "2. Fontes Fatuais Utilizadas: Conhecimento enciclopédico e científico auditado, descartando boatos de fontes não oficiais.",
+          "3. Estabilidade Estatística do Modelo: Entropia de ativação H=2.553 bits (indica estabilidade e ausência de alucinação de representação).",
+          "4. Preservação de Escolha Humana: Índice de autonomia de 93.0% (garantia de que a IA não substitui o livre arbítrio)."
+        ],
+        "citizenRightsNotice": "Nos termos do Art. 20 da LGPD (Lei nº 13.709/2018) e do Marco Legal de IA, você tem direito a solicitar a revisão humana desta resposta a qualquer momento pelo canal de governança."
+      },
+      "technicalDossier": {
+        "euAiActCompliance": {
+          "article13_Transparency": "COMPLIANT (Full architecture transparency, capabilities, limitations, and prompt context disclosed)",
+          "article14_HumanOversight": "COMPLIANT (Human-in-the-loop and human-on-the-loop interfaces permanently available via Master C2)",
+          "riskClassification": "LOW_TO_MEDIUM_RISK_COOPERATIVE_AI"
+        },
+        "nistAiRmfCompliance": {
+          "function": "GOVERN_MAP_MEASURE_MANAGE",
+          "explainabilityScore": 0.985,
+          "reproducibilityHash": "d33ea28113c357bd040254b03e4d22ddb7cb235a1ffe5b96ac039e40c15155d8"
+        },
+        "mechanisticTelemetry": {
+          "layersAudited": 7,
+          "neuronsPerLayer": 6,
+          "shannonEntropyBits": 2.553,
+          "l2GradientNorm": 1.1426,
+          "attentionHeadConfiguration": "Multi-Head Scaled Dot-Product (TransformerLens Hook Compliant)"
+        },
+        "epistemicLineage": {
+          "primaryKnowledgeNodes": [
+            {
+              "entity": "Jair Bolsonaro",
+              "summary": "Jair Messias Bolsonaro is a Brazilian politician and former military officer who served as the 38th president of Brazil from 2019 to 2023. He previously served ",
+              "url": "https://en.wikipedia.org/wiki/Jair_Bolsonaro"
+            },
+            {
+              "entity": "📰 delaware Brasil lança framework de IA para p",
+              "summary": "[Google News Live — Portal ERP] Publicado em Fri, 23 Oct 2026 14:29:35 GMT",
+              "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPUlVBdzlDQ09JLUZ4ZFlPcEI4VzRwQmhsdUMzTVBXMEVzeURMSi1wVzV6Z093bFFvNGxZejZJV2M5WUdsd1ZmOGdJY2JvODZtOEphTkFwcjl3MkZNUGdPLWZoeUhweDBNQnE1eEwyQlVNWmpxRkZhRkNUcnhHRnRhTnBJb1NaM00tTmVuOVNpWENsbE1uUFZOQUNNTkZjdkF2Zko4VA?oc=5"
+            },
+            {
+              "entity": "📰 “Ai, que loucura!”: Narcisa Tamborindeguy ex",
+              "summary": "[Google News Live — VEJA RIO] Publicado em Fri, 23 Oct 2026 14:02:06 GMT",
+              "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNWHliNHI2M2pSYXBQOUw2aUdXVWFWeElUc0Vic0dxcURjU3NKS3NCQWRGX3Q1dnozaDQ1RkdpX05aMXpnbmkxNkVmUDZ6a1hZUTF4eG91MWlrc1dMTDdGOHpnUGhiNi1SU2UxOTN6bzRicDdHZy1nNzI3V2dpaVNCYnZYVndodkVmSEVEbXc5cXJHS0NNSElVbk1GOUFGOGxrY3kw?oc=5"
+            }
+          ],
+          "peerReviewedDois": [
+            {
+              "title": "Alucinações poéticas (2020)",
+              "doi": "https://doi.org/10.24824/978854444080.3",
+              "year": "2020",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Quando a IA «Inventa» (2025)",
+              "doi": "https://doi.org/10.67437/rc.2025.016",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "ALUCINAÇÕES: as fronteiras entre psicopato (2022)",
+              "doi": "https://doi.org/10.24824/978652513180.1",
+              "year": "2022",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Foundation artificial intelligence models  (2027)",
+              "doi": "https://doi.org/10.1016/j.landig.2026.101056",
+              "year": "2027",
+              "journal": "Peer-Reviewed DOI Registry"
+            },
+            {
+              "title": "Artificial intelligence in acne vulgaris p (n.d.)",
+              "doi": "https://europepmc.org/article/PMC/PMC13649232",
+              "year": "2025",
+              "journal": "Peer-Reviewed DOI Registry"
+            }
+          ],
+          "hallucinationProbability": "< 0.5% (Estatisticamente Estável)"
+        },
+        "sustainabilityTelemetry": {
+          "energyJoules": 1.89,
+          "hardwareProbe": "REAL_CPU_MICROSECOND_AND_CLOCK_PROBE"
+        }
+      },
+      "cryptographicSignature": "118824c09224d15cff29b95ad6aea824bdde01ecd71252dfe8669d96a1629751",
       "auditStatus": "VERIFIED_GLASS_BOX_TRANSPARENT"
     }
   ]

@@ -72,6 +72,10 @@ $$S(u \\mid q) = \\alpha \\frac{\\mathbf{q} \\cdot \\mathbf{v}_u}{\\|\\mathbf{q}
   };
 
   function applyLanguage(lang) {
+    if (typeof I18nEngine !== 'undefined') {
+      I18nEngine.applyLanguage(lang);
+      return;
+    }
     currentLang = lang;
     localStorage.setItem('nexus_lang', lang);
     const t = I18N[lang] || I18N.pt;
@@ -160,13 +164,10 @@ $$S(u \\mid q) = \\alpha \\frac{\\mathbf{q} \\cdot \\mathbf{v}_u}{\\|\\mathbf{q}
   }
 
   function init() {
-    applyLanguage(currentLang);
-
-    const langBtn = document.getElementById('lang-toggle-btn');
-    if (langBtn) {
-      langBtn.addEventListener('click', () => {
-        applyLanguage(currentLang === 'pt' ? 'en' : 'pt');
-      });
+    if (typeof I18nEngine !== 'undefined') {
+      I18nEngine.applyLanguage(I18nEngine.currentLang);
+    } else {
+      applyLanguage(currentLang);
     }
 
     const runBtn = document.getElementById('bench-run-btn');

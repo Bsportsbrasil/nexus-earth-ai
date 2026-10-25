@@ -1,6 +1,6 @@
 // NEXUS Client Core: Real-time WebSocket Stream + Server-Side Gemini Proxy (Supports AQ.* Auth Keys & AIza* Keys)
 const KEY = 'nexus_gemini_key';
-const MODEL = 'gemini-2.5-flash';
+const MODEL = 'gemini-flash-latest';
 let serverAvailable = null;
 let ws = null;
 const wsListeners = new Set();

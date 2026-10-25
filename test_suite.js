@@ -161,6 +161,8 @@ async function runTests() {
 
   // 12. Test Frontier Research Hub, Formal Mathematical Notation & Bilingual I18n
   assert.ok(fs.existsSync(path.join(rootDir, 'research_hub.js')), 'Missing research_hub.js');
+  assert.ok(fs.existsSync(path.join(rootDir, 'i18n.js')), 'Missing i18n.js bilingual engine');
+  assert.ok(indexHtml.includes('src="i18n.js"'), 'Missing i18n.js script tag in index.html');
   assert.ok(indexHtml.includes('id="research"'), 'Missing #research Frontier Proofs & Benchmarks section');
   assert.ok(!indexHtml.includes('($a^{(l)}$)'), 'Raw unrendered LaTeX ($a^{(l)}$) found in index.html');
   assert.ok(indexHtml.includes('id="lang-toggle-btn"'), 'Missing Bilingual PT/EN toggle button');
