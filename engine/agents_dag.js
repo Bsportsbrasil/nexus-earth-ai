@@ -3,6 +3,7 @@ import { graphDB } from './graph_db.js';
 import { streamWithThinking, buildRealtimeTemporalContext } from './llm.js';
 import { tensorEngine } from './tensor.js';
 import { regulatoryEngine } from './regulatory_explainability.js';
+import { agentMemoryStore } from './agent_memory.js';
 
 /**
  * LangGraph / AutoGen-Style Autonomous Agent Instance
@@ -34,6 +35,18 @@ class AutonomousAgentNode {
    * Executes the agent's autonomous tool suite and reasoning step
    */
   async executeTurn({ runId, query, stateGraph, apiKey, clientTemporal, emitWs }) {
+    // 0. Verify Sovereign Creator Block Status
+    const agentMeta = agentMemoryStore.agents.get(this.role);
+    if (agentMeta && agentMeta.status === 'BLOCKED') {
+      throw new Error(`Agente [${this.role.toUpperCase()}] está atualmente BLOQUEADO pelo criador no Painel de Supervisão.`);
+    }
+
+    // Consult Private Vector Knowledge Base
+    const privateMemories = agentMemoryStore.queryAgentVectorMemory(this.role, query, 3);
+    const privateMemoryNote = privateMemories.length > 0
+      ? `\nBase de Conhecimento Vetorial Própria do Agente (${this.name}):\n` + privateMemories.map(m => `• [${m.category} (Sim: ${(m.similarity * 100).toFixed(0)}%)]: ${m.text}`).join('\n')
+      : '';
+
     const temporal = stateGraph.temporal;
     const rag = stateGraph.rag;
 
@@ -105,6 +118,16 @@ class AutonomousAgentNode {
         tokens: Math.ceil(finalOutput.length / 4)
       });
     }
+
+    // Update Private Vector Memory with New Execution Insight
+    try {
+      agentMemoryStore.addAgentVectorMemory(
+        this.role,
+        `[Orquestração DAG #${runId}] Diretiva: "${query.slice(0, 90)}". Executado por ${this.name}.`,
+        'dag_reasoning_insight',
+        { runId, query: query.slice(0, 50) }
+      );
+    } catch (_) {}
 
     return {
       role: this.role,

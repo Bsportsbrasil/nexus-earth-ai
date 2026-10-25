@@ -20,6 +20,7 @@ import { authEngine } from './engine/auth_identity.js';
 import { sovereignBriefing } from './engine/sovereign_briefing.js';
 import { lennoxGuardian } from './engine/lennox_guardian.js';
 import { regulatoryEngine } from './engine/regulatory_explainability.js';
+import { agentMemoryStore } from './engine/agent_memory.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -380,7 +381,93 @@ async function runTests() {
   assert.ok(i18nSrc.includes('navArticles') && i18nSrc.includes('navFaq') && i18nSrc.includes('navAbout'), 'i18n.js missing bilingual definitions for articles, faq, and about');
   console.log('✓ Layer 21: Institutional Central (/articles, /faq, /about, Global Footer & Full Mobile Navigation Drawer) verified');
 
-  console.log('=== ALL 21 ARCHITECTURAL, INSTITUTIONAL, MOBILE UX & COMPLIANCE LAYERS PASSED 100% ===');
+  // 22. Test Sovereign Multi-Agent Evaluation & Conversation Dashboard, Isolated Vector Stores, Voice/Text Turn, Block & Purge
+  const overview = agentMemoryStore.getDashboardOverview();
+  assert.ok(overview.agents.length >= 5, 'Default agents missing from AgentMemoryStore');
+  assert.ok(overview.systemDirective.includes('conversacional altamente seguro, focado em privacidade'), 'Agent system directive missing user specification');
+
+  // Verify isolated vector memory partition & cosine similarity retrieval
+  const testMemPlanner = agentMemoryStore.addAgentVectorMemory(
+    'planner',
+    'O criador instruiu priorizar sustentabilidade hídrica em projetos de infraestrutura',
+    'creator_instruction'
+  );
+  assert.ok(testMemPlanner.id.startsWith('vec_planner_'), 'Planner vector memory ID format invalid');
+
+  const plannerMatches = agentMemoryStore.queryAgentVectorMemory('planner', 'sustentabilidade hídrica em infraestrutura', 2);
+  assert.ok(plannerMatches.length >= 1, 'Planner vector query returned no matches');
+  assert.ok(plannerMatches[0].similarity > 0.4, 'Planner cosine similarity unexpectedly low');
+
+  // Assert STRICT isolation: Critic or Verifier should NOT have Planner's private memory
+  const criticMatches = agentMemoryStore.queryAgentVectorMemory('critic', 'sustentabilidade hídrica em infraestrutura', 2);
+  assert.ok(!criticMatches.some(m => m.id === testMemPlanner.id), 'Cross-agent data leakage detected: Critic saw Planner private memory');
+
+  // Test conversational turn with automated vector update & natural tone
+  const convAura = await agentMemoryStore.converse({
+    agentId: 'aura',
+    message: 'Como você abordaria uma transição energética justa e inclusiva?',
+    userName: 'Criador Soberano',
+    voiceEnabled: true
+  });
+  assert.ok(convAura.reply.length > 20, 'Aura conversational turn empty');
+  assert.ok(convAura.newLearnedMemory && convAura.newLearnedMemory.id, 'Conversational turn did not index new learned memory');
+  assert.ok(convAura.xaiPassport && convAura.xaiPassport.passportId, 'Conversational turn missing XAI passport');
+  assert.ok(convAura.patterns.turnCount >= 1, 'Conversational pattern turnCount not incremented');
+
+  // Test Creator Block Control (Freeze/Unfreeze)
+  agentMemoryStore.setAgentStatus('critic', 'BLOCKED');
+  const blockedConv = await agentMemoryStore.converse({
+    agentId: 'critic',
+    message: 'Audite a integridade dos dados',
+    userName: 'Criador Soberano'
+  });
+  assert.equal(blockedConv.status, 'BLOCKED', 'Blocked agent did not return BLOCKED status');
+  assert.ok(blockedConv.reply.includes('BLOQUEADO'), 'Blocked agent reply missing block notice');
+
+  // Test that DAG rejects or handles blocked agent
+  await assert.rejects(
+    async () => {
+      await executeAgentDAG({ query: 'Deep Learning Test', apiKey: '' });
+    },
+    /BLOQUEADO/,
+    'DAG should reject execution when an agent is blocked by creator'
+  );
+
+  // Restore Critic to ACTIVE
+  agentMemoryStore.setAgentStatus('critic', 'ACTIVE');
+  assert.equal(agentMemoryStore.agents.get('critic').status, 'ACTIVE', 'Failed to restore agent status to ACTIVE');
+
+  // Test Creator Purge Control (Right to be Forgotten)
+  const prePurgeCount = (agentMemoryStore.vectorStores.get('planner') || []).length;
+  assert.ok(prePurgeCount > 0, 'Planner should have vectors before purge');
+  const purgeRes = agentMemoryStore.purgeAgentMemory('planner');
+  assert.equal(purgeRes.status, 'MEMORY_PURGED_SUCCESSFULLY', 'Purge memory failed');
+  assert.equal((agentMemoryStore.vectorStores.get('planner') || []).length, 0, 'Planner vectors not wiped to zero');
+  assert.ok((agentMemoryStore.vectorStores.get('aura') || []).length > 0, 'Aura vectors should remain intact after Planner purge (isolated deletion)');
+
+  // Test Custom Agent Creation & Deletion
+  const customAgent = agentMemoryStore.createCustomAgent({
+    name: 'TEST_RESEARCHER',
+    role: 'Especialista em RedTeam e Pentest Ético',
+    description: 'Agente criado sob demanda para testes de segurança'
+  });
+  assert.equal(customAgent.id, 'test_researcher', 'Custom agent ID mismatch');
+  assert.ok(agentMemoryStore.agents.has('test_researcher'), 'Custom agent not registered');
+  const delRes = agentMemoryStore.deleteAgent('test_researcher');
+  assert.equal(delRes.action, 'CUSTOM_AGENT_DELETED_PERMANENTLY', 'Custom agent deletion failed');
+  assert.equal(agentMemoryStore.agents.has('test_researcher'), false, 'Custom agent still exists after deletion');
+
+  // Verify Frontend UI Elements for the Multi-Agent Dashboard
+  const finalHtml = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
+  assert.ok(finalHtml.includes('id="agent-dashboard-view"'), 'index.html missing #agent-dashboard-view');
+  assert.ok(finalHtml.includes('id="dash-voice-mic-btn"'), 'index.html missing #dash-voice-mic-btn (Live Voice Web Speech)');
+  assert.ok(finalHtml.includes('id="dash-agent-toggle-block-btn"'), 'index.html missing block agent button');
+  assert.ok(finalHtml.includes('id="dash-agent-purge-memory-btn"'), 'index.html missing purge memory button');
+  assert.ok(finalHtml.includes('src="agent_dashboard_ui.js"'), 'index.html missing agent_dashboard_ui.js script tag');
+
+  console.log(`✓ Layer 22: Sovereign Multi-Agent Evaluation & Conversation Dashboard (Isolated 128D Vectors, Pattern Adaptation, Voice/Text Turn, Creator Block & Right-to-be-Forgotten Purge) verified (${overview.agentsCount} agents active)`);
+
+  console.log('=== ALL 22 ARCHITECTURAL, INSTITUTIONAL, MULTI-AGENT SUPERVISION & COMPLIANCE LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

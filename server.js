@@ -22,6 +22,7 @@ import { authEngine } from './engine/auth_identity.js';
 import { sovereignBriefing } from './engine/sovereign_briefing.js';
 import { lennoxGuardian } from './engine/lennox_guardian.js';
 import { regulatoryEngine } from './engine/regulatory_explainability.js';
+import { agentMemoryStore } from './engine/agent_memory.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -524,6 +525,70 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // 5a. Dedicated Multi-Agent Evaluation, Voice/Text Conversation & Memory Hub Endpoints
+  if (pathname === '/api/agents/dashboard') {
+    if (req.method === 'GET') {
+      return jsonResponse(res, 200, agentMemoryStore.getDashboardOverview());
+    }
+  }
+
+  if (pathname === '/api/agents/converse' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const convRes = await agentMemoryStore.converse({
+        agentId: body.agentId || 'aura',
+        message: body.message || '',
+        userName: body.userName || 'Criador',
+        apiKey: body.apiKey || '',
+        voiceEnabled: !!body.voiceEnabled,
+        clientTemporal: body.clientTemporal
+      });
+      return jsonResponse(res, 200, convRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/agents/block' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const updated = agentMemoryStore.setAgentStatus(body.agentId, body.blocked ? 'BLOCKED' : 'ACTIVE');
+      return jsonResponse(res, 200, { agentId: body.agentId, status: updated.status, agent: updated });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/agents/purge-memory' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const purgeRes = agentMemoryStore.purgeAgentMemory(body.agentId);
+      return jsonResponse(res, 200, purgeRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/agents/delete' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const delRes = agentMemoryStore.deleteAgent(body.agentId);
+      return jsonResponse(res, 200, delRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/agents/create' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const created = agentMemoryStore.createCustomAgent(body);
+      return jsonResponse(res, 201, created);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
   // 5b. Task & Calendar Automation Endpoints (/api/tasks, /api/tasks/ics, /api/tasks/plan)
   if (pathname === '/api/tasks') {
     if (req.method === 'GET') {
@@ -975,6 +1040,9 @@ const server = http.createServer(async (req, res) => {
     '/chat',
     '/neural',
     '/agents',
+    '/agentes',
+    '/agents-dashboard',
+    '/agentes-dashboard',
     '/knowledge',
     '/graph',
     '/studio',

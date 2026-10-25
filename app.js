@@ -75,6 +75,9 @@ const NexusRouter = (() => {
     'chat': 'command-center',
     'neural': 'neural',
     'agents': 'agents',
+    'agentes': 'agents',
+    'agents-dashboard': 'agents',
+    'agentes-dashboard': 'agents',
     'knowledge': 'knowledge',
     'graph': 'knowledge',
     'studio': 'studio',
@@ -150,6 +153,10 @@ const NexusRouter = (() => {
         break;
       case 'agents':
         if (typeof Agents !== 'undefined') ensureModuleInit('Agents', Agents);
+        if (typeof AgentDashboardUI !== 'undefined') {
+          ensureModuleInit('AgentDashboardUI', AgentDashboardUI);
+          AgentDashboardUI.loadDashboardState();
+        }
         break;
       case 'knowledge':
         if (typeof Graph !== 'undefined') {
@@ -406,4 +413,25 @@ document.addEventListener('DOMContentLoaded', () => {
       Graph.loadTopic(searchQuery);
     }
   }
+
+  // Multi-Agent Dashboard Subtab Controller
+  window.switchAgentSubTab = function(tab) {
+    const dashView = document.getElementById('agent-dashboard-view');
+    const dagView = document.getElementById('agent-dag-view');
+    const btnDash = document.getElementById('tab-btn-agent-dashboard');
+    const btnDag = document.getElementById('tab-btn-agent-dag');
+
+    if (tab === 'dashboard') {
+      if (dashView) dashView.style.display = 'block';
+      if (dagView) dagView.style.display = 'none';
+      if (btnDash) btnDash.classList.add('active');
+      if (btnDag) btnDag.classList.remove('active');
+      if (window.AgentDashboardUI) window.AgentDashboardUI.loadDashboardState();
+    } else {
+      if (dashView) dashView.style.display = 'none';
+      if (dagView) dagView.style.display = 'block';
+      if (btnDash) btnDash.classList.remove('active');
+      if (btnDag) btnDag.classList.add('active');
+    }
+  };
 });

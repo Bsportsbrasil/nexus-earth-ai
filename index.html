@@ -749,74 +749,184 @@
     </div>
   </section>
 
-  <!-- Multi-Agent Section -->
+  <!-- Multi-Agent Section & Sovereign Supervision Dashboard -->
   <section id="agents" class="section" data-route="agents">
     <div class="section-header">
-      <div class="section-tag">Module 02</div>
-      <h2 class="section-title">Multi-Agent Reasoning</h2>
-      <p class="section-desc">4 specialized AI agents collaborate, debate, and refine — arriving at superintelligent conclusions.</p>
+      <div class="section-tag">Module 02 • Supervisão Soberana &amp; Raciocínio Multi-Agente</div>
+      <h2 class="section-title">Centro de Supervisão, Diálogo &amp; Avaliação de Agentes</h2>
+      <p class="section-desc">Ambiente de teste e supervisão individual de cada agente com voz e texto, memória vetorial própria isolada, análise de padrões e controle de bloqueio e exclusão sob demanda do criador.</p>
     </div>
-    <div class="agents-container">
-      <div class="agent-input-row">
-        <input type="text" id="agent-prompt" class="agent-input" placeholder="Enter a problem for the agents to solve..." value="How would a superintelligent AI redesign the global economy to eliminate poverty?" />
-        <button class="btn-primary" id="agent-run-btn">
-          <span>Run Agents</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </button>
+
+    <!-- Subtabs: Dashboard de Supervisão vs Orquestrador DAG -->
+    <div class="agent-subtabs-bar">
+      <button class="agent-subtab-btn active" id="tab-btn-agent-dashboard" onclick="switchAgentSubTab('dashboard')">
+        🤖 Dashboard de Diálogo &amp; Supervisão
+      </button>
+      <button class="agent-subtab-btn" id="tab-btn-agent-dag" onclick="switchAgentSubTab('dag')">
+        ⚡ Orquestrador Multi-Agente DAG
+      </button>
+    </div>
+
+    <!-- View 1: Sovereign Multi-Agent Evaluation & Conversation Dashboard -->
+    <div id="agent-dashboard-view">
+      <div class="agent-dashboard-grid">
+        <!-- Col 1: Agent Rail -->
+        <div class="agent-rail-col">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem">
+            <span style="font-size:0.75rem;font-weight:700;color:var(--text-secondary);letter-spacing:0.08em;text-transform:uppercase">Agentes Registrados</span>
+            <button class="btn-secondary" id="dash-create-agent-btn" style="padding:3px 8px;font-size:0.72rem" title="Adicionar Novo Agente">+ Novo</button>
+          </div>
+          <div class="agent-rail-list" id="agents-nav-rail">
+            <!-- Rendered dynamically by AgentDashboardUI -->
+          </div>
+        </div>
+
+        <!-- Col 2: Chat & Voice Interactive Testing Canvas -->
+        <div class="agent-chat-col glass-panel">
+          <div class="agent-chat-header">
+            <div>
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <span style="font-weight:700;font-size:0.98rem;color:var(--text-primary)" id="dash-agent-name">AURA (Live Communication)</span>
+                <span class="agent-badge DONE" id="dash-agent-status-badge">🟢 ATIVO</span>
+              </div>
+              <div style="font-size:0.75rem;color:var(--text-secondary)" id="dash-agent-role">Companion de Comunicação &amp; Inclusão</div>
+            </div>
+            <div class="agent-chat-actions">
+              <button class="btn-secondary btn-block" id="dash-agent-toggle-block-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem">🛑 Bloquear Agente</button>
+              <button class="btn-secondary" id="dash-agent-purge-memory-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem" title="Expurgar toda a base vetorial própria deste agente">🗑️ Limpar Memória</button>
+              <button class="btn-secondary" id="dash-agent-delete-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem;color:#f43f5e" title="Excluir ou desativar agente">❌ Excluir</button>
+            </div>
+          </div>
+
+          <div class="dash-chat-messages" id="dash-chat-messages">
+            <div class="dash-chat-sys-log">
+              🛡️ Conversa altamente segura e criptografada (AES-256). Tom natural e amigável ativado. Cada mensagem consulta e atualiza a base vetorial própria do agente.
+            </div>
+          </div>
+
+          <div class="agent-chat-input-bar">
+            <button class="btn-voice-mic" id="dash-voice-mic-btn" title="Falar por voz via microfone">🎙️ Falar</button>
+            <button class="btn-secondary" id="dash-voice-mute-btn" style="font-size:0.74rem;padding:0.45rem 0.65rem">🔊 Voz Ativa</button>
+            <input type="text" id="dash-chat-input" class="text-input" placeholder="Converse ou teste o conhecimento aprendido deste agente..." style="flex:1" />
+            <button class="btn-primary" id="dash-chat-send-btn" style="padding:0.55rem 1rem">
+              <span>Enviar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Col 3: Isolated Vector Memory & Pattern Inspector -->
+        <div class="agent-inspector-col">
+          <div class="panel glass-panel" style="padding:0.9rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+              <span class="panel-title" style="margin:0">🧠 Memória Vetorial Própria</span>
+              <span class="agent-badge DONE" id="insp-vector-count" style="font-size:0.64rem">0 vetores</span>
+            </div>
+            <div style="font-size:0.72rem;color:var(--text-secondary);margin-bottom:0.6rem">
+              Projeção densa de 128 dimensões normalizada L2 com similaridade de cosseno.
+            </div>
+            <div style="font-size:0.74rem;font-weight:600;color:var(--cyan);margin-bottom:0.35rem">Consultado nesta Mensagem:</div>
+            <div id="insp-matches-list" style="max-height:160px;overflow-y:auto">
+              <div style="font-size:0.75rem;color:var(--text-secondary)">Envie uma mensagem para inspecionar a busca vetorial.</div>
+            </div>
+            <div id="insp-new-learned" style="margin-top:0.6rem">
+              <!-- New vector memory rendered here -->
+            </div>
+          </div>
+
+          <div class="panel glass-panel" style="padding:0.9rem">
+            <div class="panel-title" style="margin-bottom:0.4rem">📊 Análise de Padrões Conversacionais</div>
+            <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.75rem">
+              <div style="display:flex;justify-content:space-between">
+                <span style="color:var(--text-secondary)">Cadência / Extensão:</span>
+                <strong style="color:var(--text-primary)" id="insp-sentence-len">12 palavras/frase</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between">
+                <span style="color:var(--text-secondary)">Estilo de Tom:</span>
+                <span style="color:var(--emerald);font-weight:600">Natural &amp; Amigável</span>
+              </div>
+              <div style="margin-top:0.3rem">
+                <span style="color:var(--text-secondary);display:block;margin-bottom:0.25rem">Tópicos Recorrentes:</span>
+                <div id="insp-topics">
+                  <span class="topic-pill">#alinhamento</span>
+                  <span class="topic-pill">#aprendizado</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel glass-panel" style="padding:0.75rem;background:rgba(0,245,255,0.03);border-color:rgba(0,245,255,0.18)">
+            <div style="font-size:0.68rem;color:var(--text-secondary);line-height:1.4">
+              <strong style="color:var(--cyan)">🔒 Soberania &amp; Direito ao Esquecimento:</strong> O contexto de cada agente é 100% isolado e passível de expurgo imediato (botão "Limpar Memória") sob seu controle exclusivo, sem afetar os outros agentes.
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="agents-grid" id="agents-grid">
-        <div class="agent-card glass-panel" id="agent-planner">
-          <div class="agent-header">
-            <div class="agent-icon planner-icon">🧠</div>
-            <div class="agent-info">
-              <span class="agent-name">PLANNER</span>
-              <span class="agent-role">Strategic Decomposition</span>
-            </div>
-            <div class="agent-badge" id="planner-badge">IDLE</div>
-          </div>
-          <div class="agent-output" id="planner-output"><span class="idle-text">Awaiting task…</span></div>
-          <div class="agent-footer"><span class="token-count" id="planner-tokens">0 tokens</span></div>
+    </div>
+
+    <!-- View 2: Collaborative Multi-Agent DAG Orchestrator -->
+    <div id="agent-dag-view" style="display:none">
+      <div class="agents-container">
+        <div class="agent-input-row">
+          <input type="text" id="agent-prompt" class="agent-input" placeholder="Enter a problem for the agents to solve..." value="How would a superintelligent AI redesign the global economy to eliminate poverty?" />
+          <button class="btn-primary" id="agent-run-btn">
+            <span>Run Agents</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
         </div>
-        <div class="agent-card glass-panel" id="agent-critic">
-          <div class="agent-header">
-            <div class="agent-icon critic-icon">🔬</div>
-            <div class="agent-info">
-              <span class="agent-name">CRITIC</span>
-              <span class="agent-role">Logical Verification</span>
+        <div class="agents-grid" id="agents-grid">
+          <div class="agent-card glass-panel" id="agent-planner">
+            <div class="agent-header">
+              <div class="agent-icon planner-icon">🧠</div>
+              <div class="agent-info">
+                <span class="agent-name">PLANNER</span>
+                <span class="agent-role">Strategic Decomposition</span>
+              </div>
+              <div class="agent-badge" id="planner-badge">IDLE</div>
             </div>
-            <div class="agent-badge" id="critic-badge">IDLE</div>
+            <div class="agent-output" id="planner-output"><span class="idle-text">Awaiting task…</span></div>
+            <div class="agent-footer"><span class="token-count" id="planner-tokens">0 tokens</span></div>
           </div>
-          <div class="agent-output" id="critic-output"><span class="idle-text">Awaiting task…</span></div>
-          <div class="agent-footer"><span class="token-count" id="critic-tokens">0 tokens</span></div>
-        </div>
-        <div class="agent-card glass-panel" id="agent-executor">
-          <div class="agent-header">
-            <div class="agent-icon executor-icon">⚡</div>
-            <div class="agent-info">
-              <span class="agent-name">EXECUTOR</span>
-              <span class="agent-role">Solution Synthesis</span>
+          <div class="agent-card glass-panel" id="agent-critic">
+            <div class="agent-header">
+              <div class="agent-icon critic-icon">🔬</div>
+              <div class="agent-info">
+                <span class="agent-name">CRITIC</span>
+                <span class="agent-role">Logical Verification</span>
+              </div>
+              <div class="agent-badge" id="critic-badge">IDLE</div>
             </div>
-            <div class="agent-badge" id="executor-badge">IDLE</div>
+            <div class="agent-output" id="critic-output"><span class="idle-text">Awaiting task…</span></div>
+            <div class="agent-footer"><span class="token-count" id="critic-tokens">0 tokens</span></div>
           </div>
-          <div class="agent-output" id="executor-output"><span class="idle-text">Awaiting task…</span></div>
-          <div class="agent-footer"><span class="token-count" id="executor-tokens">0 tokens</span></div>
-        </div>
-        <div class="agent-card glass-panel" id="agent-verifier">
-          <div class="agent-header">
-            <div class="agent-icon verifier-icon">✅</div>
-            <div class="agent-info">
-              <span class="agent-name">VERIFIER</span>
-              <span class="agent-role">Consensus & Validation</span>
+          <div class="agent-card glass-panel" id="agent-executor">
+            <div class="agent-header">
+              <div class="agent-icon executor-icon">⚡</div>
+              <div class="agent-info">
+                <span class="agent-name">EXECUTOR</span>
+                <span class="agent-role">Solution Synthesis</span>
+              </div>
+              <div class="agent-badge" id="executor-badge">IDLE</div>
             </div>
-            <div class="agent-badge" id="verifier-badge">IDLE</div>
+            <div class="agent-output" id="executor-output"><span class="idle-text">Awaiting task…</span></div>
+            <div class="agent-footer"><span class="token-count" id="executor-tokens">0 tokens</span></div>
           </div>
-          <div class="agent-output" id="verifier-output"><span class="idle-text">Awaiting task…</span></div>
-          <div class="agent-footer"><span class="token-count" id="verifier-tokens">0 tokens</span></div>
+          <div class="agent-card glass-panel" id="agent-verifier">
+            <div class="agent-header">
+              <div class="agent-icon verifier-icon">✅</div>
+              <div class="agent-info">
+                <span class="agent-name">VERIFIER</span>
+                <span class="agent-role">Consensus &amp; Validation</span>
+              </div>
+              <div class="agent-badge" id="verifier-badge">IDLE</div>
+            </div>
+            <div class="agent-output" id="verifier-output"><span class="idle-text">Awaiting task…</span></div>
+            <div class="agent-footer"><span class="token-count" id="verifier-tokens">0 tokens</span></div>
+          </div>
         </div>
-      </div>
-      <div class="consensus-panel glass-panel" id="consensus-panel" style="display:none">
-        <div class="panel-title">🌐 Superintelligence Consensus</div>
-        <div class="consensus-output" id="consensus-output"></div>
+        <div class="consensus-panel glass-panel" id="consensus-panel" style="display:none">
+          <div class="panel-title">🌐 Superintelligence Consensus</div>
+          <div class="consensus-output" id="consensus-output"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1853,6 +1963,7 @@
   <script src="assistant_studio.js"></script>
   <script src="research_hub.js"></script>
   <script src="auth_ui.js"></script>
+  <script src="agent_dashboard_ui.js"></script>
   <script src="i18n.js"></script>
   <script src="app.js"></script>
 </body>

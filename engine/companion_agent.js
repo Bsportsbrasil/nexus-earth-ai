@@ -8,6 +8,7 @@ import { broker } from './broker.js';
 import { globalIntel } from './global_intelligence.js';
 import { lennoxGuardian } from './lennox_guardian.js';
 import { regulatoryEngine } from './regulatory_explainability.js';
+import { agentMemoryStore } from './agent_memory.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const MEMORY_PATH = path.join(__dirname, '..', 'data', 'companion_memory.json');
@@ -192,6 +193,12 @@ class CompanionAgentEngine {
 
     const activeName = this.state.userName || 'Ana';
     this.state.interactionCount++;
+
+    // Check Sovereign Creator Block Status
+    const auraMeta = agentMemoryStore.agents.get('aura');
+    if (auraMeta && auraMeta.status === 'BLOCKED') {
+      throw new Error('AURA está atualmente BLOQUEADA pelo criador no Painel de Supervisão.');
+    }
 
     const temporal = buildRealtimeTemporalContext(clientTemporal);
     const emotionProfile = this.detectEmotionAndIntent(cleanMsg, activeName);
@@ -410,6 +417,16 @@ class CompanionAgentEngine {
 
     if (onChunk) onChunk(reply);
     this._save();
+
+    // Consult & Update AURA's Private Vector Memory Store
+    try {
+      agentMemoryStore.addAgentVectorMemory(
+        'aura',
+        `[Conversa com ${activeName}] Pergunta: "${cleanMsg.slice(0, 80)}". Resposta empática gerada: "${reply.slice(0, 80)}"`,
+        'aura_turn_insight',
+        { userName: activeName }
+      );
+    } catch (_) {}
 
     const xaiPassport = regulatoryEngine.generateDecisionPassport({
       decisionType: 'AURA_LIVE_CONVERSATION',

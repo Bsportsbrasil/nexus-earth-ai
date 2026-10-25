@@ -8,6 +8,27 @@
   ],
   "dailyJournal": [
     {
+      "id": "52caacfa-f155-43bf-a006-b319696146db",
+      "date": "2026-10-25",
+      "time": "11:29:05",
+      "insight": "Ana consultou data/hora em tempo real (11:29:05)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "7710bf49-5fbf-4da4-9cd8-19d45f3bdc06",
+      "date": "2026-10-25",
+      "time": "11:29:05",
+      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "d4196818-ab9e-44bf-9996-1428de9d4008",
+      "date": "2026-10-25",
+      "time": "11:29:05",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "59286e18-782c-4f1c-aff7-843d8d43ce1f",
       "date": "2026-10-25",
       "time": "11:18:17",
@@ -335,28 +356,7 @@
       "time": "02:32:21",
       "insight": "Ana explorou \"O que faz bem ao osso faz bem a tudo (2020)\" [Tom: 🤝 Conexão Natural & Empática]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "e9777092-0257-400c-8add-d14821f666ea",
-      "date": "2026-10-25",
-      "time": "02:24:24",
-      "insight": "Ana consultou data/hora em tempo real (02:24:24)",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "9bfdad69-7bf4-4be8-816f-6bf1faeeb45d",
-      "date": "2026-10-25",
-      "time": "02:24:24",
-      "insight": "Ana explorou \"VisionQuest\" [Tom: 🌱 Frustração / Apoio Paciente]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "fb89f5e4-29b7-4744-bcab-7066dbba176c",
-      "date": "2026-10-25",
-      "time": "02:24:24",
-      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 109
+  "interactionCount": 111
 }
