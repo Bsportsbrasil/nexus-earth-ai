@@ -19,6 +19,7 @@ import { c2Engine } from './engine/c2_sovereign.js';
 import { cloudVault } from './engine/cloud_connectors.js';
 import { globalIntel } from './engine/global_intelligence.js';
 import { authEngine } from './engine/auth_identity.js';
+import { sovereignBriefing } from './engine/sovereign_briefing.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -160,10 +161,15 @@ async function parseJsonBody(req) {
   });
 }
 
+const ZERO_MOBILE_DATA_PERMISSIONS_POLICY = 'camera=(), geolocation=(), contacts=(), usb=(), bluetooth=(), serial=(), hid=(), magnetometer=(), gyroscope=(), accelerometer=(), payment=(), midi=(), browsing-topics=(), interest-cohort=()';
+
 function jsonResponse(res, status, data) {
   res.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
     'X-Content-Type-Options': 'nosniff',
+    'Permissions-Policy': ZERO_MOBILE_DATA_PERMISSIONS_POLICY,
+    'X-Mobile-Device-Data-Access': 'ZERO_BYTES_ENFORCED',
+    'Referrer-Policy': 'no-referrer',
     'Cache-Control': 'no-store'
   });
   res.end(JSON.stringify(data));
@@ -335,7 +341,8 @@ const server = http.createServer(async (req, res) => {
       return jsonResponse(res, 200, {
         token,
         state: securityController.getState(),
-        c2: c2Engine.getFullDashboardState()
+        c2: c2Engine.getFullDashboardState(),
+        sovereignBriefing: await sovereignBriefing.generateCreatorVoiceBriefing()
       });
     } catch (e) {
       return jsonResponse(res, 400, { error: e.message });
@@ -353,7 +360,8 @@ const server = http.createServer(async (req, res) => {
       return jsonResponse(res, 200, {
         ...securityController.getState(),
         telemetry: telemetry.getSnapshot(gStats, bStats),
-        c2: c2Engine.getFullDashboardState()
+        c2: c2Engine.getFullDashboardState(),
+        sovereignBriefing: await sovereignBriefing.generateCreatorVoiceBriefing()
       });
     }
     if (req.method === 'POST') {
@@ -386,6 +394,11 @@ const server = http.createServer(async (req, res) => {
           extra.pentestReport = c2Engine.runAutomatedPentest();
         } else if (body.action === 'create_backup') {
           extra.backup = c2Engine.createEncryptedBackup();
+        } else if (body.action === 'ask_directive_advisor') {
+          extra.advisorReply = await sovereignBriefing.generateCreatorVoiceBriefing({
+            question: body.question || '',
+            apiKey: body.apiKey || ''
+          });
         } else if (body.action === 'simulate_threat') {
           try {
             c2Engine.inspectAndFilterRequest({
@@ -898,6 +911,9 @@ const server = http.createServer(async (req, res) => {
     const headers = {
       'Content-Type': isManifest ? 'application/manifest+json; charset=utf-8' : (MIME_TYPES[ext] || 'application/octet-stream'),
       'X-Content-Type-Options': 'nosniff',
+      'Permissions-Policy': ZERO_MOBILE_DATA_PERMISSIONS_POLICY,
+      'X-Mobile-Device-Data-Access': 'ZERO_BYTES_ENFORCED',
+      'Referrer-Policy': 'no-referrer',
       'X-Robots-Tag': isRestrictedAdmin
         ? 'noindex, nofollow, noarchive, nosnippet'
         : 'index, follow, max-image-preview:large, max-snippet:-1'

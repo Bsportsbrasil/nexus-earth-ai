@@ -1,4 +1,21 @@
-// App Bootstrap + Modular SPA Router (NexusRouter) + Lazy-Loading Controller + PWA Manager
+// App Bootstrap + Modular SPA Router (NexusRouter) + Lazy-Loading Controller + Zero-Mobile-Data Sandbox + PWA Manager
+(function enforceMobileZeroDeviceDataSandbox() {
+  try {
+    // Strictly block access to mobile device geolocation, contacts, bluetooth, usb, and serial APIs
+    if (typeof navigator !== 'undefined') {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition = (_, err) => err && err({ code: 1, message: 'NEXUS_ZERO_DEVICE_DATA_POLICY: Geolocation access disabled.' });
+        navigator.geolocation.watchPosition = (_, err) => err && err({ code: 1, message: 'NEXUS_ZERO_DEVICE_DATA_POLICY: Geolocation access disabled.' });
+      }
+      ['contacts', 'bluetooth', 'usb', 'serial', 'hid'].forEach((api) => {
+        if (api in navigator) {
+          try { Object.defineProperty(navigator, api, { get: () => undefined, configurable: false }); } catch (_) {}
+        }
+      });
+    }
+  } catch (_) {}
+})();
+
 let deferredInstallPrompt = null;
 
 window.addEventListener('beforeinstallprompt', (e) => {

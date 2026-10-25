@@ -17,6 +17,7 @@ import { buildRealtimeTemporalContext } from './engine/llm.js';
 import { cloudVault } from './engine/cloud_connectors.js';
 import { globalIntel } from './engine/global_intelligence.js';
 import { authEngine } from './engine/auth_identity.js';
+import { sovereignBriefing } from './engine/sovereign_briefing.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -264,7 +265,24 @@ async function runTests() {
   authEngine.deleteOwnAccount(regOut.user.id);
   console.log('✓ Layer 17: Enterprise Identity, Registration, PBKDF2-SHA512 Login, 2FA/MFA, Session Revocation & LGPD Portability verified');
 
-  console.log('=== ALL 17 ARCHITECTURAL, IDENTITY/AUTH, OMNISCIENT NEWS/SOCIAL, REAL BACKEND ENGINES, MODULAR UI/UX, MASTER C2 & COMPANION LAYERS PASSED 100% ===');
+  // 18. Test Sovereign Knowledge Distiller, NEXUS Directive Analyzer, Direct Creator Voice Advisor & Zero-Mobile-Data Shield
+  const scrubbed = sovereignBriefing.scrubDeviceAndPersonalData('Contato +55 (11) 99876-5432 email user@phone.com IP 192.168.1.15 sobre astronomia visual');
+  assert.ok(scrubbed.includes('[CELULAR_PROTEGIDO]') && scrubbed.includes('[EMAIL_ANONIMIZADO]') && scrubbed.includes('[IP_ISOLADO]'), 'Mobile & PII scrubber failed');
+
+  const distilledEntry = sovereignBriefing.recordAgentKnowledge({
+    sourceAgent: 'AURA_LIVE_COMPANION',
+    topic: 'Pedagogia Visual & Ciência',
+    rawKnowledge: 'Aprendizado cooperativo sobre astrofísica com respeito à autonomia humana e método visual previsível.'
+  });
+  assert.ok(distilledEntry.directiveAudit.compliant, 'Distilled knowledge failed NEXUS directive compliance');
+  assert.ok(distilledEntry.deviceDataAccessed.includes('ZERO_BYTES'), 'Zero mobile device data guarantee missing');
+
+  const creatorBriefing = await sovereignBriefing.generateCreatorVoiceBriefing({ question: 'Qual o resumo do aprendizado dos agentes?' });
+  assert.ok(creatorBriefing.spokenBriefing.includes('Comandante') || creatorBriefing.spokenBriefing.length > 40, 'Creator voice briefing failed');
+  assert.ok(creatorBriefing.deviceIsolationPolicy.enforcedPermissionsPolicy.includes('camera=()'), 'Permissions-Policy mobile isolation missing');
+  console.log(`✓ Layer 18: Sovereign Knowledge Distiller, NEXUS Directive Analyzer, Direct Creator Voice Advisor & Zero-Mobile-Data Shield verified (${creatorBriefing.totalDistilledItems} syntheses)`);
+
+  console.log('=== ALL 18 ARCHITECTURAL, SOVEREIGN VOICE ADVISOR, ZERO-MOBILE-DATA, IDENTITY/AUTH, OMNISCIENT NEWS/SOCIAL & MASTER C2 LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

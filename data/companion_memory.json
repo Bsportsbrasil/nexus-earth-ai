@@ -8,6 +8,27 @@
   ],
   "dailyJournal": [
     {
+      "id": "e9777092-0257-400c-8add-d14821f666ea",
+      "date": "2026-10-25",
+      "time": "02:24:24",
+      "insight": "Ana consultou data/hora em tempo real (02:24:24)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "9bfdad69-7bf4-4be8-816f-6bf1faeeb45d",
+      "date": "2026-10-25",
+      "time": "02:24:24",
+      "insight": "Ana explorou \"VisionQuest\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "fb89f5e4-29b7-4744-bcab-7066dbba176c",
+      "date": "2026-10-25",
+      "time": "02:24:24",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "0c49285a-f44c-4536-a6a0-9a47367a6eb3",
       "date": "2026-10-25",
       "time": "02:16:08",
@@ -335,28 +356,7 @@
       "time": "01:54:29",
       "insight": "Ana explorou \"ROMANA (2020)\" [Tom: 🤝 Conexão Natural & Empática]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "e03a00ae-9dc2-43f2-aa76-8a4fe0c1b8ec",
-      "date": "2026-10-25",
-      "time": "01:53:08",
-      "insight": "Ana explorou \"O que acontece no seu cérebro quando você  (2026)\" [Tom: 🎯 Solicitação Séria / Atenção & Foco]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "753c6b30-d5d4-44c7-81de-5d56a943b4c6",
-      "date": "2026-10-25",
-      "time": "01:52:18",
-      "insight": "Ana consultou data/hora em tempo real (01:52:18)",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "549ddc5d-f92a-4b90-9615-dd7bae47d9b9",
-      "date": "2026-10-25",
-      "time": "01:52:18",
-      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🌱 Frustração / Apoio Paciente]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 64
+  "interactionCount": 66
 }

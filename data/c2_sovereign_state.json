@@ -878,6 +878,138 @@
       "severity": "CRITICAL",
       "prevHash": "e9fb0f16a6aaf284",
       "hash": "6e5715719bb0b19e7cf694049b92fc5b50b1bfed388568ab5eac58e2abd86734"
+    },
+    {
+      "index": 61,
+      "timestamp": "2026-10-25T05:24:24.822Z",
+      "actor": "SOVEREIGN_OWNER",
+      "role": "SOVEREIGN_OWNER",
+      "action": "ACCOUNT_VIP_MANUAL_ACTIVATE",
+      "target": "acc_5ff88d2a",
+      "details": "Cliente ativado manualmente: Test VIP Client (vip@siliconvalley.io) [VIP_DIRECT_GRANT]",
+      "severity": "INFO",
+      "prevHash": "6e5715719bb0b19e",
+      "hash": "d53c42d5c19066fd5796bbda10ba01698966c236659c5d2ef1bf2cc85aa304e6"
+    },
+    {
+      "index": 62,
+      "timestamp": "2026-10-25T05:24:24.824Z",
+      "actor": "SOVEREIGN_OWNER",
+      "role": "SOVEREIGN_OWNER",
+      "action": "ACCOUNT_STATUS_SUSPENDED",
+      "target": "acc_5ff88d2a",
+      "details": "Test VIP Client: status alterado para SUSPENDED. Motivo: Test suspension",
+      "severity": "WARN",
+      "prevHash": "d53c42d5c19066fd",
+      "hash": "a94ea57409527e545d89f989282b4bef2f1b4aa54766486b9c3329c1ca3ba32a"
+    },
+    {
+      "index": 63,
+      "timestamp": "2026-10-25T05:24:24.828Z",
+      "actor": "SOVEREIGN_OWNER",
+      "role": "SOVEREIGN_OWNER",
+      "action": "ACCOUNT_PERMANENT_WIPE",
+      "target": "acc_5ff88d2a",
+      "details": "Exclusão permanente de dados e agentes de Test VIP Client (vip@siliconvalley.io)",
+      "severity": "CRITICAL",
+      "prevHash": "a94ea57409527e54",
+      "hash": "0e9f8c0e030120cae151fbe1a0f1a514fb89b5db5a7fbd60853fb30f527b3d1f"
+    },
+    {
+      "index": 64,
+      "timestamp": "2026-10-25T05:24:24.831Z",
+      "actor": "acc_flagged_intruder",
+      "role": "RESTRICTED_SANDBOX",
+      "action": "BLOCKED_INACTIVE_ACCOUNT",
+      "target": "/api/companion",
+      "details": "Acesso negado: conta está com status [SUSPENDED]",
+      "severity": "WARN",
+      "prevHash": "0e9f8c0e030120ca",
+      "hash": "724a20bd74f2042029882677b49828a77402076adae9241c92a264e40f91a978"
+    },
+    {
+      "index": 65,
+      "timestamp": "2026-10-25T05:24:24.831Z",
+      "actor": "acc_flagged_intruder",
+      "role": "RESTRICTED_SANDBOX",
+      "action": "BLOCKED_INACTIVE_ACCOUNT",
+      "target": "/api/graph",
+      "details": "Acesso negado: conta está com status [SUSPENDED]",
+      "severity": "WARN",
+      "prevHash": "724a20bd74f20420",
+      "hash": "4dc949b1dbc004270524d9797690e1be747994f54ea0657159f1cda7f9859a0c"
+    },
+    {
+      "index": 66,
+      "timestamp": "2026-10-25T05:24:24.832Z",
+      "actor": "acc_flagged_intruder",
+      "role": "RESTRICTED_SANDBOX",
+      "action": "BLOCKED_INACTIVE_ACCOUNT",
+      "target": "/api/agents/run",
+      "details": "Acesso negado: conta está com status [SUSPENDED]",
+      "severity": "WARN",
+      "prevHash": "4dc949b1dbc00427",
+      "hash": "33aa729953a63f7a078be11a8ae257dbb321968c535eb68ff1e1e089dcc64140"
+    },
+    {
+      "index": 67,
+      "timestamp": "2026-10-25T05:24:24.833Z",
+      "actor": "acc_flagged_intruder",
+      "role": "RESTRICTED_SANDBOX",
+      "action": "BLOCKED_INACTIVE_ACCOUNT",
+      "target": "/api/gemini",
+      "details": "Acesso negado: conta está com status [SUSPENDED]",
+      "severity": "WARN",
+      "prevHash": "33aa729953a63f7a",
+      "hash": "e43e112522d879eb89d79b9cf7e1a9c7782dc52dc96f992ada4acde7d4be18b9"
+    },
+    {
+      "index": 68,
+      "timestamp": "2026-10-25T05:24:24.834Z",
+      "actor": "SOVEREIGN_OWNER",
+      "role": "SOVEREIGN_OWNER",
+      "action": "AUTOMATED_PENTEST_EXECUTED",
+      "target": "WAF_AND_SANDBOX",
+      "details": "4/4 vetores de ataque neutralizados com sucesso.",
+      "severity": "INFO",
+      "prevHash": "e43e112522d879eb",
+      "hash": "f72acc66c2d575ec4fdf2634f1b93c2e97eab86c1278d7a7a78bb33dd35ba50d"
+    },
+    {
+      "index": 69,
+      "timestamp": "2026-10-25T05:24:24.837Z",
+      "actor": "SOVEREIGN_OWNER",
+      "role": "SOVEREIGN_OWNER",
+      "action": "ENCRYPTED_BACKUP_CREATED",
+      "target": "c2_encrypted_backup.enc",
+      "details": "Backup AES-256-GCM criado (29441 bytes, SHA256=d7297c1e52df2ea8...)",
+      "severity": "INFO",
+      "prevHash": "f72acc66c2d575ec",
+      "hash": "2d329e51d7eccbeef663562fd3ef6a895226332fe5f0f7e680502ef7f577ac8e"
+    },
+    {
+      "index": 70,
+      "timestamp": "2026-10-25T05:24:24.960Z",
+      "actor": "SOVEREIGN_OWNER",
+      "role": "SOVEREIGN_OWNER",
+      "action": "ACCOUNT_VIP_MANUAL_ACTIVATE",
+      "target": "acc_5d867444",
+      "details": "Cliente ativado manualmente: Dra. Helena Costa (test_1792905864895@nexus.ai) [PRO_COOPERATIVE]",
+      "severity": "INFO",
+      "prevHash": "2d329e51d7eccbee",
+      "hash": "2d55bf2e14d614fc8d92bc8b722ffeafebbe3fccf0c1d937c1ce6fb8630f89fb"
+    },
+    {
+      "index": 71,
+      "timestamp": "2026-10-25T05:24:25.146Z",
+      "actor": "SOVEREIGN_OWNER",
+      "role": "SOVEREIGN_OWNER",
+      "action": "ACCOUNT_PERMANENT_WIPE",
+      "target": "acc_5d867444",
+      "details": "Exclusão permanente de dados e agentes de Dra. Helena Costa (test_1792905864895@nexus.ai)",
+      "severity": "CRITICAL",
+      "prevHash": "2d55bf2e14d614fc",
+      "hash": "66efc67d286ed4c4cd49f520e4e7338215f3690171e319c34ff49c3cd2b81507"
     }
   ],
   "backups": [
@@ -944,6 +1076,14 @@
       "ciphertextSha256": "09682875b3ef8af67ea18c5795a94a5c8b7338ce5e4ec70354ba7f552185106c",
       "bytes": 25369,
       "createdAt": "2026-10-25T05:16:08.615Z"
+    },
+    {
+      "cipher": "AES-256-GCM",
+      "iv": "7916bb9cee4c0605ba62d838",
+      "authTag": "0ca24b6e63a93c4efe7cfc21160a46d6",
+      "ciphertextSha256": "d7297c1e52df2ea813e6d0bde07fccaa1eccb6c3753fe0d5776f83559efb04b8",
+      "bytes": 29441,
+      "createdAt": "2026-10-25T05:24:24.836Z"
     }
   ]
 }

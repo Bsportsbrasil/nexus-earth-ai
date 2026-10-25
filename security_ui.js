@@ -345,9 +345,63 @@ const SecurityUI = (function () {
     }
   }
 
+  let lastSpokenBriefingText = '';
+
+  function speakAdvisorBriefing(textToSpeak) {
+    const txt = (textToSpeak || lastSpokenBriefingText || '').trim();
+    if (!txt || !('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(txt);
+    u.lang = 'pt-BR';
+    u.rate = 0.98;
+    u.pitch = 1.04;
+    const voices = window.speechSynthesis.getVoices() || [];
+    const ptVoice = voices.find(v => /pt[-_]?BR/i.test(v.lang) && /(Francisca|Thalita|Maria|Luciana|Natural|Google)/i.test(v.name))
+      || voices.find(v => /pt/i.test(v.lang));
+    if (ptVoice) u.voice = ptVoice;
+    window.speechSynthesis.speak(u);
+  }
+
+  function renderSovereignDirectives(sb) {
+    if (!sb) return;
+    const speechBox = document.getElementById('c2-advisor-speech-box');
+    const compPct = document.getElementById('c2-directive-compliance-pct');
+    const countBadge = document.getElementById('c2-distilled-count-badge');
+    const tbody = document.getElementById('c2-distilled-tbody');
+
+    if (sb.spokenBriefing) {
+      lastSpokenBriefingText = sb.spokenBriefing;
+      if (speechBox) speechBox.textContent = sb.spokenBriefing;
+    }
+    if (compPct && sb.totalCompliancePct !== undefined) {
+      compPct.textContent = `${sb.totalCompliancePct}%`;
+    }
+    const items = sb.recentKnowledge || [];
+    if (countBadge) countBadge.textContent = `${sb.totalDistilledItems || items.length} SÍNTESES`;
+    if (tbody) {
+      tbody.innerHTML = items.map(it => `
+        <tr>
+          <td style="font-family:var(--font-mono);font-size:0.7rem">${esc(new Date(it.timestamp).toLocaleTimeString())}</td>
+          <td><span class="agent-badge DONE">${esc(it.sourceAgent)}</span></td>
+          <td><strong>${esc(it.topic)}</strong></td>
+          <td style="font-size:0.76rem;color:var(--text-primary)">${esc(it.anonymizedInsight)}</td>
+          <td>
+            <span style="color:var(--emerald);font-family:var(--font-mono);font-size:0.72rem">
+              ✓ ${Math.round((it.directiveAudit?.complianceScore || 0.98) * 100)}% CONFORME
+            </span>
+          </td>
+          <td><code style="color:var(--cyan);font-size:0.68rem">${esc(it.deviceDataAccessed || 'ZERO_BYTES')}</code></td>
+        </tr>
+      `).join('');
+    }
+  }
+
   function renderAll(data) {
     if (!data) return;
     renderKillSwitchAndBreakers(data);
+    if (data.sovereignBriefing) {
+      renderSovereignDirectives(data.sovereignBriefing);
+    }
     if (data.c2) {
       fullC2Data = data.c2;
       const kpiAcc = document.getElementById('c2-kpi-accounts');
@@ -403,7 +457,7 @@ const SecurityUI = (function () {
       setToken(data.token);
       if (inp) inp.value = '';
       showDashboard();
-      renderAll({ ...data.state, c2: data.c2 });
+      renderAll({ ...data.state, c2: data.c2, sovereignBriefing: data.sovereignBriefing });
       refreshState();
     } catch (e) {
       showAuthGate('Erro de conexão com o servidor.');
@@ -513,6 +567,51 @@ const SecurityUI = (function () {
         pre.style.display = 'block';
         pre.textContent = 'Backup Criptografado AES-256-GCM Gerado com Sucesso:\n' + JSON.stringify(res.backup, null, 2);
       }
+    });
+
+    // Sovereign Directive Advisor Direct Voice & Text Controls
+    document.getElementById('c2-speak-briefing-btn')?.addEventListener('click', () => {
+      speakAdvisorBriefing(lastSpokenBriefingText);
+    });
+
+    const askAdvisor = async (questionStr) => {
+      const inp = document.getElementById('c2-advisor-input');
+      const q = (questionStr !== undefined ? questionStr : (inp?.value || '')).trim();
+      const box = document.getElementById('c2-advisor-speech-box');
+      if (box) box.textContent = '⏳ O Conselheiro Soberano de Diretrizes está consolidando o conhecimento dos agentes...';
+      if (inp) inp.value = '';
+      const res = await postC2Action({ action: 'ask_directive_advisor', question: q });
+      if (res && res.advisorReply) {
+        renderSovereignDirectives(res.advisorReply);
+        speakAdvisorBriefing(res.advisorReply.spokenBriefing);
+      }
+    };
+
+    document.getElementById('c2-advisor-send-btn')?.addEventListener('click', () => askAdvisor());
+    document.getElementById('c2-advisor-input')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') askAdvisor();
+    });
+
+    document.getElementById('c2-mic-advisor-btn')?.addEventListener('click', () => {
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRec) {
+        alert('Use o navegador Chrome ou Safari para falar por voz com o Conselheiro Soberano.');
+        return;
+      }
+      const rec = new SpeechRec();
+      rec.lang = 'pt-BR';
+      rec.interimResults = false;
+      const micBtn = document.getElementById('c2-mic-advisor-btn');
+      if (micBtn) micBtn.textContent = '🔴 Ouvindo Você...';
+      rec.onresult = (ev) => {
+        const transcript = ev.results?.[0]?.[0]?.transcript || '';
+        if (micBtn) micBtn.textContent = '🎙️ Falar por Voz';
+        if (transcript) askAdvisor(transcript);
+      };
+      rec.onerror = () => {
+        if (micBtn) micBtn.textContent = '🎙️ Falar por Voz';
+      };
+      rec.start();
     });
 
     // Connect WebSocket for instant real-time threat notifications

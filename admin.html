@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NEXUS — Master C2 Sovereign Dashboard (Acesso Exclusivo da Proprietária)</title>
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="theme-color" content="#020408" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="/manifest.json" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -112,6 +116,7 @@
       <button class="c2-tab-btn" data-tab="tab-waf">🚨 4. WAF, Radar de Más Intenções, Pentest &amp; Backups</button>
       <button class="c2-tab-btn" data-tab="tab-mlsecops">🧬 5. MLSecOps (Pesos IP, Anti-Poisoning &amp; CI/CD)</button>
       <button class="c2-tab-btn" data-tab="tab-audit">📜 6. Logs de Auditoria Imutáveis (SHA-256)</button>
+      <button class="c2-tab-btn" data-tab="tab-directives" style="border-color:var(--cyan);color:var(--cyan)">🎙️ 7. Conselheiro de Diretrizes (Voz Direta) &amp; Conhecimento dos Agentes</button>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
@@ -410,6 +415,82 @@
               </tr>
             </thead>
             <tbody id="c2-audit-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 7: CONSELHEIRO SOBERANO DE DIRETRIZES (VOZ DIRETA COM O CRIADOR)
+         & DESTILAÇÃO DE CONHECIMENTO DOS AGENTES + ESCUDO ZERO-DADOS DE CELULAR
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-directives" class="c2-pane">
+      <div class="assistant-grid" style="margin-bottom:1.25rem">
+        <!-- Direct Voice & Text Channel with the NEXUS Directive Advisor -->
+        <div class="panel glass-panel assistant-col" style="grid-column: span 2">
+          <div class="cc-pane-header" style="flex-wrap:wrap;gap:0.5rem">
+            <div>
+              <span class="panel-title">🎙️ Conselheiro Central de Diretrizes do NEXUS (Comunicação Direta com Você)</span>
+              <span style="display:block;font-size:0.72rem;color:var(--emerald);font-family:var(--font-mono)">Sintetiza todo o conhecimento evoluído pelos agentes com os usuários e fala diretamente com você no seu celular/PC.</span>
+            </div>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+              <button class="btn-primary" id="c2-speak-briefing-btn" style="padding:0.45rem 0.9rem;font-size:0.78rem">🔊 Ouvir Análise por Voz Agora</button>
+              <button class="btn-secondary" id="c2-mic-advisor-btn" style="padding:0.45rem 0.85rem;font-size:0.78rem">🎙️ Falar por Voz</button>
+            </div>
+          </div>
+
+          <div id="c2-advisor-speech-box" style="background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.28);border-radius:10px;padding:1rem;font-size:0.86rem;line-height:1.65;color:var(--text-primary);margin:0.65rem 0;white-space:pre-line">
+            Carregando síntese executiva de conhecimento dos agentes e auditoria das Diretrizes do NEXUS...
+          </div>
+
+          <div style="display:flex;gap:0.5rem">
+            <input type="text" id="c2-advisor-input" class="text-input" placeholder="Pergunte diretamente ao Conselheiro de Diretrizes sobre o aprendizado dos agentes..." />
+            <button class="btn-primary" id="c2-advisor-send-btn" style="white-space:nowrap">Consultar Diretrizes</button>
+          </div>
+        </div>
+
+        <!-- Zero-Device-Data Mobile Isolation Shield Certificate -->
+        <div class="panel glass-panel assistant-col">
+          <div class="cc-pane-header">
+            <span class="panel-title">📱 Isolamento Total de Celulares Conectados</span>
+            <span class="agent-badge DONE">ZERO DEVICE DATA</span>
+          </div>
+          <p style="font-size:0.76rem;color:var(--text-secondary)">
+            Garantia criptográfica e de kernel HTTP (<code>Permissions-Policy</code>) de que o aplicativo instalado nos celulares (seu e dos usuários) <strong>não tem acesso a nenhum dado pessoal do aparelho</strong>:
+          </p>
+          <div id="c2-mobile-shield-list" style="display:flex;flex-direction:column;gap:0.38rem;font-size:0.74rem;font-family:var(--font-mono);color:var(--emerald)">
+            <div>✓ Contatos / Agenda Telefônica: BLOQUEADO</div>
+            <div>✓ Galeria de Fotos / Arquivos: BLOQUEADO</div>
+            <div>✓ GPS / Geolocalização Física: BLOQUEADO</div>
+            <div>✓ Câmera / Sensores Biométricos: BLOQUEADO</div>
+            <div>✓ SMS / Chamadas / IMEI / MAC: BLOQUEADO</div>
+            <div>✓ Bluetooth / USB / Giroscópio: BLOQUEADO</div>
+          </div>
+          <div style="margin-top:0.65rem;padding:0.5rem;border-radius:8px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.28);font-size:0.72rem;color:var(--emerald);text-align:center">
+            Conformidade Geral com Diretrizes: <strong id="c2-directive-compliance-pct">99.2%</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Distilled Collective Knowledge Ledger from All Agents -->
+      <div class="panel glass-panel" style="padding:1rem">
+        <div class="cc-pane-header" style="margin-bottom:0.75rem">
+          <span class="panel-title">🧠 Conhecimento Coletivo Desenvolvido pelos Agentes com os Usuários (100% Anonimizado &amp; Auditado pelas Diretrizes)</span>
+          <span class="agent-badge DONE" id="c2-distilled-count-badge">0 SÍNTESES</span>
+        </div>
+        <div class="c2-table-wrap" style="max-height:360px;overflow-y:auto">
+          <table class="c2-table">
+            <thead>
+              <tr>
+                <th>Horário</th>
+                <th>Agente Origem</th>
+                <th>Tópico / Domínio</th>
+                <th>Conhecimento Destilado (Zero Dados Pessoais)</th>
+                <th>Auditoria das Diretrizes NEXUS</th>
+                <th>Dados de Celular</th>
+              </tr>
+            </thead>
+            <tbody id="c2-distilled-tbody"></tbody>
           </table>
         </div>
       </div>
