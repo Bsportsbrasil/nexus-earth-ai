@@ -3,17 +3,71 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>http://localhost:5173/</loc>
+    <loc>https://nexusearthai.com/</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="http://localhost:5173/" />
-    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:5173/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="http://localhost:5173/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://nexusearthai.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nexusearthai.com/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nexusearthai.com/" />
     <image:image>
-      <image:loc>http://localhost:5173/og-image.png</image:loc>
-      <image:title>NEXUS — Superinteligência Cooperativa e Agente AURA</image:title>
-      <image:caption>Plataforma de Superinteligência Cooperativa com Transparência Cognitiva Glass-Box, Multi-Agentes DAG, GraphRAG e Pedagogia Inclusiva TEA.</image:caption>
+      <image:loc>https://nexusearthai.com/og-image.png</image:loc>
+      <image:title>NEXUS Earth AI — Superinteligência Cooperativa &amp; Inteligência Geoespacial</image:title>
+      <image:caption>Plataforma de Superinteligência Cooperativa com Transparência Cognitiva Glass-Box, Multi-Agentes DAG, Google Earth Parity e Pedagogia Inclusiva TEA.</image:caption>
     </image:image>
+  </url>
+  <url>
+    <loc>https://nexusearthai.com/earth</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nexusearthai.com/aura</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nexusearthai.com/command-center</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nexusearthai.com/agents</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nexusearthai.com/knowledge</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nexusearthai.com/guide</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nexusearthai.com/articles</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nexusearthai.com/faq</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nexusearthai.com/about</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

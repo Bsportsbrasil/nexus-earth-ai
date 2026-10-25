@@ -8,6 +8,27 @@
   ],
   "dailyJournal": [
     {
+      "id": "c5635540-d395-42f3-80e0-d9187572945e",
+      "date": "2026-10-25",
+      "time": "12:39:12",
+      "insight": "Ana consultou data/hora em tempo real (12:39:12)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "a941a299-ab4c-47aa-87ac-b50e314dbb47",
+      "date": "2026-10-25",
+      "time": "12:39:12",
+      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "e9a1efd2-d104-4202-b753-72dc98c3fd12",
+      "date": "2026-10-25",
+      "time": "12:39:12",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "cd3e6cac-6548-4819-9503-9b19f745b07a",
       "date": "2026-10-25",
       "time": "12:29:19",
@@ -335,28 +356,7 @@
       "time": "02:45:46",
       "insight": "Ana consultou data/hora em tempo real (02:45:46)",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "f61e8f6c-258f-4607-9b75-47a3f4094986",
-      "date": "2026-10-25",
-      "time": "02:45:46",
-      "insight": "Ana explorou \"VisionQuest\" [Tom: 🌱 Frustração / Apoio Paciente]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "4922dd1b-4939-482b-821a-654417d29afa",
-      "date": "2026-10-25",
-      "time": "02:45:46",
-      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "6ea8b0cb-bfb8-416d-a6ae-a8c9609e0285",
-      "date": "2026-10-25",
-      "time": "02:45:05",
-      "insight": "Ana consultou data/hora em tempo real (02:45:05)",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 124
+  "interactionCount": 126
 }
