@@ -1357,6 +1357,7 @@ broker.subscribe('c2.threat_alert', (ev) => {
 // Seed initial GraphDB on startup so GraphRAG has immediate indexed entities
 graphDB.ingestTopic('Artificial intelligence').catch(() => {});
 
-server.listen(PORT, '127.0.0.1', () => {
-  console.log(`NEXUS Enterprise Engine listening safely on http://localhost:${PORT} (127.0.0.1 only)`);
+const HOST = process.env.HOST || '0.0.0.0';
+server.listen(PORT, HOST, () => {
+  console.log(`NEXUS Enterprise Engine listening safely on http://${HOST}:${PORT}`);
 });
