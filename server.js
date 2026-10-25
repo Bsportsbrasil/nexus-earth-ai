@@ -688,7 +688,7 @@ const server = http.createServer(async (req, res) => {
 
   // 5a-bis. Supreme Supervisor Agent (Exclusive to Master Admin/Creator — Zero Public Access)
   if (pathname.startsWith('/api/supervisor/')) {
-    const authHeader = req.headers['authorization'] || '';
+    const authHeader = req.headers['authorization'] || req.headers['x-nexus-admin-key'] || '';
     if (!securityController.verifyAdminToken(authHeader)) {
       return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY: Acesso restrito exclusivamente ao Criador Soberano no Master C2.' });
     }
