@@ -328,10 +328,11 @@ export class AgentMemoryStore {
         const sysInstruction = [
           MANDATORY_SYSTEM_DIRECTIVE,
           `\nIdentidade Específica do Agente: ${agent.name} (${agent.role}).`,
+          agent.instructions ? `Instruções Customizadas do Administrador: ${agent.instructions}` : '',
           `Diretriz de Tom: Natural, amigável, acolhedor e direto ao ponto. Nunca repita a pergunta do criador.`,
           `Padrão de Conversa Adaptado: Frases de tamanho médio ${pat?.avgSentenceLength || 12} palavras. Tópicos frequentes: ${pat?.topics?.join(', ') || 'Nenhum'}.`,
           `Base de Conhecimento Vetorial Própria Consultada:\n${contextLines}`
-        ].join('\n\n');
+        ].filter(Boolean).join('\n\n');
 
         const prompt = [
           temporal.promptHeader,
@@ -522,6 +523,21 @@ export class AgentMemoryStore {
   }
 
   /**
+   * Admin Action: Update an Agent's metadata, role, description or instructions
+   */
+  updateAgent(agentId, { name, role, description, instructions }) {
+    const ag = this.agents.get(agentId);
+    if (!ag) throw new Error(`Agente "${agentId}" não encontrado.`);
+    if (name && name.trim()) ag.name = name.trim();
+    if (role && role.trim()) ag.role = role.trim();
+    if (description !== undefined) ag.description = description.trim();
+    if (instructions !== undefined) ag.instructions = instructions.trim();
+    ag.updatedAt = new Date().toISOString();
+    this._save();
+    return ag;
+  }
+
+  /**
    * Overview of all agents for the dedicated Dashboard
    */
   getDashboardOverview() {
@@ -534,6 +550,7 @@ export class AgentMemoryStore {
         name: a.name,
         role: a.role,
         description: a.description,
+        instructions: a.instructions || '',
         status: a.status,
         isSystem: !!a.isSystem,
         totalVectors: store.length,

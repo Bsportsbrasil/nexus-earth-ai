@@ -314,10 +314,114 @@
         </div>
       </div>
 
-      <!-- Per-User Agent Governance & Surgical Cognitive Intervention Table -->
+            <!-- Painel Soberano de Gestão, Administração e Teste de Todos os Agentes -->
+      <div class="panel glass-panel" style="padding:1.25rem;margin-bottom:1.5rem;border:1px solid rgba(0,245,255,0.25)">
+        <div class="cc-pane-header" style="margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem">
+          <div>
+            <span class="panel-title" style="font-size:1.1rem;display:flex;align-items:center;gap:0.5rem">
+              <span>🤖 3. Central de Gestão &amp; Administração de Todos os Agentes de IA</span>
+            </span>
+            <div style="font-size:0.78rem;color:var(--text-secondary);margin-top:3px">
+              Acesso exclusivo do Administrador: alterne entre todos os agentes (Aura, Planner, Critic, Executor, Verifier e Agentes Customizados), crie novos agentes sob demanda (+ Novo), atualize personas e prompts, bloqueie/desbloqueie, exclua, expurgue memórias vetoriais e teste via voz e texto em tempo real.
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem">
+            <span class="agent-badge DONE" style="font-size:0.68rem">100% CONTROLE ADMINISTRATIVO</span>
+          </div>
+        </div>
+
+        <div id="admin-agent-dashboard-view">
+          <div class="agent-dashboard-grid">
+            <!-- Col 1: Agent Rail -->
+            <div class="agent-rail-col">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem">
+                <span id="agent-rail-title" style="font-size:0.75rem;font-weight:700;color:var(--text-secondary);letter-spacing:0.08em;text-transform:uppercase">Agentes Registrados</span>
+                <button class="btn-secondary" id="dash-create-agent-btn" style="padding:3px 8px;font-size:0.72rem" title="Adicionar Novo Agente">+ Novo</button>
+              </div>
+              <div class="agent-rail-list" id="agents-nav-rail">
+                <!-- Rendered dynamically by AgentDashboardUI -->
+              </div>
+            </div>
+
+            <!-- Col 2: Chat & Voice Interactive Testing Canvas -->
+            <div class="agent-chat-col glass-panel">
+              <div class="agent-chat-header">
+                <div>
+                  <div style="display:flex;align-items:center;gap:0.5rem">
+                    <span style="font-weight:700;font-size:0.98rem;color:var(--text-primary)" id="dash-agent-name">AURA (Live Communication)</span>
+                    <span class="agent-badge DONE" id="dash-agent-status-badge">🟢 ATIVO</span>
+                  </div>
+                  <div style="font-size:0.75rem;color:var(--text-secondary)" id="dash-agent-role">Companion de Comunicação &amp; Inclusão</div>
+                </div>
+                <div class="agent-chat-actions" style="display:flex;gap:0.4rem;flex-wrap:wrap">
+                  <button class="btn-secondary" id="dash-agent-edit-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem" title="Atualizar persona, especialidade ou prompt">✏️ Atualizar</button>
+                  <button class="btn-secondary btn-block" id="dash-agent-toggle-block-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem">🛑 Bloquear Agente</button>
+                  <button class="btn-secondary" id="dash-agent-purge-memory-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem" title="Expurgar toda a base vetorial própria deste agente">🗑️ Limpar Memória</button>
+                  <button class="btn-secondary" id="dash-agent-delete-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem;color:#f43f5e" title="Excluir ou desativar agente">❌ Excluir</button>
+                </div>
+              </div>
+
+              <div class="dash-chat-messages" id="dash-chat-messages" style="height:320px;max-height:360px">
+                <div class="dash-chat-sys-log">
+                  🛡️ Terminal de Teste Administrativo Ativo. Alterne entre qualquer agente no menu lateral para avaliar o raciocínio, respostas por voz e base de conhecimento vetorial individual.
+                </div>
+              </div>
+
+              <div class="agent-chat-input-bar">
+                <button class="btn-voice-mic" id="dash-voice-mic-btn" title="Falar por voz via microfone">🎙️ Falar</button>
+                <button class="btn-secondary" id="dash-voice-mute-btn" style="font-size:0.74rem;padding:0.45rem 0.65rem">🔊 Voz Ativa</button>
+                <input type="text" id="dash-chat-input" class="text-input" placeholder="Teste o raciocínio ou conhecimento deste agente..." style="flex:1" />
+                <button class="btn-primary" id="dash-chat-send-btn" style="padding:0.55rem 1rem">
+                  <span>Testar</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Col 3: Isolated Vector Memory & Pattern Inspector -->
+            <div class="agent-inspector-col">
+              <div class="panel glass-panel" style="padding:0.9rem">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+                  <span class="panel-title" style="margin:0;font-size:0.85rem">🧠 Memória Vetorial (128D)</span>
+                  <span class="agent-badge DONE" id="insp-vector-count" style="font-size:0.64rem">0 vetores</span>
+                </div>
+                <div style="font-size:0.72rem;color:var(--text-secondary);margin-bottom:0.6rem">
+                  Projeção densa de 128 dimensões normalizada L2 com similaridade de cosseno.
+                </div>
+                <div style="font-size:0.74rem;font-weight:600;color:var(--cyan);margin-bottom:0.35rem">Consultado nesta Mensagem:</div>
+                <div id="insp-matches-list" style="max-height:140px;overflow-y:auto">
+                  <div style="font-size:0.75rem;color:var(--text-secondary)">Envie uma mensagem para inspecionar a busca vetorial.</div>
+                </div>
+                <div id="insp-new-learned" style="margin-top:0.6rem"></div>
+              </div>
+
+              <div class="panel glass-panel" style="padding:0.9rem">
+                <div class="panel-title" style="margin-bottom:0.4rem;font-size:0.85rem">📊 Análise de Padrões do Agente</div>
+                <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.75rem">
+                  <div style="display:flex;justify-content:space-between">
+                    <span style="color:var(--text-secondary)">Cadência / Frase:</span>
+                    <strong style="color:var(--text-primary)" id="insp-sentence-len">12 palavras/frase</strong>
+                  </div>
+                  <div style="display:flex;justify-content:space-between">
+                    <span style="color:var(--text-secondary)">Tom Conversacional:</span>
+                    <span style="color:var(--emerald);font-weight:600">Natural &amp; Amigável</span>
+                  </div>
+                  <div style="margin-top:0.3rem">
+                    <span style="color:var(--text-secondary);display:block;margin-bottom:0.25rem">Tópicos Recorrentes:</span>
+                    <div id="insp-topics">
+                      <span class="topic-pill">#alinhamento</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-- Per-User Agent Governance & Surgical Cognitive Intervention Table -->
       <div class="panel glass-panel" style="padding:1rem">
         <div class="cc-pane-header" style="margin-bottom:0.75rem">
-          <span class="panel-title">🧠 3. Gestão de Agentes por Usuário &amp; Intervenção Cognitiva Cirúrgica (Pausar, Congelar, Reiniciar ou Destruir Memória)</span>
+          <span class="panel-title">🧠 4. Gestão de Agentes por Usuário &amp; Intervenção Cognitiva Cirúrgica (Pausar, Congelar, Reiniciar ou Destruir Memória)</span>
           <span class="agent-badge DONE">LEAST PRIVILEGE ENFORCED</span>
         </div>
         <div class="c2-table-wrap">
@@ -888,5 +992,6 @@
   <script src="i18n.js"></script>
   <script src="security_ui.js"></script>
   <script src="supervisor_workspace.js"></script>
+  <script src="agent_dashboard_ui.js"></script>
 </body>
 </html>

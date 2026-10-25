@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T18:37:42.051Z",
+  "updatedAt": "2026-10-25T19:01:43.977Z",
   "certifications": {
     "aura": {
       "certified": true,
@@ -30,8 +30,8 @@
       "status": "CERTIFICADO_PELO_CRIADOR",
       "agentId": "executor",
       "certifiedBy": "Criador Soberano",
-      "timestamp": "2026-10-25T18:37:42.050Z",
-      "certHash": "3f32beedf7e6ec47a6537cf4bd258269fb3ec06f8bab27cf85374a74251866dd",
+      "timestamp": "2026-10-25T19:01:43.977Z",
+      "certHash": "57d6f95fd8cbbaca9cdf8b6d8cff607618d4e6e6bc132a66168213888d88eb8a",
       "note": "Re-homologado"
     },
     "verifier": {
@@ -44,6 +44,54 @@
     }
   },
   "feedbackHistory": [
+    {
+      "id": "fb_1792954903948_378a",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication & Empathy)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication & Empathy) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T19:01:43.948Z"
+    },
+    {
+      "id": "fb_1792954590076_8aa7",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication & Empathy)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication & Empathy) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T18:56:30.077Z"
+    },
+    {
+      "id": "fb_1792953694542_3791",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication & Empathy)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication & Empathy) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T18:41:34.542Z"
+    },
+    {
+      "id": "fb_1792953596877_70ae",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication & Empathy)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication & Empathy) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T18:39:56.877Z"
+    },
     {
       "id": "fb_1792953461983_6d88",
       "agentId": "aura",
@@ -226,36 +274,6 @@
     }
   ],
   "supervisorHistory": [
-    {
-      "role": "creator",
-      "text": "Qual é o status da governança dos agentes neste momento?",
-      "timestamp": "2026-10-25T14:41:47.462Z"
-    },
-    {
-      "role": "supervisor",
-      "text": "Relatório de Supervisão Ativo (11:41:47): Todos os 5 agentes estão sendo monitorados em tempo real. Identifico 5 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 18 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
-      "timestamp": "2026-10-25T14:41:47.462Z"
-    },
-    {
-      "role": "creator",
-      "text": "como andam os aprendizados dos agentes",
-      "timestamp": "2026-10-25T14:43:35.955Z"
-    },
-    {
-      "role": "supervisor",
-      "text": "Os aprendizados estão estáveis e concentrados nos 18 vetores densos indexados. \n\nNenhum desvio cognitivo ou anomalia de alinhamento foi registrado nas últimas 24 horas. Os agentes mantêm coerência total nos pesos e nas diretrizes éticas estabelecidas. \n\nAlgum parâmetro específico de adaptação que o senhor deseja auditar agora?",
-      "timestamp": "2026-10-25T14:43:35.955Z"
-    },
-    {
-      "role": "creator",
-      "text": "sua voz ainda esta robotica",
-      "timestamp": "2026-10-25T14:44:47.845Z"
-    },
-    {
-      "role": "supervisor",
-      "text": "Entendido. Ajustando modulação e cadência imediatamente para uma frequência mais natural e fluida. O tom robótico foi eliminado. Como deseja prosseguir com a auditoria dos agentes?",
-      "timestamp": "2026-10-25T14:44:47.845Z"
-    },
     {
       "role": "creator",
       "text": "quero vozes mais humanas",
@@ -465,6 +483,46 @@
       "role": "supervisor",
       "text": "Relatório de Supervisão Ativo (15:37:41): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 92 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
       "timestamp": "2026-10-25T18:37:41.979Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T18:39:56.875Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (15:39:56): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 97 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T18:39:56.875Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T18:41:34.540Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (15:41:34): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 102 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T18:41:34.540Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T18:56:30.075Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (15:56:30): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 107 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T18:56:30.075Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T19:01:43.946Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (16:01:43): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 112 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T19:01:43.946Z"
     }
   ]
 }

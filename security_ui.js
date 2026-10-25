@@ -585,6 +585,9 @@ const SecurityUI = (function () {
     document.querySelectorAll('.c2-pane').forEach(p => {
       p.classList.toggle('active', p.id === tabId);
     });
+    if (tabId === 'tab-agents' && window.AgentDashboardUI) {
+      window.AgentDashboardUI.loadDashboardState();
+    }
   }
 
   function init() {

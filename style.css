@@ -2132,6 +2132,14 @@ section.hero-section[data-route].route-active {
 .btn-unblock:hover {
   background: rgba(16, 185, 129, 0.22) !important;
 }
+.btn-edit {
+  background: rgba(0, 245, 255, 0.08) !important;
+  border-color: rgba(0, 245, 255, 0.3) !important;
+  color: var(--cyan) !important;
+}
+.btn-edit:hover {
+  background: rgba(0, 245, 255, 0.18) !important;
+}
 
 /* Column 3: Inspector */
 .agent-inspector-col {

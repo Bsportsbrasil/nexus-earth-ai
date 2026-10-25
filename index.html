@@ -773,15 +773,15 @@
   <!-- Multi-Agent Section & Sovereign Supervision Dashboard -->
   <section id="agents" class="section" data-route="agents">
     <div class="section-header">
-      <div class="section-tag">Module 02 • Supervisão Soberana &amp; Raciocínio Multi-Agente</div>
-      <h2 class="section-title">Centro de Supervisão, Diálogo &amp; Avaliação de Agentes</h2>
-      <p class="section-desc">Ambiente de teste e supervisão individual de cada agente com voz e texto, memória vetorial própria isolada, análise de padrões e controle de bloqueio e exclusão sob demanda do criador.</p>
+      <div class="section-tag" data-i18n="agents_tag">Módulo 02 • Inteligência Artificial Pessoal</div>
+      <h2 class="section-title" data-i18n="agents_title">Seu Agente de Inteligência Artificial</h2>
+      <p class="section-desc" data-i18n="agents_desc">Seu assistente exclusivo de IA conectado à sua conta, com aprendizado vetorial próprio isolado, diálogo natural por voz e texto e total soberania de privacidade.</p>
     </div>
 
-    <!-- Subtabs: Dashboard de Supervisão vs Orquestrador DAG -->
-    <div class="agent-subtabs-bar">
+    <!-- Subtabs: Diálogo com Agente vs Orquestrador DAG -->
+    <div class="agent-subtabs-bar" id="agent-subtabs-bar">
       <button class="agent-subtab-btn active" id="tab-btn-agent-dashboard" onclick="switchAgentSubTab('dashboard')">
-        🤖 Dashboard de Diálogo &amp; Supervisão
+        🤖 Diálogo com Seu Agente Pessoal
       </button>
       <button class="agent-subtab-btn" id="tab-btn-agent-dag" onclick="switchAgentSubTab('dag')">
         ⚡ Orquestrador Multi-Agente DAG
@@ -794,8 +794,8 @@
         <!-- Col 1: Agent Rail -->
         <div class="agent-rail-col">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem">
-            <span style="font-size:0.75rem;font-weight:700;color:var(--text-secondary);letter-spacing:0.08em;text-transform:uppercase">Agentes Registrados</span>
-            <button class="btn-secondary" id="dash-create-agent-btn" style="padding:3px 8px;font-size:0.72rem" title="Adicionar Novo Agente">+ Novo</button>
+            <span id="agent-rail-title" style="font-size:0.75rem;font-weight:700;color:var(--text-secondary);letter-spacing:0.08em;text-transform:uppercase">Seu Agente de IA</span>
+            <button class="btn-secondary" id="dash-create-agent-btn" style="padding:3px 8px;font-size:0.72rem;display:none" title="Adicionar Novo Agente">+ Novo</button>
           </div>
           <div class="agent-rail-list" id="agents-nav-rail">
             <!-- Rendered dynamically by AgentDashboardUI -->
@@ -807,15 +807,16 @@
           <div class="agent-chat-header">
             <div>
               <div style="display:flex;align-items:center;gap:0.5rem">
-                <span style="font-weight:700;font-size:0.98rem;color:var(--text-primary)" id="dash-agent-name">AURA (Live Communication)</span>
-                <span class="agent-badge DONE" id="dash-agent-status-badge">🟢 ATIVO</span>
+                <span style="font-weight:700;font-size:0.98rem;color:var(--text-primary)" id="dash-agent-name">AURA (Seu Agente Pessoal)</span>
+                <span class="agent-badge DONE" id="dash-agent-status-badge">🟢 SEU AGENTE EXCLUSIVO</span>
               </div>
-              <div style="font-size:0.75rem;color:var(--text-secondary)" id="dash-agent-role">Companion de Comunicação &amp; Inclusão</div>
+              <div style="font-size:0.75rem;color:var(--text-secondary)" id="dash-agent-role">Companion Pessoal de Inteligência • 1 Agente Exclusivo Vinculado</div>
             </div>
             <div class="agent-chat-actions">
-              <button class="btn-secondary btn-block" id="dash-agent-toggle-block-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem">🛑 Bloquear Agente</button>
-              <button class="btn-secondary" id="dash-agent-purge-memory-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem" title="Expurgar toda a base vetorial própria deste agente">🗑️ Limpar Memória</button>
-              <button class="btn-secondary" id="dash-agent-delete-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem;color:#f43f5e" title="Excluir ou desativar agente">❌ Excluir</button>
+              <button class="btn-secondary" id="dash-agent-edit-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem;display:none" title="Atualizar persona ou prompt">✏️ Atualizar</button>
+              <button class="btn-secondary btn-block" id="dash-agent-toggle-block-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem;display:none">🛑 Bloquear Agente</button>
+              <button class="btn-secondary" id="dash-agent-purge-memory-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem" title="Limpar histórico e memória pessoal do seu agente sob privacidade LGPD">🧹 Limpar Memória</button>
+              <button class="btn-secondary" id="dash-agent-delete-btn" style="font-size:0.75rem;padding:0.4rem 0.75rem;color:#f43f5e;display:none" title="Excluir ou desativar agente">❌ Excluir</button>
             </div>
           </div>
 

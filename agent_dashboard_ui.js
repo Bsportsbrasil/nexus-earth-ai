@@ -1,13 +1,8 @@
 /**
  * NEXUS Sovereign Multi-Agent Evaluation, Voice/Text Conversation & Memory Hub UI
- * Dedicated dashboard separated from Master C2 Sovereign Panel.
- * Allows the Creator to:
- *  - Inspect all agents and switch seamlessly between them.
- *  - Converse with any agent via Text (typing) or Voice (Web Speech Recognition + Neural TTS).
- *  - Test learned knowledge grounded in each agent's private vector store.
- *  - Block/Unblock agents instantly (Freeze/Resume).
- *  - Purge/Delete an agent's vector knowledge base (Right to be Forgotten).
- *  - Create custom agents with isolated vector memory namespaces.
+ * Dedicated dashboard separating regular User access (1 dedicated personal agent)
+ * from Administrator/Creator access (complete multi-agent management, blocking,
+ * deletion, updating, creation, and individual vector testing).
  */
 const AgentDashboardUI = (function () {
   const esc = s => (s || '').replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
@@ -17,6 +12,15 @@ const AgentDashboardUI = (function () {
   let ttsEnabled = true;
   let recognizer = null;
   let isProcessingTurn = false;
+
+  function isAdminMode() {
+    if (typeof window === 'undefined') return false;
+    if (window.location.pathname.includes('admin') || window.location.hash.includes('admin')) return true;
+    if (sessionStorage.getItem('nexus_admin_token') || localStorage.getItem('nexus_admin_token')) return true;
+    const user = window.AuthUI ? window.AuthUI.getCurrentUser() : null;
+    if (user && (user.role === 'SOVEREIGN_OWNER' || user.role === 'ADMIN' || user.role === 'OWNER')) return true;
+    return false;
+  }
 
   function init() {
     loadDashboardState();
@@ -51,6 +55,67 @@ const AgentDashboardUI = (function () {
   function renderAgentsList() {
     const container = document.getElementById('agents-nav-rail');
     if (!container || !currentOverview?.agents) return;
+
+    const isAdmin = isAdminMode();
+    const createBtn = document.getElementById('dash-create-agent-btn');
+    const blockBtn = document.getElementById('dash-agent-toggle-block-btn');
+    const delBtn = document.getElementById('dash-agent-delete-btn');
+    const editBtn = document.getElementById('dash-agent-edit-btn');
+    const purgeBtn = document.getElementById('dash-agent-purge-memory-btn');
+    const railTitle = document.getElementById('agent-rail-title');
+    const dagTabBtn = document.getElementById('tab-btn-agent-dag');
+
+    if (!isAdmin) {
+      // 1 AGENT PER USER: Regular users interact ONLY with their 1 dedicated personal agent (e.g. AURA)
+      if (createBtn) createBtn.style.display = 'none';
+      if (blockBtn) blockBtn.style.display = 'none';
+      if (delBtn) delBtn.style.display = 'none';
+      if (editBtn) editBtn.style.display = 'none';
+      if (dagTabBtn) dagTabBtn.style.display = 'none';
+
+      if (railTitle) railTitle.textContent = 'Seu Agente de IA';
+
+      if (purgeBtn) {
+        purgeBtn.style.display = 'inline-block';
+        purgeBtn.innerHTML = '🧹 Limpar Histórico / Memória';
+        purgeBtn.title = 'Limpar histórico e memória pessoal do seu agente sob privacidade LGPD';
+      }
+
+      const userAgent = currentOverview.agents.find(a => a.id === 'aura') || currentOverview.agents[0];
+      if (userAgent) {
+        activeAgentId = userAgent.id;
+        container.innerHTML = `
+          <div class="agent-rail-item selected" data-agent-id="${esc(userAgent.id)}" style="cursor:default;border-color:var(--cyan);background:rgba(0,245,255,0.08)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.25rem">
+              <strong style="color:var(--text-primary);font-size:0.92rem">🌟 ${esc(userAgent.name.split('(')[0].trim())}</strong>
+              <span class="status-pill active">🟢 SEU AGENTE EXCLUSIVO</span>
+            </div>
+            <div style="font-size:0.74rem;color:var(--cyan);margin-bottom:0.35rem;font-weight:600">1 Agente Exclusivo Vinculado à sua Conta</div>
+            <div style="font-size:0.72rem;color:var(--text-secondary);margin-bottom:0.35rem">${esc(userAgent.role)}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.68rem;color:var(--text-secondary);font-family:var(--font-mono)">
+              <span>🧠 ${userAgent.totalVectors} memórias aprendidas</span>
+              <span>💬 ${userAgent.turnCount} conversas</span>
+            </div>
+          </div>
+        `;
+      }
+      return;
+    }
+
+    // ADMIN MODE: Show all agents, administrative actions, and create button
+    if (createBtn) createBtn.style.display = 'inline-block';
+    if (blockBtn) blockBtn.style.display = 'inline-block';
+    if (delBtn) delBtn.style.display = 'inline-block';
+    if (editBtn) editBtn.style.display = 'inline-block';
+    if (dagTabBtn) dagTabBtn.style.display = 'inline-block';
+
+    if (railTitle) railTitle.textContent = 'Agentes Registrados (Admin)';
+
+    if (purgeBtn) {
+      purgeBtn.style.display = 'inline-block';
+      purgeBtn.innerHTML = '🗑️ Limpar Memória';
+      purgeBtn.title = 'Expurgar toda a base vetorial própria deste agente';
+    }
 
     container.innerHTML = currentOverview.agents.map(ag => {
       const isSelected = ag.id === activeAgentId;
@@ -93,37 +158,70 @@ const AgentDashboardUI = (function () {
     const ag = getActiveAgent();
     if (!ag) return;
 
+    const isAdmin = isAdminMode();
     const titleEl = document.getElementById('dash-agent-name');
     const roleEl = document.getElementById('dash-agent-role');
     const statusEl = document.getElementById('dash-agent-status-badge');
     const blockBtn = document.getElementById('dash-agent-toggle-block-btn');
+    const editBtn = document.getElementById('dash-agent-edit-btn');
+    const delBtn = document.getElementById('dash-agent-delete-btn');
 
-    if (titleEl) titleEl.textContent = ag.name;
-    if (roleEl) roleEl.textContent = ag.role;
+    if (titleEl) {
+      titleEl.textContent = isAdmin
+        ? ag.name
+        : `${ag.name.split('(')[0].trim()} (Seu Agente Pessoal)`;
+    }
+    if (roleEl) {
+      roleEl.textContent = isAdmin
+        ? ag.role
+        : `${ag.role} • 1 Agente Exclusivo Vinculado`;
+    }
+
     if (statusEl) {
-      if (ag.status === 'BLOCKED') {
-        statusEl.className = 'agent-badge blocked';
-        statusEl.textContent = '🔴 BLOQUEADO';
-        statusEl.style.background = 'rgba(244,63,94,0.18)';
-        statusEl.style.borderColor = '#f43f5e';
-        statusEl.style.color = '#f43f5e';
-      } else {
+      if (!isAdmin) {
         statusEl.className = 'agent-badge DONE';
-        statusEl.textContent = '🟢 ATIVO';
+        statusEl.textContent = '🟢 SEU AGENTE EXCLUSIVO';
         statusEl.style.background = 'rgba(16,185,129,0.18)';
         statusEl.style.borderColor = '#10b981';
         statusEl.style.color = '#10b981';
+      } else {
+        if (ag.status === 'BLOCKED') {
+          statusEl.className = 'agent-badge blocked';
+          statusEl.textContent = '🔴 BLOQUEADO';
+          statusEl.style.background = 'rgba(244,63,94,0.18)';
+          statusEl.style.borderColor = '#f43f5e';
+          statusEl.style.color = '#f43f5e';
+        } else {
+          statusEl.className = 'agent-badge DONE';
+          statusEl.textContent = '🟢 ATIVO';
+          statusEl.style.background = 'rgba(16,185,129,0.18)';
+          statusEl.style.borderColor = '#10b981';
+          statusEl.style.color = '#10b981';
+        }
       }
     }
 
     if (blockBtn) {
-      if (ag.status === 'BLOCKED') {
-        blockBtn.innerHTML = '🟢 Desbloquear Agente';
-        blockBtn.className = 'btn-secondary btn-unblock';
+      if (!isAdmin) {
+        blockBtn.style.display = 'none';
       } else {
-        blockBtn.innerHTML = '🛑 Bloquear Agente';
-        blockBtn.className = 'btn-secondary btn-block';
+        blockBtn.style.display = 'inline-block';
+        if (ag.status === 'BLOCKED') {
+          blockBtn.innerHTML = '🟢 Desbloquear Agente';
+          blockBtn.className = 'btn-secondary btn-unblock';
+        } else {
+          blockBtn.innerHTML = '🛑 Bloquear Agente';
+          blockBtn.className = 'btn-secondary btn-block';
+        }
       }
+    }
+
+    if (editBtn) {
+      editBtn.style.display = isAdmin ? 'inline-block' : 'none';
+    }
+
+    if (delBtn) {
+      delBtn.style.display = isAdmin ? 'inline-block' : 'none';
     }
   }
 
@@ -185,7 +283,9 @@ const AgentDashboardUI = (function () {
 
     const row = document.createElement('div');
     row.className = `dash-chat-bubble ${role}`;
-    const header = role === 'user' ? '👤 Você (Criador)' : `🤖 ${getActiveAgent()?.name || 'Agente'}`;
+    const header = role === 'user'
+      ? (isAdminMode() ? '👤 Você (Criador/Admin)' : '👤 Você')
+      : `🤖 ${getActiveAgent()?.name || 'Agente'}`;
 
     row.innerHTML = `
       <div class="bubble-header">${esc(header)} <span class="bubble-time">${new Date().toTimeString().slice(0, 5)}</span></div>
@@ -219,13 +319,16 @@ const AgentDashboardUI = (function () {
     if (sendBtn) sendBtn.disabled = true;
 
     try {
+      const user = window.AuthUI ? window.AuthUI.getCurrentUser() : null;
+      const userName = isAdminMode() ? 'Criador' : (user?.name || 'Usuário');
+
       const res = await fetch('/api/agents/converse', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           agentId: activeAgentId,
           message: clean,
-          userName: 'Criador',
+          userName,
           voiceEnabled: fromVoice,
           apiKey: window.Gemini ? Gemini.getKey() : '',
           clientTemporal: getClientTemporal()
@@ -375,9 +478,12 @@ const AgentDashboardUI = (function () {
     const ag = getActiveAgent();
     if (!ag) return;
 
-    if (!confirm(`⚠️ ATENÇÃO: Deseja realmente EXPURGAR E EXCLUIR toda a base de conhecimento vetorial própria do agente ${ag.name}?\n\nEsta ação é irreversível e atende ao Direito ao Esquecimento (LGPD/GDPR).`)) {
-      return;
-    }
+    const isAdmin = isAdminMode();
+    const confirmMsg = isAdmin
+      ? `⚠️ ATENÇÃO: Deseja realmente EXPURGAR E EXCLUIR toda a base de conhecimento vetorial própria do agente ${ag.name}?\n\nEsta ação é irreversível e atende ao Direito ao Esquecimento (LGPD/GDPR).`
+      : `Deseja limpar todo o histórico de conversas e memórias aprendidas com o seu agente ${ag.name}? Seus dados serão redefinidos conforme as diretrizes de privacidade.`;
+
+    if (!confirm(confirmMsg)) return;
 
     try {
       const res = await fetch('/api/agents/purge-memory', {
@@ -387,7 +493,11 @@ const AgentDashboardUI = (function () {
       });
       const data = await res.json();
       if (res.ok) {
-        appendSystemLog(`🗑️ Memória vetorial do agente ${ag.id.toUpperCase()} foi completamente expurgada (${data.purgedVectorsCount} vetores deletados).`);
+        appendSystemLog(`🗑️ Memória do agente ${ag.id.toUpperCase()} foi limpa (${data.purgedVectorsCount} memórias deletadas).`);
+        const log = document.getElementById('dash-chat-messages');
+        if (log) {
+          log.innerHTML = `<div class="dash-chat-sys-log">🛡️ Memória e conversas reinicializadas com sucesso sob conformidade de privacidade.</div>`;
+        }
         await loadDashboardState();
       } else {
         alert(`Erro ao expurgar memória: ${data.error}`);
@@ -421,6 +531,46 @@ const AgentDashboardUI = (function () {
       }
     } catch (e) {
       alert(`Falha de conexão: ${e.message}`);
+    }
+  }
+
+  async function editAgentPrompt() {
+    const ag = getActiveAgent();
+    if (!ag) return;
+
+    const newName = prompt(`Nome do Agente:`, ag.name);
+    if (newName === null) return;
+
+    const newRole = prompt(`Função / Especialidade do Agente:`, ag.role);
+    if (newRole === null) return;
+
+    const newDesc = prompt(`Descrição da persona e objetivos:`, ag.description || '');
+    if (newDesc === null) return;
+
+    const newInst = prompt(`Diretrizes de Comportamento / Prompt do Sistema (opcional):`, ag.instructions || '');
+    if (newInst === null) return;
+
+    try {
+      const res = await fetch('/api/agents/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          agentId: ag.id,
+          name: newName.trim() || ag.name,
+          role: newRole.trim() || ag.role,
+          description: newDesc.trim(),
+          instructions: newInst.trim()
+        })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        appendSystemLog(`Agente ${ag.id.toUpperCase()} atualizado com sucesso.`);
+        await loadDashboardState();
+      } else {
+        alert(`Erro ao atualizar agente: ${data.error}`);
+      }
+    } catch (e) {
+      alert(`Falha ao atualizar agente: ${e.message}`);
     }
   }
 
@@ -458,6 +608,7 @@ const AgentDashboardUI = (function () {
     const blockBtn = document.getElementById('dash-agent-toggle-block-btn');
     const purgeBtn = document.getElementById('dash-agent-purge-memory-btn');
     const delBtn = document.getElementById('dash-agent-delete-btn');
+    const editBtn = document.getElementById('dash-agent-edit-btn');
     const newAgentBtn = document.getElementById('dash-create-agent-btn');
 
     if (sendBtn && input) {
@@ -482,6 +633,7 @@ const AgentDashboardUI = (function () {
     if (blockBtn) blockBtn.addEventListener('click', toggleBlockCurrentAgent);
     if (purgeBtn) purgeBtn.addEventListener('click', purgeMemoryCurrentAgent);
     if (delBtn) delBtn.addEventListener('click', deleteCurrentAgent);
+    if (editBtn) editBtn.addEventListener('click', editAgentPrompt);
     if (newAgentBtn) newAgentBtn.addEventListener('click', createCustomAgentPrompt);
   }
 
@@ -489,6 +641,7 @@ const AgentDashboardUI = (function () {
     init,
     loadDashboardState,
     sendMessage,
+    isAdminMode,
     getActiveAgent: () => getActiveAgent()
   };
 })();

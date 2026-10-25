@@ -597,6 +597,16 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  if (pathname === '/api/agents/update' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const updated = agentMemoryStore.updateAgent(body.agentId, body);
+      return jsonResponse(res, 200, updated);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
   // 5a-bis. Supreme Supervisor Agent (Exclusive to Master Admin/Creator — Zero Public Access)
   if (pathname.startsWith('/api/supervisor/')) {
     const authHeader = req.headers['authorization'] || '';
