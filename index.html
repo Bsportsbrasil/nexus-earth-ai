@@ -629,12 +629,31 @@
           <div id="trans-output" class="trans-result"></div>
         </div>
         <div class="omnichannel-links">
-          <div class="cc-sub-label">One-Click Native App Dispatch (WhatsApp / Telegram / Copy)</div>
+          <div class="cc-sub-label">One-Click Cloud API &amp; Native App Dispatch (WhatsApp / Telegram / Copy)</div>
           <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
             <button class="btn-secondary" id="share-wa-btn" style="flex:1">🟢 WhatsApp</button>
             <button class="btn-secondary" id="share-tg-btn" style="flex:1">🔵 Telegram</button>
             <button class="btn-secondary" id="share-copy-btn" style="flex:1">📋 Copy Briefing</button>
           </div>
+          <details style="margin-top:0.65rem;background:rgba(2,4,12,0.55);border:1px solid var(--border);border-radius:8px;padding:0.55rem">
+            <summary style="cursor:pointer;font-size:0.74rem;color:var(--cyan);font-weight:600">🔒 Cofre Zero-Trust (AES-256-GCM): Conectar Google Calendar, Telegram Bot &amp; WhatsApp Cloud API</summary>
+            <div style="display:flex;flex-direction:column;gap:0.4rem;margin-top:0.55rem">
+              <input type="password" id="vault-gcal-token" class="text-input" placeholder="Google Calendar OAuth2 Bearer Token (opcional)..." style="font-size:0.74rem;padding:0.38rem 0.6rem" />
+              <div style="display:flex;gap:0.4rem">
+                <input type="password" id="vault-tg-token" class="text-input" placeholder="Telegram Bot Token..." style="font-size:0.74rem;padding:0.38rem 0.6rem" />
+                <input type="text" id="vault-tg-chat" class="text-input" placeholder="Telegram Chat ID..." style="font-size:0.74rem;padding:0.38rem 0.6rem;max-width:130px" />
+              </div>
+              <div style="display:flex;gap:0.4rem">
+                <input type="password" id="vault-wa-token" class="text-input" placeholder="WhatsApp Cloud Token..." style="font-size:0.74rem;padding:0.38rem 0.6rem" />
+                <input type="text" id="vault-wa-phone" class="text-input" placeholder="Phone ID..." style="font-size:0.74rem;padding:0.38rem 0.6rem;max-width:105px" />
+                <input type="text" id="vault-wa-to" class="text-input" placeholder="Nº Destino..." style="font-size:0.74rem;padding:0.38rem 0.6rem;max-width:110px" />
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem">
+                <span id="vault-status-msg" style="font-size:0.68rem;color:var(--emerald)">Criptografia AES-256-GCM + PBKDF2 ativa</span>
+                <button class="btn-primary" id="vault-save-btn" style="padding:0.35rem 0.75rem;font-size:0.72rem">💾 Salvar no Cofre</button>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
     </div>

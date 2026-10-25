@@ -195,7 +195,7 @@
         "org": 0.19999999999999998,
         "30483942u": 0.19999999999999998
       },
-      "updatedAt": 1792903394513
+      "updatedAt": 1792903984379
     },
     {
       "id": "paper:10.1093/hesc/9780198557364.003.0001",
@@ -222,7 +222,7 @@
         "003": 0.1856953381770518,
         "0001": 0.1856953381770518
       },
-      "updatedAt": 1792903394513
+      "updatedAt": 1792903984379
     },
     {
       "id": "paper:10.3403/30483942",
@@ -245,7 +245,7 @@
         "https": 0.19999999999999998,
         "org": 0.19999999999999998
       },
-      "updatedAt": 1792903394513
+      "updatedAt": 1792903984379
     },
     {
       "id": "2025 portuguese legislative election",
@@ -2362,7 +2362,7 @@
         "objetivos": 0.09534625892455925,
         "definidos": 0.09534625892455925
       },
-      "updatedAt": 1792903393633
+      "updatedAt": 1792903983727
     },
     {
       "id": "1956",
@@ -2373,7 +2373,7 @@
       "vector": {
         "1956": 1
       },
-      "updatedAt": 1792903393883
+      "updatedAt": 1792903983951
     },
     {
       "id": "a.i. - inteligência artificial",
@@ -2385,7 +2385,7 @@
         "inteligência": 0.7071067811865476,
         "artificial": 0.7071067811865476
       },
-      "updatedAt": 1792903393883
+      "updatedAt": 1792903983952
     },
     {
       "id": "a priori",
@@ -2396,7 +2396,7 @@
       "vector": {
         "priori": 1
       },
-      "updatedAt": 1792903393883
+      "updatedAt": 1792903983952
     },
     {
       "id": "ablação (inteligência artificial)",
@@ -2409,7 +2409,7 @@
         "inteligência": 0.5773502691896258,
         "artificial": 0.5773502691896258
       },
-      "updatedAt": 1792903393883
+      "updatedAt": 1792903983952
     },
     {
       "id": "academia",
@@ -2420,7 +2420,7 @@
       "vector": {
         "academia": 1
       },
-      "updatedAt": 1792903393883
+      "updatedAt": 1792903983952
     },
     {
       "id": "agente inteligente",
@@ -2432,7 +2432,7 @@
         "agente": 0.7071067811865476,
         "inteligente": 0.7071067811865476
       },
-      "updatedAt": 1792903393883
+      "updatedAt": 1792903983952
     },
     {
       "id": "alan turing",
@@ -2444,7 +2444,7 @@
         "alan": 0.7071067811865476,
         "turing": 0.7071067811865476
       },
-      "updatedAt": 1792903393883
+      "updatedAt": 1792903983952
     },
     {
       "id": "alexandre, o grande",
@@ -2456,7 +2456,7 @@
         "alexandre": 0.7071067811865476,
         "grande": 0.7071067811865476
       },
-      "updatedAt": 1792903393883
+      "updatedAt": 1792903983952
     },
     {
       "id": "alfa-sinucleína",
@@ -2468,7 +2468,7 @@
         "alfa": 0.7071067811865476,
         "sinucleína": 0.7071067811865476
       },
-      "updatedAt": 1792903393883
+      "updatedAt": 1792903983952
     },
     {
       "id": "alfred north whitehead",
@@ -2481,7 +2481,468 @@
         "north": 0.5773502691896258,
         "whitehead": 0.5773502691896258
       },
-      "updatedAt": 1792903393883
+      "updatedAt": 1792903983952
+    },
+    {
+      "id": "roma antiga",
+      "label": "Roma Antiga",
+      "category": "Root",
+      "summary": "Roma Antiga foi uma civilização itálica que surgiu no século VIII a.C. Localizada ao longo do mar Mediterrâneo e centrada na cidade de Roma, na península Itálica, expandiu-se para se tornar um dos maiores impérios do mundo antigo, com uma estimativa de 50 a 90 milhões de habitantes e cobrindo 6,5 milhões de quilômetros quadrados no seu auge entre os séculos I e II.",
+      "url": "https://pt.wikipedia.org/wiki/Roma_Antiga",
+      "vector": {
+        "roma": 0.40089186286863643,
+        "antiga": 0.2672612419124243,
+        "foi": 0.13363062095621214,
+        "uma": 0.2672612419124243,
+        "civilização": 0.13363062095621214,
+        "itálica": 0.2672612419124243,
+        "que": 0.13363062095621214,
+        "surgiu": 0.13363062095621214,
+        "século": 0.13363062095621214,
+        "viii": 0.13363062095621214,
+        "localizada": 0.13363062095621214,
+        "longo": 0.13363062095621214,
+        "mar": 0.13363062095621214,
+        "mediterrâneo": 0.13363062095621214,
+        "centrada": 0.13363062095621214,
+        "cidade": 0.13363062095621214,
+        "península": 0.13363062095621214,
+        "expandiu": 0.13363062095621214,
+        "para": 0.13363062095621214,
+        "tornar": 0.13363062095621214,
+        "dos": 0.13363062095621214,
+        "maiores": 0.13363062095621214,
+        "impérios": 0.13363062095621214,
+        "mundo": 0.13363062095621214,
+        "antigo": 0.13363062095621214,
+        "com": 0.13363062095621214,
+        "estimativa": 0.13363062095621214,
+        "milhões": 0.2672612419124243,
+        "habitantes": 0.13363062095621214,
+        "cobrindo": 0.13363062095621214,
+        "quilômetros": 0.13363062095621214,
+        "quadrados": 0.13363062095621214,
+        "seu": 0.13363062095621214,
+        "auge": 0.13363062095621214,
+        "entre": 0.13363062095621214,
+        "séculos": 0.13363062095621214
+      },
+      "updatedAt": 1792904067311
+    },
+    {
+      "id": "21 de abril",
+      "label": "21 de abril",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "abril": 1
+      },
+      "updatedAt": 1792904067533
+    },
+    {
+      "id": "476",
+      "label": "476",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "476": 1
+      },
+      "updatedAt": 1792904067533
+    },
+    {
+      "id": "753 a.c.",
+      "label": "753 a.C.",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "753": 1
+      },
+      "updatedAt": 1792904067533
+    },
+    {
+      "id": "ab urbe condita libri",
+      "label": "Ab Urbe condita libri",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "urbe": 0.5773502691896258,
+        "condita": 0.5773502691896258,
+        "libri": 0.5773502691896258
+      },
+      "updatedAt": 1792904067533
+    },
+    {
+      "id": "adoção (roma antiga)",
+      "label": "Adoção (Roma Antiga)",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "adoção": 0.5773502691896258,
+        "roma": 0.5773502691896258,
+        "antiga": 0.5773502691896258
+      },
+      "updatedAt": 1792904067533
+    },
+    {
+      "id": "adriano",
+      "label": "Adriano",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "adriano": 1
+      },
+      "updatedAt": 1792904067533
+    },
+    {
+      "id": "afresco",
+      "label": "Afresco",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "afresco": 1
+      },
+      "updatedAt": 1792904067533
+    },
+    {
+      "id": "agostinho de hipona",
+      "label": "Agostinho de Hipona",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "agostinho": 0.7071067811865476,
+        "hipona": 0.7071067811865476
+      },
+      "updatedAt": 1792904067533
+    },
+    {
+      "id": "agricultura na roma antiga",
+      "label": "Agricultura na Roma Antiga",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "agricultura": 0.5773502691896258,
+        "roma": 0.5773502691896258,
+        "antiga": 0.5773502691896258
+      },
+      "updatedAt": 1792904067533
+    },
+    {
+      "id": "alamanos",
+      "label": "Alamanos",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "alamanos": 1
+      },
+      "updatedAt": 1792904067533
+    },
+    {
+      "id": "paper:10.2307/jj.38238722.6",
+      "label": "ROMANA (2020)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Jordanes: Romana and Getica (2020). DOI: https://doi.org/10.2307/jj.38238722.6",
+      "url": "https://doi.org/10.2307/jj.38238722.6",
+      "vector": {
+        "2020": 0.4170288281141495,
+        "2307": 0.20851441405707474,
+        "38238722": 0.20851441405707474,
+        "romana": 0.4170288281141495,
+        "peer": 0.20851441405707474,
+        "reviewed": 0.20851441405707474,
+        "study": 0.20851441405707474,
+        "published": 0.20851441405707474,
+        "jordanes": 0.20851441405707474,
+        "and": 0.20851441405707474,
+        "getica": 0.20851441405707474,
+        "doi": 0.4170288281141495,
+        "https": 0.20851441405707474,
+        "org": 0.20851441405707474
+      },
+      "updatedAt": 1792904067933
+    },
+    {
+      "id": "paper:10.2307/jj.15135912.9",
+      "label": "Premesse culturali e figurative dei picta  (2024)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Picta Nilotica Romana (2024). DOI: https://doi.org/10.2307/jj.15135912.9",
+      "url": "https://doi.org/10.2307/jj.15135912.9",
+      "vector": {
+        "2024": 0.3922322702763681,
+        "2307": 0.19611613513818404,
+        "15135912": 0.19611613513818404,
+        "premesse": 0.19611613513818404,
+        "culturali": 0.19611613513818404,
+        "figurative": 0.19611613513818404,
+        "dei": 0.19611613513818404,
+        "picta": 0.3922322702763681,
+        "peer": 0.19611613513818404,
+        "reviewed": 0.19611613513818404,
+        "study": 0.19611613513818404,
+        "published": 0.19611613513818404,
+        "nilotica": 0.19611613513818404,
+        "romana": 0.19611613513818404,
+        "doi": 0.3922322702763681,
+        "https": 0.19611613513818404,
+        "org": 0.19611613513818404
+      },
+      "updatedAt": 1792904067933
+    },
+    {
+      "id": "paper:10.2307/jj.15135912.11",
+      "label": "Il catalogo dei picta nilotica romana (CPN (2024)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Picta Nilotica Romana (2024). DOI: https://doi.org/10.2307/jj.15135912.11",
+      "url": "https://doi.org/10.2307/jj.15135912.11",
+      "vector": {
+        "2024": 0.35921060405354976,
+        "2307": 0.17960530202677488,
+        "15135912": 0.17960530202677488,
+        "catalogo": 0.17960530202677488,
+        "dei": 0.17960530202677488,
+        "picta": 0.35921060405354976,
+        "nilotica": 0.35921060405354976,
+        "romana": 0.35921060405354976,
+        "cpn": 0.17960530202677488,
+        "peer": 0.17960530202677488,
+        "reviewed": 0.17960530202677488,
+        "study": 0.17960530202677488,
+        "published": 0.17960530202677488,
+        "doi": 0.35921060405354976,
+        "https": 0.17960530202677488,
+        "org": 0.17960530202677488
+      },
+      "updatedAt": 1792904067933
+    },
+    {
+      "id": "3% (2.ª temporada)",
+      "label": "3% (2.ª temporada)",
+      "category": "Root",
+      "summary": "A segunda temporada de 3%, série brasileira de drama e ficção científica da Netflix, estreou em 27 de abril de 2018 com 10 episódios. A série foi desenvolvida por Pedro Aguilera e a direção foi de Philippe Barcinski, Daina Giannecchini, Jotagá Crema e Dani Libardi.",
+      "url": "https://pt.wikipedia.org/wiki/3%25_(2.%C2%AA_temporada)",
+      "vector": {
+        "2018": 0.16666666666666663,
+        "temporada": 0.33333333333333326,
+        "segunda": 0.16666666666666663,
+        "série": 0.33333333333333326,
+        "brasileira": 0.16666666666666663,
+        "drama": 0.16666666666666663,
+        "ficção": 0.16666666666666663,
+        "científica": 0.16666666666666663,
+        "netflix": 0.16666666666666663,
+        "estreou": 0.16666666666666663,
+        "abril": 0.16666666666666663,
+        "com": 0.16666666666666663,
+        "episódios": 0.16666666666666663,
+        "foi": 0.33333333333333326,
+        "desenvolvida": 0.16666666666666663,
+        "por": 0.16666666666666663,
+        "pedro": 0.16666666666666663,
+        "aguilera": 0.16666666666666663,
+        "direção": 0.16666666666666663,
+        "philippe": 0.16666666666666663,
+        "barcinski": 0.16666666666666663,
+        "daina": 0.16666666666666663,
+        "giannecchini": 0.16666666666666663,
+        "jotagá": 0.16666666666666663,
+        "crema": 0.16666666666666663,
+        "dani": 0.16666666666666663,
+        "libardi": 0.16666666666666663
+      },
+      "updatedAt": 1792904126363
+    },
+    {
+      "id": "2018",
+      "label": "2018",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2018": 1
+      },
+      "updatedAt": 1792904126574
+    },
+    {
+      "id": "27 de abril",
+      "label": "27 de abril",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "abril": 1
+      },
+      "updatedAt": 1792904126574
+    },
+    {
+      "id": "3%",
+      "label": "3%",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {},
+      "updatedAt": 1792904126574
+    },
+    {
+      "id": "3% (1.ª temporada)",
+      "label": "3% (1.ª temporada)",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "temporada": 1
+      },
+      "updatedAt": 1792904126574
+    },
+    {
+      "id": "3% (3.ª temporada)",
+      "label": "3% (3.ª temporada)",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "temporada": 1
+      },
+      "updatedAt": 1792904126574
+    },
+    {
+      "id": "amanda magalhães",
+      "label": "Amanda Magalhães",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "amanda": 0.7071067811865476,
+        "magalhães": 0.7071067811865476
+      },
+      "updatedAt": 1792904126574
+    },
+    {
+      "id": "bianca comparato",
+      "label": "Bianca Comparato",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "bianca": 0.7071067811865476,
+        "comparato": 0.7071067811865476
+      },
+      "updatedAt": 1792904126574
+    },
+    {
+      "id": "brasil",
+      "label": "Brasil",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "brasil": 1
+      },
+      "updatedAt": 1792904126574
+    },
+    {
+      "id": "bruno fagundes",
+      "label": "Bruno Fagundes",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "bruno": 0.7071067811865476,
+        "fagundes": 0.7071067811865476
+      },
+      "updatedAt": 1792904126574
+    },
+    {
+      "id": "celso frateschi",
+      "label": "Celso Frateschi",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "celso": 0.7071067811865476,
+        "frateschi": 0.7071067811865476
+      },
+      "updatedAt": 1792904126574
+    },
+    {
+      "id": "paper:10.24824/978854444080.3",
+      "label": "Alucinações poéticas (2020)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (2020). DOI: https://doi.org/10.24824/978854444080.3",
+      "url": "https://doi.org/10.24824/978854444080.3",
+      "vector": {
+        "2020": 0.39999999999999997,
+        "24824": 0.19999999999999998,
+        "alucinações": 0.19999999999999998,
+        "poéticas": 0.19999999999999998,
+        "peer": 0.39999999999999997,
+        "reviewed": 0.39999999999999997,
+        "study": 0.19999999999999998,
+        "published": 0.19999999999999998,
+        "journal": 0.19999999999999998,
+        "doi": 0.39999999999999997,
+        "https": 0.19999999999999998,
+        "org": 0.19999999999999998,
+        "978854444080": 0.19999999999999998
+      },
+      "updatedAt": 1792904127017
+    },
+    {
+      "id": "paper:10.67437/rc.2025.016",
+      "label": "Quando a IA «Inventa» (2025)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Revista CAZOS (2025). DOI: https://doi.org/10.67437/rc.2025.016",
+      "url": "https://doi.org/10.67437/rc.2025.016",
+      "vector": {
+        "2025": 0.6,
+        "67437": 0.19999999999999998,
+        "quando": 0.19999999999999998,
+        "inventa": 0.19999999999999998,
+        "peer": 0.19999999999999998,
+        "reviewed": 0.19999999999999998,
+        "study": 0.19999999999999998,
+        "published": 0.19999999999999998,
+        "revista": 0.19999999999999998,
+        "cazos": 0.19999999999999998,
+        "doi": 0.39999999999999997,
+        "https": 0.19999999999999998,
+        "org": 0.19999999999999998,
+        "016": 0.19999999999999998
+      },
+      "updatedAt": 1792904127017
+    },
+    {
+      "id": "paper:10.24824/978652513180.1",
+      "label": "ALUCINAÇÕES: as fronteiras entre psicopato (2022)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (2022). DOI: https://doi.org/10.24824/978652513180.1",
+      "url": "https://doi.org/10.24824/978652513180.1",
+      "vector": {
+        "2022": 0.3849001794597506,
+        "24824": 0.1924500897298753,
+        "alucinações": 0.1924500897298753,
+        "fronteiras": 0.1924500897298753,
+        "entre": 0.1924500897298753,
+        "psicopato": 0.1924500897298753,
+        "peer": 0.3849001794597506,
+        "reviewed": 0.3849001794597506,
+        "study": 0.1924500897298753,
+        "published": 0.1924500897298753,
+        "journal": 0.1924500897298753,
+        "doi": 0.3849001794597506,
+        "https": 0.1924500897298753,
+        "org": 0.1924500897298753,
+        "978652513180": 0.1924500897298753
+      },
+      "updatedAt": 1792904127017
     }
   ],
   "edges": [
@@ -3112,6 +3573,162 @@
     {
       "source": "inteligência artificial",
       "target": "paper:10.3403/30483942",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "roma antiga",
+      "target": "21 de abril",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "roma antiga",
+      "target": "476",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "roma antiga",
+      "target": "753 a.c.",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "roma antiga",
+      "target": "ab urbe condita libri",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "roma antiga",
+      "target": "adoção (roma antiga)",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "roma antiga",
+      "target": "adriano",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "roma antiga",
+      "target": "afresco",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "roma antiga",
+      "target": "agostinho de hipona",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "roma antiga",
+      "target": "agricultura na roma antiga",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "roma antiga",
+      "target": "alamanos",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "roma antiga",
+      "target": "paper:10.2307/jj.38238722.6",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "roma antiga",
+      "target": "paper:10.2307/jj.15135912.9",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "roma antiga",
+      "target": "paper:10.2307/jj.15135912.11",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "2018",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "27 de abril",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "3%",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "3% (1.ª temporada)",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "3% (3.ª temporada)",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "amanda magalhães",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "bianca comparato",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "brasil",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "bruno fagundes",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "celso frateschi",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "paper:10.24824/978854444080.3",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "paper:10.67437/rc.2025.016",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "3% (2.ª temporada)",
+      "target": "paper:10.24824/978652513180.1",
       "type": "CITED_IN_LITERATURE",
       "weight": 0.95
     }

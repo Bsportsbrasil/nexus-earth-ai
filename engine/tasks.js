@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { graphDB } from './graph_db.js';
 import { streamWithThinking } from './llm.js';
 import { broker } from './broker.js';
+import { cloudVault } from './cloud_connectors.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TASKS_PATH = path.join(__dirname, '..', 'data', 'tasks_calendar.json');
@@ -59,7 +60,7 @@ class TaskAutomationEngine {
     return this.items;
   }
 
-  addItem({ title, date, time = '10:00', category = 'General', priority = 'MEDIUM', notes = '' }) {
+  addItem({ title, date, time = '10:00', category = 'General', priority = 'MEDIUM', notes = '', syncCloud = false }) {
     const item = {
       id: crypto.randomUUID(),
       title: (title || 'Nova Tarefa').trim(),
@@ -69,11 +70,15 @@ class TaskAutomationEngine {
       priority,
       status: 'SCHEDULED',
       notes,
+      googleCalendarUrl: `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`[NEXUS ${category}] ${(title || 'Nova Tarefa').trim()}`)}&details=${encodeURIComponent(notes || 'Gerado pelo NEXUS AI')}`,
       createdAt: Date.now()
     };
     this.items.push(item);
     this._save();
     broker.publish('tasks.created', item);
+    if (syncCloud) {
+      cloudVault.syncEventToGoogleCalendar(item).catch(() => {});
+    }
     return item;
   }
 

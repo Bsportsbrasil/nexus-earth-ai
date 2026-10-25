@@ -6,3 +6,5 @@ node_modules/
 .vercel/
 .netlify/
 *.log
+data/encrypted_user_vault.enc
+data/broker_wal.jsonl

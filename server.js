@@ -16,6 +16,7 @@ import { alignmentEngine } from './engine/ethics_inclusion.js';
 import { securityController } from './engine/security_control.js';
 import { companionEngine } from './engine/companion_agent.js';
 import { c2Engine } from './engine/c2_sovereign.js';
+import { cloudVault } from './engine/cloud_connectors.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -660,6 +661,77 @@ const server = http.createServer(async (req, res) => {
         thought: result.thought,
         latencyMs: result.latencyMs
       });
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
+  // 6b. Real Mechanistic Interpretability Hook Probe Endpoint (/api/neural/hooks)
+  if (req.method === 'GET' && pathname === '/api/neural/hooks') {
+    const q = parsedUrl.searchParams.get('q') || 'Superintelligence Mechanistic Probe';
+    const state = tensorEngine.forwardAndStep(q);
+    broadcastWs({ type: 'tensor_state', data: state });
+    return jsonResponse(res, 200, state);
+  }
+
+  // 6c. Continuous Scientific ETL Pipeline Trigger (/api/graph/etl)
+  if (req.method === 'POST' && pathname === '/api/graph/etl') {
+    try {
+      const body = await parseJsonBody(req);
+      const topic = body.topic || 'Quantum computing';
+      const etlRes = await graphDB.ingestTopic(topic);
+      return jsonResponse(res, 200, {
+        ok: true,
+        topic,
+        ingestedRoot: etlRes?.root || null,
+        papersIngested: etlRes?.papers || [],
+        etlStats: graphDB.etlStats,
+        totalNodes: graphDB.nodes.size,
+        totalEdges: graphDB.edges.length
+      });
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
+  // 6d. Zero-Trust AES-256-GCM Personal Credential Vault & Live Cloud API Dispatch (/api/cloud/vault & /api/cloud/dispatch)
+  if (pathname === '/api/cloud/vault') {
+    if (req.method === 'GET') {
+      return jsonResponse(res, 200, cloudVault.getMaskedStatus());
+    }
+    if (req.method === 'POST') {
+      try {
+        const body = await parseJsonBody(req);
+        const status = cloudVault.updateCredentials(body);
+        return jsonResponse(res, 200, { ok: true, status });
+      } catch (e) {
+        return jsonResponse(res, 400, { error: e.message });
+      }
+    }
+  }
+
+  if (req.method === 'POST' && pathname === '/api/cloud/dispatch') {
+    try {
+      const body = await parseJsonBody(req);
+      const { channel, text, taskItem, recipient } = body;
+      if (channel === 'telegram') {
+        const tgRes = await cloudVault.sendTelegramMessage(text || 'Briefing Executivo NEXUS AI', recipient);
+        return jsonResponse(res, 200, tgRes);
+      }
+      if (channel === 'whatsapp') {
+        const waRes = await cloudVault.sendWhatsAppCloudMessage(text || 'Briefing Executivo NEXUS AI', recipient);
+        return jsonResponse(res, 200, waRes);
+      }
+      if (channel === 'gcal') {
+        const gcalRes = await cloudVault.syncEventToGoogleCalendar(taskItem || {
+          title: text || 'Compromisso NEXUS AI',
+          date: new Date().toISOString().slice(0, 10),
+          time: '10:00',
+          category: 'Executive'
+        });
+        return jsonResponse(res, 200, gcalRes);
+      }
+      return jsonResponse(res, 400, { error: 'Unknown cloud channel' });
     } catch (e) {
       return jsonResponse(res, 500, { error: e.message });
     }

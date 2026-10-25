@@ -8,6 +8,55 @@
   ],
   "dailyJournal": [
     {
+      "id": "09dd8712-2692-4556-8098-eeb641403365",
+      "date": "2026-10-25",
+      "time": "02:03:19",
+      "insight": "Ana consultou data/hora em tempo real (02:03:19)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "40af5da7-5281-4af4-8c7e-94bd9be51f7c",
+      "date": "2026-10-25",
+      "time": "02:03:19",
+      "insight": "Ana explorou \"VisionQuest\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "856a63d7-8f86-461b-afdd-7dd064168a21",
+      "date": "2026-10-25",
+      "time": "02:03:19",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "26cd465c-0258-4a89-be6b-a7d6c69d16a9",
+      "date": "2026-10-25",
+      "time": "01:55:28",
+      "insight": "Ana explorou \"Alucinações poéticas (2020)\" [Tom: 🤝 Conexão Natural & Empática]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "5b6bbca6-b5ff-48f8-bbc3-bee45119e236",
+      "date": "2026-10-25",
+      "time": "01:55:16",
+      "insight": "Ana explorou \"VisionQuest\" [Tom: 🎯 Solicitação Séria / Atenção & Foco]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "01523fa4-3c7b-4044-9c51-def971b5edd0",
+      "date": "2026-10-25",
+      "time": "01:54:29",
+      "insight": "Ana explorou \"ROMANA (2020)\" [Tom: 🤝 Conexão Natural & Empática]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "e03a00ae-9dc2-43f2-aa76-8a4fe0c1b8ec",
+      "date": "2026-10-25",
+      "time": "01:53:08",
+      "insight": "Ana explorou \"O que acontece no seu cérebro quando você  (2026)\" [Tom: 🎯 Solicitação Séria / Atenção & Foco]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "753c6b30-d5d4-44c7-81de-5d56a943b4c6",
       "date": "2026-10-25",
       "time": "01:52:18",
@@ -162,5 +211,5 @@
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 16
+  "interactionCount": 23
 }

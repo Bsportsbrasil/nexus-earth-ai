@@ -166,8 +166,27 @@ const NeuralViz = (function () {
     document.getElementById('nn-inject-btn').addEventListener('click', inject);
     if (window.NexusWS) {
       NexusWS.onMessage((msg) => {
-        if (msg.type === 'tensor_state' && msg.data?.telemetry) {
-          const tel = msg.data.telemetry;
+        const tensorPayload = msg.type === 'tensor_state' ? msg.data : (msg.type === 'welcome' ? msg.tensor : null);
+        if (tensorPayload && tensorPayload.telemetry) {
+          const tel = tensorPayload.telemetry;
+          // Synchronize browser nodes and edges directly with backend TransformerLens hook activations & weights
+          if (Array.isArray(tensorPayload.activations)) {
+            tensorPayload.activations.forEach((layerActs, lIdx) => {
+              if (nodes[lIdx] && Array.isArray(layerActs)) {
+                nodes[lIdx].forEach((n, nIdx) => {
+                  if (typeof layerActs[nIdx] === 'number') n.a = layerActs[nIdx];
+                });
+              }
+            });
+          }
+          if (Array.isArray(tensorPayload.weights)) {
+            edges.forEach((edge) => {
+              const lMat = tensorPayload.weights[edge.l];
+              if (lMat && lMat[0] && typeof lMat[0][0] === 'number') {
+                weightL2Norm = tel.gradNorm || tel.weightNorm || weightL2Norm;
+              }
+            });
+          }
           document.getElementById('nn-activation').textContent = tel.meanActivation.toFixed(3);
           document.getElementById('nn-entropy').textContent = tel.shannonEntropy.toFixed(2) + ' bits';
           document.getElementById('nn-grad').textContent = tel.gradNorm.toFixed(4);

@@ -21,9 +21,11 @@ const AssistantStudio = (function () {
           <div class="task-meta">${esc(it.date)} • ${esc(it.time || '09:00')} [${esc(it.category || 'Task')}]</div>
           <div>${esc(it.title)}</div>
         </div>
+        <button class="btn-secondary" data-gcal="${esc(it.id)}" title="Sincronizar com Google Calendar API / Web" style="padding:2px 7px;font-size:0.68rem">☁️ GCal</button>
         <button class="btn-secondary" data-del="${esc(it.id)}" style="padding:2px 7px;font-size:0.7rem">✕</button>
       `;
       row.querySelector('[data-toggle]').onclick = () => toggleTask(it.id);
+      row.querySelector('[data-gcal]').onclick = () => syncTaskToGoogleCalendar(it);
       row.querySelector('[data-del]').onclick = () => deleteTask(it.id);
       box.appendChild(row);
     });
@@ -84,6 +86,26 @@ const AssistantStudio = (function () {
       });
       if (r.ok) renderTasks((await r.json()).items);
     } catch (e) {}
+  }
+
+  async function syncTaskToGoogleCalendar(taskItem) {
+    try {
+      const r = await fetch('/api/cloud/dispatch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ channel: 'gcal', taskItem })
+      });
+      if (r.ok) {
+        const d = await r.json();
+        if (d.syncedToCloud && d.response?.htmlLink) {
+          window.open(d.response.htmlLink, '_blank', 'noopener');
+          return;
+        }
+        if (d.googleCalendarTemplateUrl) {
+          window.open(d.googleCalendarTemplateUrl, '_blank', 'noopener');
+        }
+      }
+    } catch (_) {}
   }
 
   async function generateSmartPlan() {
@@ -305,13 +327,43 @@ const AssistantStudio = (function () {
       });
     }
 
-    // Native App Share Bridges (WhatsApp, Telegram, Clipboard)
-    document.getElementById('share-wa-btn')?.addEventListener('click', () => {
+    // Cloud API + Native App Share Bridges (WhatsApp Cloud API, Telegram Bot API, Clipboard)
+    document.getElementById('share-wa-btn')?.addEventListener('click', async () => {
       const txt = document.getElementById('trans-output')?.textContent || lastShareableText;
+      try {
+        const r = await fetch('/api/cloud/dispatch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ channel: 'whatsapp', text: txt })
+        });
+        if (r.ok) {
+          const d = await r.json();
+          if (d.sentViaApi) {
+            const b = document.getElementById('share-wa-btn');
+            if (b) { b.textContent = '✓ Enviado via API!'; setTimeout(() => b.textContent = '🟢 WhatsApp', 2000); }
+            return;
+          }
+        }
+      } catch (_) {}
       window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank', 'noopener');
     });
-    document.getElementById('share-tg-btn')?.addEventListener('click', () => {
+    document.getElementById('share-tg-btn')?.addEventListener('click', async () => {
       const txt = document.getElementById('trans-output')?.textContent || lastShareableText;
+      try {
+        const r = await fetch('/api/cloud/dispatch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ channel: 'telegram', text: txt })
+        });
+        if (r.ok) {
+          const d = await r.json();
+          if (d.sentViaApi) {
+            const b = document.getElementById('share-tg-btn');
+            if (b) { b.textContent = '✓ Enviado via Bot!'; setTimeout(() => b.textContent = '🔵 Telegram', 2000); }
+            return;
+          }
+        }
+      } catch (_) {}
       window.open(`https://t.me/share/url?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(txt)}`, '_blank', 'noopener');
     });
     document.getElementById('share-copy-btn')?.addEventListener('click', () => {
@@ -319,6 +371,35 @@ const AssistantStudio = (function () {
       navigator.clipboard?.writeText(txt);
       const b = document.getElementById('share-copy-btn');
       if (b) { b.textContent = '✓ Copied!'; setTimeout(() => b.textContent = '📋 Copy Briefing', 1500); }
+    });
+
+    // Zero-Trust AES-256-GCM Personal Credential Vault Save Handler
+    document.getElementById('vault-save-btn')?.addEventListener('click', async () => {
+      const payload = {
+        googleCalendarToken: document.getElementById('vault-gcal-token')?.value || '',
+        telegramBotToken: document.getElementById('vault-tg-token')?.value || '',
+        telegramChatId: document.getElementById('vault-tg-chat')?.value || '',
+        whatsappAccessToken: document.getElementById('vault-wa-token')?.value || '',
+        whatsappPhoneId: document.getElementById('vault-wa-phone')?.value || '',
+        whatsappRecipientPhone: document.getElementById('vault-wa-to')?.value || ''
+      };
+      const statusMsg = document.getElementById('vault-status-msg');
+      try {
+        const r = await fetch('/api/cloud/vault', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (r.ok) {
+          ['vault-gcal-token', 'vault-tg-token', 'vault-wa-token'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = '';
+          });
+          if (statusMsg) statusMsg.textContent = '✓ Credenciais blindadas no Cofre AES-256-GCM!';
+        }
+      } catch (e) {
+        if (statusMsg) statusMsg.textContent = 'Erro ao salvar no Cofre: ' + e.message;
+      }
     });
   }
 
