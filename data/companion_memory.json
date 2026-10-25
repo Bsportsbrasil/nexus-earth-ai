@@ -8,6 +8,27 @@
   ],
   "dailyJournal": [
     {
+      "id": "8c9b7188-eff7-42db-a8b3-991c5df92e1d",
+      "date": "2026-10-25",
+      "time": "10:25:02",
+      "insight": "Ana consultou data/hora em tempo real (10:25:02)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "e4a1622a-fff1-42b5-9609-72313c7e5ae2",
+      "date": "2026-10-25",
+      "time": "10:25:02",
+      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "439b4c2a-28f0-484c-a0c0-e5c3508a2f1f",
+      "date": "2026-10-25",
+      "time": "10:25:02",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "28f10198-fc5f-48b3-9901-f9f109fd0486",
       "date": "2026-10-25",
       "time": "04:34:44",
@@ -335,28 +356,7 @@
       "time": "02:10:26",
       "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🎯 Solicitação Séria / Atenção & Foco]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "3b4deba2-7ce7-49b4-8d3b-61417e2a5c8e",
-      "date": "2026-10-25",
-      "time": "02:10:09",
-      "insight": "Ana explorou \"VisionQuest\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "88cf2ee9-395d-47cf-9b88-d2d71021e61a",
-      "date": "2026-10-25",
-      "time": "02:09:59",
-      "insight": "Ana explorou \"VisionQuest\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "e5b5e1c2-62fd-4696-a386-c48e78e2ba86",
-      "date": "2026-10-25",
-      "time": "02:09:27",
-      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 92
+  "interactionCount": 96
 }
