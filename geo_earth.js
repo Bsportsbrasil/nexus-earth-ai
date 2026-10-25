@@ -32,7 +32,30 @@ const GeoEarth = (function () {
     zoom: 16
   };
 
-  function init() {
+  function ensureLeafletLoaded() {
+    return new Promise((resolve) => {
+      if (typeof L !== 'undefined') return resolve();
+      const css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+      css.crossOrigin = '';
+      document.head.appendChild(css);
+
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+      script.crossOrigin = '';
+      script.onload = () => resolve();
+      script.onerror = () => resolve();
+      document.body.appendChild(script);
+    });
+  }
+
+  async function init() {
+    if (typeof L === 'undefined') {
+      await ensureLeafletLoaded();
+    }
     initMap();
     initMenuDropdowns();
     initToolbarEvents();

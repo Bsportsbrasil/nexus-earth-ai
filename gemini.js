@@ -1,7 +1,7 @@
 // NEXUS Client Core: Real-time WebSocket Stream + Server-Side Gemini Proxy (Supports AQ.* Auth Keys & AIza* Keys)
 const KEY = 'nexus_gemini_key';
 const MODEL = 'gemini-flash-latest';
-let serverAvailable = null;
+let serverAvailable = true;
 let ws = null;
 const wsListeners = new Set();
 
@@ -206,15 +206,18 @@ document.getElementById('key-clear').onclick = () => {
   refresh();
 };
 
-fetch('/api/gemini', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({})
-}).then(r => {
-  serverAvailable = (r.status === 400);
-  refresh();
-}).catch(() => {
-  serverAvailable = false;
-  refresh();
-});
+// Server availability is true by default; check lazily without blocking initial paint
+function checkServerLazy() {
+  fetch('/api/gemini', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({})
+  }).then(r => {
+    serverAvailable = (r.status === 400 || r.status === 200);
+    refresh();
+  }).catch(() => {
+    serverAvailable = false;
+    refresh();
+  });
+}
 refresh();

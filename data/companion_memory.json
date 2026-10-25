@@ -8,6 +8,48 @@
   ],
   "dailyJournal": [
     {
+      "id": "61ee2d59-5d70-458b-a57b-efc58207aac3",
+      "date": "2026-10-25",
+      "time": "17:44:07",
+      "insight": "Ana consultou data/hora em tempo real (17:44:07)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "cd966de7-a5ec-4c3a-ac93-12a1b0546fad",
+      "date": "2026-10-25",
+      "time": "17:44:07",
+      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "44cf0579-d174-48a0-880e-c947e8ada61b",
+      "date": "2026-10-25",
+      "time": "17:44:07",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "a782db20-5652-443a-a910-36dc47597066",
+      "date": "2026-10-25",
+      "time": "17:42:22",
+      "insight": "Ana consultou data/hora em tempo real (17:42:22)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "e71a14a3-3b77-47b2-a1d2-94c8d2aeb5d4",
+      "date": "2026-10-25",
+      "time": "17:42:22",
+      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "6dce9855-9b82-4b3a-969a-24d4480580e1",
+      "date": "2026-10-25",
+      "time": "17:42:22",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "2e7fc9fe-72e8-4270-8ba9-7bc77d8a78a4",
       "date": "2026-10-25",
       "time": "17:02:53",
@@ -314,49 +356,7 @@
       "time": "14:54:22",
       "insight": "Ana consultou data/hora em tempo real (14:54:22)",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "540def2b-7648-4f09-b7fa-3843d64e7c7c",
-      "date": "2026-10-25",
-      "time": "14:54:22",
-      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "dd598fcc-62dc-4b9b-b784-1239cf49a584",
-      "date": "2026-10-25",
-      "time": "14:54:22",
-      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "12c408a0-5f6d-4962-903b-94fadfb85203",
-      "date": "2026-10-25",
-      "time": "14:31:51",
-      "insight": "Ana consultou data/hora em tempo real (14:31:51)",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "df7bac3a-a059-4bed-bed5-4f9a4cb3e3fd",
-      "date": "2026-10-25",
-      "time": "14:31:51",
-      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "8a1ee6cb-549e-46ca-b2aa-dbfc725a004b",
-      "date": "2026-10-25",
-      "time": "14:31:51",
-      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "43b101c7-9887-4cf8-8062-df8d8e19c2d2",
-      "date": "2026-10-25",
-      "time": "14:29:44",
-      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 166
+  "interactionCount": 170
 }

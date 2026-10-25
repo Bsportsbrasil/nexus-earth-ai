@@ -1,4 +1,5 @@
 // Real mathematical Multi-Layer Perceptron (MLP) forward propagation + telemetry
+// Optimized for zero forced-reflow & mobile CPU efficiency
 const NeuralViz = (function () {
   const themes = {
     cyan: ['#00f5ff', '#0ea5e9'], violet: ['#a855f7', '#ec4899'],
@@ -6,20 +7,22 @@ const NeuralViz = (function () {
   };
   const cfg = { layers: 7, neurons: 6, speed: 5, theme: 'cyan' };
   const canvas = document.getElementById('neural-canvas');
-  const ctx = canvas.getContext('2d');
+  let ctx = null;
   let nodes = [], edges = [], pulses = [];
   let weightL2Norm = 0;
+  let isLoopRunning = false;
+  let rafId = null;
 
   const sigmoid = z => 1 / (1 + Math.exp(-z));
 
   function build() {
-    const W = canvas.width, H = canvas.height;
+    if (!canvas) return;
+    const W = canvas.width || 680, H = canvas.height || 480;
     nodes = []; edges = [];
     for (let l = 0; l < cfg.layers; l++) {
       const n = (l === 0 || l === cfg.layers - 1) ? Math.max(3, cfg.neurons - 2) : cfg.neurons;
       const layer = [];
       for (let i = 0; i < n; i++) {
-        // Deterministic Xavier-like initial bias and state
         const initA = 0.5 + 0.3 * Math.sin(l * 1.7 + i * 2.3);
         layer.push({
           x: 60 + l * (W - 120) / (cfg.layers - 1),
@@ -36,7 +39,6 @@ const NeuralViz = (function () {
       const scale = Math.sqrt(2 / fanIn);
       nodes[l].forEach((a, i) => {
         nodes[l + 1].forEach((b, j) => {
-          // Deterministic Xavier weight initialization based on topology coordinates
           const w = Math.sin((l + 1) * 3.1 + (i + 1) * 1.9 + (j + 1) * 2.7) * scale;
           sumSq += w * w;
           edges.push({ a, b, w, l });
@@ -46,7 +48,6 @@ const NeuralViz = (function () {
     weightL2Norm = Math.sqrt(sumSq);
   }
 
-  // Real mathematical forward pass across the network layers
   function forwardPass(inputVector) {
     if (!nodes.length) return;
     nodes[0].forEach((n, i) => {
@@ -66,10 +67,19 @@ const NeuralViz = (function () {
   }
 
   function resize() {
-    if (!canvas || !canvas.parentElement) return;
-    const r = canvas.parentElement.getBoundingClientRect();
-    canvas.width = Math.max(680, r.width || 760);
-    canvas.height = Math.max(480, r.height || 480);
+    if (!canvas) return;
+    // Prevent forced layout reflow during initial page boot: check if canvas is visible first
+    if (canvas.offsetParent === null) {
+      if (!canvas.width) canvas.width = 680;
+      if (!canvas.height) canvas.height = 480;
+      if (!nodes.length) { build(); forwardPass(); }
+      return;
+    }
+    const parent = canvas.parentElement;
+    const w = parent ? (parent.clientWidth || 760) : 760;
+    const h = parent ? (parent.clientHeight || 480) : 480;
+    canvas.width = Math.max(340, w);
+    canvas.height = Math.max(320, Math.min(600, h));
     build();
     forwardPass();
   }
@@ -94,8 +104,6 @@ const NeuralViz = (function () {
     const allNodes = nodes.flat();
     if (!allNodes.length) return;
     const meanAct = allNodes.reduce((s, n) => s + n.a, 0) / allNodes.length;
-
-    // Real Shannon Entropy H = -sum(p_i * log2(p_i)) over normalized activations
     const sumA = allNodes.reduce((s, n) => s + Math.max(1e-6, n.a), 0);
     let entropy = 0;
     for (const n of allNodes) {
@@ -103,20 +111,25 @@ const NeuralViz = (function () {
       entropy -= p * Math.log2(p);
     }
 
-    document.getElementById('nn-activation').textContent = meanAct.toFixed(3);
-    document.getElementById('nn-firing').textContent = pulses.length + ' / ' + edges.length;
-    document.getElementById('nn-entropy').textContent = entropy.toFixed(2) + ' bits';
-    document.getElementById('nn-grad').textContent = weightL2Norm.toFixed(3);
+    const aEl = document.getElementById('nn-activation');
+    if (aEl) aEl.textContent = meanAct.toFixed(3);
+    const fEl = document.getElementById('nn-firing');
+    if (fEl) fEl.textContent = pulses.length + ' / ' + edges.length;
+    const eEl = document.getElementById('nn-entropy');
+    if (eEl) eEl.textContent = entropy.toFixed(2) + ' bits';
+    const gEl = document.getElementById('nn-grad');
+    if (gEl) gEl.textContent = weightL2Norm.toFixed(3);
   }
 
   let stepTick = 0;
   function frame() {
-    // Render-gate: pause heavy 2D canvas drawing when /neural route is not visible
-    if (!canvas || canvas.offsetParent === null) {
-      requestAnimationFrame(frame);
+    // Zero-CPU Idle Gate: if /neural route is not active or hidden, stop the animation loop completely!
+    if (!canvas || canvas.offsetParent === null || document.hidden) {
+      isLoopRunning = false;
       return;
     }
-    const [c1, c2] = themes[cfg.theme];
+    if (!ctx) ctx = canvas.getContext('2d');
+    const [c1, c2] = themes[cfg.theme] || themes.cyan;
     ctx.fillStyle = 'rgba(2,4,8,.35)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     for (const e of edges) {
@@ -150,32 +163,36 @@ const NeuralViz = (function () {
       const idx = (stepTick / 15 | 0) % nodes[0].length;
       spawnFrom(nodes[0][idx], 0);
     }
-    const sec = document.getElementById('neural');
-    const isVisible = sec && (sec.classList.contains('route-active') || sec.style.display !== 'none');
-    if (isVisible && !document.hidden) {
-      requestAnimationFrame(frame);
-    } else {
-      setTimeout(() => requestAnimationFrame(frame), 600);
-    }
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function startLoop() {
+    if (isLoopRunning) return;
+    isLoopRunning = true;
+    rafId = requestAnimationFrame(frame);
   }
 
   function bindControls() {
     ['layers', 'neurons', 'speed'].forEach(k => {
       const el = document.getElementById('nn-' + k);
-      el.addEventListener('input', () => {
-        cfg[k] = +el.value;
-        document.getElementById(`nn-${k}-val`).textContent = el.value;
-        if (k !== 'speed') { build(); forwardPass(); }
-      });
+      if (el) {
+        el.addEventListener('input', () => {
+          cfg[k] = +el.value;
+          const valEl = document.getElementById(`nn-${k}-val`);
+          if (valEl) valEl.textContent = el.value;
+          if (k !== 'speed') { build(); forwardPass(); }
+        });
+      }
     });
-    document.getElementById('nn-theme').addEventListener('change', e => cfg.theme = e.target.value);
-    document.getElementById('nn-inject-btn').addEventListener('click', inject);
+    const themeEl = document.getElementById('nn-theme');
+    if (themeEl) themeEl.addEventListener('change', e => cfg.theme = e.target.value);
+    const injBtn = document.getElementById('nn-inject-btn');
+    if (injBtn) injBtn.addEventListener('click', inject);
     if (window.NexusWS) {
       NexusWS.onMessage((msg) => {
         const tensorPayload = msg.type === 'tensor_state' ? msg.data : (msg.type === 'welcome' ? msg.tensor : null);
         if (tensorPayload && tensorPayload.telemetry) {
           const tel = tensorPayload.telemetry;
-          // Synchronize browser nodes and edges directly with backend TransformerLens hook activations & weights
           if (Array.isArray(tensorPayload.activations)) {
             tensorPayload.activations.forEach((layerActs, lIdx) => {
               if (nodes[lIdx] && Array.isArray(layerActs)) {
@@ -193,28 +210,56 @@ const NeuralViz = (function () {
               }
             });
           }
-          document.getElementById('nn-activation').textContent = tel.meanActivation.toFixed(3);
-          document.getElementById('nn-entropy').textContent = tel.shannonEntropy.toFixed(2) + ' bits';
-          document.getElementById('nn-grad').textContent = tel.gradNorm.toFixed(4);
+          const actEl = document.getElementById('nn-activation');
+          if (actEl) actEl.textContent = tel.meanActivation.toFixed(3);
+          const entEl = document.getElementById('nn-entropy');
+          if (entEl) entEl.textContent = tel.shannonEntropy.toFixed(2) + ' bits';
+          const grdEl = document.getElementById('nn-grad');
+          if (grdEl) grdEl.textContent = tel.gradNorm.toFixed(4);
         }
       });
     }
-    setInterval(updateRealTelemetry, 400);
+    // Only update telemetry when the neural section is visibly rendered
+    setInterval(() => {
+      if (canvas && canvas.offsetParent !== null && !document.hidden) {
+        updateRealTelemetry();
+      }
+    }, 1000);
   }
 
-  // Hero: rotating 3D Fibonacci sphere
+  // Hero: rotating 3D Fibonacci sphere - lightweight & adaptive
   function hero() {
-    const hc = document.getElementById('hero-neural-preview'), h = hc.getContext('2d');
-    const pts = Array.from({ length: 160 }, (_, i) => {
-      const phi = Math.acos(1 - 2 * (i + .5) / 160), th = Math.PI * (1 + 5 ** .5) * i;
+    const hc = document.getElementById('hero-neural-preview');
+    if (!hc) return;
+    const h = hc.getContext('2d');
+    const isMobile = window.innerWidth <= 768;
+    const ptCount = isMobile ? 36 : 80;
+    const pts = Array.from({ length: ptCount }, (_, i) => {
+      const phi = Math.acos(1 - 2 * (i + .5) / ptCount), th = Math.PI * (1 + 5 ** .5) * i;
       return [Math.cos(th) * Math.sin(phi), Math.sin(th) * Math.sin(phi), Math.cos(phi)];
     });
     let ang = 0;
-    (function loop() {
-      if (!hc || hc.offsetParent === null || document.hidden) {
-        setTimeout(() => requestAnimationFrame(loop), 600);
+    let heroVisible = true;
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        heroVisible = entries[0].isIntersecting;
+      }, { threshold: 0.1 });
+      observer.observe(hc);
+    }
+
+    let lastHeroTime = 0;
+    (function loop(time) {
+      if (!hc || hc.offsetParent === null || document.hidden || !heroVisible) {
+        setTimeout(() => requestAnimationFrame(loop), 500);
         return;
       }
+      // On mobile, throttle to ~30 FPS to save CPU and battery
+      if (isMobile && (time - lastHeroTime < 32)) {
+        requestAnimationFrame(loop);
+        return;
+      }
+      lastHeroTime = time;
       ang += .004;
       h.clearRect(0, 0, 520, 520);
       const proj = pts.map(([x, y, z]) => {
@@ -222,10 +267,11 @@ const NeuralViz = (function () {
         const Y = y * Math.cos(ang * .6) - Z * Math.sin(ang * .6), Z2 = y * Math.sin(ang * .6) + Z * Math.cos(ang * .6);
         return [260 + X * 180, 260 + Y * 180, Z2];
       });
+      const maxDist = isMobile ? 55 : 48;
       for (let i = 0; i < proj.length; i++) for (let j = i + 1; j < proj.length; j++) {
         const d = Math.hypot(proj[i][0] - proj[j][0], proj[i][1] - proj[j][1]);
-        if (d < 48) {
-          h.strokeStyle = `rgba(0,245,255,${(1 - d / 48) * .25 * ((proj[i][2] + 1.5) / 2.5)})`;
+        if (d < maxDist) {
+          h.strokeStyle = `rgba(0,245,255,${(1 - d / maxDist) * .25 * ((proj[i][2] + 1.5) / 2.5)})`;
           h.beginPath(); h.moveTo(proj[i][0], proj[i][1]); h.lineTo(proj[j][0], proj[j][1]); h.stroke();
         }
       }
@@ -236,7 +282,7 @@ const NeuralViz = (function () {
       }
       h.globalAlpha = 1;
       requestAnimationFrame(loop);
-    })();
+    })(0);
   }
 
   let initialized = false;
@@ -245,10 +291,17 @@ const NeuralViz = (function () {
     initialized = true;
     resize();
     bindControls();
-    updateRealTelemetry();
-    frame();
     hero();
-    addEventListener('resize', resize);
+    window.addEventListener('resize', () => {
+      if (canvas && canvas.offsetParent !== null) resize();
+    }, { passive: true });
   }
-  return { init, onRouteShow: resize };
+
+  function onRouteShow() {
+    resize();
+    updateRealTelemetry();
+    startLoop();
+  }
+
+  return { init, onRouteShow };
 })();

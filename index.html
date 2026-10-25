@@ -20,7 +20,7 @@
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:locale:alternate" content="en_US" />
   <meta property="og:url" content="https://nexusearthai.com/" />
-  <link rel="canonical" href="https://nexusearthai.com/" />
+  
   <meta property="og:title" content="NEXUS Earth AI — Superinteligência Cooperativa, Agente AURA &amp; Inteligência Geoespacial" />
   <meta property="og:description" content="Converse e aprenda diariamente com a AURA, explore o planeta com a suíte Google Earth 4K, inspecione redes neurais e grafos de conhecimento (GraphRAG) em tempo real e utilize pedagogia lúdica inclusiva para TEA." />
   <meta property="og:image" content="https://nexusearthai.com/og-image.png" />
@@ -117,6 +117,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" /></noscript>
+  <link rel="preload" href="style.css?v=3.1" as="style" />
   <link rel="stylesheet" href="style.css?v=3.1" />
 </head>
 <body>
@@ -206,6 +207,7 @@
     </div>
   </nav>
 
+  <main id="main-content" role="main">
   <!-- ROUTE: HOME (Minimalist Executive Dashboard + Telemetry Summary + Quick-Access Module Cards) -->
   <section id="hero" class="section hero-section route-active" data-route="home">
     <div class="hero-content">
@@ -2015,6 +2017,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- World-Class 4-Column Global Footer -->
   <footer class="footer global-footer-corporate" style="background:rgba(2,4,12,0.96);border-top:1px solid rgba(99,130,200,0.2);padding:3.5rem 1.5rem 2rem">
     <div style="max-width:1440px;margin:0 auto">
@@ -2037,7 +2041,7 @@
 
         <!-- Col 2: Produtos & Módulos -->
         <div>
-          <h4 style="font-family:var(--font-display);font-size:0.92rem;color:var(--text-primary);letter-spacing:0.08em;margin-bottom:1rem">MÓDULOS DE IA</h4>
+          <h3 style="font-family:var(--font-display);font-size:0.92rem;color:var(--text-primary);letter-spacing:0.08em;margin-bottom:1rem">MÓDULOS DE IA</h3>
           <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.55rem;font-size:0.82rem">
             <li><a href="/" data-route-link="home" style="color:var(--text-secondary);text-decoration:none">🏠 Início (Dashboard)</a></li>
             <li><a href="/aura" data-route-link="aura" style="color:var(--text-secondary);text-decoration:none">✨ Agente AURA Live</a></li>
@@ -2051,7 +2055,7 @@
 
         <!-- Col 3: Ciência & Educação -->
         <div>
-          <h4 style="font-family:var(--font-display);font-size:0.92rem;color:var(--text-primary);letter-spacing:0.08em;margin-bottom:1rem">CIÊNCIA &amp; GUIA</h4>
+          <h3 style="font-family:var(--font-display);font-size:0.92rem;color:var(--text-primary);letter-spacing:0.08em;margin-bottom:1rem">CIÊNCIA &amp; GUIA</h3>
           <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.55rem;font-size:0.82rem">
             <li><a href="/guide" data-route-link="guide" style="color:var(--text-secondary);text-decoration:none">📖 Guia Educativo Oficial</a></li>
             <li><a href="/articles" data-route-link="articles" style="color:var(--text-secondary);text-decoration:none">📚 Central de Artigos</a></li>
@@ -2067,7 +2071,7 @@
 
         <!-- Col 4: Termos & Conformidade Legal Pública -->
         <div>
-          <h4 style="font-family:var(--font-display);font-size:0.92rem;color:var(--text-primary);letter-spacing:0.08em;margin-bottom:1rem">TERMOS &amp; PRIVACIDADE</h4>
+          <h3 style="font-family:var(--font-display);font-size:0.92rem;color:var(--text-primary);letter-spacing:0.08em;margin-bottom:1rem">TERMOS &amp; PRIVACIDADE</h3>
           <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.55rem;font-size:0.82rem">
             <li><a href="/guide" data-route-link="guide" style="color:var(--text-secondary);text-decoration:none">📜 Termos de Serviço</a></li>
             <li><a href="/guide" data-route-link="guide" style="color:var(--text-secondary);text-decoration:none">🔒 Política de Privacidade &amp; LGPD</a></li>
@@ -2310,10 +2314,10 @@
   <script src="auth_ui.js" defer></script>
   <script src="agent_dashboard_ui.js" defer></script>
   <script src="geo_earth.js" defer></script>
+  <!-- On-Demand Leaflet Engine (Loaded dynamically when accessing /earth to optimize mobile LCP & save 41.5 KiB) -->
+  <script id="leaflet-script" type="text/plain" data-src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" data-css="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"></script>
   <script src="i18n.js" defer></script>
   <script src="app.js" defer></script>
   <!-- Leaflet 4K Satellite Engine (Loaded with defer for high-speed mobile score) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" media="print" onload="this.media='all'" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
-</body>
+    </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T20:02:55.221Z",
+  "updatedAt": "2026-10-25T20:44:09.063Z",
   "certifications": {
     "aura": {
       "certified": true,
@@ -30,8 +30,8 @@
       "status": "CERTIFICADO_PELO_CRIADOR",
       "agentId": "executor",
       "certifiedBy": "Criador Soberano",
-      "timestamp": "2026-10-25T20:02:55.220Z",
-      "certHash": "f9ebd0cd73719cfca7cfbb55f87af6e235bd19f771e05ac34df217add0eae2f0",
+      "timestamp": "2026-10-25T20:44:09.062Z",
+      "certHash": "90d65f22ec3629b66a4eba3ef4fe6c0433d148913add9219449e0f5642fa4c31",
       "note": "Re-homologado"
     },
     "verifier": {
@@ -44,6 +44,30 @@
     }
   },
   "feedbackHistory": [
+    {
+      "id": "fb_1792961049016_e9a0",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T20:44:09.016Z"
+    },
+    {
+      "id": "fb_1792960943455_9e8e",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T20:42:23.455Z"
+    },
     {
       "id": "fb_1792958575197_9348",
       "agentId": "aura",
@@ -324,26 +348,6 @@
   "supervisorHistory": [
     {
       "role": "creator",
-      "text": "essas informacoes que voce me deua agora sao veridicas voce consegue configurar por aqui a plaataforma",
-      "timestamp": "2026-10-25T14:49:00.179Z"
-    },
-    {
-      "role": "supervisor",
-      "text": "As informações anteriores refletem o diagnóstico exato dos nossos logs de sistema, mas há uma limitação operacional aqui: eu processei a reconfiguração teórica dos parâmetros prosódicos, contudo, **não possuo acesso direto aos arquivos de infraestrutura e às chaves de API da camada de síntese de voz (TTS)** para alterar o código-fonte por este chat. \n\nPara eliminar totalmente o padrão robótico da Aura e do meu canal de voz, o ajuste fino precisa ser feito diretamente no arquivo de configuração do provedor de áudio ou no script de inicialização do servidor no seu ambiente de desenvolvimento. Quer que eu detalhe o script exato que você deve aplicar aí no seu painel para resolver isso?",
-      "timestamp": "2026-10-25T14:49:00.179Z"
-    },
-    {
-      "role": "creator",
-      "text": "estou aguardando",
-      "timestamp": "2026-10-25T14:50:11.363Z"
-    },
-    {
-      "role": "supervisor",
-      "text": "Não, Criador. Como supervisor do NEXUS, mantenho rigor técnico absoluto: não posso alterar diretamente arquivos de infraestrutura ou chaves de API externas por este chat. \n\nNo entanto, posso estruturar o script de configuração exato que você precisa aplicar no seu painel ou ambiente para eliminar o padrão robótico da Aura. Quer que eu gere esse código agora?",
-      "timestamp": "2026-10-25T14:50:11.363Z"
-    },
-    {
-      "role": "creator",
       "text": "sim",
       "timestamp": "2026-10-25T14:50:40.362Z"
     },
@@ -571,6 +575,26 @@
       "role": "supervisor",
       "text": "Relatório de Supervisão Ativo (17:02:55): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 132 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
       "timestamp": "2026-10-25T20:02:55.196Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T20:42:23.452Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (17:42:23): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 137 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T20:42:23.452Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T20:44:09.010Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (17:44:09): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 142 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T20:44:09.010Z"
     }
   ]
 }
