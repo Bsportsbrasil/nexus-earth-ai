@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nexus-pwa-v2';
+const CACHE_NAME = 'nexus-pwa-v3';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -9,6 +9,8 @@ const CORE_ASSETS = [
   '/icon-512.png',
   '/og-image.png',
   '/app.js',
+  '/i18n.js',
+  '/geo_earth.js',
   '/companion_ui.js',
   '/command_center.js',
   '/cooperative_ui.js',

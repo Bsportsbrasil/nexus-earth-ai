@@ -272,7 +272,16 @@ const CompanionUI = (function () {
         throw new Error(data.error || `HTTP ${resp.status}`);
       }
 
-      const formatted = esc(data.reply || '').replace(/\n/g, '<br>');
+      let formatted = esc(data.reply || '').replace(/\n/g, '<br>');
+      const lowerQ = msg.toLowerCase();
+      if (lowerQ.includes('localiza') || lowerQ.includes('mercado') || lowerQ.includes('onde') || lowerQ.includes('mapa') || lowerQ.includes('earth') || lowerQ.includes('distancia') || lowerQ.includes('coordenada')) {
+        formatted += `<div style="margin-top:0.65rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
+          <a href="/earth" class="aura-chip" style="text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem;border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,255,0.12)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            🌍 Abrir Módulo Earth Geo (Mapeamento 4K &amp; Geodésico)
+          </a>
+        </div>`;
+      }
       if (replyEl) replyEl.innerHTML = formatted;
 
       history.push({ role: 'user', parts: [{ text: msg }] });
@@ -400,13 +409,15 @@ const CompanionUI = (function () {
     const stateLabel = document.getElementById('aura-state-label');
     if (!liveBtn) return;
 
+    const isMobile = window.innerWidth <= 768;
+
     if (liveSessionActive) {
-      liveBtn.textContent = '🔴 Conversa Ao Vivo Ativa (Parar)';
+      liveBtn.textContent = isMobile ? '🔴 Parar' : '🔴 Conversa Ao Vivo Ativa (Parar)';
       liveBtn.style.borderColor = 'var(--rose)';
       liveBtn.style.color = '#fff';
       liveBtn.style.background = 'rgba(244,63,94,0.28)';
     } else {
-      liveBtn.textContent = '🎙️ Iniciar Conversa Ao Vivo';
+      liveBtn.textContent = isMobile ? '🎙️ Voz Ao Vivo' : '🎙️ Iniciar Conversa Ao Vivo';
       liveBtn.style.borderColor = '';
       liveBtn.style.color = '';
       liveBtn.style.background = '';

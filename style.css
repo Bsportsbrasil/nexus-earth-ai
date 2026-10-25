@@ -1318,6 +1318,15 @@ body {
   .graph-container { grid-template-columns: 1fr; height: auto; }
   .graph-canvas-wrap { height: 400px; }
 }
+/* ==========================================================================
+   AUDITED & HIGH-PERFORMANCE MOBILE OPTIMIZATIONS (Smartphones & Tablets)
+   ========================================================================== */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw;
+  -webkit-tap-highlight-color: transparent;
+}
+
 @media (max-width: 960px) {
   .nav-center { display: none !important; }
   .mobile-only-btn { display: inline-flex !important; }
@@ -1325,38 +1334,280 @@ body {
   .nav-status #pwa-install-btn { display: none; }
   .nav-status #key-status { display: none; }
 }
+
 @media (max-width: 768px) {
-  body { padding-bottom: 84px !important; }
-  #nav { padding: 0 0.85rem; height: 62px; }
-  .nav-brand-text .logo-text { font-size: 1.15rem; }
-  .section { padding: 75px 1rem 50px; }
+  body {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  
+  /* Compact Native Header */
+  #nav {
+    padding: 0 0.65rem !important;
+    height: 54px !important;
+  }
+  .nav-inner {
+    height: 100%;
+  }
+  .nav-brand-text .logo-text {
+    font-size: 1.1rem;
+  }
+  .nav-status {
+    gap: 0.35rem !important;
+  }
+  .nav-status .nav-btn,
+  .nav-status .btn-secondary,
+  .nav-status .btn-primary {
+    height: 32px !important;
+    padding: 0 0.5rem !important;
+    font-size: 0.72rem !important;
+  }
+  #current-lang-code {
+    font-size: 0.72rem !important;
+  }
+
+  /* Compact Section Containers */
+  .section {
+    padding: 58px 0.75rem 40px !important;
+  }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .gauge-row { grid-template-columns: 1fr; }
   .nav-center { display: none !important; }
   .nav-links { display: none !important; }
   .logo-tag { display: none !important; }
-  .mobile-bottom-dock { display: flex !important; }
-  .aura-style-strip { flex-direction: column; align-items: stretch; }
-  .cc-omni-bar { flex-direction: column; align-items: stretch; }
+  
+  /* Global Inputs: Minimum 16px prevents mobile auto-zoom */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* ── AURA LIVE NATIVE MOBILE APP WORKSPACE ── */
+  #companion {
+    padding-top: 56px !important;
+    padding-bottom: 74px !important;
+  }
+  #companion .section-header {
+    margin-bottom: 0.4rem !important;
+    text-align: left;
+    padding: 0 0.2rem;
+  }
+  #companion .section-tag {
+    font-size: 0.65rem !important;
+    padding: 0.15rem 0.5rem !important;
+    margin-bottom: 0.2rem !important;
+    display: inline-flex;
+  }
+  #companion .section-title {
+    font-size: 1.15rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.2rem !important;
+  }
+  #companion .section-desc {
+    display: none !important; /* Hide verbose desktop intro on mobile */
+  }
+  .aura-philosophy-banner {
+    display: none !important; /* Conceal banner on mobile to prioritize viewport */
+  }
+
+  .aura-layout {
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
+  }
+  .aura-main-card {
+    min-height: calc(100dvh - 175px) !important;
+    max-height: calc(100dvh - 175px) !important;
+    padding: 0.75rem !important;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  .aura-top-bar {
+    padding-bottom: 0.4rem !important;
+    gap: 0.35rem !important;
+  }
+  .aura-orb {
+    width: 34px !important;
+    height: 34px !important;
+  }
+  .aura-identity div strong {
+    font-size: 0.8rem !important;
+  }
+  .aura-identity div small {
+    font-size: 0.65rem !important;
+  }
+  .aura-voice-controls {
+    width: 100% !important;
+    display: flex !important;
+    gap: 0.35rem !important;
+    justify-content: space-between !important;
+    margin-top: 0.2rem;
+  }
+  .aura-voice-controls button {
+    flex: 1 !important;
+    height: 36px !important;
+    font-size: 0.73rem !important;
+    padding: 0 0.35rem !important;
+    justify-content: center !important;
+    border-radius: 6px !important;
+  }
+  .aura-style-strip {
+    padding: 0.35rem 0.5rem !important;
+    font-size: 0.72rem !important;
+    gap: 0.35rem !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .aura-style-strip input,
+  .aura-style-strip select {
+    font-size: 16px !important;
+    height: 34px !important;
+    border-radius: 6px !important;
+  }
+  .aura-messages {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 0.15rem;
+    gap: 0.6rem !important;
+  }
+  .aura-msg {
+    max-width: 90% !important;
+    font-size: 0.83rem !important;
+    padding: 0.6rem 0.75rem !important;
+    border-radius: 10px;
+    line-height: 1.5 !important;
+  }
+  .aura-chips {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.4rem !important;
+    padding: 0.25rem 0 !important;
+  }
+  .aura-chips::-webkit-scrollbar {
+    display: none;
+  }
+  .aura-chip {
+    flex-shrink: 0 !important;
+    font-size: 0.72rem !important;
+    padding: 0.35rem 0.65rem !important;
+    border-radius: 16px !important;
+  }
+  .aura-input-row {
+    display: flex;
+    gap: 0.45rem;
+    align-items: center;
+  }
+  .aura-input-row input {
+    font-size: 16px !important;
+    height: 44px !important;
+    border-radius: 8px;
+    padding: 0 0.75rem !important;
+  }
+  .aura-input-row button {
+    height: 44px !important;
+    min-width: 58px;
+    padding: 0 0.85rem !important;
+    font-size: 0.82rem !important;
+    font-weight: 700;
+    border-radius: 8px;
+  }
+  .aura-journal-card {
+    min-height: auto !important;
+    max-height: 220px !important;
+    padding: 0.75rem !important;
+  }
+
+  /* ── COMMAND CENTER MOBILE ── */
+  #command-center {
+    padding-top: 56px !important;
+    padding-bottom: 74px !important;
+  }
+  #command-center .section-header {
+    margin-bottom: 0.45rem !important;
+    text-align: left;
+  }
+  #command-center .section-desc {
+    display: none !important;
+  }
+  .cc-omni-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cc-omni-bar input {
+    font-size: 16px !important;
+    height: 44px !important;
+  }
+
+  /* ── EARTH GEO PLANETARY MOBILE ── */
+  #earth {
+    padding-top: 54px !important;
+    padding-bottom: 74px !important;
+  }
+  #earth .section-desc {
+    display: none !important;
+  }
+  .earth-desktop-window {
+    height: calc(100dvh - 145px) !important;
+    border-radius: 8px !important;
+  }
+  #earth-map {
+    height: 100% !important;
+  }
+
+  /* ── NATIVE MOBILE BOTTOM DOCK ── */
+  .mobile-bottom-dock {
+    display: flex !important;
+    height: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
+    padding: 0.3rem 0.4rem calc(0.3rem + env(safe-area-inset-bottom, 0px)) !important;
+    background: rgba(3, 7, 18, 0.96) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-top: 1px solid rgba(0, 245, 255, 0.25) !important;
+    box-shadow: 0 -8px 24px rgba(0,0,0,0.6) !important;
+  }
+  .dock-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0;
+    gap: 1px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    border-radius: 6px;
+    transition: all 0.15s ease;
+  }
+  .dock-item svg {
+    width: 19px;
+    height: 19px;
+  }
+  .dock-item small {
+    font-size: 0.63rem;
+    font-weight: 600;
+  }
+  .dock-item.active {
+    color: var(--cyan) !important;
+    background: rgba(0, 245, 255, 0.12) !important;
+  }
+
   .task-planner-bar, .task-add-row { flex-wrap: wrap; }
   .hero-stat-row { flex-wrap: wrap; justify-content: center; }
-  .exec-dashboard-wrap { padding: 0 1rem 2.5rem; }
+  .exec-dashboard-wrap { padding: 0 0.75rem 2rem; }
   .exec-hub-grid { grid-template-columns: 1fr; }
 }
+
 @media (max-width: 480px) {
   .metrics-grid { grid-template-columns: 1fr; }
-  .hero-title { font-size: 1.85rem; line-height: 1.15; }
-  .hero-desc { font-size: 0.95rem; line-height: 1.6; }
+  .hero-title { font-size: 1.7rem; line-height: 1.15; }
+  .hero-desc { font-size: 0.9rem; line-height: 1.5; }
   .msg-content { max-width: 92%; }
   .hero-cta-row > div { flex-direction: column; width: 100%; }
   .hero-cta-row button { width: 100%; justify-content: center; }
-  .aura-voice-controls { width: 100%; justify-content: space-between; }
-  .nav-status .btn-primary, .nav-status .btn-secondary {
-    padding: 0 0.5rem !important;
-    font-size: 0.70rem !important;
-    height: 32px;
-  }
 }
+
 
 /* ── Mobile Navigation Drawer & Hamburger ───────────── */
 .mobile-only-btn {
