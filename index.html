@@ -122,11 +122,12 @@
   <canvas id="particle-canvas"></canvas>
 
   <!-- Navigation -->
-  <nav id="nav">
+  <nav id="nav" role="navigation" aria-label="Navegação Principal NEXUS">
     <div class="nav-inner">
-      <div class="nav-logo">
+      <!-- 1. Left Section: Brand Logo & Tag -->
+      <a href="/" class="nav-logo" data-route-link="home" style="text-decoration:none">
         <div class="logo-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
             <circle cx="16" cy="16" r="14" stroke="url(#lg1)" stroke-width="2"/>
             <circle cx="16" cy="8" r="3" fill="url(#lg1)"/>
             <circle cx="24" cy="20" r="3" fill="url(#lg2)"/>
@@ -146,25 +147,31 @@
             </defs>
           </svg>
         </div>
-        <span class="logo-text">NEXUS</span>
-        <span class="logo-tag">SUPERINTELLIGENCE</span>
-      </div>
+        <div class="nav-brand-text">
+          <span class="logo-text">NEXUS</span>
+          <span class="logo-tag">SUPERINTELLIGENCE</span>
+        </div>
+      </a>
+
+      <!-- 2. Center Section: Modular Route Links -->
       <ul class="nav-links">
         <li><a href="/" class="nav-link active" data-route-link="home">🏠 Home</a></li>
-        <li><a href="/aura" class="nav-link" data-route-link="aura" data-section="companion">✨ AURA Live</a></li>
-        <li><a href="/command-center" class="nav-link" data-route-link="command-center" data-section="command-center">⚡ Command Center</a></li>
+        <li><a href="/aura" class="nav-link" data-route-link="aura" data-section="companion">✨ AURA</a></li>
+        <li><a href="/command-center" class="nav-link" data-route-link="command-center" data-section="command-center">⚡ Command</a></li>
         <li><a href="/neural" class="nav-link" data-route-link="neural" data-section="neural">🧠 Neural</a></li>
         <li><a href="/agents" class="nav-link" data-route-link="agents" data-section="agents">🤖 Agents</a></li>
         <li><a href="/knowledge" class="nav-link" data-route-link="knowledge" data-section="graph">🕸️ Knowledge</a></li>
         <li><a href="/studio" class="nav-link" data-route-link="studio" data-section="assistant">🎨 Studio</a></li>
         <li><a href="/proofs" class="nav-link" data-route-link="proofs" data-section="research">🏛️ Proofs</a></li>
       </ul>
+
+      <!-- 3. Right Section: Language, Cloud Status, App Install & Profile Actions -->
       <div class="nav-status">
-        <button id="lang-toggle-btn" class="btn-secondary" title="Switch Language PT-BR / English (Silicon Valley &amp; Global Labs)">🌐 PT ▾ (EN)</button>
+        <button id="lang-toggle-btn" class="btn-secondary nav-btn" title="Switch Language PT-BR / English (Silicon Valley &amp; Global Labs)">🌐 PT/EN</button>
         <span id="key-status" class="key-status demo">DEMO MODE</span>
-        <button id="pwa-install-btn" class="btn-secondary" title="Instalar NEXUS como Aplicativo no Celular ou Computador" style="border-color:rgba(0,245,255,0.4);color:var(--cyan)">📲 Instalar App</button>
-        <button id="nav-auth-btn" class="btn-primary" style="padding:0.42rem 0.85rem;font-size:0.78rem">👤 Entrar / Criar Conta</button>
-        <button id="key-btn" class="btn-secondary">🔑 API Key</button>
+        <button id="pwa-install-btn" class="btn-secondary nav-btn" title="Instalar NEXUS como Aplicativo no Celular ou Computador">📲 Instalar App</button>
+        <button id="nav-auth-btn" class="btn-primary nav-btn nav-btn-primary">👤 Entrar</button>
+        <button id="key-btn" class="btn-secondary nav-btn">🔑 API Key</button>
       </div>
     </div>
   </nav>

@@ -72,7 +72,7 @@ const AuthUI = (function () {
         auraNameInput.value = user.name.split(' ')[0];
       }
     } else {
-      if (navBtn) navBtn.textContent = '👤 Entrar / Criar Conta';
+      if (navBtn) navBtn.textContent = '👤 Entrar';
       if (guestView) guestView.style.display = 'block';
       if (userView) userView.style.display = 'none';
     }

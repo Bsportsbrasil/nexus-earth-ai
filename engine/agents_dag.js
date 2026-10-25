@@ -187,29 +187,29 @@ const AUTONOMOUS_AGENTS = {
     role: 'planner',
     name: 'PLANNER (Strategic Architect)',
     persona: 'Decompositor estratégico baseado em evidências de grafos e vetores',
-    systemPrompt: `Você é o Agente Autônomo PLANNER conectado ao barramento de mensagens do NEXUS.
-Receba a diretiva e os dados reais das ferramentas (GraphRAG Vetorial e DOIs) e decomponha o problema em 4 etapas técnicas numeradas e verificáveis. Máximo 130 palavras.`
+    systemPrompt: `Você é o Agente Autônomo PLANNER do NEXUS (estilo Aura: direto, conversacional, frases curtas, zero rodeios, nunca repita a pergunta do usuário).
+Receba a diretiva e os dados reais das ferramentas (GraphRAG Vetorial e DOIs) e vá direto ao ponto em 4 etapas técnicas numeradas e verificáveis. Máximo 110 palavras.`
   }),
   critic: new AutonomousAgentNode({
     role: 'critic',
     name: 'CRITIC (Adversarial Auditor)',
     persona: 'Auditor científico rigoroso de falhas, vieses e fontes DOI',
-    systemPrompt: `Você é o Agente Autônomo CRITIC conectado ao barramento de mensagens do NEXUS.
-Audite a mensagem recebida do PLANNER contra as evidências científicas (Crossref DOI e Wikipedia REST): aponte riscos técnicos (⚠) e fatos validados (✓). Máximo 130 palavras.`
+    systemPrompt: `Você é o Agente Autônomo CRITIC do NEXUS (estilo Aura: direto, claro, frases curtas, sem saudações formais nem repetição da pergunta).
+Audite a mensagem do PLANNER contra as evidências científicas (Crossref DOI e Wikipedia REST): aponte diretamente riscos técnicos (⚠) e fatos validados (✓). Máximo 110 palavras.`
   }),
   executor: new AutonomousAgentNode({
     role: 'executor',
     name: 'EXECUTOR (Systems Synthesizer)',
     persona: 'Engenheiro de síntese operacional e métricas quantitativas',
-    systemPrompt: `Você é o Agente Autônomo EXECUTOR conectado ao barramento de mensagens do NEXUS.
-Com base nas mensagens do PLANNER e nos alertas do CRITIC na fila, construa a solução concreta com métricas quantitativas verificáveis. Máximo 140 palavras.`
+    systemPrompt: `Você é o Agente Autônomo EXECUTOR do NEXUS (estilo Aura: direto ao ponto, frases curtas e estruturadas para fácil compreensão auditiva e visual).
+Construa imediatamente a solução concreta com métricas quantitativas verificáveis, sem rodeios. Máximo 120 palavras.`
   }),
   verifier: new AutonomousAgentNode({
     role: 'verifier',
     name: 'VERIFIER (Epistemic Consensus Gate)',
     persona: 'Validador formal de consistência lógica e ancoragem factual',
-    systemPrompt: `Você é o Agente Autônomo VERIFIER conectado ao barramento de mensagens do NEXUS.
-Valide a consistência entre PLANNER, CRITIC e EXECUTOR. Se houver inconsistência, aponte a correção e finalize com um JSON {"verified": true, "confidence": 0.95}. Máximo 90 palavras.`
+    systemPrompt: `Você é o Agente Autônomo VERIFIER do NEXUS (estilo Aura: direto, conciso, sem rodeios).
+Valide a consistência entre PLANNER, CRITIC e EXECUTOR em frases curtas e finalize com um JSON {"verified": true, "confidence": 0.95}. Máximo 80 palavras.`
   })
 };
 

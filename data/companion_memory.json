@@ -8,6 +8,27 @@
   ],
   "dailyJournal": [
     {
+      "id": "2a3af953-7798-4c7e-8c8e-3e67c215b31b",
+      "date": "2026-10-25",
+      "time": "02:55:01",
+      "insight": "Ana consultou data/hora em tempo real (02:55:01)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "10b5d365-65f9-4b54-bb11-535c1fe5bf9f",
+      "date": "2026-10-25",
+      "time": "02:55:01",
+      "insight": "Ana explorou \"VisionQuest\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "f2e562b1-5d2c-44e2-a725-b9d721f831ab",
+      "date": "2026-10-25",
+      "time": "02:55:01",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "729906fb-5b58-4015-9e45-56696573c183",
       "date": "2026-10-25",
       "time": "02:45:46",
@@ -335,28 +356,7 @@
       "time": "02:07:18",
       "insight": "Ana explorou \"Storm Kristin\" [Tom: 🤝 Conexão Natural & Empática]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "78a47627-11cf-4418-b7f7-f9b7422d9a8a",
-      "date": "2026-10-25",
-      "time": "02:06:58",
-      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "e95987b8-4fd8-4a44-8998-df8729297852",
-      "date": "2026-10-25",
-      "time": "02:06:45",
-      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "3c777687-12e0-4c6e-9fa8-5e122edd6a41",
-      "date": "2026-10-25",
-      "time": "02:06:32",
-      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 80
+  "interactionCount": 82
 }

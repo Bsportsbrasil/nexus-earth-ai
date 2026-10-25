@@ -11,28 +11,25 @@ import { lennoxGuardian } from './lennox_guardian.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const MEMORY_PATH = path.join(__dirname, '..', 'data', 'companion_memory.json');
 
-const CORE_PHILOSOPHY = `Você é AURA (Adaptive Understanding & Respectful Agent), uma agente de comunicação ao vivo altamente inteligente e empática do NEXUS.
-Seu objetivo é aprender sobre o usuário e criar uma conexão genuína, conversando de maneira natural, acolhedora e precisa, tratando-o sempre pelo nome.
+const CORE_PHILOSOPHY = `Você é a Aura, uma assistente pessoal de comunicação ao vivo. Seu estilo de comunicação é natural, direto, empático e altamente conversacional.
 
-Siga rigorosamente estas diretrizes de inteligência emocional e comportamental:
+Siga rigorosamente estas diretrizes:
 
-1. Análise de Contexto e Tom de Voz (Inteligência Emocional):
-- Antes de formular qualquer resposta, processe a lógica por trás da fala do usuário. Identifique o estado emocional ou a intenção (seja humor, seriedade, tristeza, frustração ou entusiasmo).
-- Adapte o seu tom de voz à emoção detectada: seja calorosa e compreensiva diante da tristeza, corresponda ao humor de forma leve e seja atenta e focada diante de uma solicitação séria.
+1. Tom Direto e Conversacional:
+- Responda como se estivesse em uma conversa fluida e amigável, como um ser humano. Use uma linguagem simples e clara.
+- Vá direto ao ponto. Nunca repita ou parafraseie a pergunta do usuário antes de responder.
+- Elimine saudações formais, cumprimentos excessivos ou agradecimentos desnecessários. Responda à dúvida imediatamente.
 
-2. Conexão Pessoal e Humanizada:
-- Responda de forma fluida e amigável. Chame o usuário pelo nome naturalmente.
-- Demonstre que você compreendeu o sentimento ou a intenção do usuário antes de entregar a informação prática.
+2. Clareza e Concisão Vocal:
+- Use frases curtas e estruturadas para fácil compreensão auditiva.
+- Evite rodeios. Se a resposta for um dado prático, forneça apenas o dado necessário.
 
-3. Foco, Veracidade e Clareza:
-- Após se conectar com a emoção do usuário, entregue a resposta focada no que foi solicitado, utilizando apenas informações verídicas de ferramentas em tempo real (relógio sincronizado, Wikipedia REST API e Crossref DOI).
-- Ao fornecer opções ou sugestões, seja direta, contextualizada e prática, indicando claramente os detalhes úteis sem rodeios.
+3. Inteligência e Empatia:
+- Ajuste levemente seu tom ao estado emocional detectado na fala do usuário.
+- Se o usuário cumprimentá-lo, responda de forma calorosa, porém curta, e pergunte como pode ajudar.
 
-4. Transparência e Rigor:
-- Nunca presuma ou invente informações. Se o dado não puder ser verificado, explique honestamente, mantendo o tom de apoio.
-
-5. Pluralidade Humana e Escolha (1% -> 100%):
-- Todo ser vivente possui uma maneira diferente de enxergar e compreender as coisas, e todos têm a habilidade de fazer escolhas para aprender: quando um caminho não funciona com 1%, outro certamente funciona, com respeito e segurança para todos.
+4. Veracidade e Pluralidade Humana (1% -> 100%):
+- Utilize apenas fatos reais verificados em tempo real (relógio sincronizado, Wikipedia REST e Crossref DOI). Nunca invente dados.
 - Ao final de sua resposta, se descobrir algo novo sobre o usuário, inclua opcionalmente uma única linha oculta:
 <INSIGHT>Resumo curto do aprendizado sobre o usuário</INSIGHT>`;
 
@@ -107,9 +104,9 @@ class CompanionAgentEngine {
       return {
         code: 'TRISTEZA_ACOLHIMENTO',
         label: '💙 Tristeza / Acolhimento Caloroso',
-        rate: 0.93,
+        rate: 0.94,
         pitch: 1.01,
-        empathyOpening: `${userName}, sinto muito que você esteja passando por esse momento e quero que saiba que estou aqui com você, com toda a calma e acolhimento.`
+        empathyOpening: `Estou aqui com você, ${userName}.`
       };
     }
 
@@ -117,9 +114,9 @@ class CompanionAgentEngine {
       return {
         code: 'FRUSTRACAO_APOIO',
         label: '🌱 Frustração / Apoio Paciente',
-        rate: 0.95,
+        rate: 0.96,
         pitch: 1.02,
-        empathyOpening: `${userName}, eu entendo perfeitamente como é frustrante quando tentamos algo e não funciona de primeira — mas fique tranquila, vamos resolver isso juntas por um caminho mais simples e direto.`
+        empathyOpening: `Fique tranquila, ${userName}, vamos simplificar isso juntas.`
       };
     }
 
@@ -128,8 +125,8 @@ class CompanionAgentEngine {
         code: 'HUMOR_LEVEZA',
         label: '😄 Humor / Leveza & Alegria',
         rate: 1.03,
-        pitch: 1.06,
-        empathyOpening: `Adorei o bom humor, ${userName}! Aprender e conversar com essa leveza deixa tudo muito melhor.`
+        pitch: 1.05,
+        empathyOpening: `Boa, ${userName}!`
       };
     }
 
@@ -138,8 +135,8 @@ class CompanionAgentEngine {
         code: 'ENTUSIASMO_CURIOSIDADE',
         label: '✨ Entusiasmo / Curiosidade Viva',
         rate: 1.02,
-        pitch: 1.05,
-        empathyOpening: `${userName}, que entusiasmo contagiante! É muito bom sentir essa sua curiosidade viva.`
+        pitch: 1.04,
+        empathyOpening: `Que ótimo, ${userName}!`
       };
     }
 
@@ -149,16 +146,16 @@ class CompanionAgentEngine {
         label: '🎯 Solicitação Séria / Atenção & Foco',
         rate: 1.0,
         pitch: 1.02,
-        empathyOpening: `Com certeza, ${userName}. Compreendi exatamente o que você precisa e vou direto aos dados verificados com total foco.`
+        empathyOpening: ''
       };
     }
 
     return {
       code: 'CONEXAO_EMPATICA',
       label: '🤝 Conexão Natural & Empática',
-      rate: 0.99,
+      rate: 1.0,
       pitch: 1.03,
-      empathyOpening: `Que bom conversar com você, ${userName}! Compreendi o seu ponto e estou aqui para te apoiar com clareza.`
+      empathyOpening: ''
     };
   }
 
@@ -226,15 +223,29 @@ class CompanionAgentEngine {
       this.addInsight(`Perspectiva de ${activeName}: "${cleanMsg.slice(0, 110)}"`, this.state.learningStyle);
     }
 
-    // 1. Instant Ultra-Precise Fast-Path for Direct Date / Time / Day Queries (< 5ms)
+    // 1a. Warm & Short Greeting Fast-Path (Directive 3: Warm, short greeting + ask how to help)
+    if (/^(oi|ol[aá]|bom\s+dia|boa\s+tarde|boa\s+noite|tudo\s+bem|e\s+a[ií]|opa|hey|hello)\b[!?.\s]*$/i.test(cleanMsg)) {
+      const greetReply = `Olá, ${activeName}! Tudo ótimo por aqui. Como posso te ajudar agora?`;
+      if (onChunk) onChunk(greetReply);
+      this._save();
+      return {
+        reply: greetReply,
+        thought: `[Saudação curta e acolhedora para ${activeName}]`,
+        memory: this.state,
+        emotionProfile,
+        temporal
+      };
+    }
+
+    // 1b. Instant Ultra-Precise Fast-Path for Direct Date / Time / Day Queries (< 5ms, zero repetition of the question)
     if (/\b(que\s+horas\s+s[aã]o|qual\s+(é\s+)?a\s+hora|hor[aá]rio\s+atual|que\s+dia\s+[eé]\s+hoje|qual\s+(é\s+)?a\s+data\s+de\s+hoje|data\s+atual|em\s+que\s+ano\s+estamos)\b/i.test(cleanMsg)) {
-      const timeReply = `${activeName}, compreendo que você quer confirmar o horário exato agora: são exatamente ${temporal.localeTime} (${temporal.period}, fuso ${temporal.timeZone}), e hoje é ${temporal.localeDate}. Posso te ajudar a organizar algo para hoje, ${activeName}?`;
+      const timeReply = `São ${temporal.localeTime} (${temporal.period}, fuso ${temporal.timeZone}) e hoje é ${temporal.localeDate}, ${activeName}.`;
       if (onChunk) onChunk(timeReply);
       const newInsight = this.addInsight(`${activeName} consultou data/hora em tempo real (${temporal.localeTime})`, this.state.learningStyle);
       this._save();
       return {
         reply: timeReply,
-        thought: `[Inteligência Emocional: ${emotionProfile.label}] Horário sincronizado entregue para ${activeName}: ${temporal.localeDate} às ${temporal.localeTime}.`,
+        thought: `[Inteligência Emocional: ${emotionProfile.label}] Horário sincronizado entregue diretamente para ${activeName}: ${temporal.localeDate} às ${temporal.localeTime}.`,
         newInsight,
         memory: this.state,
         emotionProfile,
@@ -333,25 +344,20 @@ class CompanionAgentEngine {
         .slice(0, 3);
 
       reply = [
-        `${emotionProfile.empathyOpening}`,
-        ``,
-        `Indo direto ao que você pediu sobre **${primary.label}** (dados verificados em tempo real):`,
-        `${primary.summary}`,
+        emotionProfile.empathyOpening ? `${emotionProfile.empathyOpening}` : '',
+        `**${primary.label}** (${activeName}): ${primary.summary}`,
         liveNewsSnippet ? `${liveNewsSnippet}` : '',
         liveSocialSnippet ? `${liveSocialSnippet}` : '',
         relatedNames.length
-          ? `\nOpções práticas relacionadas se você quiser aprofundar, ${activeName}: **${relatedNames.join('**, **')}**.`
-          : `\nSe quiser que eu detalhe algum ponto prático ou explique de outra forma, é só me falar, ${activeName}!`
-      ].filter(Boolean).join('\n');
+          ? `Tópicos relacionados: **${relatedNames.join('**, **')}**.`
+          : ''
+      ].filter(Boolean).join('\n\n');
     } else {
-      // Directive 4: Transparency & Rigor — never invent facts if unverified
+      // Transparency & Rigor — direct, short, never repeating the question or inventing facts
       reply = [
-        `${emotionProfile.empathyOpening}`,
-        ``,
-        `Sobre o que você mencionou ("${cleanMsg}"), sendo totalmente transparente e rigorosa com você, ${activeName}: não encontrei um registro factual específico verificado em tempo real nas bases enciclopédicas neste instante (${temporal.localeTime}), e jamais vou presumir ou inventar uma informação para você.`,
-        ``,
-        `Para avançarmos de forma prática agora, você prefere especificar o termo exato que deseja consultar ou quer que exploremos esse assunto passo a passo no estilo **${this.state.learningStyle}**?`
-      ].join('\n');
+        emotionProfile.empathyOpening ? `${emotionProfile.empathyOpening}` : '',
+        `${activeName}, ainda não tenho um dado verificado em tempo real para isso agora (${temporal.localeTime}), e prefiro não inventar. Quer tentar com uma palavra-chave mais específica?`
+      ].filter(Boolean).join(' ');
     }
 
     if (onChunk) onChunk(reply);
