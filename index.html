@@ -48,6 +48,7 @@
         <span class="logo-tag">SUPERINTELLIGENCE</span>
       </div>
       <ul class="nav-links">
+        <li><a href="#command-center" class="nav-link active" data-section="command-center">⚡ Command Center</a></li>
         <li><a href="#neural" class="nav-link" data-section="neural">Neural</a></li>
         <li><a href="#agents" class="nav-link" data-section="agents">Agents</a></li>
         <li><a href="#graph" class="nav-link" data-section="graph">Knowledge</a></li>
@@ -77,8 +78,8 @@
         all converging into a single unified superintelligence. This is not the future. This is now.
       </p>
       <div class="hero-cta-row">
-        <button class="btn-primary" id="hero-launch-btn" onclick="document.getElementById('neural').scrollIntoView({behavior:'smooth'})">
-          <span>Launch NEXUS</span>
+        <button class="btn-primary" id="hero-launch-btn" onclick="document.getElementById('command-center').scrollIntoView({behavior:'smooth'})">
+          <span>Open Glass-Box Command Center</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
         <div class="hero-stat-row">
@@ -94,6 +95,90 @@
         <div class="ring ring-1"></div>
         <div class="ring ring-2"></div>
         <div class="ring ring-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unified Glass-Box AI Control Center (3-Pillar Convergence) -->
+  <section id="command-center" class="section">
+    <div class="section-header">
+      <div class="section-tag">Glass-Box AI Control Center</div>
+      <h2 class="section-title">Unified Cognitive & Operational Convergence</h2>
+      <p class="section-desc">Unlike black-box chatbots (ChatGPT/Claude), dispatch a single directive below and watch all 3 pillars fire simultaneously on one screen: <strong>(1) Glass-Box Tensor & GraphRAG Inspection</strong>, <strong>(2) Multi-Agent DAG Consensus</strong>, and <strong>(3) Live Cluster Telemetry & MessageBroker Bus</strong>.</p>
+    </div>
+
+    <div class="cc-omni-bar glass-panel">
+      <span class="cc-omni-tag">UNIFIED DISPATCH</span>
+      <input type="text" id="cc-prompt" class="cc-omni-input" value="Quantum computing impact on cryptography" placeholder="Enter any scientific, engineering, or strategic directive to execute across all 5 layers..." />
+      <button class="btn-primary" id="cc-exec-btn">
+        <span>Execute Full Pipeline</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+    </div>
+
+    <!-- Live DAG Pipeline Stage Tracker -->
+    <div class="cc-pipeline-bar glass-panel" id="cc-pipeline">
+      <div class="cc-stage" id="cc-st-graphrag"><span class="cc-dot"></span>1. GraphRAG Vector + 1-Hop</div>
+      <div class="cc-arrow">→</div>
+      <div class="cc-stage" id="cc-st-tensor"><span class="cc-dot"></span>2. Tensor Forward/Backprop</div>
+      <div class="cc-arrow">→</div>
+      <div class="cc-stage" id="cc-st-planner"><span class="cc-dot"></span>3. Planner Agent</div>
+      <div class="cc-arrow">→</div>
+      <div class="cc-stage" id="cc-st-critic"><span class="cc-dot"></span>4. Critic Audit</div>
+      <div class="cc-arrow">→</div>
+      <div class="cc-stage" id="cc-st-executor"><span class="cc-dot"></span>5. Executor Synthesis</div>
+      <div class="cc-arrow">→</div>
+      <div class="cc-stage" id="cc-st-verifier"><span class="cc-dot"></span>6. Verifier & Consensus</div>
+    </div>
+
+    <div class="cc-bento-grid">
+      <!-- Pillar 1: Cognitive Transparency (Glass Box) -->
+      <div class="cc-pane glass-panel">
+        <div class="cc-pane-header">
+          <span class="panel-title">🔬 Pillar 1: Cognitive Glass-Box (GraphRAG + Attention Heatmap)</span>
+          <span class="agent-badge IDLE" id="cc-p1-badge">READY</span>
+        </div>
+        <div class="cc-p1-split">
+          <div class="cc-attn-box">
+            <div class="cc-sub-label">Self-Attention & Layer Activations ($a^{(l)}$)</div>
+            <canvas id="cc-attn-canvas" width="220" height="150"></canvas>
+            <div class="cc-tensor-stats" id="cc-tensor-stats">H = -- bits | ||∇W|| = --</div>
+          </div>
+          <div class="cc-rag-box">
+            <div class="cc-sub-label">Retrieved GraphRAG Nodes & DOI Citations</div>
+            <div class="cc-rag-list" id="cc-rag-list">
+              <span class="idle-text">Dispatch a directive to watch live vector &amp; subgraph retrieval...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pillar 2: Autonomous Multi-Agent Consensus Stream -->
+      <div class="cc-pane glass-panel">
+        <div class="cc-pane-header">
+          <span class="panel-title">🤖 Pillar 2: Multi-Agent Debate &amp; Verified Consensus</span>
+          <span class="agent-badge IDLE" id="cc-p2-badge">IDLE</span>
+        </div>
+        <div class="cc-debate-stream" id="cc-debate-stream">
+          <span class="idle-text">Planner, Critic, Executor, and Verifier reasoning traces will stream here simultaneously...</span>
+        </div>
+      </div>
+
+      <!-- Pillar 3: Operational Infrastructure & MessageBroker Bus -->
+      <div class="cc-pane glass-panel">
+        <div class="cc-pane-header">
+          <span class="panel-title">📡 Pillar 3: Live MessageBroker Bus &amp; Hardware Telemetry</span>
+          <span class="agent-badge DONE" id="cc-p3-badge">BUS ONLINE</span>
+        </div>
+        <div class="cc-telemetry-strip">
+          <div class="cc-mini-stat"><span id="cc-cpu">--%</span><small>Host CPU</small></div>
+          <div class="cc-mini-stat"><span id="cc-ram">-- GB</span><small>RAM Used</small></div>
+          <div class="cc-mini-stat"><span id="cc-gnodes">0</span><small>GraphDB Nodes</small></div>
+          <div class="cc-mini-stat"><span id="cc-msgs">0</span><small>Broker Events</small></div>
+        </div>
+        <div class="cc-broker-log" id="cc-broker-log">
+          <div class="broker-line">[SYSTEM] RFC 6455 WebSocket &amp; MessageBroker initialized.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -411,6 +496,7 @@
   <script src="graph.js"></script>
   <script src="chat.js"></script>
   <script src="metrics.js"></script>
+  <script src="command_center.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

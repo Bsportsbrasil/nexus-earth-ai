@@ -1,6 +1,6 @@
 // App bootstrap + nav highlighting
 document.addEventListener('DOMContentLoaded', () => {
-  [NeuralViz, Agents, Graph, Chat, Metrics].forEach(m => {
+  [CommandCenter, NeuralViz, Agents, Graph, Chat, Metrics].forEach(m => {
     try { m.init(); } catch (e) { console.error(e); }
   });
   const links = document.querySelectorAll('.nav-link');
