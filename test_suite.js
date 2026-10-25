@@ -16,6 +16,7 @@ import { c2Engine } from './engine/c2_sovereign.js';
 import { buildRealtimeTemporalContext } from './engine/llm.js';
 import { cloudVault } from './engine/cloud_connectors.js';
 import { globalIntel } from './engine/global_intelligence.js';
+import { authEngine } from './engine/auth_identity.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -230,7 +231,40 @@ async function runTests() {
   assert.ok(intelPulse.privacyProtection.includes('Zero-Cookie Anonymized Proxy'), 'Zero-Trust social/news proxy shield missing');
   console.log(`✓ Layer 16: Omniscient Global News, Search Engines, Social Media Pulse & Surgical Platform Auditor verified (${surgicalAudit.totalEngineModules} engine modules SHA-256 verified)`);
 
-  console.log('=== ALL 16 ARCHITECTURAL, OMNISCIENT NEWS/SOCIAL, REAL BACKEND ENGINES, MODULAR UI/UX, MASTER C2, RESEARCH, SEO, PWA & COMPANION LAYERS PASSED 100% ===');
+  // 17. Test Enterprise Identity, Registration, PBKDF2-SHA512 Login, HMAC-SHA256 Session JWT, 2FA/MFA, Recovery & LGPD
+  const testEmail = `test_${Date.now()}@nexus.ai`;
+  const regOut = authEngine.register({
+    name: 'Dra. Helena Costa',
+    email: testEmail,
+    password: 'StrongPassword#2026',
+    company: 'NEXUS Lab',
+    lgpdConsent: true
+  });
+  assert.ok(regOut.token && regOut.user.id, 'User registration failed to issue token');
+  const sessionCheck = authEngine.verifySessionToken(regOut.token);
+  assert.equal(sessionCheck.user.email, testEmail, 'HMAC-SHA256 Session token verification failed');
+
+  // Enable 2FA/MFA and verify MFA challenge
+  const mfaUpdate = authEngine.updateProfile(regOut.user.id, { toggleMfa: true });
+  assert.equal(mfaUpdate.user.mfaEnabled, true, '2FA/MFA activation failed');
+  const loginChallenge = authEngine.login({ email: testEmail, password: 'StrongPassword#2026' });
+  assert.equal(loginChallenge.mfaRequired, true, '2FA challenge was not enforced on login');
+  const loginWithMfa = authEngine.login({
+    email: testEmail,
+    password: 'StrongPassword#2026',
+    mfaCode: mfaUpdate.mfaPinPreview
+  });
+  assert.ok(loginWithMfa.token, '2FA login with valid PIN failed');
+
+  // Test LGPD Data Portability Export & Logout + Cleanup
+  const lgpdExport = authEngine.exportUserDataLGPD(regOut.user.id);
+  assert.ok(lgpdExport.cryptographicSignature && lgpdExport.profile.email === testEmail, 'LGPD export signature failed');
+  authEngine.logout(loginWithMfa.token);
+  assert.equal(authEngine.verifySessionToken(loginWithMfa.token), null, 'Logout did not revoke session token');
+  authEngine.deleteOwnAccount(regOut.user.id);
+  console.log('✓ Layer 17: Enterprise Identity, Registration, PBKDF2-SHA512 Login, 2FA/MFA, Session Revocation & LGPD Portability verified');
+
+  console.log('=== ALL 17 ARCHITECTURAL, IDENTITY/AUTH, OMNISCIENT NEWS/SOCIAL, REAL BACKEND ENGINES, MODULAR UI/UX, MASTER C2 & COMPANION LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

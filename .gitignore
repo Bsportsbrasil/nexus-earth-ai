@@ -7,4 +7,5 @@ node_modules/
 .netlify/
 *.log
 data/encrypted_user_vault.enc
+data/users_identity.enc
 data/broker_wal.jsonl

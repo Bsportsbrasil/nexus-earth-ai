@@ -18,6 +18,7 @@ import { companionEngine } from './engine/companion_agent.js';
 import { c2Engine } from './engine/c2_sovereign.js';
 import { cloudVault } from './engine/cloud_connectors.js';
 import { globalIntel } from './engine/global_intelligence.js';
+import { authEngine } from './engine/auth_identity.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -762,6 +763,112 @@ const server = http.createServer(async (req, res) => {
       return jsonResponse(res, 200, auditReport);
     } catch (e) {
       return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
+  // 6g. Enterprise Identity, Registration, Login, Logout, MFA & LGPD Privacy Endpoints (/api/auth/*)
+  if (pathname.startsWith('/api/auth/')) {
+    const extractSessionToken = () => {
+      const authHeader = req.headers['authorization'] || '';
+      if (authHeader.startsWith('Bearer ')) return authHeader.slice(7).trim();
+      const cookieHeader = req.headers['cookie'] || '';
+      const m = cookieHeader.match(/nexus_session=([^;]+)/);
+      return m ? decodeURIComponent(m[1]) : '';
+    };
+
+    try {
+      const ip = req.socket.remoteAddress || '127.0.0.1';
+      const userAgent = req.headers['user-agent'] || 'NEXUS-Client';
+
+      if (req.method === 'POST' && pathname === '/api/auth/register') {
+        const body = await parseJsonBody(req);
+        c2Engine.inspectAndFilterRequest({
+          accountId: 'acc_public_live',
+          ip,
+          endpoint: '/api/auth/register',
+          payloadText: `${body.name || ''} ${body.email || ''} ${body.company || ''}`
+        });
+        const reg = authEngine.register({ ...body, ip, userAgent });
+        res.setHeader('Set-Cookie', `nexus_session=${encodeURIComponent(reg.token)}; HttpOnly; SameSite=Strict; Path=/; Max-Age=604800`);
+        return jsonResponse(res, 201, reg);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/auth/login') {
+        const body = await parseJsonBody(req);
+        c2Engine.inspectAndFilterRequest({
+          accountId: 'acc_public_live',
+          ip,
+          endpoint: '/api/auth/login',
+          payloadText: `${body.email || ''}`
+        });
+        const loginRes = authEngine.login({ ...body, ip, userAgent });
+        if (loginRes.token) {
+          res.setHeader('Set-Cookie', `nexus_session=${encodeURIComponent(loginRes.token)}; HttpOnly; SameSite=Strict; Path=/; Max-Age=604800`);
+        }
+        return jsonResponse(res, 200, loginRes);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/auth/logout') {
+        const tok = extractSessionToken();
+        authEngine.logout(tok);
+        res.setHeader('Set-Cookie', 'nexus_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0');
+        return jsonResponse(res, 200, { ok: true, message: 'Sessão encerrada com segurança.' });
+      }
+
+      if (req.method === 'POST' && pathname === '/api/auth/logout-all') {
+        const verified = authEngine.verifySessionToken(extractSessionToken());
+        if (!verified) return jsonResponse(res, 401, { error: 'Sessão inválida ou expirada.' });
+        const revoked = authEngine.logoutAllDevices(verified.user.id);
+        res.setHeader('Set-Cookie', 'nexus_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0');
+        return jsonResponse(res, 200, { ok: true, revokedSessions: revoked });
+      }
+
+      if (req.method === 'GET' && pathname === '/api/auth/me') {
+        const verified = authEngine.verifySessionToken(extractSessionToken());
+        if (!verified) return jsonResponse(res, 401, { authenticated: false });
+        return jsonResponse(res, 200, {
+          authenticated: true,
+          user: authEngine._sanitizeUser(verified.user),
+          currentSessionId: verified.session.sessionId
+        });
+      }
+
+      if (req.method === 'POST' && pathname === '/api/auth/profile') {
+        const verified = authEngine.verifySessionToken(extractSessionToken());
+        if (!verified) return jsonResponse(res, 401, { error: 'Não autenticado.' });
+        const body = await parseJsonBody(req);
+        const updated = authEngine.updateProfile(verified.user.id, body);
+        return jsonResponse(res, 200, { ok: true, ...updated });
+      }
+
+      if (req.method === 'POST' && pathname === '/api/auth/recover') {
+        const body = await parseJsonBody(req);
+        const rec = authEngine.requestPasswordRecovery(body.email);
+        return jsonResponse(res, 200, { ok: true, ...rec });
+      }
+
+      if (req.method === 'POST' && pathname === '/api/auth/reset-password') {
+        const body = await parseJsonBody(req);
+        const resetRes = authEngine.resetPasswordWithCode(body);
+        return jsonResponse(res, 200, resetRes);
+      }
+
+      if (req.method === 'GET' && pathname === '/api/auth/export-lgpd') {
+        const verified = authEngine.verifySessionToken(extractSessionToken());
+        if (!verified) return jsonResponse(res, 401, { error: 'Não autenticado.' });
+        const pkg = authEngine.exportUserDataLGPD(verified.user.id);
+        return jsonResponse(res, 200, pkg);
+      }
+
+      if (req.method === 'DELETE' && pathname === '/api/auth/account') {
+        const verified = authEngine.verifySessionToken(extractSessionToken());
+        if (!verified) return jsonResponse(res, 401, { error: 'Não autenticado.' });
+        authEngine.deleteOwnAccount(verified.user.id);
+        res.setHeader('Set-Cookie', 'nexus_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0');
+        return jsonResponse(res, 200, { ok: true, deleted: true });
+      }
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
     }
   }
 
