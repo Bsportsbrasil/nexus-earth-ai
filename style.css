@@ -1318,7 +1318,7 @@ body {
   .graph-container { grid-template-columns: 1fr; height: auto; }
   .graph-canvas-wrap { height: 400px; }
 }
-@media (max-width: 860px) {
+@media (max-width: 960px) {
   .nav-center { display: none !important; }
   .mobile-only-btn { display: inline-flex !important; }
   .nav-status #key-btn { display: none; }

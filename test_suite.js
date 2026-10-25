@@ -508,16 +508,21 @@ async function runTests() {
   // Re-certify
   supremeSupervisor.certifyAgent({ agentId: 'executor', creatorName: 'Criador Soberano', note: 'Re-homologado' });
 
-  // Verify DOM & Architecture Presence of /supervisor
-  assert.ok(finalHtml.includes('id="supervisor"'), 'index.html missing #supervisor section');
-  assert.ok(finalHtml.includes('id="sup-lead-messages"'), 'index.html missing #sup-lead-messages');
-  assert.ok(finalHtml.includes('id="sup-sub-certify-btn"'), 'index.html missing Human Certification button');
-  assert.ok(finalHtml.includes('src="supervisor_workspace.js"'), 'index.html missing supervisor_workspace.js script');
+  // Verify Sovereign Confidentiality & Creator Exclusivity
+  // 1. Public index.html MUST NOT contain the supervisor workspace or direct links to it
+  assert.ok(!finalHtml.includes('id="supervisor"'), 'index.html unexpectedly exposes #supervisor section to public users');
+  assert.ok(!finalHtml.includes('data-route="supervisor"'), 'index.html unexpectedly exposes supervisor route to public users');
+  assert.ok(finalHtml.includes('src="voice_engine.js"'), 'index.html missing neural voice engine');
 
+  // 2. admin.html (Master C2 Console) MUST house the Supreme Supervisor & HITL Certification
   const adminSrc = fs.readFileSync(path.join(rootDir, 'admin.html'), 'utf8');
-  assert.ok(adminSrc.includes('/supervisor'), 'admin.html missing direct executive link to /supervisor');
+  assert.ok(adminSrc.includes('id="tab-supervisor"'), 'admin.html missing tab-supervisor pane');
+  assert.ok(adminSrc.includes('id="sup-lead-messages"'), 'admin.html missing #sup-lead-messages');
+  assert.ok(adminSrc.includes('id="sup-sub-certify-btn"'), 'admin.html missing Human Certification button');
+  assert.ok(adminSrc.includes('src="supervisor_workspace.js"'), 'admin.html missing supervisor_workspace.js script');
+  assert.ok(adminSrc.includes('src="voice_engine.js"'), 'admin.html missing voice_engine.js script');
 
-  console.log(`✓ Layer 23: Supreme Supervisor Agent (LENNOX Oversight Plane, Dual-Canvas Testing, Human-in-the-Loop Certification & Bespoke Non-Generic Vector Glyphs) verified (${supOverview.stats.totalAgents} agents under oversight)`);
+  console.log(`✓ Layer 23: Supreme Supervisor Agent (Creator-Exclusive C2 Dashboard Isolation, Dual-Canvas Testing, Human-in-the-Loop Certification & Natural Neural Voice Engine) verified (${supOverview.stats.totalAgents} agents under oversight)`);
 
   console.log('=== ALL 23 ARCHITECTURAL, INSTITUTIONAL, MULTI-AGENT SUPERVISION & COMPLIANCE LAYERS PASSED 100% ===');
 }

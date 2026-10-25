@@ -60,8 +60,7 @@ const NexusRouter = (() => {
     'guide',
     'articles',
     'faq',
-    'about',
-    'supervisor'
+    'about'
   ]);
 
   const ALIAS_MAP = {
@@ -96,10 +95,7 @@ const NexusRouter = (() => {
     'perguntas': 'faq',
     'about': 'about',
     'sobre': 'about',
-    'sobre-nos': 'about',
-    'supervisor': 'supervisor',
-    'agente-supervisor': 'supervisor',
-    'supervisao': 'supervisor'
+    'sobre-nos': 'about'
   };
 
   const ROUTE_PATHS = {
@@ -114,8 +110,7 @@ const NexusRouter = (() => {
     'guide': '/guide',
     'articles': '/articles',
     'faq': '/faq',
-    'about': '/about',
-    'supervisor': '/supervisor'
+    'about': '/about'
   };
 
   const initializedModules = new Set();
@@ -178,18 +173,16 @@ const NexusRouter = (() => {
         if (typeof Metrics !== 'undefined') ensureModuleInit('Metrics', Metrics);
         if (typeof ResearchHub !== 'undefined') ensureModuleInit('ResearchHub', ResearchHub);
         break;
-      case 'supervisor':
-        if (typeof SupervisorWorkspace !== 'undefined') {
-          ensureModuleInit('SupervisorWorkspace', SupervisorWorkspace);
-          SupervisorWorkspace.loadOverview();
-        }
-        break;
     }
   }
 
   function normalizeRoute(raw) {
     if (!raw) return 'home';
     const cleaned = String(raw).replace(/^[#\/]+/, '').replace(/\/+$/, '').toLowerCase();
+    if (cleaned === 'supervisor' || cleaned === 'agente-supervisor' || cleaned === 'supervisao') {
+      window.location.href = '/admin.html#tab-supervisor';
+      return 'home';
+    }
     return ALIAS_MAP[cleaned] || (VALID_ROUTES.has(cleaned) ? cleaned : 'home');
   }
 

@@ -548,6 +548,7 @@ const SecurityUI = (function () {
       if (r.ok) {
         showDashboard();
         renderAll(await r.json());
+        window.SupervisorWorkspace?.loadOverview?.();
       }
     } catch (e) {}
   }
@@ -571,6 +572,7 @@ const SecurityUI = (function () {
       showDashboard();
       renderAll({ ...data.state, c2: data.c2, sovereignBriefing: data.sovereignBriefing, lennox: data.lennox, regulatory: data.regulatory, passports: data.passports });
       refreshState();
+      window.SupervisorWorkspace?.loadOverview?.();
     } catch (e) {
       showAuthGate('Erro de conexão com o servidor.');
     }

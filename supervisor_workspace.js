@@ -12,6 +12,17 @@ const SupervisorWorkspace = (function () {
   let isListeningSub = false;
   let ttsEnabled = true;
 
+  function getAdminToken() {
+    return sessionStorage.getItem('nexus_admin_token') || localStorage.getItem('nexus_admin_token') || '';
+  }
+
+  function getAuthHeaders() {
+    const token = getAdminToken();
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+    return headers;
+  }
+
   function init() {
     loadOverview();
     bindEvents();
@@ -31,8 +42,15 @@ const SupervisorWorkspace = (function () {
 
   async function loadOverview() {
     try {
-      const res = await fetch('/api/supervisor/overview');
-      if (!res.ok) return;
+      const res = await fetch('/api/supervisor/overview', {
+        headers: getAuthHeaders()
+      });
+      if (!res.ok) {
+        if (res.status === 401) {
+          console.warn('Supervisor: Acesso restrito. Autentique-se no console C2.');
+        }
+        return;
+      }
       overview = await res.json();
       renderStats();
       renderSubordinateSelector();
@@ -128,7 +146,7 @@ const SupervisorWorkspace = (function () {
     try {
       const res = await fetch('/api/supervisor/converse', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify({
           message: clean,
           apiKey: window.Gemini ? Gemini.getKey() : '',
@@ -247,7 +265,7 @@ const SupervisorWorkspace = (function () {
     try {
       const res = await fetch('/api/supervisor/certify', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify({ agentId: ag.id, creatorName: 'Criador Soberano (NEXUS)', note })
       });
       const data = await res.json();
@@ -272,7 +290,7 @@ const SupervisorWorkspace = (function () {
     try {
       const res = await fetch('/api/agents/block', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify({ agentId: ag.id, blocked: willBlock })
       });
       if (res.ok) {
@@ -294,7 +312,7 @@ const SupervisorWorkspace = (function () {
     try {
       const res = await fetch('/api/agents/purge-memory', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify({ agentId: ag.id })
       });
       if (res.ok) {
@@ -373,11 +391,16 @@ const SupervisorWorkspace = (function () {
   }
 
   function speak(text) {
-    if (!('speechSynthesis' in window) || !ttsEnabled) return;
+    if (!ttsEnabled) return;
+    if (window.VoiceEngine) {
+      VoiceEngine.speak(text, { persona: 'supervisor', rate: 0.96, pitch: 1.0 });
+      return;
+    }
+    if (!('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'pt-BR';
-    u.rate = 1.05;
+    u.rate = 1.0;
     window.speechSynthesis.speak(u);
   }
 

@@ -128,6 +128,30 @@ const CompanionUI = (function () {
 
     // Stop active mic while AURA speaks so she doesn't hear her own audio output
     stopRecognizerInstance();
+
+    if (window.VoiceEngine) {
+      isAuraSpeaking = true;
+      if (orb) orb.classList.add('speaking');
+      if (stateLabel) stateLabel.textContent = 'AURA respondendo com voz natural e acolhedora...';
+
+      VoiceEngine.speak(text, {
+        persona: 'aura',
+        rate: Math.min(1.2, Math.max(0.85, (emotionProfile?.rate || 0.98) * userCadence)),
+        pitch: emotionProfile?.pitch || 1.01,
+        onDone: () => {
+          isAuraSpeaking = false;
+          if (orb) orb.classList.remove('speaking');
+          if (stateLabel) {
+            stateLabel.textContent = liveSessionActive
+              ? 'AURA ouvindo continuamente você agora (fale livremente)...'
+              : 'Pronta para conversar e aprender com você hoje';
+          }
+          if (onDoneSpeaking) onDoneSpeaking();
+        }
+      });
+      return;
+    }
+
     window.speechSynthesis.cancel();
 
     const clean = (text || '')

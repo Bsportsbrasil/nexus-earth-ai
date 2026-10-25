@@ -322,7 +322,12 @@ const AgentDashboardUI = (function () {
   }
 
   function speakAgentReply(text) {
-    if (!('speechSynthesis' in window) || !ttsEnabled) return;
+    if (!ttsEnabled) return;
+    if (window.VoiceEngine) {
+      VoiceEngine.speak(text, { persona: 'neutral', rate: 0.98, pitch: 1.0 });
+      return;
+    }
+    if (!('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
 
     const u = new SpeechSynthesisUtterance(text);

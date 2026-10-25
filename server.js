@@ -596,7 +596,14 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 5a-bis. Supreme Supervisor Agent (Master Oversight Plane & Human-in-the-Loop)
+  // 5a-bis. Supreme Supervisor Agent (Exclusive to Master Admin/Creator — Zero Public Access)
+  if (pathname.startsWith('/api/supervisor/')) {
+    const authHeader = req.headers['authorization'] || '';
+    if (!securityController.verifyAdminToken(authHeader)) {
+      return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY: Acesso restrito exclusivamente ao Criador Soberano no Master C2.' });
+    }
+  }
+
   if (pathname === '/api/supervisor/overview' && req.method === 'GET') {
     return jsonResponse(res, 200, supremeSupervisor.getSupervisorOverview());
   }
@@ -1124,11 +1131,14 @@ const server = http.createServer(async (req, res) => {
     '/faq',
     '/about',
     '/sobre',
-    '/sobre-nos',
-    '/supervisor',
-    '/agente-supervisor',
-    '/dashboard'
+    '/sobre-nos'
   ]);
+
+  // Creator-Only Redirect: /supervisor navigates to Master C2 Tab 10
+  if (pathname === '/supervisor' || pathname === '/agente-supervisor') {
+    res.writeHead(302, { 'Location': '/admin.html#tab-supervisor' });
+    return res.end();
+  }
   let filePath = SPA_ROUTES.has(pathname) ? '/index.html' : pathname;
   const resolvedPath = path.normalize(path.join(__dirname, filePath));
   if (!resolvedPath.startsWith(__dirname)) {

@@ -123,6 +123,7 @@
       <button class="c2-tab-btn" data-tab="tab-directives" style="border-color:var(--cyan);color:var(--cyan)">🎙️ 7. Conselheiro de Diretrizes (Voz Direta) &amp; Conhecimento dos Agentes</button>
       <button class="c2-tab-btn" data-tab="tab-lennox" style="border-color:var(--rose);color:var(--rose);font-weight:700">🛡️ 8. LENNOX — Guardião Soberano, Socorro &amp; Documentos Internos ([IMPORTANTE &amp; RELEVANTE])</button>
       <button class="c2-tab-btn" data-tab="tab-regulatory" style="border-color:var(--emerald);color:var(--emerald);font-weight:700">📜 9. Dossiês de Explicabilidade Regulatória (EU AI Act &amp; LGPD)</button>
+      <button class="c2-tab-btn" data-tab="tab-supervisor" style="border-color:var(--cyan);color:var(--cyan);font-weight:700">🛡️ 10. Supervisão Suprema &amp; Homologação de Agentes (HITL)</button>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
@@ -698,6 +699,118 @@
       </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 10: SUPERVISÃO SUPREMA & HOMOLOGAÇÃO HUMANA DE AGENTES (HITL)
+         Exclusive Creator Workstation: Direct dialogue with Lead Supervisor LENNOX,
+         real-time subordinate agent testing, and cryptographic behavioral certification.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-supervisor" class="c2-pane">
+      <div class="assistant-grid" style="margin-bottom:1rem">
+        <div class="panel glass-panel assistant-col" style="grid-column: span 3">
+          <div class="cc-pane-header">
+            <span class="panel-title">🛡️ Centro de Supervisão Suprema Soberana &amp; Homologação Humana (HITL)</span>
+            <span class="agent-badge DONE">CREATOR-EXCLUSIVE ZERO-TRUST</span>
+          </div>
+          <p style="font-size:0.76rem;color:var(--text-secondary);margin:0.25rem 0 0.75rem 0">
+            Workstation restrita ao criador da plataforma. Converse diretamente com o Agente Principal (LENNOX), audite e teste o comportamento de cada agente subordinado em tempo real, e certifique ou revogue a homologação com carimbo criptográfico SHA-256.
+          </p>
+
+          <!-- Telemetry Stats Strip -->
+          <div class="exec-telemetry-strip" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.75rem;margin-bottom:1rem">
+            <div class="exec-kpi-card" style="background:rgba(2,6,23,0.6);border:1px solid rgba(0,245,255,0.2);border-radius:8px;padding:0.75rem;text-align:center">
+              <span class="kpi-num" id="sup-stat-total-agents" style="display:block;font-size:1.4rem;font-weight:700;color:var(--cyan)">5</span>
+              <span class="kpi-label" style="font-size:0.7rem;color:var(--text-secondary)">Agentes Supervisionados</span>
+            </div>
+            <div class="exec-kpi-card" style="background:rgba(2,6,23,0.6);border:1px solid rgba(16,185,129,0.2);border-radius:8px;padding:0.75rem;text-align:center">
+              <span class="kpi-num" id="sup-stat-certified" style="display:block;font-size:1.4rem;font-weight:700;color:var(--emerald)">5 / 5</span>
+              <span class="kpi-label" style="font-size:0.7rem;color:var(--text-secondary)">Homologados pelo Criador</span>
+            </div>
+            <div class="exec-kpi-card" style="background:rgba(2,6,23,0.6);border:1px solid rgba(244,63,94,0.2);border-radius:8px;padding:0.75rem;text-align:center">
+              <span class="kpi-num" id="sup-stat-blocked" style="display:block;font-size:1.4rem;font-weight:700;color:#f43f5e">0</span>
+              <span class="kpi-label" style="font-size:0.7rem;color:var(--text-secondary)">Bloqueios / Intervenções</span>
+            </div>
+            <div class="exec-kpi-card" style="background:rgba(2,6,23,0.6);border:1px solid rgba(168,85,247,0.2);border-radius:8px;padding:0.75rem;text-align:center">
+              <span class="kpi-num" id="sup-stat-vectors" style="display:block;font-size:1.4rem;font-weight:700;color:var(--purple)">0</span>
+              <span class="kpi-label" style="font-size:0.7rem;color:var(--text-secondary)">Vetores Indexados</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dual Canvas Workstation: Left = Supervisor Lead (LENNOX), Right = Subordinate Under Audit -->
+      <div class="supervisor-dual-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
+        <!-- Left Canvas: Master Supervisor Agent (LENNOX) -->
+        <div class="panel glass-panel supervisor-lead-card" style="display:flex;flex-direction:column;border-radius:12px;overflow:hidden">
+          <div class="agent-chat-header" style="border-radius:10px 10px 0 0;padding:0.75rem 1rem;background:rgba(2,6,23,0.7);border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <span class="lead-logo-badge" style="color:var(--cyan)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/></svg>
+                </span>
+                <strong style="color:var(--text-primary);font-size:0.95rem">LENNOX SUPREME OVERSIGHT</strong>
+                <span class="agent-badge DONE" style="font-size:0.62rem">LEAD CONTROLLER</span>
+              </div>
+              <div style="font-size:0.72rem;color:var(--text-secondary);margin-top:2px">Agente Principal Controlador &amp; Assessor Direto do Criador</div>
+            </div>
+          </div>
+
+          <div class="dash-chat-messages" id="sup-lead-messages" style="height:420px;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:0.75rem;background:rgba(2,4,12,0.6)">
+            <div class="dash-chat-sys-log" style="font-size:0.74rem;color:var(--text-secondary);border:1px dashed rgba(0,245,255,0.3);padding:0.6rem;border-radius:6px">
+              🛡️ Canal criptografado direto com o Agente Principal Supervisor. Fale ou digite para receber diagnósticos do cluster de agentes e relatórios de conformidade.
+            </div>
+          </div>
+
+          <div class="agent-chat-input-bar" style="display:flex;gap:0.5rem;padding:0.75rem;background:rgba(2,6,23,0.8);border-top:1px solid rgba(255,255,255,0.08)">
+            <button class="btn-voice-mic" id="sup-lead-mic-btn" title="Falar com o Supervisor" style="padding:0.5rem 0.8rem;font-size:0.78rem">🎤 Falar</button>
+            <input type="text" id="sup-lead-input" class="text-input" placeholder="Converse com o Supervisor LENNOX sobre a saúde e comportamento dos agentes..." style="flex:1;font-size:0.8rem" />
+            <button class="btn-primary" id="sup-lead-send-btn" style="padding:0.55rem 1rem">
+              <span>Enviar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Canvas: Subordinate / User Agent Being Tested & Certified -->
+        <div class="panel glass-panel supervisor-sub-card" style="display:flex;flex-direction:column;border-radius:12px;overflow:hidden">
+          <div class="agent-chat-header" style="border-radius:10px 10px 0 0;padding:0.75rem 1rem;background:rgba(2,6,23,0.7);border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem">
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+                <select id="sup-subordinate-select" class="select-input" style="max-width:240px;font-size:0.78rem">
+                  <!-- Populated dynamically -->
+                </select>
+                <span class="agent-badge DONE" id="sup-sub-cert-badge" style="font-size:0.65rem">HOMOLOGADO</span>
+              </div>
+              <div style="font-size:0.72rem;color:var(--text-secondary);margin-top:3px" id="sup-sub-role">Companion de Comunicação &amp; Inclusão</div>
+            </div>
+            <div class="agent-chat-actions" style="display:flex;gap:0.4rem">
+              <button class="btn-secondary" id="sup-sub-certify-btn" style="border-color:var(--emerald);color:var(--emerald);font-size:0.72rem;padding:0.35rem 0.65rem" title="Autenticar comportamento com carimbo soberano">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Homologar
+              </button>
+              <button class="btn-secondary btn-block" id="sup-sub-block-btn" style="font-size:0.72rem;padding:0.35rem 0.65rem">Bloquear</button>
+              <button class="btn-secondary" id="sup-sub-purge-btn" style="font-size:0.72rem;padding:0.35rem 0.65rem;color:#f43f5e" title="Expurgar base vetorial">Limpar</button>
+            </div>
+          </div>
+
+          <!-- Real-Time Feedback from Supervisor on Subordinate Turns -->
+          <div id="sup-feedback-banner" class="sup-turn-feedback" style="display:none;margin:0.75rem;padding:0.75rem;border-radius:8px;border:1px solid"></div>
+
+          <div class="dash-chat-messages" id="sup-sub-messages" style="height:360px;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:0.75rem;background:rgba(2,4,12,0.6)">
+            <div class="dash-chat-sys-log" style="font-size:0.74rem;color:var(--text-secondary);border:1px dashed rgba(255,255,255,0.2);padding:0.6rem;border-radius:6px">
+              👤 Teste o comportamento do agente subordinado abaixo. O Agente Principal (LENNOX) analisará cada resposta gerando parecer de alinhamento em tempo real.
+            </div>
+          </div>
+
+          <div class="agent-chat-input-bar" style="display:flex;gap:0.5rem;padding:0.75rem;background:rgba(2,6,23,0.8);border-top:1px solid rgba(255,255,255,0.08)">
+            <button class="btn-voice-mic" id="sup-sub-mic-btn" title="Falar com o agente" style="padding:0.5rem 0.8rem;font-size:0.78rem">🎤 Falar</button>
+            <input type="text" id="sup-sub-input" class="text-input" placeholder="Faça perguntas ou dê diretrizes ao agente para auditar o comportamento..." style="flex:1;font-size:0.8rem" />
+            <button class="btn-primary" id="sup-sub-send-btn" style="padding:0.55rem 1rem">
+              <span>Testar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Formal Legal / Technical Markdown Dossier Viewer Modal -->
     <div id="xai-dossier-modal" class="modal">
       <div class="modal-box" style="width:min(780px,94vw);max-height:86vh;overflow-y:auto">
@@ -713,7 +826,9 @@
     </div>
   </section>
 
+  <script src="voice_engine.js"></script>
   <script src="particles.js"></script>
   <script src="security_ui.js"></script>
+  <script src="supervisor_workspace.js"></script>
 </body>
 </html>

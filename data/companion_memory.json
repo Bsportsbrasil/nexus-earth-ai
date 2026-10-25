@@ -8,6 +8,41 @@
   ],
   "dailyJournal": [
     {
+      "id": "37eeac11-8962-4000-a9fc-19324ccbb129",
+      "date": "2026-10-25",
+      "time": "12:15:38",
+      "insight": "Ana consultou data/hora em tempo real (12:15:38)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "ae7cf32d-3640-412c-b3c8-dd8d09bceb77",
+      "date": "2026-10-25",
+      "time": "12:15:38",
+      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "3521f26a-0c48-45d7-b82f-b77eda61164c",
+      "date": "2026-10-25",
+      "time": "12:15:38",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "2755a814-8c77-4e51-a797-c6ba3c5b60e2",
+      "date": "2026-10-25",
+      "time": "11:54:35",
+      "insight": "Ana conversou sobre \"Lindinha da minha vida\" [Tom: 🤝 Conexão Natural & Empática]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "41a8982b-ed07-449c-86e3-e73cb6532d80",
+      "date": "2026-10-25",
+      "time": "11:53:55",
+      "insight": "Ana conversou sobre \"eu quero que você pare de ouvir minha conversa\" [Tom: 🤝 Conexão Natural & Empática]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "2bcde625-d426-4fbc-9984-d9b748d016a7",
       "date": "2026-10-25",
       "time": "11:41:45",
@@ -321,42 +356,7 @@
       "time": "02:36:34",
       "insight": "Ana explorou \"VisionQuest\" [Tom: 🤝 Conexão Natural & Empática]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "82661786-1fab-4001-ae7d-c67fba89a5de",
-      "date": "2026-10-25",
-      "time": "02:36:29",
-      "insight": "Ana explorou \"VisionQuest\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "588cd9c4-d53f-410c-a62a-6d6d29030d94",
-      "date": "2026-10-25",
-      "time": "02:35:54",
-      "insight": "Ana explorou \"Storm Kristin\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "a4cfc565-88a3-491e-89ed-b52ce1bf3c92",
-      "date": "2026-10-25",
-      "time": "02:35:44",
-      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "7cf2842f-0eff-4361-9af9-e54dcf69866e",
-      "date": "2026-10-25",
-      "time": "02:35:22",
-      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "0531880c-c6f4-4219-96c4-6bcb205d0a46",
-      "date": "2026-10-25",
-      "time": "02:35:18",
-      "insight": "Ana explorou \"Roma Antiga\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 115
+  "interactionCount": 122
 }
