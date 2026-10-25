@@ -53,7 +53,7 @@
         "defined": 0.09449111825230687,
         "goals": 0.09449111825230687
       },
-      "updatedAt": 1792897875104
+      "updatedAt": 1792898720315
     },
     {
       "id": "15.ai",
@@ -62,7 +62,7 @@
       "summary": "",
       "url": "",
       "vector": {},
-      "updatedAt": 1792897875353
+      "updatedAt": 1792898720551
     },
     {
       "id": "1x technologies",
@@ -73,7 +73,7 @@
       "vector": {
         "technologies": 1
       },
-      "updatedAt": 1792897875353
+      "updatedAt": 1792898720551
     },
     {
       "id": "2024 indian general election",
@@ -87,7 +87,7 @@
         "general": 0.5,
         "election": 0.5
       },
-      "updatedAt": 1792897875353
+      "updatedAt": 1792898720551
     },
     {
       "id": "3d optical data storage",
@@ -100,7 +100,7 @@
         "data": 0.5773502691896258,
         "storage": 0.5773502691896258
       },
-      "updatedAt": 1792897875353
+      "updatedAt": 1792898720551
     },
     {
       "id": "a* search algorithm",
@@ -112,7 +112,7 @@
         "search": 0.7071067811865476,
         "algorithm": 0.7071067811865476
       },
-      "updatedAt": 1792897875353
+      "updatedAt": 1792898720551
     },
     {
       "id": "a.i. artificial intelligence",
@@ -124,7 +124,7 @@
         "artificial": 0.7071067811865476,
         "intelligence": 0.7071067811865476
       },
-      "updatedAt": 1792897875353
+      "updatedAt": 1792898720551
     },
     {
       "id": "aaai",
@@ -135,7 +135,7 @@
       "vector": {
         "aaai": 1
       },
-      "updatedAt": 1792897875353
+      "updatedAt": 1792898720551
     },
     {
       "id": "abb",
@@ -146,7 +146,7 @@
       "vector": {
         "abb": 1
       },
-      "updatedAt": 1792897875353
+      "updatedAt": 1792898720551
     },
     {
       "id": "acm computing classification system",
@@ -160,7 +160,7 @@
         "classification": 0.5,
         "system": 0.5
       },
-      "updatedAt": 1792897875353
+      "updatedAt": 1792898720552
     },
     {
       "id": "acm sigevo",
@@ -172,7 +172,7 @@
         "acm": 0.7071067811865476,
         "sigevo": 0.7071067811865476
       },
-      "updatedAt": 1792897875353
+      "updatedAt": 1792898720552
     },
     {
       "id": "paper:10.3403/30483942u",
@@ -195,7 +195,7 @@
         "org": 0.19999999999999998,
         "30483942u": 0.19999999999999998
       },
-      "updatedAt": 1792897875981
+      "updatedAt": 1792898721190
     },
     {
       "id": "paper:10.1093/hesc/9780198557364.003.0001",
@@ -222,7 +222,7 @@
         "003": 0.1856953381770518,
         "0001": 0.1856953381770518
       },
-      "updatedAt": 1792897875981
+      "updatedAt": 1792898721190
     },
     {
       "id": "paper:10.3403/30483942",
@@ -245,7 +245,7 @@
         "https": 0.19999999999999998,
         "org": 0.19999999999999998
       },
-      "updatedAt": 1792897875981
+      "updatedAt": 1792898721190
     },
     {
       "id": "2025 portuguese legislative election",
@@ -838,7 +838,7 @@
         "attention": 0.22360679774997896,
         "mechanism": 0.22360679774997896
       },
-      "updatedAt": 1792898697176
+      "updatedAt": 1792899240368
     },
     {
       "id": "self-attention",
@@ -856,7 +856,91 @@
         "single": 0.3015113445777636,
         "sequence": 0.3015113445777636
       },
-      "updatedAt": 1792898697176
+      "updatedAt": 1792899240368
+    },
+    {
+      "id": "paper:10.21711/2319023x2026/pmo1429",
+      "label": "Grafo de divisibilidade: uma ferramenta vi (2026)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Revista Professor de Matemática On line (2026). DOI: https://doi.org/10.21711/2319023x2026/pmo1429",
+      "url": "https://doi.org/10.21711/2319023x2026/pmo1429",
+      "vector": {
+        "2026": 0.3999999999999999,
+        "21711": 0.19999999999999996,
+        "grafo": 0.19999999999999996,
+        "divisibilidade": 0.19999999999999996,
+        "uma": 0.19999999999999996,
+        "ferramenta": 0.19999999999999996,
+        "peer": 0.19999999999999996,
+        "reviewed": 0.19999999999999996,
+        "study": 0.19999999999999996,
+        "published": 0.19999999999999996,
+        "revista": 0.19999999999999996,
+        "professor": 0.19999999999999996,
+        "matemática": 0.19999999999999996,
+        "line": 0.19999999999999996,
+        "doi": 0.3999999999999999,
+        "https": 0.19999999999999996,
+        "org": 0.19999999999999996,
+        "2319023x2026": 0.19999999999999996,
+        "pmo1429": 0.19999999999999996
+      },
+      "updatedAt": 1792898788267
+    },
+    {
+      "id": "paper:10.14393/ufu.di.2016.452",
+      "label": "Um caminho brincante para explorar o teatr (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.14393/ufu.di.2016.452",
+      "url": "https://doi.org/10.14393/ufu.di.2016.452",
+      "vector": {
+        "452": 0.19611613513818404,
+        "2016": 0.19611613513818404,
+        "14393": 0.19611613513818404,
+        "caminho": 0.19611613513818404,
+        "brincante": 0.19611613513818404,
+        "para": 0.19611613513818404,
+        "explorar": 0.19611613513818404,
+        "teatr": 0.19611613513818404,
+        "peer": 0.3922322702763681,
+        "reviewed": 0.3922322702763681,
+        "study": 0.19611613513818404,
+        "published": 0.19611613513818404,
+        "journal": 0.19611613513818404,
+        "doi": 0.3922322702763681,
+        "https": 0.19611613513818404,
+        "org": 0.19611613513818404,
+        "ufu": 0.19611613513818404
+      },
+      "updatedAt": 1792898788267
+    },
+    {
+      "id": "paper:10.9771/peri.v1i12.29148",
+      "label": "Fazendo gênero, fazendo enunciados: discur (2020)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Revista Periódicus (2020). DOI: https://doi.org/10.9771/peri.v1i12.29148",
+      "url": "https://doi.org/10.9771/peri.v1i12.29148",
+      "vector": {
+        "2020": 0.3849001794597504,
+        "9771": 0.1924500897298752,
+        "29148": 0.1924500897298752,
+        "fazendo": 0.3849001794597504,
+        "gênero": 0.1924500897298752,
+        "enunciados": 0.1924500897298752,
+        "discur": 0.1924500897298752,
+        "peer": 0.1924500897298752,
+        "reviewed": 0.1924500897298752,
+        "study": 0.1924500897298752,
+        "published": 0.1924500897298752,
+        "revista": 0.1924500897298752,
+        "periódicus": 0.1924500897298752,
+        "doi": 0.3849001794597504,
+        "https": 0.1924500897298752,
+        "org": 0.1924500897298752,
+        "peri": 0.1924500897298752,
+        "v1i12": 0.1924500897298752
+      },
+      "updatedAt": 1792898788267
     }
   ],
   "edges": [

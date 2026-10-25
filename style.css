@@ -757,6 +757,141 @@ body {
   min-height: 70px;
 }
 
+/* ── Sovereign Security Dashboard & Kill-Switch ── */
+.btn-kill-mini {
+  background: rgba(244, 63, 94, 0.16);
+  color: var(--rose);
+  border: 1px solid var(--rose);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  letter-spacing: 0.08em;
+}
+.btn-kill-mini:hover, .btn-kill-mini.locked {
+  background: var(--rose);
+  color: #fff;
+  box-shadow: 0 0 18px rgba(244, 63, 94, 0.55);
+}
+
+.security-dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1.1fr 0.95fr;
+  gap: 1rem;
+}
+.sec-master-card, .sec-breakers-card, .sec-audit-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.sec-master-card.locked {
+  border-color: var(--rose);
+  box-shadow: 0 0 36px rgba(244, 63, 94, 0.25);
+}
+.sec-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.kill-switch-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+.btn-kill-master {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--rose);
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(159, 18, 57, 0.45));
+  color: #fecdd3;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: 0 0 24px rgba(244, 63, 94, 0.25);
+}
+.btn-kill-master:hover {
+  background: var(--rose);
+  color: #fff;
+  box-shadow: 0 0 36px rgba(244, 63, 94, 0.65);
+  transform: translateY(-1px);
+}
+.btn-restore-master {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--green);
+  background: rgba(16, 185, 129, 0.2);
+  color: #a7f3d0;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-restore-master:hover {
+  background: var(--green);
+  color: #020408;
+}
+.sec-quick-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+.breaker-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.breaker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+}
+.breaker-row strong {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-primary);
+}
+.breaker-row small {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+}
+.breaker-btn {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid;
+  min-width: 78px;
+}
+.breaker-btn.on {
+  background: rgba(16, 185, 129, 0.14);
+  color: var(--green);
+  border-color: var(--green);
+}
+.breaker-btn.off {
+  background: rgba(244, 63, 94, 0.14);
+  color: var(--rose);
+  border-color: var(--rose);
+}
+
 /* ── API Key ────────────────────────────────────────── */
 .nav-status { gap: 10px; }
 .key-status { font-family: var(--font-mono); font-size: .65rem; letter-spacing: .15em; padding: 3px 8px; border-radius: 4px; border: 1px solid; }
@@ -777,6 +912,7 @@ body {
   .cc-bento-grid { grid-template-columns: 1fr; }
   .cc-p1-split { grid-template-columns: 1fr; }
   .assistant-grid { grid-template-columns: 1fr; }
+  .security-dashboard-grid { grid-template-columns: 1fr; }
   .neural-container { grid-template-columns: 1fr; }
   .agents-grid { grid-template-columns: 1fr; }
   .chat-container { grid-template-columns: 1fr; height: auto; }

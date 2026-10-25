@@ -13,6 +13,7 @@ import { executeAgentDAG } from './engine/agents_dag.js';
 import { taskEngine } from './engine/tasks.js';
 import { generateVisualAsset, generateExecutiveReport } from './engine/studio.js';
 import { alignmentEngine } from './engine/ethics_inclusion.js';
+import { securityController } from './engine/security_control.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -177,7 +178,38 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'GET' && pathname === '/api/telemetry') {
     const gStats = { totalNodes: graphDB.nodes.size, totalEdges: graphDB.edges.length };
     const bStats = broker.getStats();
-    return jsonResponse(res, 200, telemetry.getSnapshot(gStats, bStats));
+    return jsonResponse(res, 200, {
+      ...telemetry.getSnapshot(gStats, bStats),
+      security: securityController.getState()
+    });
+  }
+
+  // 2b. Sovereign Security & Kill-Switch Governance Endpoint (/api/security)
+  if (pathname === '/api/security') {
+    if (req.method === 'GET') {
+      return jsonResponse(res, 200, securityController.getState());
+    }
+    if (req.method === 'POST') {
+      try {
+        const body = await parseJsonBody(req);
+        let state;
+        if (body.action === 'kill_switch') {
+          state = securityController.engageKillSwitch(body.reason || 'Acionado pelo Operador Humano');
+        } else if (body.action === 'restore') {
+          state = securityController.disengageKillSwitch();
+        } else if (body.action === 'toggle_module') {
+          state = securityController.setModuleState(body.module, body.enabled);
+        } else if (body.action === 'purge_keys') {
+          state = securityController.purgeRuntimeSecrets();
+        } else {
+          state = securityController.getState();
+        }
+        broadcastWs({ type: 'security_state', data: state });
+        return jsonResponse(res, 200, state);
+      } catch (e) {
+        return jsonResponse(res, 400, { error: e.message });
+      }
+    }
   }
 
   // 3. Tensor Forward/Backward Execution Endpoint (/api/tensor)
@@ -197,6 +229,11 @@ const server = http.createServer(async (req, res) => {
 
   // 4. GraphRAG & Persistent Graph Database Endpoint (/api/graph)
   if (pathname === '/api/graph') {
+    try {
+      securityController.assertAllowed('graphrag');
+    } catch (e) {
+      return jsonResponse(res, 423, { error: e.message, locked: true });
+    }
     if (req.method === 'GET') {
       const q = url.searchParams.get('q');
       if (q) {
@@ -219,6 +256,7 @@ const server = http.createServer(async (req, res) => {
   // 5. Multi-Agent DAG Execution Endpoint (/api/agents/run)
   if (req.method === 'POST' && pathname === '/api/agents/run') {
     try {
+      securityController.assertAllowed('agents');
       const body = await parseJsonBody(req);
       const result = await executeAgentDAG({
         query: body.query || 'Artificial Intelligence',
@@ -227,7 +265,7 @@ const server = http.createServer(async (req, res) => {
       });
       return jsonResponse(res, 200, result);
     } catch (e) {
-      return jsonResponse(res, 500, { error: e.message });
+      return jsonResponse(res, 423, { error: e.message });
     }
   }
 
@@ -238,6 +276,7 @@ const server = http.createServer(async (req, res) => {
     }
     if (req.method === 'POST') {
       try {
+        securityController.assertAllowed('tasks');
         const body = await parseJsonBody(req);
         if (body.action === 'toggle') {
           return jsonResponse(res, 200, { item: taskEngine.toggleItem(body.id), items: taskEngine.listItems() });
@@ -249,7 +288,7 @@ const server = http.createServer(async (req, res) => {
         const item = taskEngine.addItem(body);
         return jsonResponse(res, 200, { item, items: taskEngine.listItems() });
       } catch (e) {
-        return jsonResponse(res, 400, { error: e.message });
+        return jsonResponse(res, 423, { error: e.message });
       }
     }
   }
@@ -265,6 +304,7 @@ const server = http.createServer(async (req, res) => {
 
   if (req.method === 'POST' && pathname === '/api/tasks/plan') {
     try {
+      securityController.assertAllowed('tasks');
       const body = await parseJsonBody(req);
       const plan = await taskEngine.generateSmartPlan({
         goal: body.goal,
@@ -273,28 +313,30 @@ const server = http.createServer(async (req, res) => {
       });
       return jsonResponse(res, 200, { ...plan, items: taskEngine.listItems() });
     } catch (e) {
-      return jsonResponse(res, 500, { error: e.message });
+      return jsonResponse(res, 423, { error: e.message });
     }
   }
 
   // 5c. Multimodal Studio Endpoints (/api/studio/image, /api/studio/report)
   if (req.method === 'POST' && pathname === '/api/studio/image') {
     try {
+      securityController.assertAllowed('studio');
       const body = await parseJsonBody(req);
       const asset = await generateVisualAsset({ prompt: body.prompt, apiKey: body.apiKey });
       return jsonResponse(res, 200, asset);
     } catch (e) {
-      return jsonResponse(res, 500, { error: e.message });
+      return jsonResponse(res, 423, { error: e.message });
     }
   }
 
   if (req.method === 'POST' && pathname === '/api/studio/report') {
     try {
+      securityController.assertAllowed('studio');
       const body = await parseJsonBody(req);
       const rep = await generateExecutiveReport({ topic: body.topic, apiKey: body.apiKey });
       return jsonResponse(res, 200, rep);
     } catch (e) {
-      return jsonResponse(res, 500, { error: e.message });
+      return jsonResponse(res, 423, { error: e.message });
     }
   }
 
@@ -312,6 +354,7 @@ const server = http.createServer(async (req, res) => {
 
   if (req.method === 'POST' && pathname === '/api/cooperative/inclusion') {
     try {
+      securityController.assertAllowed('llm');
       const body = await parseJsonBody(req);
       const result = await alignmentEngine.generateInclusivePedagogy({
         topic: body.topic,
@@ -322,7 +365,7 @@ const server = http.createServer(async (req, res) => {
       broadcastWs({ type: 'ethics_gate', data: result.gate });
       return jsonResponse(res, 200, result);
     } catch (e) {
-      return jsonResponse(res, 500, { error: e.message });
+      return jsonResponse(res, 423, { error: e.message });
     }
   }
 
@@ -331,11 +374,12 @@ const server = http.createServer(async (req, res) => {
     try {
       const body = await parseJsonBody(req);
       if (!body.contents) {
-        if (process.env.GEMINI_API_KEY) {
+        if (process.env.GEMINI_API_KEY && !securityController.emergencyLockdown && securityController.modules.llm) {
           return jsonResponse(res, 400, { error: 'Missing contents', serverKeyConfigured: true });
         }
         return jsonResponse(res, 503, { error: 'SERVER_KEY_NOT_CONFIGURED' });
       }
+      securityController.assertAllowed('llm');
       const apiKey = body.apiKey || process.env.GEMINI_API_KEY;
       if (!apiKey) {
         return jsonResponse(res, 503, { error: 'SERVER_KEY_NOT_CONFIGURED' });
@@ -415,7 +459,8 @@ server.on('upgrade', (req, socket) => {
   sendWs(socket, {
     type: 'welcome',
     telemetry: telemetry.getSnapshot(gStats, bStats),
-    tensor: tensorEngine.forwardAndStep('init_nexus')
+    tensor: tensorEngine.forwardAndStep('init_nexus'),
+    security: securityController.getState()
   });
 
   socket.on('data', async (buf) => {
@@ -428,6 +473,10 @@ server.on('upgrade', (req, socket) => {
       }
       for (const raw of messages) {
         const msg = JSON.parse(raw);
+        if (securityController.emergencyLockdown) {
+          sendWs(socket, { type: 'error', error: 'SECURITY_LOCKDOWN_ACTIVE: Kill-Switch engaged by operator.' });
+          continue;
+        }
         if (msg.action === 'tensor_step') {
           if (msg.layers || msg.neurons) {
             tensorEngine.configure(msg.layers, msg.neurons);

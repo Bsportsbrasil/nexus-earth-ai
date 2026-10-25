@@ -7,6 +7,7 @@ import { executeAgentDAG } from './engine/agents_dag.js';
 import { taskEngine } from './engine/tasks.js';
 import { generateVisualAsset, generateExecutiveReport } from './engine/studio.js';
 import { alignmentEngine } from './engine/ethics_inclusion.js';
+import { securityController } from './engine/security_control.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -95,7 +96,22 @@ async function runTests() {
   assert.ok(teaRes.content.includes('História Social') || teaRes.content.length > 100, 'TEA Ludic Literature generation failed');
   console.log(`✓ Layer 8: Cooperative Controlled Release Gate & TEA Inclusive Pedagogy verified (${gateEval.releaseGate}, ${gateEval.sustainability.requestJoules}J)`);
 
-  console.log('=== ALL 8 ARCHITECTURAL, COOPERATIVE & ASSISTANT LAYERS PASSED 100% ===');
+  // 9. Test Sovereign Security Controller & Master AI Kill-Switch
+  securityController.engageKillSwitch('Unit Test Emergency Stop');
+  assert.equal(securityController.emergencyLockdown, true, 'Kill-Switch failed to engage');
+  let blockedError = null;
+  try {
+    securityController.assertAllowed('llm');
+  } catch (err) {
+    blockedError = err;
+  }
+  assert.ok(blockedError && blockedError.message.includes('SECURITY_LOCKDOWN_ACTIVE'), 'Kill-Switch did not block LLM access');
+  securityController.disengageKillSwitch();
+  assert.equal(securityController.emergencyLockdown, false, 'Kill-Switch failed to restore');
+  assert.equal(securityController.assertAllowed('llm'), true, 'System did not restore access after disengage');
+  console.log(`✓ Layer 9: Sovereign Security Dashboard & Master Kill-Switch verified (${securityController.getState().blockedAttempts} blocked attempt recorded)`);
+
+  console.log('=== ALL 9 ARCHITECTURAL, SECURITY, COOPERATIVE & ASSISTANT LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {
