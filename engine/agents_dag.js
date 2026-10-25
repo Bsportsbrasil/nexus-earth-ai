@@ -2,6 +2,7 @@ import { broker } from './broker.js';
 import { graphDB } from './graph_db.js';
 import { streamWithThinking, buildRealtimeTemporalContext } from './llm.js';
 import { tensorEngine } from './tensor.js';
+import { regulatoryEngine } from './regulatory_explainability.js';
 
 /**
  * LangGraph / AutoGen-Style Autonomous Agent Instance
@@ -323,12 +324,25 @@ export async function executeAgentDAG({ query, apiKey, clientTemporal = null, em
   }
 
   notify('completed', { consensus: consensusText, messagesExchanged: stateGraph.messages.length });
+
+  // Generate Formal Algorithmic Decision Passport (EU AI Act & LGPD Compliance)
+  const xaiPassport = regulatoryEngine.generateDecisionPassport({
+    decisionType: 'MULTI_AGENT_DAG_CONSENSUS',
+    prompt: query,
+    response: consensusText,
+    sourceAgent: 'MULTI_AGENT_DAG_CONSENSUS',
+    userName: 'Operador / Pesquisa',
+    accountId: 'acc_vip_bioneuro',
+    ragEvidence: rag
+  });
+
   return {
     runId,
     agentOutputs: stateGraph.agentOutputs,
     toolTelemetry: stateGraph.toolTelemetry,
     messagesExchanged: stateGraph.messages.length,
     consensus: consensusText,
-    rag
+    rag,
+    xaiPassport
   };
 }

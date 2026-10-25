@@ -8,24 +8,31 @@
   ],
   "dailyJournal": [
     {
-      "id": "55ca035b-6e48-4167-8357-3517ec133773",
+      "id": "9c8a2994-3285-46b7-be93-ebc60e3ee047",
       "date": "2026-10-25",
-      "time": "03:01:42",
-      "insight": "Ana consultou data/hora em tempo real (03:01:42)",
+      "time": "03:11:42",
+      "insight": "Ana consultou data/hora em tempo real (03:11:42)",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
     },
     {
-      "id": "5a212e1b-a842-4c8d-8f50-a4d15b107904",
+      "id": "91a43179-1ee8-4065-8ca2-042afa3cf408",
       "date": "2026-10-25",
-      "time": "03:01:42",
+      "time": "03:11:42",
       "insight": "Ana explorou \"VisionQuest\" [Tom: 🌱 Frustração / Apoio Paciente]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
     },
     {
-      "id": "67c01cfa-8762-4acf-9f9b-f1e1e20b0f5a",
+      "id": "67fd02b3-59de-4c1f-916c-ff1d1f1c31bf",
       "date": "2026-10-25",
-      "time": "03:01:42",
+      "time": "03:11:42",
       "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "80d381bb-4d43-4c22-a70b-ea315c57938c",
+      "date": "2026-10-25",
+      "time": "03:05:26",
+      "insight": "Ana explorou \"Roma Antiga\" [Tom: 🤝 Conexão Natural & Empática]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
     },
     {
@@ -349,14 +356,7 @@
       "time": "02:08:26",
       "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🤝 Conexão Natural & Empática]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "85a27c78-08d9-407b-a820-26033df7a3b3",
-      "date": "2026-10-25",
-      "time": "02:08:09",
-      "insight": "Ana explorou \"Zimbra (banda)\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 84
+  "interactionCount": 86
 }

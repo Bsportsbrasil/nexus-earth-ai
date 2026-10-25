@@ -7,6 +7,7 @@ import { graphDB } from './graph_db.js';
 import { broker } from './broker.js';
 import { globalIntel } from './global_intelligence.js';
 import { lennoxGuardian } from './lennox_guardian.js';
+import { regulatoryEngine } from './regulatory_explainability.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const MEMORY_PATH = path.join(__dirname, '..', 'data', 'companion_memory.json');
@@ -316,6 +317,17 @@ class CompanionAgentEngine {
 
         const cleanAnswer = res.answer.replace(/<INSIGHT>[\s\S]*?<\/INSIGHT>/gi, '').trim();
         this._save();
+
+        const xaiPassport = regulatoryEngine.generateDecisionPassport({
+          decisionType: 'AURA_LIVE_CONVERSATION',
+          prompt: cleanMsg,
+          response: cleanAnswer,
+          sourceAgent: 'AURA_LIVE_COMPANION',
+          userName: activeName,
+          accountId: 'acc_public_live',
+          ragEvidence: rag
+        });
+
         return {
           reply: cleanAnswer,
           thought: res.thought,
@@ -323,7 +335,8 @@ class CompanionAgentEngine {
           memory: this.state,
           emotionProfile,
           rag,
-          temporal
+          temporal,
+          xaiPassport
         };
       } catch (e) {
         // Proceed to verified empathetic & factual synthesis below if offline or quota reached
@@ -362,6 +375,17 @@ class CompanionAgentEngine {
 
     if (onChunk) onChunk(reply);
     this._save();
+
+    const xaiPassport = regulatoryEngine.generateDecisionPassport({
+      decisionType: 'AURA_LIVE_CONVERSATION',
+      prompt: cleanMsg,
+      response: reply,
+      sourceAgent: 'AURA_LIVE_COMPANION',
+      userName: activeName,
+      accountId: 'acc_public_live',
+      ragEvidence: rag
+    });
+
     return {
       reply,
       thought: `[Inteligência Emocional: ${emotionProfile.label}] Conectada com ${activeName} às ${temporal.localeTime} e validada com rigor factual.`,
@@ -369,7 +393,8 @@ class CompanionAgentEngine {
       memory: this.state,
       emotionProfile,
       rag,
-      temporal
+      temporal,
+      xaiPassport
     };
   }
 }

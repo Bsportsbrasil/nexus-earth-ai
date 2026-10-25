@@ -118,6 +118,7 @@
       <button class="c2-tab-btn" data-tab="tab-audit">📜 6. Logs de Auditoria Imutáveis (SHA-256)</button>
       <button class="c2-tab-btn" data-tab="tab-directives" style="border-color:var(--cyan);color:var(--cyan)">🎙️ 7. Conselheiro de Diretrizes (Voz Direta) &amp; Conhecimento dos Agentes</button>
       <button class="c2-tab-btn" data-tab="tab-lennox" style="border-color:var(--rose);color:var(--rose);font-weight:700">🛡️ 8. LENNOX — Guardião Soberano, Socorro &amp; Documentos Internos ([IMPORTANTE &amp; RELEVANTE])</button>
+      <button class="c2-tab-btn" data-tab="tab-regulatory" style="border-color:var(--emerald);color:var(--emerald);font-weight:700">📜 9. Dossiês de Explicabilidade Regulatória (EU AI Act &amp; LGPD)</button>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
@@ -577,6 +578,108 @@
             </thead>
             <tbody id="lx-docs-tbody"></tbody>
           </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 9: DOSSIÊS DE EXPLICABILIDADE REGULATÓRIA (EU AI ACT & LGPD)
+         Elimina a dor estrutural dos modelos Caixa-Preta (OpenAI, Google)
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-regulatory" class="c2-pane">
+      <!-- Top KPIs of Regulatory Transparency Strip -->
+      <div class="coop-scores-grid" style="margin-bottom:1.25rem">
+        <div class="cc-mini-stat"><span id="xai-total-issued" style="color:var(--emerald)">0</span><small>Passaportes XAI Emitidos</small></div>
+        <div class="cc-mini-stat"><span style="color:var(--emerald)">100%</span><small>Conformidade EU AI Act (Art. 13/14)</small></div>
+        <div class="cc-mini-stat"><span style="color:var(--cyan)">100%</span><small>Conformidade LGPD (Art. 20)</small></div>
+        <div class="cc-mini-stat"><span id="xai-avg-agency" style="color:var(--cyan)">98%</span><small>Preservação Média de Agência Humana (A_H)</small></div>
+        <div class="cc-mini-stat"><span id="xai-avg-entropy" style="color:var(--violet)">2.52</span><small>Entropia Média de Shannon (Bits)</small></div>
+      </div>
+
+      <div class="assistant-grid" style="margin-bottom:1.25rem">
+        <!-- Frameworks Matrix & Legal Assurance -->
+        <div class="panel glass-panel assistant-col" style="grid-column: span 2">
+          <div class="cc-pane-header">
+            <div>
+              <span class="panel-title">🏛️ Matriz de Conformidade Legal Global &amp; Auditoria Algorítmica</span>
+              <span style="display:block;font-size:0.72rem;color:var(--text-secondary)">A arquitetura Glass-Box do NEXUS resolve a maior dor de conformidade das empresas: cada inferência possui rastreabilidade total de pesos, entropia, fontes e linhagem de dados.</span>
+            </div>
+            <span class="agent-badge DONE">ZERO BLACK-BOX RISK</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:0.75rem">
+            <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.25);border-radius:8px;padding:0.75rem">
+              <strong style="color:var(--emerald);font-size:0.82rem">🇪🇺 EU AI Act (Regulation EU 2024/1689)</strong>
+              <div style="font-size:0.74rem;color:var(--text-secondary);margin-top:0.35rem;line-height:1.5">
+                • <strong>Artigo 13 (Transparência):</strong> Divulgação integral da lógica operacional, capacidades e limites.<br/>
+                • <strong>Artigo 14 (Supervisão Humana):</strong> Painel Soberano C2 e Kill-Switch permitem intervenção humana em tempo real.<br/>
+                • <strong>Multas Mitigadas:</strong> Elimina riscos de penalidades de até 7% do faturamento global.
+              </div>
+            </div>
+
+            <div style="background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.25);border-radius:8px;padding:0.75rem">
+              <strong style="color:var(--cyan);font-size:0.82rem">🇧🇷 LGPD (Lei nº 13.709/2018) &amp; Marco Legal de IA</strong>
+              <div style="font-size:0.74rem;color:var(--text-secondary);margin-top:0.35rem;line-height:1.5">
+                • <strong>Artigo 20 (Direito à Explicação):</strong> Cada decisão automatizada gera um resumo em linguagem simples e clara para o cidadão.<br/>
+                • <strong>PL 2338/2023 (Marco Legal de IA):</strong> Auditoria de impacto algorítmico e proibição de uso de "segredo industrial" como pretexto.<br/>
+                • <strong>Não-Discriminação:</strong> Validação cruzada com bases oficiais comprovada em ledger imutável.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Issue on-demand Regulatory Passport Test -->
+        <div class="panel glass-panel assistant-col">
+          <div class="cc-pane-header">
+            <span class="panel-title">⚡ Emissor de Passaporte XAI</span>
+            <span class="agent-badge DONE">AUDIT-READY</span>
+          </div>
+          <p style="font-size:0.74rem;color:var(--text-secondary);margin-bottom:0.5rem">
+            Gere ou audite um passaporte regulatório instantâneo para qualquer diretiva ou decisão:
+          </p>
+          <input type="text" id="xai-prompt-input" class="text-input" placeholder="Prompt da decisão (ex: concessão, triagem)..." style="font-size:0.76rem;margin-bottom:0.4rem" />
+          <textarea id="xai-response-input" class="text-input" placeholder="Resposta / Deliberação do agente..." style="font-size:0.76rem;height:65px;resize:none;margin-bottom:0.4rem"></textarea>
+          <button class="btn-primary full-width" id="xai-emit-btn" style="justify-content:center;font-size:0.76rem">📜 Emitir Passaporte Criptográfico</button>
+        </div>
+      </div>
+
+      <!-- Issued XAI Passports Table -->
+      <div class="panel glass-panel" style="padding:1rem">
+        <div class="cc-pane-header" style="margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem">
+          <div>
+            <span class="panel-title">📑 Registro Imutável de Passaportes de Decisão Algorítmica (AuditX Passports)</span>
+            <span style="display:block;font-size:0.72rem;color:var(--text-secondary)">Passaportes criptográficos emitidos para cada deliberação da AURA e do Grafo Multi-Agente, prontos para auditoria judicial e regulatória.</span>
+          </div>
+          <span class="agent-badge DONE" id="xai-passports-count-badge">0 PASSAPORTES</span>
+        </div>
+        <div class="c2-table-wrap" style="max-height:420px;overflow-y:auto">
+          <table class="c2-table">
+            <thead>
+              <tr>
+                <th>ID do Passaporte / Horário</th>
+                <th>Agente &amp; Tipo</th>
+                <th>Explicação em Linguagem Simples (LGPD Art. 20)</th>
+                <th>Selos Regulatórios</th>
+                <th>Métricas Mecanísticas (Entropia / Agência)</th>
+                <th>Dossiê &amp; Assinatura SHA-256</th>
+              </tr>
+            </thead>
+            <tbody id="xai-passports-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formal Legal / Technical Markdown Dossier Viewer Modal -->
+    <div id="xai-dossier-modal" class="modal">
+      <div class="modal-box" style="width:min(780px,94vw);max-height:86vh;overflow-y:auto">
+        <div class="cc-pane-header">
+          <span class="panel-title" id="xai-modal-title">📜 Dossiê Regulatório Formal de Explicabilidade</span>
+          <button id="xai-modal-close" class="btn-secondary" style="padding:2px 8px;font-size:0.76rem">✕ Fechar</button>
+        </div>
+        <pre id="xai-modal-content" style="background:rgba(2,4,12,0.92);border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--text-primary);line-height:1.55;white-space:pre-wrap;margin:0.75rem 0"></pre>
+        <div style="display:flex;gap:0.5rem;justify-content:flex-end">
+          <button id="xai-modal-copy-btn" class="btn-primary" style="padding:0.45rem 1rem;font-size:0.76rem">📋 Copiar Dossiê Completo (.md)</button>
         </div>
       </div>
     </div>

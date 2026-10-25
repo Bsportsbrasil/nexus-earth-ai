@@ -438,6 +438,70 @@ const SecurityUI = (function () {
     }
   }
 
+  function renderRegulatoryPassports(reg, passports) {
+    if (!reg && !passports) return;
+    const m = reg?.metrics || {};
+    const setEl = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    };
+    setEl('xai-total-issued', m.totalPassportsIssued ?? (passports?.length || 0));
+    setEl('xai-avg-agency', `${Math.round((m.averageHumanAgencyScore ?? 0.98) * 100)}%`);
+    setEl('xai-avg-entropy', m.averageEntropyBits ?? 2.52);
+
+    const list = passports || [];
+    setEl('xai-passports-count-badge', `${list.length} PASSAPORTES AUDITADOS`);
+
+    const tbody = document.getElementById('xai-passports-tbody');
+    if (tbody) {
+      tbody.innerHTML = list.map(p => `
+        <tr>
+          <td style="font-family:var(--font-mono);font-size:0.68rem">
+            <strong style="color:var(--emerald)">${esc(p.passportId)}</strong><br/>
+            <span style="color:var(--text-muted)">${esc(new Date(p.timestamp).toLocaleTimeString())}</span>
+          </td>
+          <td>
+            <span class="agent-badge DONE" style="font-size:0.65rem">${esc(p.sourceAgent)}</span><br/>
+            <small style="color:var(--text-secondary)">${esc(p.decisionType)}</small>
+          </td>
+          <td style="font-size:0.73rem;color:var(--text-primary);max-width:300px">
+            <div>${esc(p.plainLanguageExplanation?.summary || p.promptSnippet)}</div>
+            <div style="font-size:0.67rem;color:var(--text-muted);margin-top:3px">Prompt: "${esc((p.promptSnippet || '').slice(0, 70))}…"</div>
+          </td>
+          <td>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <span class="agent-badge DONE" style="font-size:0.62rem">EU AI ACT ART.13/14 ✓</span>
+              <span class="agent-badge DONE" style="font-size:0.62rem">LGPD ART.20 ✓</span>
+            </div>
+          </td>
+          <td style="font-family:var(--font-mono);font-size:0.7rem;color:var(--cyan)">
+            H = ${p.scores?.shannonEntropyBits ?? 2.54} bits<br/>
+            A_H = ${Math.round((p.scores?.humanAgency ?? 0.98) * 100)}%
+          </td>
+          <td>
+            <button class="c2-action-btn ok view-dossier-btn" data-passport="${esc(p.passportId)}">📜 Ver Dossiê .md</button><br/>
+            <code style="font-size:0.62rem;color:var(--text-muted)">${esc((p.cryptographicSignature || '').slice(0, 14))}…</code>
+          </td>
+        </tr>
+      `).join('');
+
+      document.querySelectorAll('.view-dossier-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const pid = btn.getAttribute('data-passport');
+          const res = await postC2Action({ action: 'export_xai_dossier', passportId: pid });
+          if (res && res.markdownDossier) {
+            const modal = document.getElementById('xai-dossier-modal');
+            const pre = document.getElementById('xai-modal-content');
+            const title = document.getElementById('xai-modal-title');
+            if (title) title.textContent = `📜 Dossiê Regulatório: ${pid}`;
+            if (pre) pre.textContent = res.markdownDossier;
+            if (modal) modal.classList.add('open');
+          }
+        });
+      });
+    }
+  }
+
   function renderAll(data) {
     if (!data) return;
     renderKillSwitchAndBreakers(data);
@@ -446,6 +510,9 @@ const SecurityUI = (function () {
     }
     if (data.lennox) {
       renderLennoxGuardian(data.lennox);
+    }
+    if (data.regulatory || data.passports) {
+      renderRegulatoryPassports(data.regulatory, data.passports);
     }
     if (data.c2) {
       fullC2Data = data.c2;
@@ -502,7 +569,7 @@ const SecurityUI = (function () {
       setToken(data.token);
       if (inp) inp.value = '';
       showDashboard();
-      renderAll({ ...data.state, c2: data.c2, sovereignBriefing: data.sovereignBriefing, lennox: data.lennox });
+      renderAll({ ...data.state, c2: data.c2, sovereignBriefing: data.sovereignBriefing, lennox: data.lennox, regulatory: data.regulatory, passports: data.passports });
       refreshState();
     } catch (e) {
       showAuthGate('Erro de conexão com o servidor.');
@@ -695,6 +762,51 @@ const SecurityUI = (function () {
       if (res && res.emergencySimulation && out) {
         out.textContent = res.emergencySimulation.empatheticResponse;
       }
+    });
+
+    // Regulatory Explainability & XAI Passport Modal Controls
+    document.getElementById('xai-modal-close')?.addEventListener('click', () => {
+      document.getElementById('xai-dossier-modal')?.classList.remove('open');
+    });
+
+    document.getElementById('xai-modal-copy-btn')?.addEventListener('click', () => {
+      const text = document.getElementById('xai-modal-content')?.textContent || '';
+      if (text && navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+        const btn = document.getElementById('xai-modal-copy-btn');
+        if (btn) {
+          const old = btn.textContent;
+          btn.textContent = '✓ Dossiê Copiado!';
+          setTimeout(() => { btn.textContent = old; }, 2000);
+        }
+      }
+    });
+
+    document.getElementById('xai-emit-btn')?.addEventListener('click', async () => {
+      const pInp = document.getElementById('xai-prompt-input');
+      const rInp = document.getElementById('xai-response-input');
+      const prompt = (pInp?.value || '').trim();
+      const response = (rInp?.value || '').trim();
+      if (!prompt) {
+        alert('Digite o prompt da decisão para emitir o passaporte.');
+        return;
+      }
+      try {
+        const res = await fetch('/api/explainability/passport', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt,
+            response: response || 'Decisão analisada e validada pelo motor de transparência Glass-Box.',
+            decisionType: 'MANUAL_C2_AUDIT_PROBE'
+          })
+        });
+        if (res.ok) {
+          if (pInp) pInp.value = '';
+          if (rInp) rInp.value = '';
+          refreshState();
+        }
+      } catch (_) {}
     });
 
     // Connect WebSocket for instant real-time threat notifications

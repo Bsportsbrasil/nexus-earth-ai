@@ -19,6 +19,7 @@ import { globalIntel } from './engine/global_intelligence.js';
 import { authEngine } from './engine/auth_identity.js';
 import { sovereignBriefing } from './engine/sovereign_briefing.js';
 import { lennoxGuardian } from './engine/lennox_guardian.js';
+import { regulatoryEngine } from './engine/regulatory_explainability.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -329,7 +330,33 @@ async function runTests() {
   assert.ok(ownerReport.internalDocuments.length >= 3, 'Lennox internal documents not persisted for Platform Owner');
   console.log(`✓ Layer 19: LENNOX Sovereign Guardian (Official Authority Validation, Empathetic Emergency Cartography, Autonomous Blocking & ${ownerReport.internalDocuments.length} [IMPORTANTE & RELEVANTE] Owner Documents) verified`);
 
-  console.log('=== ALL 19 ARCHITECTURAL, LENNOX SOVEREIGN GUARDIAN, VOICE ADVISOR, ZERO-MOBILE-DATA, IDENTITY/AUTH & MASTER C2 LAYERS PASSED 100% ===');
+  // 20. Test NEXUS Regulatory Explainability & XAI Algorithmic Decision Passport Engine (Eliminates Black-Box Regulatory Liability)
+  const regOverview = regulatoryEngine.getComplianceOverview();
+  assert.equal(regOverview.engineStatus, 'ONLINE_ACTIVE_GLASS_BOX_ENFORCED', 'Regulatory engine not active');
+  assert.ok(regOverview.frameworksSupported.some(f => f.name.includes('EU AI Act')), 'Missing EU AI Act compliance');
+  assert.ok(regOverview.frameworksSupported.some(f => f.name.includes('LGPD')), 'Missing LGPD compliance');
+
+  const testPass = regulatoryEngine.generateDecisionPassport({
+    decisionType: 'LOAN_ELIGIBILITY_AND_ETHICAL_AUDIT',
+    prompt: 'Avaliar solicitação de microcrédito e autonomia produtiva para cooperativa',
+    response: 'Aprovado com base em dados verificados, histórico de cumprimento e ausência de risco de sobre-endividamento.',
+    sourceAgent: 'ETHICAL_ALIGNMENT_AGENT',
+    userName: 'Mariana Silva',
+    accountId: 'acc_vip_bioneuro'
+  });
+  assert.ok(testPass.passportId.startsWith('XAI-PASS-'), 'Passport ID format invalid');
+  assert.ok(testPass.plainLanguageExplanation.summary.includes('Mariana Silva'), 'Plain-language explanation missing user reference');
+  assert.ok(testPass.technicalDossier.euAiActCompliance.article13_Transparency.includes('COMPLIANT'), 'EU AI Act Art. 13 not compliant');
+  assert.ok(testPass.scores.humanAgency >= 0.90, 'Human agency preservation score below 0.90');
+  assert.ok(testPass.cryptographicSignature.length === 64, 'SHA-256 signature invalid');
+
+  const mdDossier = regulatoryEngine.generateMarkdownAuditDossier(testPass.passportId);
+  assert.ok(mdDossier.includes('Dossiê Regulatório de Explicabilidade') && mdDossier.includes('EU_AI_ACT'), 'Markdown regulatory dossier export failed');
+
+  assert.ok(auraRes.xaiPassport && auraRes.xaiPassport.passportId, 'AURA converse turn missing automated XAI passport');
+  console.log(`✓ Layer 20: Regulatory Explainability & XAI Decision Passport Engine (EU AI Act Art. 13/14, LGPD Art. 20, NIST AI RMF, ISO 42001 & SHA-256 Merkle Seal) verified (${regulatoryEngine.passports.size} passports issued)`);
+
+  console.log('=== ALL 20 ARCHITECTURAL, REGULATORY EXPLAINABILITY, LENNOX GUARDIAN, IDENTITY/AUTH & MASTER C2 LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

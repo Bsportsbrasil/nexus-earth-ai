@@ -21,6 +21,7 @@ import { globalIntel } from './engine/global_intelligence.js';
 import { authEngine } from './engine/auth_identity.js';
 import { sovereignBriefing } from './engine/sovereign_briefing.js';
 import { lennoxGuardian } from './engine/lennox_guardian.js';
+import { regulatoryEngine } from './engine/regulatory_explainability.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -344,7 +345,9 @@ const server = http.createServer(async (req, res) => {
         state: securityController.getState(),
         c2: c2Engine.getFullDashboardState(),
         sovereignBriefing: await sovereignBriefing.generateCreatorVoiceBriefing(),
-        lennox: lennoxGuardian.getOwnerDashboardReport()
+        lennox: lennoxGuardian.getOwnerDashboardReport(),
+        regulatory: regulatoryEngine.getComplianceOverview(),
+        passports: regulatoryEngine.getRecentPassports(30)
       });
     } catch (e) {
       return jsonResponse(res, 400, { error: e.message });
@@ -364,7 +367,9 @@ const server = http.createServer(async (req, res) => {
         telemetry: telemetry.getSnapshot(gStats, bStats),
         c2: c2Engine.getFullDashboardState(),
         sovereignBriefing: await sovereignBriefing.generateCreatorVoiceBriefing(),
-        lennox: lennoxGuardian.getOwnerDashboardReport()
+        lennox: lennoxGuardian.getOwnerDashboardReport(),
+        regulatory: regulatoryEngine.getComplianceOverview(),
+        passports: regulatoryEngine.getRecentPassports(30)
       });
     }
     if (req.method === 'POST') {
@@ -416,6 +421,9 @@ const server = http.createServer(async (req, res) => {
             payloadText: body.payloadText || 'Estou em perigo na rua e tendo uma crise de pânico severa, preciso de ajuda urgente emocional e da polícia',
             coordinates: body.coordinates || { lat: -23.5505, lon: -46.6333 }
           });
+        } else if (body.action === 'export_xai_dossier') {
+          extra.markdownDossier = regulatoryEngine.generateMarkdownAuditDossier(body.passportId);
+          extra.passport = regulatoryEngine.getPassport(body.passportId);
         } else if (body.action === 'simulate_threat') {
           try {
             c2Engine.inspectAndFilterRequest({
@@ -442,7 +450,9 @@ const server = http.createServer(async (req, res) => {
           ...state,
           ...extra,
           c2,
-          lennox: lennoxGuardian.getOwnerDashboardReport()
+          lennox: lennoxGuardian.getOwnerDashboardReport(),
+          regulatory: regulatoryEngine.getComplianceOverview(),
+          passports: regulatoryEngine.getRecentPassports(30)
         });
       } catch (e) {
         return jsonResponse(res, 400, { error: e.message });
@@ -904,6 +914,53 @@ const server = http.createServer(async (req, res) => {
       }
     } catch (e) {
       return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  // 6h. Regulatory Explainability & XAI Algorithmic Decision Passports (EU AI Act & LGPD Art. 20)
+  if (pathname.startsWith('/api/explainability')) {
+    try {
+      if (req.method === 'GET' && pathname === '/api/explainability/overview') {
+        return jsonResponse(res, 200, regulatoryEngine.getComplianceOverview());
+      }
+
+      if (req.method === 'GET' && pathname === '/api/explainability/passports') {
+        const limit = Number(parsedUrl.searchParams.get('limit') || 40);
+        return jsonResponse(res, 200, {
+          overview: regulatoryEngine.getComplianceOverview(),
+          passports: regulatoryEngine.getRecentPassports(limit)
+        });
+      }
+
+      if (req.method === 'GET' && pathname.startsWith('/api/explainability/passport/')) {
+        const passportId = pathname.slice('/api/explainability/passport/'.length).trim();
+        const format = parsedUrl.searchParams.get('format') || 'json';
+        const passport = regulatoryEngine.getPassport(passportId);
+        if (!passport) {
+          return jsonResponse(res, 404, { error: `Passaporte XAI "${passportId}" não encontrado.` });
+        }
+        if (format === 'markdown' || format === 'md') {
+          const md = regulatoryEngine.generateMarkdownAuditDossier(passportId);
+          res.writeHead(200, { 'Content-Type': 'text/markdown; charset=utf-8' });
+          return res.end(md);
+        }
+        return jsonResponse(res, 200, passport);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/explainability/passport') {
+        const body = await parseJsonBody(req);
+        const passport = regulatoryEngine.generateDecisionPassport({
+          decisionType: body.decisionType || 'ON_DEMAND_REGULATORY_AUDIT',
+          prompt: body.prompt || '',
+          response: body.response || '',
+          sourceAgent: body.sourceAgent || 'REGULATORY_AUDIT_PROBE',
+          userName: body.userName || 'Auditor',
+          accountId: body.accountId || 'acc_public_live'
+        });
+        return jsonResponse(res, 201, passport);
+      }
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
     }
   }
 
