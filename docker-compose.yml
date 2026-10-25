@@ -10,8 +10,35 @@ services:
       - NODE_ENV=production
       - PORT=5173
       - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - NEO4J_URI=bolt://neo4j:7687
     volumes:
       - nexus-graph-data:/app/data
+    depends_on:
+      - neo4j
+      - python-worker
+    restart: unless-stopped
+
+  python-worker:
+    image: python:3.12-slim
+    container_name: nexus-python-worker
+    working_dir: /worker
+    volumes:
+      - ./python_worker:/worker
+    command: sh -c "pip install --no-cache-dir fastapi uvicorn pydantic && uvicorn main:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  neo4j:
+    image: neo4j:5-community
+    container_name: nexus-neo4j-graphdb
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/nexus_superintelligence
+    volumes:
+      - nexus-neo4j-data:/data
     restart: unless-stopped
 
   prometheus:
@@ -38,3 +65,4 @@ services:
 
 volumes:
   nexus-graph-data:
+  nexus-neo4j-data:

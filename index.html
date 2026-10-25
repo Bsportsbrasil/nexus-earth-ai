@@ -49,6 +49,7 @@
       </div>
       <ul class="nav-links">
         <li><a href="#command-center" class="nav-link active" data-section="command-center">⚡ Command Center</a></li>
+        <li><a href="#cooperative" class="nav-link" data-section="cooperative">🌱 Cooperative &amp; TEA</a></li>
         <li><a href="#assistant" class="nav-link" data-section="assistant">📅 Assistant &amp; Studio</a></li>
         <li><a href="#neural" class="nav-link" data-section="neural">Neural</a></li>
         <li><a href="#agents" class="nav-link" data-section="agents">Agents</a></li>
@@ -179,6 +180,66 @@
         </div>
         <div class="cc-broker-log" id="cc-broker-log">
           <div class="broker-line">[SYSTEM] RFC 6455 WebSocket &amp; MessageBroker initialized.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cooperative Superintelligence: Controlled Release, TEA Inclusive Pedagogy & Eco-Sustainability -->
+  <section id="cooperative" class="section">
+    <div class="section-header">
+      <div class="section-tag">Cooperative Superintelligence Protocol</div>
+      <h2 class="section-title">Controlled Release, Neurodivergent (TEA) Inclusion &amp; Eco-Governance</h2>
+      <p class="section-desc">Every technological advance is preceded by an ethical &amp; social impact gate, prioritizing formative education, ludic literature for Autism Spectrum (TEA) social integration, human agency preservation, and environmental sustainability.</p>
+    </div>
+
+    <div class="assistant-grid">
+      <!-- 1. Controlled Release & Ethical Impact Gate -->
+      <div class="panel glass-panel assistant-col">
+        <div class="cc-pane-header">
+          <span class="panel-title">🛡️ 1. Controlled Release &amp; Human Agency Gate</span>
+          <span class="agent-badge DONE" id="coop-gate-badge">STAGE 4 COOPERATIVE</span>
+        </div>
+        <div class="coop-scores-grid">
+          <div class="cc-mini-stat"><span id="coop-agency">96%</span><small>Human Agency</small></div>
+          <div class="cc-mini-stat"><span id="coop-inclusion">94%</span><small>Social Inclusion</small></div>
+          <div class="cc-mini-stat"><span id="coop-eco">98%</span><small>Eco Efficiency</small></div>
+          <div class="cc-mini-stat"><span id="coop-joules">0.0 J</span><small>Energy Used</small></div>
+        </div>
+        <div class="cc-sub-label" style="margin-top:0.4rem">Pre-Release Ethical &amp; Social Impact Simulator</div>
+        <div style="display:flex;gap:0.4rem">
+          <input type="text" id="coop-eval-input" class="text-input" placeholder="Testar diretiva no Gate de Liberação Controlada..." />
+          <button class="btn-secondary" id="coop-eval-btn">Audit Gate</button>
+        </div>
+        <div class="cc-broker-log" id="coop-audit-log">
+          <div class="broker-line">[PROTOCOL] Human-in-the-Loop &amp; Proportional Progress active.</div>
+          <div class="broker-line">[ECO-TELEMETRY] Compute carbon &amp; Joule tracking enabled.</div>
+        </div>
+      </div>
+
+      <!-- 2. Ludic Literature & TEA Social Integration Studio ( spans 2 columns on desktop ) -->
+      <div class="panel glass-panel assistant-col" style="grid-column: span 2">
+        <div class="cc-pane-header">
+          <span class="panel-title">📖 2. Formative Inclusion &amp; Ludic Literature Studio (TEA / Neurodivergent Social Integration)</span>
+          <span class="agent-badge DONE" id="coop-tea-badge">PEDAGOGY READY</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 0.8fr auto;gap:0.5rem;align-items:center">
+          <input type="text" id="tea-topic-input" class="text-input" value="Explorar o Sistema Solar fazendo amigos na escola" placeholder="Tema formativo ou interesse especial (hiperfoco)..." />
+          <select id="tea-profile-select" class="select-input">
+            <option value="TEA Nível 1 — Apoio Visual e Previsibilidade">TEA Nível 1 — Apoio Visual e Previsibilidade</option>
+            <option value="TEA Nível 2 — Comunicação Alternativa e Sensorial Suave">TEA Nível 2 — Comunicação Alternativa e Sensorial</option>
+            <option value="Altas Habilidades / Dupla Excepcionalidade (2e)">Altas Habilidades / Dupla Excepcionalidade</option>
+            <option value="TDAH &amp; Neurodivergência — Aprendizagem Cinestésica">TDAH — Aprendizagem Lúdica Ativa</option>
+          </select>
+          <select id="tea-age-select" class="select-input">
+            <option value="6 a 10 anos (Infantil)">6 a 10 anos</option>
+            <option value="11 a 15 anos (Adolescente)">11 a 15 anos</option>
+            <option value="Jovens e Adultos">Jovens e Adultos</option>
+          </select>
+          <button class="btn-primary" id="tea-gen-btn" style="padding:0.55rem 1rem;font-size:0.8rem;white-space:nowrap">🌱 Gerar Conto &amp; Prática Lúdica</button>
+        </div>
+        <div class="studio-preview" id="tea-output" style="align-items:flex-start;justify-content:flex-start">
+          <span class="idle-text">Clique em "Gerar Conto &amp; Prática Lúdica" para criar uma História Social adaptada (método Carol Gray), um conto literário ancorado no hiperfoco e uma dinâmica cooperativa passo a passo para integrar indivíduos com TEA no tecido social.</span>
         </div>
       </div>
     </div>
@@ -565,7 +626,7 @@
     <div class="modal-box glass-panel">
       <div class="panel-title">Conectar Gemini</div>
       <p class="modal-desc">Cole sua chave da API Gemini (grátis em <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>). Ela fica salva apenas neste navegador.</p>
-      <input type="password" id="key-input" class="text-input" placeholder="AIza..." />
+      <input type="password" id="key-input" class="text-input" placeholder="AQ... ou AIza..." />
       <div class="modal-actions">
         <button id="key-clear" class="btn-secondary">Remover</button>
         <button id="key-cancel" class="btn-secondary">Cancelar</button>
@@ -583,6 +644,7 @@
   <script src="chat.js"></script>
   <script src="metrics.js"></script>
   <script src="command_center.js"></script>
+  <script src="cooperative_ui.js"></script>
   <script src="assistant_studio.js"></script>
   <script src="app.js"></script>
 </body>

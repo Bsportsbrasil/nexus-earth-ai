@@ -12,9 +12,22 @@ import { streamWithThinking } from './engine/llm.js';
 import { executeAgentDAG } from './engine/agents_dag.js';
 import { taskEngine } from './engine/tasks.js';
 import { generateVisualAsset, generateExecutiveReport } from './engine/studio.js';
+import { alignmentEngine } from './engine/ethics_inclusion.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
+
+// Load .env.local automatically if present (gitignored for security)
+try {
+  const envPath = path.join(__dirname, '.env.local');
+  if (fs.existsSync(envPath)) {
+    const lines = fs.readFileSync(envPath, 'utf8').split(/\r?\n/);
+    for (const line of lines) {
+      const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.+?)\s*$/);
+      if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+    }
+  }
+} catch (e) {}
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -280,6 +293,34 @@ const server = http.createServer(async (req, res) => {
       const body = await parseJsonBody(req);
       const rep = await generateExecutiveReport({ topic: body.topic, apiKey: body.apiKey });
       return jsonResponse(res, 200, rep);
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
+  // 5d. Cooperative Superintelligence: Controlled Release Gate & TEA Inclusive Pedagogy (/api/cooperative/gate, /api/cooperative/inclusion)
+  if (req.method === 'POST' && pathname === '/api/cooperative/gate') {
+    try {
+      const body = await parseJsonBody(req);
+      const evaluation = alignmentEngine.evaluateControlledRelease(body.directive || '', body.tokens || 120);
+      broadcastWs({ type: 'ethics_gate', data: evaluation });
+      return jsonResponse(res, 200, evaluation);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (req.method === 'POST' && pathname === '/api/cooperative/inclusion') {
+    try {
+      const body = await parseJsonBody(req);
+      const result = await alignmentEngine.generateInclusivePedagogy({
+        topic: body.topic,
+        profile: body.profile,
+        ageGroup: body.ageGroup,
+        apiKey: body.apiKey
+      });
+      broadcastWs({ type: 'ethics_gate', data: result.gate });
+      return jsonResponse(res, 200, result);
     } catch (e) {
       return jsonResponse(res, 500, { error: e.message });
     }

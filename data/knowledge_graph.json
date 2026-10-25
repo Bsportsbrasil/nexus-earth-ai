@@ -53,7 +53,7 @@
         "defined": 0.09449111825230687,
         "goals": 0.09449111825230687
       },
-      "updatedAt": 1792896474645
+      "updatedAt": 1792897875104
     },
     {
       "id": "15.ai",
@@ -62,7 +62,7 @@
       "summary": "",
       "url": "",
       "vector": {},
-      "updatedAt": 1792896474897
+      "updatedAt": 1792897875353
     },
     {
       "id": "1x technologies",
@@ -73,7 +73,7 @@
       "vector": {
         "technologies": 1
       },
-      "updatedAt": 1792896474897
+      "updatedAt": 1792897875353
     },
     {
       "id": "2024 indian general election",
@@ -87,7 +87,7 @@
         "general": 0.5,
         "election": 0.5
       },
-      "updatedAt": 1792896474897
+      "updatedAt": 1792897875353
     },
     {
       "id": "3d optical data storage",
@@ -100,7 +100,7 @@
         "data": 0.5773502691896258,
         "storage": 0.5773502691896258
       },
-      "updatedAt": 1792896474897
+      "updatedAt": 1792897875353
     },
     {
       "id": "a* search algorithm",
@@ -112,7 +112,7 @@
         "search": 0.7071067811865476,
         "algorithm": 0.7071067811865476
       },
-      "updatedAt": 1792896474897
+      "updatedAt": 1792897875353
     },
     {
       "id": "a.i. artificial intelligence",
@@ -124,7 +124,7 @@
         "artificial": 0.7071067811865476,
         "intelligence": 0.7071067811865476
       },
-      "updatedAt": 1792896474897
+      "updatedAt": 1792897875353
     },
     {
       "id": "aaai",
@@ -135,7 +135,7 @@
       "vector": {
         "aaai": 1
       },
-      "updatedAt": 1792896474897
+      "updatedAt": 1792897875353
     },
     {
       "id": "abb",
@@ -146,7 +146,7 @@
       "vector": {
         "abb": 1
       },
-      "updatedAt": 1792896474897
+      "updatedAt": 1792897875353
     },
     {
       "id": "acm computing classification system",
@@ -160,7 +160,7 @@
         "classification": 0.5,
         "system": 0.5
       },
-      "updatedAt": 1792896474898
+      "updatedAt": 1792897875353
     },
     {
       "id": "acm sigevo",
@@ -172,7 +172,7 @@
         "acm": 0.7071067811865476,
         "sigevo": 0.7071067811865476
       },
-      "updatedAt": 1792896474898
+      "updatedAt": 1792897875353
     },
     {
       "id": "paper:10.3403/30483942u",
@@ -195,7 +195,7 @@
         "org": 0.19999999999999998,
         "30483942u": 0.19999999999999998
       },
-      "updatedAt": 1792896475885
+      "updatedAt": 1792897875981
     },
     {
       "id": "paper:10.1093/hesc/9780198557364.003.0001",
@@ -222,7 +222,7 @@
         "003": 0.1856953381770518,
         "0001": 0.1856953381770518
       },
-      "updatedAt": 1792896475885
+      "updatedAt": 1792897875981
     },
     {
       "id": "paper:10.3403/30483942",
@@ -245,7 +245,7 @@
         "https": 0.19999999999999998,
         "org": 0.19999999999999998
       },
-      "updatedAt": 1792896475885
+      "updatedAt": 1792897875981
     },
     {
       "id": "2025 portuguese legislative election",
@@ -739,6 +739,124 @@
         "acad": 0.19611613513818404
       },
       "updatedAt": 1792896891917
+    },
+    {
+      "id": "paper:10.14393/ufu.di.2019.2181",
+      "label": "Revestimento de ureia com materiais polimé (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.14393/ufu.di.2019.2181",
+      "url": "https://doi.org/10.14393/ufu.di.2019.2181",
+      "vector": {
+        "2019": 0.19611613513818404,
+        "2181": 0.19611613513818404,
+        "14393": 0.19611613513818404,
+        "revestimento": 0.19611613513818404,
+        "ureia": 0.19611613513818404,
+        "com": 0.19611613513818404,
+        "materiais": 0.19611613513818404,
+        "polimé": 0.19611613513818404,
+        "peer": 0.3922322702763681,
+        "reviewed": 0.3922322702763681,
+        "study": 0.19611613513818404,
+        "published": 0.19611613513818404,
+        "journal": 0.19611613513818404,
+        "doi": 0.3922322702763681,
+        "https": 0.19611613513818404,
+        "org": 0.19611613513818404,
+        "ufu": 0.19611613513818404
+      },
+      "updatedAt": 1792898328907
+    },
+    {
+      "id": "paper:10.29327/5960585",
+      "label": "BRINCAR PARA INCLUIR: necessidades formati (2026)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (2026). DOI: https://doi.org/10.29327/5960585",
+      "url": "https://doi.org/10.29327/5960585",
+      "vector": {
+        "2026": 0.3779644730092272,
+        "29327": 0.1889822365046136,
+        "5960585": 0.1889822365046136,
+        "brincar": 0.1889822365046136,
+        "para": 0.1889822365046136,
+        "incluir": 0.1889822365046136,
+        "necessidades": 0.1889822365046136,
+        "formati": 0.1889822365046136,
+        "peer": 0.3779644730092272,
+        "reviewed": 0.3779644730092272,
+        "study": 0.1889822365046136,
+        "published": 0.1889822365046136,
+        "journal": 0.1889822365046136,
+        "doi": 0.3779644730092272,
+        "https": 0.1889822365046136,
+        "org": 0.1889822365046136
+      },
+      "updatedAt": 1792898328907
+    },
+    {
+      "id": "paper:10.26512/2011.04.tcc.3267",
+      "label": "A contribuição da literatura para os aluno (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.26512/2011.04.tcc.3267",
+      "url": "https://doi.org/10.26512/2011.04.tcc.3267",
+      "vector": {
+        "2011": 0.2,
+        "3267": 0.2,
+        "26512": 0.2,
+        "contribuição": 0.2,
+        "literatura": 0.2,
+        "para": 0.2,
+        "aluno": 0.2,
+        "peer": 0.4,
+        "reviewed": 0.4,
+        "study": 0.2,
+        "published": 0.2,
+        "journal": 0.2,
+        "doi": 0.4,
+        "https": 0.2,
+        "org": 0.2,
+        "tcc": 0.2
+      },
+      "updatedAt": 1792898328907
+    },
+    {
+      "id": "transformer (deep learning)",
+      "label": "Transformer (deep learning)",
+      "category": "Root",
+      "summary": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+      "url": "https://en.wikipedia.org/wiki/Transformer_(deep_learning)",
+      "vector": {
+        "transformer": 0.4472135954999579,
+        "deep": 0.4472135954999579,
+        "learning": 0.4472135954999579,
+        "architecture": 0.22360679774997896,
+        "based": 0.22360679774997896,
+        "the": 0.22360679774997896,
+        "multi": 0.22360679774997896,
+        "head": 0.22360679774997896,
+        "self": 0.22360679774997896,
+        "attention": 0.22360679774997896,
+        "mechanism": 0.22360679774997896
+      },
+      "updatedAt": 1792898697176
+    },
+    {
+      "id": "self-attention",
+      "label": "Self-attention",
+      "category": "Linked",
+      "summary": "Attention mechanism relating different positions of a single sequence.",
+      "url": "",
+      "vector": {
+        "self": 0.3015113445777636,
+        "attention": 0.6030226891555271,
+        "mechanism": 0.3015113445777636,
+        "relating": 0.3015113445777636,
+        "different": 0.3015113445777636,
+        "positions": 0.3015113445777636,
+        "single": 0.3015113445777636,
+        "sequence": 0.3015113445777636
+      },
+      "updatedAt": 1792898697176
     }
   ],
   "edges": [
@@ -897,6 +1015,12 @@
       "target": "paper:10.29327/226154.1.1-4",
       "type": "CITED_IN_LITERATURE",
       "weight": 0.95
+    },
+    {
+      "source": "transformer (deep learning)",
+      "target": "self-attention",
+      "type": "USES_MECHANISM",
+      "weight": 0.98
     }
   ]
 }

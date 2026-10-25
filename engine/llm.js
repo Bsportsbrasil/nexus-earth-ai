@@ -4,9 +4,8 @@ const DEFAULT_MODEL = 'gemini-3-flash-preview';
 
 /**
  * Frontier LLM Reasoning Engine with Native Chain-of-Thought Extraction
- * Uses Gemini 3 `thinkingConfig: { includeThoughts: true, thinkingLevel }` via direct
- * Server-Sent Events (SSE) streaming — zero external npm packages required,
- * while also supporting @google/genai if installed.
+ * Authenticates via `x-goog-api-key` header (supporting both new `AQ....` Authorization Keys
+ * and legacy `AIza...` keys) and streams via Server-Sent Events (SSE).
  */
 export async function streamWithThinking({
   apiKey,
@@ -16,7 +15,7 @@ export async function streamWithThinking({
   onThoughtChunk,
   onAnswerChunk
 }) {
-  const resolvedKey = apiKey || process.env.GEMINI_API_KEY;
+  const resolvedKey = (apiKey || process.env.GEMINI_API_KEY || '').trim();
   if (!resolvedKey) {
     throw new Error('NO_API_KEY');
   }
@@ -42,16 +41,19 @@ export async function streamWithThinking({
     };
   }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${DEFAULT_MODEL}:streamGenerateContent?alt=sse&key=${encodeURIComponent(resolvedKey)}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${DEFAULT_MODEL}:streamGenerateContent?alt=sse`;
   const resp = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'x-goog-api-key': resolvedKey
+    },
     body: JSON.stringify(payload)
   });
 
   if (!resp.ok) {
     const errText = await resp.text();
-    throw new Error(`Gemini API HTTP ${resp.status}: ${errText.slice(0, 200)}`);
+    throw new Error(`Gemini API HTTP ${resp.status}: ${errText.slice(0, 240)}`);
   }
 
   let fullThought = '';

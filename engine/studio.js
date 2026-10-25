@@ -16,10 +16,13 @@ export async function generateVisualAsset({ prompt, apiKey }) {
   // 1. If Gemini API Key is present, attempt native Gemini Image Generation (gemini-2.5-flash-image)
   if (resolvedKey) {
     try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key=${encodeURIComponent(resolvedKey)}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent`;
       const resp = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': resolvedKey.trim()
+        },
         body: JSON.stringify({
           contents: [{ role: 'user', parts: [{ text: cleanPrompt }] }],
           generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }

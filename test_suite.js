@@ -6,6 +6,7 @@ import { telemetry } from './engine/telemetry.js';
 import { executeAgentDAG } from './engine/agents_dag.js';
 import { taskEngine } from './engine/tasks.js';
 import { generateVisualAsset, generateExecutiveReport } from './engine/studio.js';
+import { alignmentEngine } from './engine/ethics_inclusion.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -81,7 +82,20 @@ async function runTests() {
   assert.ok(repRes.report.includes('Slide 1'), 'Executive Slide Deck missing slides');
   console.log(`✓ Layer 7: Multimodal Visual Studio & Slide Deck Synthesis verified (${imgAsset.mode})`);
 
-  console.log('=== ALL 7 ARCHITECTURAL & ASSISTANT LAYERS PASSED 100% ===');
+  // 8. Test Cooperative Superintelligence: Controlled Release Gate & TEA Ludic Literature Studio
+  const gateEval = alignmentEngine.evaluateControlledRelease('Educação inclusiva e lúdica para crianças com TEA', 200);
+  assert.equal(gateEval.releaseGate, 'APPROVED_STAGE_4_COOPERATIVE', 'Ethical gate did not approve inclusive directive');
+  assert.ok(gateEval.scores.humanAgency >= 0.9, 'Human agency score too low');
+  const teaRes = await alignmentEngine.generateInclusivePedagogy({
+    topic: 'Sistema Solar e amizade',
+    profile: 'TEA Nível 1',
+    ageGroup: '6 a 10 anos',
+    apiKey: ''
+  });
+  assert.ok(teaRes.content.includes('História Social') || teaRes.content.length > 100, 'TEA Ludic Literature generation failed');
+  console.log(`✓ Layer 8: Cooperative Controlled Release Gate & TEA Inclusive Pedagogy verified (${gateEval.releaseGate}, ${gateEval.sustainability.requestJoules}J)`);
+
+  console.log('=== ALL 8 ARCHITECTURAL, COOPERATIVE & ASSISTANT LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

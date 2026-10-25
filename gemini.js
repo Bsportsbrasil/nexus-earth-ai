@@ -1,22 +1,12 @@
-// NEXUS Client Core: Real-time WebSocket Stream + Gemini Thinking Extraction + Serverless Fallback
-import { GoogleGenAI } from 'https://esm.run/@google/genai';
-
+// NEXUS Client Core: Real-time WebSocket Stream + Server-Side Gemini Proxy (Supports AQ.* Auth Keys & AIza* Keys)
 const KEY = 'nexus_gemini_key';
 const MODEL = 'gemini-3-flash-preview';
-let ai = null;
 let serverAvailable = null;
 let ws = null;
 const wsListeners = new Set();
 
 function getLocalKey() {
-  return sessionStorage.getItem(KEY);
-}
-
-function client() {
-  const k = getLocalKey();
-  if (!k) return null;
-  if (!ai) ai = new GoogleGenAI({ apiKey: k });
-  return ai;
+  return sessionStorage.getItem(KEY) || localStorage.getItem(KEY) || '';
 }
 
 function connectWebSocket() {
@@ -59,22 +49,24 @@ window.NexusWS = {
 window.Gemini = {
   model: MODEL,
   hasKey: () => serverAvailable === true || !!getLocalKey(),
-  getKey: () => getLocalKey() || '',
+  getKey: () => getLocalKey(),
   setKey(k) {
     if (k && k.trim()) {
       sessionStorage.setItem(KEY, k.trim());
     } else {
       sessionStorage.removeItem(KEY);
+      localStorage.removeItem(KEY);
     }
-    ai = null;
   },
   /**
-   * Streams both Reasoning Tokens (Chain-of-Thought) and Answer Tokens.
-   * Supports onChunk(fullAnswer) and optional onThought(fullThought).
+   * Streams both Reasoning Tokens (Chain-of-Thought) and Answer Tokens via backend /api/gemini
+   * or direct x-goog-api-key SSE stream.
    */
   async stream(contents, systemInstruction, onChunk, onThought) {
-    // 1. If local key is NOT set, try backend /api/gemini (which also streams over WebSocket)
-    if (!getLocalKey() && serverAvailable !== false) {
+    const localKey = getLocalKey();
+
+    // 1. Route through backend /api/gemini (streams thoughts & answer over WebSocket in real time)
+    if (serverAvailable !== false || localKey) {
       const unsub = window.NexusWS.onMessage((msg) => {
         if (msg.type === 'chat_thought' && onThought) onThought(msg.fullThought);
         if (msg.type === 'chat_answer' && onChunk) onChunk(msg.fullAnswer);
@@ -83,11 +75,15 @@ window.Gemini = {
         const resp = await fetch('/api/gemini', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents, systemInstruction })
+          body: JSON.stringify({
+            contents,
+            systemInstruction,
+            apiKey: localKey || undefined
+          })
         });
         unsub();
         if (resp.ok) {
-          serverAvailable = true;
+          if (!localKey) serverAvailable = true;
           refresh();
           const data = await resp.json();
           if (data.thought && onThought) onThought(data.thought);
@@ -95,47 +91,71 @@ window.Gemini = {
           return data.text || '';
         }
         const errData = await resp.json().catch(() => ({}));
-        if (resp.status === 503 && errData.error === 'SERVER_KEY_NOT_CONFIGURED') {
+        if (resp.status === 503 && errData.error === 'SERVER_KEY_NOT_CONFIGURED' && !localKey) {
           serverAvailable = false;
           refresh();
-        } else {
-          throw new Error(errData.error || `HTTP ${resp.status}`);
+          throw new Error('NO_KEY');
         }
+        throw new Error(errData.error || `HTTP ${resp.status}`);
       } catch (e) {
         unsub();
-        if (serverAvailable === true) throw e;
-        serverAvailable = false;
-        refresh();
+        if (!localKey) {
+          serverAvailable = false;
+          refresh();
+          throw e;
+        }
       }
     }
 
-    // 2. Direct Browser SDK with Native Thinking Extraction (`includeThoughts: true`)
-    const c = client();
-    if (!c) throw new Error('NO_KEY');
-    const res = await c.models.generateContentStream({
-      model: MODEL,
-      contents,
-      config: {
-        systemInstruction,
-        thinkingConfig: {
-          includeThoughts: true,
-          thinkingLevel: 'MEDIUM'
-        }
-      }
+    // 2. Direct browser SSE fallback with x-goog-api-key header (supports AQ.* and AIza* keys)
+    if (!localKey) throw new Error('NO_KEY');
+    const formattedContents = typeof contents === 'string'
+      ? [{ role: 'user', parts: [{ text: contents }] }]
+      : contents;
+    const payload = {
+      contents: formattedContents,
+      generationConfig: { thinkingConfig: { includeThoughts: true, thinkingLevel: 'MEDIUM' } }
+    };
+    if (systemInstruction) payload.systemInstruction = { parts: [{ text: systemInstruction }] };
+
+    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:streamGenerateContent?alt=sse`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': localKey
+      },
+      body: JSON.stringify(payload)
     });
+    if (!r.ok) throw new Error(`Gemini HTTP ${r.status}`);
+
     let fullAnswer = '';
     let fullThought = '';
-    for await (const chunk of res) {
-      const parts = chunk.candidates?.[0]?.content?.parts || [];
-      for (const part of parts) {
-        if (!part.text) continue;
-        if (part.thought) {
-          fullThought += part.text;
-          onThought && onThought(fullThought);
-        } else {
-          fullAnswer += part.text;
-          onChunk && onChunk(fullAnswer);
-        }
+    const reader = r.body.getReader();
+    const dec = new TextDecoder();
+    let buf = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop() || '';
+      for (const ln of lines) {
+        if (!ln.startsWith('data:')) continue;
+        const js = ln.slice(5).trim();
+        if (!js || js === '[DONE]') continue;
+        try {
+          const ch = JSON.parse(js);
+          for (const part of ch.candidates?.[0]?.content?.parts || []) {
+            if (!part.text) continue;
+            if (part.thought) {
+              fullThought += part.text;
+              onThought && onThought(fullThought);
+            } else {
+              fullAnswer += part.text;
+              onChunk && onChunk(fullAnswer);
+            }
+          }
+        } catch (e) {}
       }
     }
     return fullAnswer;
@@ -149,11 +169,10 @@ const status = document.getElementById('key-status');
 
 function refresh() {
   const on = serverAvailable === true || !!getLocalKey();
-  const wsActive = window.NexusWS && window.NexusWS.isOpen();
   status.textContent = serverAvailable === true
-    ? 'CLOUD SECURE'
-    : (on ? 'GEMINI LIVE' : (wsActive ? 'ENGINE ONLINE' : 'GRAPHRAG READY'));
-  status.className = 'key-status ' + (on || wsActive ? 'live' : 'demo');
+    ? 'GEMINI CLOUD ACTIVE'
+    : (on ? 'GEMINI LIVE' : 'GRAPHRAG READY');
+  status.className = 'key-status ' + (on ? 'live' : 'demo');
 }
 
 document.getElementById('key-btn').onclick = () => {
