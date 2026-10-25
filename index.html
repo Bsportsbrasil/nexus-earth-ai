@@ -163,6 +163,7 @@
         <li><a href="/knowledge" class="nav-link" data-route-link="knowledge" data-section="graph">🕸️ Knowledge</a></li>
         <li><a href="/studio" class="nav-link" data-route-link="studio" data-section="assistant">🎨 Studio</a></li>
         <li><a href="/proofs" class="nav-link" data-route-link="proofs" data-section="research">🏛️ Proofs</a></li>
+        <li><a href="/guide" class="nav-link" data-route-link="guide" data-section="guide">📖 Guia</a></li>
       </ul>
 
       <!-- 3. Right Section: Language, Cloud Status, App Install & Profile Actions -->
@@ -332,6 +333,18 @@
             <p class="exec-card-desc">Fundamentos matemáticos formais, suíte de benchmark reprodutível assinada em SHA-256, exportação de Whitepaper (.MD) e citação BibTeX, além de telemetria Prometheus.</p>
           </div>
           <div class="exec-card-cta">Auditar Provas &amp; Telemetria →</div>
+        </div>
+
+        <div class="glass-panel exec-module-card" data-goto-route="guide">
+          <div>
+            <div class="exec-card-top">
+              <div class="exec-card-icon">📖</div>
+              <span class="exec-card-route">/guide</span>
+            </div>
+            <div class="exec-card-title" style="margin-top:0.85rem">Guia Educativo &amp; Manual Técnico Sênior</div>
+            <p class="exec-card-desc">Manual completo e aprofundado com SEO técnico sênior, documentação 100% verídica de cada uma das funções da plataforma, arquitetura Glass-Box e conformidade regulatória.</p>
+          </div>
+          <div class="exec-card-cta">Explorar Guia Técnico Oficial →</div>
         </div>
       </div>
     </div>
@@ -1093,6 +1106,190 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ROUTE: /guide (Senior Technical Educational Guide & Comprehensive Manual with Rich SEO) -->
+  <section id="guide" class="section" data-route="guide" style="padding-top:110px">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "TechArticle",
+          "headline": "Manual Técnico e Guia Educativo Oficial da Plataforma NEXUS Superintelligence",
+          "description": "Especificação aprofundada, 100% verídica e guia passo a passo de todas as 9 funções da arquitetura Glass-Box do NEXUS: Interpretabilidade Mecanística, Consenso Multi-Agente DAG, GraphRAG Vetorial, Agente AURA Live, Governança C2 Soberana e Conformidade EU AI Act / LGPD.",
+          "articleSection": "Artificial Intelligence & Computational Systems",
+          "inLanguage": "pt-BR",
+          "author": { "@type": "Organization", "name": "NEXUS Core Engineering" },
+          "publisher": { "@type": "Organization", "name": "NEXUS Superintelligence", "url": "https://localhost:5173" },
+          "datePublished": "2026-10-25",
+          "dateModified": "2026-10-25"
+        },
+        {
+          "@type": "HowTo",
+          "name": "Como Utilizar a Plataforma NEXUS Superintelligence e Seus Recursos Glass-Box",
+          "description": "Instruções operacionais para utilizar cada módulo da plataforma NEXUS, desde a conversação por voz com AURA até a auditoria regulatória de explicabilidade algorítmica.",
+          "step": [
+            { "@type": "HowToStep", "name": "Conversação Contínua com AURA Live", "text": "Clique no botão 'Iniciar Conversa Ao Vivo' no módulo /aura e converse livremente por voz sem necessidade de pressionar botões novamente." },
+            { "@type": "HowToStep", "name": "Inspeção de Interpretabilidade Mecanística", "text": "Acesse /neural para visualizar taxas de ativação de camadas, tensores de atenção e entropia de Shannon em tempo real." },
+            { "@type": "HowToStep", "name": "Execução de Raciocínio Multi-Agente DAG", "text": "Acesse /agents e submeta uma diretiva para acionar o pipeline de debate entre Planner, Critic, Executor e Verifier." },
+            { "@type": "HowToStep", "name": "Exploração Epistêmica com GraphRAG", "text": "Acesse /knowledge e pesquise qualquer tema para visualizar o subgrafo vetorial com grounding em artigos científicos DOI." },
+            { "@type": "HowToStep", "name": "Auditoria de Explicabilidade Regulatória", "text": "No Master C2 (/admin.html), inspecione os Passaportes XAI que cumprem integralmente o Artigo 13/14 do EU AI Act e o Artigo 20 da LGPD." }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <div class="section-header" style="max-width:920px;margin:0 auto 3rem">
+      <div class="section-tag">Manual Técnico Oficial • SEO Sênior • 100% Veracidade</div>
+      <h2 class="section-title">Guia Educativo da Plataforma NEXUS</h2>
+      <p class="section-desc">Documentação técnica e prática de alto nível, explicando em detalhes o funcionamento, a fundamentação científica e o modo de uso de cada uma das 9 funções essenciais da plataforma.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:260px 1fr;gap:2rem;max-width:1400px;margin:0 auto;align-items:start">
+      <!-- Sticky Navigation / Table of Contents -->
+      <aside class="panel glass-panel" style="padding:1.25rem;position:sticky;top:85px;max-height:82vh;overflow-y:auto">
+        <strong style="color:var(--cyan);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em;display:block;margin-bottom:0.75rem">Índice do Manual</strong>
+        <nav style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.75rem">
+          <a href="#g-phil" style="color:var(--text-secondary);text-decoration:none;padding:3px 0">1. Filosofia &amp; Arquitetura</a>
+          <a href="#g-aura" style="color:var(--text-secondary);text-decoration:none;padding:3px 0">2. AURA Live (Voz &amp; TEA)</a>
+          <a href="#g-cc" style="color:var(--text-secondary);text-decoration:none;padding:3px 0">3. Glass-Box Command Center</a>
+          <a href="#g-neural" style="color:var(--text-secondary);text-decoration:none;padding:3px 0">4. Interpretabilidade Mecanística</a>
+          <a href="#g-agents" style="color:var(--text-secondary);text-decoration:none;padding:3px 0">5. Multi-Agente DAG (LangGraph)</a>
+          <a href="#g-rag" style="color:var(--text-secondary);text-decoration:none;padding:3px 0">6. GraphRAG &amp; DOIs Científicos</a>
+          <a href="#g-studio" style="color:var(--text-secondary);text-decoration:none;padding:3px 0">7. Estúdio &amp; Calendário .ICS</a>
+          <a href="#g-c2" style="color:var(--text-secondary);text-decoration:none;padding:3px 0">8. Master C2 &amp; Guardião LENNOX</a>
+          <a href="#g-xai" style="color:var(--text-secondary);text-decoration:none;padding:3px 0">9. Dossiês XAI (EU AI Act/LGPD)</a>
+        </nav>
+      </aside>
+
+      <!-- Articles Body -->
+      <main style="display:flex;flex-direction:column;gap:2rem">
+        <!-- 1. Filosofia & Glass-Box Overview -->
+        <article id="g-phil" class="panel glass-panel" style="padding:1.85rem">
+          <span class="agent-badge DONE" style="font-size:0.68rem;margin-bottom:0.6rem">CAPÍTULO 1 • FUNDAMENTOS</span>
+          <h3 style="font-size:1.35rem;color:#f8fafc;margin-bottom:0.65rem">1. Filosofia &amp; Arquitetura da Superinteligência Cooperativa Glass-Box</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.85rem">
+            Diferente dos modelos comerciais de ponta (OpenAI, Anthropic, Google) que operam como "caixas-pretas" impenetráveis, o <strong>NEXUS</strong> é construído sob o paradigma <strong>Glass-Box (Caixa de Vidro)</strong>. Cada token gerado, decisão tomada ou recomendação emitida expõe seus pesos latentes, trajetórias de atenção e fontes epistêmicas comprovadas.
+          </p>
+          <div style="background:rgba(0,245,255,0.05);border-left:3px solid var(--cyan);padding:0.75rem 1rem;border-radius:4px;font-size:0.82rem;line-height:1.6;margin-bottom:1rem">
+            <strong>Princípio da Pluralidade Humana (1% → 100%):</strong> Todo ser vivente enxerga o mundo a partir de uma perspectiva sensorial e cognitiva singular. Quando uma metodologia falha para 1% dos indivíduos, o sistema oferece alternativas pedagógicas e adaptativas que funcionam, garantindo autonomia sem coerção.
+          </div>
+          <h4 style="font-size:0.92rem;color:var(--cyan);margin-bottom:0.4rem">Como Utilizar:</h4>
+          <ol style="font-size:0.82rem;color:var(--text-secondary);padding-left:1.25rem;line-height:1.6">
+            <li>Navegue pelas abas do topo para acessar cada motor independente.</li>
+            <li>Observe na Home (Dashboard Executivo) os indicadores de latência de barramento (RTT), contagem de nós no banco vetorial e entropia global.</li>
+          </ol>
+        </article>
+
+        <!-- 2. AURA Live & TEA Inclusive Pedagogy -->
+        <article id="g-aura" class="panel glass-panel" style="padding:1.85rem">
+          <span class="agent-badge DONE" style="font-size:0.68rem;margin-bottom:0.6rem">CAPÍTULO 2 • AURA LIVE</span>
+          <h3 style="font-size:1.35rem;color:#f8fafc;margin-bottom:0.65rem">2. Agente AURA Live: Conversação Contínua por Voz &amp; Inclusão TEA</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.85rem">
+            A <strong>AURA</strong> é uma agente de comunicação ao vivo projetada com empatia inteligente e prosódia vocal humanizada. Ela reconhece o estado emocional do interlocutor (humor, tristeza, frustração, seriedade) e ajusta automaticamente o tom de voz e o ritmo das respostas.
+          </p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem">
+            <div style="background:rgba(255,255,255,0.03);padding:0.75rem;border-radius:8px">
+              <strong style="color:var(--emerald);font-size:0.82rem">🎙️ Modo Hands-Free Contínuo</strong>
+              <p style="font-size:0.78rem;color:var(--text-secondary);margin-top:0.3rem">Após clicar em <em>"Iniciar Conversa Ao Vivo"</em>, o microfone escuta e responde continuamente no ritmo do diálogo, sem que você precise apertar o botão de áudio a cada turno.</p>
+            </div>
+            <div style="background:rgba(255,255,255,0.03);padding:0.75rem;border-radius:8px">
+              <strong style="color:var(--violet);font-size:0.82rem">🧩 Pedagogia para Autismo (TEA)</strong>
+              <p style="font-size:0.78rem;color:var(--text-secondary);margin-top:0.3rem">Geração de Histórias Sociais com base no método formal de Carol Gray (Frases Descritivas, Perspectivas, Diretivas e Afirmativas), garantindo previsibilidade e segurança emocional.</p>
+            </div>
+          </div>
+          <h4 style="font-size:0.92rem;color:var(--cyan);margin-bottom:0.4rem">Instruções de Uso:</h4>
+          <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.6">Acesse <code>/aura</code>, defina seu estilo de aprendizagem preferido no seletor (ex: <em>Visual &amp; Lúdico</em>) e fale naturalmente. A AURA registra aprendizados no seu <em>Diário de Aprendizado Mútuo</em>.</p>
+        </article>
+
+        <!-- 3. Glass-Box Command Center -->
+        <article id="g-cc" class="panel glass-panel" style="padding:1.85rem">
+          <span class="agent-badge DONE" style="font-size:0.68rem;margin-bottom:0.6rem">CAPÍTULO 3 • COMMAND CENTER</span>
+          <h3 style="font-size:1.35rem;color:#f8fafc;margin-bottom:0.65rem">3. Glass-Box Command Center: Convergência Unificada dos 3 Pilares</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.85rem">
+            O Command Center (<code>/command-center</code>) unifica em uma visão em tempo real os três pilares que operam simultaneamente: o Grafo de Conhecimento (GraphRAG), os Tensores Neurais de Atenção e o Debate Multi-Agente DAG.
+          </p>
+          <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.6">
+            • <strong>Mapa de Calor de Atenção:</strong> Exibe a ativação de cada camada e cabeçote em tempo de execução.<br/>
+            • <strong>Log de Barramento (MessageBroker):</strong> Monitora mensagens trafegadas com confirmação de entrega (ACK) e offset durável.<br/>
+            • <strong>Fórmula Matemática de Shannon:</strong> Acompanhamento contínuo de $H(a) = -\sum_i p_i \log_2 p_i$.
+          </div>
+        </article>
+
+        <!-- 4. Interpretabilidade Mecanística -->
+        <article id="g-neural" class="panel glass-panel" style="padding:1.85rem">
+          <span class="agent-badge DONE" style="font-size:0.68rem;margin-bottom:0.6rem">CAPÍTULO 4 • REDE NEURAL</span>
+          <h3 style="font-size:1.35rem;color:#f8fafc;margin-bottom:0.65rem">4. Interpretabilidade Mecanística &amp; Tensores (TransformerLens Hooks)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.85rem">
+            No módulo <code>/neural</code>, você audita a matemática exata de um Transformer e Multi-Layer Perceptron (MLP). Cada camada processa a propagação direta $a^{(l)} = \sigma(W^{(l)}a^{(l-1)} + b^{(l)})$ e expõe a norma euclidiana do gradiente $\|\nabla_W \mathcal{L}\|_2$.
+          </p>
+          <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.6">
+            <strong>Injetor de Perturbação:</strong> Permite injetar ruído gaussiano controlado em camadas intermediárias para testar a robustez representacional e garantir que o modelo não entre em colapso cognitivo.
+          </p>
+        </article>
+
+        <!-- 5. Grafo Multi-Agente DAG -->
+        <article id="g-agents" class="panel glass-panel" style="padding:1.85rem">
+          <span class="agent-badge DONE" style="font-size:0.68rem;margin-bottom:0.6rem">CAPÍTULO 5 • MULTI-AGENTE</span>
+          <h3 style="font-size:1.35rem;color:#f8fafc;margin-bottom:0.65rem">5. Grafo de Raciocínio Multi-Agente DAG (LangGraph Consensus)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.85rem">
+            Em <code>/agents</code>, problemas complexos não são deixados a cargo de uma única LLM propensa a alucinações. O pipeline DAG divide o raciocínio em quatro agentes autônomos com personas e caixas de entrada dedicadas:
+          </p>
+          <ul style="font-size:0.82rem;color:var(--text-secondary);padding-left:1.25rem;line-height:1.6;margin-bottom:0.85rem">
+            <li><strong>PLANNER:</strong> Decompõe a diretiva em etapas operacionais verificáveis.</li>
+            <li><strong>CRITIC:</strong> Realiza auditoria adversarial rigorosa buscando falhas, vieses e incoerências.</li>
+            <li><strong>EXECUTOR:</strong> Constrói a solução prática com métricas quantitativas.</li>
+            <li><strong>VERIFIER:</strong> Valida formalmente o consenso e emite o índice de confiança final.</li>
+          </ul>
+        </article>
+
+        <!-- 6. GraphRAG & DOIs Científicos -->
+        <article id="g-rag" class="panel glass-panel" style="padding:1.85rem">
+          <span class="agent-badge DONE" style="font-size:0.68rem;margin-bottom:0.6rem">CAPÍTULO 6 • GRAPHRAG</span>
+          <h3 style="font-size:1.35rem;color:#f8fafc;margin-bottom:0.65rem">6. GraphRAG Vetorial &amp; Grounding Científico (Crossref DOI &amp; Wikipedia)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.85rem">
+            Em <code>/knowledge</code>, o sistema utiliza um banco vetorial híbrido denso de 128 dimensões combinado com busca esparsa TF-IDF e travessia topológica de 1-Hop. Para cada consulta, o motor realiza ETL contínuo buscando artigos revisados por pares com DOI oficial na Crossref e na biblioteca Europe PMC, garantindo factualidade com zero alucinação.
+          </p>
+        </article>
+
+        <!-- 7. Assistente Multimodal & Calendário -->
+        <article id="g-studio" class="panel glass-panel" style="padding:1.85rem">
+          <span class="agent-badge DONE" style="font-size:0.68rem;margin-bottom:0.6rem">CAPÍTULO 7 • ESTÚDIO</span>
+          <h3 style="font-size:1.35rem;color:#f8fafc;margin-bottom:0.65rem">7. Estúdio Multimodal &amp; Automação de Tarefas (.ICS / Calendário)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.85rem">
+            No módulo <code>/studio</code>, organize metas diárias com geração automática de planos de ação exportáveis no formato padrão <strong>RFC 5545 (.ICS)</strong>, compatível nativamente com Google Calendar, Apple Calendar e Outlook. O estúdio também gera apresentações executivas e diagramas vetoriais SVG de alta resolução.
+          </p>
+        </article>
+
+        <!-- 8. Master C2 & LENNOX Sovereign Guardian -->
+        <article id="g-c2" class="panel glass-panel" style="padding:1.85rem">
+          <span class="agent-badge DONE" style="font-size:0.68rem;margin-bottom:0.6rem">CAPÍTULO 8 • GOVERNANÇA C2</span>
+          <h3 style="font-size:1.35rem;color:#f8fafc;margin-bottom:0.65rem">8. Centro de Comando e Controle Soberano (Master C2) &amp; Guardião LENNOX</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.85rem">
+            Isolado em <code>/admin.html</code> com autenticação criptográfica restrita à proprietária (chave mestra), o Master C2 oferece poder de intervenção cirúrgica sobre todas as contas, agentes, permissões RBAC, sandbox e o <strong>Master Kill-Switch</strong>.
+          </p>
+          <div style="background:rgba(244,63,94,0.06);border:1px solid rgba(244,63,94,0.28);border-radius:8px;padding:0.75rem;font-size:0.82rem;line-height:1.6">
+            <strong>O Guardião LENNOX:</strong> Núcleo de governança e segurança autônomo. Cruza dados com fontes oficiais governamentais (OMS, Ministério da Saúde, ANVISA, SENASP/MJ, Planalto) mitigando falsos positivos. Em situações de perigo ou vulnerabilidade física, aciona o protocolo empático de emergência médica e policial integrando cartografia OpenStreetMap Nominatim e contatos oficiais (190, 192, 193, 188).
+          </div>
+        </article>
+
+        <!-- 9. Motor de Explicabilidade Regulatória XAI -->
+        <article id="g-xai" class="panel glass-panel" style="padding:1.85rem">
+          <span class="agent-badge DONE" style="font-size:0.68rem;margin-bottom:0.6rem">CAPÍTULO 9 • EXPLICABILIDADE REGULATÓRIA</span>
+          <h3 style="font-size:1.35rem;color:#f8fafc;margin-bottom:0.65rem">9. Motor de Explicabilidade Regulatória &amp; Passaportes XAI (EU AI Act &amp; LGPD)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0.85rem">
+            Resolve a maior vulnerabilidade jurídica das grandes empresas de tecnologia: a incapacidade de explicar o interior de modelos "caixa-preta". O NEXUS emite para cada deliberação um <strong>Passaporte Criptográfico XAI</strong> com valor probatório:
+          </p>
+          <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.6">
+            • <strong>LGPD (Art. 20 §1):</strong> Resumo claro em linguagem acessível sobre os fatores ponderados na decisão e garantia de revisão humana.<br/>
+            • <strong>EU AI Act (Artigos 13 &amp; 14):</strong> Dossiê técnico completo contendo atribuição de atenção, entropia de Shannon, estabilidade de pesos e supervisão humana.<br/>
+            • <strong>Assinatura SHA-256 Merkle:</strong> Selo criptográfico encadeado ao ledger imutável, auditável por órgãos judiciais e comitês de compliance corporativo.
+          </div>
+        </article>
+      </main>
     </div>
   </section>
 

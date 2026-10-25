@@ -254,13 +254,50 @@ class CompanionAgentEngine {
       };
     }
 
+    // 1c. Direct Local Services & Hospital / Medical Assistance Fast-Path
+    if (/\b(hospital|pronto\s*socorro|upa|m[eé]dic[ao]s?|posto\s+de\s+sa[uú]de|socorro\s+m[eé]dico|ambul[aâ]ncia|encontrar\s+hospital)\b/i.test(cleanMsg)) {
+      const geo = await lennoxGuardian.resolveEmergencyLocationAndServices();
+      const hospReply = [
+        `Para encontrar o hospital ou pronto-atendimento mais próximo agora, ${activeName}:`,
+        `1. **Em caso de urgência:** Ligue imediatamente para o **SAMU 192** ou **Bombeiros 193** (ligação gratuita).`,
+        `2. **Pontos de Atendimento Oficial (${geo.localityLabel}):**`,
+        ...geo.nearestOfficialEstablishments.map(e => `• **${e.type}:** ${e.name} ([Abrir Mapa](${e.mapUrl}))`),
+        `3. **Dica de GPS rápido:** Abra o aplicativo de mapas (Google Maps, Apple Maps ou Waze) no seu celular e digite **"Hospital"** ou **"UPA"** para ver a rota exata com seu GPS.`
+      ].join('\n\n');
+      if (onChunk) onChunk(hospReply);
+      this._save();
+      return {
+        reply: hospReply,
+        thought: `[Atendimento de Saúde e Localização de Hospital entregue para ${activeName}]`,
+        memory: this.state,
+        emotionProfile,
+        temporal,
+        xaiPassport: regulatoryEngine.generateDecisionPassport({
+          decisionType: 'AURA_HEALTH_AND_LOCAL_SERVICE',
+          prompt: cleanMsg,
+          response: hospReply,
+          sourceAgent: 'AURA_LIVE_COMPANION',
+          userName: activeName,
+          accountId: 'acc_public_live'
+        })
+      };
+    }
+
     // 2. Query Verified GraphRAG + Real-Time Global News & Social Media Pulse in parallel
     const wantsLiveNewsOrSocial = /\b(not[ií]cia|hoje|atual|atuais|agora|rede\s+social|redes\s+sociais|reddit|bluesky|github|tend[eê]ncia|mundo|jornal|acontecendo|avan[cç]o| novidade)\b/i.test(cleanMsg);
     const [rag, liveIntel] = await Promise.all([
       graphDB.queryGraphRAG(cleanMsg, 3),
       wantsLiveNewsOrSocial ? globalIntel.queryOmniscientIntelligence(cleanMsg).catch(() => null) : Promise.resolve(null)
     ]);
-    const primary = rag.seedNodes[0];
+
+    // Strictly enforce relevance: only use a node if semantic similarity is real (>= 0.42) or explicit keyword overlap exists!
+    const queryTokens = cleanMsg.toLowerCase().split(/\s+/).filter(w => w.length > 3);
+    const topNode = rag.seedNodes[0];
+    const topLabelLower = (topNode?.label || '').toLowerCase();
+    const hasWordOverlap = queryTokens.some(tok => topLabelLower.includes(tok));
+    const isNodeRelevant = topNode && (rag.topSimilarityScore >= 0.42 || hasWordOverlap);
+    const relevantPrimary = isNodeRelevant ? topNode : null;
+
     const recentInsights = this.state.dailyJournal.slice(0, 5).map(j => `- [${j.date} ${j.time || ''}] ${j.insight}`).join('\n');
 
     const liveNewsSnippet = liveIntel?.news?.articles?.length
@@ -284,9 +321,9 @@ class CompanionAgentEngine {
 
     if (resolvedKey) {
       try {
-        const factualContext = (primary?.summary
-          ? `\n\n[Dados Verídicos em Tempo Real via GraphRAG (${primary.label} — ${primary.url})]: ${primary.summary}`
-          : `\n\n[Nota de Transparência]: Caso a pergunta exija um dado externo que não esteja verificado, seja 100% honesta com ${activeName} e jamais invente fatos.`) + liveNewsSnippet + liveSocialSnippet;
+        const factualContext = (relevantPrimary?.summary
+          ? `\n\n[Dados Verídicos em Tempo Real via GraphRAG (${relevantPrimary.label} — ${relevantPrimary.url})]: ${relevantPrimary.summary}`
+          : `\n\n[Nota de Transparência]: Responda diretamente e exatamente ao que ${activeName} perguntou. Caso a pergunta exija um dado que você não possui, explique honestamente e jamais invente fatos ou desvie de assunto.`) + liveNewsSnippet + liveSocialSnippet;
         const contextualizedMsg = `Fala de ${activeName}: "${cleanMsg}"${factualContext}`;
 
         const contents = [
@@ -339,26 +376,27 @@ class CompanionAgentEngine {
           xaiPassport
         };
       } catch (e) {
+        console.error('AURA Gemini LLM call failed:', e.message || e);
         // Proceed to verified empathetic & factual synthesis below if offline or quota reached
       }
     }
 
     // 3. Empathetic, Personal & Strictly Verified Synthesis (Honoring all 4 Emotional Intelligence Directives)
     const newInsight = this.addInsight(
-      `${activeName} explorou "${(primary?.label || cleanMsg).slice(0, 55)}" [Tom: ${emotionProfile.label}]`,
+      `${activeName} explorou "${(relevantPrimary?.label || cleanMsg).slice(0, 55)}" [Tom: ${emotionProfile.label}]`,
       this.state.learningStyle
     );
 
     let reply;
-    if (primary && primary.summary) {
+    if (relevantPrimary && relevantPrimary.summary) {
       const relatedNames = (rag.subgraph?.nodes || [])
         .map(n => n.label)
-        .filter(l => l && l !== primary.label)
+        .filter(l => l && l !== relevantPrimary.label)
         .slice(0, 3);
 
       reply = [
         emotionProfile.empathyOpening ? `${emotionProfile.empathyOpening}` : '',
-        `**${primary.label}** (${activeName}): ${primary.summary}`,
+        `**${relevantPrimary.label}** (${activeName}): ${relevantPrimary.summary}`,
         liveNewsSnippet ? `${liveNewsSnippet}` : '',
         liveSocialSnippet ? `${liveSocialSnippet}` : '',
         relatedNames.length
@@ -366,11 +404,8 @@ class CompanionAgentEngine {
           : ''
       ].filter(Boolean).join('\n\n');
     } else {
-      // Transparency & Rigor — direct, short, never repeating the question or inventing facts
-      reply = [
-        emotionProfile.empathyOpening ? `${emotionProfile.empathyOpening}` : '',
-        `${activeName}, ainda não tenho um dado verificado em tempo real para isso agora (${temporal.localeTime}), e prefiro não inventar. Quer tentar com uma palavra-chave mais específica?`
-      ].filter(Boolean).join(' ');
+      // Transparency & Rigor — never invent facts and NEVER output an unrelated topic like Roma Antiga
+      reply = `${activeName}, sobre o que você perguntou ("${cleanMsg}"): no momento não tenho um dado verificado exato registrado no meu índice local neste instante (${temporal.localeTime}), e prefiro não inventar. Se puder me dar mais detalhes ou uma palavra-chave específica, procuro para você agora mesmo!`;
     }
 
     if (onChunk) onChunk(reply);

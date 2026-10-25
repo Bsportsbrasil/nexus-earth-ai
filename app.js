@@ -56,7 +56,8 @@ const NexusRouter = (() => {
     'agents',
     'knowledge',
     'studio',
-    'proofs'
+    'proofs',
+    'guide'
   ]);
 
   const ALIAS_MAP = {
@@ -78,7 +79,9 @@ const NexusRouter = (() => {
     'assistant': 'studio',
     'proofs': 'proofs',
     'research': 'proofs',
-    'metrics': 'proofs'
+    'metrics': 'proofs',
+    'guide': 'guide',
+    'guia': 'guide'
   };
 
   const ROUTE_PATHS = {
@@ -89,7 +92,8 @@ const NexusRouter = (() => {
     'agents': '/agents',
     'knowledge': '/knowledge',
     'studio': '/studio',
-    'proofs': '/proofs'
+    'proofs': '/proofs',
+    'guide': '/guide'
   };
 
   const initializedModules = new Set();
