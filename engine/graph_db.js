@@ -218,7 +218,8 @@ export class GraphDatabase {
   _extractSubjectQuery(rawQuery) {
     const cleaned = (rawQuery || '')
       .replace(/[?!.,;:"']/g, ' ')
-      .replace(/\b(me\s+ensine(\s+algo(\s+fascinante)?)?(\s+sobre)?|o\s+que\s+(é|são|significa)|como\s+funciona(m)?|quem\s+(foi|é|descobriu|inventou)|fale\s+sobre|explique(\s+sobre)?|qual\s+(é|a|o)|por\s+que|de\s+um\s+jeito\s+divertido(\s+e\s+visual)?|para\s+mim|por\s+favor|hoje|agora)\b/gi, ' ')
+      .replace(/\b(me\s+ajude(\s+com|\s+a)?|ajuda|preciso\s+de|gostaria\s+de\s+saber|me\s+ensine(\s+algo(\s+fascinante)?)?(\s+sobre)?|o\s+que\s+(é|são|significa)|como\s+funciona(m)?|quem\s+(foi|é|descobriu|inventou)|fale\s+sobre|explique(\s+sobre)?|me\s+explique|qual\s+(é|a|o)|por\s+que|de\s+um\s+jeito\s+divertido(\s+e\s+visual)?)\b/gi, ' ')
+      .replace(/\b(uma?\s+pesquisa(\s+de|\s+da|\s+escolar|\s+para)?|trabalho(\s+de|\s+da)?|escola(\s+sobre)?|faculdade(\s+sobre)?|estudo(\s+sobre)?|sobre|para\s+mim|por\s+favor|hoje|agora)\b/gi, ' ')
       .replace(/\s+/g, ' ')
       .trim();
     return cleaned.length >= 2 ? cleaned : (rawQuery || '').trim();
@@ -368,7 +369,9 @@ export class GraphDatabase {
     scored.sort((a, b) => b.score - a.score);
 
     let liveIngestion = null;
-    if (scored.length === 0 || scored[0].score < 0.38) {
+    const topPureSim = scored[0]?.similarity || 0;
+    // Strict threshold: if the best node doesn't have at least 0.28 pure semantic similarity, trigger live ingestion
+    if (scored.length === 0 || topPureSim < 0.28) {
       liveIngestion = await this.ingestTopic(query);
       scored = [];
       for (const node of this.nodes.values()) {
@@ -380,6 +383,16 @@ export class GraphDatabase {
         });
       }
       scored.sort((a, b) => b.score - a.score);
+
+      // Explicitly prioritize the newly ingested entity to prevent disconnected fallbacks (e.g. Roma Antiga)
+      if (liveIngestion && liveIngestion.root) {
+        scored = scored.filter(s => s.node.id !== liveIngestion.root.id);
+        scored.unshift({
+          node: liveIngestion.root,
+          similarity: 0.95,
+          score: 1.0
+        });
+      }
     }
 
     const topSimilarityScore = scored[0]?.similarity || 0.85;

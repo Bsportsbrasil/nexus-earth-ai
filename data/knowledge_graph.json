@@ -6068,6 +6068,7 @@
       "category": "Root",
       "summary": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
       "url": "https://en.wikipedia.org/wiki/Transformer_(deep_learning)",
+      "doi": "",
       "vector": {
         "transformer": 0.4472135954999579,
         "deep": 0.4472135954999579,
@@ -6081,7 +6082,6 @@
         "attention": 0.22360679774997896,
         "mechanism": 0.22360679774997896
       },
-      "updatedAt": 1792903936770,
       "denseVec": [
         0.16344,
         0,
@@ -6212,7 +6212,8 @@
         0,
         -0.08172
       ],
-      "pageRank": 1
+      "pageRank": 1,
+      "updatedAt": 1792969727409
     },
     {
       "id": "self-attention",
@@ -6220,6 +6221,7 @@
       "category": "Linked",
       "summary": "Attention mechanism relating different positions of a single sequence.",
       "url": "",
+      "doi": "",
       "vector": {
         "self": 0.3015113445777636,
         "attention": 0.6030226891555271,
@@ -6230,7 +6232,6 @@
         "single": 0.3015113445777636,
         "sequence": 0.3015113445777636
       },
-      "updatedAt": 1792903936770,
       "denseVec": [
         0,
         0.04647,
@@ -6361,7 +6362,8 @@
         0.09295,
         0.04647
       ],
-      "pageRank": 1
+      "pageRank": 1,
+      "updatedAt": 1792969727409
     },
     {
       "id": "paper:10.21711/2319023x2026/pmo1429",
@@ -23455,10 +23457,10 @@
     },
     {
       "id": "live_intel:artificial intelligence",
-      "label": "🌐 Pulso Global: Artificial intelligence",
+      "label": "🌐 Pulso Global: Artificial Intelligence",
       "category": "LiveIntel",
-      "summary": "14 notícias globais e 4 sinais sociais analisados em tempo real (POSITIVO / EXPANSÃO TECNOLÓGICA).",
-      "url": "https://news.google.com/rss/articles/CBMiuwJBVV95cUxOUDBCQ25vS2wyUWdKR1F1WHU1ZnJVZTE1bkhfT3JLT25EdmNfM181UFowdUdsVHhQdWFvQUZLYzNLSlNBeUdNMFVoQzYxbXJQT3JNSURJdi0xemlJTnU3ZWFkNGM0WF9GSTB6YUtaeF9JMVVUVjJfbExhZ3BydUJnU3lqaFgwOFNjNUFYYy1yOEg1SmRlZjYwdW9LeG9wZkFDeFJkUkQ3aW94czA0eDQ2VGkyNnpPeXgxZDZ1YzE3TU4xaGdIem9VRmt2bUFIaGxrNERMRkM4Z3JEUkFoWmdxTnVLZi1Obk5FZVRoUkdVcVV1Z2FMUEFoR085dzJuUnNLOWxjdUNUdDhicHVkZF9OUm5GVDAzX0N3alUxd05WbllDcHpJaXdDV3Y5WENfcENqRzRERWRmbUtPUFk?oc=5",
+      "summary": "0 notícias globais e 0 sinais sociais analisados em tempo real (POSITIVO / EXPANSÃO TECNOLÓGICA).",
+      "url": "https://news.google.com",
       "doi": "",
       "vector": {
         "pulso": 0.2672612419124244,
@@ -23607,7 +23609,7 @@
         0.03529
       ],
       "pageRank": 2.5373,
-      "updatedAt": 1792939369647
+      "updatedAt": 1792969731480
     },
     {
       "id": "news:monitoring the invasive grass eragro",
