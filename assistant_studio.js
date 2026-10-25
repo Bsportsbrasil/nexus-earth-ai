@@ -295,6 +295,82 @@ const AssistantStudio = (function () {
     out.textContent = text;
   }
 
+  function downloadFile(filename, content, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function downloadCurrentSvg() {
+    const preview = document.getElementById('studio-preview');
+    const svgEl = preview?.querySelector('svg');
+    if (svgEl) {
+      downloadFile('nexus_architecture_infographic.svg', svgEl.outerHTML, 'image/svg+xml');
+    } else {
+      alert('Nenhum diagrama vetorial SVG ativo no momento. Clique em "Generate Image / Diagram" primeiro.');
+    }
+  }
+
+  function copyCurrentSvg() {
+    const preview = document.getElementById('studio-preview');
+    const svgEl = preview?.querySelector('svg');
+    const btn = document.getElementById('studio-copy-svg-btn');
+    if (svgEl) {
+      navigator.clipboard?.writeText(svgEl.outerHTML);
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = '✅ SVG Copiado!';
+        setTimeout(() => { btn.textContent = orig; }, 1800);
+      }
+    } else {
+      navigator.clipboard?.writeText(lastShareableText);
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = '✅ Conteúdo Copiado!';
+        setTimeout(() => { btn.textContent = orig; }, 1800);
+      }
+    }
+  }
+
+  function printCurrentPdf() {
+    window.print();
+  }
+
+  async function dispatchWebhook() {
+    const url = prompt('Insira o Endpoint Webhook HTTPS de destino (Slack, Discord, MS Teams, n8n ou Zapier):', 'https://httpbin.org/post');
+    if (!url || !url.startsWith('http')) return;
+    const btn = document.getElementById('share-webhook-btn');
+    if (btn) btn.textContent = '⏳ Disparando...';
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'NEXUS Superintelligence Platform',
+          timestamp: new Date().toISOString(),
+          type: 'EXECUTIVE_BRIEFING',
+          content: lastShareableText
+        })
+      });
+      if (btn) {
+        btn.textContent = res.ok ? '✅ Webhook Enviado!' : `⚠️ Status ${res.status}`;
+        setTimeout(() => { btn.textContent = '⚡ Webhook API'; }, 2200);
+      }
+    } catch (e) {
+      if (btn) {
+        btn.textContent = '❌ Falha de Envio';
+        setTimeout(() => { btn.textContent = '⚡ Webhook API'; }, 2200);
+      }
+      alert('Erro ao disparar Webhook: ' + e.message);
+    }
+  }
+
   function init() {
     const dateEl = document.getElementById('task-date-input');
     if (dateEl) dateEl.value = new Date().toISOString().slice(0, 10);
@@ -372,6 +448,10 @@ const AssistantStudio = (function () {
       const b = document.getElementById('share-copy-btn');
       if (b) { b.textContent = '✓ Copied!'; setTimeout(() => b.textContent = '📋 Copy Briefing', 1500); }
     });
+    document.getElementById('share-webhook-btn')?.addEventListener('click', dispatchWebhook);
+    document.getElementById('studio-dl-svg-btn')?.addEventListener('click', downloadCurrentSvg);
+    document.getElementById('studio-copy-svg-btn')?.addEventListener('click', copyCurrentSvg);
+    document.getElementById('studio-print-pdf-btn')?.addEventListener('click', printCurrentPdf);
 
     // Zero-Trust AES-256-GCM Personal Credential Vault Save Handler
     document.getElementById('vault-save-btn')?.addEventListener('click', async () => {

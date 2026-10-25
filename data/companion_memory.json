@@ -8,6 +8,34 @@
   ],
   "dailyJournal": [
     {
+      "id": "d4f29080-6ef2-4a6c-850c-ae28117a6d8d",
+      "date": "2026-10-25",
+      "time": "11:04:36",
+      "insight": "Ana consultou data/hora em tempo real (11:04:36)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "908e0272-7696-4e68-8e49-a277dce7c6bd",
+      "date": "2026-10-25",
+      "time": "11:04:36",
+      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "d3527542-ecdc-46bc-b51d-9df95d4a2aaa",
+      "date": "2026-10-25",
+      "time": "11:04:36",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "6c6f9c14-ab13-4cc1-92f6-453067850b40",
+      "date": "2026-10-25",
+      "time": "10:41:58",
+      "insight": "Ana se interessa por perspectivas subjetivas e analogias visuais para explicar conceitos biológicos e cognitivos.",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "b2b2930e-c2f8-4da1-bfbe-a74973ac9745",
       "date": "2026-10-25",
       "time": "10:37:19",
@@ -328,35 +356,7 @@
       "time": "02:11:58",
       "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🤝 Conexão Natural & Empática]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "de63251f-c8ce-4547-bff9-2acc65366ff5",
-      "date": "2026-10-25",
-      "time": "02:11:46",
-      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "ec0c0a60-076a-44bb-965e-8ee50f456d4a",
-      "date": "2026-10-25",
-      "time": "02:11:34",
-      "insight": "Ana explorou \"Jair Bolsonaro\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "32eb6318-492b-457c-bced-c68d85126636",
-      "date": "2026-10-25",
-      "time": "02:11:13",
-      "insight": "Ana explorou \"A.I. - Inteligência Artificial\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "35f1f692-ef80-43f6-9e9d-53c2296608fb",
-      "date": "2026-10-25",
-      "time": "02:10:44",
-      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 100
+  "interactionCount": 103
 }

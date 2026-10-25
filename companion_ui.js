@@ -9,6 +9,7 @@ const CompanionUI = (function () {
   let isProcessingTurn = false;
   let activeRecognizer = null;
   let cachedVoices = [];
+  let userCadence = Number(localStorage.getItem('nexus_aura_voice_rate') || 1.0);
 
   if ('speechSynthesis' in window) {
     const loadVoices = () => { cachedVoices = window.speechSynthesis.getVoices() || []; };
@@ -144,47 +145,63 @@ const CompanionUI = (function () {
     }
 
     isAuraSpeaking = true;
-    const sentences = clean.match(/[^.!?]+[.!?]*/g) || [clean];
     const voice = pickGentleHumanizedVoice();
-    const targetRate = emotionProfile?.rate || 1.0;
+    const targetRate = Math.min(1.8, Math.max(0.6, (emotionProfile?.rate || 1.0) * userCadence));
     const targetPitch = emotionProfile?.pitch || 1.03;
 
-    sentences.forEach((sentence, idx) => {
-      const phrase = sentence.trim();
-      if (!phrase) return;
+    // Split text into natural conversational chunks by commas, semicolons and sentences for natural breathing pauses
+    const chunks = clean.match(/[^.,!?;:]+[.,!?;:]*/g) || [clean];
+
+    let currentIdx = 0;
+    function speakNextChunk() {
+      if (!isAuraSpeaking || currentIdx >= chunks.length) {
+        isAuraSpeaking = false;
+        if (orb) orb.classList.remove('speaking');
+        if (stateLabel) {
+          stateLabel.textContent = liveSessionActive
+            ? '🎙️ AURA ouvindo continuamente você agora (fale livremente)...'
+            : 'Pronta para conversar e aprender com você hoje';
+        }
+        if (onDoneSpeaking) onDoneSpeaking();
+        return;
+      }
+
+      const phrase = (chunks[currentIdx] || '').trim();
+      currentIdx++;
+      if (!phrase) {
+        speakNextChunk();
+        return;
+      }
+
       const u = new SpeechSynthesisUtterance(phrase);
       u.lang = 'pt-BR';
       if (voice) u.voice = voice;
-      // Emotionally-adapted natural human prosody
       u.rate = targetRate;
       u.pitch = targetPitch;
       u.volume = 1.0;
 
-      if (idx === 0) {
-        u.onstart = () => {
-          isAuraSpeaking = true;
-          if (orb) orb.classList.add('speaking');
-          if (stateLabel) {
-            stateLabel.textContent = liveSessionActive
-              ? '🌸 AURA respondendo (Conversa Contínua Ao Vivo ativa)...'
-              : '🌸 AURA falando com voz natural e gentil...';
-          }
-        };
-      }
-      if (idx === sentences.length - 1) {
-        u.onend = () => {
-          isAuraSpeaking = false;
-          if (orb) orb.classList.remove('speaking');
-          if (onDoneSpeaking) onDoneSpeaking();
-        };
-      }
-      u.onerror = () => {
-        isAuraSpeaking = false;
-        if (orb) orb.classList.remove('speaking');
-        if (onDoneSpeaking) onDoneSpeaking();
+      u.onstart = () => {
+        if (orb) orb.classList.add('speaking');
+        if (stateLabel) {
+          stateLabel.textContent = liveSessionActive
+            ? '🌸 AURA respondendo com voz natural e acolhedora...'
+            : '🌸 AURA falando com entonação empática e direta...';
+        }
       };
+
+      u.onend = () => {
+        // Natural micro-pause between clauses
+        setTimeout(speakNextChunk, 45);
+      };
+
+      u.onerror = () => {
+        speakNextChunk();
+      };
+
       window.speechSynthesis.speak(u);
-    });
+    }
+
+    speakNextChunk();
   }
 
   async function sendToAura(overrideText) {
@@ -422,6 +439,19 @@ const CompanionUI = (function () {
         ttsActive = !ttsActive;
         if (!ttsActive && window.speechSynthesis) window.speechSynthesis.cancel();
         ttsBtn.textContent = ttsActive ? '🔊 Voz Natural ON' : '🔇 Voz OFF';
+      });
+    }
+
+    const cadenceBtn = document.getElementById('aura-cadence-btn');
+    if (cadenceBtn) {
+      cadenceBtn.textContent = `⚡ ${userCadence.toFixed(userCadence === 1.15 ? 2 : 1)}x`;
+      cadenceBtn.addEventListener('click', () => {
+        if (userCadence === 1.0) userCadence = 1.15;
+        else if (userCadence === 1.15) userCadence = 1.3;
+        else if (userCadence === 1.3) userCadence = 0.9;
+        else userCadence = 1.0;
+        localStorage.setItem('nexus_aura_voice_rate', userCadence);
+        cadenceBtn.textContent = `⚡ ${userCadence.toFixed(userCadence === 1.15 ? 2 : 1)}x`;
       });
     }
 

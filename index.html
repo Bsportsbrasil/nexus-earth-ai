@@ -378,6 +378,7 @@
           <div class="aura-voice-controls">
             <button class="btn-secondary" id="aura-live-voice-btn" title="Conversar por Voz em Tempo Real">🎙️ Voz Ao Vivo</button>
             <button class="btn-secondary" id="aura-tts-toggle" title="Ativar/Desativar Resposta Falada">🔊 Voz ON</button>
+            <button class="btn-secondary" id="aura-cadence-btn" title="Velocidade da Voz da AURA">⚡ 1.0x</button>
           </div>
         </div>
 
@@ -627,7 +628,12 @@
           </div>
         </div>
         <div class="studio-preview" id="studio-preview">
-          <span class="idle-text">Clique em "Generate Image" (usa `gemini-2.5-flash-image` + Diagrama Vetorial GraphRAG + Wikimedia Commons) ou "Synthesize Slide Deck" para criar apresentações executivas com fontes DOI.</span>
+          <span class="idle-text">Clique em "Generate Image" (Diagrama Vetorial GraphRAG + Wikimedia Commons) ou "Synthesize Slide Deck" para criar apresentações executivas com fontes DOI.</span>
+        </div>
+        <div id="studio-export-toolbar" style="display:flex;gap:0.4rem;margin-top:0.5rem;flex-wrap:wrap">
+          <button class="btn-secondary" id="studio-dl-svg-btn" style="flex:1;justify-content:center;font-size:0.75rem;padding:0.4rem">⬇ Baixar SVG Vetorial</button>
+          <button class="btn-secondary" id="studio-copy-svg-btn" style="flex:1;justify-content:center;font-size:0.75rem;padding:0.4rem">📋 Copiar Código SVG</button>
+          <button class="btn-secondary" id="studio-print-pdf-btn" style="flex:1;justify-content:center;font-size:0.75rem;padding:0.4rem">🖨️ Imprimir / PDF</button>
         </div>
       </div>
 
@@ -656,11 +662,12 @@
           <div id="trans-output" class="trans-result"></div>
         </div>
         <div class="omnichannel-links">
-          <div class="cc-sub-label">One-Click Cloud API &amp; Native App Dispatch (WhatsApp / Telegram / Copy)</div>
+          <div class="cc-sub-label">One-Click Cloud API &amp; Native App Dispatch (WhatsApp / Telegram / Copy / Webhooks)</div>
           <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
             <button class="btn-secondary" id="share-wa-btn" style="flex:1">🟢 WhatsApp</button>
             <button class="btn-secondary" id="share-tg-btn" style="flex:1">🔵 Telegram</button>
             <button class="btn-secondary" id="share-copy-btn" style="flex:1">📋 Copy Briefing</button>
+            <button class="btn-secondary" id="share-webhook-btn" style="flex:1">⚡ Webhook API</button>
           </div>
           <details style="margin-top:0.65rem;background:rgba(2,4,12,0.55);border:1px solid var(--border);border-radius:8px;padding:0.55rem">
             <summary style="cursor:pointer;font-size:0.74rem;color:var(--cyan);font-weight:600">🔒 Cofre Zero-Trust (AES-256-GCM): Conectar Google Calendar, Telegram Bot &amp; WhatsApp Cloud API</summary>
@@ -1085,7 +1092,9 @@
           <button class="btn-primary" id="bench-run-btn" style="padding:0.45rem 0.9rem;font-size:0.78rem">⚡ Run Reproducible Benchmark Suite</button>
           <button class="btn-secondary" id="bench-export-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">⬇ Export Certificate (.JSON)</button>
           <button class="btn-secondary" id="whitepaper-dl-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">📘 Download Technical Whitepaper (.MD)</button>
-          <button class="btn-secondary" id="cite-bibtex-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">📄 Copy BibTeX Citation</button>
+          <button class="btn-secondary" id="whitepaper-latex-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">📄 Export LaTeX (.TEX)</button>
+          <button class="btn-secondary" id="cite-bibtex-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">🏷️ Copy BibTeX</button>
+          <button class="btn-secondary" id="research-print-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">🖨️ Print Academic Paper</button>
         </div>
       </div>
 
@@ -1096,7 +1105,7 @@
         <div class="cc-mini-stat"><span id="bm-agency">96%</span><small>Human Agency Preservation</small></div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:1rem;align-items:stretch" class=" aura-layout">
+      <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:1rem;align-items:stretch" class="aura-layout">
         <div>
           <div class="cc-sub-label">Live Cryptographically Verified Benchmark Telemetry (<code>GET /api/benchmark</code>):</div>
           <pre id="bench-json-output" style="background:rgba(2,4,12,0.85);border:1px solid var(--border);border-radius:8px;padding:0.75rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);max-height:210px;overflow:auto;margin:0">Initializing live benchmark...</pre>
@@ -1109,6 +1118,40 @@
             <a href="/api/telemetry" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>🖥️ Host Cluster CPU/RAM/Heap Snapshot</span><code>GET /api/telemetry</code></a>
             <a href="/api/graph?q=Artificial%20intelligence" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>🕸️ Vector GraphRAG + 1-Hop Subgraph API</span><code>GET /api/graph</code></a>
             <a href="/sitemap.xml" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>🌐 Dynamic Search Engine Sitemap XML</span><code>GET /sitemap.xml</code></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TransformerLens Multi-Head Attention & Residual Stream Interactive Probing Card -->
+      <div class="panel glass-panel" style="margin-top:1.25rem;padding:1.25rem;background:rgba(15,23,42,0.65)">
+        <div class="cc-pane-header" style="flex-wrap:wrap;gap:0.5rem">
+          <div>
+            <span class="panel-title">🔬 TransformerLens Residual Stream &amp; Attention Pattern Probe</span>
+            <span class="agent-badge DONE" style="font-size:0.68rem;margin-left:0.5rem">HOOK INTERPRETABILITY</span>
+          </div>
+          <div style="display:flex;gap:0.4rem;align-items:center">
+            <span style="font-size:0.72rem;color:var(--text-secondary)">Attention Head:</span>
+            <select id="probe-head-select" class="select-input" style="max-width:140px;padding:3px 8px;font-size:0.75rem">
+              <option value="0">Head 0 (Epistemic)</option>
+              <option value="1">Head 1 (Syntax/DAG)</option>
+              <option value="2">Head 2 (Inclusion/Empathy)</option>
+              <option value="3">Head 3 (Verification)</option>
+            </select>
+            <button class="btn-secondary" id="probe-run-btn" style="padding:3px 10px;font-size:0.75rem">⚡ Inspecionar Tokens</button>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:0.85rem" class="aura-layout">
+          <div>
+            <div class="cc-sub-label">Softmax Attention Heatmap A = softmax(QKᵀ / √d_k):</div>
+            <div id="attention-matrix-view" style="overflow-x:auto;padding:0.75rem;background:rgba(2,4,12,0.85);border-radius:8px;border:1px solid var(--border);min-height:180px">
+              <!-- Rendered Attention Matrix -->
+            </div>
+          </div>
+          <div>
+            <div class="cc-sub-label">Residual Stream Propagation Flow (hook_embed → hook_resid_post):</div>
+            <div id="residual-stream-flow" style="display:flex;flex-direction:column;gap:0.45rem;font-size:0.75rem;font-family:var(--font-mono);background:rgba(2,4,12,0.85);border-radius:8px;border:1px solid var(--border);padding:0.75rem;min-height:180px">
+              <!-- Rendered Stream Layers -->
+            </div>
           </div>
         </div>
       </div>
