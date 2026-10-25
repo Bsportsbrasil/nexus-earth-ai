@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T18:19:55.960Z",
+  "updatedAt": "2026-10-25T18:25:18.811Z",
   "certifications": {
     "aura": {
       "certified": true,
@@ -30,8 +30,8 @@
       "status": "CERTIFICADO_PELO_CRIADOR",
       "agentId": "executor",
       "certifiedBy": "Criador Soberano",
-      "timestamp": "2026-10-25T18:19:55.960Z",
-      "certHash": "928bf0d5a68b60fbc8c35e2614c059ddeaa58da32b6c15446f679acd65b6daa0",
+      "timestamp": "2026-10-25T18:25:18.810Z",
+      "certHash": "22f31f08b02bd3e846811362f7b209fc3727fabb66368947908133a9db39d94f",
       "note": "Re-homologado"
     },
     "verifier": {
@@ -44,6 +44,18 @@
     }
   },
   "feedbackHistory": [
+    {
+      "id": "fb_1792952718778_04dc",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication & Empathy)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication & Empathy) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T18:25:18.778Z"
+    },
     {
       "id": "fb_1792952395942_fb6e",
       "agentId": "aura",
@@ -421,6 +433,16 @@
       "role": "supervisor",
       "text": "Relatório de Supervisão Ativo (15:19:55): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 82 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
       "timestamp": "2026-10-25T18:19:55.940Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T18:25:18.774Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (15:25:18): Todos os 6 agentes estão sendo monitorados em tempo real. Identifico 6 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 87 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T18:25:18.774Z"
     }
   ]
 }

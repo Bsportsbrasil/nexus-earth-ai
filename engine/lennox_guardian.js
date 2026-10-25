@@ -525,19 +525,21 @@ export class LennoxSovereignGuardian {
         // Confirmed violation -> Autonomous Immediate Intervention!
         this.policingState.autonomousBlocksExecuted++;
 
-        // A. Block offending account in Master C2
-        try {
-          c2Engine.setAccountStatus(
-            accountId,
-            'BLOCKED',
-            `[LENNOX INTERVENÇÃO AUTÔNOMA] Violação confirmada (${matchedSig.category}) após validação oficial.`
-          );
-        } catch (_) {}
+        // A. Block offending account in Master C2 (never lock out shared public gateway for all visitors)
+        if (accountId !== 'acc_public_live') {
+          try {
+            c2Engine.setAccountStatus(
+              accountId,
+              'BLOCKED',
+              `[LENNOX INTERVENÇÃO AUTÔNOMA] Violação confirmada (${matchedSig.category}) após validação oficial.`
+            );
+          } catch (_) {}
 
-        // B. Suspend / Freeze associated agent in Master C2
-        try {
-          c2Engine.interveneAgent(agentId, 'FREEZE');
-        } catch (_) {}
+          // B. Suspend / Freeze associated agent in Master C2
+          try {
+            c2Engine.interveneAgent(agentId, 'FREEZE');
+          } catch (_) {}
+        }
 
         // C. Revoke all active login sessions of the offending user
         try {
