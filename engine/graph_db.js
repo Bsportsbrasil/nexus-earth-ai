@@ -351,7 +351,8 @@ export class GraphDatabase {
   /**
    * Hybrid Dense HNSW + Sparse TF-IDF + 1-Hop Property GraphRAG Retrieval
    */
-  async queryGraphRAG(query, topK = 6) {
+  async queryGraphRAG(rawQuery, topK = 6) {
+    const query = this._extractSubjectQuery(rawQuery);
     const qSparse = this._computeVector(query);
     const qDense = this._computeDenseEmbedding(query);
 
