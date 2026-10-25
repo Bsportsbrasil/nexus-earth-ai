@@ -10,6 +10,8 @@ import { tensorEngine } from './engine/tensor.js';
 import { telemetry } from './engine/telemetry.js';
 import { streamWithThinking } from './engine/llm.js';
 import { executeAgentDAG } from './engine/agents_dag.js';
+import { taskEngine } from './engine/tasks.js';
+import { generateVisualAsset, generateExecutiveReport } from './engine/studio.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -216,6 +218,73 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // 5b. Task & Calendar Automation Endpoints (/api/tasks, /api/tasks/ics, /api/tasks/plan)
+  if (pathname === '/api/tasks') {
+    if (req.method === 'GET') {
+      return jsonResponse(res, 200, { items: taskEngine.listItems() });
+    }
+    if (req.method === 'POST') {
+      try {
+        const body = await parseJsonBody(req);
+        if (body.action === 'toggle') {
+          return jsonResponse(res, 200, { item: taskEngine.toggleItem(body.id), items: taskEngine.listItems() });
+        }
+        if (body.action === 'delete') {
+          taskEngine.deleteItem(body.id);
+          return jsonResponse(res, 200, { items: taskEngine.listItems() });
+        }
+        const item = taskEngine.addItem(body);
+        return jsonResponse(res, 200, { item, items: taskEngine.listItems() });
+      } catch (e) {
+        return jsonResponse(res, 400, { error: e.message });
+      }
+    }
+  }
+
+  if (req.method === 'GET' && pathname === '/api/tasks/ics') {
+    const ics = taskEngine.exportToICS();
+    res.writeHead(200, {
+      'Content-Type': 'text/calendar; charset=utf-8',
+      'Content-Disposition': 'attachment; filename="nexus_schedule.ics"'
+    });
+    return res.end(ics);
+  }
+
+  if (req.method === 'POST' && pathname === '/api/tasks/plan') {
+    try {
+      const body = await parseJsonBody(req);
+      const plan = await taskEngine.generateSmartPlan({
+        goal: body.goal,
+        type: body.type,
+        apiKey: body.apiKey
+      });
+      return jsonResponse(res, 200, { ...plan, items: taskEngine.listItems() });
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
+  // 5c. Multimodal Studio Endpoints (/api/studio/image, /api/studio/report)
+  if (req.method === 'POST' && pathname === '/api/studio/image') {
+    try {
+      const body = await parseJsonBody(req);
+      const asset = await generateVisualAsset({ prompt: body.prompt, apiKey: body.apiKey });
+      return jsonResponse(res, 200, asset);
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
+  if (req.method === 'POST' && pathname === '/api/studio/report') {
+    try {
+      const body = await parseJsonBody(req);
+      const rep = await generateExecutiveReport({ topic: body.topic, apiKey: body.apiKey });
+      return jsonResponse(res, 200, rep);
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
   // 6. Gemini LLM Endpoint with Thinking & GraphRAG Grounding (/api/gemini)
   if (req.method === 'POST' && pathname === '/api/gemini') {
     try {
@@ -365,6 +434,6 @@ server.on('upgrade', (req, socket) => {
 // Seed initial GraphDB on startup so GraphRAG has immediate indexed entities
 graphDB.ingestTopic('Artificial intelligence').catch(() => {});
 
-server.listen(PORT, () => {
-  console.log(`NEXUS Enterprise Engine listening on http://localhost:${PORT} (WebSocket: ws://localhost:${PORT}/ws | Prometheus: http://localhost:${PORT}/metrics)`);
+server.listen(PORT, '127.0.0.1', () => {
+  console.log(`NEXUS Enterprise Engine listening safely on http://localhost:${PORT} (127.0.0.1 only)`);
 });

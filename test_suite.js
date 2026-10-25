@@ -4,6 +4,8 @@ import { graphDB } from './engine/graph_db.js';
 import { tensorEngine } from './engine/tensor.js';
 import { telemetry } from './engine/telemetry.js';
 import { executeAgentDAG } from './engine/agents_dag.js';
+import { taskEngine } from './engine/tasks.js';
+import { generateVisualAsset, generateExecutiveReport } from './engine/studio.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -65,7 +67,21 @@ async function runTests() {
   assert.ok(events.length > 4, 'DAG did not stream events');
   console.log(`✓ Layer 2b: Multi-Agent DAG Orchestrator verified (${events.length} real-time stream events emitted)`);
 
-  console.log('=== ALL 5 ARCHITECTURAL LAYERS PASSED 100% ===');
+  // 6. Test Task & Calendar Automation (.ics export + Smart Plan)
+  const planRes = await taskEngine.generateSmartPlan({ goal: 'Transformer Deep Learning Study', apiKey: '' });
+  assert.ok(planRes.createdTasks.length >= 1, 'Smart Plan did not create calendar tasks');
+  const ics = taskEngine.exportToICS();
+  assert.ok(ics.includes('BEGIN:VCALENDAR') && ics.includes('BEGIN:VEVENT'), 'ICS export malformed');
+  console.log(`✓ Layer 6: Task & Calendar Automation + RFC5545 .ics export verified (${taskEngine.listItems().length} scheduled items)`);
+
+  // 7. Test Multimodal Visual & Executive Report Studio
+  const imgAsset = await generateVisualAsset({ prompt: 'Transformer Architecture', apiKey: '' });
+  assert.ok(imgAsset.dataUrl.startsWith('data:image/'), 'Visual asset dataUrl missing');
+  const repRes = await generateExecutiveReport({ topic: 'Transformer (deep learning)', apiKey: '' });
+  assert.ok(repRes.report.includes('Slide 1'), 'Executive Slide Deck missing slides');
+  console.log(`✓ Layer 7: Multimodal Visual Studio & Slide Deck Synthesis verified (${imgAsset.mode})`);
+
+  console.log('=== ALL 7 ARCHITECTURAL & ASSISTANT LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

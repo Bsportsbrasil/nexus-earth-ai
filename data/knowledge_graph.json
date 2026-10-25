@@ -1,0 +1,902 @@
+{
+  "nodes": [
+    {
+      "id": "artificial intelligence",
+      "label": "Artificial intelligence",
+      "category": "Root",
+      "summary": "Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoning, problem-solving, perception, and decision-making. It is a field of research in engineering, mathematics, and computer science that develops and studies methods and software that enable machines to perceive their environment and use learning and intelligence to take actions that maximise their chances of achieving defined goals.",
+      "url": "https://en.wikipedia.org/wiki/Artificial_intelligence",
+      "vector": {
+        "artificial": 0.18898223650461374,
+        "intelligence": 0.3779644730092275,
+        "the": 0.09449111825230687,
+        "capability": 0.09449111825230687,
+        "computational": 0.09449111825230687,
+        "systems": 0.09449111825230687,
+        "perform": 0.09449111825230687,
+        "tasks": 0.09449111825230687,
+        "typically": 0.09449111825230687,
+        "associated": 0.09449111825230687,
+        "with": 0.09449111825230687,
+        "human": 0.09449111825230687,
+        "such": 0.09449111825230687,
+        "learning": 0.18898223650461374,
+        "reasoning": 0.09449111825230687,
+        "problem": 0.09449111825230687,
+        "solving": 0.09449111825230687,
+        "perception": 0.09449111825230687,
+        "and": 0.5669467095138412,
+        "decision": 0.09449111825230687,
+        "making": 0.09449111825230687,
+        "field": 0.09449111825230687,
+        "research": 0.09449111825230687,
+        "engineering": 0.09449111825230687,
+        "mathematics": 0.09449111825230687,
+        "computer": 0.09449111825230687,
+        "science": 0.09449111825230687,
+        "that": 0.2834733547569206,
+        "develops": 0.09449111825230687,
+        "studies": 0.09449111825230687,
+        "methods": 0.09449111825230687,
+        "software": 0.09449111825230687,
+        "enable": 0.09449111825230687,
+        "machines": 0.09449111825230687,
+        "perceive": 0.09449111825230687,
+        "their": 0.18898223650461374,
+        "environment": 0.09449111825230687,
+        "use": 0.09449111825230687,
+        "take": 0.09449111825230687,
+        "actions": 0.09449111825230687,
+        "maximise": 0.09449111825230687,
+        "chances": 0.09449111825230687,
+        "achieving": 0.09449111825230687,
+        "defined": 0.09449111825230687,
+        "goals": 0.09449111825230687
+      },
+      "updatedAt": 1792896474645
+    },
+    {
+      "id": "15.ai",
+      "label": "15.ai",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {},
+      "updatedAt": 1792896474897
+    },
+    {
+      "id": "1x technologies",
+      "label": "1X Technologies",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "technologies": 1
+      },
+      "updatedAt": 1792896474897
+    },
+    {
+      "id": "2024 indian general election",
+      "label": "2024 Indian general election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "2024": 0.5,
+        "indian": 0.5,
+        "general": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792896474897
+    },
+    {
+      "id": "3d optical data storage",
+      "label": "3D optical data storage",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "optical": 0.5773502691896258,
+        "data": 0.5773502691896258,
+        "storage": 0.5773502691896258
+      },
+      "updatedAt": 1792896474897
+    },
+    {
+      "id": "a* search algorithm",
+      "label": "A* search algorithm",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "search": 0.7071067811865476,
+        "algorithm": 0.7071067811865476
+      },
+      "updatedAt": 1792896474897
+    },
+    {
+      "id": "a.i. artificial intelligence",
+      "label": "A.I. Artificial Intelligence",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "artificial": 0.7071067811865476,
+        "intelligence": 0.7071067811865476
+      },
+      "updatedAt": 1792896474897
+    },
+    {
+      "id": "aaai",
+      "label": "AAAI",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "aaai": 1
+      },
+      "updatedAt": 1792896474897
+    },
+    {
+      "id": "abb",
+      "label": "ABB",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "abb": 1
+      },
+      "updatedAt": 1792896474897
+    },
+    {
+      "id": "acm computing classification system",
+      "label": "ACM Computing Classification System",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "acm": 0.5,
+        "computing": 0.5,
+        "classification": 0.5,
+        "system": 0.5
+      },
+      "updatedAt": 1792896474898
+    },
+    {
+      "id": "acm sigevo",
+      "label": "ACM SIGEVO",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "acm": 0.7071067811865476,
+        "sigevo": 0.7071067811865476
+      },
+      "updatedAt": 1792896474898
+    },
+    {
+      "id": "paper:10.3403/30483942u",
+      "label": "Artificial Intelligence. Artificial Intell (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.3403/30483942u",
+      "url": "https://doi.org/10.3403/30483942u",
+      "vector": {
+        "3403": 0.19999999999999998,
+        "artificial": 0.39999999999999997,
+        "intelligence": 0.19999999999999998,
+        "intell": 0.19999999999999998,
+        "peer": 0.39999999999999997,
+        "reviewed": 0.39999999999999997,
+        "study": 0.19999999999999998,
+        "published": 0.19999999999999998,
+        "journal": 0.19999999999999998,
+        "doi": 0.39999999999999997,
+        "https": 0.19999999999999998,
+        "org": 0.19999999999999998,
+        "30483942u": 0.19999999999999998
+      },
+      "updatedAt": 1792896475885
+    },
+    {
+      "id": "paper:10.1093/hesc/9780198557364.003.0001",
+      "label": "Artificial intelligence (1993)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Applications of Artificial Intelligence in Chemistry (1993). DOI: https://doi.org/10.1093/hesc/9780198557364.003.0001",
+      "url": "https://doi.org/10.1093/hesc/9780198557364.003.0001",
+      "vector": {
+        "1093": 0.1856953381770518,
+        "1993": 0.3713906763541036,
+        "artificial": 0.3713906763541036,
+        "intelligence": 0.3713906763541036,
+        "peer": 0.1856953381770518,
+        "reviewed": 0.1856953381770518,
+        "study": 0.1856953381770518,
+        "published": 0.1856953381770518,
+        "applications": 0.1856953381770518,
+        "chemistry": 0.1856953381770518,
+        "doi": 0.3713906763541036,
+        "https": 0.1856953381770518,
+        "org": 0.1856953381770518,
+        "hesc": 0.1856953381770518,
+        "9780198557364": 0.1856953381770518,
+        "003": 0.1856953381770518,
+        "0001": 0.1856953381770518
+      },
+      "updatedAt": 1792896475885
+    },
+    {
+      "id": "paper:10.3403/30483942",
+      "label": "Artificial Intelligence. Artificial Intell (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.3403/30483942",
+      "url": "https://doi.org/10.3403/30483942",
+      "vector": {
+        "3403": 0.19999999999999998,
+        "30483942": 0.19999999999999998,
+        "artificial": 0.39999999999999997,
+        "intelligence": 0.19999999999999998,
+        "intell": 0.19999999999999998,
+        "peer": 0.39999999999999997,
+        "reviewed": 0.39999999999999997,
+        "study": 0.19999999999999998,
+        "published": 0.19999999999999998,
+        "journal": 0.19999999999999998,
+        "doi": 0.39999999999999997,
+        "https": 0.19999999999999998,
+        "org": 0.19999999999999998
+      },
+      "updatedAt": 1792896475885
+    },
+    {
+      "id": "2025 portuguese legislative election",
+      "label": "2025 Portuguese legislative election",
+      "category": "Root",
+      "summary": "A snap legislative election took place in Portugal on 18 May 2025 to elect members of the Assembly of the Republic for the 17th Legislature. All 230 seats to the Assembly of the Republic were up for election.",
+      "url": "https://en.wikipedia.org/wiki/2025_Portuguese_legislative_election",
+      "vector": {
+        "230": 0.1212678125181665,
+        "2025": 0.242535625036333,
+        "portuguese": 0.1212678125181665,
+        "legislative": 0.242535625036333,
+        "election": 0.3638034375544995,
+        "snap": 0.1212678125181665,
+        "took": 0.1212678125181665,
+        "place": 0.1212678125181665,
+        "portugal": 0.1212678125181665,
+        "may": 0.1212678125181665,
+        "elect": 0.1212678125181665,
+        "members": 0.1212678125181665,
+        "the": 0.6063390625908325,
+        "assembly": 0.242535625036333,
+        "republic": 0.242535625036333,
+        "for": 0.242535625036333,
+        "17th": 0.1212678125181665,
+        "legislature": 0.1212678125181665,
+        "all": 0.1212678125181665,
+        "seats": 0.1212678125181665,
+        "were": 0.1212678125181665
+      },
+      "updatedAt": 1792896589997
+    },
+    {
+      "id": "1820 portuguese legislative election",
+      "label": "1820 Portuguese legislative election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1820": 0.5,
+        "portuguese": 0.5,
+        "legislative": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792896590380
+    },
+    {
+      "id": "1822 portuguese legislative election",
+      "label": "1822 Portuguese legislative election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1822": 0.5,
+        "portuguese": 0.5,
+        "legislative": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792896590380
+    },
+    {
+      "id": "1826 portuguese legislative election",
+      "label": "1826 Portuguese legislative election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1826": 0.5,
+        "portuguese": 0.5,
+        "legislative": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792896590380
+    },
+    {
+      "id": "1828 portuguese legislative election",
+      "label": "1828 Portuguese legislative election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1828": 0.5,
+        "portuguese": 0.5,
+        "legislative": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792896590380
+    },
+    {
+      "id": "1834 portuguese legislative election",
+      "label": "1834 Portuguese legislative election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1834": 0.5,
+        "portuguese": 0.5,
+        "legislative": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792896590380
+    },
+    {
+      "id": "1838 portuguese legislative election",
+      "label": "1838 Portuguese legislative election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1838": 0.5,
+        "portuguese": 0.5,
+        "legislative": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792896590380
+    },
+    {
+      "id": "1840 portuguese legislative election",
+      "label": "1840 Portuguese legislative election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1840": 0.5,
+        "portuguese": 0.5,
+        "legislative": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792896590380
+    },
+    {
+      "id": "1842 portuguese legislative election",
+      "label": "1842 Portuguese legislative election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1842": 0.5,
+        "portuguese": 0.5,
+        "legislative": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792896590380
+    },
+    {
+      "id": "1845 portuguese legislative election",
+      "label": "1845 Portuguese legislative election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1845": 0.5,
+        "portuguese": 0.5,
+        "legislative": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792896590380
+    },
+    {
+      "id": "1847 portuguese legislative election",
+      "label": "1847 Portuguese legislative election",
+      "category": "Linked",
+      "summary": "",
+      "url": "",
+      "vector": {
+        "1847": 0.5,
+        "portuguese": 0.5,
+        "legislative": 0.5,
+        "election": 0.5
+      },
+      "updatedAt": 1792896590380
+    },
+    {
+      "id": "paper:10.48021/978-65-5355-074-2",
+      "label": "O caminho que te faz ser quem você é (2022)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (2022). DOI: https://doi.org/10.48021/978-65-5355-074-2",
+      "url": "https://doi.org/10.48021/978-65-5355-074-2",
+      "vector": {
+        "978": 0.1796053020267749,
+        "2022": 0.3592106040535498,
+        "5355": 0.1796053020267749,
+        "48021": 0.1796053020267749,
+        "caminho": 0.1796053020267749,
+        "que": 0.1796053020267749,
+        "faz": 0.1796053020267749,
+        "ser": 0.1796053020267749,
+        "quem": 0.1796053020267749,
+        "você": 0.1796053020267749,
+        "peer": 0.3592106040535498,
+        "reviewed": 0.3592106040535498,
+        "study": 0.1796053020267749,
+        "published": 0.1796053020267749,
+        "journal": 0.1796053020267749,
+        "doi": 0.3592106040535498,
+        "https": 0.1796053020267749,
+        "org": 0.1796053020267749,
+        "074": 0.1796053020267749
+      },
+      "updatedAt": 1792896591576
+    },
+    {
+      "id": "paper:10.48021/978-65-252-9776-7-c6",
+      "label": "VOCÊ FAZ O QUE TE FAZ FELIZ? REFLEXÕES ACE (2023)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Estratégias para o bem-estar e felicidade na escola: – Volume 1 (2023). DOI: https://doi.org/10.48021/978-65-252-9776-7-c6",
+      "url": "https://doi.org/10.48021/978-65-252-9776-7-c6",
+      "vector": {
+        "252": 0.17149858514250882,
+        "978": 0.17149858514250882,
+        "2023": 0.34299717028501764,
+        "9776": 0.17149858514250882,
+        "48021": 0.17149858514250882,
+        "você": 0.17149858514250882,
+        "faz": 0.34299717028501764,
+        "que": 0.17149858514250882,
+        "feliz": 0.17149858514250882,
+        "reflexões": 0.17149858514250882,
+        "ace": 0.17149858514250882,
+        "peer": 0.17149858514250882,
+        "reviewed": 0.17149858514250882,
+        "study": 0.17149858514250882,
+        "published": 0.17149858514250882,
+        "estratégias": 0.17149858514250882,
+        "para": 0.17149858514250882,
+        "bem": 0.17149858514250882,
+        "estar": 0.17149858514250882,
+        "felicidade": 0.17149858514250882,
+        "escola": 0.17149858514250882,
+        "volume": 0.17149858514250882,
+        "doi": 0.34299717028501764,
+        "https": 0.17149858514250882,
+        "org": 0.17149858514250882
+      },
+      "updatedAt": 1792896591579
+    },
+    {
+      "id": "paper:10.29327/226154.1.1-4",
+      "label": "O que te faz feliz? (2020)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Revista Diálogos (2020). DOI: https://doi.org/10.29327/226154.1.1-4",
+      "url": "https://doi.org/10.29327/226154.1.1-4",
+      "vector": {
+        "2020": 0.4364357804719848,
+        "29327": 0.2182178902359924,
+        "226154": 0.2182178902359924,
+        "que": 0.2182178902359924,
+        "faz": 0.2182178902359924,
+        "feliz": 0.2182178902359924,
+        "peer": 0.2182178902359924,
+        "reviewed": 0.2182178902359924,
+        "study": 0.2182178902359924,
+        "published": 0.2182178902359924,
+        "revista": 0.2182178902359924,
+        "diálogos": 0.2182178902359924,
+        "doi": 0.4364357804719848,
+        "https": 0.2182178902359924,
+        "org": 0.2182178902359924
+      },
+      "updatedAt": 1792896591579
+    },
+    {
+      "id": "paper:10.17771/pucrio.acad.55705",
+      "label": "COMO GANHAR DINHEIRO NA INTERNET?: A CONST (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.17771/pucrio.acad.55705",
+      "url": "https://doi.org/10.17771/pucrio.acad.55705",
+      "vector": {
+        "17771": 0.19611613513818404,
+        "55705": 0.19611613513818404,
+        "como": 0.19611613513818404,
+        "ganhar": 0.19611613513818404,
+        "dinheiro": 0.19611613513818404,
+        "internet": 0.19611613513818404,
+        "const": 0.19611613513818404,
+        "peer": 0.3922322702763681,
+        "reviewed": 0.3922322702763681,
+        "study": 0.19611613513818404,
+        "published": 0.19611613513818404,
+        "journal": 0.19611613513818404,
+        "doi": 0.3922322702763681,
+        "https": 0.19611613513818404,
+        "org": 0.19611613513818404,
+        "pucrio": 0.19611613513818404,
+        "acad": 0.19611613513818404
+      },
+      "updatedAt": 1792896618608
+    },
+    {
+      "id": "paper:10.31219/osf.io/v3z69",
+      "label": "Como ganhar oNobel? (2021)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (2021). DOI: https://doi.org/10.31219/osf.io/v3z69",
+      "url": "https://doi.org/10.31219/osf.io/v3z69",
+      "vector": {
+        "2021": 0.3849001794597506,
+        "31219": 0.1924500897298753,
+        "como": 0.1924500897298753,
+        "ganhar": 0.1924500897298753,
+        "onobel": 0.1924500897298753,
+        "peer": 0.3849001794597506,
+        "reviewed": 0.3849001794597506,
+        "study": 0.1924500897298753,
+        "published": 0.1924500897298753,
+        "journal": 0.1924500897298753,
+        "doi": 0.3849001794597506,
+        "https": 0.1924500897298753,
+        "org": 0.1924500897298753,
+        "osf": 0.1924500897298753,
+        "v3z69": 0.1924500897298753
+      },
+      "updatedAt": 1792896618609
+    },
+    {
+      "id": "paper:10.55277/researchhub.n20pa0bl.1",
+      "label": "ᯓ ✈︎ {|[ Delta _ airlines _ telefone ]|} ᯓ (2026)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (2026). DOI: https://doi.org/10.55277/researchhub.n20pa0bl.1",
+      "url": "https://doi.org/10.55277/researchhub.n20pa0bl.1",
+      "vector": {
+        "2026": 0.3849001794597506,
+        "55277": 0.1924500897298753,
+        "delta": 0.1924500897298753,
+        "airlines": 0.1924500897298753,
+        "telefone": 0.1924500897298753,
+        "peer": 0.3849001794597506,
+        "reviewed": 0.3849001794597506,
+        "study": 0.1924500897298753,
+        "published": 0.1924500897298753,
+        "journal": 0.1924500897298753,
+        "doi": 0.3849001794597506,
+        "https": 0.1924500897298753,
+        "org": 0.1924500897298753,
+        "researchhub": 0.1924500897298753,
+        "n20pa0bl": 0.1924500897298753
+      },
+      "updatedAt": 1792896618610
+    },
+    {
+      "id": "paper:10.32388/9dxy6m",
+      "label": "Review of: \"Microinsurance: Bibliography o (2023)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (2023). DOI: https://doi.org/10.32388/9dxy6m",
+      "url": "https://doi.org/10.32388/9dxy6m",
+      "vector": {
+        "2023": 0.39223227027636803,
+        "32388": 0.19611613513818402,
+        "review": 0.19611613513818402,
+        "microinsurance": 0.19611613513818402,
+        "bibliography": 0.19611613513818402,
+        "peer": 0.39223227027636803,
+        "reviewed": 0.39223227027636803,
+        "study": 0.19611613513818402,
+        "published": 0.19611613513818402,
+        "journal": 0.19611613513818402,
+        "doi": 0.39223227027636803,
+        "https": 0.19611613513818402,
+        "org": 0.19611613513818402,
+        "9dxy6m": 0.19611613513818402
+      },
+      "updatedAt": 1792896790546
+    },
+    {
+      "id": "paper:10.31274/rtd-180813-5315",
+      "label": "Asset market approach to exchange rate det (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.31274/rtd-180813-5315",
+      "url": "https://doi.org/10.31274/rtd-180813-5315",
+      "vector": {
+        "5315": 0.19245008972987523,
+        "31274": 0.19245008972987523,
+        "180813": 0.19245008972987523,
+        "asset": 0.19245008972987523,
+        "market": 0.19245008972987523,
+        "approach": 0.19245008972987523,
+        "exchange": 0.19245008972987523,
+        "rate": 0.19245008972987523,
+        "det": 0.19245008972987523,
+        "peer": 0.38490017945975047,
+        "reviewed": 0.38490017945975047,
+        "study": 0.19245008972987523,
+        "published": 0.19245008972987523,
+        "journal": 0.19245008972987523,
+        "doi": 0.38490017945975047,
+        "https": 0.19245008972987523,
+        "org": 0.19245008972987523,
+        "rtd": 0.19245008972987523
+      },
+      "updatedAt": 1792896790546
+    },
+    {
+      "id": "paper:10.51415/10321/2563",
+      "label": "Financial monitoring policies of microfina (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.51415/10321/2563",
+      "url": "https://doi.org/10.51415/10321/2563",
+      "vector": {
+        "2563": 0.2041241452319315,
+        "10321": 0.2041241452319315,
+        "51415": 0.2041241452319315,
+        "financial": 0.2041241452319315,
+        "monitoring": 0.2041241452319315,
+        "policies": 0.2041241452319315,
+        "microfina": 0.2041241452319315,
+        "peer": 0.408248290463863,
+        "reviewed": 0.408248290463863,
+        "study": 0.2041241452319315,
+        "published": 0.2041241452319315,
+        "journal": 0.2041241452319315,
+        "doi": 0.408248290463863,
+        "https": 0.2041241452319315,
+        "org": 0.2041241452319315
+      },
+      "updatedAt": 1792896790546
+    },
+    {
+      "id": "paper:10.11606/d.55.2006.tde-18062007-114153",
+      "label": "Implementação de um sistema de arquivos pa (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.11606/d.55.2006.tde-18062007-114153",
+      "url": "https://doi.org/10.11606/d.55.2006.tde-18062007-114153",
+      "vector": {
+        "2006": 0.2,
+        "11606": 0.2,
+        "114153": 0.2,
+        "18062007": 0.2,
+        "implementação": 0.2,
+        "sistema": 0.2,
+        "arquivos": 0.2,
+        "peer": 0.4,
+        "reviewed": 0.4,
+        "study": 0.2,
+        "published": 0.2,
+        "journal": 0.2,
+        "doi": 0.4,
+        "https": 0.2,
+        "org": 0.2,
+        "tde": 0.2
+      },
+      "updatedAt": 1792896891917
+    },
+    {
+      "id": "paper:10.11606/d.55.2006.tde-23012007-163303",
+      "label": "Concepção e implementação de um modelo de  (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.11606/d.55.2006.tde-23012007-163303",
+      "url": "https://doi.org/10.11606/d.55.2006.tde-23012007-163303",
+      "vector": {
+        "2006": 0.2,
+        "11606": 0.2,
+        "163303": 0.2,
+        "23012007": 0.2,
+        "concepção": 0.2,
+        "implementação": 0.2,
+        "modelo": 0.2,
+        "peer": 0.4,
+        "reviewed": 0.4,
+        "study": 0.2,
+        "published": 0.2,
+        "journal": 0.2,
+        "doi": 0.4,
+        "https": 0.2,
+        "org": 0.2,
+        "tde": 0.2
+      },
+      "updatedAt": 1792896891917
+    },
+    {
+      "id": "paper:10.17771/pucrio.acad.7787",
+      "label": "FIDELIZAÇÃO DE CLIENTES: COMO UMA FIRMA DE (n.d.)",
+      "category": "Paper",
+      "summary": "Peer-reviewed study published in Peer-Reviewed Journal (n.d.). DOI: https://doi.org/10.17771/pucrio.acad.7787",
+      "url": "https://doi.org/10.17771/pucrio.acad.7787",
+      "vector": {
+        "7787": 0.19611613513818404,
+        "17771": 0.19611613513818404,
+        "fidelização": 0.19611613513818404,
+        "clientes": 0.19611613513818404,
+        "como": 0.19611613513818404,
+        "uma": 0.19611613513818404,
+        "firma": 0.19611613513818404,
+        "peer": 0.3922322702763681,
+        "reviewed": 0.3922322702763681,
+        "study": 0.19611613513818404,
+        "published": 0.19611613513818404,
+        "journal": 0.19611613513818404,
+        "doi": 0.3922322702763681,
+        "https": 0.19611613513818404,
+        "org": 0.19611613513818404,
+        "pucrio": 0.19611613513818404,
+        "acad": 0.19611613513818404
+      },
+      "updatedAt": 1792896891917
+    }
+  ],
+  "edges": [
+    {
+      "source": "artificial intelligence",
+      "target": "15.ai",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "1x technologies",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "2024 indian general election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "3d optical data storage",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "a* search algorithm",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "a.i. artificial intelligence",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "aaai",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "abb",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "acm computing classification system",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "acm sigevo",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "paper:10.3403/30483942u",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "paper:10.1093/hesc/9780198557364.003.0001",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "artificial intelligence",
+      "target": "paper:10.3403/30483942",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "1820 portuguese legislative election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "1822 portuguese legislative election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "1826 portuguese legislative election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "1828 portuguese legislative election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "1834 portuguese legislative election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "1838 portuguese legislative election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "1840 portuguese legislative election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "1842 portuguese legislative election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "1845 portuguese legislative election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "1847 portuguese legislative election",
+      "type": "WIKI_LINK",
+      "weight": 0.9
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "paper:10.48021/978-65-5355-074-2",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "paper:10.48021/978-65-252-9776-7-c6",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    },
+    {
+      "source": "2025 portuguese legislative election",
+      "target": "paper:10.29327/226154.1.1-4",
+      "type": "CITED_IN_LITERATURE",
+      "weight": 0.95
+    }
+  ]
+}

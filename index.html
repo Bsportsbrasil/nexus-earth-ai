@@ -49,6 +49,7 @@
       </div>
       <ul class="nav-links">
         <li><a href="#command-center" class="nav-link active" data-section="command-center">⚡ Command Center</a></li>
+        <li><a href="#assistant" class="nav-link" data-section="assistant">📅 Assistant &amp; Studio</a></li>
         <li><a href="#neural" class="nav-link" data-section="neural">Neural</a></li>
         <li><a href="#agents" class="nav-link" data-section="agents">Agents</a></li>
         <li><a href="#graph" class="nav-link" data-section="graph">Knowledge</a></li>
@@ -178,6 +179,89 @@
         </div>
         <div class="cc-broker-log" id="cc-broker-log">
           <div class="broker-line">[SYSTEM] RFC 6455 WebSocket &amp; MessageBroker initialized.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practical Task Automation, Multimodal Media Studio & Omnichannel Hub -->
+  <section id="assistant" class="section">
+    <div class="section-header">
+      <div class="section-tag">Actionable Executive Suite</div>
+      <h2 class="section-title">Task Automation, Visual Studio &amp; Omnichannel Voice Hub</h2>
+      <p class="section-desc">Combines practical daily execution (Calendars, Briefings, Routines, `.ics` export), instant Visual &amp; Report Synthesis, and native WhatsApp / Telegram / Voice integration.</p>
+    </div>
+
+    <div class="assistant-grid">
+      <!-- 1. Assistência e Automação de Tarefas -->
+      <div class="panel glass-panel assistant-col">
+        <div class="cc-pane-header">
+          <span class="panel-title">📅 1. Task &amp; Calendar Automation</span>
+          <a href="/api/tasks/ics" download="nexus_schedule.ics" class="btn-secondary" style="padding:4px 10px;font-size:0.7rem;text-decoration:none">⬇ Export .ICS</a>
+        </div>
+        <div class="task-planner-bar">
+          <input type="text" id="plan-goal-input" class="text-input" placeholder="Ex: Plano de treino hipertrofia 5 dias, Cardápio semanal proteico, Cronograma de estudos IA..." />
+          <button class="btn-primary" id="plan-gen-btn" style="padding:0.5rem 1rem;font-size:0.8rem;white-space:nowrap">✨ Auto-Plan &amp; Briefing</button>
+        </div>
+        <div class="task-add-row">
+          <input type="text" id="task-title-input" class="text-input" placeholder="Adicionar compromisso manual..." />
+          <input type="date" id="task-date-input" class="text-input" style="max-width:135px" />
+          <input type="time" id="task-time-input" class="text-input" value="09:00" style="max-width:95px" />
+          <button class="btn-secondary" id="task-add-btn">+</button>
+        </div>
+        <div class="task-list-box" id="task-list-box"></div>
+        <div class="briefing-output" id="briefing-output" style="display:none"></div>
+      </div>
+
+      <!-- 2. Geração de Conteúdo, Mídia e Relatórios -->
+      <div class="panel glass-panel assistant-col">
+        <div class="cc-pane-header">
+          <span class="panel-title">🎨 2. Multimodal Media &amp; Report Studio</span>
+          <span class="agent-badge DONE" id="studio-badge">READY</span>
+        </div>
+        <div class="studio-controls">
+          <input type="text" id="studio-prompt" class="text-input" value="Quantum Processor Cryogenic Architecture" placeholder="Descreva a imagem, diagrama ou tópico de relatório/apresentação..." />
+          <div style="display:flex;gap:0.5rem;margin-top:0.5rem">
+            <button class="btn-primary" id="studio-img-btn" style="flex:1;justify-content:center;padding:0.55rem;font-size:0.8rem">🖼️ Generate Image / Diagram</button>
+            <button class="btn-secondary" id="studio-rep-btn" style="flex:1;justify-content:center;padding:0.55rem;font-size:0.8rem">📑 Synthesize Slide Deck</button>
+          </div>
+        </div>
+        <div class="studio-preview" id="studio-preview">
+          <span class="idle-text">Clique em "Generate Image" (usa `gemini-2.5-flash-image` + Diagrama Vetorial GraphRAG + Wikimedia Commons) ou "Synthesize Slide Deck" para criar apresentações executivas com fontes DOI.</span>
+        </div>
+      </div>
+
+      <!-- 3. Integração Nativa: Voz, Tradução e Bridges (WhatsApp / Telegram / Grupo) -->
+      <div class="panel glass-panel assistant-col">
+        <div class="cc-pane-header">
+          <span class="panel-title">🎙️ 3. Native Voice, Translation &amp; App Bridges</span>
+          <span class="agent-badge DONE" id="voice-badge">VOICE READY</span>
+        </div>
+        <div class="voice-controls-box">
+          <button class="btn-primary full-width" id="voice-command-btn" style="justify-content:center">🎙️ Speak Voice Command (PT-BR / EN)</button>
+          <div id="voice-transcript" class="voice-status">Pressione para falar diretamente com o NEXUS sem digitar.</div>
+        </div>
+        <div class="translator-box">
+          <div class="cc-sub-label">Instant Neural Translator &amp; App Share</div>
+          <div style="display:flex;gap:0.4rem;margin-bottom:0.4rem">
+            <input type="text" id="trans-input" class="text-input" placeholder="Texto ou resposta para traduzir / enviar ao WhatsApp..." />
+            <select id="trans-lang" class="select-input" style="max-width:110px">
+              <option value="English">🇺🇸 EN</option>
+              <option value="Portuguese">🇧🇷 PT</option>
+              <option value="Spanish">🇪🇸 ES</option>
+              <option value="Mandarin">🇨🇳 ZH</option>
+            </select>
+            <button class="btn-secondary" id="trans-btn">Traduzir</button>
+          </div>
+          <div id="trans-output" class="trans-result"></div>
+        </div>
+        <div class="omnichannel-links">
+          <div class="cc-sub-label">One-Click Native App Dispatch (WhatsApp / Telegram / Copy)</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <button class="btn-secondary" id="share-wa-btn" style="flex:1">🟢 WhatsApp</button>
+            <button class="btn-secondary" id="share-tg-btn" style="flex:1">🔵 Telegram</button>
+            <button class="btn-secondary" id="share-copy-btn" style="flex:1">📋 Copy Briefing</button>
+          </div>
         </div>
       </div>
     </div>
@@ -366,7 +450,9 @@
           </div>
         </div>
         <div class="chat-input-row">
-          <input type="text" id="chat-input" class="chat-input-field" placeholder="Ask NEXUS anything…" />
+          <button class="btn-secondary" id="chat-mic-btn" title="Comando de Voz (Web Speech API)">🎙️</button>
+          <button class="btn-secondary" id="chat-tts-btn" title="Voz Neural Ativa/Inativa">🔊</button>
+          <input type="text" id="chat-input" class="chat-input-field" placeholder="Pergunte por voz ou texto (ou peça para traduzir, agendar, pesquisar)…" />
           <button class="btn-primary chat-send-btn" id="chat-send-btn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </button>
@@ -497,6 +583,7 @@
   <script src="chat.js"></script>
   <script src="metrics.js"></script>
   <script src="command_center.js"></script>
+  <script src="assistant_studio.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

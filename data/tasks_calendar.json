@@ -1,0 +1,57 @@
+[
+  {
+    "id": "9925d48b-6ef8-46e9-8d7f-3670fb7857ad",
+    "title": "Revisão de Arquitetura Multi-Agente DAG & GraphRAG",
+    "date": "2026-10-25",
+    "time": "09:00",
+    "category": "Engineering",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "Auditar latência de inferência e métricas Prometheus (/metrics)",
+    "createdAt": 1792897716991
+  },
+  {
+    "id": "14fa5fcd-1ada-45c4-ac3d-12cc0e735bea",
+    "title": "Deep-Work: Benchmark de Modelos e Alinhamento",
+    "date": "2026-10-25",
+    "time": "14:00",
+    "category": "Research",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "Comparar qualidade de consenso com referências DOI",
+    "createdAt": 1792897716993
+  },
+  {
+    "id": "1716dc35-17f1-4b7c-b92b-714042aafec3",
+    "title": "Briefing & Leitura Técnica: Transformer (deep learning)",
+    "date": "2026-10-25",
+    "time": "08:00",
+    "category": "Briefing",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+    "createdAt": 1792897718905
+  },
+  {
+    "id": "ca0d02e0-2638-48ba-9a31-a7f53bae1c7b",
+    "title": "Bloco de Execução Prática: Transformer Deep Learning Study",
+    "date": "2026-10-25",
+    "time": "10:30",
+    "category": "Execution",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "Aplicar diretrizes extraídas de 0 artigos científicos indexados.",
+    "createdAt": 1792897718907
+  },
+  {
+    "id": "ac25f7c8-9200-4ca3-8730-1add995d913d",
+    "title": "Auditoria de Métricas & Revisão de Progresso",
+    "date": "2026-10-25",
+    "time": "14:30",
+    "category": "Review",
+    "priority": "MEDIUM",
+    "status": "SCHEDULED",
+    "notes": "Verificar indicadores e consolidar entregáveis do dia.",
+    "createdAt": 1792897718909
+  }
+]
