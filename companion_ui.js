@@ -202,7 +202,17 @@ const CompanionUI = (function () {
       }
 
       const u = new SpeechSynthesisUtterance(phrase);
-      u.lang = 'pt-BR';
+      const tLang = window.I18nEngine ? I18nEngine.currentLang : 'pt';
+      u.lang = tLang === 'en' ? 'en-US' :
+               tLang === 'es' ? 'es-ES' :
+               tLang === 'fr' ? 'fr-FR' :
+               tLang === 'de' ? 'de-DE' :
+               tLang === 'it' ? 'it-IT' :
+               tLang === 'zh' ? 'zh-CN' :
+               tLang === 'ja' ? 'ja-JP' :
+               tLang === 'ar' ? 'ar-SA' :
+               tLang === 'ru' ? 'ru-RU' :
+               tLang === 'hi' ? 'hi-IN' : 'pt-BR';
       if (voice) u.voice = voice;
       u.rate = targetRate;
       u.pitch = targetPitch;
@@ -351,7 +361,17 @@ const CompanionUI = (function () {
     stopRecognizerInstance();
     const rec = new SpeechRec();
     activeRecognizer = rec;
-    rec.lang = 'pt-BR';
+    const currentLang = window.I18nEngine ? I18nEngine.currentLang : 'pt';
+    rec.lang = currentLang === 'en' ? 'en-US' :
+               currentLang === 'es' ? 'es-ES' :
+               currentLang === 'fr' ? 'fr-FR' :
+               currentLang === 'de' ? 'de-DE' :
+               currentLang === 'it' ? 'it-IT' :
+               currentLang === 'zh' ? 'zh-CN' :
+               currentLang === 'ja' ? 'ja-JP' :
+               currentLang === 'ar' ? 'ar-SA' :
+               currentLang === 'ru' ? 'ru-RU' :
+               currentLang === 'hi' ? 'hi-IN' : 'pt-BR';
     rec.continuous = false;
     rec.interimResults = true;
     rec.maxAlternatives = 1;
@@ -424,18 +444,19 @@ const CompanionUI = (function () {
 
     const isMobile = window.innerWidth <= 768;
 
+    const t = window.I18nEngine ? window.I18nEngine.t : (k, d) => d;
     if (liveSessionActive) {
-      liveBtn.textContent = isMobile ? '🔴 Parar' : '🔴 Conversa Ao Vivo Ativa (Parar)';
+      liveBtn.textContent = isMobile ? t('auraLiveBtnStop', '🔴 Parar') : t('auraLiveBtnStop', '🔴 Parar');
       liveBtn.style.borderColor = 'var(--rose)';
       liveBtn.style.color = '#fff';
       liveBtn.style.background = 'rgba(244,63,94,0.28)';
     } else {
-      liveBtn.textContent = isMobile ? '🎙️ Voz Ao Vivo' : '🎙️ Iniciar Conversa Ao Vivo';
+      liveBtn.textContent = isMobile ? t('auraLiveBtnStart', '🎙️ Voz Ao Vivo') : t('auraLiveBtnStart', '🎙️ Iniciar Conversa Ao Vivo');
       liveBtn.style.borderColor = '';
       liveBtn.style.color = '';
       liveBtn.style.background = '';
       if (orb) orb.classList.remove('speaking');
-      if (stateLabel) stateLabel.textContent = `Sincronizada (${getClientTemporal().localeTime}) • Pronta para conversar ✨`;
+      if (stateLabel) stateLabel.textContent = `${t('auraReady', 'Pronta para conversar e aprender com você hoje ✨')}`;
     }
   }
 

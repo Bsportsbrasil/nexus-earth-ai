@@ -56,16 +56,27 @@
     <div class="nav-inner">
       <div class="nav-logo">
         <span class="logo-text">NEXUS</span>
-        <span class="logo-tag" style="border-color:var(--rose);color:var(--rose)">MASTER C2 SOVEREIGN CONSOLE</span>
+        <span class="logo-tag" data-i18n="adminTopTag" style="border-color:var(--rose);color:var(--rose)">MASTER C2 SOVEREIGN CONSOLE</span>
       </div>
       <div class="nav-status">
+                <!-- Global Multi-Language Selector with Intelligent Auto-Detection -->
+        <div class="lang-selector-container" style="position:relative;display:inline-block;">
+          <button id="lang-toggle-btn" class="btn-secondary nav-btn" title="Selecionar Idioma Global (Auto-detectado)" aria-haspopup="true" aria-expanded="false" style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.35rem 0.65rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span id="current-lang-code">PT</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div id="lang-dropdown-menu" class="glass-panel" style="display:none;position:absolute;top:calc(100% + 6px);right:0;width:240px;max-height:360px;overflow-y:auto;background:rgba(10,15,30,0.96);border:1px solid rgba(0,245,255,0.3);border-radius:10px;padding:0.4rem;box-shadow:0 12px 35px rgba(0,0,0,0.8);backdrop-filter:blur(16px);z-index:99999;">
+            <!-- Populated dynamically by I18nEngine -->
+          </div>
+        </div>
         <span id="c2-chain-badge" class="agent-badge DONE" style="font-size:0.68rem">SHA-256 AUDIT INTACT</span>
         <a href="/supervisor" class="btn-secondary" style="text-decoration:none;border-color:var(--cyan);color:var(--cyan)">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
           Supervisor Supremo (/supervisor)
         </a>
-        <a href="/" class="btn-secondary" style="text-decoration:none">Ver Plataforma Pública</a>
-        <button id="admin-logout-btn" class="btn-secondary" style="display:none">Bloquear Console</button>
+        <a href="/" class="btn-secondary" data-i18n="adminPublicBtn" style="text-decoration:none">Ver Plataforma Pública</a>
+        <button id="admin-logout-btn" class="btn-secondary" data-i18n="adminLockBtn" style="display:none">Bloquear Console</button>
       </div>
     </div>
   </nav>
@@ -73,14 +84,14 @@
   <!-- Authentication Gate (Shown when not logged in) -->
   <section id="admin-auth-gate" class="section" style="margin:auto;max-width:480px;width:100%">
     <div class="panel glass-panel" style="padding:2rem;display:flex;flex-direction:column;gap:1rem;text-align:center">
-      <div class="section-tag" style="margin:0 auto">Soberania Técnica Absoluta</div>
-      <h2 style="font-family:var(--font-display);font-size:1.55rem">Master C2 Dashboard</h2>
+      <div class="section-tag" data-i18n="adminGateTag" style="margin:0 auto">Soberania Técnica Absoluta</div>
+      <h2 data-i18n="adminGateTitle" style="font-family:var(--font-display);font-size:1.55rem">Master C2 Dashboard</h2>
       <p style="font-size:0.84rem;color:var(--text-secondary)">
         Centro de Comando e Controle Soberano isolado da interface pública. Autentique-se com sua Chave Mestra (<code>NEXUS_ADMIN_KEY</code>) para comandar contas, RBAC, intervenção cognitiva de agentes, WAF, detecção de más intenções e o Master Kill-Switch.
       </p>
       <input type="password" id="admin-pass-input" class="text-input" placeholder="Chave Mestra de Administradora..." style="text-align:center;font-family:var(--font-mono)" />
       <div id="admin-auth-err" style="color:var(--rose);font-size:0.78rem;display:none"></div>
-      <button class="btn-primary full-width" id="admin-login-btn" style="justify-content:center">🔐 Desbloquear Centro de Comando C2</button>
+      <button class="btn-primary full-width" id="admin-login-btn" data-i18n="adminGateBtn" style="justify-content:center">🔐 Desbloquear Centro de Comando C2</button>
     </div>
   </section>
 
@@ -874,6 +885,7 @@
 
   <script src="voice_engine.js"></script>
   <script src="particles.js"></script>
+  <script src="i18n.js"></script>
   <script src="security_ui.js"></script>
   <script src="supervisor_workspace.js"></script>
 </body>

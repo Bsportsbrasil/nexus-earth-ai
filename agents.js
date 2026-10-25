@@ -140,5 +140,12 @@ const Agents = (function () {
     if (btn) btn.addEventListener('click', run);
     document.querySelectorAll('.agent-badge').forEach(b => b.classList.add('IDLE'));
   }
+  window.addEventListener('nexus:languageChanged', (ev) => {
+      const t = ev.detail?.translations || {};
+      const btn = document.getElementById('agent-run-btn');
+      if (btn && t.agentBtnRun) btn.textContent = t.agentBtnRun;
+      const cpTitle = document.querySelector('#consensus-panel .panel-title');
+      if (cpTitle && t.agentConsensusTitle) cpTitle.textContent = t.agentConsensusTitle;
+    });
   return { init };
 })();

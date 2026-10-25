@@ -199,6 +199,48 @@ const I18nEngine = (() => {
       faqA5: 'Basta enviar uma diretriz no painel de Agentes para que Planner, Critic, Executor e Verifier colaborem através de filas duráveis e cheguem a uma decisão consensual fundamentada.',
       faqQ6: 'Como a plataforma lida com termos e privacidade institucional?',
       faqA6: 'Seguimos os mais rigorosos padrões globais de transparência institucional, anonimização zero-trust e passaportes criptográficos rastreáveis por SHA-256.',
+      mobileMenu: 'Menu',
+      auraChipUniverse: '🌌 Universo de jeito divertido',
+      auraChipPerspective: '🔄 Tentar por outro ângulo (1% → 100%)',
+      auraChipDiversity: '🦋 Diversidade de olhares e respeito',
+      auraChipPipa: '📍 Restaurantes na Praia de Pipa',
+      auraLiveBtnStart: '🎙️ Iniciar Conversa Ao Vivo',
+      auraLiveBtnStop: '🔴 Parar',
+      auraListening: '🎙️ AURA ouvindo continuamente você agora (fale livremente)...',
+      auraSpeaking: 'AURA respondendo com voz natural e acolhedora...',
+      auraReady: 'Pronta para conversar e aprender com você hoje ✨',
+      agentBtnRun: 'Executar Consenso Multi-Agente',
+      agentAwaiting: 'Aguardando envio pelo MessageBroker…',
+      agentConsensusTitle: 'Decisão Consensual Formal Verificada',
+      adminTopTag: 'MASTER C2 SOVEREIGN CONSOLE',
+      adminChainBadge: 'AUDITORIA SHA-256 ÍNTEGRA',
+      adminSupervisorBtn: 'Supervisor Supremo (/supervisor)',
+      adminPublicBtn: 'Ver Plataforma Pública',
+      adminLockBtn: 'Bloquear Console',
+      adminGateTag: 'Soberania Técnica Absoluta',
+      adminGateTitle: 'Master C2 Dashboard',
+      adminGateDesc: 'Centro de Comando e Controle Soberano isolado da interface pública. Autentique-se com sua Chave Mestra (NEXUS_ADMIN_KEY) para comandar contas, RBAC, intervenção cognitiva de agentes, WAF, detecção de más intenções e o Master Kill-Switch.',
+      adminGatePlaceholder: 'Chave Mestra de Administradora...',
+      adminGateBtn: '🔐 Desbloquear Centro de Comando C2',
+      adminSidebarHeader: 'PAINEL SOBERANO C2',
+      adminSidebarSub: '10 Pilares Corporativos',
+      adminTabOverview: 'Visão Geral & Topologia',
+      adminTabTenants: 'Gestão de Contas & Tenants',
+      adminTabAgents: 'Agentes & Sandbox',
+      adminTabWaf: 'WAF & MLSecOps',
+      adminTabPentest: 'Pentest & Provas Formais',
+      adminTabBackups: 'Backups AES-256',
+      adminTabTelemetry: 'Telemetria & Joule',
+      adminTabAudit: 'Auditoria SHA-256 Merkle',
+      adminTabLennox: 'Governança Lennox',
+      adminTabSupervisor: 'Supervisor dos Agentes',
+      adminThreatTitle: '🚨 RADAR DE MÁS INTENÇÕES & WAF ATIVO:',
+      adminThreatDesc: 'Monitorando todas as interações de usuários e agentes em tempo real...',
+      adminThreatInspect: '🔍 Inspecionar Alertas',
+      adminThreatSimulate: '🧪 Simular Ataque ao WAF',
+      adminSecHeaderTag: 'Sovereign Command & Control (Master C2) • Governança Zero-Trust',
+      adminSecHeaderTitle: 'Centro de Comando e Controle Soberano',
+      adminSecHeaderDesc: 'Autoridade final sobre todas as contas cadastradas, clientes VIP, agentes autônomos por usuário, intervenção cognitiva em tempo real, sandbox guardrails, WAF contra más intenções, MLSecOps e auditoria criptográfica imutável.',
     },
 
     en: {
@@ -1202,6 +1244,141 @@ const I18nEngine = (() => {
     }
   };
 
+  
+  /**
+   * Universal translation lookup function for dynamic scripts and templates
+   */
+  function t(key, defaultFallback = '') {
+    const langDict = TRANSLATIONS[currentLang] || TRANSLATIONS['pt'] || {};
+    if (langDict[key] !== undefined) return langDict[key];
+    const enDict = TRANSLATIONS['en'] || {};
+    if (enDict[key] !== undefined) return enDict[key];
+    return defaultFallback !== undefined ? defaultFallback : key;
+  }
+
+  /**
+   * Universal Declarative DOM Translation Engine
+   * Automatically inspects any DOM root (document or dynamically mounted sub-tree)
+   * and applies localized text, HTML, placeholder, title, and aria attributes.
+   */
+  function translateDom(root = document) {
+    if (!root) return;
+    const currentDict = TRANSLATIONS[currentLang] || TRANSLATIONS['pt'] || {};
+
+    // 1. Text content via [data-i18n]
+    root.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (currentDict[key] !== undefined) {
+        el.textContent = currentDict[key];
+      }
+    });
+
+    // 2. HTML content via [data-i18n-html]
+    root.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (currentDict[key] !== undefined) {
+        el.innerHTML = currentDict[key];
+      }
+    });
+
+    // 3. Placeholders via [data-i18n-placeholder]
+    root.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (currentDict[key] !== undefined) {
+        el.placeholder = currentDict[key];
+      }
+    });
+
+    // 4. Tooltips via [data-i18n-title]
+    root.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const key = el.getAttribute('data-i18n-title');
+      if (currentDict[key] !== undefined) {
+        el.title = currentDict[key];
+      }
+    });
+
+    // 5. Accessibility via [data-i18n-aria]
+    root.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const key = el.getAttribute('data-i18n-aria');
+      if (currentDict[key] !== undefined) {
+        el.setAttribute('aria-label', currentDict[key]);
+      }
+    });
+  }
+
+  /**
+   * Translates Admin Console (admin.html) elements
+   */
+  function applyAdminTranslations(tDict) {
+    if (!tDict) return;
+    updateElementText('c2-chain-badge', tDict.adminChainBadge);
+    
+    // Top Bar buttons
+    const supLink = document.querySelector('a[href="/supervisor"]');
+    if (supLink) {
+      supLink.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>${tDict.adminSupervisorBtn}`;
+    }
+    const pubLink = document.querySelector('a[href="/"]');
+    if (pubLink && document.getElementById('security')) {
+      pubLink.textContent = tDict.adminPublicBtn;
+    }
+    updateElementText('admin-logout-btn', tDict.adminLockBtn);
+
+    // Login Gate
+    const gateTag = document.querySelector('#admin-auth-gate .section-tag');
+    if (gateTag) gateTag.textContent = tDict.adminGateTag;
+    const gateTitle = document.querySelector('#admin-auth-gate h2');
+    if (gateTitle) gateTitle.textContent = tDict.adminGateTitle;
+    const gateDesc = document.querySelector('#admin-auth-gate p');
+    if (gateDesc) gateDesc.textContent = tDict.adminGateDesc;
+    const passInp = document.getElementById('admin-pass-input');
+    if (passInp) passInp.placeholder = tDict.adminGatePlaceholder;
+    updateElementText('admin-login-btn', tDict.adminGateBtn);
+
+    // Sidebar 10 Pillars
+    const sidebarHeader = document.querySelector('.c2-sidebar-header-title');
+    if (sidebarHeader) sidebarHeader.textContent = tDict.adminSidebarHeader;
+    const sidebarSub = document.querySelector('.c2-sidebar-header-sub');
+    if (sidebarSub) sidebarSub.textContent = tDict.adminSidebarSub;
+
+    const tabMap = {
+      'pane-overview': tDict.adminTabOverview,
+      'pane-tenants': tDict.adminTabTenants,
+      'pane-agents': tDict.adminTabAgents,
+      'pane-waf': tDict.adminTabWaf,
+      'pane-pentest': tDict.adminTabPentest,
+      'pane-backups': tDict.adminTabBackups,
+      'pane-telemetry': tDict.adminTabTelemetry,
+      'pane-audit': tDict.adminTabAudit,
+      'pane-lennox': tDict.adminTabLennox,
+      'pane-supervisor': tDict.adminTabSupervisor
+    };
+
+    document.querySelectorAll('.c2-enterprise-sidebar .c2-tab-btn').forEach(btn => {
+      const tab = btn.getAttribute('data-tab');
+      const label = tabMap[tab];
+      if (label) {
+        const span = btn.querySelector('span:not(.tab-icon):not(.active-dot):not(.c2-sub-count)');
+        if (span) span.textContent = label;
+      }
+    });
+
+    // Threat Banner
+    const threatTitle = document.querySelector('#c2-threat-banner strong');
+    if (threatTitle) threatTitle.textContent = tDict.adminThreatTitle;
+    const threatDesc = document.getElementById('c2-latest-threat-text');
+    if (threatDesc && !threatDesc.getAttribute('data-has-custom-threat')) threatDesc.textContent = tDict.adminThreatDesc;
+    updateElementText('c2-sim-attack-btn', tDict.adminThreatSimulate);
+
+    // Section Header
+    const secTag = document.querySelector('#security .section-tag');
+    if (secTag) secTag.textContent = tDict.adminSecHeaderTag;
+    const secTitle = document.querySelector('#security .section-title');
+    if (secTitle) secTitle.textContent = tDict.adminSecHeaderTitle;
+    const secDesc = document.querySelector('#security .section-desc');
+    if (secDesc) secDesc.textContent = tDict.adminSecHeaderDesc;
+  }
+
   function updateElementText(id, text) {
     const el = document.getElementById(id);
     if (el && typeof text === 'string') el.textContent = text;
@@ -1473,6 +1650,23 @@ const I18nEngine = (() => {
     }
 
     // Dispatch custom event for submodules (AURA, Earth, etc.)
+    translateDom(document);
+    applyAdminTranslations(t);
+    
+    // Mobile Bottom Dock Labels
+    const dockItems = document.querySelectorAll('.mobile-bottom-dock .dock-item');
+    dockItems.forEach(item => {
+      const route = item.getAttribute('data-route-link');
+      const small = item.querySelector('small');
+      if (small) {
+        if (route === 'home') small.textContent = t.navHome || 'Home';
+        else if (route === 'aura') small.textContent = t.navAura || 'AURA';
+        else if (route === 'earth') small.textContent = t.navEarth || 'Earth';
+        else if (route === 'command-center') small.textContent = t.navCommand || 'Comando';
+        else if (item.id === 'dock-btn-menu') small.textContent = t.mobileMenu || 'Menu';
+      }
+    });
+
     applyDeepSectionTranslations(t);
 
     window.dispatchEvent(new CustomEvent('nexus:languageChanged', { 
@@ -1566,6 +1760,8 @@ const I18nEngine = (() => {
 
   return {
     init,
+    t,
+    translateDom,
     applyLanguage,
     toggleDropdown,
     detectUserLanguage,

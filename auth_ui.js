@@ -79,7 +79,8 @@ const AuthUI = (function () {
         auraNameInput.value = user.name.split(' ')[0];
       }
     } else {
-      if (navBtn) navBtn.textContent = '👤 Entrar';
+      const signInText = window.I18nEngine ? window.I18nEngine.t('navSignIn', 'Entrar') : 'Entrar';
+      if (navBtn) navBtn.textContent = '👤 ' + signInText;
       if (guestView) guestView.style.display = 'block';
       if (userView) userView.style.display = 'none';
     }
