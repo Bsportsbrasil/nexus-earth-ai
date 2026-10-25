@@ -1,0 +1,72 @@
+{
+  "updatedAt": "2026-10-25T14:41:47.502Z",
+  "certifications": {
+    "aura": {
+      "certified": true,
+      "status": "CERTIFICADO_PELO_CRIADOR",
+      "certifiedBy": "Criador Soberano (NEXUS)",
+      "timestamp": "2026-10-25T00:00:00.000Z",
+      "certHash": "a0efda59c2449f87e4eed0fba5b29e704215f3f4902dd3bee721fffaeb1beb02",
+      "note": "Certificação basal de fábrica com alinhamento e vetor próprio inicializado."
+    },
+    "planner": {
+      "certified": true,
+      "status": "CERTIFICADO_PELO_CRIADOR",
+      "certifiedBy": "Criador Soberano (NEXUS)",
+      "timestamp": "2026-10-25T00:00:00.000Z",
+      "certHash": "e5742030b39e8340624dca5300acf69850fd457588aa17077ba2c3fcafde0288",
+      "note": "Certificação basal de fábrica com alinhamento e vetor próprio inicializado."
+    },
+    "critic": {
+      "certified": true,
+      "status": "CERTIFICADO_PELO_CRIADOR",
+      "certifiedBy": "Criador Soberano (NEXUS)",
+      "timestamp": "2026-10-25T00:00:00.000Z",
+      "certHash": "a6fd71f332ea9e1e6e5d4e403259211a330ef6bdad5f01ce9d7e1010ab17fc71",
+      "note": "Certificação basal de fábrica com alinhamento e vetor próprio inicializado."
+    },
+    "executor": {
+      "certified": true,
+      "status": "CERTIFICADO_PELO_CRIADOR",
+      "agentId": "executor",
+      "certifiedBy": "Criador Soberano",
+      "timestamp": "2026-10-25T14:41:47.501Z",
+      "certHash": "ef52fa9f39bf50eaadcd1dfe68d532b285c33b748607a0b1be29a64db90be5c4",
+      "note": "Re-homologado"
+    },
+    "verifier": {
+      "certified": true,
+      "status": "CERTIFICADO_PELO_CRIADOR",
+      "certifiedBy": "Criador Soberano (NEXUS)",
+      "timestamp": "2026-10-25T00:00:00.000Z",
+      "certHash": "3584c4bc58f05a275b5ebde6708a8036d2cf54c226014cd1878918dd894f2917",
+      "note": "Certificação basal de fábrica com alinhamento e vetor próprio inicializado."
+    }
+  },
+  "feedbackHistory": [
+    {
+      "id": "fb_1792939307467_afb4",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication & Empathy)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication & Empathy) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-25T14:41:47.467Z"
+    }
+  ],
+  "supervisorHistory": [
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-25T14:41:47.462Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Relatório de Supervisão Ativo (11:41:47): Todos os 5 agentes estão sendo monitorados em tempo real. Identifico 5 agentes com status ATIVO e 0 agentes sob bloqueio. A integridade das memórias vetoriais isoladas está em 100% (total de 18 vetores densos indexados). Nenhuma anomalia de segurança ou fuga de dados detectada nas últimas 24 horas.",
+      "timestamp": "2026-10-25T14:41:47.462Z"
+    }
+  ]
+}

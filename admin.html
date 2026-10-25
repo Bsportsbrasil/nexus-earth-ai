@@ -60,8 +60,12 @@
       </div>
       <div class="nav-status">
         <span id="c2-chain-badge" class="agent-badge DONE" style="font-size:0.68rem">SHA-256 AUDIT INTACT</span>
-        <a href="/" class="btn-secondary" style="text-decoration:none">↗ Ver Plataforma Pública</a>
-        <button id="admin-logout-btn" class="btn-secondary" style="display:none">🔒 Bloquear Console</button>
+        <a href="/supervisor" class="btn-secondary" style="text-decoration:none;border-color:var(--cyan);color:var(--cyan)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          Supervisor Supremo (/supervisor)
+        </a>
+        <a href="/" class="btn-secondary" style="text-decoration:none">Ver Plataforma Pública</a>
+        <button id="admin-logout-btn" class="btn-secondary" style="display:none">Bloquear Console</button>
       </div>
     </div>
   </nav>
@@ -182,6 +186,30 @@
          PILLAR 2: GOVERNANÇA DE AGENTES POR USUÁRIO, INTERVENÇÃO COGNITIVA & KILL-SWITCH
          ═══════════════════════════════════════════════════════════════════════ -->
     <div id="tab-agents" class="c2-pane">
+      <!-- Dedicated Workstation Link to Supreme Supervisor Agent -->
+      <div class="panel glass-panel assistant-col" style="background:linear-gradient(135deg,rgba(0,245,255,0.06),rgba(168,85,247,0.09));border:1px solid var(--cyan);margin-bottom:1.25rem;padding:1.25rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+          <div>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+              <span class="lead-logo-badge" style="width:30px;height:30px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              </span>
+              <strong style="color:var(--text-primary);font-size:1.05rem">Supervisor Supremo de Agentes &amp; Homologação Humana (HITL)</strong>
+              <span class="agent-badge DONE">LINK EXCLUSIVO DO CRIADOR</span>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:0.35rem;max-width:760px">
+              Ambiente executivo dedicado para conversar com o Agente Principal Controlador (LENNOX), auditar interações dos agentes de usuários em tela dupla e emitir homologação soberana ou bloqueio imediato.
+            </p>
+          </div>
+          <div>
+            <a href="/supervisor" class="btn-primary" style="text-decoration:none;padding:0.65rem 1.25rem;display:inline-flex;align-items:center;gap:0.5rem">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Abrir Workstation do Supervisor (/supervisor) →</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="assistant-grid" style="margin-bottom:1.25rem">
         <!-- Global Master Kill-Switch -->
         <div class="panel glass-panel assistant-col">

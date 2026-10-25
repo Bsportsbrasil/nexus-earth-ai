@@ -23,6 +23,7 @@ import { sovereignBriefing } from './engine/sovereign_briefing.js';
 import { lennoxGuardian } from './engine/lennox_guardian.js';
 import { regulatoryEngine } from './engine/regulatory_explainability.js';
 import { agentMemoryStore } from './engine/agent_memory.js';
+import { supremeSupervisor } from './engine/supervisor_agent.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -543,6 +544,12 @@ const server = http.createServer(async (req, res) => {
         voiceEnabled: !!body.voiceEnabled,
         clientTemporal: body.clientTemporal
       });
+      // Automated Supreme Supervisor Evaluation of Subordinate Turn
+      convRes.supervisorFeedback = supremeSupervisor.evaluateAgentTurn({
+        agentId: convRes.agentId,
+        userMessage: body.message || '',
+        agentReply: convRes.reply || ''
+      });
       return jsonResponse(res, 200, convRes);
     } catch (e) {
       return jsonResponse(res, 400, { error: e.message });
@@ -584,6 +591,66 @@ const server = http.createServer(async (req, res) => {
       const body = await parseJsonBody(req);
       const created = agentMemoryStore.createCustomAgent(body);
       return jsonResponse(res, 201, created);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  // 5a-bis. Supreme Supervisor Agent (Master Oversight Plane & Human-in-the-Loop)
+  if (pathname === '/api/supervisor/overview' && req.method === 'GET') {
+    return jsonResponse(res, 200, supremeSupervisor.getSupervisorOverview());
+  }
+
+  if (pathname === '/api/supervisor/converse' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const supRes = await supremeSupervisor.converseWithCreator({
+        message: body.message || '',
+        apiKey: body.apiKey || '',
+        clientTemporal: body.clientTemporal
+      });
+      return jsonResponse(res, 200, supRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/supervisor/certify' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const certRes = supremeSupervisor.certifyAgent({
+        agentId: body.agentId,
+        creatorName: body.creatorName || 'Criador Soberano',
+        note: body.note || 'Homologado e certificado pelo Criador'
+      });
+      return jsonResponse(res, 200, certRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/supervisor/revoke' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const revRes = supremeSupervisor.revokeCertification({
+        agentId: body.agentId,
+        reason: body.reason || 'Revogado pelo Criador'
+      });
+      return jsonResponse(res, 200, revRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/supervisor/evaluate-turn' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const evalRes = supremeSupervisor.evaluateAgentTurn({
+        agentId: body.agentId,
+        userMessage: body.userMessage || '',
+        agentReply: body.agentReply || ''
+      });
+      return jsonResponse(res, 200, evalRes);
     } catch (e) {
       return jsonResponse(res, 400, { error: e.message });
     }
@@ -1057,7 +1124,10 @@ const server = http.createServer(async (req, res) => {
     '/faq',
     '/about',
     '/sobre',
-    '/sobre-nos'
+    '/sobre-nos',
+    '/supervisor',
+    '/agente-supervisor',
+    '/dashboard'
   ]);
   let filePath = SPA_ROUTES.has(pathname) ? '/index.html' : pathname;
   const resolvedPath = path.normalize(path.join(__dirname, filePath));

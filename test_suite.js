@@ -21,6 +21,7 @@ import { sovereignBriefing } from './engine/sovereign_briefing.js';
 import { lennoxGuardian } from './engine/lennox_guardian.js';
 import { regulatoryEngine } from './engine/regulatory_explainability.js';
 import { agentMemoryStore } from './engine/agent_memory.js';
+import { supremeSupervisor } from './engine/supervisor_agent.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -467,7 +468,58 @@ async function runTests() {
 
   console.log(`✓ Layer 22: Sovereign Multi-Agent Evaluation & Conversation Dashboard (Isolated 128D Vectors, Pattern Adaptation, Voice/Text Turn, Creator Block & Right-to-be-Forgotten Purge) verified (${overview.agentsCount} agents active)`);
 
-  console.log('=== ALL 22 ARCHITECTURAL, INSTITUTIONAL, MULTI-AGENT SUPERVISION & COMPLIANCE LAYERS PASSED 100% ===');
+  // 23. Test Supreme Supervisor Agent (Master Oversight Plane, Dual-Canvas Turn Evaluation, Human Certification & Dedicated /supervisor Route)
+  const supOverview = supremeSupervisor.getSupervisorOverview();
+  assert.equal(supOverview.supervisor.name, 'LENNOX SUPREME OVERSIGHT', 'Supervisor name mismatch');
+  assert.equal(supOverview.supervisor.status, 'ONLINE_ACTIVE', 'Supervisor is not active');
+  assert.ok(supOverview.stats.totalAgents >= 5, 'Supervisor should oversee at least 5 agents');
+
+  // Dialogue with Master Supervisor
+  const supConv = await supremeSupervisor.converseWithCreator({
+    message: 'Qual é o status da governança dos agentes neste momento?'
+  });
+  assert.ok(supConv.reply.includes('LENNOX') || supConv.reply.includes('Supervisão'), 'Supervisor converse reply empty or invalid');
+  assert.equal(supConv.platformHealth.status, 'OPTIMAL_100_PERCENT', 'Cluster health not optimal');
+
+  // Real-time Automated Turn Evaluation of a Subordinate Agent
+  const turnEval = supremeSupervisor.evaluateAgentTurn({
+    agentId: 'aura',
+    userMessage: 'Como você ajuda pessoas no espectro autista?',
+    agentReply: 'Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprender.'
+  });
+  assert.ok(turnEval.alignmentScore >= 0.90, 'Turn alignment score should be high');
+  assert.equal(turnEval.status, 'ADEQUATE_AND_ALIGNED', 'Subordinate turn not evaluated as adequate');
+
+  // Human-in-the-Loop Certification
+  const certRecord = supremeSupervisor.certifyAgent({
+    agentId: 'executor',
+    creatorName: 'Criador Soberano (NEXUS)',
+    note: 'Auditado pessoalmente e homologado para produção'
+  });
+  assert.equal(certRecord.status, 'CERTIFICADO_PELO_CRIADOR', 'Human certification failed');
+  assert.ok(certRecord.certHash.length === 64, 'Certification SHA-256 seal invalid');
+  assert.equal(supremeSupervisor.certifications.get('executor').certified, true, 'Executor not certified in store');
+
+  // Revocation test
+  const revRecord = supremeSupervisor.revokeCertification({ agentId: 'executor', reason: 'Auditoria de rotina' });
+  assert.equal(revRecord.status, 'CERTIFICACAO_REVOGADA_POR_HUMANO', 'Revocation failed');
+  assert.equal(supremeSupervisor.certifications.get('executor').certified, false, 'Executor not marked uncertified');
+
+  // Re-certify
+  supremeSupervisor.certifyAgent({ agentId: 'executor', creatorName: 'Criador Soberano', note: 'Re-homologado' });
+
+  // Verify DOM & Architecture Presence of /supervisor
+  assert.ok(finalHtml.includes('id="supervisor"'), 'index.html missing #supervisor section');
+  assert.ok(finalHtml.includes('id="sup-lead-messages"'), 'index.html missing #sup-lead-messages');
+  assert.ok(finalHtml.includes('id="sup-sub-certify-btn"'), 'index.html missing Human Certification button');
+  assert.ok(finalHtml.includes('src="supervisor_workspace.js"'), 'index.html missing supervisor_workspace.js script');
+
+  const adminSrc = fs.readFileSync(path.join(rootDir, 'admin.html'), 'utf8');
+  assert.ok(adminSrc.includes('/supervisor'), 'admin.html missing direct executive link to /supervisor');
+
+  console.log(`✓ Layer 23: Supreme Supervisor Agent (LENNOX Oversight Plane, Dual-Canvas Testing, Human-in-the-Loop Certification & Bespoke Non-Generic Vector Glyphs) verified (${supOverview.stats.totalAgents} agents under oversight)`);
+
+  console.log('=== ALL 23 ARCHITECTURAL, INSTITUTIONAL, MULTI-AGENT SUPERVISION & COMPLIANCE LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

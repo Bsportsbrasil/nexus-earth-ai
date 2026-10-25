@@ -8,6 +8,34 @@
   ],
   "dailyJournal": [
     {
+      "id": "2bcde625-d426-4fbc-9984-d9b748d016a7",
+      "date": "2026-10-25",
+      "time": "11:41:45",
+      "insight": "Ana consultou data/hora em tempo real (11:41:45)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "fa71e96f-a151-4a54-b008-994822cb57a2",
+      "date": "2026-10-25",
+      "time": "11:41:45",
+      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "6de49678-5361-4568-a52e-49a0069e4323",
+      "date": "2026-10-25",
+      "time": "11:41:45",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "b4ba5bb0-cb75-4951-8af1-85fc84eb1443",
+      "date": "2026-10-25",
+      "time": "11:35:59",
+      "insight": "Ana conversou sobre \"me ajude a encontrar as farmacias mais barata aqui\" [Tom: 🤝 Conexão Natural & Empática]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "52caacfa-f155-43bf-a006-b319696146db",
       "date": "2026-10-25",
       "time": "11:29:05",
@@ -328,35 +356,7 @@
       "time": "02:35:18",
       "insight": "Ana explorou \"Roma Antiga\" [Tom: 🤝 Conexão Natural & Empática]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "5b678679-5b20-406c-8ed8-0b50b37afebc",
-      "date": "2026-10-25",
-      "time": "02:35:12",
-      "insight": "Ana explorou \"Inteligência artificial\" [Tom: 🎯 Solicitação Séria / Atenção & Foco]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "517965f5-b589-418e-9d14-b2b00e3c5c24",
-      "date": "2026-10-25",
-      "time": "02:35:02",
-      "insight": "Ana explorou \"Roma Antiga\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "00ac3fae-66e7-4022-a6fb-32ef8ff7f4d6",
-      "date": "2026-10-25",
-      "time": "02:32:42",
-      "insight": "Ana explorou \"VisionQuest\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "8258b281-cda0-4b93-91aa-676a6c819c08",
-      "date": "2026-10-25",
-      "time": "02:32:21",
-      "insight": "Ana explorou \"O que faz bem ao osso faz bem a tudo (2020)\" [Tom: 🤝 Conexão Natural & Empática]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 111
+  "interactionCount": 115
 }

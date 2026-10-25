@@ -14,26 +14,27 @@ const I18nEngine = (() => {
 
   const TRANSLATIONS = {
     pt: {
-      langBtn: '🌐 PT ▾ (EN)',
+      langBtn: 'PT (EN)',
       langTitle: 'Alternar idioma para Inglês (Vale do Silício & Labs Globais)',
 
       // Navigation
-      navHome: '🏠 Início',
-      navAura: '✨ AURA',
-      navCommand: '⚡ Comando',
-      navNeural: '🧠 Neural',
-      navAgents: '🤖 Agentes',
-      navKnowledge: '🕸️ Conhecimento',
-      navStudio: '🎨 Estúdio',
-      navProofs: '🏛️ Provas',
-      navGuide: '📖 Guia',
-      navArticles: '📚 Artigos',
-      navFaq: '❓ FAQ',
-      navAbout: '🏢 Sobre Nós',
+      navHome: 'Início',
+      navAura: 'AURA Live',
+      navCommand: 'Comando',
+      navNeural: 'Neural',
+      navAgents: 'Agentes',
+      navSupervisor: 'Supervisor',
+      navKnowledge: 'Conhecimento',
+      navStudio: 'Estúdio',
+      navProofs: 'Provas',
+      navGuide: 'Guia',
+      navArticles: 'Artigos',
+      navFaq: 'FAQ',
+      navAbout: 'Sobre Nós',
 
-      navInstallApp: '📲 Instalar App',
-      navSignIn: '👤 Entrar',
-      navApiKey: '🔑 Chave API',
+      navInstallApp: 'Instalar App',
+      navSignIn: 'Entrar',
+      navApiKey: 'Chave API',
       keyStatusDemo: 'MODO DEMO',
       keyStatusActive: 'GEMINI CLOUD ATIVO',
       keyStatusReady: 'GRAPHRAG PRONTO',
@@ -151,26 +152,27 @@ const I18nEngine = (() => {
     },
 
     en: {
-      langBtn: '🌐 EN ▾ (PT)',
+      langBtn: 'EN (PT)',
       langTitle: 'Switch language to Portuguese (PT-BR)',
 
       // Navigation
-      navHome: '🏠 Home',
-      navAura: '✨ AURA',
-      navCommand: '⚡ Command',
-      navNeural: '🧠 Neural',
-      navAgents: '🤖 Agents',
-      navKnowledge: '🕸️ Knowledge',
-      navStudio: '🎨 Studio',
-      navProofs: '🏛️ Proofs',
-      navGuide: '📖 Guide',
-      navArticles: '📚 Articles',
-      navFaq: '❓ FAQ',
-      navAbout: '🏢 About Us',
+      navHome: 'Home',
+      navAura: 'AURA Live',
+      navCommand: 'Command',
+      navNeural: 'Neural',
+      navAgents: 'Agents',
+      navSupervisor: 'Supervisor',
+      navKnowledge: 'Knowledge',
+      navStudio: 'Studio',
+      navProofs: 'Proofs',
+      navGuide: 'Guide',
+      navArticles: 'Articles',
+      navFaq: 'FAQ',
+      navAbout: 'About Us',
 
-      navInstallApp: '📲 Install App',
-      navSignIn: '👤 Sign In',
-      navApiKey: '🔑 API Key',
+      navInstallApp: 'Install App',
+      navSignIn: 'Sign In',
+      navApiKey: 'API Key',
       keyStatusDemo: 'DEMO MODE',
       keyStatusActive: 'GEMINI CLOUD ACTIVE',
       keyStatusReady: 'GRAPHRAG READY',
@@ -314,22 +316,47 @@ const I18nEngine = (() => {
       langBtn.title = t.langTitle;
     }
 
+    // Bespoke Futuristic SVG Vector Glyphs (Zero Generic Emojis)
+    const ROUTE_ICONS = {
+      home: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+      aura: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg>`,
+      'command-center': `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+      neural: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="12" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="10.5"/><line x1="8.5" y1="16.5" x2="15.5" y2="13.5"/></svg>`,
+      agents: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="16" y1="16" x2="16.01" y2="16"/></svg>`,
+      supervisor: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>`,
+      knowledge: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`,
+      studio: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+      proofs: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`,
+      guide: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+      articles: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+      faq: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+      about: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`
+    };
+
     // 2. Navigation Bar & Mobile Drawer Links
     const navLinks = document.querySelectorAll('.nav-links .nav-link, #mobile-drawer .nav-link');
     navLinks.forEach(link => {
       const route = link.getAttribute('data-route-link');
-      if (route === 'home') link.textContent = t.navHome;
-      else if (route === 'aura') link.textContent = t.navAura;
-      else if (route === 'command-center') link.textContent = t.navCommand;
-      else if (route === 'neural') link.textContent = t.navNeural;
-      else if (route === 'agents') link.textContent = t.navAgents;
-      else if (route === 'knowledge') link.textContent = t.navKnowledge;
-      else if (route === 'studio') link.textContent = t.navStudio;
-      else if (route === 'proofs') link.textContent = t.navProofs;
-      else if (route === 'guide') link.textContent = t.navGuide;
-      else if (route === 'articles') link.textContent = t.navArticles;
-      else if (route === 'faq') link.textContent = t.navFaq;
-      else if (route === 'about') link.textContent = t.navAbout;
+      const icon = ROUTE_ICONS[route] || '';
+      let text = '';
+      if (route === 'home') text = t.navHome;
+      else if (route === 'aura') text = t.navAura;
+      else if (route === 'command-center') text = t.navCommand;
+      else if (route === 'neural') text = t.navNeural;
+      else if (route === 'agents') text = t.navAgents;
+      else if (route === 'supervisor') text = t.navSupervisor;
+      else if (route === 'knowledge') text = t.navKnowledge;
+      else if (route === 'studio') text = t.navStudio;
+      else if (route === 'proofs') text = t.navProofs;
+      else if (route === 'guide') text = t.navGuide;
+      else if (route === 'articles') text = t.navArticles;
+      else if (route === 'faq') text = t.navFaq;
+      else if (route === 'about') text = t.navAbout;
+
+      if (text) {
+        const cleanText = text.replace(/^[^\w\s\u00C0-\u00FF]+\s*/, '');
+        link.innerHTML = `${icon}<span>${cleanText}</span>`;
+      }
     });
 
     // 3. Navigation Bar Action Buttons

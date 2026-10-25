@@ -60,7 +60,8 @@ const NexusRouter = (() => {
     'guide',
     'articles',
     'faq',
-    'about'
+    'about',
+    'supervisor'
   ]);
 
   const ALIAS_MAP = {
@@ -95,7 +96,10 @@ const NexusRouter = (() => {
     'perguntas': 'faq',
     'about': 'about',
     'sobre': 'about',
-    'sobre-nos': 'about'
+    'sobre-nos': 'about',
+    'supervisor': 'supervisor',
+    'agente-supervisor': 'supervisor',
+    'supervisao': 'supervisor'
   };
 
   const ROUTE_PATHS = {
@@ -110,7 +114,8 @@ const NexusRouter = (() => {
     'guide': '/guide',
     'articles': '/articles',
     'faq': '/faq',
-    'about': '/about'
+    'about': '/about',
+    'supervisor': '/supervisor'
   };
 
   const initializedModules = new Set();
@@ -172,6 +177,12 @@ const NexusRouter = (() => {
       case 'proofs':
         if (typeof Metrics !== 'undefined') ensureModuleInit('Metrics', Metrics);
         if (typeof ResearchHub !== 'undefined') ensureModuleInit('ResearchHub', ResearchHub);
+        break;
+      case 'supervisor':
+        if (typeof SupervisorWorkspace !== 'undefined') {
+          ensureModuleInit('SupervisorWorkspace', SupervisorWorkspace);
+          SupervisorWorkspace.loadOverview();
+        }
         break;
     }
   }
