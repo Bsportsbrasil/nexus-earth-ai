@@ -82,9 +82,9 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
         <div class="hero-stat-row">
-          <div class="hero-stat"><span class="stat-num" id="h-params">847B</span><span class="stat-label">Parameters</span></div>
-          <div class="hero-stat"><span class="stat-num" id="h-iq">∞</span><span class="stat-label">IQ Equiv.</span></div>
-          <div class="hero-stat"><span class="stat-num" id="h-agents">4,096</span><span class="stat-label">Active Agents</span></div>
+          <div class="hero-stat"><span class="stat-num" id="h-params">--</span><span class="stat-label">Hardware Threads</span></div>
+          <div class="hero-stat"><span class="stat-num" id="h-iq">--</span><span class="stat-label">Render FPS</span></div>
+          <div class="hero-stat"><span class="stat-num" id="h-agents">0</span><span class="stat-label">Real API Calls</span></div>
         </div>
       </div>
     </div>
@@ -102,8 +102,8 @@
   <section id="neural" class="section">
     <div class="section-header">
       <div class="section-tag">Module 01</div>
-      <h2 class="section-title">Live Neural Network</h2>
-      <p class="section-desc">Watch 847 billion parameters fire in real time. Every thought, every computation — visible.</p>
+      <h2 class="section-title">Live Multi-Layer Perceptron</h2>
+      <p class="section-desc">Real mathematical forward propagation ($a^{(l)} = \sigma(W^{(l)}a^{(l-1)})$) computed in your browser at 60 FPS, with live Shannon entropy and weight norm telemetry.</p>
     </div>
     <div class="neural-container">
       <div class="neural-sidebar">
@@ -136,11 +136,11 @@
           <button class="btn-secondary full-width" id="nn-inject-btn">⚡ Inject Signal</button>
         </div>
         <div class="panel glass-panel">
-          <div class="panel-title">Live Stats</div>
-          <div class="stat-item"><span>Avg Activation</span><span class="stat-val" id="nn-activation">0.73</span></div>
-          <div class="stat-item"><span>Firing Rate</span><span class="stat-val" id="nn-firing">420 Hz</span></div>
-          <div class="stat-item"><span>Entropy</span><span class="stat-val" id="nn-entropy">2.41</span></div>
-          <div class="stat-item"><span>Gradient Norm</span><span class="stat-val" id="nn-grad">0.009</span></div>
+          <div class="panel-title">Real Network Telemetry</div>
+          <div class="stat-item"><span>Mean Activation</span><span class="stat-val" id="nn-activation">0.00</span></div>
+          <div class="stat-item"><span>Active Synapses</span><span class="stat-val" id="nn-firing">0</span></div>
+          <div class="stat-item"><span>Shannon Entropy</span><span class="stat-val" id="nn-entropy">0.00 bits</span></div>
+          <div class="stat-item"><span>L2 Weight Norm</span><span class="stat-val" id="nn-grad">0.000</span></div>
         </div>
       </div>
       <div class="neural-canvas-wrap">
@@ -226,26 +226,27 @@
   <section id="graph" class="section">
     <div class="section-header">
       <div class="section-tag">Module 03</div>
-      <h2 class="section-title">Knowledge Graph</h2>
-      <p class="section-desc">Explore the living web of interconnected knowledge. Every node a concept. Every edge a relationship.</p>
+      <h2 class="section-title">Live Knowledge Graph (Wikipedia API)</h2>
+      <p class="section-desc">Type any real-world topic to fetch live encyclopedia summaries and links directly from Wikipedia's REST API, building an interactive graph in real time.</p>
     </div>
     <div class="graph-container">
       <div class="graph-sidebar">
         <div class="panel glass-panel">
-          <div class="panel-title">Graph Controls</div>
-          <input type="text" id="graph-search" class="text-input" placeholder="Search concept..." />
+          <div class="panel-title">Live Wikipedia Query</div>
+          <div style="display:flex;gap:6px;margin-bottom:0.75rem">
+            <input type="text" id="graph-search" class="text-input" placeholder="Ex: Silicon Valley, CRISPR..." />
+            <button class="btn-secondary" id="graph-fetch-btn" title="Fetch from Wikipedia">Go</button>
+          </div>
           <div class="graph-legend">
-            <div class="legend-item"><span class="legend-dot" style="background:#00f5ff"></span>Technology</div>
-            <div class="legend-item"><span class="legend-dot" style="background:#a855f7"></span>Science</div>
-            <div class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span>Philosophy</div>
-            <div class="legend-item"><span class="legend-dot" style="background:#10b981"></span>Society</div>
-            <div class="legend-item"><span class="legend-dot" style="background:#f43f5e"></span>Ethics</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#00f5ff"></span>Root Topic (Live)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#a855f7"></span>Linked Concept</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#10b981"></span>Expanded Node</div>
           </div>
         </div>
         <div class="panel glass-panel" id="node-info-panel">
-          <div class="panel-title">Node Info</div>
+          <div class="panel-title">Real Encyclopedia Data</div>
           <div id="node-info-content">
-            <p class="idle-text">Click a node to explore</p>
+            <p class="idle-text">Click any node to fetch its live Wikipedia summary and expand connections.</p>
           </div>
         </div>
       </div>
@@ -274,8 +275,8 @@
             <div class="msg-avatar">N</div>
             <div class="msg-content">
               <div class="msg-name">NEXUS</div>
-              <div class="msg-text">Greetings. I am NEXUS — a convergence of 847 billion parameters, 4,096 autonomous agents, and a knowledge graph spanning 12 million concepts. Ask me anything. I do not merely answer — I <em>understand</em>.</div>
-              <div class="msg-time">23:28:00</div>
+              <div class="msg-text">Olá. Eu sou o <strong>NEXUS</strong>. Toda resposta neste console é gerada com <strong>dados 100% reais</strong>: via modelo Gemini (quando sua chave está ativa) ou buscando dados verificados ao vivo na Wikipedia REST API + análise estatística real. Pergunte sobre qualquer tema científico, histórico ou tecnológico.</div>
+              <div class="msg-time" id="welcome-time">--:--:--</div>
             </div>
           </div>
         </div>
@@ -305,70 +306,70 @@
   <section id="metrics" class="section">
     <div class="section-header">
       <div class="section-tag">Module 05</div>
-      <h2 class="section-title">Live Intelligence Metrics</h2>
-      <p class="section-desc">Real-time telemetry from NEXUS's cognitive architecture — every pulse, every inference cycle.</p>
+      <h2 class="section-title">100% Real System & API Telemetry</h2>
+      <p class="section-desc">Zero random numbers. Real-time hardware, memory, network RTT, frame rate, and API token telemetry measured directly from your browser and active API sessions.</p>
     </div>
     <div class="metrics-grid">
       <div class="metric-card glass-panel">
         <div class="metric-icon">⚡</div>
         <div class="metric-value" id="m-tokens">0</div>
-        <div class="metric-label">Tokens / Second</div>
+        <div class="metric-label">Measured Tokens / Sec</div>
         <canvas class="sparkline" id="spark-tokens" width="120" height="40"></canvas>
       </div>
       <div class="metric-card glass-panel">
-        <div class="metric-icon">🧬</div>
-        <div class="metric-value" id="m-params">847B</div>
-        <div class="metric-label">Active Parameters</div>
+        <div class="metric-icon">🖥️</div>
+        <div class="metric-value" id="m-params">--</div>
+        <div class="metric-label">CPU Logical Cores</div>
         <canvas class="sparkline" id="spark-params" width="120" height="40"></canvas>
       </div>
       <div class="metric-card glass-panel">
-        <div class="metric-icon">🌀</div>
-        <div class="metric-value" id="m-depth">0</div>
-        <div class="metric-label">Reasoning Depth</div>
+        <div class="metric-icon">📡</div>
+        <div class="metric-value" id="m-depth">-- ms</div>
+        <div class="metric-label">API / Network Latency</div>
         <canvas class="sparkline" id="spark-depth" width="120" height="40"></canvas>
       </div>
       <div class="metric-card glass-panel">
-        <div class="metric-icon">🔮</div>
-        <div class="metric-value" id="m-confidence">0%</div>
-        <div class="metric-label">Confidence Score</div>
+        <div class="metric-icon">🎞️</div>
+        <div class="metric-value" id="m-confidence">60 FPS</div>
+        <div class="metric-label">Real Render Frame Rate</div>
         <canvas class="sparkline" id="spark-conf" width="120" height="40"></canvas>
       </div>
       <div class="metric-card glass-panel">
-        <div class="metric-icon">🌐</div>
-        <div class="metric-value" id="m-agents-active">0</div>
-        <div class="metric-label">Active Agents</div>
+        <div class="metric-icon">🧠</div>
+        <div class="metric-value" id="m-agents-active">0 MB</div>
+        <div class="metric-label">JS Heap Memory Used</div>
         <canvas class="sparkline" id="spark-agents" width="120" height="40"></canvas>
       </div>
       <div class="metric-card glass-panel">
-        <div class="metric-icon">💡</div>
-        <div class="metric-value" id="m-entropy">0.00</div>
-        <div class="metric-label">Cognitive Entropy</div>
+        <div class="metric-icon">📊</div>
+        <div class="metric-value" id="m-entropy">0</div>
+        <div class="metric-label">Total Session Tokens</div>
         <canvas class="sparkline" id="spark-entropy" width="120" height="40"></canvas>
       </div>
     </div>
     <div class="gauge-row">
       <div class="gauge-card glass-panel">
-        <div class="panel-title">Processing Load</div>
+        <div class="panel-title">Frame Budget Load</div>
         <div class="gauge-wrap">
           <canvas id="gauge-load" width="200" height="200"></canvas>
           <div class="gauge-value" id="gauge-load-val">0%</div>
-          <div class="gauge-label">CPU/Neural Load</div>
+          <div class="gauge-label">Main Thread Frame Time</div>
         </div>
       </div>
       <div class="gauge-card glass-panel">
-        <div class="panel-title">Intelligence Quotient</div>
+        <div class="panel-title">Memory Allocation</div>
         <div class="gauge-wrap">
           <canvas id="gauge-iq" width="200" height="200"></canvas>
-          <div class="gauge-value" id="gauge-iq-val">0</div>
-          <div class="gauge-label">Estimated IQ Equivalent</div>
+          <div class="gauge-value" id="gauge-iq-val">0%</div>
+          <div class="gauge-label">Used / Allocated JS Heap</div>
         </div>
       </div>
       <div class="gauge-card glass-panel">
-        <div class="panel-title">Knowledge Coverage</div>
+        <div class="panel-title">Knowledge Graph Size</div>
         <div class="gauge-wrap">
           <canvas id="gauge-knowledge" width="200" height="200"></canvas>
-          <div class="gauge-value" id="gauge-knowledge-val">0%</div>
-          <div class="gauge-label">% Human Knowledge</div>
+          <div class="gauge-value" id="gauge-knowledge-val">0</div>
+          <div class="gauge-label">Verified Live Nodes Loaded</div>
         </div>
       </div>
     </div>

@@ -1,46 +1,145 @@
-// Force-directed knowledge graph (SVG, no deps)
+// Live Knowledge Graph powered 100% by the real Wikipedia REST & Action APIs
 const Graph = (function () {
-  const colors = { Technology: '#00f5ff', Science: '#a855f7', Philosophy: '#f59e0b', Society: '#10b981', Ethics: '#f43f5e' };
-  const data = [
-    ['Artificial Intelligence', 'Technology', 'Systems that perform tasks requiring intelligence.'],
-    ['Neural Networks', 'Technology', 'Layered function approximators inspired by the brain.'],
-    ['Quantum Computing', 'Technology', 'Computation using superposition and entanglement.'],
-    ['Robotics', 'Technology', 'Embodied machines that sense and act.'],
-    ['Neuroscience', 'Science', 'Study of the nervous system and cognition.'],
-    ['Physics', 'Science', 'The fundamental laws of matter and energy.'],
-    ['Genomics', 'Science', 'Study of complete sets of DNA.'],
-    ['Mathematics', 'Science', 'The language of structure and pattern.'],
-    ['Consciousness', 'Philosophy', 'Subjective experience — the hard problem.'],
-    ['Epistemology', 'Philosophy', 'Theory of knowledge and justified belief.'],
-    ['Economy', 'Society', 'Production and distribution of resources.'],
-    ['Education', 'Society', 'Transmission of knowledge and skills.'],
-    ['Healthcare', 'Society', 'Maintenance and improvement of health.'],
-    ['AI Alignment', 'Ethics', 'Ensuring AI goals match human values.'],
-    ['Privacy', 'Ethics', 'Control over personal information.'],
-    ['Fairness', 'Ethics', 'Absence of unjust bias in decisions.']
-  ];
-  const links = [[0,1],[0,2],[0,3],[0,13],[1,4],[1,7],[2,5],[2,7],[3,0],[4,8],[8,9],[0,9],[0,10],[0,11],[0,12],[6,12],[6,0],[13,15],[13,14],[14,10],[15,10],[11,9],[5,7]];
-  let nodes, svg, g, scale = 1, tx = 0, ty = 0, W, H, drag = null;
+  const colors = { Root: '#00f5ff', Linked: '#a855f7', Expanded: '#10b981' };
+  let nodes = [], links = [], svg, g, linkLayer, nodeLayer, scale = 1, tx = 0, ty = 0, W, H, drag = null;
   const NS = 'http://www.w3.org/2000/svg';
   const el = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
+
+  async function fetchWikiTopic(topic) {
+    const t0 = performance.now();
+    const clean = topic.trim();
+    if (!clean) return null;
+
+    // Try English and Portuguese Wikipedia REST APIs for maximum coverage
+    for (const lang of ['en', 'pt']) {
+      try {
+        const sumUrl = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(clean)}`;
+        const r = await fetch(sumUrl);
+        if (!r.ok) continue;
+        const summary = await r.json();
+        if (summary.type === 'disambiguation' || !summary.extract) continue;
+
+        // Fetch related internal links via MediaWiki API
+        const linksUrl = `https://${lang}.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(summary.title)}&prop=links&plnamespace=0&pllimit=12&format=json&origin=*`;
+        const lr = await fetch(linksUrl);
+        const ldata = await lr.json();
+        const pages = ldata?.query?.pages || {};
+        const firstPage = Object.values(pages)[0] || {};
+        const related = (firstPage.links || [])
+          .map(lk => lk.title)
+          .filter(t => t && !t.includes(':') && t.length < 36)
+          .slice(0, 8);
+
+        window.Metrics && Metrics.recordApiCall(performance.now() - t0);
+        return {
+          title: summary.title,
+          extract: summary.extract,
+          url: summary.content_urls?.desktop?.page || `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(summary.title)}`,
+          lang,
+          related
+        };
+      } catch (e) {
+        // try next language
+      }
+    }
+    return null;
+  }
+
+  function addOrGetNode(name, cat, desc, url) {
+    let existing = nodes.find(n => n.name.toLowerCase() === name.toLowerCase());
+    if (existing) {
+      if (desc && !existing.desc) existing.desc = desc;
+      if (url && !existing.url) existing.url = url;
+      if (cat === 'Root' || cat === 'Expanded') {
+        existing.cat = cat;
+        existing.c.setAttribute('fill', colors[cat]);
+      }
+      return existing;
+    }
+    const i = nodes.length;
+    const angle = i * 1.1;
+    const n = {
+      name, cat, desc: desc || '', url: url || '', i,
+      x: W / 2 + Math.cos(angle) * (80 + (i % 5) * 25),
+      y: H / 2 + Math.sin(angle) * (80 + (i % 5) * 25),
+      vx: 0, vy: 0
+    };
+    n.g = el('g', { style: 'cursor:pointer' });
+    n.c = el('circle', { r: cat === 'Root' ? 15 : 10, fill: colors[cat] || colors.Linked, 'fill-opacity': .9, stroke: '#020408', 'stroke-width': 2 });
+    n.c.style.filter = `drop-shadow(0 0 6px ${colors[cat] || colors.Linked})`;
+    n.t = el('text', { fill: '#cbd5e1', 'font-size': 11, 'text-anchor': 'middle', dy: -15, 'font-family': 'Inter' });
+    n.t.textContent = n.name;
+    n.g.append(n.c, n.t);
+    nodeLayer.appendChild(n.g);
+    n.g.addEventListener('mousedown', e => { drag = n; e.stopPropagation(); });
+    n.g.addEventListener('click', () => selectAndExpand(n));
+    nodes.push(n);
+    window.Metrics && Metrics.setGraphNodes(nodes.length);
+    return n;
+  }
+
+  function addLink(a, b) {
+    if (a === b) return;
+    if (links.some(l => (l.a === a && l.b === b) || (l.a === b && l.b === a))) return;
+    const line = el('line', { stroke: 'rgba(148,163,184,.28)', 'stroke-width': 1.2 });
+    linkLayer.appendChild(line);
+    links.push({ a, b, el: line });
+  }
+
+  async function selectAndExpand(n) {
+    const info = document.getElementById('node-info-content');
+    info.innerHTML = `<div class="node-info-title">${n.name}</div><div class="node-info-category">FETCHING LIVE WIKIPEDIA DATA…</div>`;
+    const data = await fetchWikiTopic(n.name);
+    if (data) {
+      n.desc = data.extract;
+      n.url = data.url;
+      if (n.cat !== 'Root') {
+        n.cat = 'Expanded';
+        n.c.setAttribute('fill', colors.Expanded);
+      }
+      data.related.forEach(relTitle => {
+        const child = addOrGetNode(relTitle, 'Linked', '', '');
+        addLink(n, child);
+      });
+    }
+    const relNames = links.filter(l => l.a === n || l.b === n).map(l => (l.a === n ? l.b.name : l.a.name));
+    info.innerHTML =
+      `<div class="node-info-title">${n.name}</div>
+       <div class="node-info-category">LIVE WIKIPEDIA SOURCE</div>
+       <p>${n.desc || 'No summary available.'}</p>
+       ${n.url ? `<p style="margin-top:.5rem"><a href="${n.url}" target="_blank" rel="noopener" style="color:var(--cyan)">↗ Read full article on Wikipedia</a></p>` : ''}
+       <p style="margin-top:.5rem"><strong>Connected (${relNames.length}):</strong> ${relNames.slice(0, 10).join(', ')}</p>`;
+    links.forEach(l => l.el.setAttribute('stroke', (l.a === n || l.b === n) ? colors[n.cat] : 'rgba(148,163,184,.22)'));
+  }
+
+  async function loadTopic(topic, clearExisting = false) {
+    if (clearExisting) {
+      nodes = []; links = [];
+      linkLayer.innerHTML = ''; nodeLayer.innerHTML = '';
+    }
+    const data = await fetchWikiTopic(topic);
+    if (!data) {
+      document.getElementById('node-info-content').innerHTML =
+        `<p style="color:var(--rose)">Topic "${topic}" not found on Wikipedia. Try another real concept (e.g., "Artificial intelligence", "Silicon Valley", "Quantum computing").</p>`;
+      return;
+    }
+    const root = addOrGetNode(data.title, 'Root', data.extract, data.url);
+    data.related.forEach(relTitle => {
+      const child = addOrGetNode(relTitle, 'Linked', '', '');
+      addLink(root, child);
+    });
+    selectAndExpand(root);
+  }
 
   function init() {
     svg = document.getElementById('knowledge-graph');
     const r = svg.getBoundingClientRect(); W = r.width || 800; H = r.height || 520;
-    nodes = data.map(([name, cat, desc], i) => ({ name, cat, desc, i,
-      x: W / 2 + Math.cos(i) * 150, y: H / 2 + Math.sin(i) * 150, vx: 0, vy: 0 }));
-    g = el('g'); svg.appendChild(g);
-    links.forEach(l => { l.el = el('line', { stroke: 'rgba(148,163,184,.2)', 'stroke-width': 1 }); g.appendChild(l.el); });
-    nodes.forEach(n => {
-      n.g = el('g', { style: 'cursor:pointer' });
-      n.c = el('circle', { r: n.i === 0 ? 16 : 10, fill: colors[n.cat], 'fill-opacity': .85, stroke: '#020408', 'stroke-width': 2 });
-      n.c.style.filter = `drop-shadow(0 0 6px ${colors[n.cat]})`;
-      n.t = el('text', { fill: '#cbd5e1', 'font-size': 11, 'text-anchor': 'middle', dy: -16, 'font-family': 'Inter' });
-      n.t.textContent = n.name;
-      n.g.append(n.c, n.t); g.appendChild(n.g);
-      n.g.addEventListener('mousedown', e => { drag = n; e.stopPropagation(); });
-      n.g.addEventListener('click', () => select(n));
-    });
+    g = el('g');
+    linkLayer = el('g');
+    nodeLayer = el('g');
+    g.append(linkLayer, nodeLayer);
+    svg.appendChild(g);
+
     let pan = null;
     svg.addEventListener('mousedown', e => pan = [e.clientX - tx, e.clientY - ty]);
     addEventListener('mousemove', e => {
@@ -53,26 +152,28 @@ const Graph = (function () {
     document.getElementById('zoom-in').onclick = () => scale = Math.min(3, scale * 1.2);
     document.getElementById('zoom-out').onclick = () => scale = Math.max(.4, scale / 1.2);
     document.getElementById('zoom-reset').onclick = () => { scale = 1; tx = ty = 0; };
-    document.getElementById('graph-search').addEventListener('input', e => {
-      const q = e.target.value.toLowerCase();
-      nodes.forEach(n => n.g.style.opacity = !q || n.name.toLowerCase().includes(q) ? 1 : .15);
-    });
+
+    const searchInput = document.getElementById('graph-search');
+    const fetchBtn = document.getElementById('graph-fetch-btn');
+    const triggerSearch = () => {
+      const q = searchInput.value.trim();
+      if (q) loadTopic(q, false);
+    };
+    if (fetchBtn) fetchBtn.onclick = triggerSearch;
+    searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') triggerSearch(); });
+
+    // Load real initial knowledge graph from Wikipedia on startup
+    loadTopic('Artificial intelligence', true);
     tick();
   }
-  function select(n) {
-    const rel = links.filter(l => l[0] === n.i || l[1] === n.i).map(l => nodes[l[0] === n.i ? l[1] : l[0]].name);
-    document.getElementById('node-info-content').innerHTML =
-      `<div class="node-info-title">${n.name}</div><div class="node-info-category">${n.cat.toUpperCase()}</div>
-       <p>${n.desc}</p><p style="margin-top:.5rem"><strong>Connected:</strong> ${rel.join(', ')}</p>`;
-    links.forEach(l => l.el.setAttribute('stroke', l[0] === n.i || l[1] === n.i ? colors[n.cat] : 'rgba(148,163,184,.2)'));
-  }
+
   function tick() {
     for (const a of nodes) for (const b of nodes) if (a !== b) {
       const dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy + .01, f = 1800 / d2;
       a.vx += dx * f / Math.sqrt(d2); a.vy += dy * f / Math.sqrt(d2);
     }
-    for (const [i, j] of links) {
-      const a = nodes[i], b = nodes[j], dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy), f = (d - 110) * .01;
+    for (const l of links) {
+      const a = l.a, b = l.b, dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1, f = (d - 115) * .012;
       a.vx += dx / d * f; a.vy += dy / d * f; b.vx -= dx / d * f; b.vy -= dy / d * f;
     }
     for (const n of nodes) {
@@ -81,10 +182,13 @@ const Graph = (function () {
       n.vx *= .85; n.vy *= .85;
       n.g.setAttribute('transform', `translate(${n.x},${n.y})`);
     }
-    links.forEach(l => { const a = nodes[l[0]], b = nodes[l[1]];
-      l.el.setAttribute('x1', a.x); l.el.setAttribute('y1', a.y); l.el.setAttribute('x2', b.x); l.el.setAttribute('y2', b.y); });
+    links.forEach(l => {
+      l.el.setAttribute('x1', l.a.x); l.el.setAttribute('y1', l.a.y);
+      l.el.setAttribute('x2', l.b.x); l.el.setAttribute('y2', l.b.y);
+    });
     g.setAttribute('transform', `translate(${tx},${ty}) scale(${scale})`);
     requestAnimationFrame(tick);
   }
-  return { init };
+
+  return { init, fetchWikiTopic };
 })();
