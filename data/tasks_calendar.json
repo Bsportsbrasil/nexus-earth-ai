@@ -218,5 +218,38 @@
     "status": "SCHEDULED",
     "notes": "Verificar indicadores e consolidar entregáveis do dia.",
     "createdAt": 1792899931451
+  },
+  {
+    "id": "2d44f1aa-8d00-41f8-af25-03609e2f4837",
+    "title": "Briefing & Leitura Técnica: Transformer (deep learning)",
+    "date": "2026-10-25",
+    "time": "08:00",
+    "category": "Briefing",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+    "createdAt": 1792900675734
+  },
+  {
+    "id": "eb67f320-9a88-421a-a9fb-e444602ab642",
+    "title": "Bloco de Execução Prática: Transformer Deep Learning Study",
+    "date": "2026-10-25",
+    "time": "10:30",
+    "category": "Execution",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "Aplicar diretrizes extraídas de 0 artigos científicos indexados.",
+    "createdAt": 1792900675737
+  },
+  {
+    "id": "0f2e5f0b-b40e-434c-8fcc-f04bc2e7cee7",
+    "title": "Auditoria de Métricas & Revisão de Progresso",
+    "date": "2026-10-25",
+    "time": "14:30",
+    "category": "Review",
+    "priority": "MEDIUM",
+    "status": "SCHEDULED",
+    "notes": "Verificar indicadores e consolidar entregáveis do dia.",
+    "createdAt": 1792900675740
   }
 ]

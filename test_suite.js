@@ -1,4 +1,7 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { broker } from './engine/broker.js';
 import { graphDB } from './engine/graph_db.js';
 import { tensorEngine } from './engine/tensor.js';
@@ -128,7 +131,23 @@ async function runTests() {
   assert.ok(auraRes.memory.dailyJournal.length >= 1, 'AURA did not persist daily learning insight');
   console.log(`✓ Layer 10: AURA Daily-Learning Companion Agent verified (${auraRes.memory.dailyJournal.length} insights stored)`);
 
-  console.log('=== ALL 10 ARCHITECTURAL, COMPANION, SECURITY, COOPERATIVE & ASSISTANT LAYERS PASSED 100% ===');
+  // 11. Test Senior SEO & PWA Native Installability Compliance
+  const rootDir = path.dirname(fileURLToPath(import.meta.url));
+  const manifest = JSON.parse(fs.readFileSync(path.join(rootDir, 'manifest.json'), 'utf8'));
+  assert.equal(manifest.display, 'standalone', 'PWA display mode must be standalone');
+  assert.ok(manifest.icons.some(i => i.sizes === '192x192' && i.type === 'image/png'), 'Missing 192x192 PNG icon in manifest.json');
+  assert.ok(manifest.icons.some(i => i.sizes === '512x512' && i.type === 'image/png'), 'Missing 512x512 PNG icon in manifest.json');
+  assert.ok(fs.existsSync(path.join(rootDir, 'sw.js')), 'Missing PWA Service Worker sw.js');
+  assert.ok(fs.existsSync(path.join(rootDir, 'robots.txt')), 'Missing robots.txt');
+  assert.ok(fs.existsSync(path.join(rootDir, 'sitemap.xml')), 'Missing sitemap.xml');
+  const indexHtml = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
+  assert.ok(indexHtml.includes('application/ld+json'), 'Missing Schema.org JSON-LD in index.html');
+  assert.ok(indexHtml.includes('property="og:image"'), 'Missing Open Graph og:image in index.html');
+  const adminHtml = fs.readFileSync(path.join(rootDir, 'admin.html'), 'utf8');
+  assert.ok(adminHtml.includes('noindex, nofollow'), 'admin.html must remain unindexed by search engines');
+  console.log('✓ Layer 11: Senior SEO (JSON-LD, OpenGraph, Sitemap, Robots.txt) & PWA Installability (sw.js, 192/512 PNGs) verified');
+
+  console.log('=== ALL 11 ARCHITECTURAL, SEO, PWA, COMPANION, SECURITY & COOPERATIVE LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

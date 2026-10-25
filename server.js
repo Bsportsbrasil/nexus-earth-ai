@@ -36,6 +36,9 @@ const MIME_TYPES = {
   '.css': 'text/css; charset=utf-8',
   '.js': 'application/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
+  '.webmanifest': 'application/manifest+json; charset=utf-8',
+  '.xml': 'application/xml; charset=utf-8',
+  '.txt': 'text/plain; charset=utf-8',
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
   '.ico': 'image/x-icon'
@@ -163,8 +166,59 @@ function jsonResponse(res, status, data) {
 }
 
 const server = http.createServer(async (req, res) => {
-  const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+  const proto = req.headers['x-forwarded-proto'] || 'http';
+  const host = req.headers.host || `localhost:${PORT}`;
+  const origin = `${proto}://${host}`;
+  const url = new URL(req.url, origin);
   const pathname = url.pathname;
+
+  // 0. Dynamic SEO Endpoints (/robots.txt & /sitemap.xml)
+  if (req.method === 'GET' && pathname === '/robots.txt') {
+    const robots = [
+      '# NEXUS — Cooperative Superintelligence Platform',
+      'User-agent: *',
+      'Allow: /',
+      'Allow: /index.html',
+      'Allow: /manifest.json',
+      'Allow: /favicon.svg',
+      'Allow: /icon-192.png',
+      'Allow: /icon-512.png',
+      'Allow: /og-image.png',
+      'Disallow: /admin.html',
+      'Disallow: /security_ui.js',
+      'Disallow: /api/admin/',
+      'Disallow: /api/security',
+      '',
+      `Sitemap: ${origin}/sitemap.xml`
+    ].join('\n');
+    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=3600' });
+    return res.end(robots);
+  }
+
+  if (req.method === 'GET' && pathname === '/sitemap.xml') {
+    const today = new Date().toISOString().slice(0, 10);
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>${origin}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="${origin}/" />
+    <xhtml:link rel="alternate" hreflang="en" href="${origin}/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${origin}/" />
+    <image:image>
+      <image:loc>${origin}/og-image.png</image:loc>
+      <image:title>NEXUS — Superinteligência Cooperativa &amp; Agente AURA</image:title>
+      <image:caption>Plataforma de Superinteligência Cooperativa com Transparência Cognitiva Glass-Box, Multi-Agentes DAG, GraphRAG e Pedagogia Inclusiva TEA.</image:caption>
+    </image:image>
+  </url>
+</urlset>`;
+    res.writeHead(200, { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=3600' });
+    return res.end(sitemap);
+  }
 
   // 1. Prometheus Observability Scraping Endpoint (/metrics)
   if (req.method === 'GET' && pathname === '/metrics') {
@@ -471,10 +525,20 @@ const server = http.createServer(async (req, res) => {
 
   if (fs.existsSync(resolvedPath) && fs.statSync(resolvedPath).isFile()) {
     const ext = path.extname(resolvedPath).toLowerCase();
-    res.writeHead(200, {
-      'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
-      'X-Content-Type-Options': 'nosniff'
-    });
+    const isManifest = filePath === '/manifest.json';
+    const isRestrictedAdmin = filePath === '/admin.html' || filePath === '/security_ui.js';
+    const headers = {
+      'Content-Type': isManifest ? 'application/manifest+json; charset=utf-8' : (MIME_TYPES[ext] || 'application/octet-stream'),
+      'X-Content-Type-Options': 'nosniff',
+      'X-Robots-Tag': isRestrictedAdmin
+        ? 'noindex, nofollow, noarchive, nosnippet'
+        : 'index, follow, max-image-preview:large, max-snippet:-1'
+    };
+    if (filePath === '/sw.js') {
+      headers['Service-Worker-Allowed'] = '/';
+      headers['Cache-Control'] = 'no-cache';
+    }
+    res.writeHead(200, headers);
     fs.createReadStream(resolvedPath).pipe(res);
   } else {
     res.writeHead(404);

@@ -1,0 +1,43 @@
+# NEXUS — Cooperative Superintelligence Platform
+# Senior SEO Crawler Policy (Google, Bing, DuckDuckGo, Applebot, AI Search Engines)
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /manifest.json
+Allow: /favicon.svg
+Allow: /icon-192.png
+Allow: /icon-512.png
+Allow: /og-image.png
+Disallow: /admin.html
+Disallow: /security_ui.js
+Disallow: /api/admin/
+Disallow: /api/security
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin.html
+Disallow: /api/security
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin.html
+Disallow: /api/security
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin.html
+
+User-agent: Applebot
+Allow: /
+Disallow: /admin.html
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin.html
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin.html
+
+Sitemap: http://localhost:5173/sitemap.xml
