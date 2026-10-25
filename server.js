@@ -14,6 +14,7 @@ import { taskEngine } from './engine/tasks.js';
 import { generateVisualAsset, generateExecutiveReport } from './engine/studio.js';
 import { alignmentEngine } from './engine/ethics_inclusion.js';
 import { securityController } from './engine/security_control.js';
+import { companionEngine } from './engine/companion_agent.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -366,6 +367,36 @@ const server = http.createServer(async (req, res) => {
       return jsonResponse(res, 200, result);
     } catch (e) {
       return jsonResponse(res, 423, { error: e.message });
+    }
+  }
+
+  // 5e. AURA Daily-Learning Companion Agent Endpoint (/api/companion)
+  if (pathname === '/api/companion') {
+    if (req.method === 'GET') {
+      return jsonResponse(res, 200, companionEngine.getMemory());
+    }
+    if (req.method === 'POST') {
+      try {
+        securityController.assertAllowed('llm');
+        const body = await parseJsonBody(req);
+        if (body.action === 'clear') {
+          return jsonResponse(res, 200, companionEngine.clearMemory());
+        }
+        if (body.action === 'set_style') {
+          return jsonResponse(res, 200, companionEngine.setStyle(body.learningStyle));
+        }
+        const resCompanion = await companionEngine.converse({
+          message: body.message,
+          learningStyle: body.learningStyle,
+          history: body.history || [],
+          apiKey: body.apiKey,
+          onThought: (fullThought) => broadcastWs({ type: 'aura_thought', fullThought }),
+          onChunk: (visibleText) => broadcastWs({ type: 'aura_stream', visibleText })
+        });
+        return jsonResponse(res, 200, resCompanion);
+      } catch (e) {
+        return jsonResponse(res, 423, { error: e.message });
+      }
     }
   }
 

@@ -8,6 +8,7 @@ import { taskEngine } from './engine/tasks.js';
 import { generateVisualAsset, generateExecutiveReport } from './engine/studio.js';
 import { alignmentEngine } from './engine/ethics_inclusion.js';
 import { securityController } from './engine/security_control.js';
+import { companionEngine } from './engine/companion_agent.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -111,7 +112,17 @@ async function runTests() {
   assert.equal(securityController.assertAllowed('llm'), true, 'System did not restore access after disengage');
   console.log(`✓ Layer 9: Sovereign Security Dashboard & Master Kill-Switch verified (${securityController.getState().blockedAttempts} blocked attempt recorded)`);
 
-  console.log('=== ALL 9 ARCHITECTURAL, SECURITY, COOPERATIVE & ASSISTANT LAYERS PASSED 100% ===');
+  // 10. Test AURA Daily-Learning Companion Agent & Pluralistic Philosophy Engine
+  const auraRes = await companionEngine.converse({
+    message: 'Eu prefiro aprender com histórias visuais e sem medo de errar',
+    learningStyle: 'Visual, Lúdico & Histórias Criativas',
+    apiKey: ''
+  });
+  assert.ok(auraRes.reply.length > 50, 'AURA companion reply empty');
+  assert.ok(auraRes.memory.dailyJournal.length >= 1, 'AURA did not persist daily learning insight');
+  console.log(`✓ Layer 10: AURA Daily-Learning Companion Agent verified (${auraRes.memory.dailyJournal.length} insights stored)`);
+
+  console.log('=== ALL 10 ARCHITECTURAL, COMPANION, SECURITY, COOPERATIVE & ASSISTANT LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

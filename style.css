@@ -892,6 +892,158 @@ body {
   border-color: var(--rose);
 }
 
+/* ── AURA Daily-Learning Companion Agent & Mobile Optimization ── */
+.aura-layout {
+  display: grid;
+  grid-template-columns: 1.45fr 0.85fr;
+  gap: 1.25rem;
+}
+.aura-main-card, .aura-journal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 520px;
+  max-height: 600px;
+}
+.aura-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.aura-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.aura-orb {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #00f5ff, #a855f7 65%, #10b981 100%);
+  box-shadow: 0 0 22px rgba(0, 245, 255, 0.55);
+  animation: aura-pulse 3s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.aura-orb.speaking {
+  animation: aura-speak 0.65s ease-in-out infinite alternate;
+  box-shadow: 0 0 36px rgba(168, 85, 247, 0.85), 0 0 18px rgba(0, 245, 255, 0.9);
+}
+@keyframes aura-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+@keyframes aura-speak {
+  from { transform: scale(0.95); }
+  to { transform: scale(1.18); }
+}
+.aura-voice-controls {
+  display: flex;
+  gap: 0.45rem;
+}
+.aura-style-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0, 245, 255, 0.05);
+  border: 1px solid rgba(0, 245, 255, 0.18);
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-sm);
+}
+.aura-messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding-right: 0.25rem;
+}
+.aura-chips {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  padding-bottom: 0.2rem;
+}
+.aura-chip {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.32);
+  color: var(--text-primary);
+  font-size: 0.74rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition);
+}
+.aura-chip:hover {
+  border-color: var(--cyan);
+  background: var(--cyan-dim);
+}
+.aura-philosophy-banner {
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.08), rgba(168, 85, 247, 0.1));
+  border: 1px solid rgba(0, 245, 255, 0.22);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.8rem;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+.aura-philosophy-banner strong { color: var(--cyan); }
+.aura-journal-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.journal-item {
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid var(--violet);
+  border-radius: 6px;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+.journal-meta {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  color: var(--cyan);
+  margin-bottom: 0.2rem;
+}
+
+/* ── Mobile Bottom Dock (Smartphones & Tablets) ── */
+.mobile-bottom-dock {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1500;
+  background: rgba(2, 4, 8, 0.94);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-glow);
+  padding: 0.35rem 0.5rem calc(0.35rem + env(safe-area-inset-bottom, 0px));
+  justify-content: space-around;
+  align-items: center;
+}
+.dock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.65rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+}
+.dock-item span { font-size: 1.15rem; }
+.dock-item.active, .dock-item:hover { color: var(--cyan); background: var(--cyan-dim); }
+.dock-item.dock-stop { color: var(--rose); }
+
 /* ── API Key ────────────────────────────────────────── */
 .nav-status { gap: 10px; }
 .key-status { font-family: var(--font-mono); font-size: .65rem; letter-spacing: .15em; padding: 3px 8px; border-radius: 4px; border: 1px solid; }
@@ -909,6 +1061,7 @@ body {
 @media (max-width: 1024px) {
   .hero-section { flex-direction: column; text-align: center; }
   .hero-visual { max-width: 380px; }
+  .aura-layout { grid-template-columns: 1fr; }
   .cc-bento-grid { grid-template-columns: 1fr; }
   .cc-p1-split { grid-template-columns: 1fr; }
   .assistant-grid { grid-template-columns: 1fr; }
@@ -920,11 +1073,21 @@ body {
   .graph-canvas-wrap { height: 400px; }
 }
 @media (max-width: 768px) {
+  body { padding-bottom: 72px; }
+  #nav { padding: 0 0.85rem; }
+  .section { padding: 80px 1rem 50px; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .gauge-row { grid-template-columns: 1fr; }
   .nav-links { display: none; }
+  .logo-tag { display: none; }
+  .mobile-bottom-dock { display: flex; }
+  .aura-style-strip { flex-direction: column; align-items: stretch; }
+  .cc-omni-bar { flex-direction: column; align-items: stretch; }
+  .task-planner-bar, .task-add-row { flex-wrap: wrap; }
   .hero-stat-row { flex-wrap: wrap; justify-content: center; }
 }
 @media (max-width: 480px) {
   .metrics-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2.2rem; }
+  .msg-content { max-width: 90%; }
 }

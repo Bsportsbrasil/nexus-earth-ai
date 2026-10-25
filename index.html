@@ -9,6 +9,9 @@
   <meta property="og:description" content="Real-time neural networks, multi-agent reasoning, knowledge graph exploration, and AI chat with visible thought chains." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#020408" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,7 +51,8 @@
         <span class="logo-tag">SUPERINTELLIGENCE</span>
       </div>
       <ul class="nav-links">
-        <li><a href="#command-center" class="nav-link active" data-section="command-center">⚡ Command Center</a></li>
+        <li><a href="#companion" class="nav-link active" data-section="companion">✨ AURA Live</a></li>
+        <li><a href="#command-center" class="nav-link" data-section="command-center">⚡ Command Center</a></li>
         <li><a href="#security" class="nav-link" data-section="security">🛡️ Security &amp; Kill-Switch</a></li>
         <li><a href="#cooperative" class="nav-link" data-section="cooperative">🌱 Cooperative &amp; TEA</a></li>
         <li><a href="#assistant" class="nav-link" data-section="assistant">📅 Assistant &amp; Studio</a></li>
@@ -99,6 +103,83 @@
         <div class="ring ring-1"></div>
         <div class="ring ring-2"></div>
         <div class="ring ring-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AURA: Real-Time Daily-Learning Companion Agent (Web & Mobile Optimized) -->
+  <section id="companion" class="section">
+    <div class="section-header">
+      <div class="section-tag">AURA — Adaptive Understanding &amp; Respectful Agent</div>
+      <h2 class="section-title">Daily-Learning Companion &amp; Pluralistic Empathy AI</h2>
+      <p class="section-desc">Converse por voz ou texto exatamente como no Gemini Live. A <strong>AURA</strong> aprende diariamente com você de forma segura, divertida e educativa — compreendendo que <em>todo ser vivente enxerga o mundo de um jeito único</em> e que sempre existe um caminho de escolha que funciona para cada pessoa, com respeito e segurança para todos.</p>
+    </div>
+
+    <div class="aura-layout">
+      <!-- Left / Main: Live Voice & Conversational Orb + Stream -->
+      <div class="panel glass-panel aura-main-card">
+        <div class="aura-top-bar">
+          <div class="aura-identity">
+            <div class="aura-orb" id="aura-orb"></div>
+            <div>
+              <strong style="color:var(--cyan);font-size:0.9rem">AURA — Agente de Comunicação Viva</strong>
+              <span id="aura-state-label" style="display:block;font-size:0.72rem;color:var(--text-secondary)">Pronta para conversar e aprender com você hoje</span>
+            </div>
+          </div>
+          <div class="aura-voice-controls">
+            <button class="btn-secondary" id="aura-live-voice-btn" title="Conversar por Voz em Tempo Real">🎙️ Voz Ao Vivo</button>
+            <button class="btn-secondary" id="aura-tts-toggle" title="Ativar/Desativar Resposta Falada">🔊 Voz ON</button>
+          </div>
+        </div>
+
+        <!-- Cognitive Perspective & Learning Path Selector -->
+        <div class="aura-style-strip">
+          <span class="cc-sub-label" style="margin:0;white-space:nowrap">🧭 Meu Jeito de Aprender Hoje:</span>
+          <select id="aura-style-select" class="select-input">
+            <option value="Visual, Lúdico &amp; Histórias Criativas">🎨 Visual, Lúdico &amp; Histórias Criativas</option>
+            <option value="Prático, Passo a Passo &amp; Tentativa Sem Medo de Errar">🛠️ Prático, Passo a Passo (Se 1% falhar, tentamos outro!)</option>
+            <option value="Calmo, Previsível &amp; Acolhedor (Amigável para TEA)">🌱 Calmo, Previsível &amp; Sensorialmente Acolhedor (TEA)</option>
+            <option value="Científico, Profundo &amp; Filosófico">🔬 Científico, Profundo &amp; Filosófico</option>
+          </select>
+        </div>
+
+        <!-- Conversation Messages -->
+        <div class="aura-messages" id="aura-messages">
+          <div class="chat-msg assistant-msg">
+            <div class="msg-avatar">A</div>
+            <div class="msg-content">
+              <div class="msg-name">AURA</div>
+              <div class="msg-text">Olá! Eu sou a <strong>AURA</strong>. Cada ser vivente tem um jeito único de sentir, enxergar e compreender as coisas — e todos nós temos o poder de fazer escolhas para aprender! Se uma explicação não funcionar de um jeito, descobrimos outra juntos. Sobre o que você quer conversar, criar ou aprender hoje?</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Discovery Chips -->
+        <div class="aura-chips">
+          <button class="aura-chip" data-prompt="Me ensine algo fascinante sobre o universo de um jeito divertido e visual!">🌌 Universo de jeito divertido</button>
+          <button class="aura-chip" data-prompt="Tentei aprender algo hoje e não deu certo de primeira. Me ajude a ver por outro ângulo!">🔄 Tentar por outro ângulo (1% → 100%)</button>
+          <button class="aura-chip" data-prompt="Por que todo ser vivente enxerga o mundo de um jeito diferente e único?">🦋 Diversidade de olhares e respeito</button>
+        </div>
+
+        <!-- Input Bar -->
+        <div class="chat-input-row" style="padding:0.75rem 0 0 0">
+          <input type="text" id="aura-input" class="chat-input-field" placeholder="Converse com a AURA (ela aprende diariamente com seu jeito único)…" />
+          <button class="btn-primary chat-send-btn" id="aura-send-btn">Enviar</button>
+        </div>
+      </div>
+
+      <!-- Right: Daily Learning Journal & Pluralistic Philosophy Card -->
+      <div class="panel glass-panel aura-journal-card">
+        <div class="cc-pane-header">
+          <span class="panel-title">📔 Diário de Aprendizado Mútuo (Memória Segura)</span>
+          <button class="btn-secondary" id="aura-clear-btn" style="padding:2px 8px;font-size:0.65rem">Limpar</button>
+        </div>
+        <div class="aura-philosophy-banner">
+          <strong>🤝 Princípio da Pluralidade Humana:</strong><br/>
+          Todo ser vivente compreende o mundo de forma única. Quando um método não funciona com 1%, outro caminho funciona — somos iguais em dignidade e diferentes no jeito de ser, com respeito e segurança para todos.
+        </div>
+        <div class="cc-sub-label">O que a AURA aprendeu com você (<span id="aura-count">0</span> interações):</div>
+        <div class="aura-journal-list" id="aura-journal-list"></div>
       </div>
     </div>
   </section>
@@ -691,6 +772,15 @@
     </div>
   </footer>
 
+  <!-- Mobile Bottom Navigation Dock (Native App Feel on Smartphones & Tablets) -->
+  <div class="mobile-bottom-dock" id="mobile-dock">
+    <a href="#companion" class="dock-item active" data-section="companion"><span>✨</span><small>AURA</small></a>
+    <a href="#command-center" class="dock-item" data-section="command-center"><span>⚡</span><small>Control</small></a>
+    <a href="#cooperative" class="dock-item" data-section="cooperative"><span>🌱</span><small>TEA/Ética</small></a>
+    <a href="#assistant" class="dock-item" data-section="assistant"><span>📅</span><small>Agenda</small></a>
+    <a href="#security" class="dock-item dock-stop" data-section="security"><span>🛑</span><small>Segurança</small></a>
+  </div>
+
   <!-- API Key Modal -->
   <div id="key-modal" class="modal">
     <div class="modal-box glass-panel">
@@ -713,6 +803,7 @@
   <script src="graph.js"></script>
   <script src="chat.js"></script>
   <script src="metrics.js"></script>
+  <script src="companion_ui.js"></script>
   <script src="command_center.js"></script>
   <script src="security_ui.js"></script>
   <script src="cooperative_ui.js"></script>
