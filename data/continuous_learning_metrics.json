@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-10-26T01:51:11.765Z",
-  "totalEvaluated": 239,
-  "totalApproved": 192,
-  "totalBlocked": 47,
-  "averageEntropy": 3.232,
-  "epistemicAccuracyPct": 80.3,
+  "updatedAt": "2026-10-26T08:52:04.183Z",
+  "totalEvaluated": 247,
+  "totalApproved": 197,
+  "totalBlocked": 50,
+  "averageEntropy": 3.517,
+  "epistemicAccuracyPct": 79.8,
   "learningCurve": [
     {
       "date": "2026-10-12",
@@ -106,13 +106,93 @@
     },
     {
       "date": "2026-10-26",
-      "accuracy": 80.3,
-      "totalKnowledge": 192,
-      "hallucinationsBlocked": 47,
-      "entropy": 3.23
+      "accuracy": 79.8,
+      "totalKnowledge": 197,
+      "hallucinationsBlocked": 50,
+      "entropy": 3.52
     }
   ],
   "history": [
+    {
+      "id": "eval_1793004724183",
+      "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",
+      "agentId": "GLOBAL_OMNISCIENCE_REASONER",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 4.74,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T08:52:04.183Z"
+    },
+    {
+      "id": "eval_1793004724154",
+      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
+      "agentId": "HALLUCINATING_TESTER",
+      "verdict": "REJECTED_HALLUCINATION",
+      "confidenceScore": 0.25,
+      "entropyBits": 3.91,
+      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
+      "timestamp": "2026-10-26T08:52:04.154Z"
+    },
+    {
+      "id": "eval_1793004724151",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T08:52:04.151Z"
+    },
+    {
+      "id": "eval_1793004670109",
+      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
+      "agentId": "HALLUCINATING_TESTER",
+      "verdict": "REJECTED_HALLUCINATION",
+      "confidenceScore": 0.25,
+      "entropyBits": 3.91,
+      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
+      "timestamp": "2026-10-26T08:51:10.109Z"
+    },
+    {
+      "id": "eval_1793004670107",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T08:51:10.107Z"
+    },
+    {
+      "id": "eval_1792981069728",
+      "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",
+      "agentId": "GLOBAL_OMNISCIENCE_REASONER",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 4.74,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T02:17:49.728Z"
+    },
+    {
+      "id": "eval_1792981069702",
+      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
+      "agentId": "HALLUCINATING_TESTER",
+      "verdict": "REJECTED_HALLUCINATION",
+      "confidenceScore": 0.25,
+      "entropyBits": 3.91,
+      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
+      "timestamp": "2026-10-26T02:17:49.702Z"
+    },
+    {
+      "id": "eval_1792981069701",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T02:17:49.701Z"
+    },
     {
       "id": "eval_1792979471764",
       "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",

@@ -228,6 +228,7 @@ html, body {
   display: none;
   flex-direction: column;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   padding: 14px;
   padding-bottom: calc(var(--dock-height) + var(--safe-bottom) + 20px);
@@ -368,6 +369,8 @@ html, body {
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  max-width: 100vw;
   height: calc(var(--dock-height) + var(--safe-bottom));
   padding-bottom: var(--safe-bottom);
   background: rgba(3, 7, 18, 0.96);
@@ -377,10 +380,13 @@ html, body {
   align-items: center;
   justify-content: space-around;
   z-index: 200;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .dock-item {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -392,6 +398,7 @@ html, body {
   cursor: pointer;
   padding: 8px 0;
   text-decoration: none;
+  overflow: hidden;
 }
 
 .dock-item svg {
@@ -403,8 +410,12 @@ html, body {
 }
 
 .dock-item-label {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .dock-item.active {
@@ -1535,11 +1546,11 @@ html, body {
       <!-- ================= TAB 5: SUPERVISOR LENNOX (C2) ================= -->
       <section id="view-supervisor" class="tab-view">
 
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-          <button type="button" class="cyber-btn-secondary" onclick="NexusMobile.switchTab('home')" style="font-size: 0.78rem; padding: 6px 12px; display: inline-flex; align-items: center; gap: 4px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; gap: 8px;">
+          <button type="button" class="cyber-btn-secondary" onclick="NexusMobile.switchTab('home')" style="font-size: 0.78rem; padding: 6px 10px; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; flex-shrink: 0;">
             ← Voltar ao Início
           </button>
-          <span class="hud-badge purple">CONSOLE SOBERANO LENNOX</span>
+          <span class="hud-badge purple" style="font-size: 0.65rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">CONSOLE LENNOX</span>
         </div>
 
         <!-- Master Creator Auth Gate -->
@@ -1606,14 +1617,14 @@ html, body {
           <p class="card-desc-hud" style="margin-top: 6px;">
             Tradução dinâmica completa da interface, páginas e respostas do ecossistema.
           </p>
-          <div style="display: flex; gap: 8px; margin-top: 10px;">
-            <button type="button" class="mobile-lang-btn active" data-lang="pt" style="flex:1; padding: 8px; border-radius: 8px; border: 1px solid #00f5ff; background: rgba(0,245,255,0.15); color: #00f5ff; font-weight: 700; cursor: pointer;">
+          <div style="display: flex; gap: 6px; margin-top: 10px;">
+            <button type="button" class="mobile-lang-btn active" data-lang="pt" style="flex:1; min-width: 0; padding: 7px 4px; border-radius: 8px; border: 1px solid #00f5ff; background: rgba(0,245,255,0.15); color: #00f5ff; font-size: 0.74rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
               🇧🇷 Português
             </button>
-            <button type="button" class="mobile-lang-btn" data-lang="en" style="flex:1; padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-weight: 700; cursor: pointer;">
+            <button type="button" class="mobile-lang-btn" data-lang="en" style="flex:1; min-width: 0; padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.74rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
               🇺🇸 English
             </button>
-            <button type="button" class="mobile-lang-btn" data-lang="es" style="flex:1; padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-weight: 700; cursor: pointer;">
+            <button type="button" class="mobile-lang-btn" data-lang="es" style="flex:1; min-width: 0; padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.74rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
               🇪🇸 Español
             </button>
           </div>
@@ -1635,9 +1646,9 @@ html, body {
           <div class="card-title-hud">
             <span>📲</span> Aplicativo & Google Play Store
           </div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Instalação Direta no Smartphone</div>
-            <button id="btn-settings-install" class="cyber-btn-secondary" style="background: var(--cyan); color: #02040a; font-weight: 700;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+            <div style="font-size: 0.85rem; color: var(--text-muted); min-width: 140px; flex: 1;">Instalação Direta no Smartphone</div>
+            <button id="btn-settings-install" class="cyber-btn-secondary" style="background: var(--cyan); color: #02040a; font-weight: 700; white-space: nowrap;">
               Instalar App PWA
             </button>
           </div>
@@ -1654,11 +1665,11 @@ html, body {
           <p class="card-desc-hud" style="margin-top: 6px;">
             Documentação obrigatória para publicação na Google Play Store e conformidade com o EU AI Act e LGPD:
           </p>
-          <div style="display: flex; gap: 8px; margin-top: 8px;">
-            <a href="/privacy" class="cyber-btn-secondary" style="font-size: 0.8rem;">
+          <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+            <a href="/privacy" class="cyber-btn-secondary" style="font-size: 0.8rem; flex: 1; min-width: 130px; justify-content: center;">
               <span>📜</span> Política de Privacidade
             </a>
-            <a href="/terms" class="cyber-btn-secondary" style="font-size: 0.8rem;">
+            <a href="/terms" class="cyber-btn-secondary" style="font-size: 0.8rem; flex: 1; min-width: 130px; justify-content: center;">
               <span>📋</span> Termos de Uso
             </a>
           </div>
