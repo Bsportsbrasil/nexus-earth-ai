@@ -224,6 +224,9 @@
       </p>
       <div class="hero-cta-row">
         <div style="display:flex;gap:0.65rem;flex-wrap:wrap">
+          <button class="btn-primary" onclick="openHolo3DModal()" style="background:linear-gradient(135deg,var(--cyan),#8b5cf6);">
+            <span>🌌 Núcleo 3D Interativo</span>
+          </button>
           <button class="btn-primary" data-goto-route="aura">
             <span id="hero-aura-btn">✨ Conversar com AURA Live</span>
           </button>
@@ -2305,6 +2308,7 @@
   <script src="voice_engine.js" defer></script>
   <script type="module" src="gemini.js"></script>
   <script src="particles.js" defer></script>
+  <script src="quantum_holo_3d.js" defer></script>
   <script src="neural.js" defer></script>
   <script src="agents.js" defer></script>
   <script src="graph.js" defer></script>
@@ -2323,5 +2327,59 @@
   <script src="i18n.js" defer></script>
   <script src="app.js" defer></script>
   <!-- Leaflet 4K Satellite Engine (Loaded with defer for high-speed mobile score) -->
-    </body>
+      <!-- Modal 3D Holographic Superintelligence Cockpit -->
+  <div id="modal-holo-3d" class="glass-panel" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(2,4,10,0.94);backdrop-filter:blur(24px);z-index:999999;flex-direction:column;align-items:center;justify-content:center;padding:20px;">
+    <div style="width:100%;max-width:920px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid rgba(0,245,255,0.25);padding-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:1.6rem;">🌌</span>
+        <div>
+          <div style="font-weight:800;font-size:1.15rem;color:#fff;letter-spacing:0.06em;">NÚCLEO 3D DA SUPERINTELIGÊNCIA NEXUS</div>
+          <div style="font-size:0.75rem;color:var(--cyan);font-family:monospace;">RENDERIZAÇÃO A 60 FPS • ARRASTE PARA GIRAR • SCROLL PARA ZOOM • TOQUE NOS AGENTES</div>
+        </div>
+      </div>
+      <button onclick="closeHolo3DModal()" class="btn-secondary" style="width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">✕</button>
+    </div>
+    <div style="position:relative;width:100%;max-width:920px;height:520px;border:1px solid rgba(0,245,255,0.3);border-radius:14px;overflow:hidden;background:radial-gradient(circle at 50% 50%, rgba(6,182,212,0.12), transparent 70%);">
+      <canvas id="modal-holo-canvas" style="width:100%;height:100%;display:block;cursor:grab;"></canvas>
+      <div id="modal-holo-hud" style="position:absolute;bottom:16px;left:16px;right:16px;background:rgba(10,18,36,0.85);backdrop-filter:blur(16px);border:1px solid rgba(0,245,255,0.3);border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div id="modal-holo-nodename" style="font-weight:700;color:#fff;font-size:0.95rem;">🧬 AURA Companion (Órbita Ativa)</div>
+          <div id="modal-holo-nodedesc" style="font-size:0.78rem;color:#94a3b8;">Toque ou clique em qualquer satélite multi-agente na cena 3D para inspecionar.</div>
+        </div>
+        <button id="modal-holo-pulsebtn" class="btn-primary" style="font-size:0.8rem;padding:6px 14px;background:linear-gradient(135deg,var(--cyan),#2563eb);">⚡ Disparar Pulso Neural</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    let modalHoloInstance = null;
+    function openHolo3DModal() {
+      const modal = document.getElementById('modal-holo-3d');
+      if (modal) {
+        modal.style.display = 'flex';
+        if (!modalHoloInstance && window.QuantumHolo3D) {
+          modalHoloInstance = window.QuantumHolo3D.mount('modal-holo-canvas', {
+            isMobile: window.innerWidth <= 768,
+            scale: 1.35,
+            onNodeClick: (node) => {
+              const nameEl = document.getElementById('modal-holo-nodename');
+              const descEl = document.getElementById('modal-holo-nodedesc');
+              if (nameEl) nameEl.innerHTML = `<span>🧬</span> ${node.name} (Órbita: ${node.radius}u)`;
+              if (descEl) descEl.textContent = `${node.role} • Velocidade Angular: ${(Math.abs(node.speed)*100).toFixed(1)} rad/s`;
+            }
+          });
+          const pulseBtn = document.getElementById('modal-holo-pulsebtn');
+          if (pulseBtn) {
+            pulseBtn.onclick = () => {
+              if (modalHoloInstance) modalHoloInstance.triggerAudioPulse(35);
+            };
+          }
+        }
+      }
+    }
+    function closeHolo3DModal() {
+      const modal = document.getElementById('modal-holo-3d');
+      if (modal) modal.style.display = 'none';
+    }
+  </script>
+</body>
 </html>

@@ -74,10 +74,29 @@
           </button>
         </div>
 
-        <!-- Quantum Neural Orb Hologram -->
-        <div class="neural-orb-stage">
-          <canvas id="neural-orb-canvas"></canvas>
-          <div class="orb-status-text" id="orb-status-caption">Superinteligência Pronta • Toque no Orbe</div>
+        <!-- 3D Quantum Superintelligence Holographic Stage -->
+        <div class="neural-orb-stage" style="height: 230px;">
+          <canvas id="neural-orb-canvas" style="width: 100%; max-width: 340px; height: 210px;"></canvas>
+          <div class="orb-status-text" id="orb-status-caption">
+            <span>🌌</span> Núcleo 3D Interativo • Arraste para Girar ou Toque nos Agentes
+          </div>
+        </div>
+
+        <!-- Dynamic 3D Agent Inspector HUD (Tapping 3D Nodes) -->
+        <div id="holo-3d-inspector" class="cyber-card glow-cyan" style="display: none; padding: 12px 14px; margin-bottom: 12px;">
+          <div class="card-header-hud">
+            <div class="card-title-hud" id="holo-node-title">
+              <span>🧬</span> AURA (Companion)
+            </div>
+            <span class="hud-badge cyan" id="holo-node-status">SINCRONIZADO</span>
+          </div>
+          <div id="holo-node-desc" style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">
+            Inclusão Cognitiva, Pedagogia TEA & Diálogo Natural.
+          </div>
+          <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan);">
+            <span id="holo-node-radius">ÓRBITA: 105u</span>
+            <span id="holo-node-entropy">ENTROPIA: 2.55 BITS</span>
+          </div>
         </div>
 
         <!-- Real-Time Cyber Telemetry Grid -->
@@ -469,6 +488,7 @@
 
   </div>
 
+  <script src="/quantum_holo_3d.js"></script>
   <script src="/mobile.js"></script>
 </body>
 </html>

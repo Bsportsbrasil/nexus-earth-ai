@@ -99,103 +99,32 @@ const NexusMobile = (function () {
     else switchTab('home');
   }
 
-  /* --- 60 FPS Quantum Holographic Orb Canvas --- */
+  /* --- 60 FPS Quantum 3D Superintelligence Holo-Stage --- */
+  let holo3DInstance = null;
+
   function initQuantumOrb() {
-    orbCanvas = document.getElementById('neural-orb-canvas');
-    if (!orbCanvas) return;
-    orbCtx = orbCanvas.getContext('2d');
+    if (window.QuantumHolo3D) {
+      holo3DInstance = QuantumHolo3D.mount('neural-orb-canvas', {
+        isMobile: true,
+        scale: 0.88,
+        onNodeClick: (node) => {
+          triggerHaptic(25);
+          const inspector = document.getElementById('holo-3d-inspector');
+          const title = document.getElementById('holo-node-title');
+          const desc = document.getElementById('holo-node-desc');
+          const radius = document.getElementById('holo-node-radius');
+          const status = document.getElementById('holo-node-status');
 
-    const dpr = window.devicePixelRatio || 1;
-    orbCanvas.width = 180 * dpr;
-    orbCanvas.height = 180 * dpr;
-    orbCtx.scale(dpr, dpr);
-
-    // Initialize 70 quantum orbital particles
-    orbParticles = [];
-    for (let i = 0; i < 70; i++) {
-      orbParticles.push({
-        angle: Math.random() * Math.PI * 2,
-        dist: 45 + Math.random() * 35,
-        speed: (Math.random() - 0.5) * 0.04,
-        size: 1.2 + Math.random() * 2.2,
-        hue: Math.random() > 0.5 ? 185 : 275, // Cyan & Purple
-        alpha: 0.2 + Math.random() * 0.7
+          if (inspector && title && desc) {
+            inspector.style.display = 'block';
+            title.innerHTML = `<span>🧬</span> ${escapeHtml(node.name)}`;
+            desc.textContent = node.role;
+            if (radius) radius.textContent = `ÓRBITA: ${node.radius}u`;
+            if (status) status.textContent = 'INTERAGINDO';
+          }
+        }
       });
     }
-
-    orbCanvas.addEventListener('touchstart', () => {
-      triggerHaptic(25);
-      orbTargetRadius = orbBaseRadius + 20;
-    }, { passive: true });
-
-    orbCanvas.addEventListener('touchend', () => {
-      orbTargetRadius = orbBaseRadius;
-    }, { passive: true });
-
-    renderOrb();
-  }
-
-  function renderOrb() {
-    if (!orbCtx) return;
-    orbCtx.clearRect(0, 0, 180, 180);
-    const cx = 90;
-    const cy = 90;
-
-    // Smooth radius interpolation
-    if (isListening) orbTargetRadius = orbBaseRadius + 15 + Math.sin(Date.now() * 0.008) * 8;
-    else if (isSpeaking) orbTargetRadius = orbBaseRadius + 10 + Math.sin(Date.now() * 0.012) * 6;
-    else orbTargetRadius = orbBaseRadius + Math.sin(Date.now() * 0.002) * 3;
-
-    orbRadius += (orbTargetRadius - orbRadius) * 0.1;
-    orbAngle += 0.015;
-
-    // 1. Holographic Outer Glow
-    const gradGlow = orbCtx.createRadialGradient(cx, cy, orbRadius * 0.2, cx, cy, orbRadius * 1.6);
-    gradGlow.addColorStop(0, isListening ? 'rgba(244, 63, 94, 0.45)' : 'rgba(0, 245, 255, 0.35)');
-    gradGlow.addColorStop(0.5, 'rgba(168, 85, 247, 0.2)');
-    gradGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
-    orbCtx.fillStyle = gradGlow;
-    orbCtx.beginPath();
-    orbCtx.arc(cx, cy, orbRadius * 1.6, 0, Math.PI * 2);
-    orbCtx.fill();
-
-    // 2. Orbital Interference Rings
-    for (let r = 0; r < 3; r++) {
-      orbCtx.save();
-      orbCtx.translate(cx, cy);
-      orbCtx.rotate(orbAngle * (r % 2 === 0 ? 1 : -1) + r * 1.1);
-      orbCtx.strokeStyle = r === 0 ? 'rgba(0, 245, 255, 0.6)' : (r === 1 ? 'rgba(168, 85, 247, 0.5)' : 'rgba(16, 185, 129, 0.4)');
-      orbCtx.lineWidth = 1.2;
-      orbCtx.beginPath();
-      orbCtx.ellipse(0, 0, orbRadius * 1.15, orbRadius * 0.65, 0, 0, Math.PI * 2);
-      orbCtx.stroke();
-      orbCtx.restore();
-    }
-
-    // 3. Central Quantum Core
-    const coreGrad = orbCtx.createRadialGradient(cx - 6, cy - 6, 2, cx, cy, orbRadius * 0.85);
-    coreGrad.addColorStop(0, '#ffffff');
-    coreGrad.addColorStop(0.3, isListening ? '#f43f5e' : '#00f5ff');
-    coreGrad.addColorStop(0.7, '#8b5cf6');
-    coreGrad.addColorStop(1, 'rgba(3, 7, 18, 0.9)');
-    orbCtx.fillStyle = coreGrad;
-    orbCtx.beginPath();
-    orbCtx.arc(cx, cy, orbRadius * 0.85, 0, Math.PI * 2);
-    orbCtx.fill();
-
-    // 4. Orbiting Quantum Particles
-    orbParticles.forEach(p => {
-      p.angle += p.speed;
-      const px = cx + Math.cos(p.angle) * p.dist * (orbRadius / orbBaseRadius);
-      const py = cy + Math.sin(p.angle) * p.dist * 0.7 * (orbRadius / orbBaseRadius);
-
-      orbCtx.fillStyle = p.hue === 185 ? `rgba(0, 245, 255, ${p.alpha})` : `rgba(168, 85, 247, ${p.alpha})`;
-      orbCtx.beginPath();
-      orbCtx.arc(px, py, p.size, 0, Math.PI * 2);
-      orbCtx.fill();
-    });
-
-    animFrameId = requestAnimationFrame(renderOrb);
   }
 
   /* --- Cyber Background Grid Canvas --- */
@@ -315,6 +244,7 @@ const NexusMobile = (function () {
       recognition.onstart = () => {
         isListening = true;
         triggerHaptic(30);
+        if (holo3DInstance) holo3DInstance.triggerAudioPulse(35);
         if (micBtn) micBtn.classList.add('listening');
         const orbText = document.getElementById('orb-status-caption');
         if (orbText) orbText.textContent = 'Ouvindo sua voz...';
@@ -358,6 +288,7 @@ const NexusMobile = (function () {
       if (!q) return;
 
       triggerHaptic(20);
+      if (holo3DInstance) holo3DInstance.triggerAudioPulse(30);
       appendChatBubble(q, 'user');
       if (input) input.value = '';
       if (sendBtn) sendBtn.disabled = true;

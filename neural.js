@@ -227,10 +227,18 @@ const NeuralViz = (function () {
     }, 1000);
   }
 
-  // Hero: rotating 3D Fibonacci sphere - lightweight & adaptive
+  // Hero: rotating 3D Quantum Superintelligence Core
   function hero() {
     const hc = document.getElementById('hero-neural-preview');
     if (!hc) return;
+
+    if (window.QuantumHolo3D) {
+      window.QuantumHolo3D.mount('hero-neural-preview', {
+        isMobile: window.innerWidth <= 768,
+        scale: 1.2
+      });
+      return;
+    }
     const h = hc.getContext('2d');
     const isMobile = window.innerWidth <= 768;
     const ptCount = isMobile ? 36 : 80;
