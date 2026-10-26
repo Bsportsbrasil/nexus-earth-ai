@@ -591,15 +591,22 @@ const SecurityUI = (function () {
     }
   }
 
-  function switchTab(tabId) {
+  function switchTab(tabId, shouldScroll = false) {
     document.querySelectorAll('.c2-tab-btn').forEach(b => {
       b.classList.toggle('active', b.getAttribute('data-tab') === tabId);
     });
     document.querySelectorAll('.c2-pane').forEach(p => {
       p.classList.toggle('active', p.id === tabId);
     });
+    try { window.location.hash = tabId; } catch (_) {}
     if (tabId === 'tab-agents' && window.AgentDashboardUI) {
       window.AgentDashboardUI.loadDashboardState();
+    }
+    if (shouldScroll) {
+      const pane = document.getElementById(tabId);
+      if (pane) {
+        pane.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   }
 
@@ -618,8 +625,28 @@ const SecurityUI = (function () {
       btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab')));
     });
 
+    // Direct jump cards and buttons (KPI 1-click management)
+    document.querySelectorAll('[data-jump]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        const target = el.getAttribute('data-jump');
+        if (target) {
+          switchTab(target, true);
+        }
+      });
+    });
+
+    // Restore active tab from URL hash if provided
+    try {
+      if (window.location.hash) {
+        const hashTab = window.location.hash.replace('#', '');
+        if (document.getElementById(hashTab)) {
+          switchTab(hashTab);
+        }
+      }
+    } catch (_) {}
+
     document.getElementById('c2-jump-threats-btn')?.addEventListener('click', () => {
-      switchTab('tab-waf');
+      switchTab('tab-waf', true);
     });
 
     // Simulate Malicious Attack against WAF

@@ -92,10 +92,36 @@
       background: linear-gradient(90deg, transparent, var(--card-accent, var(--cyan)), transparent);
       opacity: 0.8;
     }
+    .c2-kpi-card {
+      cursor: pointer;
+    }
     .c2-kpi-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(0,245,255,0.35);
-      box-shadow: 0 14px 32px rgba(0,0,0,0.65), 0 0 24px rgba(0,245,255,0.12);
+      transform: translateY(-3px);
+      border-color: rgba(0,245,255,0.45);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.65), 0 0 24px rgba(0,245,255,0.18);
+    }
+    .c2-kpi-action-btn {
+      margin-top: 0.85rem;
+      padding: 0.45rem 0.75rem;
+      border-radius: 7px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .c2-kpi-action-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--card-accent, var(--cyan));
+      color: #ffffff;
+      box-shadow: 0 0 14px rgba(0, 245, 255, 0.25);
     }
     .c2-kpi-head {
       display: flex;
@@ -262,58 +288,85 @@
     </div>
 
     <!-- Top KPI Summary Strip -->
-    <!-- Tier-1 Enterprise Big Tech Executive KPI Deck -->
+    <!-- Tier-1 Enterprise Big Tech Executive KPI Deck with Direct Management Action Buttons -->
     <div class="c2-kpi-grid">
-      <div class="c2-kpi-card" style="--card-accent: var(--cyan)">
-        <div class="c2-kpi-head">
-          <span class="c2-kpi-title"><span class="tab-icon">👥</span> CONTAS &amp; TENANTS</span>
-          <span class="c2-kpi-badge" style="color:var(--cyan);border-color:rgba(0,245,255,0.3)"><span class="c2-pulse-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan)"></span> RBAC ATIVO</span>
+      <!-- Card 1: Contas & Tenants -->
+      <div class="c2-kpi-card" style="--card-accent: var(--cyan)" data-jump="tab-accounts" title="Clique para abrir e gerenciar Contas, Clientes VIP e Papéis RBAC">
+        <div>
+          <div class="c2-kpi-head">
+            <span class="c2-kpi-title"><span class="tab-icon">👥</span> CONTAS &amp; TENANTS</span>
+            <span class="c2-kpi-badge" style="color:var(--cyan);border-color:rgba(0,245,255,0.3)"><span class="c2-pulse-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan)"></span> RBAC ATIVO</span>
+          </div>
+          <div class="c2-kpi-val" id="c2-kpi-accounts">0</div>
+          <div class="c2-kpi-sub">
+            <span>Empresas &amp; Clientes VIP</span>
+            <span style="color:var(--cyan);font-family:var(--font-mono);font-size:0.68rem">100% C2</span>
+          </div>
         </div>
-        <div class="c2-kpi-val" id="c2-kpi-accounts">0</div>
-        <div class="c2-kpi-sub">
-          <span>Empresas &amp; Clientes VIP</span>
-          <span style="color:var(--cyan);font-family:var(--font-mono);font-size:0.68rem">100% C2</span>
-        </div>
+        <button class="c2-kpi-action-btn" data-jump="tab-accounts" title="Gerenciar Contas, Clientes VIP e Regras RBAC">
+          <span>⚙️ Gerenciar &amp; Alterar Contas</span>
+          <span>→</span>
+        </button>
       </div>
 
-      <div class="c2-kpi-card" style="--card-accent: var(--violet)">
-        <div class="c2-kpi-head">
-          <span class="c2-kpi-title"><span class="tab-icon">🧠</span> AGENTES AUTÔNOMOS</span>
-          <span class="c2-kpi-badge" style="color:var(--violet);border-color:rgba(168,85,247,0.3)"><span class="c2-pulse-dot" style="background:var(--violet);box-shadow:0 0 8px var(--violet)"></span> SANDBOX</span>
+      <!-- Card 2: Agentes Autônomos -->
+      <div class="c2-kpi-card" style="--card-accent: var(--violet)" data-jump="tab-agents" title="Clique para abrir Governança de Agentes, Parâmetros Cognitivos e Kill-Switch">
+        <div>
+          <div class="c2-kpi-head">
+            <span class="c2-kpi-title"><span class="tab-icon">🧠</span> AGENTES AUTÔNOMOS</span>
+            <span class="c2-kpi-badge" style="color:var(--violet);border-color:rgba(168,85,247,0.3)"><span class="c2-pulse-dot" style="background:var(--violet);box-shadow:0 0 8px var(--violet)"></span> SANDBOX</span>
+          </div>
+          <div class="c2-kpi-val" id="c2-kpi-agents" style="color:var(--violet)">0</div>
+          <div class="c2-kpi-sub">
+            <span>Vinculados &amp; Em Execução</span>
+            <span style="color:var(--violet);font-family:var(--font-mono);font-size:0.68rem">ZERO-POISON</span>
+          </div>
         </div>
-        <div class="c2-kpi-val" id="c2-kpi-agents" style="color:var(--violet)">0</div>
-        <div class="c2-kpi-sub">
-          <span>Vinculados &amp; Em Execução</span>
-          <span style="color:var(--violet);font-family:var(--font-mono);font-size:0.68rem">ZERO-POISON</span>
-        </div>
+        <button class="c2-kpi-action-btn" data-jump="tab-agents" title="Ajustar Governança, Parâmetros Cognitivos e Kill-Switch">
+          <span>🧠 Ajustar &amp; Auditar Agentes</span>
+          <span>→</span>
+        </button>
       </div>
 
-      <div class="c2-kpi-card" style="--card-accent: var(--rose)">
-        <div class="c2-kpi-head">
-          <span class="c2-kpi-title"><span class="tab-icon">🚨</span> DEFESA &amp; WAF</span>
-          <span class="c2-kpi-badge" style="color:var(--rose);border-color:rgba(244,63,94,0.3)"><span class="c2-pulse-dot" style="background:var(--rose);box-shadow:0 0 8px var(--rose)"></span> BLOQUEIO</span>
+      <!-- Card 3: Defesa & WAF -->
+      <div class="c2-kpi-card" style="--card-accent: var(--rose)" data-jump="tab-waf" title="Clique para inspecionar Alertas WAF, Ameaças Mitigadas e Backups">
+        <div>
+          <div class="c2-kpi-head">
+            <span class="c2-kpi-title"><span class="tab-icon">🚨</span> DEFESA &amp; WAF</span>
+            <span class="c2-kpi-badge" style="color:var(--rose);border-color:rgba(244,63,94,0.3)"><span class="c2-pulse-dot" style="background:var(--rose);box-shadow:0 0 8px var(--rose)"></span> BLOQUEIO</span>
+          </div>
+          <div class="c2-kpi-val" id="c2-kpi-threats" style="color:var(--rose)">0</div>
+          <div class="c2-kpi-sub">
+            <span>Más Intenções Mitigadas</span>
+            <span style="color:var(--rose);font-family:var(--font-mono);font-size:0.68rem">BLINDADO</span>
+          </div>
         </div>
-        <div class="c2-kpi-val" id="c2-kpi-threats" style="color:var(--rose)">0</div>
-        <div class="c2-kpi-sub">
-          <span>Más Intenções Mitigadas</span>
-          <span style="color:var(--rose);font-family:var(--font-mono);font-size:0.68rem">BLINDADO</span>
-        </div>
+        <button class="c2-kpi-action-btn" data-jump="tab-waf" title="Inspecionar Alertas WAF, Mitigações e Backups">
+          <span>🚨 Inspecionar &amp; Mitigar WAF</span>
+          <span>→</span>
+        </button>
       </div>
 
-      <div class="c2-kpi-card" style="--card-accent: var(--emerald)">
-        <div class="c2-kpi-head">
-          <span class="c2-kpi-title"><span class="tab-icon">⛓️</span> LEDGER SHA-256</span>
-          <span class="c2-kpi-badge" style="color:var(--emerald);border-color:rgba(16,185,129,0.3)"><span class="c2-pulse-dot" style="background:var(--emerald);box-shadow:0 0 8px var(--emerald)"></span> MERKLE</span>
+      <!-- Card 4: Ledger SHA-256 -->
+      <div class="c2-kpi-card" style="--card-accent: var(--emerald)" data-jump="tab-audit" title="Clique para abrir e auditar o Ledger Imutável SHA-256 e Blocos Merkle">
+        <div>
+          <div class="c2-kpi-head">
+            <span class="c2-kpi-title"><span class="tab-icon">⛓️</span> LEDGER SHA-256</span>
+            <span class="c2-kpi-badge" style="color:var(--emerald);border-color:rgba(16,185,129,0.3)"><span class="c2-pulse-dot" style="background:var(--emerald);box-shadow:0 0 8px var(--emerald)"></span> MERKLE</span>
+          </div>
+          <div class="c2-kpi-val" id="c2-kpi-audit" style="color:var(--emerald)">0</div>
+          <div class="c2-kpi-sub">
+            <span>Blocos Criptográficos Imutáveis</span>
+            <span style="color:var(--emerald);font-family:var(--font-mono);font-size:0.68rem">100% AUDIT</span>
+          </div>
         </div>
-        <div class="c2-kpi-val" id="c2-kpi-audit" style="color:var(--emerald)">0</div>
-        <div class="c2-kpi-sub">
-          <span>Blocos Criptográficos Imutáveis</span>
-          <span style="color:var(--emerald);font-family:var(--font-mono);font-size:0.68rem">100% AUDIT</span>
-        </div>
+        <button class="c2-kpi-action-btn" data-jump="tab-audit" title="Auditar Blocos Criptográficos e Integridade Merkle">
+          <span>📜 Auditar &amp; Verificar Ledger</span>
+          <span>→</span>
+        </button>
       </div>
     </div>
-    </div>
-
+    
     <!-- Master C2 Navigation Tabs (6 Pillars) -->
     <!-- Master C2 Enterprise Layout: Left Sidebar Navigation & Right Workspace -->
     <div class="c2-enterprise-layout" style="display:flex;gap:1.5rem;align-items:flex-start;margin-top:1.25rem;">

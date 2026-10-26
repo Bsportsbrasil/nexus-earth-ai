@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-10-26T11:44:37.301Z",
-  "totalEvaluated": 256,
-  "totalApproved": 203,
-  "totalBlocked": 53,
-  "averageEntropy": 3.753,
-  "epistemicAccuracyPct": 79.3,
+  "updatedAt": "2026-10-26T11:54:01.240Z",
+  "totalEvaluated": 259,
+  "totalApproved": 205,
+  "totalBlocked": 54,
+  "averageEntropy": 3.811,
+  "epistemicAccuracyPct": 79.2,
   "learningCurve": [
     {
       "date": "2026-10-12",
@@ -106,13 +106,43 @@
     },
     {
       "date": "2026-10-26",
-      "accuracy": 79.3,
-      "totalKnowledge": 203,
-      "hallucinationsBlocked": 53,
-      "entropy": 3.75
+      "accuracy": 79.2,
+      "totalKnowledge": 205,
+      "hallucinationsBlocked": 54,
+      "entropy": 3.81
     }
   ],
   "history": [
+    {
+      "id": "eval_1793015641240",
+      "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",
+      "agentId": "GLOBAL_OMNISCIENCE_REASONER",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 4.74,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T11:54:01.240Z"
+    },
+    {
+      "id": "eval_1793015641213",
+      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
+      "agentId": "HALLUCINATING_TESTER",
+      "verdict": "REJECTED_HALLUCINATION",
+      "confidenceScore": 0.25,
+      "entropyBits": 3.91,
+      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
+      "timestamp": "2026-10-26T11:54:01.213Z"
+    },
+    {
+      "id": "eval_1793015641212",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T11:54:01.212Z"
+    },
     {
       "id": "eval_1793015077301",
       "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",
