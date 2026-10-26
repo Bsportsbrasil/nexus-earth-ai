@@ -222,18 +222,23 @@ const I18nEngine = (() => {
       adminGateDesc: 'Centro de Comando e Controle Soberano isolado da interface pública. Autentique-se com sua Chave Mestra (NEXUS_ADMIN_KEY) para comandar contas, RBAC, intervenção cognitiva de agentes, WAF, detecção de más intenções e o Master Kill-Switch.',
       adminGatePlaceholder: 'Chave Mestra de Administradora...',
       adminGateBtn: '🔐 Desbloquear Centro de Comando C2',
-      adminSidebarHeader: 'PAINEL SOBERANO C2',
-      adminSidebarSub: '10 Pilares Corporativos',
+      adminSidebarHeader: 'MÓDULOS CORPORATIVOS',
+      adminSidebarSub: 'Soberano C2 • v2.6 Enterprise',
+      adminTabAccounts: '1. Contas, Clientes VIP & RBAC',
+      adminTabAgents: '2. Governança & Kill-Switch',
+      adminTabSandbox: '3. Sandbox & Guardrails',
+      adminTabWaf: '4. WAF, Radar & Backups',
+      adminTabMlsecops: '5. MLSecOps & Anti-Poisoning',
+      adminTabAudit: '6. Auditoria Imutável (SHA-256)',
+      adminTabRegulatory: '7. Dossiês XAI (EU AI Act & LGPD)',
+      adminTabDirectives: '8. Conselheiro de Diretrizes',
+      adminTabLennox: '9. LENNOX — Guardião Soberano',
+      adminTabSupervisor: '10. Supervisão Suprema (HITL)',
       adminTabOverview: 'Visão Geral & Topologia',
       adminTabTenants: 'Gestão de Contas & Tenants',
-      adminTabAgents: 'Agentes & Sandbox',
-      adminTabWaf: 'WAF & MLSecOps',
       adminTabPentest: 'Pentest & Provas Formais',
       adminTabBackups: 'Backups AES-256',
       adminTabTelemetry: 'Telemetria & Joule',
-      adminTabAudit: 'Auditoria SHA-256 Merkle',
-      adminTabLennox: 'Governança Lennox',
-      adminTabSupervisor: 'Supervisor dos Agentes',
       adminThreatTitle: '🚨 RADAR DE MÁS INTENÇÕES & WAF ATIVO:',
       adminThreatDesc: 'Monitorando todas as interações de usuários e agentes em tempo real...',
       adminThreatInspect: '🔍 Inspecionar Alertas',
@@ -340,7 +345,36 @@ const I18nEngine = (() => {
       earthMenuView: 'View ▾',
       earthMenuAdd: 'Add ▾',
       earthMenuTools: 'Tools ▾',
-      earthMenuHelp: 'Help ▾'
+      earthMenuHelp: 'Help ▾',
+      adminTopTag: 'MASTER C2 SOVEREIGN CONSOLE',
+      adminChainBadge: 'SHA-256 AUDIT INTACT',
+      adminSupervisorBtn: 'Supreme Supervisor (/supervisor)',
+      adminPublicBtn: 'View Public Platform',
+      adminLockBtn: 'Lock Console',
+      adminGateTag: 'Absolute Technical Sovereignty',
+      adminGateTitle: 'Master C2 Dashboard',
+      adminGateDesc: 'Sovereign Command & Control Center isolated from public interface. Authenticate with your Master Key (NEXUS_ADMIN_KEY) to govern accounts, RBAC, agent cognitive intervention, WAF, malicious intent detection, and the Master Kill-Switch.',
+      adminGatePlaceholder: 'Administrator Master Key...',
+      adminGateBtn: '🔐 Unlock C2 Command Center',
+      adminSidebarHeader: 'CORPORATE MODULES',
+      adminSidebarSub: 'Sovereign C2 • v2.0',
+      adminTabAccounts: '1. Accounts, VIP Clients & RBAC',
+      adminTabAgents: '2. Governance & Kill-Switch',
+      adminTabSandbox: '3. Sandbox & Guardrails',
+      adminTabWaf: '4. WAF, Radar & Backups',
+      adminTabMlsecops: '5. MLSecOps & Anti-Poisoning',
+      adminTabAudit: '6. Immutable Audit (SHA-256)',
+      adminTabDirectives: '7. Directives Advisor',
+      adminTabLennox: '8. LENNOX — Sovereign Guardian',
+      adminTabRegulatory: '9. XAI Dossiers (EU AI Act & LGPD)',
+      adminTabSupervisor: '10. Supreme Supervision (HITL)',
+      adminThreatTitle: '🚨 MALICIOUS INTENT RADAR & WAF ACTIVE:',
+      adminThreatDesc: 'Monitoring all user and agent interactions in real-time...',
+      adminThreatInspect: '🔍 Inspect Alerts',
+      adminThreatSimulate: '🧪 Simulate WAF Attack',
+      adminSecHeaderTag: 'Sovereign Command & Control (Master C2) • Zero-Trust Governance',
+      adminSecHeaderTitle: 'Sovereign Command and Control Center',
+      adminSecHeaderDesc: 'Final authority over all registered accounts, VIP clients, per-user autonomous agents, real-time cognitive intervention, sandbox guardrails, WAF against malicious intent, MLSecOps, and immutable cryptographic audit.'
     },
 
     es: {
@@ -440,7 +474,41 @@ const I18nEngine = (() => {
       earthMenuView: 'Ver ▾',
       earthMenuAdd: 'Añadir ▾',
       earthMenuTools: 'Herramientas ▾',
-      earthMenuHelp: 'Ayuda ▾'
+      earthMenuHelp: 'Ayuda ▾',
+      adminTopTag: 'CONSOLA SOBERANA MASTER C2',
+      adminChainBadge: 'AUDITORÍA SHA-256 ÍNTEGRA',
+      adminSupervisorBtn: 'Supervisor Supremo (/supervisor)',
+      adminPublicBtn: 'Ver Plataforma Pública',
+      adminLockBtn: 'Bloquear Consola',
+      adminGateTag: 'Soberanía Técnica Absoluta',
+      adminGateTitle: 'Master C2 Dashboard',
+      adminGateDesc: 'Centro de Comando y Control Soberano aislado de la interfaz pública. Autentíquese con su Clave Maestra (NEXUS_ADMIN_KEY) para gobernar cuentas, RBAC, intervención cognitiva de agentes, WAF, detección de malas intenciones y el Master Kill-Switch.',
+      adminGatePlaceholder: 'Clave Maestra de Administradora...',
+      adminGateBtn: '🔐 Desbloquear Centro de Comando C2',
+      adminSidebarHeader: 'MÓDULOS CORPORATIVOS',
+      adminSidebarSub: 'C2 Soberano • v2.6 Enterprise',
+      adminTabAccounts: '1. Cuentas, Clientes VIP & RBAC',
+      adminTabAgents: '2. Gobernanza & Kill-Switch',
+      adminTabSandbox: '3. Sandbox & Guardrails',
+      adminTabWaf: '4. WAF, Radar & Respaldos',
+      adminTabMlsecops: '5. MLSecOps & Anti-Envenenamiento',
+      adminTabAudit: '6. Auditoría Inmutable (SHA-256)',
+      adminTabRegulatory: '7. Dossiers XAI (EU AI Act & LGPD)',
+      adminTabDirectives: '8. Consejero de Directivas',
+      adminTabLennox: '9. LENNOX — Guardián Soberano',
+      adminTabSupervisor: '10. Supervisión Suprema (HITL)',
+      adminTabOverview: 'Visión General & Topología',
+      adminTabTenants: 'Gestión de Cuentas & Tenants',
+      adminTabPentest: 'Pentest & Pruebas Formales',
+      adminTabBackups: 'Respaldos AES-256',
+      adminTabTelemetry: 'Telemetría & Joule',
+      adminThreatTitle: '🚨 RADAR DE MALAS INTENCIONES & WAF ACTIVO:',
+      adminThreatDesc: 'Monitoreando todas las interacciones de usuarios y agentes en tiempo real...',
+      adminThreatInspect: '🔍 Inspeccionar Alertas',
+      adminThreatSimulate: '🧪 Simular Ataque al WAF',
+      adminSecHeaderTag: 'Sovereign Command & Control (Master C2) • Gobernanza Zero-Trust',
+      adminSecHeaderTitle: 'Centro de Comando y Control Soberano',
+      adminSecHeaderDesc: 'Autoridad final sobre todas las cuentas registradas, clientes VIP, agentes autónomos por usuario, intervención cognitiva en tiempo real, sandbox guardrails, WAF contra malas intenciones, MLSecOps y auditoría criptográfica inmutable.'
     },
 
     fr: {
@@ -1311,72 +1379,97 @@ const I18nEngine = (() => {
    */
   function applyAdminTranslations(tDict) {
     if (!tDict) return;
-    updateElementText('c2-chain-badge', tDict.adminChainBadge);
+    const ptFallback = TRANSLATIONS['pt'] || {};
+    const safeStr = (val, fb = '') => (typeof val === 'string' && val.trim() !== '') ? val : fb;
+
+    const chainText = safeStr(tDict.adminChainBadge, safeStr(ptFallback.adminChainBadge, 'AUDITORIA SHA-256 ÍNTEGRA'));
+    updateElementText('c2-chain-badge', chainText);
     
     // Top Bar buttons
-    const supLink = document.querySelector('a[href="/supervisor"]');
+    const supText = safeStr(tDict.adminSupervisorBtn, safeStr(ptFallback.adminSupervisorBtn, 'Supervisor Supremo (/supervisor)'));
+    const supLink = document.getElementById('c2-supervisor-text');
     if (supLink) {
-      supLink.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>${tDict.adminSupervisorBtn}`;
+      supLink.textContent = supText;
+    } else {
+      const supA = document.querySelector('a[href="/supervisor"]');
+      if (supA) {
+        supA.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>${supText}`;
+      }
     }
+
     const pubLink = document.querySelector('a[href="/"]');
     if (pubLink && document.getElementById('security')) {
-      pubLink.textContent = tDict.adminPublicBtn;
+      pubLink.textContent = safeStr(tDict.adminPublicBtn, safeStr(ptFallback.adminPublicBtn, 'Ver Plataforma Pública'));
     }
-    updateElementText('admin-logout-btn', tDict.adminLockBtn);
+    updateElementText('admin-logout-btn', safeStr(tDict.adminLockBtn, safeStr(ptFallback.adminLockBtn, 'Bloquear Console')));
 
     // Login Gate
     const gateTag = document.querySelector('#admin-auth-gate .section-tag');
-    if (gateTag) gateTag.textContent = tDict.adminGateTag;
+    if (gateTag) gateTag.textContent = safeStr(tDict.adminGateTag, safeStr(ptFallback.adminGateTag, 'Soberania Técnica Absoluta'));
     const gateTitle = document.querySelector('#admin-auth-gate h2');
-    if (gateTitle) gateTitle.textContent = tDict.adminGateTitle;
+    if (gateTitle) gateTitle.textContent = safeStr(tDict.adminGateTitle, safeStr(ptFallback.adminGateTitle, 'Master C2 Dashboard'));
     const gateDesc = document.querySelector('#admin-auth-gate p');
-    if (gateDesc) gateDesc.textContent = tDict.adminGateDesc;
+    if (gateDesc) gateDesc.textContent = safeStr(tDict.adminGateDesc, safeStr(ptFallback.adminGateDesc, 'Centro de Comando e Controle Soberano isolado da interface pública.'));
     const passInp = document.getElementById('admin-pass-input');
-    if (passInp) passInp.placeholder = tDict.adminGatePlaceholder;
-    updateElementText('admin-login-btn', tDict.adminGateBtn);
+    if (passInp) passInp.placeholder = safeStr(tDict.adminGatePlaceholder, safeStr(ptFallback.adminGatePlaceholder, 'Chave Mestra de Administradora...'));
+    updateElementText('admin-login-btn', safeStr(tDict.adminGateBtn, safeStr(ptFallback.adminGateBtn, '🔐 Desbloquear Centro de Comando C2')));
 
     // Sidebar 10 Pillars
     const sidebarHeader = document.querySelector('.c2-sidebar-header-title');
-    if (sidebarHeader) sidebarHeader.textContent = tDict.adminSidebarHeader;
+    if (sidebarHeader) sidebarHeader.textContent = safeStr(tDict.adminSidebarHeader, safeStr(ptFallback.adminSidebarHeader, 'MÓDULOS CORPORATIVOS'));
     const sidebarSub = document.querySelector('.c2-sidebar-header-sub');
-    if (sidebarSub) sidebarSub.textContent = tDict.adminSidebarSub;
+    if (sidebarSub) sidebarSub.textContent = safeStr(tDict.adminSidebarSub, safeStr(ptFallback.adminSidebarSub, 'Soberano C2 • v2.6 Enterprise'));
 
     const tabMap = {
-      'pane-overview': tDict.adminTabOverview,
-      'pane-tenants': tDict.adminTabTenants,
-      'pane-agents': tDict.adminTabAgents,
-      'pane-waf': tDict.adminTabWaf,
-      'pane-pentest': tDict.adminTabPentest,
-      'pane-backups': tDict.adminTabBackups,
-      'pane-telemetry': tDict.adminTabTelemetry,
-      'pane-audit': tDict.adminTabAudit,
-      'pane-lennox': tDict.adminTabLennox,
-      'pane-supervisor': tDict.adminTabSupervisor
+      'tab-accounts': safeStr(tDict.adminTabAccounts, safeStr(ptFallback.adminTabAccounts, '1. Contas, Clientes VIP & RBAC')),
+      'tab-agents': safeStr(tDict.adminTabAgents, safeStr(ptFallback.adminTabAgents, '2. Governança & Kill-Switch')),
+      'tab-sandbox': safeStr(tDict.adminTabSandbox, safeStr(ptFallback.adminTabSandbox, '3. Sandbox & Guardrails')),
+      'tab-waf': safeStr(tDict.adminTabWaf, safeStr(ptFallback.adminTabWaf, '4. WAF, Radar & Backups')),
+      'tab-mlsecops': safeStr(tDict.adminTabMlsecops, safeStr(ptFallback.adminTabMlsecops, '5. MLSecOps & Anti-Poisoning')),
+      'tab-audit': safeStr(tDict.adminTabAudit, safeStr(ptFallback.adminTabAudit, '6. Auditoria Imutável (SHA-256)')),
+      'tab-regulatory': safeStr(tDict.adminTabRegulatory, safeStr(ptFallback.adminTabRegulatory, '7. Dossiês XAI (EU AI Act & LGPD)')),
+      'tab-directives': safeStr(tDict.adminTabDirectives, safeStr(ptFallback.adminTabDirectives, '8. Conselheiro de Diretrizes')),
+      'tab-lennox': safeStr(tDict.adminTabLennox, safeStr(ptFallback.adminTabLennox, '9. LENNOX — Guardião Soberano')),
+      'tab-supervisor': safeStr(tDict.adminTabSupervisor, safeStr(ptFallback.adminTabSupervisor, '10. Supervisão Suprema (HITL)')),
+      // Aliases
+      'pane-overview': safeStr(tDict.adminTabAccounts, safeStr(ptFallback.adminTabAccounts, '1. Contas, Clientes VIP & RBAC')),
+      'pane-tenants': safeStr(tDict.adminTabAccounts, safeStr(ptFallback.adminTabAccounts, '1. Contas, Clientes VIP & RBAC')),
+      'pane-agents': safeStr(tDict.adminTabAgents, safeStr(ptFallback.adminTabAgents, '2. Governança & Kill-Switch')),
+      'pane-waf': safeStr(tDict.adminTabWaf, safeStr(ptFallback.adminTabWaf, '4. WAF, Radar & Backups')),
+      'pane-pentest': safeStr(tDict.adminTabSandbox, safeStr(ptFallback.adminTabSandbox, '3. Sandbox & Guardrails')),
+      'pane-backups': safeStr(tDict.adminTabWaf, safeStr(ptFallback.adminTabWaf, '4. WAF, Radar & Backups')),
+      'pane-telemetry': safeStr(tDict.adminTabMlsecops, safeStr(ptFallback.adminTabMlsecops, '5. MLSecOps & Anti-Poisoning')),
+      'pane-audit': safeStr(tDict.adminTabAudit, safeStr(ptFallback.adminTabAudit, '6. Auditoria Imutável (SHA-256)')),
+      'pane-lennox': safeStr(tDict.adminTabLennox, safeStr(ptFallback.adminTabLennox, '9. LENNOX — Guardião Soberano')),
+      'pane-supervisor': safeStr(tDict.adminTabSupervisor, safeStr(ptFallback.adminTabSupervisor, '10. Supervisão Suprema (HITL)'))
     };
 
     document.querySelectorAll('.c2-enterprise-sidebar .c2-tab-btn').forEach(btn => {
       const tab = btn.getAttribute('data-tab');
       const label = tabMap[tab];
-      if (label) {
-        const span = btn.querySelector('span:not(.tab-icon):not(.active-dot):not(.c2-sub-count)');
+      if (typeof label === 'string' && label) {
+        const span = btn.querySelector('.tab-text') || btn.querySelector('span:not(.tab-icon):not(.active-dot):not(.c2-sub-count)');
         if (span) span.textContent = label;
       }
     });
 
     // Threat Banner
     const threatTitle = document.querySelector('#c2-threat-banner strong');
-    if (threatTitle) threatTitle.textContent = tDict.adminThreatTitle;
+    if (threatTitle) threatTitle.textContent = safeStr(tDict.adminThreatTitle, safeStr(ptFallback.adminThreatTitle, '🚨 RADAR DE MÁS INTENÇÕES & WAF ATIVO:'));
     const threatDesc = document.getElementById('c2-latest-threat-text');
-    if (threatDesc && !threatDesc.getAttribute('data-has-custom-threat')) threatDesc.textContent = tDict.adminThreatDesc;
-    updateElementText('c2-sim-attack-btn', tDict.adminThreatSimulate);
+    if (threatDesc && !threatDesc.getAttribute('data-has-custom-threat')) {
+      threatDesc.textContent = safeStr(tDict.adminThreatDesc, safeStr(ptFallback.adminThreatDesc, 'Monitorando todas as interações de usuários e agentes em tempo real...'));
+    }
+    updateElementText('c2-sim-attack-btn', safeStr(tDict.adminThreatSimulate, safeStr(ptFallback.adminThreatSimulate, '🧪 Simular Ataque ao WAF')));
+    updateElementText('c2-jump-threats-btn', safeStr(tDict.adminThreatInspect, safeStr(ptFallback.adminThreatInspect, '🔍 Inspecionar Alertas')));
 
     // Section Header
     const secTag = document.querySelector('#security .section-tag');
-    if (secTag) secTag.textContent = tDict.adminSecHeaderTag;
+    if (secTag) secTag.textContent = safeStr(tDict.adminSecHeaderTag, safeStr(ptFallback.adminSecHeaderTag, 'Sovereign Command & Control (Master C2) • Governança Zero-Trust'));
     const secTitle = document.querySelector('#security .section-title');
-    if (secTitle) secTitle.textContent = tDict.adminSecHeaderTitle;
+    if (secTitle) secTitle.textContent = safeStr(tDict.adminSecHeaderTitle, safeStr(ptFallback.adminSecHeaderTitle, 'Centro de Comando e Controle Soberano'));
     const secDesc = document.querySelector('#security .section-desc');
-    if (secDesc) secDesc.textContent = tDict.adminSecHeaderDesc;
+    if (secDesc) secDesc.textContent = safeStr(tDict.adminSecHeaderDesc, safeStr(ptFallback.adminSecHeaderDesc, 'Autoridade final sobre todas as contas cadastradas, clientes VIP, agentes autônomos por usuário, intervenção cognitiva em tempo real, sandbox guardrails, WAF contra más intenções, MLSecOps e auditoria criptográfica imutável.'));
   }
 
   function updateElementText(id, text) {

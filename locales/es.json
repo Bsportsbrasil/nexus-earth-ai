@@ -80,5 +80,16 @@
     "privacy": "Privacidad y GDPR",
     "installApp": "Instalar Aplicación en Smartphone",
     "creatorConsole": "Terminal Administrativo C2"
+  },
+  "admin": {
+    "topTag": "CONSOLA SOBERANA MASTER C2",
+    "chainBadge": "AUDITORÍA SHA-256 ÍNTEGRA",
+    "supervisorBtn": "Supervisor Supremo (/supervisor)",
+    "publicBtn": "Ver Plataforma Pública",
+    "lockBtn": "Bloquear Consola",
+    "gateTag": "Soberanía Técnica Absoluta",
+    "gateTitle": "Master C2 Dashboard",
+    "gateDesc": "Centro de Comando y Control Soberano aislado de la interfaz pública.",
+    "gateBtn": "🔐 Desbloquear Centro de Comando C2"
   }
 }

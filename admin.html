@@ -13,38 +13,180 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* Tier-1 Enterprise Big Tech C2 Executive Console Architecture */
     .c2-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
     .c2-tab-btn {
-      padding: 0.55rem 1rem; border-radius: 8px; border: 1px solid var(--border);
-      background: rgba(15,23,42,0.75); color: var(--text-secondary); cursor: pointer;
-      font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; transition: all 0.2s;
+      padding: 0.55rem 0.85rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(15,23,42,0.45); color: #94a3b8; cursor: pointer;
+      font-family: var(--font-sans); font-size: 0.78rem; font-weight: 500; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex; align-items: center; gap: 0.6rem; text-align: left; width: 100%;
     }
-    .c2-tab-btn.active, .c2-tab-btn:hover {
-      border-color: var(--cyan); color: #fff; background: rgba(0,245,255,0.14);
-      box-shadow: 0 0 18px rgba(0,245,255,0.18);
+    .c2-tab-btn:hover {
+      background: rgba(255,255,255,0.06); color: #f1f5f9; border-color: rgba(255,255,255,0.15);
+    }
+    .c2-tab-btn.active {
+      background: linear-gradient(90deg, rgba(0,245,255,0.15) 0%, rgba(0,245,255,0.02) 100%);
+      border-color: rgba(0,245,255,0.45); border-left: 3px solid var(--cyan);
+      color: #ffffff; font-weight: 600; box-shadow: 0 0 16px rgba(0,245,255,0.12);
     }
     .c2-pane { display: none; }
-    .c2-pane.active { display: block; }
-    .c2-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; background: rgba(2,4,12,0.75); }
+    .c2-pane.active { display: block; animation: c2FadeIn 0.25s ease-out; }
+    @keyframes c2FadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .c2-table-wrap {
+      overflow-x: auto; border: 1px solid rgba(255,255,255,0.09); border-radius: 12px;
+      background: rgba(4,8,20,0.85); backdrop-filter: blur(16px); box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
     .c2-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; text-align: left; }
     .c2-table th {
-      padding: 0.65rem 0.75rem; background: rgba(15,23,42,0.9); color: var(--cyan);
-      font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; border-bottom: 1px solid var(--border);
+      padding: 0.75rem 0.9rem; background: rgba(15,23,42,0.95); color: var(--cyan);
+      font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    .c2-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: middle; }
-    .c2-table tr:hover td { background: rgba(0,245,255,0.03); }
+    .c2-table td { padding: 0.75rem 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
+    .c2-table tr:hover td { background: rgba(0,245,255,0.04); }
     .c2-action-btn {
-      padding: 3px 8px; font-size: 0.68rem; border-radius: 5px; border: 1px solid var(--border);
+      padding: 4px 10px; font-size: 0.7rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.05); color: #e2e8f0; cursor: pointer; margin: 2px; font-family: var(--font-mono);
+      transition: all 0.15s ease;
     }
-    .c2-action-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+    .c2-action-btn:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,245,255,0.1); }
     .c2-action-btn.danger { border-color: rgba(244,63,94,0.45); color: #fda4af; background: rgba(244,63,94,0.1); }
-    .c2-action-btn.danger:hover { background: var(--rose); color: #fff; }
+    .c2-action-btn.danger:hover { background: var(--rose); color: #fff; box-shadow: 0 0 12px rgba(244,63,94,0.4); }
     .c2-action-btn.ok { border-color: rgba(16,185,129,0.45); color: #6ee7b7; background: rgba(16,185,129,0.1); }
+    .c2-action-btn.ok:hover { background: var(--emerald); color: #fff; }
+
+    /* Executive KPI Grid & Tier-1 Glass Cards */
+    .c2-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 1080px) {
+      .c2-kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+    }
+    @media (max-width: 640px) {
+      .c2-kpi-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+    }
+    .c2-kpi-card {
+      background: linear-gradient(145deg, rgba(15,23,42,0.78) 0%, rgba(3,7,18,0.92) 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 1.15rem 1.25rem;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .c2-kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--card-accent, var(--cyan)), transparent);
+      opacity: 0.8;
+    }
+    .c2-kpi-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0,245,255,0.35);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.65), 0 0 24px rgba(0,245,255,0.12);
+    }
+    .c2-kpi-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .c2-kpi-title {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .c2-kpi-badge {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .c2-kpi-val {
+      font-family: var(--font-mono);
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #f8fafc;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .c2-kpi-sub {
+      font-size: 0.74rem;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .c2-pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      display: inline-block;
+      box-shadow: 0 0 8px var(--cyan);
+      animation: c2Pulse 2s infinite ease-in-out;
+    }
+    @keyframes c2Pulse {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.7; }
+    }
+
+    /* Executive SOC Threat Radar Banner */
     .c2-threat-banner {
-      background: linear-gradient(90deg, rgba(244,63,94,0.22), rgba(168,85,247,0.18));
-      border: 1px solid var(--rose); border-radius: 10px; padding: 0.85rem 1.1rem;
-      margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+      background: linear-gradient(90deg, rgba(244,63,94,0.16) 0%, rgba(15,23,42,0.85) 100%);
+      border: 1px solid rgba(244,63,94,0.38);
+      border-left: 4px solid var(--rose);
+      border-radius: 12px;
+      padding: 0.95rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 24px rgba(244,63,94,0.14);
+    }
+    .c2-nav-group-title {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #64748b;
+      text-transform: uppercase;
+      padding: 0.65rem 0.6rem 0.25rem;
+      margin-top: 0.35rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .c2-nav-group-title:first-child {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
     }
   </style>
 </head>
@@ -59,7 +201,11 @@
         <span class="logo-tag" data-i18n="adminTopTag" style="border-color:var(--rose);color:var(--rose)">MASTER C2 SOVEREIGN CONSOLE</span>
       </div>
       <div class="nav-status">
-                <!-- Global Multi-Language Selector with Intelligent Auto-Detection -->
+        <!-- Live System Telemetry Status Chip -->
+        <span class="agent-badge DONE" style="font-size:0.68rem;display:inline-flex;align-items:center;gap:6px;">
+          <span class="c2-pulse-dot" style="background:#10b981;box-shadow:0 0 8px #10b981"></span> CLUSTER ONLINE
+        </span>
+        <!-- Global Multi-Language Selector with Intelligent Auto-Detection -->
         <div class="lang-selector-container" style="position:relative;display:inline-block;">
           <button id="lang-toggle-btn" class="btn-secondary nav-btn" title="Selecionar Idioma Global (Auto-detectado)" aria-haspopup="true" aria-expanded="false" style="display:inline-flex;align-items:center;gap:0.35rem;padding:0.35rem 0.65rem;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -70,12 +216,12 @@
             <!-- Populated dynamically by I18nEngine -->
           </div>
         </div>
-        <span id="c2-chain-badge" class="agent-badge DONE" style="font-size:0.68rem">SHA-256 AUDIT INTACT</span>
-        <a href="/supervisor" class="btn-secondary" style="text-decoration:none;border-color:var(--cyan);color:var(--cyan)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          Supervisor Supremo (/supervisor)
+        <span id="c2-chain-badge" class="agent-badge DONE" style="font-size:0.68rem">AUDITORIA SHA-256 ÍNTEGRA</span>
+        <a href="/supervisor" id="c2-supervisor-link" class="btn-secondary" style="text-decoration:none;border-color:var(--cyan);color:var(--cyan);display:inline-flex;align-items:center;gap:6px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <span id="c2-supervisor-text">Supervisor Supremo (/supervisor)</span>
         </a>
-        <a href="/" class="btn-secondary" data-i18n="adminPublicBtn" style="text-decoration:none">Ver Plataforma Pública</a>
+        <a href="/" class="btn-secondary" id="c2-public-link" data-i18n="adminPublicBtn" style="text-decoration:none">Ver Plataforma Pública</a>
         <button id="admin-logout-btn" class="btn-secondary" data-i18n="adminLockBtn" style="display:none">Bloquear Console</button>
       </div>
     </div>
@@ -116,11 +262,56 @@
     </div>
 
     <!-- Top KPI Summary Strip -->
-    <div class="coop-scores-grid" style="margin-bottom:1.25rem">
-      <div class="cc-mini-stat"><span id="c2-kpi-accounts">0</span><small>Contas &amp; Empresas Cadastradas</small></div>
-      <div class="cc-mini-stat"><span id="c2-kpi-agents">0</span><small>Agentes Vinculados (Ativos/Pausados)</small></div>
-      <div class="cc-mini-stat"><span id="c2-kpi-threats" style="color:var(--rose)">0</span><small>Ameaças / Más Intenções Contidas</small></div>
-      <div class="cc-mini-stat"><span id="c2-kpi-audit">0</span><small>Blocos de Auditoria SHA-256</small></div>
+    <!-- Tier-1 Enterprise Big Tech Executive KPI Deck -->
+    <div class="c2-kpi-grid">
+      <div class="c2-kpi-card" style="--card-accent: var(--cyan)">
+        <div class="c2-kpi-head">
+          <span class="c2-kpi-title"><span class="tab-icon">👥</span> CONTAS &amp; TENANTS</span>
+          <span class="c2-kpi-badge" style="color:var(--cyan);border-color:rgba(0,245,255,0.3)"><span class="c2-pulse-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan)"></span> RBAC ATIVO</span>
+        </div>
+        <div class="c2-kpi-val" id="c2-kpi-accounts">0</div>
+        <div class="c2-kpi-sub">
+          <span>Empresas &amp; Clientes VIP</span>
+          <span style="color:var(--cyan);font-family:var(--font-mono);font-size:0.68rem">100% C2</span>
+        </div>
+      </div>
+
+      <div class="c2-kpi-card" style="--card-accent: var(--violet)">
+        <div class="c2-kpi-head">
+          <span class="c2-kpi-title"><span class="tab-icon">🧠</span> AGENTES AUTÔNOMOS</span>
+          <span class="c2-kpi-badge" style="color:var(--violet);border-color:rgba(168,85,247,0.3)"><span class="c2-pulse-dot" style="background:var(--violet);box-shadow:0 0 8px var(--violet)"></span> SANDBOX</span>
+        </div>
+        <div class="c2-kpi-val" id="c2-kpi-agents" style="color:var(--violet)">0</div>
+        <div class="c2-kpi-sub">
+          <span>Vinculados &amp; Em Execução</span>
+          <span style="color:var(--violet);font-family:var(--font-mono);font-size:0.68rem">ZERO-POISON</span>
+        </div>
+      </div>
+
+      <div class="c2-kpi-card" style="--card-accent: var(--rose)">
+        <div class="c2-kpi-head">
+          <span class="c2-kpi-title"><span class="tab-icon">🚨</span> DEFESA &amp; WAF</span>
+          <span class="c2-kpi-badge" style="color:var(--rose);border-color:rgba(244,63,94,0.3)"><span class="c2-pulse-dot" style="background:var(--rose);box-shadow:0 0 8px var(--rose)"></span> BLOQUEIO</span>
+        </div>
+        <div class="c2-kpi-val" id="c2-kpi-threats" style="color:var(--rose)">0</div>
+        <div class="c2-kpi-sub">
+          <span>Más Intenções Mitigadas</span>
+          <span style="color:var(--rose);font-family:var(--font-mono);font-size:0.68rem">BLINDADO</span>
+        </div>
+      </div>
+
+      <div class="c2-kpi-card" style="--card-accent: var(--emerald)">
+        <div class="c2-kpi-head">
+          <span class="c2-kpi-title"><span class="tab-icon">⛓️</span> LEDGER SHA-256</span>
+          <span class="c2-kpi-badge" style="color:var(--emerald);border-color:rgba(16,185,129,0.3)"><span class="c2-pulse-dot" style="background:var(--emerald);box-shadow:0 0 8px var(--emerald)"></span> MERKLE</span>
+        </div>
+        <div class="c2-kpi-val" id="c2-kpi-audit" style="color:var(--emerald)">0</div>
+        <div class="c2-kpi-sub">
+          <span>Blocos Criptográficos Imutáveis</span>
+          <span style="color:var(--emerald);font-family:var(--font-mono);font-size:0.68rem">100% AUDIT</span>
+        </div>
+      </div>
+    </div>
     </div>
 
     <!-- Master C2 Navigation Tabs (6 Pillars) -->
@@ -128,51 +319,62 @@
     <div class="c2-enterprise-layout" style="display:flex;gap:1.5rem;align-items:flex-start;margin-top:1.25rem;">
       
       <!-- 1. Left Navigation Sidebar (Enterprise Standard) -->
-      <aside class="c2-enterprise-sidebar glass-panel" style="width:310px;min-width:310px;flex-shrink:0;position:sticky;top:80px;border-radius:12px;padding:0.85rem;display:flex;flex-direction:column;gap:0.4rem;max-height:calc(100vh - 100px);overflow-y:auto;border:1px solid rgba(0,245,255,0.25);background:rgba(4,8,20,0.94);box-shadow:0 12px 35px rgba(0,0,0,0.7);backdrop-filter:blur(24px);z-index:100;">
+      <aside class="c2-enterprise-sidebar glass-panel" style="width:310px;min-width:310px;flex-shrink:0;position:sticky;top:80px;border-radius:12px;padding:0.85rem;display:flex;flex-direction:column;gap:0.35rem;max-height:calc(100vh - 100px);overflow-y:auto;border:1px solid rgba(0,245,255,0.22);background:rgba(4,8,20,0.95);box-shadow:0 12px 35px rgba(0,0,0,0.7);backdrop-filter:blur(24px);z-index:100;">
         <div style="display:flex;align-items:center;justify-content:space-between;padding:0.4rem 0.6rem 0.65rem;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:0.4rem">
-          <span style="font-family:var(--font-display);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;color:var(--cyan);text-transform:uppercase">MÓDULOS CORPORATIVOS</span>
-          <span class="agent-badge DONE" style="font-size:0.62rem">C2 SOBERANO</span>
+          <div>
+            <div class="c2-sidebar-header-title" style="font-family:var(--font-display);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;color:var(--cyan);text-transform:uppercase">MÓDULOS CORPORATIVOS</div>
+            <div class="c2-sidebar-header-sub" style="font-size:0.65rem;color:var(--text-muted);margin-top:2px">Soberano C2 • v2.6 Enterprise</div>
+          </div>
+          <span class="agent-badge DONE" style="font-size:0.62rem">TIER-1</span>
         </div>
-        <div class="c2-tabs" style="display:flex;flex-direction:column;gap:0.35rem;margin:0;">
-          <button class="c2-tab-btn active" data-tab="tab-accounts" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
-            <span>👥</span>
-            <span>1. Contas, Clientes VIP &amp; RBAC</span>
+
+        <div class="c2-tabs" style="display:flex;flex-direction:column;gap:0.3rem;margin:0;">
+          <div class="c2-nav-group-title">IDENTIDADE &amp; ACESSO</div>
+          <button class="c2-tab-btn active" data-tab="tab-accounts">
+            <span class="tab-icon">👥</span>
+            <span class="tab-text">1. Contas, Clientes VIP &amp; RBAC</span>
           </button>
-          <button class="c2-tab-btn" data-tab="tab-agents" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
-            <span>🧠</span>
-            <span>2. Governança &amp; Kill-Switch</span>
+
+          <div class="c2-nav-group-title">DEFESA &amp; BLINDAGEM COGNITIVA</div>
+          <button class="c2-tab-btn" data-tab="tab-agents">
+            <span class="tab-icon">🧠</span>
+            <span class="tab-text">2. Governança &amp; Kill-Switch</span>
           </button>
-          <button class="c2-tab-btn" data-tab="tab-sandbox" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
-            <span>🛡️</span>
-            <span>3. Sandbox &amp; Guardrails</span>
+          <button class="c2-tab-btn" data-tab="tab-sandbox">
+            <span class="tab-icon">🛡️</span>
+            <span class="tab-text">3. Sandbox &amp; Guardrails</span>
           </button>
-          <button class="c2-tab-btn" data-tab="tab-waf" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
-            <span>🚨</span>
-            <span>4. WAF, Radar &amp; Backups</span>
+          <button class="c2-tab-btn" data-tab="tab-waf">
+            <span class="tab-icon">🚨</span>
+            <span class="tab-text">4. WAF, Radar &amp; Backups</span>
           </button>
-          <button class="c2-tab-btn" data-tab="tab-mlsecops" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
-            <span>🧬</span>
-            <span>5. MLSecOps &amp; Anti-Poisoning</span>
+          <button class="c2-tab-btn" data-tab="tab-mlsecops">
+            <span class="tab-icon">🧬</span>
+            <span class="tab-text">5. MLSecOps &amp; Anti-Poisoning</span>
           </button>
-          <button class="c2-tab-btn" data-tab="tab-audit" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;">
-            <span>📜</span>
-            <span>6. Auditoria Imutável (SHA-256)</span>
+
+          <div class="c2-nav-group-title">AUDITORIA &amp; CONFORMIDADE LEGAL</div>
+          <button class="c2-tab-btn" data-tab="tab-audit">
+            <span class="tab-icon">📜</span>
+            <span class="tab-text">6. Auditoria Imutável (SHA-256)</span>
           </button>
-          <button class="c2-tab-btn" data-tab="tab-directives" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;border-color:var(--cyan);color:var(--cyan);">
-            <span>🎙️</span>
-            <span>7. Conselheiro de Diretrizes</span>
+          <button class="c2-tab-btn" data-tab="tab-regulatory">
+            <span class="tab-icon">⚖️</span>
+            <span class="tab-text">7. Dossiês XAI (EU AI Act &amp; LGPD)</span>
           </button>
-          <button class="c2-tab-btn" data-tab="tab-lennox" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;border-color:var(--rose);color:var(--rose);font-weight:700;">
-            <span>🛡️</span>
-            <span>8. LENNOX — Guardião Soberano</span>
+
+          <div class="c2-nav-group-title">SUPERVISÃO EXECUTIVA &amp; IA</div>
+          <button class="c2-tab-btn" data-tab="tab-directives">
+            <span class="tab-icon">🎙️</span>
+            <span class="tab-text">8. Conselheiro de Diretrizes</span>
           </button>
-          <button class="c2-tab-btn" data-tab="tab-regulatory" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;border-color:var(--emerald);color:var(--emerald);font-weight:700;">
-            <span>📜</span>
-            <span>9. Dossiês XAI (EU AI Act &amp; LGPD)</span>
+          <button class="c2-tab-btn" data-tab="tab-lennox">
+            <span class="tab-icon">🛡️</span>
+            <span class="tab-text">9. LENNOX — Guardião Soberano</span>
           </button>
-          <button class="c2-tab-btn" data-tab="tab-supervisor" style="width:100%;text-align:left;display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;border-color:var(--cyan);color:var(--cyan);font-weight:700;">
-            <span>🛡️</span>
-            <span>10. Supervisão Suprema (HITL)</span>
+          <button class="c2-tab-btn" data-tab="tab-supervisor">
+            <span class="tab-icon">👁️</span>
+            <span class="tab-text">10. Supervisão Suprema (HITL)</span>
           </button>
         </div>
       </aside>

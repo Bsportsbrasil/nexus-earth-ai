@@ -80,5 +80,16 @@
     "privacy": "Privacy & GDPR",
     "installApp": "Install App on Smartphone",
     "creatorConsole": "C2 Administrative Terminal"
+  },
+  "admin": {
+    "topTag": "MASTER C2 SOVEREIGN CONSOLE",
+    "chainBadge": "SHA-256 AUDIT INTACT",
+    "supervisorBtn": "Supreme Supervisor (/supervisor)",
+    "publicBtn": "View Public Platform",
+    "lockBtn": "Lock Console",
+    "gateTag": "Absolute Technical Sovereignty",
+    "gateTitle": "Master C2 Dashboard",
+    "gateDesc": "Sovereign Command & Control Center isolated from public interface.",
+    "gateBtn": "🔐 Unlock C2 Command Center"
   }
 }
