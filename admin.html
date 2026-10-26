@@ -237,6 +237,45 @@
       max-width: 100% !important;
       box-sizing: border-box !important;
     }
+    .section-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--cyan);
+      letter-spacing: 0.06em;
+      border: 1px solid var(--cyan-dim);
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--cyan-dim);
+      max-width: 100%;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      box-sizing: border-box;
+      line-height: 1.35;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 4.5vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      background: linear-gradient(135deg, var(--text-primary) 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      max-width: 100%;
+      word-break: normal;
+      overflow-wrap: break-word;
+      box-sizing: border-box;
+    }
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      max-width: 700px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      word-break: normal;
+      overflow-wrap: break-word;
+    }
     #nav {
       width: 100% !important;
       max-width: 100vw !important;
@@ -511,7 +550,7 @@
   </section>
 
   <!-- Protected Sovereign Master C2 Dashboard (Hidden until authenticated) -->
-  <section id="security" class="section" style="display:none;padding-top:5.5rem">
+  <section id="security" class="section" style="display:none">
     <div class="section-header" style="margin-bottom:1.25rem">
       <div class="section-tag">Sovereign Command &amp; Control (Master C2) • Zero-Trust Governance</div>
       <h2 class="section-title">Centro de Comando e Controle Soberano</h2>

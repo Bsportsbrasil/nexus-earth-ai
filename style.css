@@ -385,26 +385,37 @@ body {
   padding: 100px 2rem 80px;
   max-width: 1400px; margin: 0 auto;
 }
-.section-header { text-align: center; margin-bottom: 3rem; }
+.section-header { text-align: center; margin-bottom: 3rem; width: 100%; max-width: 100%; box-sizing: border-box; }
 .section-tag {
   display: inline-block;
   font-family: var(--font-mono); font-size: 0.7rem;
-  color: var(--cyan); letter-spacing: 0.25em;
+  color: var(--cyan); letter-spacing: 0.08em;
   border: 1px solid var(--cyan-dim); padding: 4px 12px;
   border-radius: 20px; background: var(--cyan-dim);
   margin-bottom: 1rem;
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  line-height: 1.4;
 }
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.8rem, 4vw, 3rem);
   font-weight: 700; line-height: 1.15;
   background: linear-gradient(135deg, var(--text-primary) 40%, var(--cyan) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text; margin-bottom: 1rem;
+  max-width: 100%;
+  word-break: normal;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
 }
 .section-desc {
   color: var(--text-secondary); font-size: 1.05rem;
   max-width: 600px; margin: 0 auto;
+  box-sizing: border-box;
 }
 
 
@@ -1467,13 +1478,19 @@ html, body {
     box-sizing: border-box !important;
   }
   .hero-title {
-    font-size: clamp(1.35rem, 6vw, 1.85rem) !important;
-    line-height: 1.2 !important;
+    font-size: clamp(1.2rem, 5.2vw, 1.65rem) !important;
+    line-height: 1.25 !important;
     word-break: normal !important;
     overflow-wrap: break-word !important;
     hyphens: auto;
     max-width: 100% !important;
     box-sizing: border-box !important;
+  }
+  .hero-title br {
+    display: none;
+  }
+  .hero-title span {
+    display: inline !important;
   }
   .hero-desc {
     font-size: 0.9rem !important;
