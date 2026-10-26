@@ -119,6 +119,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" /></noscript>
   <link rel="preload" href="style.css?v=3.1" as="style" />
   <link rel="stylesheet" href="style.css?v=3.1" />
+  <link rel="stylesheet" href="/auth.css" />
 </head>
 <body>
   <!-- Particle background -->
@@ -2205,102 +2206,295 @@
     </div>
   </div>
 
-  <!-- Enterprise Zero-Trust Identity, Registration, Login, 2FA/MFA, Sessions & LGPD Modal -->
-  <div id="auth-modal" class="modal">
-    <div class="modal-box glass-panel" style="max-width:520px;width:94%">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.65rem">
-        <div class="panel-title" id="auth-modal-title">🔐 Identidade &amp; Segurança NEXUS (Zero-Trust)</div>
-        <button id="auth-modal-close" class="btn-secondary" style="padding:2px 9px">✕</button>
+    <!-- Enterprise Zero-Trust Identity, Registration, Login, 2FA/MFA, Sessions & LGPD Modal -->
+  <div id="auth-modal" class="auth-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="auth-card">
+      
+      <!-- Modal Header -->
+      <div class="auth-header">
+        <div class="auth-header-brand">
+          <div class="auth-header-shield">🛡️</div>
+          <div class="auth-header-title">
+            <span>NEXUS Identity</span>
+            <span class="auth-header-subtitle">Zero-Trust • PBKDF2-SHA512</span>
+          </div>
+        </div>
+        <button id="auth-modal-close" class="auth-close-btn" aria-label="Fechar">✕</button>
       </div>
 
-      <!-- Unauthenticated View: Tabs for Login / Register / Recover -->
-      <div id="auth-guest-view">
-        <div style="display:flex;gap:0.4rem;margin-bottom:0.85rem">
-          <button class="btn-primary" id="tab-login-btn" style="flex:1;justify-content:center;padding:0.45rem;font-size:0.78rem">Entrar (Login)</button>
-          <button class="btn-secondary" id="tab-register-btn" style="flex:1;justify-content:center;padding:0.45rem;font-size:0.78rem">Criar Conta</button>
-          <button class="btn-secondary" id="tab-recover-btn" style="flex:1;justify-content:center;padding:0.45rem;font-size:0.78rem">Recuperar Senha</button>
-        </div>
+      <!-- Scrollable Body -->
+      <div class="auth-body">
 
-        <!-- Login Form -->
-        <div id="auth-login-form" style="display:flex;flex-direction:column;gap:0.55rem">
-          <input type="email" id="login-email" class="text-input" placeholder="Seu e-mail (ex: ana@nexus.ai)" value="ana@nexus.ai" />
-          <input type="password" id="login-password" class="text-input" placeholder="Sua senha (demo: Nexus@2026)" value="Nexus@2026" />
-          <input type="text" id="login-mfa-code" class="text-input" placeholder="Código 2FA de 6 dígitos (se ativo)" style="display:none" />
-          <div style="font-size:0.72rem;color:var(--text-secondary)">
-            🛡️ Proteção Brute-Force ativa • Hash PBKDF2-SHA512 (120k iterações) • Cookie HttpOnly + JWT HS256
+        <!-- Unauthenticated Guest View: Login / Register / Recover -->
+        <div id="auth-guest-view">
+
+          <!-- Segmented Control Tabs -->
+          <div class="auth-nav-tabs">
+            <button type="button" class="auth-tab-btn" id="tab-login-btn">
+              <span>🔓</span> Entrar
+            </button>
+            <button type="button" class="auth-tab-btn active" id="tab-register-btn">
+              <span>✨</span> Criar Conta
+            </button>
+            <button type="button" class="auth-tab-btn" id="tab-recover-btn">
+              <span>🔑</span> Recuperar
+            </button>
           </div>
-          <button class="btn-primary full-width" id="auth-login-submit" style="justify-content:center;margin-top:0.25rem">🔓 Acessar Minha Conta</button>
-        </div>
 
-        <!-- Register Form -->
-        <div id="auth-register-form" style="display:none;flex-direction:column;gap:0.55rem">
-          <input type="text" id="reg-name" class="text-input" placeholder="Seu nome completo (ex: Dra. Helena Costa)" />
-          <input type="email" id="reg-email" class="text-input" placeholder="Seu melhor e-mail corporativo ou pessoal" />
-          <input type="password" id="reg-password" class="text-input" placeholder="Crie uma senha forte (mínimo 6 caracteres)" />
-          <input type="text" id="reg-company" class="text-input" placeholder="Empresa / Laboratório / Instituição (opcional)" />
-          <select id="reg-style" class="select-input">
-            <option value="Visual, Empático e Prático">Estilo Cognitivo: Visual, Empático e Prático</option>
-            <option value="TEA / Previsível e Estruturado">Estilo Cognitivo: TEA — Previsível e Sensorialmente Suave</option>
-            <option value="Científico, Matemático e Direto">Estilo Cognitivo: Científico, Matemático e Direto</option>
-          </select>
-          <label style="display:flex;align-items:center;gap:0.45rem;font-size:0.74rem;color:var(--text-secondary);cursor:pointer">
-            <input type="checkbox" id="reg-lgpd" checked />
-            Concordo com a proteção de dados LGPD/GDPR (armazenamento criptografado AES-256-GCM).
-          </label>
-          <button class="btn-primary full-width" id="auth-register-submit" style="justify-content:center;margin-top:0.25rem">✨ Criar Conta Segura</button>
-        </div>
+          <!-- Feedback Alert Message -->
+          <div id="auth-feedback-msg" class="auth-feedback-box" role="alert" style="margin-top: 10px;"></div>
 
-        <!-- Password Recovery Form -->
-        <div id="auth-recover-form" style="display:none;flex-direction:column;gap:0.55rem">
-          <input type="email" id="rec-email" class="text-input" placeholder="Digite o e-mail da sua conta..." />
-          <button class="btn-secondary full-width" id="auth-recover-request" style="justify-content:center">📨 Gerar Código Criptográfico de Recuperação</button>
-          <div id="rec-reset-step" style="display:none;flex-direction:column;gap:0.5rem;margin-top:0.4rem">
-            <input type="text" id="rec-code" class="text-input" placeholder="Código de 6 dígitos..." />
-            <input type="password" id="rec-new-pass" class="text-input" placeholder="Nova senha (mín. 6 caracteres)..." />
-            <button class="btn-primary full-width" id="auth-recover-confirm" style="justify-content:center">🔑 Redefinir Senha &amp; Deslogar Dispositivos</button>
+          <!-- 1. FORMULÁRIO DE CADASTRO (CRIAR CONTA) -->
+          <div id="auth-register-form" class="auth-form" style="display: flex; margin-top: 10px;">
+
+            <div class="auth-trust-banner">
+              <span class="auth-trust-banner-icon">🔒</span>
+              <div>
+                <strong>Criptografia Soberana de Ponta a Ponta</strong><br />
+                Sua identidade é protegida por hash PBKDF2 com 120.000 iterações e cofre AES-256-GCM. Nenhum dado é vendido ou usado para treino público.
+              </div>
+            </div>
+
+            <!-- Nome Completo -->
+            <div class="auth-field-group">
+              <label class="auth-field-label" for="reg-name">
+                Nome Completo <small>(obrigatório)</small>
+              </label>
+              <div class="auth-input-wrapper">
+                <span class="auth-input-icon">👤</span>
+                <input type="text" id="reg-name" class="auth-input" placeholder="Ex: Dra. Helena Costa" autocomplete="name" required />
+              </div>
+            </div>
+
+            <!-- E-mail -->
+            <div class="auth-field-group">
+              <label class="auth-field-label" for="reg-email">
+                E-mail Corporativo ou Pessoal <small>(chave de acesso)</small>
+              </label>
+              <div class="auth-input-wrapper">
+                <span class="auth-input-icon">✉️</span>
+                <input type="email" id="reg-email" class="auth-input" placeholder="seu-email@dominio.com" autocomplete="email" required />
+              </div>
+            </div>
+
+            <!-- Senha -->
+            <div class="auth-field-group">
+              <label class="auth-field-label" for="reg-password">
+                Senha de Acesso Criptográfica
+              </label>
+              <div class="auth-input-wrapper">
+                <span class="auth-input-icon">🔒</span>
+                <input type="password" id="reg-password" class="auth-input" placeholder="Crie uma senha forte (mín. 6 caracteres)" autocomplete="new-password" required />
+                <button type="button" id="toggle-reg-pass" class="auth-pwd-toggle" title="Mostrar/Ocultar Senha" aria-label="Mostrar Senha">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+
+              <!-- Password Strength Meter -->
+              <div class="auth-pwd-meter">
+                <div class="auth-pwd-bars">
+                  <div class="auth-pwd-bar-seg"></div>
+                  <div class="auth-pwd-bar-seg"></div>
+                  <div class="auth-pwd-bar-seg"></div>
+                  <div class="auth-pwd-bar-seg"></div>
+                </div>
+                <div class="auth-pwd-status">
+                  <span id="pwd-status-text" class="auth-pwd-status-text">Mínimo 6 caracteres</span>
+                  <span id="pwd-entropy-text"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Confirmar Senha -->
+            <div class="auth-field-group">
+              <label class="auth-field-label" for="reg-password-confirm">
+                Confirmar Senha <span id="pwd-match-status" style="font-size: 0.72rem; text-transform: none;"></span>
+              </label>
+              <div class="auth-input-wrapper">
+                <span class="auth-input-icon">🛡️</span>
+                <input type="password" id="reg-password-confirm" class="auth-input" placeholder="Repita a sua senha exatamente igual" autocomplete="new-password" required />
+                <button type="button" id="toggle-confirm-pass" class="auth-pwd-toggle" title="Mostrar/Ocultar Senha" aria-label="Mostrar Senha">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Organização / Empresa (Opcional) -->
+            <div class="auth-field-group">
+              <label class="auth-field-label" for="reg-company">
+                Empresa / Laboratório / Instituição <small>(opcional)</small>
+              </label>
+              <div class="auth-input-wrapper">
+                <span class="auth-input-icon">🏢</span>
+                <input type="text" id="reg-company" class="auth-input" placeholder="Ex: Hospital das Clínicas, BioTech Lab, Nexus Res" autocomplete="organization" />
+              </div>
+            </div>
+
+            <!-- Estilo Cognitivo da Superinteligência -->
+            <div class="auth-field-group">
+              <label class="auth-field-label" for="reg-style">
+                Perfil de Interação da IA (AURA)
+              </label>
+              <div class="auth-input-wrapper">
+                <span class="auth-input-icon">🧬</span>
+                <select id="reg-style" class="auth-select">
+                  <option value="Visual, Empático e Prático">Visual, Empático e Prático (Uso Diário & Produtividade)</option>
+                  <option value="TEA / Previsível e Estruturado">Inclusão TEA — Comunicação Direta, Previsível e Sensorialmente Suave</option>
+                  <option value="Científico, Matemático e Direto">Científico & Alta Densidade — Foco em Pesquisa e Métricas</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Termos e LGPD -->
+            <label class="auth-consent-label">
+              <input type="checkbox" id="reg-lgpd" class="auth-consent-checkbox" checked />
+              <span>
+                Concordo com os <a href="/terms" target="_blank" class="auth-consent-link">Termos de Uso</a> e a <a href="/privacy" target="_blank" class="auth-consent-link">Política de Privacidade (LGPD/GDPR)</a>. Meus dados são criptografados no dispositivo e tenho direito à exclusão a qualquer momento.
+              </span>
+            </label>
+
+            <!-- Botão de Criação de Conta -->
+            <button type="button" id="auth-register-submit" class="auth-submit-btn">
+              <span>✨</span> Criar Minha Conta Soberana
+            </button>
           </div>
+
+          <!-- 2. FORMULÁRIO DE LOGIN -->
+          <div id="auth-login-form" class="auth-form" style="display: none; margin-top: 10px;">
+            <div class="auth-field-group">
+              <label class="auth-field-label" for="login-email">E-mail Cadastrado</label>
+              <div class="auth-input-wrapper">
+                <span class="auth-input-icon">✉️</span>
+                <input type="email" id="login-email" class="auth-input" placeholder="seu-email@dominio.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="auth-field-group">
+              <label class="auth-field-label" for="login-password">
+                Senha de Acesso
+                <a href="javascript:void(0)" onclick="document.getElementById('tab-recover-btn').click()" style="color: #00f5ff; font-size: 0.72rem; text-transform: none; text-decoration: none;">Esqueceu a senha?</a>
+              </label>
+              <div class="auth-input-wrapper">
+                <span class="auth-input-icon">🔒</span>
+                <input type="password" id="login-password" class="auth-input" placeholder="Sua senha segura" autocomplete="current-password" />
+                <button type="button" id="toggle-login-pass" class="auth-pwd-toggle" title="Mostrar/Ocultar Senha" aria-label="Mostrar Senha">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="auth-field-group" id="login-mfa-group" style="display: none;">
+              <label class="auth-field-label" for="login-mfa-code">Código Autenticador 2FA (6 dígitos)</label>
+              <div class="auth-input-wrapper">
+                <span class="auth-input-icon">🔢</span>
+                <input type="text" id="login-mfa-code" class="auth-input" placeholder="Ex: 849201" maxlength="6" />
+              </div>
+            </div>
+
+            <button type="button" id="auth-login-submit" class="auth-submit-btn">
+              <span>🔓</span> Acessar Plataforma
+            </button>
+          </div>
+
+          <!-- 3. FORMULÁRIO DE RECUPERAÇÃO DE SENHA -->
+          <div id="auth-recover-form" class="auth-form" style="display: none; margin-top: 10px;">
+            <div class="auth-field-group">
+              <label class="auth-field-label" for="rec-email">E-mail da Conta</label>
+              <div class="auth-input-wrapper">
+                <span class="auth-input-icon">✉️</span>
+                <input type="email" id="rec-email" class="auth-input" placeholder="Digite seu e-mail cadastrado..." />
+              </div>
+            </div>
+
+            <button type="button" id="auth-recover-request" class="auth-submit-btn" style="background: rgba(0, 245, 255, 0.15); border: 1px solid rgba(0, 245, 255, 0.4); color: #00f5ff; box-shadow: none;">
+              <span>📨</span> Gerar Código de Recuperação
+            </button>
+
+            <div id="rec-reset-step" style="display: none; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div class="auth-field-group">
+                <label class="auth-field-label" for="rec-code">Código de 6 Dígitos</label>
+                <input type="text" id="rec-code" class="auth-input" placeholder="Código numérico..." />
+              </div>
+              <div class="auth-field-group">
+                <label class="auth-field-label" for="rec-new-pass">Nova Senha</label>
+                <input type="password" id="rec-new-pass" class="auth-input" placeholder="Nova senha (mín. 6 caracteres)..." />
+              </div>
+              <button type="button" id="auth-recover-confirm" class="auth-submit-btn">
+                <span>🔑</span> Redefinir Senha
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Authenticated Account & Security Cockpit View -->
+        <div id="auth-user-view" class="auth-user-cockpit" style="display: none;">
+          <div class="auth-user-card">
+            <div class="auth-user-meta-row">
+              <div>
+                <div id="acct-name-display" style="font-weight: 800; font-size: 1.05rem; color: #fff;"></div>
+                <div id="acct-email-display" style="font-size: 0.8rem; color: #94a3b8;"></div>
+              </div>
+              <span id="acct-role-badge" class="auth-user-badge">TENANT_PRO</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #cbd5e1; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 8px;" id="acct-company-display"></div>
+            <div style="font-size: 0.75rem; color: #00f5ff; font-family: var(--font-mono, monospace);" id="acct-quota-display">Quota: 100.000 tokens</div>
+          </div>
+
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" id="acct-toggle-mfa-btn" class="auth-submit-btn" style="flex: 1; padding: 10px; font-size: 0.78rem; background: rgba(0, 245, 255, 0.12); border: 1px solid rgba(0, 245, 255, 0.35); color: #00f5ff; box-shadow: none;">
+              🛡️ Ativar 2FA/MFA
+            </button>
+            <button type="button" id="acct-export-lgpd-btn" class="auth-submit-btn" style="flex: 1; padding: 10px; font-size: 0.78rem; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.18); color: #fff; box-shadow: none;">
+              📥 Exportar Dados (LGPD)
+            </button>
+          </div>
+
+          <div style="background: rgba(3, 7, 18, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 10px 12px;">
+            <div style="font-size: 0.72rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">
+              Sessões Ativas: <span id="acct-session-count" style="color: #00f5ff;">1</span>
+            </div>
+            <div id="acct-sessions-list" style="font-size: 0.72rem; color: #64748b; font-family: var(--font-mono, monospace); margin-top: 4px;"></div>
+          </div>
+
+          <div id="acct-admin-link-row" style="display: none; padding-top: 4px;">
+            <a href="/admin.html" class="auth-submit-btn" style="background: linear-gradient(135deg, #a855f7, #6366f1); color: #fff; font-size: 0.8rem; text-decoration: none;">
+              👑 Abrir Terminal Master C2 do Criador
+            </a>
+          </div>
+
+          <div style="display: flex; gap: 8px; margin-top: 6px;">
+            <button type="button" id="acct-logout-btn" class="auth-submit-btn" style="flex: 1; padding: 10px; font-size: 0.8rem; background: rgba(255, 255, 255, 0.08); color: #fff; box-shadow: none;">
+              Sair da Conta
+            </button>
+            <button type="button" id="acct-delete-btn" class="auth-submit-btn" style="flex: 1; padding: 10px; font-size: 0.8rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; box-shadow: none;">
+              Purgar Conta (LGPD)
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Security Guarantee Seals Footer -->
+      <div class="auth-footer-seals">
+        <div class="auth-seal-item">
+          <div class="auth-seal-dot"></div>
+          <span>PBKDF2-SHA512 (120k iter)</span>
+        </div>
+        <div class="auth-seal-item">
+          <div class="auth-seal-dot"></div>
+          <span>AES-256-GCM Vault</span>
+        </div>
+        <div class="auth-seal-item">
+          <div class="auth-seal-dot"></div>
+          <span>LGPD & EU AI Act Art. 14</span>
+        </div>
+        <div class="auth-seal-item">
+          <div class="auth-seal-dot"></div>
+          <span>Zero-Knowledge / Anti-Leak</span>
         </div>
       </div>
 
-      <!-- Authenticated Account & Security Center View -->
-      <div id="auth-user-view" style="display:none;flex-direction:column;gap:0.7rem">
-        <div style="background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.25);border-radius:10px;padding:0.75rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem">
-          <div>
-            <div style="font-weight:700;font-size:0.95rem;color:var(--text-primary)" id="acct-name-display">—</div>
-            <div style="font-size:0.75rem;color:var(--cyan);font-family:var(--font-mono)" id="acct-email-display">—</div>
-            <div style="font-size:0.7rem;color:var(--text-secondary)" id="acct-company-display">—</div>
-          </div>
-          <div style="text-align:right">
-            <span class="agent-badge DONE" id="acct-role-badge">TENANT_PRO</span>
-            <div style="font-size:0.68rem;color:var(--emerald);margin-top:0.25rem" id="acct-quota-display">Quota: 100k tokens</div>
-          </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
-          <button class="btn-secondary" id="acct-toggle-mfa-btn" style="justify-content:center;font-size:0.75rem">🛡️ 2FA/MFA: Desativado</button>
-          <button class="btn-secondary" id="acct-export-lgpd-btn" style="justify-content:center;font-size:0.75rem">📦 Exportar Dados (LGPD)</button>
-        </div>
-
-        <div style="font-size:0.74rem;color:var(--text-secondary)">
-          <strong>Sessões Ativas (<span id="acct-session-count">1</span>):</strong>
-          <div id="acct-sessions-list" style="font-family:var(--font-mono);font-size:0.68rem;margin-top:0.25rem;max-height:85px;overflow:auto"></div>
-        </div>
-
-        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.25rem">
-          <button class="btn-secondary" id="acct-logout-all-btn" style="flex:1;justify-content:center;font-size:0.76rem">🔒 Deslogar Todos Dispositivos</button>
-          <button class="btn-primary" id="acct-logout-btn" style="flex:1;justify-content:center;font-size:0.76rem;background:linear-gradient(135deg,#f43f5e,#e11d48)">🚪 Sair (Logout)</button>
-        </div>
-
-        <!-- Master C2 Exclusive Access Button (Visible ONLY to Owner/Admin) -->
-        <div id="acct-admin-link-row" style="display:none;margin-top:0.5rem">
-          <a href="/admin.html" class="btn-primary full-width" style="text-decoration:none;justify-content:center;background:linear-gradient(135deg,rgba(0,245,255,0.25),rgba(244,63,94,0.35));border:1px solid var(--rose);color:#fff;font-weight:700;font-size:0.82rem;display:flex;align-items:center;gap:0.4rem;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span>🛡️ Painel Administrativo Master Soberano (C2)</span>
-          </a>
-        </div>
-      </div>
-
-      <div id="auth-feedback-msg" style="margin-top:0.65rem;font-size:0.76rem;font-family:var(--font-mono);color:var(--cyan);min-height:1.1rem"></div>
     </div>
   </div>
 

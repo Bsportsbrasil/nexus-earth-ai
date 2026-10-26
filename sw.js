@@ -7,6 +7,7 @@ const CORE_ASSETS = [
   '/mobile.js',
   '/quantum_holo_3d.js',
   '/style.css',
+  '/auth.css',
   '/manifest.json',
   '/favicon.svg',
   '/icon-192.png',

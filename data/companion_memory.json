@@ -8,6 +8,27 @@
   ],
   "dailyJournal": [
     {
+      "id": "4313e49b-6ed0-4df1-b365-35c76904242c",
+      "date": "2026-10-26",
+      "time": "22:10:16",
+      "insight": "Ana consultou data/hora em tempo real (22:10:16)",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "f3104d02-38cb-441f-a719-eff4a90069e3",
+      "date": "2026-10-26",
+      "time": "22:10:16",
+      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
+      "id": "4ace4632-e14d-4c4d-ab56-c02f8790e47d",
+      "date": "2026-10-26",
+      "time": "22:10:16",
+      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "styleUsed": "Visual, Lúdico & Histórias Criativas"
+    },
+    {
       "id": "b0675e7c-16b6-4b11-a6d5-e0f2206ee02e",
       "date": "2026-10-26",
       "time": "21:56:20",
@@ -335,28 +356,7 @@
       "time": "16:57:02",
       "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
       "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "18147a3c-ef8b-4b47-b533-341593fb5ed9",
-      "date": "2026-10-25",
-      "time": "16:57:02",
-      "insight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "5730dee6-a299-456b-b39c-7ba21def0047",
-      "date": "2026-10-25",
-      "time": "16:46:28",
-      "insight": "Ana consultou data/hora em tempo real (16:46:28)",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
-    },
-    {
-      "id": "40baf0c0-b55d-4af3-a1f6-2f3ced4b006c",
-      "date": "2026-10-25",
-      "time": "16:46:28",
-      "insight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
-      "styleUsed": "Visual, Lúdico & Histórias Criativas"
     }
   ],
-  "interactionCount": 194
+  "interactionCount": 196
 }

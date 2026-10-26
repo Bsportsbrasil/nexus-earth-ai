@@ -24,19 +24,134 @@ const AuthUI = (function () {
   function setFeedback(msg, isError = false) {
     const el = document.getElementById('auth-feedback-msg');
     if (!el) return;
-    el.style.color = isError ? 'var(--rose)' : 'var(--cyan)';
-    el.textContent = msg || '';
+    if (!msg) {
+      el.className = 'auth-feedback-box';
+      el.textContent = '';
+      return;
+    }
+    el.className = `auth-feedback-box ${isError ? 'error' : 'success'}`;
+    el.innerHTML = `<span>${isError ? '⚠️' : '✓'}</span> <span>${escapeHtml(msg)}</span>`;
+  }
+
+  function escapeHtml(str) {
+    return String(str || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  }
+
+  /* --- Interactive Password Strength Meter & Entropy Calculator --- */
+  function evaluatePasswordStrength(password) {
+    if (!password) return { score: 0, text: 'Mínimo 6 caracteres', entropy: 0, color: 'transparent' };
+
+    let pool = 0;
+    if (/[a-z]/.test(password)) pool += 26;
+    if (/[A-Z]/.test(password)) pool += 26;
+    if (/[0-9]/.test(password)) pool += 10;
+    if (/[^a-zA-Z0-9]/.test(password)) pool += 33;
+
+    // Shannon Entropy in bits
+    const entropy = Math.round(password.length * (pool > 0 ? Math.log2(pool) : 0));
+
+    let score = 0;
+    if (password.length >= 6) score = 1;
+    if (password.length >= 8 && pool >= 36) score = 2;
+    if (password.length >= 10 && pool >= 62) score = 3;
+    if (password.length >= 12 && pool >= 85) score = 4;
+
+    const levels = [
+      { text: 'Muito curta', color: '#ef4444' },
+      { text: 'Fraca (adicione números/símbolos)', color: '#ef4444' },
+      { text: 'Média (adicione maiúsculas)', color: '#f59e0b' },
+      { text: 'Forte (alta segurança)', color: '#10b981' },
+      { text: 'Grau Quântico Soberano', color: '#00f5ff' }
+    ];
+
+    return {
+      score,
+      text: levels[score].text,
+      color: levels[score].color,
+      entropy
+    };
+  }
+
+  function updatePasswordMeter(password) {
+    const meterBars = document.querySelectorAll('.auth-pwd-bar-seg');
+    const statusText = document.getElementById('pwd-status-text');
+    const entropyText = document.getElementById('pwd-entropy-text');
+
+    const result = evaluatePasswordStrength(password);
+
+    meterBars.forEach((bar, idx) => {
+      if (idx < result.score) {
+        bar.style.background = result.color;
+        bar.style.boxShadow = `0 0 8px ${result.color}66`;
+      } else {
+        bar.style.background = 'rgba(255, 255, 255, 0.08)';
+        bar.style.boxShadow = 'none';
+      }
+    });
+
+    if (statusText) {
+      statusText.textContent = result.text;
+      statusText.style.color = result.color;
+    }
+    if (entropyText) {
+      entropyText.textContent = result.entropy > 0 ? `Entropia: ${result.entropy} bits` : '';
+    }
+  }
+
+  function checkPasswordMatch() {
+    const pass = document.getElementById('reg-password')?.value || '';
+    const confirm = document.getElementById('reg-password-confirm')?.value || '';
+    const matchEl = document.getElementById('pwd-match-status');
+    const confirmInput = document.getElementById('reg-password-confirm');
+
+    if (!confirm) {
+      if (matchEl) matchEl.textContent = '';
+      if (confirmInput) confirmInput.style.borderColor = 'rgba(255, 255, 255, 0.14)';
+      return;
+    }
+
+    if (pass === confirm) {
+      if (matchEl) {
+        matchEl.textContent = '✓ Senhas conferem';
+        matchEl.style.color = '#10b981';
+      }
+      if (confirmInput) confirmInput.style.borderColor = '#10b981';
+    } else {
+      if (matchEl) {
+        matchEl.textContent = '⚠️ As senhas não coincidem';
+        matchEl.style.color = '#ef4444';
+      }
+      if (confirmInput) confirmInput.style.borderColor = '#ef4444';
+    }
+  }
+
+  /* --- Toggle Password Visibility (Eye Icon) --- */
+  function togglePasswordVisibility(inputId, btnEl) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const isPass = input.type === 'password';
+    input.type = isPass ? 'text' : 'password';
+
+    const eyeOpen = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>`;
+    const eyeSlash = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>`;
+
+    if (btnEl) btnEl.innerHTML = isPass ? eyeSlash : eyeOpen;
   }
 
   function syncUserWithAuraAndNavbar(user) {
     currentUser = user || null;
     const navBtn = document.getElementById('nav-auth-btn');
+    const mobileAuthBtn = document.getElementById('mobile-auth-btn');
     const guestView = document.getElementById('auth-guest-view');
     const userView = document.getElementById('auth-user-view');
 
     if (user) {
+      const firstName = user.name.split(' ')[0];
       if (navBtn) {
-        navBtn.innerHTML = `🟢 ${user.name.split(' ')[0]} <small style="opacity:0.8">[Conta]</small>`;
+        navBtn.innerHTML = `🟢 ${escapeHtml(firstName)} <small style="opacity:0.8">[Conta]</small>`;
+      }
+      if (mobileAuthBtn) {
+        mobileAuthBtn.innerHTML = `🟢 ${escapeHtml(firstName)}`;
       }
       if (guestView) guestView.style.display = 'none';
       if (userView) userView.style.display = 'flex';
@@ -57,7 +172,7 @@ const AuthUI = (function () {
       if (quotaDisp) quotaDisp.textContent = `Quota: ${(user.quotaTokens || 100000).toLocaleString()} tokens`;
       if (mfaBtn) {
         mfaBtn.textContent = user.mfaEnabled ? '🛡️ 2FA/MFA: ATIVO ✓' : '🛡️ Ativar 2FA/MFA';
-        mfaBtn.style.borderColor = user.mfaEnabled ? 'var(--emerald)' : '';
+        mfaBtn.style.borderColor = user.mfaEnabled ? 'var(--emerald, #10b981)' : '';
       }
       if (sessCount) sessCount.textContent = String((user.activeSessions || []).length || 1);
       if (sessList) {
@@ -66,21 +181,20 @@ const AuthUI = (function () {
         ).join('');
       }
 
-      // Toggle Master C2 link strictly for Admin/Owner
       const adminLinkRow = document.getElementById('acct-admin-link-row');
       if (adminLinkRow) {
         const isAdmin = user.role === 'OWNER' || user.role === 'ADMIN' || (user.email && user.email.toLowerCase().includes('admin'));
         adminLinkRow.style.display = isAdmin ? 'block' : 'none';
       }
 
-      // Sync authenticated user name directly with AURA Companion input
       const auraNameInput = document.getElementById('aura-user-name');
       if (auraNameInput) {
-        auraNameInput.value = user.name.split(' ')[0];
+        auraNameInput.value = firstName;
       }
     } else {
-      const signInText = window.I18nEngine ? window.I18nEngine.t('navSignIn', 'Entrar') : 'Entrar';
+      const signInText = 'Entrar / Criar Conta';
       if (navBtn) navBtn.textContent = '👤 ' + signInText;
+      if (mobileAuthBtn) mobileAuthBtn.textContent = '👤 Entrar';
       if (guestView) guestView.style.display = 'block';
       if (userView) userView.style.display = 'none';
     }
@@ -98,9 +212,9 @@ const AuthUI = (function () {
     if (regForm) regForm.style.display = tab === 'register' ? 'flex' : 'none';
     if (recForm) recForm.style.display = tab === 'recover' ? 'flex' : 'none';
 
-    if (tLogin) tLogin.className = tab === 'login' ? 'btn-primary' : 'btn-secondary';
-    if (tReg) tReg.className = tab === 'register' ? 'btn-primary' : 'btn-secondary';
-    if (tRec) tRec.className = tab === 'recover' ? 'btn-primary' : 'btn-secondary';
+    if (tLogin) tLogin.className = `auth-tab-btn ${tab === 'login' ? 'active' : ''}`;
+    if (tReg) tReg.className = `auth-tab-btn ${tab === 'register' ? 'active' : ''}`;
+    if (tRec) tRec.className = `auth-tab-btn ${tab === 'recover' ? 'active' : ''}`;
     setFeedback('');
   }
 
@@ -137,14 +251,15 @@ const AuthUI = (function () {
         return;
       }
       if (d.mfaRequired) {
-        const mfaInput = document.getElementById('login-mfa-code');
-        if (mfaInput) mfaInput.style.display = 'block';
+        const mfaGroup = document.getElementById('login-mfa-group');
+        if (mfaGroup) mfaGroup.style.display = 'flex';
         setFeedback(d.message || 'Digite seu código 2FA de 6 dígitos.', false);
         return;
       }
       setStoredToken(d.token);
       syncUserWithAuraAndNavbar(d.user);
-      setFeedback(`✓ Bem-vindo(a) de volta, ${d.user.name}! Sessão segura ativa.`);
+      setFeedback(`✓ Bem-vindo(a), ${d.user.name}! Sessão segura ativa.`);
+      setTimeout(() => closeModal(), 1200);
     } catch (e) {
       setFeedback('Erro de conexão: ' + e.message, true);
     }
@@ -154,16 +269,33 @@ const AuthUI = (function () {
     const name = document.getElementById('reg-name')?.value || '';
     const email = document.getElementById('reg-email')?.value || '';
     const password = document.getElementById('reg-password')?.value || '';
+    const confirm = document.getElementById('reg-password-confirm')?.value || '';
     const company = document.getElementById('reg-company')?.value || '';
     const learningStyle = document.getElementById('reg-style')?.value || 'Visual, Empático e Prático';
     const lgpdConsent = Boolean(document.getElementById('reg-lgpd')?.checked);
 
+    if (name.trim().length < 2) {
+      setFeedback('Por favor, informe seu nome completo (mínimo 2 caracteres).', true);
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setFeedback('Por favor, informe um endereço de e-mail corporativo ou pessoal válido.', true);
+      return;
+    }
+    if (password.length < 6) {
+      setFeedback('A senha deve ter no mínimo 6 caracteres para proteção criptográfica.', true);
+      return;
+    }
+    if (confirm && password !== confirm) {
+      setFeedback('As senhas digitadas não coincidem. Verifique a confirmação.', true);
+      return;
+    }
     if (!lgpdConsent) {
       setFeedback('É necessário confirmar o consentimento de proteção de dados LGPD/GDPR.', true);
       return;
     }
 
-    setFeedback('Criando conta criptografada e provisionando agente AURA...');
+    setFeedback('Gerando chaves criptográficas PBKDF2-SHA512 e criando identidade...');
     try {
       const r = await fetch('/api/auth/register', {
         method: 'POST',
@@ -177,7 +309,8 @@ const AuthUI = (function () {
       }
       setStoredToken(d.token);
       syncUserWithAuraAndNavbar(d.user);
-      setFeedback(`✓ Conta criada com sucesso, ${d.user.name}! Sincronizada com AURA e Governança C2.`);
+      setFeedback(`✓ Identidade soberana criada com sucesso, ${d.user.name}! Sincronizada com AURA.`);
+      setTimeout(() => closeModal(), 1400);
     } catch (e) {
       setFeedback('Erro ao registrar: ' + e.message, true);
     }
@@ -200,42 +333,61 @@ const AuthUI = (function () {
       const r = await fetch('/api/auth/profile', {
         method: 'POST',
         headers: authHeaders(),
-        body: JSON.stringify({ toggleMfa: !currentUser.mfaEnabled })
+        body: JSON.stringify({ mfaEnabled: !currentUser.mfaEnabled })
       });
       const d = await r.json();
       if (r.ok && d.user) {
         syncUserWithAuraAndNavbar(d.user);
-        setFeedback(
-          d.user.mfaEnabled
-            ? `✓ 2FA/MFA Ativado! Seu PIN de segurança 2FA é: ${d.mfaPinPreview}`
-            : '✓ 2FA/MFA Desativado.'
-        );
+        setFeedback(d.user.mfaEnabled ? '✓ 2FA/MFA ativado com sucesso!' : '2FA/MFA desativado.');
       }
     } catch (e) {
-      setFeedback(e.message, true);
+      setFeedback('Falha ao alternar 2FA: ' + e.message, true);
     }
   }
 
-  async function handleExportLgpd() {
+  async function handleExportLGPD() {
     try {
       const r = await fetch('/api/auth/export-lgpd', { headers: authHeaders() });
-      if (!r.ok) return;
-      const d = await r.json();
-      const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
+      if (!r.ok) {
+        setFeedback('Erro ao exportar dados.', true);
+        return;
+      }
+      const blob = await r.blob();
+      const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `nexus_lgpd_portability_${(currentUser?.id || 'user')}.json`;
+      a.download = `nexus_identidade_lgpd_${Date.now()}.json`;
       a.click();
-      URL.revokeObjectURL(url);
-      setFeedback('✓ Pacote de Portabilidade LGPD assinado (HMAC-SHA256) exportado!');
+      setFeedback('✓ Pacote de dados LGPD exportado com sucesso.');
     } catch (e) {
-      setFeedback(e.message, true);
+      setFeedback('Falha no download LGPD: ' + e.message, true);
     }
   }
 
-  async function handleRequestRecovery() {
+  async function handleDeleteAccount() {
+    if (!confirm('ATENÇÃO: Deseja purgar sua conta e todas as memórias com base no Direito ao Esquecimento (LGPD Art. 18)? Essa ação é irreversível.')) {
+      return;
+    }
+    try {
+      const r = await fetch('/api/auth/account', { method: 'DELETE', headers: authHeaders() });
+      if (r.ok) {
+        setStoredToken('');
+        syncUserWithAuraAndNavbar(null);
+        closeModal();
+        alert('Conta e dados criptográficos purgados definitivamente da plataforma.');
+      }
+    } catch (e) {
+      setFeedback('Falha ao excluir conta: ' + e.message, true);
+    }
+  }
+
+  async function handleRecoverRequest() {
     const email = document.getElementById('rec-email')?.value || '';
+    if (!email) {
+      setFeedback('Informe seu e-mail para receber o código.', true);
+      return;
+    }
+    setFeedback('Gerando código de recuperação criptográfica...');
     try {
       const r = await fetch('/api/auth/recover', {
         method: 'POST',
@@ -244,75 +396,140 @@ const AuthUI = (function () {
       });
       const d = await r.json();
       if (!r.ok) {
-        setFeedback(d.error || 'Erro ao solicitar código.', true);
+        setFeedback(d.error || 'Falha ao solicitar código.', true);
         return;
       }
-      const stepEl = document.getElementById('rec-reset-step');
-      if (stepEl) stepEl.style.display = 'flex';
-      const codeInput = document.getElementById('rec-code');
-      if (codeInput) codeInput.value = d.recoveryCode;
-      setFeedback(`✓ Código criptográfico gerado (válido por 15 min): ${d.recoveryCode}`);
+      const resetStep = document.getElementById('rec-reset-step');
+      if (resetStep) resetStep.style.display = 'flex';
+      setFeedback(`✓ Código gerado: ${d.code} (Em produção real seria enviado ao e-mail). Digite abaixo.`);
     } catch (e) {
-      setFeedback(e.message, true);
+      setFeedback('Erro: ' + e.message, true);
     }
   }
 
-  async function handleConfirmRecovery() {
+  async function handleRecoverConfirm() {
     const email = document.getElementById('rec-email')?.value || '';
-    const recoveryCode = document.getElementById('rec-code')?.value || '';
+    const code = document.getElementById('rec-code')?.value || '';
     const newPassword = document.getElementById('rec-new-pass')?.value || '';
+
+    if (!code || !newPassword) {
+      setFeedback('Informe o código e a nova senha.', true);
+      return;
+    }
     try {
       const r = await fetch('/api/auth/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, recoveryCode, newPassword })
+        body: JSON.stringify({ email, code, newPassword })
       });
       const d = await r.json();
       if (!r.ok) {
-        setFeedback(d.error || 'Falha ao redefinir senha.', true);
+        setFeedback(d.error || 'Falha ao redefinir.', true);
         return;
       }
-      switchAuthTab('login');
-      const loginEmail = document.getElementById('login-email');
-      if (loginEmail) loginEmail.value = email;
-      setFeedback('✓ Senha redefinida com sucesso! Faça login com sua nova senha.');
+      setFeedback('✓ Senha alterada com sucesso! Faça login com a nova senha.');
+      setTimeout(() => switchAuthTab('login'), 1500);
     } catch (e) {
-      setFeedback(e.message, true);
+      setFeedback('Erro: ' + e.message, true);
     }
   }
 
-  function init() {
+  function openModal(tab = 'register') {
     const modal = document.getElementById('auth-modal');
+    if (modal) {
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+    if (currentUser) {
+      syncUserWithAuraAndNavbar(currentUser);
+    } else {
+      switchAuthTab(tab);
+    }
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('auth-modal');
+    if (modal) {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+    setFeedback('');
+  }
+
+  function init() {
+    // Nav Button listeners
     const navBtn = document.getElementById('nav-auth-btn');
+    if (navBtn) navBtn.addEventListener('click', () => openModal(currentUser ? 'login' : 'register'));
+
+    const mobileAuthBtn = document.getElementById('mobile-auth-btn');
+    if (mobileAuthBtn) mobileAuthBtn.addEventListener('click', () => openModal(currentUser ? 'login' : 'register'));
+
+    // Modal Close
     const closeBtn = document.getElementById('auth-modal-close');
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-    navBtn?.addEventListener('click', () => {
-      modal?.classList.add('open');
-      checkSessionOnBoot();
-    });
-    closeBtn?.addEventListener('click', () => modal?.classList.remove('open'));
-    modal?.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('open');
-    });
+    const modalBackdrop = document.getElementById('auth-modal');
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener('click', (e) => {
+        if (e.target === modalBackdrop) closeModal();
+      });
+    }
 
+    // Tabs
     document.getElementById('tab-login-btn')?.addEventListener('click', () => switchAuthTab('login'));
     document.getElementById('tab-register-btn')?.addEventListener('click', () => switchAuthTab('register'));
     document.getElementById('tab-recover-btn')?.addEventListener('click', () => switchAuthTab('recover'));
 
+    // Password strength meter live input
+    const regPass = document.getElementById('reg-password');
+    if (regPass) {
+      regPass.addEventListener('input', (e) => {
+        updatePasswordMeter(e.target.value);
+        checkPasswordMatch();
+      });
+    }
+
+    const regPassConfirm = document.getElementById('reg-password-confirm');
+    if (regPassConfirm) {
+      regPassConfirm.addEventListener('input', checkPasswordMatch);
+    }
+
+    // Eye toggles
+    document.getElementById('toggle-login-pass')?.addEventListener('click', function () {
+      togglePasswordVisibility('login-password', this);
+    });
+    document.getElementById('toggle-reg-pass')?.addEventListener('click', function () {
+      togglePasswordVisibility('reg-password', this);
+    });
+    document.getElementById('toggle-confirm-pass')?.addEventListener('click', function () {
+      togglePasswordVisibility('reg-password-confirm', this);
+    });
+
+    // Submits
     document.getElementById('auth-login-submit')?.addEventListener('click', handleLogin);
     document.getElementById('auth-register-submit')?.addEventListener('click', handleRegister);
+    document.getElementById('auth-recover-request')?.addEventListener('click', handleRecoverRequest);
+    document.getElementById('auth-recover-confirm')?.addEventListener('click', handleRecoverConfirm);
+
+    // Profile Actions
     document.getElementById('acct-logout-btn')?.addEventListener('click', () => handleLogout(false));
     document.getElementById('acct-logout-all-btn')?.addEventListener('click', () => handleLogout(true));
     document.getElementById('acct-toggle-mfa-btn')?.addEventListener('click', handleToggleMfa);
-    document.getElementById('acct-export-lgpd-btn')?.addEventListener('click', handleExportLgpd);
-    document.getElementById('auth-recover-request')?.addEventListener('click', handleRequestRecovery);
-    document.getElementById('auth-recover-confirm')?.addEventListener('click', handleConfirmRecovery);
+    document.getElementById('acct-export-lgpd-btn')?.addEventListener('click', handleExportLGPD);
+    document.getElementById('acct-delete-btn')?.addEventListener('click', handleDeleteAccount);
 
     checkSessionOnBoot();
   }
 
-  return { init, get currentUser() { return currentUser; } };
+  return {
+    init,
+    openModal,
+    closeModal,
+    getCurrentUser: () => currentUser,
+    checkSessionOnBoot
+  };
 })();
 
-window.AuthUI = AuthUI;
-document.addEventListener('DOMContentLoaded', () => AuthUI.init());
+document.addEventListener('DOMContentLoaded', () => {
+  AuthUI.init();
+});
