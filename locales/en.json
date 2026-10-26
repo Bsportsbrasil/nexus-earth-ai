@@ -1,0 +1,84 @@
+{
+  "system": {
+    "name": "NEXUS",
+    "version": "FRONTIER 2.0",
+    "statusOnline": "Cluster Operational",
+    "latency": "ms",
+    "sovereignty": "Zero-Trust Sovereign",
+    "copyright": "© 2026 NEXUS. All rights reserved."
+  },
+  "nav": {
+    "home": "Home",
+    "aura": "AURA",
+    "agents": "Agents",
+    "graphrag": "GraphRAG",
+    "settings": "Settings",
+    "dashboard": "Learning Dashboard",
+    "signIn": "Sign In / Register",
+    "signOut": "Sign Out"
+  },
+  "hero": {
+    "title": "Cooperative Superintelligence & Cognitive Transparency",
+    "subtitle": "Mechanistic interpretability, continuous zero-hallucination learning, and humanized neurocognitive inclusion.",
+    "ctaExplore": "Explore 3D Cluster",
+    "ctaTalk": "Talk to AURA"
+  },
+  "auth": {
+    "title": "NEXUS Identity & Security",
+    "subtitle": "Zero-Trust • PBKDF2-SHA512",
+    "tabLogin": "Sign In",
+    "tabRegister": "Create Account",
+    "tabRecover": "Recover",
+    "fullName": "Full Name",
+    "email": "Business or Personal Email",
+    "password": "Cryptographic Access Password",
+    "confirmPassword": "Confirm Password",
+    "company": "Company / Laboratory (Optional)",
+    "cognitiveStyle": "AI Interaction Profile",
+    "termsAccept": "I agree with the Terms of Use and Privacy Policy (GDPR/LGPD).",
+    "submitRegister": "Create My Sovereign Account",
+    "submitLogin": "Access Platform",
+    "pwdStrengthQuantum": "Sovereign Quantum Grade",
+    "pwdStrengthStrong": "Strong (High Security)",
+    "pwdStrengthMedium": "Medium",
+    "pwdStrengthWeak": "Weak"
+  },
+  "aura": {
+    "greeting": "Hello! I am AURA. My mission is to learn with you, support your research, and provide a warm, empathetic, and highly accurate AI companion experience.",
+    "inputPlaceholder": "Message AURA...",
+    "modeEmpathic": "🌱 Empathetic & Warm",
+    "modeTea": "🧩 TEA Inclusive",
+    "modeCreative": "💡 Creative & Inspiring",
+    "modeExecutive": "⚡ Direct & Executive",
+    "thinking": "AURA is thinking carefully...",
+    "speakAudio": "Listen with neural voice",
+    "copy": "Copy message"
+  },
+  "learning": {
+    "title": "Superintelligence Continuous Learning Dashboard",
+    "subtitle": "Real-time evolution curve telemetry and anti-hallucination gate monitoring",
+    "kpiAccuracy": "Epistemic Accuracy",
+    "kpiValidated": "Validated Knowledge",
+    "kpiBlocked": "Blocked Hallucinations",
+    "kpiEntropy": "Shannon Entropy",
+    "chartTitle": "Knowledge Evolution Curve (Last 14 Days)",
+    "liveHistory": "Real-Time Validation Stream",
+    "statusApproved": "VALIDATED KNOWLEDGE",
+    "statusBlocked": "BLOCKED HALLUCINATION"
+  },
+  "spatialRag": {
+    "title": "Private RAG & Spatial Vector Database",
+    "subtitle": "E2EE AES-256-GCM Vault linked to PostGIS geospatial coordinates",
+    "searchPlaceholder": "Search by concept, coordinate, or region...",
+    "btnSearch": "Query Vector",
+    "btnPurge": "Definitive Purge (Admin)",
+    "purgeConfirm": "Warning: Definitive purge follows the DoD 5220.22-M standard and will irreversibly shred all vectors. Proceed?"
+  },
+  "settings": {
+    "language": "Interface Language",
+    "ttsVoice": "Neural Voice in English",
+    "privacy": "Privacy & GDPR",
+    "installApp": "Install App on Smartphone",
+    "creatorConsole": "C2 Administrative Terminal"
+  }
+}

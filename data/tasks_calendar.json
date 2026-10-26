@@ -2507,5 +2507,77 @@
     "notes": "Verificar indicadores e consolidar entregáveis do dia.",
     "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%5BNEXUS%20Review%5D%20Auditoria%20de%20M%C3%A9tricas%20%26%20Revis%C3%A3o%20de%20Progresso&details=Verificar%20indicadores%20e%20consolidar%20entreg%C3%A1veis%20do%20dia.",
     "createdAt": 1792977016376
+  },
+  {
+    "id": "6f36d9e6-58f5-4a89-a513-e3c1b3ace699",
+    "title": "Briefing & Leitura Técnica: Transformer (deep learning)",
+    "date": "2026-10-26",
+    "time": "08:00",
+    "category": "Briefing",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+    "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%5BNEXUS%20Briefing%5D%20Briefing%20%26%20Leitura%20T%C3%A9cnica%3A%20Transformer%20(deep%20learning)&details=A%20Transformer%20is%20a%20deep%20learning%20architecture%20based%20on%20the%20multi-head%20self-attention%20mechanism.",
+    "createdAt": 1792978510441
+  },
+  {
+    "id": "1cbe3e06-e8d9-413c-b18d-d2bafb3f490b",
+    "title": "Bloco de Execução Prática: Transformer Deep Learning Study",
+    "date": "2026-10-26",
+    "time": "10:30",
+    "category": "Execution",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "Aplicar diretrizes extraídas de 5 artigos científicos indexados.",
+    "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%5BNEXUS%20Execution%5D%20Bloco%20de%20Execu%C3%A7%C3%A3o%20Pr%C3%A1tica%3A%20Transformer%20Deep%20Learning%20Study&details=Aplicar%20diretrizes%20extra%C3%ADdas%20de%205%20artigos%20cient%C3%ADficos%20indexados.",
+    "createdAt": 1792978510445
+  },
+  {
+    "id": "c3a8dfd0-5459-4b34-8a6e-9e8acdb30caf",
+    "title": "Auditoria de Métricas & Revisão de Progresso",
+    "date": "2026-10-26",
+    "time": "14:30",
+    "category": "Review",
+    "priority": "MEDIUM",
+    "status": "SCHEDULED",
+    "notes": "Verificar indicadores e consolidar entregáveis do dia.",
+    "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%5BNEXUS%20Review%5D%20Auditoria%20de%20M%C3%A9tricas%20%26%20Revis%C3%A3o%20de%20Progresso&details=Verificar%20indicadores%20e%20consolidar%20entreg%C3%A1veis%20do%20dia.",
+    "createdAt": 1792978510447
+  },
+  {
+    "id": "ead63250-cfb5-4e15-a793-c4c6cd981981",
+    "title": "Briefing & Leitura Técnica: Transformer (deep learning)",
+    "date": "2026-10-26",
+    "time": "08:00",
+    "category": "Briefing",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "A Transformer is a deep learning architecture based on the multi-head self-attention mechanism.",
+    "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%5BNEXUS%20Briefing%5D%20Briefing%20%26%20Leitura%20T%C3%A9cnica%3A%20Transformer%20(deep%20learning)&details=A%20Transformer%20is%20a%20deep%20learning%20architecture%20based%20on%20the%20multi-head%20self-attention%20mechanism.",
+    "createdAt": 1792978600345
+  },
+  {
+    "id": "b877c68e-f03c-49f6-a38e-d21cb0907ffd",
+    "title": "Bloco de Execução Prática: Transformer Deep Learning Study",
+    "date": "2026-10-26",
+    "time": "10:30",
+    "category": "Execution",
+    "priority": "HIGH",
+    "status": "SCHEDULED",
+    "notes": "Aplicar diretrizes extraídas de 5 artigos científicos indexados.",
+    "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%5BNEXUS%20Execution%5D%20Bloco%20de%20Execu%C3%A7%C3%A3o%20Pr%C3%A1tica%3A%20Transformer%20Deep%20Learning%20Study&details=Aplicar%20diretrizes%20extra%C3%ADdas%20de%205%20artigos%20cient%C3%ADficos%20indexados.",
+    "createdAt": 1792978600348
+  },
+  {
+    "id": "aa0a78c4-a6aa-48c3-91db-1b12def7a22b",
+    "title": "Auditoria de Métricas & Revisão de Progresso",
+    "date": "2026-10-26",
+    "time": "14:30",
+    "category": "Review",
+    "priority": "MEDIUM",
+    "status": "SCHEDULED",
+    "notes": "Verificar indicadores e consolidar entregáveis do dia.",
+    "googleCalendarUrl": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%5BNEXUS%20Review%5D%20Auditoria%20de%20M%C3%A9tricas%20%26%20Revis%C3%A3o%20de%20Progresso&details=Verificar%20indicadores%20e%20consolidar%20entreg%C3%A1veis%20do%20dia.",
+    "createdAt": 1792978600350
   }
 ]

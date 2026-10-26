@@ -1,0 +1,167 @@
+{
+  "updatedAt": "2026-10-26T01:36:42.103Z",
+  "totalEvaluated": 227,
+  "totalApproved": 186,
+  "totalBlocked": 41,
+  "averageEntropy": 2.559,
+  "epistemicAccuracyPct": 81.9,
+  "learningCurve": [
+    {
+      "date": "2026-10-12",
+      "accuracy": 88.5,
+      "totalKnowledge": 40,
+      "hallucinationsBlocked": 8,
+      "entropy": 2.7
+    },
+    {
+      "date": "2026-10-13",
+      "accuracy": 89.3,
+      "totalKnowledge": 50,
+      "hallucinationsBlocked": 10,
+      "entropy": 2.68
+    },
+    {
+      "date": "2026-10-14",
+      "accuracy": 90.1,
+      "totalKnowledge": 61,
+      "hallucinationsBlocked": 13,
+      "entropy": 2.66
+    },
+    {
+      "date": "2026-10-15",
+      "accuracy": 90.8,
+      "totalKnowledge": 71,
+      "hallucinationsBlocked": 15,
+      "entropy": 2.64
+    },
+    {
+      "date": "2026-10-16",
+      "accuracy": 91.6,
+      "totalKnowledge": 81,
+      "hallucinationsBlocked": 17,
+      "entropy": 2.62
+    },
+    {
+      "date": "2026-10-17",
+      "accuracy": 92.4,
+      "totalKnowledge": 92,
+      "hallucinationsBlocked": 19,
+      "entropy": 2.6
+    },
+    {
+      "date": "2026-10-18",
+      "accuracy": 93.2,
+      "totalKnowledge": 102,
+      "hallucinationsBlocked": 22,
+      "entropy": 2.58
+    },
+    {
+      "date": "2026-10-19",
+      "accuracy": 94,
+      "totalKnowledge": 113,
+      "hallucinationsBlocked": 24,
+      "entropy": 2.56
+    },
+    {
+      "date": "2026-10-20",
+      "accuracy": 94.7,
+      "totalKnowledge": 123,
+      "hallucinationsBlocked": 26,
+      "entropy": 2.54
+    },
+    {
+      "date": "2026-10-21",
+      "accuracy": 95.5,
+      "totalKnowledge": 133,
+      "hallucinationsBlocked": 29,
+      "entropy": 2.52
+    },
+    {
+      "date": "2026-10-22",
+      "accuracy": 96.3,
+      "totalKnowledge": 144,
+      "hallucinationsBlocked": 31,
+      "entropy": 2.5
+    },
+    {
+      "date": "2026-10-23",
+      "accuracy": 97.1,
+      "totalKnowledge": 154,
+      "hallucinationsBlocked": 33,
+      "entropy": 2.48
+    },
+    {
+      "date": "2026-10-24",
+      "accuracy": 97.8,
+      "totalKnowledge": 164,
+      "hallucinationsBlocked": 35,
+      "entropy": 2.46
+    },
+    {
+      "date": "2026-10-25",
+      "accuracy": 98.6,
+      "totalKnowledge": 175,
+      "hallucinationsBlocked": 38,
+      "entropy": 2.44
+    },
+    {
+      "date": "2026-10-26",
+      "accuracy": 81.9,
+      "totalKnowledge": 186,
+      "hallucinationsBlocked": 41,
+      "entropy": 2.56
+    }
+  ],
+  "history": [
+    {
+      "id": "eval_1792978602103",
+      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
+      "agentId": "HALLUCINATING_TESTER",
+      "verdict": "REJECTED_HALLUCINATION",
+      "confidenceScore": 0.25,
+      "entropyBits": 3.91,
+      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
+      "timestamp": "2026-10-26T01:36:42.103Z"
+    },
+    {
+      "id": "eval_1792978602102",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T01:36:42.102Z"
+    },
+    {
+      "id": "eval_01",
+      "statement": "A bacia amazônica abriga cerca de 10% da biodiversidade conhecida mundialmente.",
+      "agentId": "AURA_COMPANION",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.98,
+      "entropyBits": 2.38,
+      "groundingAnchor": "WWF / INPE Remote Sensing Catalog",
+      "timestamp": "2026-10-25T21:35:06.610Z"
+    },
+    {
+      "id": "eval_02",
+      "statement": "Talvez a gravidade seja uma ilusão mágica criada por cristais subterrâneos.",
+      "agentId": "UNCHECKED_INPUT",
+      "verdict": "REJECTED_HALLUCINATION",
+      "confidenceScore": 0.12,
+      "entropyBits": 4.85,
+      "rejectionReason": "Afirmação especulativa sem ancoragem nas leis da relatividade geral (Dois filtros violados).",
+      "timestamp": "2026-10-25T23:35:06.610Z"
+    },
+    {
+      "id": "eval_03",
+      "statement": "O modelo de atenção Transformer calcula correlações posicionais via matrizes Q, K e V.",
+      "agentId": "PLANNER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.99,
+      "entropyBits": 2.15,
+      "groundingAnchor": "Vaswani et al., Attention is All You Need (2017)",
+      "timestamp": "2026-10-26T01:05:06.610Z"
+    }
+  ]
+}

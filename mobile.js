@@ -24,6 +24,75 @@ const NexusMobile = (function () {
   const views = {};
   const dockItems = {};
 
+  
+  /* --- Humanized Empathy Mode & Dynamic i18n Integration --- */
+  let activeEmpathyMode = 'EMPATHIC';
+
+  function initEmpathyAndI18n() {
+    const pills = document.querySelectorAll('#aura-empathy-pills .empathy-pill');
+    pills.forEach(p => {
+      p.addEventListener('click', () => {
+        pills.forEach(b => {
+          b.style.background = 'rgba(255, 255, 255, 0.05)';
+          b.style.color = '#94a3b8';
+          b.style.borderColor = 'rgba(255, 255, 255, 0.12)';
+        });
+        p.style.background = 'rgba(0, 245, 255, 0.15)';
+        p.style.color = '#00f5ff';
+        p.style.borderColor = 'rgba(0, 245, 255, 0.4)';
+        activeEmpathyMode = p.dataset.mode;
+        triggerHaptic(18);
+
+        const notices = {
+          EMPATHIC: 'Modo Acolhedor & Empático ativado. AURA priorizará validação emocional e escuta ativa.',
+          TEA: 'Modo Inclusivo TEA ativado. Respostas calmas, estruturadas e sem sobrecarga sensorial.',
+          CREATIVE: 'Modo Criativo ativado. Insights inspiradores e pensamento lateral.',
+          EXECUTIVE: 'Modo Direto & Executivo ativado. Respostas concisas e estruturadas.'
+        };
+        appendAuraNotice(notices[activeEmpathyMode] || 'Modo atualizado.');
+      });
+    });
+
+    const langBtns = document.querySelectorAll('.mobile-lang-btn');
+    const headerLangBtn = document.getElementById('mobile-header-lang-btn');
+
+    function setMobileLanguage(code) {
+      document.cookie = 'nexus_lang=' + code + '; path=/; max-age=31536000';
+      langBtns.forEach(btn => {
+        const isMatch = btn.dataset.lang === code;
+        btn.style.borderColor = isMatch ? '#00f5ff' : 'rgba(255, 255, 255, 0.15)';
+        btn.style.background = isMatch ? 'rgba(0, 245, 255, 0.15)' : 'rgba(255, 255, 255, 0.06)';
+        btn.style.color = isMatch ? '#00f5ff' : '#94a3b8';
+      });
+      if (headerLangBtn) headerLangBtn.textContent = '🌐 ' + code.toUpperCase();
+      if (window.I18nEngine) {
+        window.I18nEngine.applyLanguage(code);
+      }
+      triggerHaptic(20);
+    }
+
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', () => setMobileLanguage(btn.dataset.lang));
+    });
+
+    if (headerLangBtn) {
+      headerLangBtn.addEventListener('click', () => {
+        const cur = (headerLangBtn.textContent || '').includes('PT') ? 'en' : ((headerLangBtn.textContent || '').includes('EN') ? 'es' : 'pt');
+        setMobileLanguage(cur);
+      });
+    }
+  }
+
+  function appendAuraNotice(text) {
+    const stream = document.getElementById('aura-stream-area');
+    if (!stream) return;
+    const div = document.createElement('div');
+    div.style.cssText = 'text-align:center; font-size:0.72rem; color:#00f5ff; background:rgba(0,245,255,0.08); border:1px dashed rgba(0,245,255,0.25); border-radius:8px; padding:6px 10px; margin:8px auto; max-width:90%;';
+    div.textContent = '🌱 ' + text;
+    stream.appendChild(div);
+    stream.scrollTop = stream.scrollHeight;
+  }
+
   function init() {
     ['home', 'aura', 'agents', 'graphrag', 'settings'].forEach(id => {
       views[id] = document.getElementById(`view-${id}`);
@@ -31,6 +100,7 @@ const NexusMobile = (function () {
     });
 
     initNavigation();
+    initEmpathyAndI18n();
     initQuantumOrb();
     initCyberGrid();
     initAuraChat();

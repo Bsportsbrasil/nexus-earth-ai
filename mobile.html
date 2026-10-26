@@ -1208,7 +1208,10 @@ html, body {
         <button type="button" id="mobile-auth-btn" class="icon-btn-hud" title="Minha Conta / Cadastro" aria-label="Identidade e Conta" style="width: auto; padding: 4px 10px; border-radius: 8px; font-size: 0.74rem; font-weight: 700; background: rgba(0, 245, 255, 0.12); border: 1px solid rgba(0, 245, 255, 0.38); color: var(--cyan); display: flex; align-items: center; gap: 4px;">
           <span>👤</span> Entrar
         </button>
-        <div class="hud-beacon">
+                <button type="button" id="mobile-header-lang-btn" class="icon-btn-hud" title="Mudar Idioma" aria-label="Idioma" style="font-size:0.7rem;font-weight:700;color:var(--cyan);border:1px solid rgba(0,245,255,0.25);background:rgba(0,245,255,0.08);border-radius:6px;padding:3px 7px;">
+          🌐 PT
+        </button>
+<div class="hud-beacon">
           <div class="beacon-dot"></div>
           <span id="hud-val-ping">840 ms</span>
         </div>
@@ -1269,6 +1272,9 @@ html, body {
           <div class="telemetry-cell">
             <div class="telemetry-label">Hardware VPS</div>
             <div class="telemetry-value cyan" id="hud-val-cpu">AMD Epyc</div>
+
+        <!-- Visual Continuous Learning & Zero-Hallucination Dashboard -->
+        <div id="learning-dashboard-container" style="margin-top: 14px; margin-bottom: 16px;"></div>
           </div>
           <div class="telemetry-cell">
             <div class="telemetry-label">RAM Alocada</div>
@@ -1339,7 +1345,26 @@ html, body {
       <section id="view-aura" class="tab-view">
 
         <!-- Chat Stream -->
-        <div class="aura-chat-stream" id="aura-stream-area">
+                <!-- Humanized Empathy & Cognitive Mode Selector -->
+        <div class="empathy-mode-bar" style="padding: 10px 14px; background: rgba(3, 7, 18, 0.9); border-bottom: 1px solid rgba(0, 245, 255, 0.2); display: flex; align-items: center; justify-content: space-between; gap: 8px; overflow-x: auto;">
+          <span style="font-size: 0.72rem; color: #94a3b8; font-weight: 700; white-space: nowrap;">Modo da IA:</span>
+          <div style="display: flex; gap: 6px; flex-shrink: 0;" id="aura-empathy-pills">
+            <button type="button" class="empathy-pill active" data-mode="EMPATHIC" style="padding: 5px 10px; font-size: 0.72rem; border-radius: 12px; border: 1px solid rgba(0, 245, 255, 0.4); background: rgba(0, 245, 255, 0.15); color: #00f5ff; cursor: pointer; white-space: nowrap;">
+              🌱 Acolhedora & Empática
+            </button>
+            <button type="button" class="empathy-pill" data-mode="TEA" style="padding: 5px 10px; font-size: 0.72rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.05); color: #94a3b8; cursor: pointer; white-space: nowrap;">
+              🧩 Inclusiva TEA
+            </button>
+            <button type="button" class="empathy-pill" data-mode="CREATIVE" style="padding: 5px 10px; font-size: 0.72rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.05); color: #94a3b8; cursor: pointer; white-space: nowrap;">
+              💡 Criativa
+            </button>
+            <button type="button" class="empathy-pill" data-mode="EXECUTIVE" style="padding: 5px 10px; font-size: 0.72rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.05); color: #94a3b8; cursor: pointer; white-space: nowrap;">
+              ⚡ Direta
+            </button>
+          </div>
+        </div>
+
+<div class="aura-chat-stream" id="aura-stream-area">
           <div class="chat-bubble aura">
             <div class="bubble-content">
               Olá! Eu sou a <strong>AURA</strong>. Minha missão é aprender com você, apoiar sua pesquisa e garantir uma experiência de inteligência acolhedora e precisa. Toque no microfone para conversar por voz ou digite sua pergunta.
@@ -1557,6 +1582,26 @@ html, body {
 
       <!-- ================= TAB 6: AJUSTES & GOVERNANÇA ================= -->
       <section id="view-settings" class="tab-view">
+
+        <div class="cyber-card glow-cyan" id="mobile-lang-container">
+          <div class="card-title-hud">
+            <span>🌐</span> Internacionalização & Idioma
+          </div>
+          <p class="card-desc-hud" style="margin-top: 6px;">
+            Tradução dinâmica completa da interface, páginas e respostas do ecossistema.
+          </p>
+          <div style="display: flex; gap: 8px; margin-top: 10px;">
+            <button type="button" class="mobile-lang-btn active" data-lang="pt" style="flex:1; padding: 8px; border-radius: 8px; border: 1px solid #00f5ff; background: rgba(0,245,255,0.15); color: #00f5ff; font-weight: 700; cursor: pointer;">
+              🇧🇷 Português
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="en" style="flex:1; padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-weight: 700; cursor: pointer;">
+              🇺🇸 English
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="es" style="flex:1; padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-weight: 700; cursor: pointer;">
+              🇪🇸 Español
+            </button>
+          </div>
+        </div>
 
         <div class="cyber-card glow-cyan">
           <div class="card-title-hud">
@@ -1968,5 +2013,7 @@ html, body {
     </div>
   </div>
   <script src="/auth_ui.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/learning_dashboard_ui.js"></script>
 </body>
 </html>

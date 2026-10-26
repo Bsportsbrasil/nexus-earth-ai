@@ -28,6 +28,9 @@ import { agentMemoryStore } from './engine/agent_memory.js';
 import { supremeSupervisor } from './engine/supervisor_agent.js';
 import { geoEngine } from './engine/geo_engine.js';
 import { openApiSpec } from './engine/openapi_spec.js';
+import { supabaseSpatialRAG } from './engine/supabase_spatial_rag.js';
+import { continuousLearningValidator } from './engine/continuous_learning_validator.js';
+import { serverI18n } from './engine/i18n_server.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -1144,6 +1147,70 @@ const server = http.createServer(async (req, res) => {
     } catch (e) {
       return jsonResponse(res, 400, { error: e.message });
     }
+  }
+
+  // 6i. Sovereign Spatial RAG & Online Supabase Connector (/api/spatial-rag/*)
+  if (pathname.startsWith('/api/spatial-rag/')) {
+    try {
+      if (req.method === 'GET' && pathname === '/api/spatial-rag/stats') {
+        return jsonResponse(res, 200, supabaseSpatialRAG.getStats());
+      }
+      if (req.method === 'POST' && pathname === '/api/spatial-rag/query') {
+        const body = await parseJsonBody(req);
+        const results = supabaseSpatialRAG.queryHybrid(body);
+        return jsonResponse(res, 200, { ok: true, count: results.length, results });
+      }
+      if (req.method === 'POST' && pathname === '/api/spatial-rag/upsert') {
+        const body = await parseJsonBody(req);
+        const result = supabaseSpatialRAG.upsertSpatialVector(body);
+        return jsonResponse(res, 201, result);
+      }
+      if (req.method === 'POST' && pathname === '/api/spatial-rag/test-connection') {
+        const body = await parseJsonBody(req);
+        const testRes = await supabaseSpatialRAG.testCloudConnection(body.url, body.key);
+        return jsonResponse(res, 200, testRes);
+      }
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  // 6j. Exclusive Administrator Sovereign Data Purge (/api/admin/spatial-rag/purge)
+  if (pathname === '/api/admin/spatial-rag/purge') {
+    if (req.method !== 'DELETE' && req.method !== 'POST') {
+      return jsonResponse(res, 405, { error: 'Method Not Allowed' });
+    }
+    try {
+      const authHeader = req.headers['authorization'] || '';
+      const providedKey = req.headers['x-admin-key'] || (authHeader.startsWith('Bearer ') ? authHeader.slice(7).trim() : '');
+      const body = await parseJsonBody(req);
+      const purgeResult = supabaseSpatialRAG.purgeAllData(providedKey || body.adminKey, body.confirmationCode);
+      return jsonResponse(res, 200, purgeResult);
+    } catch (e) {
+      return jsonResponse(res, 403, { error: e.message });
+    }
+  }
+
+  // 6k. Continuous Epistemic Learning & Anti-Hallucination Gate (/api/learning/*)
+  if (pathname.startsWith('/api/learning/')) {
+    try {
+      if (req.method === 'GET' && pathname === '/api/learning/metrics') {
+        return jsonResponse(res, 200, continuousLearningValidator.getDashboardMetrics());
+      }
+      if (req.method === 'POST' && pathname === '/api/learning/validate-and-commit') {
+        const body = await parseJsonBody(req);
+        const evalRes = continuousLearningValidator.evaluateAssertion(body);
+        return jsonResponse(res, evalRes.ok ? 200 : 422, evalRes);
+      }
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  // 6l. Server-Side Localization JSON Dictionary (/api/locales/*)
+  if (pathname.startsWith('/api/locales/')) {
+    const lang = pathname.slice('/api/locales/'.length).trim().toLowerCase() || 'pt';
+    return jsonResponse(res, 200, serverI18n.getLocaleDict(lang));
   }
 
   // 6h. Regulatory Explainability & XAI Algorithmic Decision Passports (EU AI Act & LGPD Art. 20)

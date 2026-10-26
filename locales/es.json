@@ -1,0 +1,84 @@
+{
+  "system": {
+    "name": "NEXUS",
+    "version": "FRONTIER 2.0",
+    "statusOnline": "Clúster Operacional",
+    "latency": "ms",
+    "sovereignty": "Zero-Trust Soberano",
+    "copyright": "© 2026 NEXUS. Todos los derechos reservados."
+  },
+  "nav": {
+    "home": "Inicio",
+    "aura": "AURA",
+    "agents": "Agentes",
+    "graphrag": "GraphRAG",
+    "settings": "Ajustes",
+    "dashboard": "Panel de Aprendizaje",
+    "signIn": "Iniciar Sesión / Registro",
+    "signOut": "Cerrar Sesión"
+  },
+  "hero": {
+    "title": "Superinteligencia Cooperativa y Transparencia Cognitiva",
+    "subtitle": "Interpretabilidad mecánica, aprendizaje continuo sin alucinaciones e inclusión neurocognitiva humanizada.",
+    "ctaExplore": "Explorar Clúster 3D",
+    "ctaTalk": "Conversar con AURA"
+  },
+  "auth": {
+    "title": "Identidad y Seguridad NEXUS",
+    "subtitle": "Zero-Trust • PBKDF2-SHA512",
+    "tabLogin": "Entrar",
+    "tabRegister": "Crear Cuenta",
+    "tabRecover": "Recuperar",
+    "fullName": "Nombre Completo",
+    "email": "Correo Corporativo o Personal",
+    "password": "Contraseña Criptográfica",
+    "confirmPassword": "Confirmar Contraseña",
+    "company": "Empresa / Laboratorio (Opcional)",
+    "cognitiveStyle": "Perfil de Interacción de la IA",
+    "termsAccept": "Acepto los Términos de Uso y la Política de Privacidad (GDPR/LGPD).",
+    "submitRegister": "Crear Mi Cuenta Soberana",
+    "submitLogin": "Acceder a la Plataforma",
+    "pwdStrengthQuantum": "Grado Cuántico Soberano",
+    "pwdStrengthStrong": "Fuerte (Alta Seguridad)",
+    "pwdStrengthMedium": "Media",
+    "pwdStrengthWeak": "Débil"
+  },
+  "aura": {
+    "greeting": "¡Hola! Soy AURA. Mi misión es aprender contigo, apoyar tu investigación y brindarte una experiencia acogedora, empática y precisa.",
+    "inputPlaceholder": "Mensaje para AURA...",
+    "modeEmpathic": "🌱 Empática y Acogedora",
+    "modeTea": "🧩 Inclusiva TEA",
+    "modeCreative": "💡 Creativa e Inspiradora",
+    "modeExecutive": "⚡ Directa y Ejecutiva",
+    "thinking": "AURA está pensando con atención...",
+    "speakAudio": "Escuchar con voz neural",
+    "copy": "Copiar mensaje"
+  },
+  "learning": {
+    "title": "Panel de Aprendizaje Continuo de Superinteligencia",
+    "subtitle": "Monitoreo en tiempo real de la curva de evolución y compuerta anti-alucinaciones",
+    "kpiAccuracy": "Precisión Epistémica",
+    "kpiValidated": "Conocimiento Validado",
+    "kpiBlocked": "Alucinaciones Bloqueadas",
+    "kpiEntropy": "Entropía Shannon",
+    "chartTitle": "Curva de Evolución del Conocimiento (Últimos 14 Días)",
+    "liveHistory": "Flujo de Validaciones en Tiempo Real",
+    "statusApproved": "CONOCIMIENTO VALIDADO",
+    "statusBlocked": "ALUCINACIÓN BLOQUEADA"
+  },
+  "spatialRag": {
+    "title": "RAG Privado y Base de Datos Vectorial Espacial",
+    "subtitle": "Bóveda con Cifrado E2EE AES-256-GCM vinculada a coordenadas PostGIS",
+    "searchPlaceholder": "Buscar por concepto, coordenada o región...",
+    "btnSearch": "Consultar Vector",
+    "btnPurge": "Purga Definitiva (Admin)",
+    "purgeConfirm": "Advertencia: La purga definitiva utiliza el estándar DoD 5220.22-M y destruirá permanentemente todos los vectores. ¿Desea continuar?"
+  },
+  "settings": {
+    "language": "Idioma de la Interfaz",
+    "ttsVoice": "Voz Neural en Español",
+    "privacy": "Privacidad y GDPR",
+    "installApp": "Instalar Aplicación en Smartphone",
+    "creatorConsole": "Terminal Administrativo C2"
+  }
+}

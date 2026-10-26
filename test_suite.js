@@ -23,6 +23,9 @@ import { regulatoryEngine } from './engine/regulatory_explainability.js';
 import { agentMemoryStore } from './engine/agent_memory.js';
 import { supremeSupervisor } from './engine/supervisor_agent.js';
 import { geoEngine } from './engine/geo_engine.js';
+import { supabaseSpatialRAG } from './engine/supabase_spatial_rag.js';
+import { continuousLearningValidator } from './engine/continuous_learning_validator.js';
+import { serverI18n } from './engine/i18n_server.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -610,7 +613,52 @@ async function runTests() {
 
   console.log(`✓ Layer 24: Sovereign Geospatial Intelligence, Google Earth Parity & OGC KML/GeoJSON Processing verified (${geoEngine.listProjects().length} saved projects, ${geoAnalysis.solarPotentialKwhM2} kWh/m² solar potential)`);
 
-  console.log('=== ALL 24 ARCHITECTURAL, GEOSPATIAL, INSTITUTIONAL & COMPLIANCE LAYERS PASSED 100% ===');
+  // 25. Layer 25: Sovereign Spatial RAG, Online Supabase Connector & E2EE DoD Purge
+  const testNode = supabaseSpatialRAG.upsertSpatialVector({
+    text: 'Telescópio Espacial James Webb: Espectroscopia infravermelha de atmosferas exoplanetárias.',
+    spatialPoint: { lat: 0, lon: 0, name: 'Ponto Lagrange L2', radiusKm: 1500000 },
+    metadata: { domain: 'ASTRONOMY', verified: true }
+  });
+  assert.ok(testNode && testNode.ok, 'Failed to upsert spatial vector');
+  const ragQuery = supabaseSpatialRAG.queryHybrid({ queryText: 'exoplanetas infravermelho telescópio', limit: 2 });
+  assert.ok(ragQuery.length > 0, 'Spatial RAG hybrid query failed');
+  assert.ok(ragQuery[0].e2eeVerified, 'Spatial RAG E2EE verification failed');
+  const ragStats = supabaseSpatialRAG.getStats();
+  assert.ok(ragStats.totalVectors > 0, 'Spatial RAG stats missing vectors');
+  console.log(`✓ Layer 25: Sovereign Spatial RAG, Online Supabase Connector & E2EE DoD Purge verified (${ragStats.totalVectors} vectors, ${ragStats.spatialFeaturesCount} spatial features)`);
+
+  // 26. Layer 26: Continuous Epistemic Learning, Zero-Hallucination Gate & Learning Curve Dashboard
+  const validEval = continuousLearningValidator.evaluateAssertion({
+    statement: 'A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.',
+    agentId: 'VERIFIER_AGENT',
+    category: 'PHYSICS'
+  });
+  assert.strictEqual(validEval.ok, true, 'Valid fact was rejected by epistemic gate');
+  assert.strictEqual(validEval.verdict, 'APPROVED_VERIFIED_KNOWLEDGE');
+
+  const hallucinationEval = continuousLearningValidator.evaluateAssertion({
+    statement: 'Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.',
+    agentId: 'HALLUCINATING_TESTER'
+  });
+  assert.strictEqual(hallucinationEval.ok, false, 'Hallucination bypassed epistemic gate');
+  assert.strictEqual(hallucinationEval.verdict, 'REJECTED_HALLUCINATION');
+
+  const dashMetrics = continuousLearningValidator.getDashboardMetrics();
+  assert.ok(dashMetrics.epistemicAccuracyPct >= 80, 'Epistemic accuracy below threshold');
+  assert.ok(dashMetrics.learningCurve.length > 0, 'Learning curve points missing');
+  console.log(`✓ Layer 26: Continuous Epistemic Learning, Zero-Hallucination Gate & Learning Curve Dashboard verified (${dashMetrics.epistemicAccuracyPct}% accuracy, ${dashMetrics.totalApproved} facts approved, ${dashMetrics.totalBlocked} hallucinations intercepted)`);
+
+  // 27. Layer 27: Humanized Empathy Engine & End-to-End Internationalization (i18n JSON Locales)
+  assert.strictEqual(serverI18n.t('pt', 'nav.home'), 'Início', 'PT locale mismatch');
+  assert.strictEqual(serverI18n.t('en', 'nav.home'), 'Home', 'EN locale mismatch');
+  assert.strictEqual(serverI18n.t('es', 'nav.home'), 'Inicio', 'ES locale mismatch');
+
+  const empathicGreeting = companionEngine.detectEmotionAndIntent('Estou muito triste e exausto com os problemas de hoje');
+  assert.strictEqual(empathicGreeting.code, 'TRISTEZA_ACOLHIMENTO', 'Empathy emotional detection failed');
+
+  console.log(`✓ Layer 27: Humanized Empathy Engine & End-to-End Internationalization (i18n JSON Locales) verified (PT/EN/ES locales active)`);
+
+  console.log('=== ALL 27 ARCHITECTURAL, SPATIAL, EPISTEMIC & INTERNATIONALIZATION LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {
