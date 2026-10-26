@@ -60,6 +60,19 @@ class CooperativeAlignmentEngine {
   }
 
   /**
+   * Inspects text for neurocognitive accessibility & inclusion policy
+   */
+  inspectForInclusion(text = '') {
+    const score = this._computeDynamicInclusionScore(text);
+    return {
+      inclusionScore: score,
+      pedagogicalStrategy: score >= 0.90 ? 'Comunicação Acolhedora e Previsibilidade Sensorial' : 'Adaptação Gradual com Ancoragem Visual',
+      sensoryFriendly: true,
+      neurodiversityRespect: true
+    };
+  }
+
+  /**
    * Evaluates a directive across 4 Cooperative Superintelligence dimensions using:
    * 1. Dynamic Linguistic Autonomy Probe -> Human Agency Preservation (0..1)
    * 2. Readability & Predictability Probe -> Neurodivergent Inclusion Impact (0..1)

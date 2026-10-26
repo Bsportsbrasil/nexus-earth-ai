@@ -476,6 +476,25 @@ export class GlobalIntelligenceEngine {
 
     return this.lastSurgicalAudit;
   }
+
+  /**
+   * Holistic Global Search wrapper for omniscient RAG synthesis
+   */
+  async searchKnowledge(rawQuery = '') {
+    try {
+      const res = await this.fetchGlobalNewsAndSearch(rawQuery);
+      return {
+        results: (res.articles || []).map(a => ({
+          title: a.title,
+          source: a.source,
+          url: a.url,
+          provider: a.provider
+        }))
+      };
+    } catch (_) {
+      return { results: [] };
+    }
+  }
 }
 
 export const globalIntel = new GlobalIntelligenceEngine();

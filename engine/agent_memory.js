@@ -247,6 +247,29 @@ export class AgentMemoryStore {
   }
 
   /**
+   * Global cross-agent vector search (omniscient query across all agents' memories)
+   */
+  searchAllAgentsMemory(queryText, topK = 4) {
+    const allMatches = [];
+    for (const [agentId, store] of this.vectorStores.entries()) {
+      const matches = this.queryAgentVectorMemory(agentId, queryText, topK);
+      for (const m of matches) {
+        allMatches.push({
+          ...m,
+          agentId,
+          agentName: this.agents.get(agentId)?.name || agentId
+        });
+      }
+    }
+    allMatches.sort((a, b) => b.similarity - a.similarity);
+    return allMatches.slice(0, topK);
+  }
+
+  searchMemory(queryText, topK = 4) {
+    return this.searchAllAgentsMemory(queryText, topK);
+  }
+
+  /**
    * Analyzes patterns from user utterance and adapts agent profile
    */
   _updatePatterns(agentId, text) {

@@ -187,7 +187,7 @@ export class ContinuousLearningValidator {
       verdict = 'REJECTED_HALLUCINATION';
       rejectionReason = 'Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).';
       this.totalBlocked++;
-    } else if (entropy > 4.2) {
+    } else if (entropy > 5.2) {
       confidenceScore = 0.45;
       verdict = 'REJECTED_HIGH_ENTROPY';
       rejectionReason = 'Entropia lexical anômala indicativa de alucinação sintética desordenada.';

@@ -26,6 +26,7 @@ import { geoEngine } from './engine/geo_engine.js';
 import { supabaseSpatialRAG } from './engine/supabase_spatial_rag.js';
 import { continuousLearningValidator } from './engine/continuous_learning_validator.js';
 import { serverI18n } from './engine/i18n_server.js';
+import { globalOmniscienceRAG } from './engine/global_omniscience_rag.js';
 
 async function runTests() {
   console.log('=== NEXUS Enterprise Engine Verification Suite ===');
@@ -658,7 +659,22 @@ async function runTests() {
 
   console.log(`✓ Layer 27: Humanized Empathy Engine & End-to-End Internationalization (i18n JSON Locales) verified (PT/EN/ES locales active)`);
 
-  console.log('=== ALL 27 ARCHITECTURAL, SPATIAL, EPISTEMIC & INTERNATIONALIZATION LAYERS PASSED 100% ===');
+  // 28. Layer 28: Global Omniscient Vector Search & Cross-Domain Reasoning Engine
+  const omniResult = await globalOmniscienceRAG.executeGlobalCrossReasoning({
+    prompt: 'Como a biometria, o clima e os sistemas neurais interagem na cognição humana?',
+    contextPrior: { company: 'Instituto Global de Neurotecnologia', style: 'TEA Inclusivo', role: 'Pesquisador Sênior' }
+  });
+  assert.strictEqual(omniResult.ok, true, 'Global omniscience reasoning failed');
+  assert.strictEqual(omniResult.mode, 'GLOBAL_VECTOR_SEARCH_ACTIVE');
+  assert.strictEqual(omniResult.crossDomainSynthesis.zeroAchismosVerified, true, 'Zero-achismos verification failed in global synthesis');
+  assert.ok(omniResult.crossDomainCorrelations.length >= 1, 'Expected cross-domain correlations');
+  assert.strictEqual(omniResult.softContextPriming.startingDomain, 'Instituto Global de Neurotecnologia');
+
+  const omniStats = globalOmniscienceRAG.getStats();
+  assert.ok(omniStats.totalCrossQueries >= 1, 'Omniscience query counter failed');
+  console.log(`✓ Layer 28: Global Omniscient Vector Search & Zero-Achismos Cross-Domain Reasoning verified (${omniResult.crossDomainCorrelations.length} domain bridges formed)`);
+
+  console.log('=== ALL 28 ARCHITECTURAL, SPATIAL, EPISTEMIC, I18N & GLOBAL VECTOR REASONING LAYERS PASSED 100% ===');
 }
 
 runTests().catch(err => {

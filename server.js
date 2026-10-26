@@ -31,6 +31,7 @@ import { openApiSpec } from './engine/openapi_spec.js';
 import { supabaseSpatialRAG } from './engine/supabase_spatial_rag.js';
 import { continuousLearningValidator } from './engine/continuous_learning_validator.js';
 import { serverI18n } from './engine/i18n_server.js';
+import { globalOmniscienceRAG } from './engine/global_omniscience_rag.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -1201,6 +1202,22 @@ const server = http.createServer(async (req, res) => {
         const body = await parseJsonBody(req);
         const evalRes = continuousLearningValidator.evaluateAssertion(body);
         return jsonResponse(res, evalRes.ok ? 200 : 422, evalRes);
+      }
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  // 6m. Global Omniscient Vector Search & Cross-Domain Reasoning (/api/global-rag/*)
+  if (pathname.startsWith('/api/global-rag/')) {
+    try {
+      if (req.method === 'GET' && pathname === '/api/global-rag/stats') {
+        return jsonResponse(res, 200, globalOmniscienceRAG.getStats());
+      }
+      if (req.method === 'POST' && pathname === '/api/global-rag/cross-reasoning') {
+        const body = await parseJsonBody(req);
+        const result = await globalOmniscienceRAG.executeGlobalCrossReasoning(body);
+        return jsonResponse(res, 200, result);
       }
     } catch (e) {
       return jsonResponse(res, 400, { error: e.message });

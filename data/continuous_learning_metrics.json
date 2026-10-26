@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-10-26T01:36:42.103Z",
-  "totalEvaluated": 227,
-  "totalApproved": 186,
-  "totalBlocked": 41,
-  "averageEntropy": 2.559,
-  "epistemicAccuracyPct": 81.9,
+  "updatedAt": "2026-10-26T01:51:11.765Z",
+  "totalEvaluated": 239,
+  "totalApproved": 192,
+  "totalBlocked": 47,
+  "averageEntropy": 3.232,
+  "epistemicAccuracyPct": 80.3,
   "learningCurve": [
     {
       "date": "2026-10-12",
@@ -106,13 +106,133 @@
     },
     {
       "date": "2026-10-26",
-      "accuracy": 81.9,
-      "totalKnowledge": 186,
-      "hallucinationsBlocked": 41,
-      "entropy": 2.56
+      "accuracy": 80.3,
+      "totalKnowledge": 192,
+      "hallucinationsBlocked": 47,
+      "entropy": 3.23
     }
   ],
   "history": [
+    {
+      "id": "eval_1792979471764",
+      "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",
+      "agentId": "GLOBAL_OMNISCIENCE_REASONER",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 4.74,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T01:51:11.765Z"
+    },
+    {
+      "id": "eval_1792979471734",
+      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
+      "agentId": "HALLUCINATING_TESTER",
+      "verdict": "REJECTED_HALLUCINATION",
+      "confidenceScore": 0.25,
+      "entropyBits": 3.91,
+      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
+      "timestamp": "2026-10-26T01:51:11.734Z"
+    },
+    {
+      "id": "eval_1792979471733",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T01:51:11.733Z"
+    },
+    {
+      "id": "eval_1792979404203",
+      "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",
+      "agentId": "GLOBAL_OMNISCIENCE_REASONER",
+      "verdict": "REJECTED_HIGH_ENTROPY",
+      "confidenceScore": 0.45,
+      "entropyBits": 4.74,
+      "rejectionReason": "Entropia lexical anômala indicativa de alucinação sintética desordenada.",
+      "timestamp": "2026-10-26T01:50:04.203Z"
+    },
+    {
+      "id": "eval_1792979404181",
+      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
+      "agentId": "HALLUCINATING_TESTER",
+      "verdict": "REJECTED_HALLUCINATION",
+      "confidenceScore": 0.25,
+      "entropyBits": 3.91,
+      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
+      "timestamp": "2026-10-26T01:50:04.181Z"
+    },
+    {
+      "id": "eval_1792979404180",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T01:50:04.180Z"
+    },
+    {
+      "id": "eval_1792979364104",
+      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
+      "agentId": "HALLUCINATING_TESTER",
+      "verdict": "REJECTED_HALLUCINATION",
+      "confidenceScore": 0.25,
+      "entropyBits": 3.91,
+      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
+      "timestamp": "2026-10-26T01:49:24.104Z"
+    },
+    {
+      "id": "eval_1792979364102",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T01:49:24.102Z"
+    },
+    {
+      "id": "eval_1792979328029",
+      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
+      "agentId": "HALLUCINATING_TESTER",
+      "verdict": "REJECTED_HALLUCINATION",
+      "confidenceScore": 0.25,
+      "entropyBits": 3.91,
+      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
+      "timestamp": "2026-10-26T01:48:48.029Z"
+    },
+    {
+      "id": "eval_1792979328028",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T01:48:48.028Z"
+    },
+    {
+      "id": "eval_1792979288899",
+      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
+      "agentId": "HALLUCINATING_TESTER",
+      "verdict": "REJECTED_HALLUCINATION",
+      "confidenceScore": 0.25,
+      "entropyBits": 3.91,
+      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
+      "timestamp": "2026-10-26T01:48:08.899Z"
+    },
+    {
+      "id": "eval_1792979288897",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-10-26T01:48:08.897Z"
+    },
     {
       "id": "eval_1792978602103",
       "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
