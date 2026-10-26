@@ -1344,10 +1344,12 @@ const server = http.createServer(async (req, res) => {
     if (filePath === '/sw.js') {
       headers['Service-Worker-Allowed'] = '/';
       headers['Cache-Control'] = 'no-cache';
-    } else if (filePath === '/' || ext === '.html') {
-      headers['Cache-Control'] = 'public, max-age=120, stale-while-revalidate=86400';
+    } else if (filePath === '/' || ext === '.html' || filePath.startsWith('/mobile')) {
+      headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+    } else if (ext === '.js' || ext === '.css') {
+      headers['Cache-Control'] = 'public, max-age=60, must-revalidate';
     } else {
-      headers['Cache-Control'] = 'public, max-age=31536000, immutable';
+      headers['Cache-Control'] = 'public, max-age=86400';
     }
 
     const acceptEncoding = req.headers['accept-encoding'] || '';

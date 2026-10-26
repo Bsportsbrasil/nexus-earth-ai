@@ -19,7 +19,618 @@
   <link rel="apple-touch-icon" href="/icon-192.png" />
 
   <!-- Deep-Tech Mobile Stylesheet -->
-  <link rel="stylesheet" href="/mobile.css" />
+    <!-- Immediate Anti-Hash URL Guard (Eliminates # from address bar before render) -->
+  <script>
+    (function() {
+      try {
+        if (window.location.hash) {
+          var h = window.location.hash.replace(/^#/, '').trim().toLowerCase();
+          var valid = ['aura', 'agents', 'graphrag', 'supervisor', 'settings'];
+          var target = valid.indexOf(h) !== -1 ? '/mobile/' + h : '/mobile';
+          window.history.replaceState(null, '', target);
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Critical CSS Inlined: Guarantees 0-latency styling & immunity to stale caches -->
+  <style id="nexus-critical-mobile-css">
+/* ==========================================================================
+   NEXUS FRONTIER MOBILE OS (v2.5) — High-Contrast Deep-Tech Edition
+   ========================================================================== */
+
+:root {
+  --bg-space: #030712;
+  --bg-deep: #050b18;
+  --bg-card: #0b1329;
+  --bg-cell: #0f172a;
+
+  --border-card: rgba(0, 245, 255, 0.22);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-glow: rgba(0, 245, 255, 0.45);
+
+  --cyan: #00f5ff;
+  --cyan-dim: #06b6d4;
+  --cyan-glow: 0 0 16px rgba(0, 245, 255, 0.4);
+  --purple: #a855f7;
+  --emerald: #10b981;
+  --amber: #f59e0b;
+  --rose: #f43f5e;
+
+  --text-pure: #ffffff;
+  --text-bright: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --dock-height: 64px;
+
+  --font-mono: "SF Mono", "Fira Code", Consolas, Monaco, monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-full: 9999px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-space);
+  color: var(--text-bright);
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+#app-viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 0%, #0d1e38 0%, #030712 65%);
+}
+
+#cyber-grid-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.25;
+}
+
+/* Header */
+.mobile-header {
+  height: calc(54px + var(--safe-top));
+  padding-top: var(--safe-top);
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(3, 7, 18, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo-hex {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.3), rgba(168, 85, 247, 0.3));
+  border: 1px solid var(--cyan);
+  box-shadow: var(--cyan-glow);
+}
+
+.brand-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text-pure);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.brand-title .tech-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--cyan);
+  background: rgba(0, 245, 255, 0.12);
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+}
+
+.header-hud-telemetry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-beacon {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--emerald);
+  background: rgba(16, 185, 129, 0.12);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.beacon-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--emerald);
+  box-shadow: 0 0 8px var(--emerald);
+}
+
+.icon-btn-hud {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Views Viewport */
+.views-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.tab-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 14px;
+  padding-bottom: calc(var(--dock-height) + var(--safe-bottom) + 20px);
+}
+
+.tab-view.active {
+  display: flex;
+}
+
+/* Holographic High-Contrast Cards */
+.cyber-card {
+  position: relative;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-card) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 14px 16px !important;
+  margin-bottom: 12px !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6) !important;
+  display: block !important;
+}
+
+.cyber-card.glow-cyan {
+  border-color: var(--border-glow) !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 245, 255, 0.06) !important;
+}
+
+.cyber-card.glow-purple {
+  border-color: rgba(168, 85, 247, 0.35) !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(168, 85, 247, 0.06) !important;
+}
+
+.card-header-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.card-title-hud {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-desc-hud {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+/* Telemetry Grid: 2 Columns */
+.telemetry-hud-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 10px !important;
+  margin-bottom: 12px !important;
+}
+
+.telemetry-cell {
+  background: var(--bg-cell) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 10px 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.telemetry-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.telemetry-value {
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: #fff;
+}
+
+.telemetry-value.cyan { color: var(--cyan); }
+.telemetry-value.purple { color: var(--purple); }
+.telemetry-value.emerald { color: var(--emerald); }
+
+/* 3D Neural Orb Stage */
+.neural-orb-stage {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+#neural-orb-canvas {
+  width: 320px;
+  height: 180px;
+  max-width: 100%;
+  display: block;
+}
+
+.orb-status-text {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+  text-align: center;
+}
+
+/* Badges */
+.hud-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+}
+
+.hud-badge.cyan { background: rgba(0, 245, 255, 0.15); color: var(--cyan); border: 1px solid rgba(0, 245, 255, 0.3); }
+.hud-badge.purple { background: rgba(168, 85, 247, 0.15); color: var(--purple); border: 1px solid rgba(168, 85, 247, 0.3); }
+.hud-badge.emerald { background: rgba(16, 185, 129, 0.15); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+.hud-badge.amber { background: rgba(245, 158, 11, 0.15); color: var(--amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+
+/* Bottom Dock */
+.bottom-dock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(var(--dock-height) + var(--safe-bottom));
+  padding-bottom: var(--safe-bottom);
+  background: rgba(3, 7, 18, 0.96);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 200;
+}
+
+.dock-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--text-dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 0;
+  text-decoration: none;
+}
+
+.dock-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.dock-item-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.dock-item.active {
+  color: var(--cyan);
+}
+
+.dock-item.active svg {
+  stroke: var(--cyan);
+  filter: drop-shadow(0 0 6px var(--cyan-glow));
+}
+
+/* Chat Styles */
+#view-aura { padding: 0; }
+
+.aura-chat-stream {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-bubble {
+  max-width: 86%;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.chat-bubble.aura {
+  align-self: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-bubble.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #0284c7, #2563eb);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.bubble-meta-hud {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chat-bubble.user .bubble-meta-hud {
+  color: rgba(255, 255, 255, 0.75);
+  justify-content: flex-end;
+}
+
+.matrix-scroller {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 14px 10px 14px;
+  scrollbar-width: none;
+}
+.matrix-scroller::-webkit-scrollbar { display: none; }
+
+.matrix-chip {
+  flex-shrink: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.matrix-chip:active {
+  background: rgba(0, 245, 255, 0.15);
+  border-color: var(--cyan);
+  color: #fff;
+}
+
+.chat-dock-fixed {
+  padding: 10px 14px;
+  background: rgba(3, 7, 18, 0.96);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: calc(var(--dock-height) + var(--safe-bottom));
+}
+
+.chat-text-input {
+  flex: 1;
+  background: var(--bg-cell);
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  padding: 10px 14px;
+  font-size: 0.92rem;
+  border-radius: var(--radius-full);
+  outline: none;
+}
+
+.chat-text-input:focus { border-color: var(--cyan); }
+
+.hud-btn-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.hud-btn-circle.mic {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+
+.hud-btn-circle.mic.listening {
+  background: var(--rose);
+  color: #fff;
+}
+
+.hud-btn-circle.send {
+  background: linear-gradient(135deg, var(--cyan-dim), #2563eb);
+  color: #fff;
+}
+
+/* Form Controls */
+.cyber-input {
+  width: 100%;
+  background: var(--bg-cell);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.cyber-input:focus { border-color: var(--cyan); }
+
+.cyber-btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, var(--cyan-dim), #2563eb);
+  color: #fff;
+  border: none;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cyber-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-bright);
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* DAG Steps */
+.dag-interactive-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.dag-node-item {
+  background: var(--bg-cell);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+
+.dag-node-item.active { border-color: var(--cyan); }
+.dag-node-item.done { border-color: var(--emerald); }
+
+.dag-node-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dag-node-name {
+  font-weight: 700;
+  font-size: 0.86rem;
+  color: #fff;
+}
+
+.dag-node-output {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: 4px;
+  white-space: pre-wrap;
+}
+
+.dag-connector-arrow {
+  text-align: center;
+  color: var(--cyan-dim);
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+  </style>
+  <link rel="stylesheet" href="/mobile.css?v=20261025_03" />
 </head>
 <body>
 
@@ -76,7 +687,7 @@
 
         <!-- 3D Quantum Superintelligence Holographic Stage -->
         <div class="neural-orb-stage" style="height: 230px;">
-          <canvas id="neural-orb-canvas" style="width: 100%; max-width: 340px; height: 210px;"></canvas>
+          <canvas id="neural-orb-canvas" width="340" height="210" style="width: 100%; max-width: 340px; height: 210px; display: block; margin: 0 auto; border-radius: 14px; background: rgba(3, 7, 18, 0.7);"></canvas>
           <div class="orb-status-text" id="orb-status-caption">
             <span>🌌</span> Núcleo 3D Interativo • Arraste para Girar ou Toque nos Agentes
           </div>
@@ -488,7 +1099,7 @@
 
   </div>
 
-  <script src="/quantum_holo_3d.js"></script>
-  <script src="/mobile.js"></script>
+  <script src="/quantum_holo_3d.js?v=20261025_03"></script>
+  <script src="/mobile.js?v=20261025_03"></script>
 </body>
 </html>

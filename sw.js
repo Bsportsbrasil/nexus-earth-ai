@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nexus-pwa-v5';
+const CACHE_NAME = 'nexus-pwa-v6';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -49,9 +49,12 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  // Never cache API endpoints, metrics, or the private Owner Control Plane
+  // Never cache API endpoints, metrics, dynamic mobile app, or the private Owner Control Plane
   if (
     url.pathname.startsWith('/api/') ||
+    url.pathname.startsWith('/mobile') ||
+    url.pathname === '/m' ||
+    url.pathname === '/app' ||
     url.pathname === '/metrics' ||
     url.pathname === '/admin.html' ||
     url.pathname === '/security_ui.js'
