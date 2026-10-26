@@ -390,8 +390,10 @@ const NexusMobile = (function () {
       triggerHaptic(20);
       if (holo3DInstance) holo3DInstance.triggerAudioPulse(30);
       appendChatBubble(q, 'user');
-      if (input) input.value = '';
-      if (sendBtn) sendBtn.disabled = true;
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
 
       const typingId = appendTypingBeacon();
 
@@ -419,8 +421,6 @@ const NexusMobile = (function () {
       } catch (err) {
         removeTypingBeacon(typingId);
         appendChatBubble('Atuando em modo soberano local. Como posso te auxiliar agora?', 'aura');
-      } finally {
-        if (sendBtn) sendBtn.disabled = false;
       }
     }
 
@@ -656,8 +656,10 @@ const NexusMobile = (function () {
         if (!msg) return;
 
         triggerHaptic(15);
-        input.value = '';
-        sendBtn.disabled = true;
+        if (input) {
+          input.value = '';
+          input.focus();
+        }
 
         const u = document.createElement('div');
         u.className = 'chat-bubble user';
@@ -684,8 +686,6 @@ const NexusMobile = (function () {
           }
         } catch (_) {
           alert('Erro de comunicação com LENNOX.');
-        } finally {
-          sendBtn.disabled = false;
         }
       });
     }

@@ -277,22 +277,36 @@ const AgentDashboardUI = (function () {
     }
   }
 
-  function appendChatMessage(role, text) {
+  function appendChatMessage(role, text, turnId = null) {
     const log = document.getElementById('dash-chat-messages');
-    if (!log) return;
+    if (!log) return null;
 
     const row = document.createElement('div');
     row.className = `dash-chat-bubble ${role}`;
+    if (turnId) row.id = turnId;
     const header = role === 'user'
       ? (isAdminMode() ? '👤 Você (Criador/Admin)' : '👤 Você')
       : `🤖 ${getActiveAgent()?.name || 'Agente'}`;
 
+    const isHtml = typeof text === 'string' && text.includes('<');
     row.innerHTML = `
       <div class="bubble-header">${esc(header)} <span class="bubble-time">${new Date().toTimeString().slice(0, 5)}</span></div>
-      <div class="bubble-body">${esc(text).replace(/\n/g, '<br>')}</div>
+      <div class="bubble-body">${isHtml ? text : esc(text).replace(/\n/g, '<br>')}</div>
     `;
     log.appendChild(row);
     log.scrollTop = log.scrollHeight;
+    return row;
+  }
+
+  function updateChatMessage(turnId, text) {
+    const el = document.getElementById(turnId);
+    if (!el) return;
+    const body = el.querySelector('.bubble-body');
+    if (body) {
+      body.innerHTML = esc(text).replace(/\n/g, '<br>');
+    }
+    const log = document.getElementById('dash-chat-messages');
+    if (log) log.scrollTop = log.scrollHeight;
   }
 
   function appendSystemLog(msg) {
@@ -307,16 +321,18 @@ const AgentDashboardUI = (function () {
 
   async function sendMessage(text, fromVoice = false) {
     const clean = (text || '').trim();
-    if (!clean || isProcessingTurn) return;
+    if (!clean) return;
 
-    isProcessingTurn = true;
     appendChatMessage('user', clean);
 
     const input = document.getElementById('dash-chat-input');
-    if (input) input.value = '';
+    if (input) {
+      input.value = '';
+      input.focus();
+    }
 
-    const sendBtn = document.getElementById('dash-chat-send-btn');
-    if (sendBtn) sendBtn.disabled = true;
+    const turnId = 'turn_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+    appendChatMessage('agent', '<span class="c2-pulse-dot" style="background:var(--cyan);margin-right:6px"></span><em>Processando resposta simultaneamente...</em>', turnId);
 
     try {
       const user = window.AuthUI ? window.AuthUI.getCurrentUser() : null;
@@ -337,9 +353,9 @@ const AgentDashboardUI = (function () {
 
       const data = await res.json();
       if (!res.ok) {
-        appendChatMessage('agent', `❌ Erro: ${data.error || 'Falha na resposta do agente'}`);
+        updateChatMessage(turnId, `❌ Erro: ${data.error || 'Falha na resposta do agente'}`);
       } else {
-        appendChatMessage('agent', data.reply);
+        updateChatMessage(turnId, data.reply);
         if (ttsEnabled && data.voiceText) {
           speakAgentReply(data.voiceText);
         }
@@ -347,10 +363,7 @@ const AgentDashboardUI = (function () {
         await loadDashboardState();
       }
     } catch (e) {
-      appendChatMessage('agent', `❌ Falha de rede: ${e.message}`);
-    } finally {
-      isProcessingTurn = false;
-      if (sendBtn) sendBtn.disabled = false;
+      updateChatMessage(turnId, `❌ Falha de rede: ${e.message}`);
     }
   }
 

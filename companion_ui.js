@@ -249,13 +249,20 @@ const CompanionUI = (function () {
     const orb = document.getElementById('aura-orb');
 
     const msg = (overrideText !== undefined ? overrideText : inp?.value || '').trim();
-    if (!msg || isProcessingTurn) return;
-    if (inp) inp.value = '';
+    if (!msg) return;
+    if (inp) {
+      inp.value = '';
+      inp.focus();
+    }
 
     // Barge-in: if user sends a message while AURA is speaking, interrupt speech immediately
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    if ('speechSynthesis' in window) {
+      try { window.speechSynthesis.cancel(); } catch (_) {}
+    }
+    if (window.VoiceEngine && typeof VoiceEngine.stop === 'function') {
+      VoiceEngine.stop();
+    }
     isAuraSpeaking = false;
-    isProcessingTurn = true;
 
     const learningStyle = styleSel?.value || 'Visual, Lúdico & Histórias Criativas';
     const userName = (document.getElementById('aura-user-name')?.value || 'Ana').trim() || 'Ana';

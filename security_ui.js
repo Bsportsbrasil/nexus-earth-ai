@@ -347,29 +347,42 @@ const SecurityUI = (function () {
 
   let lastSpokenBriefingText = '';
 
-  function speakAdvisorBriefing(textToSpeak) {
-    const txt = (textToSpeak || lastSpokenBriefingText || '').trim();
-    if (!txt || !('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(txt);
-    u.lang = 'pt-BR';
-    u.rate = 0.98;
-    u.pitch = 1.04;
-    const voices = window.speechSynthesis.getVoices() || [];
-    const ptVoice = voices.find(v => /pt[-_]?BR/i.test(v.lang) && /(Francisca|Thalita|Maria|Luciana|Natural|Google)/i.test(v.name))
-      || voices.find(v => /pt/i.test(v.lang));
-    if (ptVoice) u.voice = ptVoice;
-    window.speechSynthesis.speak(u);
+  function stopSpeech() {
+    if ('speechSynthesis' in window) {
+      try { window.speechSynthesis.cancel(); } catch (_) {}
+    }
+    if (window.VoiceEngine && typeof VoiceEngine.stop === 'function') {
+      VoiceEngine.stop();
+    }
   }
 
-  function renderSovereignDirectives(sb) {
+  function speakText(txt) {
+    if (!txt) return;
+    stopSpeech();
+    if (window.VoiceEngine && typeof VoiceEngine.speak === 'function') {
+      VoiceEngine.speak(txt, { persona: 'supervisor', rate: 0.98, pitch: 1.0 });
+    } else if ('speechSynthesis' in window) {
+      const u = new SpeechSynthesisUtterance(txt.slice(0, 800));
+      u.lang = 'pt-BR';
+      u.rate = 1.0;
+      window.speechSynthesis.speak(u);
+    }
+  }
+
+  function speakAdvisorBriefing(textToSpeak) {
+    const txt = (textToSpeak || lastSpokenBriefingText || '').trim();
+    if (!txt) return;
+    speakText(txt);
+  }
+
+  function renderSovereignDirectives(sb, updatePinnedBox = true) {
     if (!sb) return;
     const speechBox = document.getElementById('c2-advisor-speech-box');
     const compPct = document.getElementById('c2-directive-compliance-pct');
     const countBadge = document.getElementById('c2-distilled-count-badge');
     const tbody = document.getElementById('c2-distilled-tbody');
 
-    if (sb.spokenBriefing) {
+    if (sb.spokenBriefing && updatePinnedBox) {
       lastSpokenBriefingText = sb.spokenBriefing;
       if (speechBox) speechBox.textContent = sb.spokenBriefing;
     }
@@ -686,21 +699,100 @@ const SecurityUI = (function () {
       }
     });
 
-    // Sovereign Directive Advisor Direct Voice & Text Controls
+    // Sovereign Directive Advisor Direct Voice & Text Controls (Non-Blocking & Simultaneous)
     document.getElementById('c2-speak-briefing-btn')?.addEventListener('click', () => {
       speakAdvisorBriefing(lastSpokenBriefingText);
     });
+    document.getElementById('c2-stop-speech-btn')?.addEventListener('click', () => {
+      stopSpeech();
+    });
+
+    let activeAdvisorTurns = 0;
+
+    function updateParallelStatus() {
+      const statusEl = document.getElementById('c2-advisor-parallel-status');
+      if (!statusEl) return;
+      if (activeAdvisorTurns > 0) {
+        statusEl.innerHTML = '<span class="c2-pulse-dot" style="background:#f59e0b;box-shadow:0 0 8px #f59e0b"></span> <span style="color:#f59e0b">' + activeAdvisorTurns + ' CONSULTA' + (activeAdvisorTurns > 1 ? 'S' : '') + ' SIMULTÂNEA' + (activeAdvisorTurns > 1 ? 'S' : '') + ' EM EXECUÇÃO</span>';
+      } else {
+        statusEl.innerHTML = '<span class="c2-pulse-dot" style="background:#10b981;box-shadow:0 0 8px #10b981"></span> <span style="color:#10b981">PRONTO PARA ENTRADAS SIMULTÂNEAS</span>';
+      }
+    }
 
     const askAdvisor = async (questionStr) => {
       const inp = document.getElementById('c2-advisor-input');
       const q = (questionStr !== undefined ? questionStr : (inp?.value || '')).trim();
-      const box = document.getElementById('c2-advisor-speech-box');
-      if (box) box.textContent = '⏳ O Conselheiro Soberano de Diretrizes está consolidando o conhecimento dos agentes...';
-      if (inp) inp.value = '';
-      const res = await postC2Action({ action: 'ask_directive_advisor', question: q });
-      if (res && res.advisorReply) {
-        renderSovereignDirectives(res.advisorReply);
-        speakAdvisorBriefing(res.advisorReply.spokenBriefing);
+      if (!q) return;
+
+      if (inp) {
+        inp.value = '';
+        inp.focus();
+      }
+
+      const stream = document.getElementById('c2-advisor-dialogue-stream');
+      const turnId = 'adv_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+
+      // Append user bubble immediately
+      if (stream) {
+        const uBubble = document.createElement('div');
+        uBubble.className = 'dash-chat-bubble user';
+        uBubble.innerHTML = '<div class="bubble-header">👤 Você (Comandante) <span class="bubble-time">' + new Date().toLocaleTimeString() + '</span></div><div class="bubble-body">' + esc(q).replace(/\n/g, '<br>') + '</div>';
+        stream.appendChild(uBubble);
+
+        // Append pending assistant placeholder
+        const aBubble = document.createElement('div');
+        aBubble.id = turnId;
+        aBubble.className = 'dash-chat-bubble agent';
+        aBubble.innerHTML = '<div class="bubble-header">🎙️ Conselheiro Soberano <span class="bubble-time" style="color:var(--cyan)">processando simultaneamente...</span></div><div class="bubble-body" style="color:var(--text-secondary);font-style:italic"><span class="c2-pulse-dot" style="background:var(--cyan);margin-right:6px"></span> Cruzando diretrizes dos agentes em tempo real sem bloqueio...</div>';
+        stream.appendChild(aBubble);
+        stream.scrollTop = stream.scrollHeight;
+      }
+
+      activeAdvisorTurns++;
+      updateParallelStatus();
+
+      try {
+        const res = await postC2Action({ action: 'ask_directive_advisor', question: q });
+        activeAdvisorTurns = Math.max(0, activeAdvisorTurns - 1);
+        updateParallelStatus();
+
+        if (res && res.advisorReply) {
+          const replyText = res.advisorReply.spokenBriefing || res.advisorReply.reply || 'Diretriz processada com sucesso.';
+          const placeholder = document.getElementById(turnId);
+          if (placeholder) {
+            const bodyEl = placeholder.querySelector('.bubble-body');
+            const timeEl = placeholder.querySelector('.bubble-time');
+            if (timeEl) timeEl.textContent = new Date().toLocaleTimeString();
+            if (bodyEl) {
+              bodyEl.style.fontStyle = 'normal';
+              bodyEl.style.color = 'var(--text-primary)';
+              bodyEl.innerHTML = esc(replyText).replace(/\n/g, '<br>') + '<div style="margin-top:0.5rem;display:flex;gap:0.4rem;align-items:center"><button class="c2-action-btn ok adv-speak-btn">🔊 Ouvir</button><button class="c2-action-btn danger adv-stop-btn">🛑 Parar</button></div>';
+              
+              const sBtn = bodyEl.querySelector('.adv-speak-btn');
+              if (sBtn) sBtn.addEventListener('click', () => speakText(replyText));
+              const stpBtn = bodyEl.querySelector('.adv-stop-btn');
+              if (stpBtn) stpBtn.addEventListener('click', () => stopSpeech());
+            }
+          }
+          if (stream) stream.scrollTop = stream.scrollHeight;
+          if (res.advisorReply.recentKnowledge) {
+            renderSovereignDirectives(res.advisorReply, false);
+          }
+        } else {
+          const placeholder = document.getElementById(turnId);
+          if (placeholder) {
+            const bodyEl = placeholder.querySelector('.bubble-body');
+            if (bodyEl) bodyEl.innerHTML = '<span style="color:var(--rose)">Falha ao consultar conselheiro. Verifique a conexão.</span>';
+          }
+        }
+      } catch (err) {
+        activeAdvisorTurns = Math.max(0, activeAdvisorTurns - 1);
+        updateParallelStatus();
+        const placeholder = document.getElementById(turnId);
+        if (placeholder) {
+          const bodyEl = placeholder.querySelector('.bubble-body');
+          if (bodyEl) bodyEl.innerHTML = '<span style="color:var(--rose)">Erro: ' + esc(err.message) + '</span>';
+        }
       }
     };
 
@@ -846,7 +938,7 @@ const SecurityUI = (function () {
     }, 5000);
   }
 
-  return { init };
+  return { init, speakText, stopSpeech, switchTab };
 })();
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -821,22 +821,47 @@
         <div class="panel glass-panel assistant-col" style="grid-column: span 2">
           <div class="cc-pane-header" style="flex-wrap:wrap;gap:0.5rem">
             <div>
-              <span class="panel-title">🎙️ Conselheiro Central de Diretrizes do NEXUS (Comunicação Direta com Você)</span>
-              <span style="display:block;font-size:0.72rem;color:var(--emerald);font-family:var(--font-mono)">Sintetiza todo o conhecimento evoluído pelos agentes com os usuários e fala diretamente com você no seu celular/PC.</span>
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <span class="panel-title">🎙️ Conselheiro Central de Diretrizes do NEXUS</span>
+                <span class="agent-badge DONE" style="font-size:0.62rem">PROCESSAMENTO PARALELO ATIVO</span>
+              </div>
+              <span style="display:block;font-size:0.72rem;color:var(--emerald);font-family:var(--font-mono);margin-top:2px">Sintetiza todo o conhecimento evoluído pelos agentes com os usuários e opera com diálogo simultâneo sem bloqueios.</span>
             </div>
-            <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-              <button class="btn-primary" id="c2-speak-briefing-btn" style="padding:0.45rem 0.9rem;font-size:0.78rem">🔊 Ouvir Análise por Voz Agora</button>
-              <button class="btn-secondary" id="c2-mic-advisor-btn" style="padding:0.45rem 0.85rem;font-size:0.78rem">🎙️ Falar por Voz</button>
+            <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
+              <button class="btn-primary" id="c2-speak-briefing-btn" style="padding:0.4rem 0.75rem;font-size:0.74rem">🔊 Ouvir Síntese</button>
+              <button class="btn-secondary" id="c2-stop-speech-btn" style="padding:0.4rem 0.75rem;font-size:0.74rem;border-color:var(--rose);color:#fda4af" title="Parar reprodução de voz imediatamente">🛑 Parar Áudio</button>
+              <button class="btn-secondary" id="c2-mic-advisor-btn" style="padding:0.4rem 0.75rem;font-size:0.74rem">🎙️ Falar por Voz</button>
             </div>
           </div>
 
-          <div id="c2-advisor-speech-box" style="background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.28);border-radius:10px;padding:1rem;font-size:0.86rem;line-height:1.65;color:var(--text-primary);margin:0.65rem 0;white-space:pre-line">
-            Carregando síntese executiva de conhecimento dos agentes e auditoria das Diretrizes do NEXUS...
+          <!-- Pinned Executive Daily Briefing -->
+          <div style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.24);border-radius:10px;padding:0.85rem 1rem;margin:0.65rem 0;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem">
+              <span style="font-family:var(--font-mono);font-size:0.7rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:0.05em">📋 SÍNTESE DIÁRIA EXECUTIVA DAS DIRETRIZES</span>
+              <span style="font-size:0.65rem;color:var(--text-muted)">Relatório Permanente Fixado</span>
+            </div>
+            <div id="c2-advisor-speech-box" style="font-size:0.84rem;line-height:1.65;color:var(--text-primary);white-space:pre-line;max-height:220px;overflow-y:auto">
+              Carregando síntese executiva de conhecimento dos agentes e auditoria das Diretrizes do NEXUS...
+            </div>
           </div>
 
-          <div style="display:flex;gap:0.5rem">
-            <input type="text" id="c2-advisor-input" class="text-input" placeholder="Pergunte diretamente ao Conselheiro de Diretrizes sobre o aprendizado dos agentes..." />
-            <button class="btn-primary" id="c2-advisor-send-btn" style="white-space:nowrap">Consultar Diretrizes</button>
+          <!-- Interactive Parallel Dialogue Stream (Non-Blocking & Simultaneous) -->
+          <div class="c2-advisor-chat-section" style="margin-top:0.85rem;border-top:1px solid rgba(255,255,255,0.08);padding-top:0.75rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;flex-wrap:wrap;gap:0.4rem">
+              <span style="font-family:var(--font-mono);font-size:0.72rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:0.06em">💬 CANAL DE DIÁLOGO DIRETO SIMULTÂNEO (ZERO ESPERA)</span>
+              <span id="c2-advisor-parallel-status" style="font-size:0.68rem;color:var(--emerald);font-family:var(--font-mono);display:inline-flex;align-items:center;gap:5px"><span class="c2-pulse-dot" style="background:#10b981;box-shadow:0 0 8px #10b981"></span> PRONTO PARA ENTRADAS SIMULTÂNEAS</span>
+            </div>
+            
+            <div id="c2-advisor-dialogue-stream" style="max-height:300px;overflow-y:auto;background:rgba(2,4,12,0.75);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:0.9rem;display:flex;flex-direction:column;gap:0.75rem;margin-bottom:0.75rem">
+              <div class="dash-chat-sys-log" style="font-size:0.74rem;color:var(--text-secondary);border:1px dashed rgba(0,245,255,0.25);padding:0.65rem;border-radius:6px">
+                🎙️ Faça quantas perguntas e diretrizes quiser em sequência. O Conselheiro processa e responde simultaneamente em paralelo, sem bloquear sua escrita nem exigir espera.
+              </div>
+            </div>
+
+            <div style="display:flex;gap:0.5rem;align-items:center">
+              <input type="text" id="c2-advisor-input" class="text-input" placeholder="Escreva sua solicitação aqui (envie quantas quiser sem esperar a IA terminar)..." style="flex:1;font-size:0.82rem" />
+              <button class="btn-primary" id="c2-advisor-send-btn" style="white-space:nowrap;padding:0.55rem 1.15rem">⚡ Enviar Simultâneo</button>
+            </div>
           </div>
         </div>
 
