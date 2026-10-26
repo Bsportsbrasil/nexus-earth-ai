@@ -602,6 +602,9 @@ const SecurityUI = (function () {
     if (tabId === 'tab-agents' && window.AgentDashboardUI) {
       window.AgentDashboardUI.loadDashboardState();
     }
+    if (tabId === 'tab-organism' && window.WorldOrganismUI) {
+      window.WorldOrganismUI.loadDashboard();
+    }
     if (shouldScroll) {
       const pane = document.getElementById(tabId);
       if (pane) {

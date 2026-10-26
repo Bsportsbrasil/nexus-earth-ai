@@ -32,6 +32,7 @@ import { supabaseSpatialRAG } from './engine/supabase_spatial_rag.js';
 import { continuousLearningValidator } from './engine/continuous_learning_validator.js';
 import { serverI18n } from './engine/i18n_server.js';
 import { globalOmniscienceRAG } from './engine/global_omniscience_rag.js';
+import { worldLearnerOrganism } from './engine/world_learner_organism.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -778,6 +779,111 @@ const server = http.createServer(async (req, res) => {
         agentReply: body.agentReply || ''
       });
       return jsonResponse(res, 200, evalRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  // 5a-2. Omni-Organismo Criativo-Operacional (NEXUS World-Learner Engine)
+  if (pathname === '/api/organism/dashboard' && req.method === 'GET') {
+    return jsonResponse(res, 200, worldLearnerOrganism.getDashboard());
+  }
+
+  if (pathname === '/api/organism/observe' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const obs = worldLearnerOrganism.observeMultimodalSignal(body);
+      return jsonResponse(res, 201, { success: true, observation: obs });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/hypothesis/formulate' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const hyp = worldLearnerOrganism.formulateHypothesis(body);
+      return jsonResponse(res, 201, { success: true, hypothesis: hyp });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/hypothesis/simulate' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const sim = worldLearnerOrganism.simulateFutureConsequences(body.hypothesisId, body.options);
+      return jsonResponse(res, 200, { success: true, simulation: sim });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/hypothesis/update' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const updated = worldLearnerOrganism.updateHypothesis(body.id, body.updates);
+      return jsonResponse(res, 200, { success: true, hypothesis: updated });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/hypothesis/delete' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const delRes = worldLearnerOrganism.deleteHypothesis(body.id);
+      return jsonResponse(res, 200, delRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/creation/synthesize' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const creat = worldLearnerOrganism.synthesizeCreation(body);
+      return jsonResponse(res, 201, { success: true, creation: creat });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/creation/update' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const updated = worldLearnerOrganism.updateCreation(body.id, body.updates);
+      return jsonResponse(res, 200, { success: true, creation: updated });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/creation/delete' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const delRes = worldLearnerOrganism.deleteCreation(body.id);
+      return jsonResponse(res, 200, delRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/observation/delete' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const delRes = worldLearnerOrganism.deleteObservation(body.id);
+      return jsonResponse(res, 200, delRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/feedback' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const feedRes = worldLearnerOrganism.recordOutcomeLearning(body);
+      return jsonResponse(res, 200, feedRes);
     } catch (e) {
       return jsonResponse(res, 400, { error: e.message });
     }

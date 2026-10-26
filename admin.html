@@ -711,6 +711,10 @@
             <span class="tab-icon">👁️</span>
             <span class="tab-text">10. Supervisão Suprema (HITL)</span>
           </button>
+          <button class="c2-tab-btn" data-tab="tab-organism">
+            <span class="tab-icon">🌌</span>
+            <span class="tab-text">11. Organismo Vivo (Mundo)</span>
+          </button>
         </div>
       </aside>
 
@@ -1531,6 +1535,115 @@
       </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 11: ORGANISMO CRIATIVO-OPERACIONAL QUE APRENDE COM O MUNDO
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-organism" class="c2-pane">
+      <!-- Executive Organism Status & Metrics Strip -->
+      <div class="c2-kpi-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));gap:0.75rem;margin-bottom:1.25rem">
+        <div class="panel glass-panel" style="padding:0.85rem">
+          <div style="font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;font-family:var(--font-mono)">Status do Organismo</div>
+          <div style="font-size:1rem;font-weight:800;color:var(--emerald);margin:0.25rem 0;display:flex;align-items:center;gap:6px">
+            <span class="c2-pulse-dot" style="background:var(--emerald)"></span> VIVO &amp; APRENDENDO
+          </div>
+          <div style="font-size:0.68rem;color:var(--text-secondary)">Percepção Multimodal do Mundo</div>
+        </div>
+
+        <div class="panel glass-panel" style="padding:0.85rem">
+          <div style="font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;font-family:var(--font-mono)">Evolução Epistêmica</div>
+          <div style="font-size:1.35rem;font-weight:800;color:var(--cyan);margin:0.25rem 0" id="org-stat-acc">94.2%</div>
+          <div style="font-size:0.68rem;color:var(--text-secondary)">Índice de Certeza do Mundo</div>
+        </div>
+
+        <div class="panel glass-panel" style="padding:0.85rem">
+          <div style="font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;font-family:var(--font-mono)">Hipóteses Próprias</div>
+          <div style="font-size:1.35rem;font-weight:800;color:#c084fc;margin:0.25rem 0" id="org-stat-hypotheses">0</div>
+          <div style="font-size:0.68rem;color:var(--text-secondary)">Formuladas por Padrões Ocultos</div>
+        </div>
+
+        <div class="panel glass-panel" style="padding:0.85rem">
+          <div style="font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;font-family:var(--font-mono)">Simulações de Futuro</div>
+          <div style="font-size:1.35rem;font-weight:800;color:var(--amber);margin:0.25rem 0" id="org-stat-simulations">0</div>
+          <div style="font-size:0.68rem;color:var(--text-secondary)">Projeções de 1ª, 2ª e 3ª Ordem</div>
+        </div>
+
+        <div class="panel glass-panel" style="padding:0.85rem">
+          <div style="font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;font-family:var(--font-mono)">Criações Homologadas</div>
+          <div style="font-size:1.35rem;font-weight:800;color:var(--emerald);margin:0.25rem 0" id="org-stat-creations">0</div>
+          <div style="font-size:0.68rem;color:var(--text-secondary)">Estratégias &amp; Obras Ativas</div>
+        </div>
+
+        <div class="panel glass-panel" style="padding:0.85rem">
+          <div style="font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;font-family:var(--font-mono)">Gestão da Administradora</div>
+          <div style="font-size:1.35rem;font-weight:800;color:#f87171;margin:0.25rem 0" id="org-stat-interventions">0</div>
+          <div style="font-size:0.68rem;color:var(--text-secondary)">Edições &amp; Exclusões Soberanas</div>
+        </div>
+      </div>
+
+      <!-- Action Toolbar da Administradora -->
+      <div class="panel glass-panel" style="padding:0.85rem 1rem;margin-bottom:1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem">
+        <div>
+          <h3 style="font-size:0.95rem;font-weight:800;color:#fff;margin:0">🌌 Organismo Criativo-Operacional que Aprende com o Mundo</h3>
+          <p style="font-size:0.74rem;color:var(--text-secondary);margin:2px 0 0 0">Combina texto, imagem, áudio, vídeo, telemetria e comportamento com supervisão humana total.</p>
+        </div>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap">
+          <button class="btn-secondary" id="btn-org-ingest" style="font-size:0.76rem;padding:0.45rem 0.85rem">📡 Ingerir Sinal Multimodal</button>
+          <button class="btn-primary" id="btn-org-new-hyp" style="font-size:0.76rem;padding:0.45rem 0.85rem">💡 + Nova Hipótese</button>
+          <button class="btn-secondary" id="btn-org-refresh" style="font-size:0.76rem;padding:0.45rem 0.85rem">🔄 Atualizar</button>
+        </div>
+      </div>
+
+      <!-- 4 Columns / Dual-Grid Layout -->
+      <div class="supervisor-dual-grid" style="margin-bottom:1.25rem">
+        <!-- Coluna Esquerda: Hipóteses com Edição e Exclusão Direta -->
+        <div class="panel glass-panel" style="padding:1rem;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem">
+            <h4 style="font-size:0.86rem;font-weight:800;color:var(--cyan);margin:0">💡 Hipóteses Formadas &amp; Padrões Ocultos</h4>
+            <span style="font-size:0.68rem;color:var(--text-dim)">Edição &amp; Exclusão Direta</span>
+          </div>
+          <div id="org-hypotheses-list" style="flex:1;overflow-y:auto;max-height:560px">
+            <div style="font-size:0.78rem;color:var(--text-secondary)">Carregando hipóteses...</div>
+          </div>
+        </div>
+
+        <!-- Coluna Direita: Simulações de Futuro (1ª, 2ª e 3ª Ordem) -->
+        <div class="panel glass-panel" style="padding:1rem;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem">
+            <h4 style="font-size:0.86rem;font-weight:800;color:var(--amber);margin:0">🔮 Simulações Contrafactuais de Consequências</h4>
+            <span style="font-size:0.68rem;color:var(--text-dim)">1ª, 2ª e 3ª Ordem</span>
+          </div>
+          <div id="org-simulations-list" style="flex:1;overflow-y:auto;max-height:560px">
+            <div style="font-size:0.78rem;color:var(--text-secondary)">Carregando simulações...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lower Dual-Grid: Criações e Sinais Ingeridos -->
+      <div class="supervisor-dual-grid">
+        <!-- Criações Personalizadas e Decisões -->
+        <div class="panel glass-panel" style="padding:1rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem">
+            <h4 style="font-size:0.86rem;font-weight:800;color:var(--emerald);margin:0">🎨 Criações Sintetizadas, Estratégias &amp; Decisões</h4>
+            <span style="font-size:0.68rem;color:var(--text-dim)">Poder Soberano da Administradora</span>
+          </div>
+          <div id="org-creations-list" style="max-height:480px;overflow-y:auto">
+            <div style="font-size:0.78rem;color:var(--text-secondary)">Carregando criações...</div>
+          </div>
+        </div>
+
+        <!-- Observações e Padrões Ocultos Multimodais -->
+        <div class="panel glass-panel" style="padding:1rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem">
+            <h4 style="font-size:0.86rem;font-weight:800;color:#c084fc;margin:0">📡 Sinais Multimodais &amp; Correlações do Mundo</h4>
+            <span style="font-size:0.68rem;color:var(--text-dim)">Texto, Imagem, Som &amp; Comportamento</span>
+          </div>
+          <div id="org-observations-list" style="max-height:480px;overflow-y:auto">
+            <div style="font-size:0.78rem;color:var(--text-secondary)">Carregando sinais...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     </main>
     </div>
 
@@ -1555,5 +1668,6 @@
   <script src="security_ui.js"></script>
   <script src="supervisor_workspace.js"></script>
   <script src="agent_dashboard_ui.js"></script>
+  <script src="world_organism_ui.js"></script>
 </body>
 </html>
