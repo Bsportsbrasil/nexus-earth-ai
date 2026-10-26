@@ -250,13 +250,17 @@ const AgentDashboardUI = (function () {
       } else {
         matchesEl.innerHTML = matches.map(m => {
           const sim = m.similarity ? `${(m.similarity * 100).toFixed(0)}% sim` : 'Recente';
+          const vecId = m.id || '';
           return `
-            <div class="vector-match-card">
-              <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--cyan);margin-bottom:0.2rem">
-                <span>[${esc(m.category || 'vetor')}]</span>
-                <span>${esc(sim)}</span>
+            <div class="vector-match-card" id="card-${esc(vecId)}">
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.68rem;color:var(--cyan);margin-bottom:0.25rem">
+                <span>[${esc(m.category || 'vetor')}] • ${esc(sim)}</span>
+                <div style="display:flex;gap:0.3rem">
+                  <button class="btn-micro-edit" onclick="AgentDashboardUI.editVectorPrompt('${esc(vecId)}')" title="Editar informação diretamente">✏️ Alterar</button>
+                  <button class="btn-micro-del" onclick="AgentDashboardUI.deleteVectorPrompt('${esc(vecId)}')" title="Excluir este vetor">🗑️ Excluir</button>
+                </div>
               </div>
-              <div style="font-size:0.76rem;color:var(--text-primary)">${esc(m.text)}</div>
+              <div class="vector-text-content" style="font-size:0.76rem;color:var(--text-primary);line-height:1.4">${esc(m.text)}</div>
             </div>
           `;
         }).join('');
@@ -265,15 +269,70 @@ const AgentDashboardUI = (function () {
 
     if (newLearnedEl) {
       if (lastTurnData?.newLearnedMemory) {
+        const newVec = lastTurnData.newLearnedMemory;
+        const vecId = newVec.id || '';
         newLearnedEl.innerHTML = `
-          <div class="vector-match-card new-vector">
-            <div style="font-size:0.68rem;color:var(--emerald);font-weight:700;margin-bottom:0.2rem">✨ Novo Vetor Indexado nesta Mensagem:</div>
-            <div style="font-size:0.76rem;color:var(--text-primary)">${esc(lastTurnData.newLearnedMemory.text)}</div>
+          <div class="vector-match-card new-vector" id="card-${esc(vecId)}">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.68rem;color:var(--emerald);font-weight:700;margin-bottom:0.25rem">
+              <span>✨ Novo Vetor Indexado nesta Mensagem:</span>
+              <div style="display:flex;gap:0.3rem">
+                <button class="btn-micro-edit" onclick="AgentDashboardUI.editVectorPrompt('${esc(vecId)}')" title="Editar informação diretamente">✏️ Alterar</button>
+                <button class="btn-micro-del" onclick="AgentDashboardUI.deleteVectorPrompt('${esc(vecId)}')" title="Excluir este vetor">🗑️ Excluir</button>
+              </div>
+            </div>
+            <div class="vector-text-content" style="font-size:0.76rem;color:var(--text-primary);line-height:1.4">${esc(newVec.text)}</div>
           </div>
         `;
       } else {
         newLearnedEl.innerHTML = '<div style="font-size:0.75rem;color:var(--text-secondary)">Envie uma mensagem para disparar nova indexação vetorial.</div>';
       }
+    }
+  }
+
+  async function editVectorPrompt(vecId) {
+    if (!vecId) return alert('Identificador do vetor não encontrado.');
+    const card = document.getElementById('card-' + vecId);
+    const currentText = card ? card.querySelector('.vector-text-content')?.textContent || '' : '';
+    const newText = prompt('Corrija ou altere o conteúdo deste vetor de memória com segurança:', currentText);
+    if (newText === null || newText.trim() === '' || newText.trim() === currentText) return;
+
+    try {
+      const res = await fetch('/api/agents/update-vector', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ agentId: activeAgentId, vectorId: vecId, text: newText.trim() })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Falha ao atualizar');
+      if (card) {
+        const textEl = card.querySelector('.vector-text-content');
+        if (textEl) textEl.textContent = newText.trim();
+        card.style.borderColor = 'var(--emerald)';
+      }
+      appendSystemLog(`Vetor [${vecId}] atualizado pelo Criador com sucesso.`);
+    } catch (e) {
+      alert('Erro ao atualizar vetor: ' + e.message);
+    }
+  }
+
+  async function deleteVectorPrompt(vecId) {
+    if (!vecId) return alert('Identificador do vetor não encontrado.');
+    if (!confirm('Tem certeza de que deseja excluir permanentemente este vetor de memória do agente?')) return;
+
+    try {
+      const res = await fetch('/api/agents/delete-vector', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ agentId: activeAgentId, vectorId: vecId })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Falha ao excluir');
+      const card = document.getElementById('card-' + vecId);
+      if (card) card.remove();
+      appendSystemLog(`Vetor [${vecId}] excluído com autorização soberana do Criador.`);
+      await loadDashboardState();
+    } catch (e) {
+      alert('Erro ao excluir vetor: ' + e.message);
     }
   }
 
@@ -655,7 +714,9 @@ const AgentDashboardUI = (function () {
     loadDashboardState,
     sendMessage,
     isAdminMode,
-    getActiveAgent: () => getActiveAgent()
+    getActiveAgent: () => getActiveAgent(),
+    editVectorPrompt,
+    deleteVectorPrompt
   };
 })();
 

@@ -2400,6 +2400,75 @@ section.hero-section[data-route].route-active {
   margin-bottom: 4px;
 }
 
+/* Micro Actions for Vector Cards */
+.btn-micro-edit, .btn-micro-del {
+  font-size: 0.64rem;
+  font-family: inherit;
+  font-weight: 600;
+  padding: 0.18rem 0.45rem;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+}
+.btn-micro-edit:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.5);
+}
+.btn-micro-del:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* Human-in-the-Loop Action Bar for Chat & Assistant Responses */
+.hitl-action-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.65rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.hitl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.62rem;
+  font-size: 0.72rem;
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.8);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.hitl-btn:hover {
+  background: rgba(56, 189, 248, 0.16);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.45);
+}
+.hitl-btn.active-adopted {
+  background: rgba(16, 185, 129, 0.22) !important;
+  color: #34d399 !important;
+  border-color: rgba(16, 185, 129, 0.55) !important;
+}
+.hitl-evidence-drawer {
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  background: rgba(2, 6, 23, 0.9);
+  border: 1px solid rgba(0, 245, 255, 0.25);
+  border-radius: 6px;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
 
 .supervisor-dual-grid {
   display: grid;

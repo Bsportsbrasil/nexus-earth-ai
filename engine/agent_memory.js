@@ -516,6 +516,42 @@ export class AgentMemoryStore {
   }
 
   /**
+   * Creator Action: Edit a specific vector in an agent's memory
+   */
+  updateVector(agentId, vectorId, newText, newCategory) {
+    if (!this.agents.has(agentId)) throw new Error(`Agente ${agentId} não encontrado.`);
+    const store = this.vectorStores.get(agentId) || [];
+    const idx = store.findIndex(m => m.id === vectorId);
+    if (idx === -1) throw new Error(`Vetor ${vectorId} não encontrado.`);
+
+    if (newText) {
+      store[idx].text = newText.trim();
+      store[idx].denseVec = this._computeDenseVector(newText.trim());
+    }
+    if (newCategory) {
+      store[idx].category = newCategory.trim();
+    }
+    store[idx].updatedAt = new Date().toISOString();
+    this.vectorStores.set(agentId, store);
+    this._save();
+    return store[idx];
+  }
+
+  /**
+   * Creator Action: Delete a specific vector from an agent's memory
+   */
+  deleteVector(agentId, vectorId) {
+    if (!this.agents.has(agentId)) throw new Error(`Agente ${agentId} não encontrado.`);
+    const store = this.vectorStores.get(agentId) || [];
+    const idx = store.findIndex(m => m.id === vectorId);
+    if (idx === -1) throw new Error(`Vetor ${vectorId} não encontrado.`);
+    const removed = store.splice(idx, 1)[0];
+    this.vectorStores.set(agentId, store);
+    this._save();
+    return { agentId, vectorId, removedText: removed.text, status: 'DELETED' };
+  }
+
+  /**
    * Creator Action: Register a New Custom Agent with its own private vector store
    */
   createCustomAgent({ id, name, role, description = '' }) {

@@ -660,6 +660,32 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  if (pathname === '/api/agents/update-vector' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      if (!body.agentId || !body.vectorId || !body.text) {
+        return jsonResponse(res, 400, { error: 'agentId, vectorId e text são obrigatórios.' });
+      }
+      const updated = agentMemoryStore.updateVector(body.agentId, body.vectorId, body.text, body.category);
+      return jsonResponse(res, 200, { success: true, vector: updated });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/agents/delete-vector' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      if (!body.agentId || !body.vectorId) {
+        return jsonResponse(res, 400, { error: 'agentId e vectorId são obrigatórios.' });
+      }
+      const deleted = agentMemoryStore.deleteVector(body.agentId, body.vectorId);
+      return jsonResponse(res, 200, { success: true, result: deleted });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
   if (pathname === '/api/agents/delete' && req.method === 'POST') {
     try {
       const body = await parseJsonBody(req);
