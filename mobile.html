@@ -289,6 +289,9 @@ html, body {
   grid-template-columns: repeat(2, 1fr) !important;
   gap: 10px !important;
   margin-bottom: 12px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .telemetry-cell {
@@ -298,6 +301,9 @@ html, body {
   padding: 10px 12px !important;
   display: flex !important;
   flex-direction: column !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
 .telemetry-label {
@@ -306,6 +312,9 @@ html, body {
   color: var(--text-dim);
   text-transform: uppercase;
   margin-bottom: 2px;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .telemetry-value {
@@ -313,6 +322,9 @@ html, body {
   font-weight: 800;
   font-family: var(--font-mono);
   color: #fff;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .telemetry-value.cyan { color: var(--cyan); }
@@ -1283,9 +1295,6 @@ html, body {
           <div class="telemetry-cell">
             <div class="telemetry-label">Hardware VPS</div>
             <div class="telemetry-value cyan" id="hud-val-cpu">AMD Epyc</div>
-
-        <!-- Visual Continuous Learning & Zero-Hallucination Dashboard -->
-        <div id="learning-dashboard-container" style="margin-top: 14px; margin-bottom: 16px;"></div>
           </div>
           <div class="telemetry-cell">
             <div class="telemetry-label">RAM Alocada</div>
@@ -1300,6 +1309,9 @@ html, body {
             <div class="telemetry-value cyan" id="hud-val-entropy">2.55 bits</div>
           </div>
         </div>
+
+        <!-- Visual Continuous Learning & Zero-Hallucination Dashboard -->
+        <div id="learning-dashboard-container" style="margin-top: 14px; margin-bottom: 16px; width: 100%; max-width: 100%; box-sizing: border-box; overflow-x: hidden;"></div>
 
         <!-- Core Mission & Architecture Card -->
         <div class="cyber-card glow-cyan">

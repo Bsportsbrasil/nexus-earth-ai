@@ -253,6 +253,9 @@ html, body {
   grid-template-columns: repeat(2, 1fr) !important;
   gap: 10px !important;
   margin-bottom: 12px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .telemetry-cell {
@@ -262,6 +265,9 @@ html, body {
   padding: 10px 12px !important;
   display: flex !important;
   flex-direction: column !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
 .telemetry-label {
@@ -270,6 +276,9 @@ html, body {
   color: var(--text-dim);
   text-transform: uppercase;
   margin-bottom: 2px;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .telemetry-value {
@@ -277,6 +286,9 @@ html, body {
   font-weight: 800;
   font-family: var(--font-mono);
   color: #fff;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .telemetry-value.cyan { color: var(--cyan); }

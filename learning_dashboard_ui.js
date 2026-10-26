@@ -53,7 +53,7 @@ const LearningDashboardUI = (function () {
     `).join('');
 
     return `
-      <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block;overflow:visible;" preserveAspectRatio="xMidYMid meet">
+      <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto;display:block;overflow:hidden;" preserveAspectRatio="xMidYMid meet">
         <defs>
           <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.35" />
@@ -182,59 +182,59 @@ const LearningDashboardUI = (function () {
     if (!container) return;
 
     container.innerHTML = `
-      <div class="learning-dashboard-wrapper" style="display:flex;flex-direction:column;gap:14px;box-sizing:border-box;">
+      <div class="learning-dashboard-wrapper" style="display:flex;flex-direction:column;gap:14px;box-sizing:border-box;width:100%;max-width:100%;overflow-x:hidden;">
         
         <!-- Header -->
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <div>
-            <div style="font-size:1.05rem;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px;">
+          <div style="min-width:0;flex:1;">
+            <div style="font-size:clamp(0.88rem, 4vw, 1.05rem);font-weight:800;color:#fff;display:flex;align-items:center;gap:8px;word-break:break-word;">
               <span>📈</span> Curva de Aprendizado & Zero Alucinação
             </div>
-            <div style="font-size:0.75rem;color:#94a3b8;font-family:monospace;">
+            <div style="font-size:0.75rem;color:#94a3b8;font-family:monospace;word-break:break-word;">
               Filtro Epistêmico de Grounding • Shannon Entropy Gate
             </div>
           </div>
-          <button type="button" id="btn-dash-refresh" class="cyber-btn-secondary" style="font-size:0.75rem;padding:5px 12px;">
+          <button type="button" id="btn-dash-refresh" class="cyber-btn-secondary" style="font-size:0.75rem;padding:5px 12px;white-space:nowrap;">
             🔄 Atualizar
           </button>
         </div>
 
         <!-- 4 KPI Cards -->
-        <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:10px;">
-          <div class="cyber-card" style="padding:10px 12px;margin:0;">
-            <div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;font-family:monospace;">Precisão Epistêmica</div>
+        <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:10px;width:100%;box-sizing:border-box;">
+          <div class="cyber-card" style="padding:10px 12px;margin:0;min-width:0;box-sizing:border-box;">
+            <div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;font-family:monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Precisão Epistêmica</div>
             <div id="dash-val-accuracy" style="font-size:1.25rem;font-weight:800;color:#00f5ff;font-family:monospace;">99.4%</div>
           </div>
-          <div class="cyber-card" style="padding:10px 12px;margin:0;">
-            <div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;font-family:monospace;">Conhecimento Validado</div>
+          <div class="cyber-card" style="padding:10px 12px;margin:0;min-width:0;box-sizing:border-box;">
+            <div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;font-family:monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Conhecimento Validado</div>
             <div id="dash-val-validated" style="font-size:1.25rem;font-weight:800;color:#10b981;font-family:monospace;">185</div>
           </div>
-          <div class="cyber-card" style="padding:10px 12px;margin:0;">
-            <div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;font-family:monospace;">Alucinações Bloqueadas</div>
+          <div class="cyber-card" style="padding:10px 12px;margin:0;min-width:0;box-sizing:border-box;">
+            <div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;font-family:monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Alucinações Bloqueadas</div>
             <div id="dash-val-blocked" style="font-size:1.25rem;font-weight:800;color:#f43f5e;font-family:monospace;">40</div>
           </div>
-          <div class="cyber-card" style="padding:10px 12px;margin:0;">
-            <div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;font-family:monospace;">Entropia Shannon</div>
+          <div class="cyber-card" style="padding:10px 12px;margin:0;min-width:0;box-sizing:border-box;">
+            <div style="font-size:0.68rem;color:#94a3b8;text-transform:uppercase;font-family:monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Entropia Shannon</div>
             <div id="dash-val-entropy" style="font-size:1.25rem;font-weight:800;color:#a855f7;font-family:monospace;">2.42 bits</div>
           </div>
         </div>
 
         <!-- Interactive SVG Learning Curve Chart -->
-        <div class="cyber-card glow-cyan" style="padding:14px;margin:0;">
-          <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:8px;display:flex;justify-content:space-between;">
+        <div class="cyber-card glow-cyan" style="padding:14px;margin:0;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;">
+          <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:8px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;">
             <span>Curva de Evolução do Conhecimento (Últimos 14 Dias)</span>
             <span style="font-size:0.7rem;color:#00f5ff;font-family:monospace;">Taxa: +1.4% / dia</span>
           </div>
-          <div id="dash-chart-container" style="width:100%;min-height:140px;"></div>
+          <div id="dash-chart-container" style="width:100%;max-width:100%;min-height:140px;overflow:hidden;"></div>
         </div>
 
         <!-- Manual Epistemic Validator Tester -->
-        <div class="cyber-card" style="padding:12px;margin:0;border:1px solid rgba(0,245,255,0.2);">
+        <div class="cyber-card" style="padding:12px;margin:0;border:1px solid rgba(0,245,255,0.2);width:100%;max-width:100%;box-sizing:border-box;">
           <div style="font-size:0.82rem;font-weight:700;color:#fff;margin-bottom:6px;">
             🧪 Testar Validação Factual (Filtro Zero-Achismos)
           </div>
-          <div style="display:flex;gap:6px;">
-            <input type="text" id="dash-manual-assertion-input" class="cyber-input" placeholder="Digite uma afirmação (ex: 'A bacia amazônica tem...')" style="flex:1;font-size:0.82rem;" />
+          <div style="display:flex;gap:6px;width:100%;box-sizing:border-box;">
+            <input type="text" id="dash-manual-assertion-input" class="cyber-input" placeholder="Digite uma afirmação (ex: 'A bacia amazônica tem...')" style="flex:1;min-width:0;font-size:0.82rem;" />
             <button type="button" id="btn-dash-test-assertion" class="cyber-btn-primary" style="font-size:0.78rem;padding:6px 12px;white-space:nowrap;">
               Validar
             </button>
