@@ -828,7 +828,15 @@ const SecurityUI = (function () {
       };
     } catch (e) {}
 
-    if (getToken()) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlKey = urlParams.get('key');
+    if (urlKey && document.getElementById('admin-pass-input')) {
+      document.getElementById('admin-pass-input').value = urlKey;
+      login();
+      try {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      } catch (e) {}
+    } else if (getToken()) {
       refreshState();
     } else {
       showAuthGate();
