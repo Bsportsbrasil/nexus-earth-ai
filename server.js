@@ -1307,7 +1307,14 @@ const server = http.createServer(async (req, res) => {
     filePath = '/privacy.html';
   } else if (pathname === '/terms' || pathname === '/termos') {
     filePath = '/terms.html';
-  } else if (pathname === '/mobile' || pathname === '/m' || pathname === '/app') {
+  } else if (
+    pathname === '/mobile' ||
+    pathname.startsWith('/mobile/') ||
+    pathname === '/m' ||
+    pathname.startsWith('/m/') ||
+    pathname === '/app' ||
+    pathname.startsWith('/app/')
+  ) {
     filePath = '/mobile.html';
   } else if (SPA_ROUTES.has(pathname)) {
     filePath = '/index.html';

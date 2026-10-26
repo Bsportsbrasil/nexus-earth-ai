@@ -58,28 +58,28 @@
       "name": "AURA Live Companion",
       "short_name": "AURA Live",
       "description": "Conversar e aprender diariamente com a agente AURA",
-      "url": "/#companion",
+      "url": "/aura",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "Glass-Box Command Center",
       "short_name": "Command Center",
       "description": "Inspecionar raciocínio neural, GraphRAG e multi-agentes",
-      "url": "/#command-center",
+      "url": "/command-center",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "Pedagogia Inclusiva TEA",
       "short_name": "Inclusão TEA",
       "description": "Gerar histórias sociais e atividades lúdicas inclusivas",
-      "url": "/#cooperative",
+      "url": "/cooperative",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "Assistente & Estúdio",
       "short_name": "Agenda & Studio",
       "description": "Planejar rotinas, exportar calendário e criar mídia",
-      "url": "/#assistant",
+      "url": "/assistant",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ]

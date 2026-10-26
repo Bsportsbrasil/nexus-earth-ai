@@ -15,13 +15,13 @@
     {
       "name": "AURA Live",
       "shortName": "AURA",
-      "url": "https://nexusearthai.com/mobile#aura",
+      "url": "https://nexusearthai.com/mobile/aura",
       "icon": "https://nexusearthai.com/icon-192.png"
     },
     {
       "name": "Consenso Agentes",
       "shortName": "Agentes",
-      "url": "https://nexusearthai.com/mobile#agents",
+      "url": "https://nexusearthai.com/mobile/agents",
       "icon": "https://nexusearthai.com/icon-192.png"
     }
   ],

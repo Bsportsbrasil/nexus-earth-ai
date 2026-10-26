@@ -56,8 +56,8 @@ const NexusMobile = (function () {
     }
   }
 
-  /* --- Navigation & Tab Switching --- */
-  function switchTab(tabId) {
+  /* --- Navigation & Clean HTML5 PushState Tab Switching (Zero '#' in URL) --- */
+  function switchTab(tabId, updateUrl = true) {
     if (!views[tabId]) return;
     activeTab = tabId;
     triggerHaptic(15);
@@ -70,7 +70,19 @@ const NexusMobile = (function () {
       if (dockItems[k]) dockItems[k].classList.toggle('active', k === tabId);
     });
 
-    window.location.hash = `#${tabId}`;
+    // Clean HTML5 History API (Zero '#' hashes in URL)
+    if (updateUrl) {
+      const isHome = tabId === 'home';
+      const cleanUrl = isHome ? '/mobile' : `/mobile/${tabId}`;
+      if (window.location.pathname !== cleanUrl || window.location.hash) {
+        window.history.pushState({ tab: tabId }, '', cleanUrl);
+      }
+    } else if (window.location.hash) {
+      try {
+        window.history.replaceState({ tab: tabId }, '', window.location.pathname);
+      } catch (_) {}
+    }
+
     window.scrollTo(0, 0);
 
     // Dynamic Orb resize if switching between home and aura
@@ -79,24 +91,42 @@ const NexusMobile = (function () {
     }
   }
 
+  function resolveInitialTab() {
+    // If user arrived with a legacy # hash, clean it up immediately
+    if (window.location.hash) {
+      const legacy = window.location.hash.replace('#', '').trim().toLowerCase();
+      try {
+        window.history.replaceState(null, '', window.location.pathname);
+      } catch (_) {}
+      if (views[legacy]) return legacy;
+    }
+
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes('/aura')) return 'aura';
+    if (path.includes('/agent')) return 'agents';
+    if (path.includes('/graph') || path.includes('/knowledge')) return 'graphrag';
+    if (path.includes('/supervisor')) return 'supervisor';
+    if (path.includes('/setting') || path.includes('/ajuste')) return 'settings';
+    return 'home';
+  }
+
   function initNavigation() {
     Object.keys(dockItems).forEach(tabId => {
       if (dockItems[tabId]) {
         dockItems[tabId].addEventListener('click', (e) => {
           e.preventDefault();
-          switchTab(tabId);
+          switchTab(tabId, true);
         });
       }
     });
 
-    window.addEventListener('hashchange', () => {
-      const hash = window.location.hash.replace('#', '');
-      if (views[hash]) switchTab(hash);
+    window.addEventListener('popstate', (e) => {
+      const tab = e.state?.tab || resolveInitialTab();
+      switchTab(tab, false);
     });
 
-    const initial = window.location.hash.replace('#', '');
-    if (views[initial]) switchTab(initial);
-    else switchTab('home');
+    const initial = resolveInitialTab();
+    switchTab(initial, false);
   }
 
   /* --- 60 FPS Quantum 3D Superintelligence Holo-Stage --- */
