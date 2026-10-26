@@ -214,9 +214,223 @@
       margin-top: 0;
       padding-top: 0;
     }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       RESPONSIVE MOBILE AUDIT & ZERO HORIZONTAL OVERFLOW ENGINE
+       ═══════════════════════════════════════════════════════════════════════ */
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+    html, body, .c2-admin-body {
+      width: 100% !important;
+      max-width: 100vw !important;
+      overflow-x: hidden !important;
+      margin: 0 !important;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box !important;
+    }
+    #security, .section, .c2-enterprise-layout, .c2-enterprise-main {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    #nav {
+      width: 100% !important;
+      max-width: 100vw !important;
+      overflow-x: hidden !important;
+      box-sizing: border-box !important;
+    }
+    .nav-inner {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .c2-threat-banner {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+    }
+    .c2-threat-banner > div:first-child {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+    }
+    #c2-latest-threat-text {
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      white-space: normal !important;
+      display: inline-block;
+      max-width: 100% !important;
+    }
+    .c2-enterprise-layout {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      margin-top: 1.25rem;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .c2-enterprise-sidebar {
+      width: 310px;
+      min-width: 310px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 80px;
+      border-radius: 12px;
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      border: 1px solid rgba(0, 245, 255, 0.22);
+      background: rgba(4, 8, 20, 0.95);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(24px);
+      z-index: 100;
+      box-sizing: border-box;
+    }
+    .c2-enterprise-main {
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    .c2-vip-form-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1.2fr 1fr 0.9fr 0.9fr 0.7fr auto;
+      gap: 0.5rem;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .supervisor-dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .c2-table-wrap {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      box-sizing: border-box !important;
+    }
+    .c2-table {
+      min-width: 580px;
+    }
+
+    @media (max-width: 1120px) {
+      .c2-vip-form-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .c2-enterprise-layout {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .c2-enterprise-sidebar {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        position: static !important;
+        max-height: none !important;
+        flex-shrink: 1 !important;
+      }
+      .c2-tabs {
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding-bottom: 0.4rem !important;
+      }
+      .c2-tab-btn {
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        width: auto !important;
+      }
+      .c2-nav-group-title {
+        display: none !important;
+      }
+      #c2-chain-badge { display: none !important; }
+      #c2-public-link { display: none !important; }
+    }
+
+    @media (max-width: 900px) {
+      .assistant-grid, .security-dashboard-grid {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .assistant-col,
+      .assistant-grid > *,
+      [style*="grid-column: span"] {
+        grid-column: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .supervisor-dual-grid {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .breaker-list {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .c2-threat-banner {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+      .c2-threat-banner > div:last-child {
+        width: 100% !important;
+        flex-direction: column !important;
+      }
+      .c2-threat-banner button {
+        width: 100% !important;
+      }
+      .c2-vip-form-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .c2-vip-form-grid button {
+        width: 100% !important;
+      }
+      #c2-supervisor-text { display: none !important; }
+      .nav-status {
+        gap: 0.35rem !important;
+        max-width: calc(100vw - 110px) !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+      }
+      .nav-status::-webkit-scrollbar { display: none !important; }
+      .nav-logo .logo-tag { display: none !important; }
+    }
   </style>
 </head>
-<body style="min-height:100vh;display:flex;flex-direction:column">
+<body class="c2-admin-body">
   <canvas id="particle-canvas"></canvas>
 
   <!-- Top Bar -->
@@ -369,10 +583,10 @@
     
     <!-- Master C2 Navigation Tabs (6 Pillars) -->
     <!-- Master C2 Enterprise Layout: Left Sidebar Navigation & Right Workspace -->
-    <div class="c2-enterprise-layout" style="display:flex;gap:1.5rem;align-items:flex-start;margin-top:1.25rem;">
+    <div class="c2-enterprise-layout">
       
       <!-- 1. Left Navigation Sidebar (Enterprise Standard) -->
-      <aside class="c2-enterprise-sidebar glass-panel" style="width:310px;min-width:310px;flex-shrink:0;position:sticky;top:80px;border-radius:12px;padding:0.85rem;display:flex;flex-direction:column;gap:0.35rem;max-height:calc(100vh - 100px);overflow-y:auto;border:1px solid rgba(0,245,255,0.22);background:rgba(4,8,20,0.95);box-shadow:0 12px 35px rgba(0,0,0,0.7);backdrop-filter:blur(24px);z-index:100;">
+      <aside class="c2-enterprise-sidebar glass-panel">
         <div style="display:flex;align-items:center;justify-content:space-between;padding:0.4rem 0.6rem 0.65rem;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:0.4rem">
           <div>
             <div class="c2-sidebar-header-title" style="font-family:var(--font-display);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;color:var(--cyan);text-transform:uppercase">MÓDULOS CORPORATIVOS</div>
@@ -433,7 +647,7 @@
       </aside>
 
       <!-- 2. Main Management Workspace on the Right -->
-      <main class="c2-enterprise-main" style="flex:1;min-width:0;">
+      <main class="c2-enterprise-main">
 
     <!-- ═══════════════════════════════════════════════════════════════════════
          PILLAR 1: CONTAS, EMPRESAS, ATIVAÇÃO VIP DIRETA & RBAC
@@ -446,7 +660,7 @@
             <span class="panel-title">⚡ Concessão Direta de Acesso / Ativação Manual de Cliente Particular (Sem Cadastro Público)</span>
             <span class="agent-badge DONE">RBAC PROVISIONER</span>
           </div>
-          <div style="display:grid;grid-template-columns:1.2fr 1.2fr 1fr 0.9fr 0.9fr 0.7fr auto;gap:0.5rem;align-items:center">
+          <div class="c2-vip-form-grid">
             <input type="text" id="vip-name" class="text-input" placeholder="Nome do Cliente ou Responsável..." />
             <input type="email" id="vip-email" class="text-input" placeholder="E-mail corporativo/pessoal..." />
             <input type="text" id="vip-company" class="text-input" placeholder="Empresa / Instituição..." />
@@ -1176,7 +1390,7 @@
       </div>
 
       <!-- Dual Canvas Workstation: Left = Supervisor Lead (LENNOX), Right = Subordinate Under Audit -->
-      <div class="supervisor-dual-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
+      <div class="supervisor-dual-grid">
         <!-- Left Canvas: Master Supervisor Agent (LENNOX) -->
         <div class="panel glass-panel supervisor-lead-card" style="display:flex;flex-direction:column;border-radius:12px;overflow:hidden">
           <div class="agent-chat-header" style="border-radius:10px 10px 0 0;padding:0.75rem 1rem;background:rgba(2,6,23,0.7);border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center">
