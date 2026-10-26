@@ -1431,6 +1431,14 @@ html, body {
   #current-lang-code {
     font-size: 0.72rem !important;
   }
+  #nav-auth-btn {
+    padding: 0 0.5rem !important;
+    min-width: 32px !important;
+    justify-content: center !important;
+  }
+  #nav-auth-btn span {
+    display: none !important;
+  }
 
   .section {
     padding: 58px 0.75rem 40px !important;
