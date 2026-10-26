@@ -94,7 +94,7 @@ const NexusMobile = (function () {
   }
 
   function init() {
-    ['home', 'aura', 'agents', 'graphrag', 'settings'].forEach(id => {
+    ['home', 'aura', 'agents', 'graphrag', 'supervisor', 'settings'].forEach(id => {
       views[id] = document.getElementById(`view-${id}`);
       dockItems[id] = document.getElementById(`dock-${id}`);
     });
