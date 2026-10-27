@@ -507,9 +507,10 @@ DIRETRIZ DE DIÁLOGO COM A ADMINISTRADORA (CRIADORA):
           maxOutputTokens: 1200
         });
 
-        if (res && res.text) {
-          reply = res.text.trim();
-          usedModel = res.modelUsed || 'gemini-3.5-flash-lite';
+        const ans = res && (res.answer || res.text);
+        if (ans && ans.trim()) {
+          reply = ans.trim();
+          usedModel = res.model || res.modelUsed || 'gemini-2.5-flash';
         }
       } catch (err) {
         console.warn('WorldLearnerOrganism LLM call fallback:', err.message);

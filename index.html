@@ -162,7 +162,7 @@
       <!-- 2. Center Section: Links de Navegação Minimalista e Fluida no Centro -->
       <div class="nav-center">
         <ul class="nav-links">
-          <li><a href="/" class="nav-link active" data-route-link="home"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></a></li>
+          <li><a href="/" class="nav-link active" data-route-link="home"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Início</span></a></li>
           <li><a href="/aura" class="nav-link" data-route-link="aura" data-section="companion"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg><span>AURA Live</span></a></li>
           <li><a href="/command-center" class="nav-link" data-route-link="command-center" data-section="command-center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span>Comando C2</span></a></li>
           <li><a href="/earth" class="nav-link" data-route-link="earth" data-section="earth" style="color:var(--cyan)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span>Earth Geo</span></a></li>
@@ -187,7 +187,7 @@
               <!-- Populated dynamically by I18nEngine -->
             </div>
           </div>
-          <span id="key-status" class="key-status demo">DEMO MODE</span>
+          <span id="key-status" class="key-status demo">MODO DEMO</span>
           <button id="pwa-install-btn" class="btn-secondary nav-btn" title="Instalar NEXUS como Aplicativo no Celular ou Computador">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
             <span>App</span>
@@ -232,16 +232,16 @@
             <span id="hero-aura-btn">✨ Conversar com AURA Live</span>
           </button>
           <button class="btn-secondary" id="hero-launch-btn" data-goto-route="command-center">
-            <span id="hero-launch-btn-text">⚡ Glass-Box Command Center</span>
+            <span id="hero-launch-btn-text">⚡ Centro de Comando C2</span>
           </button>
           <button class="btn-secondary" data-goto-route="proofs">
-            <span id="hero-bench-btn">🏛️ Whitepaper &amp; Benchmarks</span>
+            <span id="hero-bench-btn">🏛️ Provas &amp; Benchmarks</span>
           </button>
         </div>
         <div class="hero-stat-row">
-          <div class="hero-stat"><span class="stat-num" id="h-params">8</span><span class="stat-label">Hardware Cores</span></div>
-          <div class="hero-stat"><span class="stat-num" id="h-iq">60</span><span class="stat-label">Graphics Engine (FPS)</span></div>
-          <div class="hero-stat"><span class="stat-num" id="h-agents">1,250+</span><span class="stat-label">Real API Calls</span></div>
+          <div class="hero-stat"><span class="stat-num" id="h-params">8</span><span class="stat-label">Núcleos de Hardware</span></div>
+          <div class="hero-stat"><span class="stat-num" id="h-iq">60</span><span class="stat-label">Motor Gráfico (FPS)</span></div>
+          <div class="hero-stat"><span class="stat-num" id="h-agents">1.250+</span><span class="stat-label">Chamadas Reais de API</span></div>
         </div>
       </div>
     </div>
@@ -304,10 +304,10 @@
               <div class="exec-card-icon">⚡</div>
               <span class="exec-card-route">/command-center</span>
             </div>
-            <div class="exec-card-title" style="margin-top:0.85rem">Glass-Box Command Center &amp; Chat</div>
+            <div class="exec-card-title" style="margin-top:0.85rem">Centro de Comando C2 &amp; Chat</div>
             <p class="exec-card-desc">Convergência operacional dos 3 pilares (Mapa de Atenção + GraphRAG, Debate Multi-Agente e Barramento MessageBroker) integrada ao Chat com Cadeia de Pensamento.</p>
           </div>
-          <div class="exec-card-cta">Abrir Command Center →</div>
+          <div class="exec-card-cta">Abrir Centro de Comando →</div>
         </div>
 
         <div class="glass-panel exec-module-card" data-goto-route="neural">
@@ -316,7 +316,7 @@
               <div class="exec-card-icon">🧠</div>
               <span class="exec-card-route">/neural</span>
             </div>
-            <div class="exec-card-title" style="margin-top:0.85rem">Mechanistic Interpretability (MLP)</div>
+            <div class="exec-card-title" style="margin-top:0.85rem">Interpretabilidade Mecanística (MLP)</div>
             <p class="exec-card-desc">Inspeção matemática em tempo real de propagação direta e reversa (a⁽ˡ⁾ = σ(W⁽ˡ⁾a⁽ˡ⁻¹⁾ + b⁽ˡ⁾)), Entropia de Shannon, norma L2 de gradientes e injetor de sinais.</p>
           </div>
           <div class="exec-card-cta">Inspecionar Rede Neural →</div>
@@ -328,7 +328,7 @@
               <div class="exec-card-icon">🤖</div>
               <span class="exec-card-route">/agents</span>
             </div>
-            <div class="exec-card-title" style="margin-top:0.85rem">Multi-Agent Reasoning (DAG)</div>
+            <div class="exec-card-title" style="margin-top:0.85rem">Raciocínio Multi-Agente (DAG)</div>
             <p class="exec-card-desc">Orquestração autônoma de 4 agentes especializados (Planner, Critic, Executor e Verifier) que decompõem, auditam e validam problemas complexos até o consenso.</p>
           </div>
           <div class="exec-card-cta">Executar Pipeline de Agentes →</div>
@@ -340,7 +340,7 @@
               <div class="exec-card-icon">🕸️</div>
               <span class="exec-card-route">/knowledge</span>
             </div>
-            <div class="exec-card-title" style="margin-top:0.85rem">GraphRAG &amp; Live Wikipedia/DOI</div>
+            <div class="exec-card-title" style="margin-top:0.85rem">GraphRAG &amp; Wikipedia/DOI ao Vivo</div>
             <p class="exec-card-desc">Explorador interativo do Grafo de Conhecimento em tempo real conectado à Wikipedia REST API e artigos científicos Crossref DOI com expansão de subgrafos 1-Hop.</p>
           </div>
           <div class="exec-card-cta">Explorar Grafo de Conhecimento →</div>
@@ -352,7 +352,7 @@
               <div class="exec-card-icon">🎨</div>
               <span class="exec-card-route">/studio</span>
             </div>
-            <div class="exec-card-title" style="margin-top:0.85rem">Task Automation &amp; Media Studio</div>
+            <div class="exec-card-title" style="margin-top:0.85rem">Automação de Tarefas &amp; Estúdio Multimodal</div>
             <p class="exec-card-desc">Planejador inteligente de rotinas com exportação de calendário RFC 5545 (.ICS), gerador de diagramas/imagens e slides executivos, tradutor neural e ponte WhatsApp/Telegram.</p>
           </div>
           <div class="exec-card-cta">Abrir Assistente &amp; Estúdio →</div>
@@ -364,7 +364,7 @@
               <div class="exec-card-icon">🏛️</div>
               <span class="exec-card-route">/proofs</span>
             </div>
-            <div class="exec-card-title" style="margin-top:0.85rem">Proofs, Benchmarks &amp; Telemetry</div>
+            <div class="exec-card-title" style="margin-top:0.85rem">Provas, Benchmarks &amp; Telemetria</div>
             <p class="exec-card-desc">Fundamentos matemáticos formais, suíte de benchmark reprodutível assinada em SHA-256, exportação de Whitepaper (.MD) e citação BibTeX, além de telemetria Prometheus.</p>
           </div>
           <div class="exec-card-cta">Auditar Provas &amp; Telemetria →</div>
@@ -473,52 +473,52 @@
   <!-- Unified Glass-Box AI Control Center (3-Pillar Convergence) -->
   <section id="command-center" class="section" data-route="command-center">
     <div class="section-header">
-      <div class="section-tag">Glass-Box AI Control Center</div>
-      <h2 class="section-title">Unified Cognitive & Operational Convergence</h2>
-      <p class="section-desc">Unlike black-box chatbots (ChatGPT/Claude), dispatch a single directive below and watch all 3 pillars fire simultaneously on one screen: <strong>(1) Glass-Box Tensor & GraphRAG Inspection</strong>, <strong>(2) Multi-Agent DAG Consensus</strong>, and <strong>(3) Live Cluster Telemetry & MessageBroker Bus</strong>.</p>
+      <div class="section-tag">Centro de Controle de IA Glass-Box</div>
+      <h2 class="section-title">Convergência Cognitiva &amp; Operacional Unificada</h2>
+      <p class="section-desc">Diferente de chatbots de caixa-preta convencionais, envie uma única diretriz abaixo e visualize os 3 pilares operando simultaneamente em uma única tela: <strong>(1) Transparência Cognitiva (Tensores e GraphRAG)</strong>, <strong>(2) Consenso Multi-Agente DAG</strong> e <strong>(3) Telemetria de Hardware e Barramento MessageBroker</strong>.</p>
     </div>
 
     <div class="cc-omni-bar glass-panel">
-      <span class="cc-omni-tag">UNIFIED DISPATCH</span>
-      <input type="text" id="cc-prompt" class="cc-omni-input" value="Quantum computing impact on cryptography" placeholder="Enter any scientific, engineering, or strategic directive to execute across all 5 layers..." />
+      <span class="cc-omni-tag">DESPACHO UNIFICADO</span>
+      <input type="text" id="cc-prompt" class="cc-omni-input" value="Impacto da computação quântica na criptografia" placeholder="Insira qualquer diretriz científica, de engenharia ou estratégica para executar em todas as camadas..." />
       <button class="btn-primary" id="cc-exec-btn">
-        <span>Execute Full Pipeline</span>
+        <span>Executar Pipeline Completo</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       </button>
     </div>
 
     <!-- Live DAG Pipeline Stage Tracker -->
     <div class="cc-pipeline-bar glass-panel" id="cc-pipeline">
-      <div class="cc-stage" id="cc-st-graphrag"><span class="cc-dot"></span>1. GraphRAG Vector + 1-Hop</div>
+      <div class="cc-stage" id="cc-st-graphrag"><span class="cc-dot"></span>1. GraphRAG Vetorial + 1-Hop</div>
       <div class="cc-arrow">→</div>
-      <div class="cc-stage" id="cc-st-tensor"><span class="cc-dot"></span>2. Tensor Forward/Backprop</div>
+      <div class="cc-stage" id="cc-st-tensor"><span class="cc-dot"></span>2. Tensores Diretos/Reversos</div>
       <div class="cc-arrow">→</div>
-      <div class="cc-stage" id="cc-st-planner"><span class="cc-dot"></span>3. Planner Agent</div>
+      <div class="cc-stage" id="cc-st-planner"><span class="cc-dot"></span>3. Agente Planner</div>
       <div class="cc-arrow">→</div>
-      <div class="cc-stage" id="cc-st-critic"><span class="cc-dot"></span>4. Critic Audit</div>
+      <div class="cc-stage" id="cc-st-critic"><span class="cc-dot"></span>4. Auditoria Critic</div>
       <div class="cc-arrow">→</div>
-      <div class="cc-stage" id="cc-st-executor"><span class="cc-dot"></span>5. Executor Synthesis</div>
+      <div class="cc-stage" id="cc-st-executor"><span class="cc-dot"></span>5. Síntese Executor</div>
       <div class="cc-arrow">→</div>
-      <div class="cc-stage" id="cc-st-verifier"><span class="cc-dot"></span>6. Verifier & Consensus</div>
+      <div class="cc-stage" id="cc-st-verifier"><span class="cc-dot"></span>6. Verifier &amp; Consenso</div>
     </div>
 
     <div class="cc-bento-grid">
       <!-- Pillar 1: Cognitive Transparency (Glass Box) -->
       <div class="cc-pane glass-panel">
         <div class="cc-pane-header">
-          <span class="panel-title">🔬 Pillar 1: Cognitive Glass-Box (GraphRAG + Attention Heatmap)</span>
-          <span class="agent-badge IDLE" id="cc-p1-badge">READY</span>
+          <span class="panel-title">🔬 Pilar 1: Transparência Cognitiva (GraphRAG + Mapa de Atenção)</span>
+          <span class="agent-badge IDLE" id="cc-p1-badge">PRONTO</span>
         </div>
         <div class="cc-p1-split">
           <div class="cc-attn-box">
-            <div class="cc-sub-label">Self-Attention &amp; Layer Activations (<code>a<sup>(l)</sup></code>)</div>
+            <div class="cc-sub-label">Auto-Atenção &amp; Ativações de Camada (<code>a<sup>(l)</sup></code>)</div>
             <canvas id="cc-attn-canvas" width="220" height="150"></canvas>
             <div class="cc-tensor-stats" id="cc-tensor-stats">H = -- bits | ||∇W|| = --</div>
           </div>
           <div class="cc-rag-box">
-            <div class="cc-sub-label">Retrieved GraphRAG Nodes & DOI Citations</div>
+            <div class="cc-sub-label">Nós do GraphRAG &amp; Citações DOI Recuperadas</div>
             <div class="cc-rag-list" id="cc-rag-list">
-              <span class="idle-text">Dispatch a directive to watch live vector &amp; subgraph retrieval...</span>
+              <span class="idle-text">Envie uma diretriz para visualizar a recuperação vetorial e de subgrafos ao vivo...</span>
             </div>
           </div>
         </div>
@@ -527,25 +527,25 @@
       <!-- Pillar 2: Autonomous Multi-Agent Consensus Stream -->
       <div class="cc-pane glass-panel">
         <div class="cc-pane-header">
-          <span class="panel-title">🤖 Pillar 2: Multi-Agent Debate &amp; Verified Consensus</span>
-          <span class="agent-badge IDLE" id="cc-p2-badge">IDLE</span>
+          <span class="panel-title">🤖 Pilar 2: Debate Multi-Agente &amp; Consenso Verificado</span>
+          <span class="agent-badge IDLE" id="cc-p2-badge">EM ESPERA</span>
         </div>
         <div class="cc-debate-stream" id="cc-debate-stream">
-          <span class="idle-text">Planner, Critic, Executor, and Verifier reasoning traces will stream here simultaneously...</span>
+          <span class="idle-text">As cadeias de raciocínio de Planner, Critic, Executor e Verifier serão transmitidas simultaneamente aqui...</span>
         </div>
       </div>
 
       <!-- Pillar 3: Operational Infrastructure & MessageBroker Bus -->
       <div class="cc-pane glass-panel">
         <div class="cc-pane-header">
-          <span class="panel-title">📡 Pillar 3: Live MessageBroker Bus &amp; Hardware Telemetry</span>
-          <span class="agent-badge DONE" id="cc-p3-badge">BUS ONLINE</span>
+          <span class="panel-title">📡 Pilar 3: Barramento MessageBroker &amp; Telemetria ao Vivo</span>
+          <span class="agent-badge DONE" id="cc-p3-badge">BARRAMENTO ATIVO</span>
         </div>
         <div class="cc-telemetry-strip">
-          <div class="cc-mini-stat"><span id="cc-cpu">--%</span><small>Host CPU</small></div>
-          <div class="cc-mini-stat"><span id="cc-ram">-- GB</span><small>RAM Used</small></div>
-          <div class="cc-mini-stat"><span id="cc-gnodes">0</span><small>GraphDB Nodes</small></div>
-          <div class="cc-mini-stat"><span id="cc-msgs">0</span><small>Broker Events</small></div>
+          <div class="cc-mini-stat"><span id="cc-cpu">--%</span><small>CPU do Host</small></div>
+          <div class="cc-mini-stat"><span id="cc-ram">-- GB</span><small>RAM em Uso</small></div>
+          <div class="cc-mini-stat"><span id="cc-gnodes">0</span><small>Nós GraphDB</small></div>
+          <div class="cc-mini-stat"><span id="cc-msgs">0</span><small>Eventos Broker</small></div>
         </div>
         <div class="cc-broker-log" id="cc-broker-log">
           <div class="broker-line">[SYSTEM] RFC 6455 WebSocket &amp; MessageBroker initialized.</div>
@@ -725,51 +725,51 @@
   <!-- Neural Network Section -->
   <section id="neural" class="section" data-route="neural">
     <div class="section-header">
-      <div class="section-tag">Module 01 — Mechanistic Interpretability</div>
-      <h2 class="section-title">Live Multi-Layer Perceptron &amp; Activation Telemetry</h2>
-      <p class="section-desc">Real mathematical forward &amp; backward propagation (<code>a<sup>(l)</sup> = σ(W<sup>(l)</sup>a<sup>(l−1)</sup> + b<sup>(l)</sup>)</code>) computed at 60 FPS, with live Shannon entropy <code>H(a<sup>(l)</sup>)</code> and L2 Jacobian gradient norm <code>||∇<sub>W</sub>L||<sub>2</sub></code>.</p>
+      <div class="section-tag">Módulo 01 — Interpretabilidade Mecanística</div>
+      <h2 class="section-title">Perceptron Multicamadas (MLP) &amp; Telemetria de Ativação ao Vivo</h2>
+      <p class="section-desc">Propagação direta e reversa com tensores reais (<code>a<sup>(l)</sup> = σ(W<sup>(l)</sup>a<sup>(l−1)</sup> + b<sup>(l)</sup>)</code>) computada a 60 FPS, com Entropia de Shannon <code>H(a<sup>(l)</sup>)</code> e norma L2 Jacobiana do gradiente <code>||∇<sub>W</sub>L||<sub>2</sub></code> em tempo real.</p>
     </div>
     <div class="neural-container">
       <div class="neural-sidebar">
         <div class="panel glass-panel">
-          <div class="panel-title">Network Controls</div>
+          <div class="panel-title">Controles da Rede</div>
           <div class="control-row">
-            <label>Layers</label>
+            <label>Camadas</label>
             <input type="range" id="nn-layers" min="3" max="12" value="7" class="slider"/>
             <span id="nn-layers-val">7</span>
           </div>
           <div class="control-row">
-            <label>Neurons/Layer</label>
+            <label>Neurônios/Camada</label>
             <input type="range" id="nn-neurons" min="3" max="12" value="6" class="slider"/>
             <span id="nn-neurons-val">6</span>
           </div>
           <div class="control-row">
-            <label>Speed</label>
+            <label>Velocidade</label>
             <input type="range" id="nn-speed" min="1" max="10" value="5" class="slider"/>
             <span id="nn-speed-val">5</span>
           </div>
           <div class="control-row">
-            <label>Theme</label>
+            <label>Tema</label>
             <select id="nn-theme" class="select-input">
-              <option value="cyan">Cyan</option>
-              <option value="violet">Violet</option>
+              <option value="cyan">Ciano</option>
+              <option value="violet">Violeta</option>
               <option value="aurora">Aurora</option>
-              <option value="fire">Fire</option>
+              <option value="fire">Fogo</option>
             </select>
           </div>
-          <button class="btn-secondary full-width" id="nn-inject-btn">⚡ Inject Signal</button>
+          <button class="btn-secondary full-width" id="nn-inject-btn">⚡ Injetar Sinal</button>
         </div>
         <div class="panel glass-panel">
-          <div class="panel-title">Real Network Telemetry</div>
-          <div class="stat-item"><span>Mean Activation</span><span class="stat-val" id="nn-activation">0.00</span></div>
-          <div class="stat-item"><span>Active Synapses</span><span class="stat-val" id="nn-firing">0</span></div>
-          <div class="stat-item"><span>Shannon Entropy</span><span class="stat-val" id="nn-entropy">0.00 bits</span></div>
-          <div class="stat-item"><span>L2 Weight Norm</span><span class="stat-val" id="nn-grad">0.000</span></div>
+          <div class="panel-title">Telemetria da Rede em Tempo Real</div>
+          <div class="stat-item"><span>Ativação Média</span><span class="stat-val" id="nn-activation">0.00</span></div>
+          <div class="stat-item"><span>Sinapses Ativas</span><span class="stat-val" id="nn-firing">0</span></div>
+          <div class="stat-item"><span>Entropia de Shannon</span><span class="stat-val" id="nn-entropy">0.00 bits</span></div>
+          <div class="stat-item"><span>Norma L2 dos Pesos</span><span class="stat-val" id="nn-grad">0.000</span></div>
         </div>
       </div>
       <div class="neural-canvas-wrap">
         <canvas id="neural-canvas"></canvas>
-        <div class="canvas-overlay-label">NEXUS Neural Core — Live Feed</div>
+        <div class="canvas-overlay-label">Núcleo Neural NEXUS — Transmissão ao Vivo</div>
       </div>
     </div>
   </section>
@@ -1427,58 +1427,58 @@
   <!-- Frontier Research, Formal Mathematical Proofs & Reproducible Benchmarks (For Global AI Leaders & Labs) -->
   <section id="research" class="section" data-route="proofs">
     <div class="section-header">
-      <div class="section-tag">Frontier Superintelligence Research &amp; Open Verification</div>
-      <h2 class="section-title">Formal Mathematical Foundations &amp; Live Reproducible Benchmarks</h2>
-      <p class="section-desc">Engineered for scrutiny by principal scientists and alignment researchers across global frontier labs (DeepMind, OpenAI, Anthropic, Meta FAIR, MILA, Stanford HAI). Inspect the mathematical axioms, execute the live ablation benchmark, or export the peer-review Whitepaper and BibTeX citation.</p>
+      <div class="section-tag">Pesquisa de Superinteligência de Fronteira &amp; Verificação Aberta</div>
+      <h2 class="section-title">Fundamentos Matemáticos Formais &amp; Benchmarks Reproduzíveis ao Vivo</h2>
+      <p class="section-desc">Projetado para escrutínio por pesquisadores e cientistas de alinhamento em laboratórios globais de fronteira. Inspecione axiomas matemáticos, execute a bateria de testes de ablação ao vivo ou exporte o Whitepaper formal e a citação BibTeX revisados por pares.</p>
     </div>
 
     <!-- 3 Mathematical Pillars -->
     <div class="assistant-grid" style="margin-bottom:1.25rem">
       <div class="panel glass-panel assistant-col">
         <div class="cc-pane-header">
-          <span class="panel-title">📐 1. Pluralistic Cooperative Alignment Objective</span>
-          <span class="agent-badge DONE">AXIOM I</span>
+          <span class="panel-title">📐 1. Objetivo de Alinhamento Cooperativo Pluralista</span>
+          <span class="agent-badge DONE">AXIOMA I</span>
         </div>
         <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.55">
-          Extending Assistance Games (Russell, 2019) and Constitutional AI to cognitive diversity: let <code>Θ = {θ₁, …, θₖ}</code> represent human neuro-cognitive priors (including TEA/autism &amp; diverse learning modalities). NEXUS optimizes:
+          Expandindo Jogos de Assistência (Russell, 2019) e IA Constitucional para a diversidade cognitiva: seja <code>Θ = {θ₁, …, θₖ}</code> os priors neurocognitivos humanos (incluindo TEA e múltiplas modalidades de aprendizado). O NEXUS otimiza:
         </p>
         <div style="background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.22);border-radius:8px;padding:0.65rem;font-family:var(--font-mono);font-size:0.76rem;color:var(--cyan);text-align:center">
           max<sub>π</sub> E<sub>θ∼P(Θ)</sub>[ U<sub>H</sub>(π | θ) ] &nbsp; s.t. &nbsp; A<sub>H</sub>(π) ≥ τ<sub>A</sub>, &nbsp; I<sub>TEA</sub>(π) ≥ τ<sub>I</sub>, &nbsp; E<sub>Joule</sub> ≤ B<sub>eco</sub>
         </div>
         <p style="font-size:0.75rem;color:var(--text-secondary)">
-          <strong>Epistemic Choice Guarantee (1% → 100%):</strong> If pedagogical policy <code>π₁</code> yields comprehension <code>&lt; ε</code> on prior <code>θᵢ</code>, AURA dynamically shifts to orthogonal modality <code>π₂ ∈ Π</code> while preserving human agency <code>A<sub>H</sub> ≥ 0.90</code>.
+          <strong>Garantia de Escolha Epistêmica (1% → 100%):</strong> Se a política pedagógica <code>π₁</code> resultar em compreensão <code>&lt; ε</code> sobre o prior <code>θᵢ</code>, a AURA transiciona dinamicamente para uma modalidade ortogonal <code>π₂ ∈ Π</code> preservando a agência humana <code>A<sub>H</sub> ≥ 0.90</code>.
         </p>
       </div>
 
       <div class="panel glass-panel assistant-col">
         <div class="cc-pane-header">
-          <span class="panel-title">🔬 2. Mechanistic Interpretability &amp; Shannon Entropy</span>
-          <span class="agent-badge DONE">AXIOM II</span>
+          <span class="panel-title">🔬 2. Interpretabilidade Mecanística &amp; Entropia de Shannon</span>
+          <span class="agent-badge DONE">AXIOMA II</span>
         </div>
         <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.55">
-          Rather than treating hidden layers as an opaque black box, NEXUS exposes layer activations <code>a<sup>(l)</sup> = σ(W<sup>(l)</sup>a<sup>(l−1)</sup> + b<sup>(l)</sup>)</code>, Jacobian L2 gradient norms, and normalized Shannon activation entropy in real time:
+          Em vez de tratar camadas ocultas como caixas-pretas opacas, o NEXUS expõe ativações de camada <code>a<sup>(l)</sup> = σ(W<sup>(l)</sup>a<sup>(l−1)</sup> + b<sup>(l)</sup>)</code>, norma L2 do gradiente Jacobiano e entropia de ativação de Shannon em tempo real:
         </p>
         <div style="background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.28);border-radius:8px;padding:0.65rem;font-family:var(--font-mono);font-size:0.76rem;color:#c084fc;text-align:center">
           H(a<sup>(l)</sup>) = − ∑<sub>i=1..d</sub> p<sub>i</sub><sup>(l)</sup> log<sub>2</sub>( p<sub>i</sub><sup>(l)</sup> ), &nbsp; ||∇<sub>W</sub>L||<sub>2</sub> = √(∑<sub>l,i,j</sub> (∂L/∂W<sub>ij</sub><sup>(l)</sup>)<sup>2</sup>)
         </div>
         <p style="font-size:0.75rem;color:var(--text-secondary)">
-          Enables continuous auditing of representation collapse, attention sparsity, and latent reasoning token chains over RFC 6455 WebSockets.
+          Permite auditoria contínua de colapso de representação, esparsidade de atenção e cadeias de tokens de raciocínio latente via WebSockets RFC 6455.
         </p>
       </div>
 
       <div class="panel glass-panel assistant-col">
         <div class="cc-pane-header">
-          <span class="panel-title">🕸️ 3. Adversarial DAG &amp; Vector GraphRAG Grounding</span>
-          <span class="agent-badge DONE">AXIOM III</span>
+          <span class="panel-title">🕸️ 3. DAG com Auditoria Adversarial &amp; Grounding no GraphRAG</span>
+          <span class="agent-badge DONE">AXIOMA III</span>
         </div>
         <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.55">
-          Every synthesis traverses a 4-stage Directed Acyclic Graph (<code>PLANNER → CRITIC → EXECUTOR → VERIFIER</code>) grounded on TF-IDF Cosine Similarity + 1-Hop Subgraph expansion over live Wikipedia &amp; Crossref DOI vertices:
+          Cada síntese percorre um Grafo Acíclico Dirigido (DAG) em 4 estágios (<code>PLANNER → CRITIC → EXECUTOR → VERIFIER</code>) ancorado em Similaridade de Cosseno + expansão de subgrafo 1-Hop sobre vértices verificados da Wikipedia e Crossref DOI:
         </p>
         <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.28);border-radius:8px;padding:0.65rem;font-family:var(--font-mono);font-size:0.76rem;color:var(--emerald);text-align:center">
           S(u | q) = α · cos(q, v<sub>u</sub>) + (1 − α) ∑<sub>w ∈ N₁(u)</sub> w<sub>uw</sub> · I<sub>DOI/Wiki</sub>(w)
         </div>
         <p style="font-size:0.75rem;color:var(--text-secondary)">
-          Drastically suppresses ungrounded hallucination by requiring adversarial Critic verification before Consensus emission.
+          Suprime drasticamente alucinações não fundamentadas ao exigir auditoria crítica adversarial prévia à emissão de qualquer consenso.
         </p>
       </div>
     </div>
@@ -1487,40 +1487,40 @@
     <div class="panel glass-panel" style="padding:1.25rem;display:flex;flex-direction:column;gap:1rem">
       <div class="cc-pane-header" style="flex-wrap:wrap;gap:0.5rem">
         <div>
-          <span class="panel-title">⚡ Live Reproducible Benchmark &amp; Peer-Review Artifact Suite</span>
-          <span id="bm-hash" style="display:block;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-secondary)">SHA-256: Awaiting benchmark execution...</span>
+          <span class="panel-title">⚡ Bateria de Benchmarks Reproduzíveis &amp; Artefatos de Pesquisa</span>
+          <span id="bm-hash" style="display:block;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-secondary)">SHA-256: Aguardando execução de benchmark...</span>
         </div>
         <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center">
-          <span class="agent-badge DONE" id="bench-status-badge">READY</span>
-          <button class="btn-primary" id="bench-run-btn" style="padding:0.45rem 0.9rem;font-size:0.78rem">⚡ Run Reproducible Benchmark Suite</button>
-          <button class="btn-secondary" id="bench-export-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">⬇ Export Certificate (.JSON)</button>
-          <button class="btn-secondary" id="whitepaper-dl-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">📘 Download Technical Whitepaper (.MD)</button>
-          <button class="btn-secondary" id="whitepaper-latex-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">📄 Export LaTeX (.TEX)</button>
-          <button class="btn-secondary" id="cite-bibtex-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">🏷️ Copy BibTeX</button>
-          <button class="btn-secondary" id="research-print-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">🖨️ Print Academic Paper</button>
+          <span class="agent-badge DONE" id="bench-status-badge">PRONTO</span>
+          <button class="btn-primary" id="bench-run-btn" style="padding:0.45rem 0.9rem;font-size:0.78rem">⚡ Executar Bateria de Benchmarks</button>
+          <button class="btn-secondary" id="bench-export-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">⬇ Exportar Certificado (.JSON)</button>
+          <button class="btn-secondary" id="whitepaper-dl-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">📘 Baixar Whitepaper Técnico (.MD)</button>
+          <button class="btn-secondary" id="whitepaper-latex-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">📄 Exportar LaTeX (.TEX)</button>
+          <button class="btn-secondary" id="cite-bibtex-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">🏷️ Copiar BibTeX</button>
+          <button class="btn-secondary" id="research-print-btn" style="padding:0.45rem 0.8rem;font-size:0.76rem">🖨️ Imprimir Artigo Científico</button>
         </div>
       </div>
 
       <div class="coop-scores-grid">
-        <div class="cc-mini-stat"><span id="bm-latency">-- ms</span><small>Full Suite Latency (4 Engines)</small></div>
-        <div class="cc-mini-stat"><span id="bm-similarity">--%</span><small>GraphRAG Cosine Top-1</small></div>
-        <div class="cc-mini-stat"><span id="bm-entropy">-- bits</span><small>Shannon Entropy H(a)</small></div>
-        <div class="cc-mini-stat"><span id="bm-agency">96%</span><small>Human Agency Preservation</small></div>
+        <div class="cc-mini-stat"><span id="bm-latency">-- ms</span><small>Latência Completa (4 Motores)</small></div>
+        <div class="cc-mini-stat"><span id="bm-similarity">--%</span><small>Similaridade GraphRAG Top-1</small></div>
+        <div class="cc-mini-stat"><span id="bm-entropy">-- bits</span><small>Entropia de Shannon H(a)</small></div>
+        <div class="cc-mini-stat"><span id="bm-agency">96%</span><small>Preservação da Agência Humana</small></div>
       </div>
 
       <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:1rem;align-items:stretch" class="aura-layout">
         <div>
-          <div class="cc-sub-label">Live Cryptographically Verified Benchmark Telemetry (<code>GET /api/benchmark</code>):</div>
-          <pre id="bench-json-output" style="background:rgba(2,4,12,0.85);border:1px solid var(--border);border-radius:8px;padding:0.75rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);max-height:210px;overflow:auto;margin:0">Initializing live benchmark...</pre>
+          <div class="cc-sub-label">Telemetria Criptograficamente Verificada do Benchmark (<code>GET /api/benchmark</code>):</div>
+          <pre id="bench-json-output" style="background:rgba(2,4,12,0.85);border:1px solid var(--border);border-radius:8px;padding:0.75rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);max-height:210px;overflow:auto;margin:0">Inicializando benchmark ao vivo...</pre>
         </div>
         <div style="display:flex;flex-direction:column;gap:0.5rem">
-          <div class="cc-sub-label">Direct Open Telemetry &amp; Verification Endpoints (Click to Inspect Raw Output):</div>
+          <div class="cc-sub-label">Endpoints Abertos de Telemetria &amp; Verificação (Clique para Inspecionar):</div>
           <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.78rem">
-            <a href="/api/benchmark" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>🔬 Live Ablation &amp; SHA-256 Benchmark JSON</span><code>GET /api/benchmark</code></a>
-            <a href="/metrics" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>📊 Native Prometheus Scraper Metrics</span><code>GET /metrics</code></a>
-            <a href="/api/telemetry" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>🖥️ Host Cluster CPU/RAM/Heap Snapshot</span><code>GET /api/telemetry</code></a>
-            <a href="/api/graph?q=Artificial%20intelligence" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>🕸️ Vector GraphRAG + 1-Hop Subgraph API</span><code>GET /api/graph</code></a>
-            <a href="/sitemap.xml" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>🌐 Dynamic Search Engine Sitemap XML</span><code>GET /sitemap.xml</code></a>
+            <a href="/api/benchmark" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>🔬 Benchmark de Ablação &amp; SHA-256 em JSON</span><code>GET /api/benchmark</code></a>
+            <a href="/metrics" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>📊 Métricas Nativas para Prometheus</span><code>GET /metrics</code></a>
+            <a href="/api/telemetry" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>🖥️ Snapshot de CPU/RAM/Heap do Cluster</span><code>GET /api/telemetry</code></a>
+            <a href="/api/graph?q=Artificial%20intelligence" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>🕸️ API do GraphRAG Vetorial + Subgrafo 1-Hop</span><code>GET /api/graph</code></a>
+            <a href="/sitemap.xml" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;justify-content:space-between"><span>🌐 Sitemap XML Dinâmico para Motores de Busca</span><code>GET /sitemap.xml</code></a>
           </div>
         </div>
       </div>
@@ -1529,29 +1529,29 @@
       <div class="panel glass-panel" style="margin-top:1.25rem;padding:1.25rem;background:rgba(15,23,42,0.65)">
         <div class="cc-pane-header" style="flex-wrap:wrap;gap:0.5rem">
           <div>
-            <span class="panel-title">🔬 TransformerLens Residual Stream &amp; Attention Pattern Probe</span>
-            <span class="agent-badge DONE" style="font-size:0.68rem;margin-left:0.5rem">HOOK INTERPRETABILITY</span>
+            <span class="panel-title">🔬 Inspeção de Atenção e Fluxo Residual (TransformerLens)</span>
+            <span class="agent-badge DONE" style="font-size:0.68rem;margin-left:0.5rem">INTERPRETABILIDADE ATIVA</span>
           </div>
           <div style="display:flex;gap:0.4rem;align-items:center">
-            <span style="font-size:0.72rem;color:var(--text-secondary)">Attention Head:</span>
+            <span style="font-size:0.72rem;color:var(--text-secondary)">Cabeça de Atenção:</span>
             <select id="probe-head-select" class="select-input" style="max-width:140px;padding:3px 8px;font-size:0.75rem">
-              <option value="0">Head 0 (Epistemic)</option>
-              <option value="1">Head 1 (Syntax/DAG)</option>
-              <option value="2">Head 2 (Inclusion/Empathy)</option>
-              <option value="3">Head 3 (Verification)</option>
+              <option value="0">Cabeça 0 (Epistêmica)</option>
+              <option value="1">Cabeça 1 (Sintaxe/DAG)</option>
+              <option value="2">Cabeça 2 (Inclusão/Empatia)</option>
+              <option value="3">Cabeça 3 (Verificação)</option>
             </select>
             <button class="btn-secondary" id="probe-run-btn" style="padding:3px 10px;font-size:0.75rem">⚡ Inspecionar Tokens</button>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:0.85rem" class="aura-layout">
           <div>
-            <div class="cc-sub-label">Softmax Attention Heatmap A = softmax(QKᵀ / √d_k):</div>
+            <div class="cc-sub-label">Mapa de Calor de Atenção Softmax A = softmax(QKᵀ / √d_k):</div>
             <div id="attention-matrix-view" style="overflow-x:auto;padding:0.75rem;background:rgba(2,4,12,0.85);border-radius:8px;border:1px solid var(--border);min-height:180px">
               <!-- Rendered Attention Matrix -->
             </div>
           </div>
           <div>
-            <div class="cc-sub-label">Residual Stream Propagation Flow (hook_embed → hook_resid_post):</div>
+            <div class="cc-sub-label">Fluxo de Propagação no Residual Stream (hook_embed → hook_resid_post):</div>
             <div id="residual-stream-flow" style="display:flex;flex-direction:column;gap:0.45rem;font-size:0.75rem;font-family:var(--font-mono);background:rgba(2,4,12,0.85);border-radius:8px;border:1px solid var(--border);padding:0.75rem;min-height:180px">
               <!-- Rendered Stream Layers -->
             </div>
@@ -2142,7 +2142,7 @@
     <nav style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.88rem;flex:1">
       <a href="/" class="nav-link" data-route-link="home"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Início</span></a>
       <a href="/aura" class="nav-link" data-route-link="aura"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg><span>AURA Live</span></a>
-      <a href="/command-center" class="nav-link" data-route-link="command-center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span>Command Center</span></a>
+      <a href="/command-center" class="nav-link" data-route-link="command-center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span>Centro de Comando</span></a>
       <a href="/neural" class="nav-link" data-route-link="neural"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="12" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="10.5"/><line x1="8.5" y1="16.5" x2="15.5" y2="13.5"/></svg><span>Rede Neural</span></a>
       <a href="/agents" class="nav-link" data-route-link="agents"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="16" y1="16" x2="16.01" y2="16"/></svg><span>Agentes</span></a>
       <a href="/knowledge" class="nav-link" data-route-link="knowledge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span>Grafo &amp; DOIs</span></a>

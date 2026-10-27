@@ -10,3 +10,4 @@ data/encrypted_user_vault.enc
 data/users_identity.enc
 data/broker_wal.jsonl
 admin_preview_active.html
+scratch/

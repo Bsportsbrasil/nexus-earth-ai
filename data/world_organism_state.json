@@ -1,16 +1,36 @@
 {
-  "updatedAt": "2026-10-27T17:00:43.745Z",
+  "updatedAt": "2026-10-27T18:57:39.547Z",
   "stats": {
-    "patternsObserved": 7,
-    "hypothesesFormulated": 6,
-    "simulationsRun": 5,
-    "creationsAdopted": 5,
-    "creatorModifications": 6,
-    "creatorDeletions": 6,
-    "accuracyEvolutionScore": 0.954,
-    "lastEvolvedAt": "2026-10-27T17:00:43.677Z"
+    "patternsObserved": 9,
+    "hypothesesFormulated": 8,
+    "simulationsRun": 7,
+    "creationsAdopted": 7,
+    "creatorModifications": 10,
+    "creatorDeletions": 10,
+    "accuracyEvolutionScore": 0.96,
+    "lastEvolvedAt": "2026-10-27T18:57:39.484Z"
   },
   "observations": [
+    {
+      "id": "obs_1793127459472_73e4a1",
+      "modality": "multimodal_audio_text",
+      "source": "Entrada de Campo Real",
+      "rawContent": "Usuário expressou necessidade de simplificação no painel executivo com voz calma.",
+      "detectedPattern": "Prevalência de clareza visual e redução de cliques intermediários para tomada de decisão.",
+      "latentCorrelation": "Interfaces com menos camadas aumentam velocidade de ação em 40%.",
+      "confidence": 0.9073544111805378,
+      "timestamp": "2026-10-27T18:57:39.473Z"
+    },
+    {
+      "id": "obs_1793127199982_076c16",
+      "modality": "multimodal_audio_text",
+      "source": "Entrada de Campo Real",
+      "rawContent": "Usuário expressou necessidade de simplificação no painel executivo com voz calma.",
+      "detectedPattern": "Prevalência de clareza visual e redução de cliques intermediários para tomada de decisão.",
+      "latentCorrelation": "Interfaces com menos camadas aumentam velocidade de ação em 40%.",
+      "confidence": 0.9505077060977823,
+      "timestamp": "2026-10-27T18:53:19.982Z"
+    },
     {
       "id": "obs_1793120443645_88880e",
       "modality": "multimodal_audio_text",
@@ -151,6 +171,40 @@
   ],
   "creations": [
     {
+      "id": "creat_1793127459480_112904",
+      "hypothesisId": "hyp_1793127459475_567237",
+      "hypothesisTitle": "Hipótese de Fluidez Operacional 1-Clique",
+      "type": "estrategia_operacional",
+      "title": "Mesa de Ações Diretas da Administradora",
+      "summary": "Painel visual com controle de edição e exclusão em tempo real de cada elemento cognitivo.",
+      "deliverables": [
+        "Modal de Edição Instantânea",
+        "Purge com 1 Clique",
+        "Log Imutável de Governança"
+      ],
+      "status": "HOMOLOGADA_PELA_ADMINISTRADORA",
+      "createdAt": "2026-10-27T18:57:39.480Z",
+      "updatedAt": "2026-10-27T18:57:39.480Z",
+      "validatedAt": "2026-10-27T18:57:39.484Z"
+    },
+    {
+      "id": "creat_1793127199990_681be9",
+      "hypothesisId": "hyp_1793127199984_b11a24",
+      "hypothesisTitle": "Hipótese de Fluidez Operacional 1-Clique",
+      "type": "estrategia_operacional",
+      "title": "Mesa de Ações Diretas da Administradora",
+      "summary": "Painel visual com controle de edição e exclusão em tempo real de cada elemento cognitivo.",
+      "deliverables": [
+        "Modal de Edição Instantânea",
+        "Purge com 1 Clique",
+        "Log Imutável de Governança"
+      ],
+      "status": "HOMOLOGADA_PELA_ADMINISTRADORA",
+      "createdAt": "2026-10-27T18:53:19.990Z",
+      "updatedAt": "2026-10-27T18:53:19.990Z",
+      "validatedAt": "2026-10-27T18:53:19.995Z"
+    },
+    {
       "id": "creat_1793120443665_09d2a1",
       "hypothesisId": "hyp_1793120443650_8cd974",
       "hypothesisTitle": "Hipótese de Fluidez Operacional 1-Clique",
@@ -234,6 +288,182 @@
     }
   ],
   "history": [
+    {
+      "action": "ORGANISM_CHAT_CLEARED_BY_CREATOR",
+      "details": {},
+      "timestamp": "2026-10-27T18:57:39.546Z"
+    },
+    {
+      "action": "CREATOR_DIALOGUE_TURN",
+      "details": {
+        "prompt": "Por que você formulou essa hipótese e quais padrões ocultos você detectou?",
+        "model": "internal_cognitive_synthesizer"
+      },
+      "timestamp": "2026-10-27T18:57:39.544Z"
+    },
+    {
+      "action": "SIMULATION_DELETED_BY_CREATOR",
+      "details": {
+        "id": "sim_1793127459477_bc14f3",
+        "scenarioName": "Cenário Ajustado pela Administradora"
+      },
+      "timestamp": "2026-10-27T18:57:39.492Z"
+    },
+    {
+      "action": "SIMULATION_EDITED_BY_CREATOR",
+      "details": {
+        "id": "sim_1793127459477_bc14f3"
+      },
+      "timestamp": "2026-10-27T18:57:39.489Z"
+    },
+    {
+      "action": "HYPOTHESIS_DELETED_BY_CREATOR",
+      "details": {
+        "id": "hyp_1793127459475_567237",
+        "title": "Hipótese de Fluidez Operacional 1-Clique (Refinada pela Administradora)"
+      },
+      "timestamp": "2026-10-27T18:57:39.487Z"
+    },
+    {
+      "action": "OUTCOME_LEARNED",
+      "details": {
+        "id": "learn_1793127459484",
+        "creationId": "creat_1793127459480_112904",
+        "feedback": "Implementado com 100% de sucesso em produção.",
+        "realWorldResult": "Zero erros e aprovação imediata.",
+        "timestamp": "2026-10-27T18:57:39.484Z"
+      },
+      "timestamp": "2026-10-27T18:57:39.484Z"
+    },
+    {
+      "action": "HYPOTHESIS_EDITED_BY_CREATOR",
+      "details": {
+        "id": "hyp_1793127459475_567237"
+      },
+      "timestamp": "2026-10-27T18:57:39.482Z"
+    },
+    {
+      "action": "CREATION_SYNTHESIZED",
+      "details": {
+        "id": "creat_1793127459480_112904",
+        "title": "Mesa de Ações Diretas da Administradora",
+        "type": "estrategia_operacional"
+      },
+      "timestamp": "2026-10-27T18:57:39.480Z"
+    },
+    {
+      "action": "SIMULATION_RUN",
+      "details": {
+        "id": "sim_1793127459477_bc14f3",
+        "hypothesisId": "hyp_1793127459475_567237"
+      },
+      "timestamp": "2026-10-27T18:57:39.477Z"
+    },
+    {
+      "action": "HYPOTHESIS_FORMULATED",
+      "details": {
+        "id": "hyp_1793127459475_567237",
+        "title": "Hipótese de Fluidez Operacional 1-Clique"
+      },
+      "timestamp": "2026-10-27T18:57:39.475Z"
+    },
+    {
+      "action": "OBSERVATION_INGESTED",
+      "details": {
+        "id": "obs_1793127459472_73e4a1",
+        "modality": "multimodal_audio_text",
+        "pattern": "Prevalência de clareza visual e redução de cliques intermediários para tomada de decisão."
+      },
+      "timestamp": "2026-10-27T18:57:39.473Z"
+    },
+    {
+      "action": "ORGANISM_CHAT_CLEARED_BY_CREATOR",
+      "details": {},
+      "timestamp": "2026-10-27T18:53:20.051Z"
+    },
+    {
+      "action": "CREATOR_DIALOGUE_TURN",
+      "details": {
+        "prompt": "Por que você formulou essa hipótese e quais padrões ocultos você detectou?",
+        "model": "internal_cognitive_synthesizer"
+      },
+      "timestamp": "2026-10-27T18:53:20.046Z"
+    },
+    {
+      "action": "SIMULATION_DELETED_BY_CREATOR",
+      "details": {
+        "id": "sim_1793127199987_078873",
+        "scenarioName": "Cenário Ajustado pela Administradora"
+      },
+      "timestamp": "2026-10-27T18:53:20.001Z"
+    },
+    {
+      "action": "SIMULATION_EDITED_BY_CREATOR",
+      "details": {
+        "id": "sim_1793127199987_078873"
+      },
+      "timestamp": "2026-10-27T18:53:19.999Z"
+    },
+    {
+      "action": "HYPOTHESIS_DELETED_BY_CREATOR",
+      "details": {
+        "id": "hyp_1793127199984_b11a24",
+        "title": "Hipótese de Fluidez Operacional 1-Clique (Refinada pela Administradora)"
+      },
+      "timestamp": "2026-10-27T18:53:19.997Z"
+    },
+    {
+      "action": "OUTCOME_LEARNED",
+      "details": {
+        "id": "learn_1793127199995",
+        "creationId": "creat_1793127199990_681be9",
+        "feedback": "Implementado com 100% de sucesso em produção.",
+        "realWorldResult": "Zero erros e aprovação imediata.",
+        "timestamp": "2026-10-27T18:53:19.995Z"
+      },
+      "timestamp": "2026-10-27T18:53:19.995Z"
+    },
+    {
+      "action": "HYPOTHESIS_EDITED_BY_CREATOR",
+      "details": {
+        "id": "hyp_1793127199984_b11a24"
+      },
+      "timestamp": "2026-10-27T18:53:19.992Z"
+    },
+    {
+      "action": "CREATION_SYNTHESIZED",
+      "details": {
+        "id": "creat_1793127199990_681be9",
+        "title": "Mesa de Ações Diretas da Administradora",
+        "type": "estrategia_operacional"
+      },
+      "timestamp": "2026-10-27T18:53:19.990Z"
+    },
+    {
+      "action": "SIMULATION_RUN",
+      "details": {
+        "id": "sim_1793127199987_078873",
+        "hypothesisId": "hyp_1793127199984_b11a24"
+      },
+      "timestamp": "2026-10-27T18:53:19.987Z"
+    },
+    {
+      "action": "HYPOTHESIS_FORMULATED",
+      "details": {
+        "id": "hyp_1793127199984_b11a24",
+        "title": "Hipótese de Fluidez Operacional 1-Clique"
+      },
+      "timestamp": "2026-10-27T18:53:19.984Z"
+    },
+    {
+      "action": "OBSERVATION_INGESTED",
+      "details": {
+        "id": "obs_1793127199982_076c16",
+        "modality": "multimodal_audio_text",
+        "pattern": "Prevalência de clareza visual e redução de cliques intermediários para tomada de decisão."
+      },
+      "timestamp": "2026-10-27T18:53:19.982Z"
+    },
     {
       "action": "ORGANISM_CHAT_CLEARED_BY_CREATOR",
       "details": {},

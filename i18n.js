@@ -37,29 +37,10 @@ const I18nEngine = (() => {
       if (saved && SUPPORTED_LANGS[saved]) {
         return saved;
       }
-
-      const navLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
-      for (const raw of navLangs) {
-        if (!raw) continue;
-        const code = raw.toLowerCase().split('-')[0];
-        if (SUPPORTED_LANGS[code]) {
-          return code;
-        }
-      }
-
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      if (tz.includes('Sao_Paulo') || tz.includes('Lisbon') || tz.includes('Fortaleza')) return 'pt';
-      if (tz.includes('Tokyo')) return 'ja';
-      if (tz.includes('Madrid') || tz.includes('Buenos_Aires') || tz.includes('Mexico') || tz.includes('Bogota') || tz.includes('Santiago')) return 'es';
-      if (tz.includes('Paris')) return 'fr';
-      if (tz.includes('Berlin') || tz.includes('Vienna') || tz.includes('Zurich')) return 'de';
-      if (tz.includes('Rome')) return 'it';
-      if (tz.includes('Moscow')) return 'ru';
-      if (tz.includes('Kolkata')) return 'hi';
-      if (tz.includes('Shanghai') || tz.includes('Hong_Kong') || tz.includes('Taipei') || tz.includes('Beijing')) return 'zh';
-      if (tz.includes('Riyadh') || tz.includes('Cairo') || tz.includes('Dubai')) return 'ar';
     } catch (_) {}
-    return 'en';
+    // O idioma soberano padrão em toda a plataforma, website e aplicativo é o Português (pt-BR).
+    // O usuário pode alternar voluntariamente para outros idiomas a qualquer momento via seletor global.
+    return 'pt';
   }
 
   let currentLang = detectUserLanguage();
@@ -212,7 +193,7 @@ const I18nEngine = (() => {
       agentBtnRun: 'Executar Consenso Multi-Agente',
       agentAwaiting: 'Aguardando envio pelo MessageBroker…',
       agentConsensusTitle: 'Decisão Consensual Formal Verificada',
-      adminTopTag: 'MASTER C2 SOVEREIGN CONSOLE',
+      adminTopTag: 'CONSOLE SOBERANO MASTER C2',
       adminChainBadge: 'AUDITORIA SHA-256 ÍNTEGRA',
       adminSupervisorBtn: 'Supervisor Supremo (/supervisor)',
       adminPublicBtn: 'Ver Plataforma Pública',
@@ -226,7 +207,7 @@ const I18nEngine = (() => {
       adminSidebarSub: 'Soberano C2 • v2.6 Enterprise',
       adminTabAccounts: '1. Contas, Clientes VIP & RBAC',
       adminTabAgents: '2. Governança & Kill-Switch',
-      adminTabSandbox: '3. Sandbox & Guardrails',
+      adminTabSandbox: '3. Isolamento & Guardrails (Sandbox)',
       adminTabWaf: '4. WAF, Radar & Backups',
       adminTabMlsecops: '5. MLSecOps & Anti-Poisoning',
       adminTabAudit: '6. Auditoria Imutável (SHA-256)',
@@ -234,6 +215,7 @@ const I18nEngine = (() => {
       adminTabDirectives: '8. Conselheiro de Diretrizes',
       adminTabLennox: '9. LENNOX — Guardião Soberano',
       adminTabSupervisor: '10. Supervisão Suprema (HITL)',
+      adminTabOrganism: '11. Organismo Vivo (Mundo)',
       adminTabOverview: 'Visão Geral & Topologia',
       adminTabTenants: 'Gestão de Contas & Tenants',
       adminTabPentest: 'Pentest & Provas Formais',
@@ -243,7 +225,7 @@ const I18nEngine = (() => {
       adminThreatDesc: 'Monitorando todas as interações de usuários e agentes em tempo real...',
       adminThreatInspect: '🔍 Inspecionar Alertas',
       adminThreatSimulate: '🧪 Simular Ataque ao WAF',
-      adminSecHeaderTag: 'Sovereign Command & Control (Master C2) • Governança Zero-Trust',
+      adminSecHeaderTag: 'Comando & Controle Soberano (Master C2) • Governança Zero-Trust',
       adminSecHeaderTitle: 'Centro de Comando e Controle Soberano',
       adminSecHeaderDesc: 'Autoridade final sobre todas as contas cadastradas, clientes VIP, agentes autônomos por usuário, intervenção cognitiva em tempo real, sandbox guardrails, WAF contra más intenções, MLSecOps e auditoria criptográfica imutável.',
     },
@@ -360,14 +342,15 @@ const I18nEngine = (() => {
       adminSidebarSub: 'Sovereign C2 • v2.0',
       adminTabAccounts: '1. Accounts, VIP Clients & RBAC',
       adminTabAgents: '2. Governance & Kill-Switch',
-      adminTabSandbox: '3. Sandbox & Guardrails',
+      adminTabSandbox: '3. Isolation & Guardrails (Sandbox)',
       adminTabWaf: '4. WAF, Radar & Backups',
       adminTabMlsecops: '5. MLSecOps & Anti-Poisoning',
       adminTabAudit: '6. Immutable Audit (SHA-256)',
-      adminTabDirectives: '7. Directives Advisor',
-      adminTabLennox: '8. LENNOX — Sovereign Guardian',
-      adminTabRegulatory: '9. XAI Dossiers (EU AI Act & LGPD)',
+      adminTabRegulatory: '7. XAI Dossiers (EU AI Act & LGPD)',
+      adminTabDirectives: '8. Directives Advisor',
+      adminTabLennox: '9. LENNOX — Sovereign Guardian',
       adminTabSupervisor: '10. Supreme Supervision (HITL)',
+      adminTabOrganism: '11. Living Organism (World-Learner)',
       adminThreatTitle: '🚨 MALICIOUS INTENT RADAR & WAF ACTIVE:',
       adminThreatDesc: 'Monitoring all user and agent interactions in real-time...',
       adminThreatInspect: '🔍 Inspect Alerts',
@@ -489,7 +472,7 @@ const I18nEngine = (() => {
       adminSidebarSub: 'C2 Soberano • v2.6 Enterprise',
       adminTabAccounts: '1. Cuentas, Clientes VIP & RBAC',
       adminTabAgents: '2. Gobernanza & Kill-Switch',
-      adminTabSandbox: '3. Sandbox & Guardrails',
+      adminTabSandbox: '3. Aislamiento & Guardrails (Sandbox)',
       adminTabWaf: '4. WAF, Radar & Respaldos',
       adminTabMlsecops: '5. MLSecOps & Anti-Envenenamiento',
       adminTabAudit: '6. Auditoría Inmutable (SHA-256)',
@@ -497,6 +480,7 @@ const I18nEngine = (() => {
       adminTabDirectives: '8. Consejero de Directivas',
       adminTabLennox: '9. LENNOX — Guardián Soberano',
       adminTabSupervisor: '10. Supervisión Suprema (HITL)',
+      adminTabOrganism: '11. Organismo Vivo (Mundo)',
       adminTabOverview: 'Visión General & Topología',
       adminTabTenants: 'Gestión de Cuentas & Tenants',
       adminTabPentest: 'Pentest & Pruebas Formales',
@@ -506,7 +490,7 @@ const I18nEngine = (() => {
       adminThreatDesc: 'Monitoreando todas las interacciones de usuarios y agentes en tiempo real...',
       adminThreatInspect: '🔍 Inspeccionar Alertas',
       adminThreatSimulate: '🧪 Simular Ataque al WAF',
-      adminSecHeaderTag: 'Sovereign Command & Control (Master C2) • Gobernanza Zero-Trust',
+      adminSecHeaderTag: 'Comando & Control Soberano (Master C2) • Gobernanza Zero-Trust',
       adminSecHeaderTitle: 'Centro de Comando y Control Soberano',
       adminSecHeaderDesc: 'Autoridad final sobre todas las cuentas registradas, clientes VIP, agentes autónomos por usuario, intervención cognitiva en tiempo real, sandbox guardrails, WAF contra malas intenciones, MLSecOps y auditoría criptográfica inmutable.'
     },
@@ -1423,7 +1407,7 @@ const I18nEngine = (() => {
     const tabMap = {
       'tab-accounts': safeStr(tDict.adminTabAccounts, safeStr(ptFallback.adminTabAccounts, '1. Contas, Clientes VIP & RBAC')),
       'tab-agents': safeStr(tDict.adminTabAgents, safeStr(ptFallback.adminTabAgents, '2. Governança & Kill-Switch')),
-      'tab-sandbox': safeStr(tDict.adminTabSandbox, safeStr(ptFallback.adminTabSandbox, '3. Sandbox & Guardrails')),
+      'tab-sandbox': safeStr(tDict.adminTabSandbox, safeStr(ptFallback.adminTabSandbox, '3. Isolamento & Guardrails (Sandbox)')),
       'tab-waf': safeStr(tDict.adminTabWaf, safeStr(ptFallback.adminTabWaf, '4. WAF, Radar & Backups')),
       'tab-mlsecops': safeStr(tDict.adminTabMlsecops, safeStr(ptFallback.adminTabMlsecops, '5. MLSecOps & Anti-Poisoning')),
       'tab-audit': safeStr(tDict.adminTabAudit, safeStr(ptFallback.adminTabAudit, '6. Auditoria Imutável (SHA-256)')),
@@ -1431,17 +1415,19 @@ const I18nEngine = (() => {
       'tab-directives': safeStr(tDict.adminTabDirectives, safeStr(ptFallback.adminTabDirectives, '8. Conselheiro de Diretrizes')),
       'tab-lennox': safeStr(tDict.adminTabLennox, safeStr(ptFallback.adminTabLennox, '9. LENNOX — Guardião Soberano')),
       'tab-supervisor': safeStr(tDict.adminTabSupervisor, safeStr(ptFallback.adminTabSupervisor, '10. Supervisão Suprema (HITL)')),
+      'tab-organism': safeStr(tDict.adminTabOrganism, safeStr(ptFallback.adminTabOrganism, '11. Organismo Vivo (Mundo)')),
       // Aliases
       'pane-overview': safeStr(tDict.adminTabAccounts, safeStr(ptFallback.adminTabAccounts, '1. Contas, Clientes VIP & RBAC')),
       'pane-tenants': safeStr(tDict.adminTabAccounts, safeStr(ptFallback.adminTabAccounts, '1. Contas, Clientes VIP & RBAC')),
       'pane-agents': safeStr(tDict.adminTabAgents, safeStr(ptFallback.adminTabAgents, '2. Governança & Kill-Switch')),
       'pane-waf': safeStr(tDict.adminTabWaf, safeStr(ptFallback.adminTabWaf, '4. WAF, Radar & Backups')),
-      'pane-pentest': safeStr(tDict.adminTabSandbox, safeStr(ptFallback.adminTabSandbox, '3. Sandbox & Guardrails')),
+      'pane-pentest': safeStr(tDict.adminTabSandbox, safeStr(ptFallback.adminTabSandbox, '3. Isolamento & Guardrails (Sandbox)')),
       'pane-backups': safeStr(tDict.adminTabWaf, safeStr(ptFallback.adminTabWaf, '4. WAF, Radar & Backups')),
       'pane-telemetry': safeStr(tDict.adminTabMlsecops, safeStr(ptFallback.adminTabMlsecops, '5. MLSecOps & Anti-Poisoning')),
       'pane-audit': safeStr(tDict.adminTabAudit, safeStr(ptFallback.adminTabAudit, '6. Auditoria Imutável (SHA-256)')),
       'pane-lennox': safeStr(tDict.adminTabLennox, safeStr(ptFallback.adminTabLennox, '9. LENNOX — Guardião Soberano')),
-      'pane-supervisor': safeStr(tDict.adminTabSupervisor, safeStr(ptFallback.adminTabSupervisor, '10. Supervisão Suprema (HITL)'))
+      'pane-supervisor': safeStr(tDict.adminTabSupervisor, safeStr(ptFallback.adminTabSupervisor, '10. Supervisão Suprema (HITL)')),
+      'pane-organism': safeStr(tDict.adminTabOrganism, safeStr(ptFallback.adminTabOrganism, '11. Organismo Vivo (Mundo)'))
     };
 
     document.querySelectorAll('.c2-enterprise-sidebar .c2-tab-btn').forEach(btn => {
@@ -1452,6 +1438,27 @@ const I18nEngine = (() => {
         if (span) span.textContent = label;
       }
     });
+
+    // Sidebar Category Headings
+    const groupTitles = document.querySelectorAll('.c2-nav-group-title');
+    if (groupTitles && groupTitles.length >= 4) {
+      if (currentLang === 'en') {
+        groupTitles[0].textContent = 'IDENTITY & ACCESS';
+        groupTitles[1].textContent = 'DEFENSE & COGNITIVE SHIELDING';
+        groupTitles[2].textContent = 'AUDIT & LEGAL COMPLIANCE';
+        groupTitles[3].textContent = 'EXECUTIVE SUPERVISION & AI';
+      } else if (currentLang === 'es') {
+        groupTitles[0].textContent = 'IDENTIDAD & ACCESO';
+        groupTitles[1].textContent = 'DEFENSA & BLINDAJE COGNITIVO';
+        groupTitles[2].textContent = 'AUDITORÍA & CONFORMIDAD LEGAL';
+        groupTitles[3].textContent = 'SUPERVISIÓN EJECUTIVA & IA';
+      } else {
+        groupTitles[0].textContent = 'IDENTIDADE & ACESSO';
+        groupTitles[1].textContent = 'DEFESA & BLINDAGEM COGNITIVA';
+        groupTitles[2].textContent = 'AUDITORIA & CONFORMIDADE LEGAL';
+        groupTitles[3].textContent = 'SUPERVISÃO EXECUTIVA & IA';
+      }
+    }
 
     // Threat Banner
     const threatTitle = document.querySelector('#c2-threat-banner strong');
@@ -1465,7 +1472,7 @@ const I18nEngine = (() => {
 
     // Section Header
     const secTag = document.querySelector('#security .section-tag');
-    if (secTag) secTag.textContent = safeStr(tDict.adminSecHeaderTag, safeStr(ptFallback.adminSecHeaderTag, 'Sovereign Command & Control (Master C2) • Governança Zero-Trust'));
+    if (secTag) secTag.textContent = safeStr(tDict.adminSecHeaderTag, safeStr(ptFallback.adminSecHeaderTag, 'Comando & Controle Soberano (Master C2) • Governança Zero-Trust'));
     const secTitle = document.querySelector('#security .section-title');
     if (secTitle) secTitle.textContent = safeStr(tDict.adminSecHeaderTitle, safeStr(ptFallback.adminSecHeaderTitle, 'Centro de Comando e Controle Soberano'));
     const secDesc = document.querySelector('#security .section-desc');

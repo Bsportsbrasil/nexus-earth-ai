@@ -552,7 +552,7 @@
   <!-- Protected Sovereign Master C2 Dashboard (Hidden until authenticated) -->
   <section id="security" class="section" style="display:none">
     <div class="section-header" style="margin-bottom:1.25rem">
-      <div class="section-tag">Sovereign Command &amp; Control (Master C2) • Zero-Trust Governance</div>
+      <div class="section-tag">Comando &amp; Controle Soberano (Master C2) • Governança Zero-Trust</div>
       <h2 class="section-title">Centro de Comando e Controle Soberano</h2>
       <p class="section-desc">Autoridade final sobre todas as contas cadastradas, clientes VIP, agentes autônomos por usuário, intervenção cognitiva em tempo real, sandbox guardrails, WAF contra más intenções, MLSecOps e auditoria criptográfica imutável.</p>
     </div>
@@ -576,7 +576,7 @@
       <div class="c2-kpi-card" style="--card-accent: var(--cyan)" data-jump="tab-accounts" title="Clique para abrir e gerenciar Contas, Clientes VIP e Papéis RBAC">
         <div>
           <div class="c2-kpi-head">
-            <span class="c2-kpi-title"><span class="tab-icon">👥</span> CONTAS &amp; TENANTS</span>
+            <span class="c2-kpi-title"><span class="tab-icon">👥</span> CONTAS &amp; EMPRESAS</span>
             <span class="c2-kpi-badge" style="color:var(--cyan);border-color:rgba(0,245,255,0.3)"><span class="c2-pulse-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan)"></span> RBAC ATIVO</span>
           </div>
           <div class="c2-kpi-val" id="c2-kpi-accounts">0</div>
@@ -596,12 +596,12 @@
         <div>
           <div class="c2-kpi-head">
             <span class="c2-kpi-title"><span class="tab-icon">🧠</span> AGENTES AUTÔNOMOS</span>
-            <span class="c2-kpi-badge" style="color:var(--violet);border-color:rgba(168,85,247,0.3)"><span class="c2-pulse-dot" style="background:var(--violet);box-shadow:0 0 8px var(--violet)"></span> SANDBOX</span>
+            <span class="c2-kpi-badge" style="color:var(--violet);border-color:rgba(168,85,247,0.3)"><span class="c2-pulse-dot" style="background:var(--violet);box-shadow:0 0 8px var(--violet)"></span> ISOLAMENTO ATIVO</span>
           </div>
           <div class="c2-kpi-val" id="c2-kpi-agents" style="color:var(--violet)">0</div>
           <div class="c2-kpi-sub">
             <span>Vinculados &amp; Em Execução</span>
-            <span style="color:var(--violet);font-family:var(--font-mono);font-size:0.68rem">ZERO-POISON</span>
+            <span style="color:var(--violet);font-family:var(--font-mono);font-size:0.68rem">ANTI-ENVENENAMENTO</span>
           </div>
         </div>
         <button class="c2-kpi-action-btn" data-jump="tab-agents" title="Ajustar Governança, Parâmetros Cognitivos e Kill-Switch">
@@ -639,7 +639,7 @@
           <div class="c2-kpi-val" id="c2-kpi-audit" style="color:var(--emerald)">0</div>
           <div class="c2-kpi-sub">
             <span>Blocos Criptográficos Imutáveis</span>
-            <span style="color:var(--emerald);font-family:var(--font-mono);font-size:0.68rem">100% AUDIT</span>
+            <span style="color:var(--emerald);font-family:var(--font-mono);font-size:0.68rem">100% AUDITADO</span>
           </div>
         </div>
         <button class="c2-kpi-action-btn" data-jump="tab-audit" title="Auditar Blocos Criptográficos e Integridade Merkle">
@@ -660,7 +660,7 @@
             <div class="c2-sidebar-header-title" style="font-family:var(--font-display);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;color:var(--cyan);text-transform:uppercase">MÓDULOS CORPORATIVOS</div>
             <div class="c2-sidebar-header-sub" style="font-size:0.65rem;color:var(--text-muted);margin-top:2px">Soberano C2 • v2.6 Enterprise</div>
           </div>
-          <span class="agent-badge DONE" style="font-size:0.62rem">TIER-1</span>
+          <span class="agent-badge DONE" style="font-size:0.62rem">NÍVEL 1</span>
         </div>
 
         <div class="c2-tabs" style="display:flex;flex-direction:column;gap:0.3rem;margin:0;">
@@ -677,7 +677,7 @@
           </button>
           <button class="c2-tab-btn" data-tab="tab-sandbox">
             <span class="tab-icon">🛡️</span>
-            <span class="tab-text">3. Sandbox &amp; Guardrails</span>
+            <span class="tab-text">3. Isolamento &amp; Guardrails (Sandbox)</span>
           </button>
           <button class="c2-tab-btn" data-tab="tab-waf">
             <span class="tab-icon">🚨</span>
@@ -730,7 +730,7 @@
         <div class="panel glass-panel assistant-col" style="grid-column: span 3">
           <div class="cc-pane-header">
             <span class="panel-title">⚡ Concessão Direta de Acesso / Ativação Manual de Cliente Particular (Sem Cadastro Público)</span>
-            <span class="agent-badge DONE">RBAC PROVISIONER</span>
+            <span class="agent-badge DONE">PROVISIONADOR RBAC</span>
           </div>
           <div class="c2-vip-form-grid">
             <input type="text" id="vip-name" class="text-input" placeholder="Nome do Cliente ou Responsável..." />
@@ -963,7 +963,7 @@
       <div class="panel glass-panel" style="padding:1rem">
         <div class="cc-pane-header" style="margin-bottom:0.75rem">
           <span class="panel-title">🧠 4. Gestão de Agentes por Usuário &amp; Intervenção Cognitiva Cirúrgica (Pausar, Congelar, Reiniciar ou Destruir Memória)</span>
-          <span class="agent-badge DONE">LEAST PRIVILEGE ENFORCED</span>
+          <span class="agent-badge DONE">MENOR PRIVILÉGIO ATIVO</span>
         </div>
         <div class="c2-table-wrap">
           <table class="c2-table">
@@ -991,20 +991,20 @@
         <div class="panel glass-panel assistant-col">
           <div class="cc-pane-header">
             <span class="panel-title">🔒 Isolamento Estrito de Sandbox</span>
-            <span class="agent-badge DONE">CONTAINED</span>
+            <span class="agent-badge DONE">CONFINADO EM SANDBOX</span>
           </div>
           <div style="display:flex;flex-direction:column;gap:0.65rem;font-size:0.8rem">
-            <div class="breaker-row"><div><strong>Filesystem System Protection</strong><small id="sb-fs">STRICT_READONLY_ROOT</small></div><span class="agent-badge DONE">LOCKED</span></div>
-            <div class="breaker-row"><div><strong>Cross-Tenant DB Isolation</strong><small id="sb-db">ENFORCED_NAMESPACE_LOCK</small></div><span class="agent-badge DONE">LOCKED</span></div>
-            <div class="breaker-row"><div><strong>Privilege Escalation Shield</strong><small id="sb-priv">KERNEL_AND_ENV_SHIELDED</small></div><span class="agent-badge DONE">LOCKED</span></div>
-            <div class="breaker-row"><div><strong>Network Egress Filter</strong><small id="sb-net">ALLOWLISTED_APIS_ONLY</small></div><span class="agent-badge DONE">LOCKED</span></div>
+            <div class="breaker-row"><div><strong>Proteção do Sistema de Arquivos</strong><small id="sb-fs">STRICT_READONLY_ROOT</small></div><span class="agent-badge DONE">BLOQUEADO &amp; SEGURO</span></div>
+            <div class="breaker-row"><div><strong>Isolamento de Banco de Dados entre Clientes</strong><small id="sb-db">ENFORCED_NAMESPACE_LOCK</small></div><span class="agent-badge DONE">BLOQUEADO &amp; SEGURO</span></div>
+            <div class="breaker-row"><div><strong>Blindagem contra Escalação de Privilégios</strong><small id="sb-priv">KERNEL_AND_ENV_SHIELDED</small></div><span class="agent-badge DONE">BLOQUEADO &amp; SEGURO</span></div>
+            <div class="breaker-row"><div><strong>Filtro de Saída de Rede (Egress)</strong><small id="sb-net">ALLOWLISTED_APIS_ONLY</small></div><span class="agent-badge DONE">BLOQUEADO &amp; SEGURO</span></div>
           </div>
         </div>
 
         <div class="panel glass-panel assistant-col" style="grid-column: span 2">
           <div class="cc-pane-header">
             <span class="panel-title">🛠️ Tool Allowlists &amp; Validação Explícita de Ferramentas de Agentes</span>
-            <span class="agent-badge DONE">ZERO-TRUST TOOLS</span>
+            <span class="agent-badge DONE">FERRAMENTAS ZERO-TRUST</span>
           </div>
           <p style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:0.5rem">
             Defina exatamente quais ferramentas os agentes autônomos têm permissão para invocar. Ferramentas críticas de sistema permanecem bloqueadas no kernel do backend.
@@ -1036,7 +1036,7 @@
         <div class="panel glass-panel assistant-col">
           <div class="cc-pane-header">
             <span class="panel-title">🛡️ WAF, Prompt Injection &amp; Criptografia E2E</span>
-            <span class="agent-badge DONE">ACTIVE SHIELD</span>
+            <span class="agent-badge DONE">ESCUDO ATIVO</span>
           </div>
           <div style="font-size:0.78rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.45rem">
             <div>• <strong>Defesa Prompt Injection / Jailbreak:</strong> <span style="color:var(--emerald)">ATIVA (Sanitização Estrita)</span></div>
@@ -1097,7 +1097,7 @@
         <div class="panel glass-panel assistant-col">
           <div class="cc-pane-header">
             <span class="panel-title">🛡️ Defesa contra Data Poisoning (Linhagem)</span>
-            <span class="agent-badge DONE">ACTIVE GUARD</span>
+            <span class="agent-badge DONE">GUARDA ATIVA</span>
           </div>
           <p style="font-size:0.78rem;color:var(--text-secondary)">
             Inspeciona entropia e padrões de gatilho adversarial antes de permitir que qualquer interação alimente a memória dinâmica da AURA ou o GraphDB.
@@ -1208,7 +1208,7 @@
         <div class="panel glass-panel assistant-col">
           <div class="cc-pane-header">
             <span class="panel-title">📱 Isolamento Total de Celulares Conectados</span>
-            <span class="agent-badge DONE">ZERO DEVICE DATA</span>
+            <span class="agent-badge DONE">ZERO DADOS NO DISPOSITIVO</span>
           </div>
           <p style="font-size:0.76rem;color:var(--text-secondary)">
             Garantia criptográfica e de kernel HTTP (<code>Permissions-Policy</code>) de que o aplicativo instalado nos celulares (seu e dos usuários) <strong>não tem acesso a nenhum dado pessoal do aparelho</strong>:
@@ -1297,7 +1297,7 @@
         <div class="panel glass-panel assistant-col">
           <div class="cc-pane-header">
             <span class="panel-title">⚖️ Estatuto Soberano do LENNOX</span>
-            <span class="agent-badge DONE">ZERO ADMIN PRIVILEGE</span>
+            <span class="agent-badge DONE">SEM PRIVILÉGIOS DE ADMIN</span>
           </div>
           <div style="font-size:0.75rem;color:var(--text-secondary);display:flex;flex-direction:column;gap:0.42rem">
             <div>• <strong>Autoridade:</strong> Subordinação direta e absoluta à Proprietária da Plataforma.</div>
@@ -1357,7 +1357,7 @@
               <span class="panel-title">🏛️ Matriz de Conformidade Legal Global &amp; Auditoria Algorítmica</span>
               <span style="display:block;font-size:0.72rem;color:var(--text-secondary)">A arquitetura Glass-Box do NEXUS resolve a maior dor de conformidade das empresas: cada inferência possui rastreabilidade total de pesos, entropia, fontes e linhagem de dados.</span>
             </div>
-            <span class="agent-badge DONE">ZERO BLACK-BOX RISK</span>
+            <span class="agent-badge DONE">ZERO RISCO CAIXA-PRETA</span>
           </div>
 
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:0.75rem">
@@ -1385,7 +1385,7 @@
         <div class="panel glass-panel assistant-col">
           <div class="cc-pane-header">
             <span class="panel-title">⚡ Emissor de Passaporte XAI</span>
-            <span class="agent-badge DONE">AUDIT-READY</span>
+            <span class="agent-badge DONE">PRONTO PARA AUDITORIA</span>
           </div>
           <p style="font-size:0.74rem;color:var(--text-secondary);margin-bottom:0.5rem">
             Gere ou audite um passaporte regulatório instantâneo para qualquer diretiva ou decisão:
@@ -1433,7 +1433,7 @@
         <div class="panel glass-panel assistant-col" style="grid-column: span 3">
           <div class="cc-pane-header">
             <span class="panel-title">🛡️ Centro de Supervisão Suprema Soberana &amp; Homologação Humana (HITL)</span>
-            <span class="agent-badge DONE">CREATOR-EXCLUSIVE ZERO-TRUST</span>
+            <span class="agent-badge DONE">ZERO-TRUST EXCLUSIVO DA PROPRIETÁRIA</span>
           </div>
           <p style="font-size:0.76rem;color:var(--text-secondary);margin:0.25rem 0 0.75rem 0">
             Workstation restrita ao criador da plataforma. Converse diretamente com o Agente Principal (LENNOX), audite e teste o comportamento de cada agente subordinado em tempo real, e certifique ou revogue a homologação com carimbo criptográfico SHA-256.
