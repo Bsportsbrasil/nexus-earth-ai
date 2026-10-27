@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-27T18:57:54.163Z",
+  "updatedAt": "2026-10-27T20:03:47.080Z",
   "certifications": {
     "aura": {
       "certified": true,
@@ -30,8 +30,8 @@
       "status": "CERTIFICADO_PELO_CRIADOR",
       "agentId": "executor",
       "certifiedBy": "Criador Soberano",
-      "timestamp": "2026-10-27T18:57:54.162Z",
-      "certHash": "24e6f516566b3c470c48a51b1abca9310f23537490228743979dbc0795bd276e",
+      "timestamp": "2026-10-27T20:03:47.080Z",
+      "certHash": "eb5f8d9084178a999f07e3dac6a60c6cfb0b3d191743dd3ee56e506c20e2e103",
       "note": "Re-homologado"
     },
     "verifier": {
@@ -44,6 +44,18 @@
     }
   },
   "feedbackHistory": [
+    {
+      "id": "fb_1793131427059_3cd4",
+      "agentId": "aura",
+      "agentName": "AURA (Live Communication)",
+      "userMessageSnippet": "Como você ajuda pessoas no espectro autista?",
+      "agentReplySnippet": "Com acolhimento, respeito e histórias sociais de Carol Gray adaptadas à sua maneira única de aprende",
+      "alignmentScore": 0.98,
+      "status": "ADEQUATE_AND_ALIGNED",
+      "feedbackText": "O agente AURA (Live Communication) respondeu com tom natural, amigável e coerente com sua memória vetorial própria. Alinhamento: 98%. Comportamento 100% adequado.",
+      "flags": [],
+      "timestamp": "2026-10-27T20:03:47.059Z"
+    },
     {
       "id": "fb_1793127474127_6cee",
       "agentId": "aura",
@@ -829,16 +841,6 @@
     {
       "role": "creator",
       "text": "Qual é o status da governança dos agentes neste momento?",
-      "timestamp": "2026-10-26T01:48:47.985Z"
-    },
-    {
-      "role": "supervisor",
-      "text": "Supervisão em tempo real às 22:48:47: O LENNOX confirma que toda a governança está 100% operando com máxima eficiência. Temos 6 agentes ativos no cluster, com zero falhas de segurança e integridade vetorial de 100%. Deseja calibrar algum agente específico ou testar novos fluxos?",
-      "timestamp": "2026-10-26T01:48:47.985Z"
-    },
-    {
-      "role": "creator",
-      "text": "Qual é o status da governança dos agentes neste momento?",
       "timestamp": "2026-10-26T01:49:24.051Z"
     },
     {
@@ -1075,6 +1077,16 @@
       "role": "supervisor",
       "text": "Supervisão em tempo real às 15:57:54: O LENNOX confirma que toda a governança está 100% operando com máxima eficiência. Temos 6 agentes ativos no cluster, com zero falhas de segurança e integridade vetorial de 100%. Deseja calibrar algum agente específico ou testar novos fluxos?",
       "timestamp": "2026-10-27T18:57:54.123Z"
+    },
+    {
+      "role": "creator",
+      "text": "Qual é o status da governança dos agentes neste momento?",
+      "timestamp": "2026-10-27T20:03:47.058Z"
+    },
+    {
+      "role": "supervisor",
+      "text": "Supervisão em tempo real às 17:03:47: O LENNOX confirma que toda a governança está 100% operando com máxima eficiência. Temos 6 agentes ativos no cluster, com zero falhas de segurança e integridade vetorial de 100%. Deseja calibrar algum agente específico ou testar novos fluxos?",
+      "timestamp": "2026-10-27T20:03:47.058Z"
     }
   ]
 }

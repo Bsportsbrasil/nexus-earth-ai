@@ -408,8 +408,41 @@
       .c2-nav-group-title {
         display: none !important;
       }
-      #c2-chain-badge { display: none !important; }
-      #c2-public-link { display: none !important; }
+      #nav {
+        height: auto !important;
+        min-height: 50px !important;
+        padding: 6px 10px !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+      }
+      .nav-inner {
+        height: auto !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+      .nav-status {
+        display: flex !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        justify-content: flex-end !important;
+        max-width: 100% !important;
+      }
+      .nav-status .agent-badge,
+      .nav-status .btn-secondary,
+      .nav-status a.btn-secondary {
+        height: 28px !important;
+        padding: 2px 7px !important;
+        font-size: 0.68rem !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+      }
+      #c2-chain-badge { display: inline-flex !important; }
+      #c2-public-link { display: inline-flex !important; }
+      #c2-supervisor-text { display: inline !important; font-size: 0.68rem !important; }
     }
 
     @media (max-width: 900px) {
@@ -456,7 +489,7 @@
       .c2-vip-form-grid button {
         width: 100% !important;
       }
-      #c2-supervisor-text { display: none !important; }
+      #c2-supervisor-text { display: inline !important; font-size: 0.68rem !important; }
       .section-tag {
         letter-spacing: 0.05em !important;
         font-size: 0.62rem !important;
