@@ -183,9 +183,10 @@ const status = document.getElementById('key-status');
 
 function refresh() {
   const on = serverAvailable === true || !!getLocalKey();
+  const isEn = window.I18nEngine && typeof window.I18nEngine.getCurrentLanguage === 'function' && window.I18nEngine.getCurrentLanguage() === 'en';
   status.textContent = serverAvailable === true
-    ? 'GEMINI CLOUD ACTIVE'
-    : (on ? 'GEMINI LIVE' : 'GRAPHRAG READY');
+    ? (isEn ? 'GEMINI CLOUD ACTIVE' : 'GEMINI CLOUD ATIVO')
+    : (on ? (isEn ? 'GEMINI LIVE' : 'GEMINI AO VIVO') : (isEn ? 'GRAPHRAG READY' : 'GRAPHRAG PRONTO'));
   status.className = 'key-status ' + (on ? 'live' : 'demo');
 }
 

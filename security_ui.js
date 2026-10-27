@@ -102,9 +102,17 @@ const SecurityUI = (function () {
 
     tbody.innerHTML = filtered.map(acc => {
       const isRoot = acc.id === 'acc_owner_root';
+      const statusMap = {
+        'ACTIVE': 'ATIVA',
+        'BLOCKED': 'BLOQUEADA',
+        'SUSPENDED': 'SUSPENSA',
+        'CANCELLED': 'CANCELADA',
+        'QUARANTINED': 'QUARENTENA'
+      };
+      const statusLabel = statusMap[acc.status] || esc(acc.status);
       const statusBadge = acc.status === 'ACTIVE'
-        ? '<span class="agent-badge DONE">ACTIVE</span>'
-        : `<span class="agent-badge ERROR">${esc(acc.status)}</span>`;
+        ? `<span class="agent-badge DONE">${statusLabel}</span>`
+        : `<span class="agent-badge ERROR">${statusLabel}</span>`;
       const riskColor = (acc.threatScore || 0) >= 70 ? 'var(--rose)' : (acc.threatScore || 0) > 20 ? '#f59e0b' : 'var(--emerald)';
       const pct = Math.min(100, Math.round(((acc.usedTokens || 0) / Math.max(1, acc.quotaTokens || 1)) * 100));
 
@@ -179,6 +187,14 @@ const SecurityUI = (function () {
     tbody.innerHTML = agents.map(ag => {
       const owner = accMap.get(ag.accountId);
       const badgeClass = ag.status === 'ACTIVE' ? 'DONE' : (ag.status === 'MEMORY_WIPED' ? 'ERROR' : 'IDLE');
+      const agStatusMap = {
+        'ACTIVE': 'ATIVO',
+        'PAUSED': 'PAUSADO',
+        'FROZEN': 'CONGELADO',
+        'BLOCKED': 'BLOQUEADO',
+        'MEMORY_WIPED': 'MEMÓRIA RESETADA'
+      };
+      const agStatusLabel = agStatusMap[ag.status] || esc(ag.status);
       return `
         <tr>
           <td>
@@ -190,7 +206,7 @@ const SecurityUI = (function () {
             <small style="color:var(--text-secondary)">${esc(owner ? owner.company : '')}</small>
           </td>
           <td>
-            <span class="agent-badge ${badgeClass}">${esc(ag.status)}</span><br/>
+            <span class="agent-badge ${badgeClass}">${agStatusLabel}</span><br/>
             <small style="font-size:0.68rem;color:${ag.learningFrozen ? '#f59e0b' : 'var(--emerald)'}">
               ${ag.learningFrozen ? '❄️ Aprendizado Congelado' : '🌱 Aprendizado Dinâmico Ativo'}
             </small>
@@ -316,8 +332,8 @@ const SecurityUI = (function () {
     if (c2.auditIntegrity) {
       if (chainBadge) {
         chainBadge.textContent = c2.auditIntegrity.intact
-          ? `SHA-256 CHAIN INTACT (${c2.auditIntegrity.totalBlocks} BLOCKS)`
-          : 'CHAIN TAMPER DETECTED';
+          ? `CADEIA SHA-256 ÍNTEGRA (${c2.auditIntegrity.totalBlocks} BLOCOS)`
+          : 'VIOLAÇÃO DE CADEIA DETECTADA';
       }
       if (headHashEl) {
         headHashEl.textContent = `HEAD SHA-256: ${(c2.auditIntegrity.headHash || '').slice(0, 20)}...`;
