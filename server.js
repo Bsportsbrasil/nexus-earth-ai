@@ -889,6 +889,51 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  if (pathname === '/api/organism/converse' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const apiKey = body.apiKey || process.env.GEMINI_API_KEY;
+      const convRes = await worldLearnerOrganism.converseWithCreator({
+        message: body.message,
+        apiKey,
+        clientTemporal: body.clientTemporal,
+        voiceEnabled: body.voiceEnabled
+      });
+      return jsonResponse(res, 200, convRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/chat/clear' && req.method === 'POST') {
+    try {
+      const clearRes = worldLearnerOrganism.clearChatHistory();
+      return jsonResponse(res, 200, clearRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/simulation/update' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const updated = worldLearnerOrganism.updateSimulation(body.id, body.updates);
+      return jsonResponse(res, 200, { success: true, simulation: updated });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/organism/simulation/delete' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const delRes = worldLearnerOrganism.deleteSimulation(body.id);
+      return jsonResponse(res, 200, delRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
   // 5b. Task & Calendar Automation Endpoints (/api/tasks, /api/tasks/ics, /api/tasks/plan)
   if (pathname === '/api/tasks') {
     if (req.method === 'GET') {

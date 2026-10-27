@@ -2897,3 +2897,47 @@ section.hero-section[data-route].route-active {
   border-left: 3px solid #10b981;
   color: var(--text-primary);
 }
+
+.org-quick-prompt-btn {
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  color: #d8b4fe;
+  font-size: 0.72rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.org-quick-prompt-btn:hover {
+  background: rgba(168, 85, 247, 0.22);
+  border-color: rgba(168, 85, 247, 0.55);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.org-chat-suggestion-box {
+  margin-top: 0.65rem;
+  padding: 0.65rem 0.85rem;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.org-chat-suggestion-box .title {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #c084fc;
+}
+.org-chat-suggestion-box .desc {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.org-chat-suggestion-box .actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.2rem;
+}

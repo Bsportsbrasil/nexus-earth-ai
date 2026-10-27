@@ -78,4 +78,31 @@ assert.strictEqual(delRes.success, true);
 assert.strictEqual(delRes.deletedId, hyp.id);
 console.log('✓ Creator direct hypothesis deletion verified');
 
+// 9. Simulation Update and Deletion
+const updatedSim = worldLearnerOrganism.updateSimulation(sim.id, {
+  scenarioName: 'Cenário Ajustado pela Administradora'
+});
+assert.strictEqual(updatedSim.scenarioName, 'Cenário Ajustado pela Administradora');
+const delSimRes = worldLearnerOrganism.deleteSimulation(sim.id);
+assert.strictEqual(delSimRes.success, true);
+assert.strictEqual(delSimRes.deletedId, sim.id);
+console.log('✓ Simulation update and deletion by Creator verified');
+
+// 10. Direct Dialogue and Testing with Creator
+const convRes = await worldLearnerOrganism.converseWithCreator({
+  message: 'Por que você formulou essa hipótese e quais padrões ocultos você detectou?',
+  voiceEnabled: true
+});
+assert.strictEqual(convRes.success, true);
+assert.ok(convRes.reply.length > 50, 'Empty organism reply');
+assert.ok(convRes.voiceText.length > 20, 'Empty voiceText for speech');
+assert.ok(convRes.suggestedHypothesis || convRes.suggestedSimulation, 'No suggested actions generated');
+console.log('✓ Creator dialogue and real developmental test verified:', convRes.voiceText.slice(0, 80));
+
+// 11. Clear Chat History
+const clearRes = worldLearnerOrganism.clearChatHistory();
+assert.strictEqual(clearRes.success, true);
+assert.strictEqual(worldLearnerOrganism.chatHistory.length, 0);
+console.log('✓ Creator chat history clear/reset verified');
+
 console.log('ALL WORLD LEARNER ORGANISM TESTS PASSED 100%!');

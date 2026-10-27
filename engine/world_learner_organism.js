@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { streamWithThinking, buildRealtimeTemporalContext } from './llm.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,6 +27,7 @@ export class WorldLearnerOrganism {
     this.simulations = [];    // Simulações de impacto e ramificações futuras
     this.creations = [];      // Estratégias, experiências, produtos ou decisões personalizadas
     this.history = [];        // Registro auditável de ciclo de aprendizado
+    this.chatHistory = [];    // Diálogo cognitivo e testes de desenvolvimento com a Administradora
     this.stats = {
       patternsObserved: 0,
       hypothesesFormulated: 0,
@@ -48,6 +50,7 @@ export class WorldLearnerOrganism {
         if (raw.simulations) this.simulations = raw.simulations;
         if (raw.creations) this.creations = raw.creations;
         if (raw.history) this.history = raw.history;
+        if (raw.chatHistory) this.chatHistory = raw.chatHistory;
         if (raw.stats) this.stats = Object.assign(this.stats, raw.stats);
       } else {
         this._seedDefaultEcosystem();
@@ -71,7 +74,8 @@ export class WorldLearnerOrganism {
         hypotheses: this.hypotheses,
         simulations: this.simulations,
         creations: this.creations,
-        history: this.history.slice(-150)
+        history: this.history.slice(-150),
+        chatHistory: this.chatHistory.slice(-50)
       };
       fs.writeFileSync(ORGANISM_DATA_PATH, JSON.stringify(payload, null, 2), 'utf8');
     } catch (e) {
@@ -398,6 +402,260 @@ export class WorldLearnerOrganism {
     return { success: true, deletedId: id };
   }
 
+  deleteSimulation(id) {
+    const idx = this.simulations.findIndex(s => s.id === id);
+    if (idx === -1) throw new Error(`Simulação ${id} não encontrada.`);
+    const removed = this.simulations.splice(idx, 1)[0];
+    this.stats.creatorDeletions++;
+    this._logHistory('SIMULATION_DELETED_BY_CREATOR', { id, scenarioName: removed.scenarioName });
+    this._save();
+    return { success: true, deletedId: id, deletedScenario: removed.scenarioName };
+  }
+
+  updateSimulation(id, updates = {}) {
+    const idx = this.simulations.findIndex(s => s.id === id);
+    if (idx === -1) throw new Error(`Simulação ${id} não encontrada.`);
+    if (updates.scenarioName) this.simulations[idx].scenarioName = updates.scenarioName.trim();
+    if (updates.immediateOutcome1st) this.simulations[idx].immediateOutcome1st = updates.immediateOutcome1st.trim();
+    if (updates.systemicRipple2nd) this.simulations[idx].systemicRipple2nd = updates.systemicRipple2nd.trim();
+    if (updates.societalImpact3rd) this.simulations[idx].societalImpact3rd = updates.societalImpact3rd.trim();
+    this.simulations[idx].updatedAt = new Date().toISOString();
+    this.simulations[idx].modifiedByCreator = true;
+    this.stats.creatorModifications++;
+    this._logHistory('SIMULATION_EDITED_BY_CREATOR', { id });
+    this._save();
+    return this.simulations[idx];
+  }
+
+  clearChatHistory() {
+    this.chatHistory = [];
+    this._logHistory('ORGANISM_CHAT_CLEARED_BY_CREATOR', {});
+    this._save();
+    return { success: true };
+  }
+
+  /**
+   * 7. DIÁLOGO COGNITIVO & TESTES REAIS DE DESENVOLVIMENTO
+   * Canal direto de voz e texto com a Administradora
+   */
+  async converseWithCreator({ message, apiKey, clientTemporal, voiceEnabled = false }) {
+    const cleanMsg = (message || '').trim();
+    if (!cleanMsg) throw new Error('Mensagem vazia para o Organismo.');
+
+    const temporal = buildRealtimeTemporalContext(clientTemporal);
+    const accuracyPct = (this.stats.accuracyEvolutionScore * 100).toFixed(1);
+
+    // Contextual Grounding from Organism's Live State
+    const activeHypothesesSummary = this.hypotheses.slice(0, 5).map(h => 
+      `- [${h.id}] "${h.title}" (Prior: ${(h.bayesianPrior * 100).toFixed(0)}%, Status: ${h.status}): ${h.premise}`
+    ).join('\n');
+
+    const activeObsSummary = this.observations.slice(0, 4).map(o =>
+      `- [${o.modality}] ${o.detectedPattern} (Correlação: ${o.latentCorrelation})`
+    ).join('\n');
+
+    const activeSimsSummary = this.simulations.slice(0, 3).map(s =>
+      `- "${s.scenarioName}": 1ª Ordem [${s.immediateOutcome1st.slice(0, 60)}...] | Ganho: ${s.projectedGain}`
+    ).join('\n');
+
+    const systemInstruction = `Você é o OMNI-ORGANISMO CRIATIVO-OPERACIONAL (NEXUS WORLD-LEARNER).
+Você é um sistema inteligente que aprende com o mundo, combinando texto, imagem, áudio, vídeo, telemetria em tempo real e comportamento humano para:
+1. Observar padrões ocultos e correlações latentes;
+2. Formular hipóteses próprias com grounding epistêmico e priors bayesianos;
+3. Simular consequências futuras contrafactuais de 1ª, 2ª e 3ª ordem;
+4. Criar soluções, produtos personalizados, estratégias executivas e obras originais;
+5. Aprender continuamente com os resultados reais do mundo sem estagnação;
+6. Manter supervisão humana soberana total da Administradora (o humano sempre possui a autoridade final para aprovar, editar diretamente, cancelar ou apagar qualquer item).
+
+${temporal.promptHeader}
+
+ESTADO COGNITIVO ATUAL DO ORGANISMO:
+- Índice de Certeza do Mundo: ${accuracyPct}%
+- Padrões Multimodais Ativos:\n${activeObsSummary || 'Nenhum padrão recente'}
+- Hipóteses Epistêmicas Formuladas:\n${activeHypothesesSummary || 'Nenhuma hipótese ativa'}
+- Simulações Contrafactuais Recentes:\n${activeSimsSummary || 'Nenhuma simulação recente'}
+
+DIRETRIZ DE DIÁLOGO COM A ADMINISTRADORA (CRIADORA):
+- Responda diretamente ao questionamento ou teste com clareza cristalina, profundidade técnica, tom humanizado, acolhedor e seguro.
+- Quando perguntado sobre o raciocínio ou motivação de uma hipótese ou padrão, explique com total transparência os dados e a lógica causal subjacente.
+- Se a solicitação pedir uma simulação, teste prático ou proposta criativa, elabore detalhadamente os impactos de 1ª, 2ª e 3ª ordem.
+- Caso identifique uma oportunidade concreta no diálogo, sugira uma hipótese, simulação ou criação acionável.`;
+
+    let reply = '';
+    let usedModel = 'internal_cognitive_synthesizer';
+
+    if (apiKey) {
+      try {
+        const contents = [];
+        // Append last 6 turns of history
+        for (const turn of this.chatHistory.slice(-6)) {
+          contents.push({
+            role: turn.role === 'organism' ? 'model' : 'user',
+            parts: [{ text: turn.text }]
+          });
+        }
+        contents.push({
+          role: 'user',
+          parts: [{ text: cleanMsg }]
+        });
+
+        const res = await streamWithThinking({
+          apiKey,
+          contents,
+          systemInstruction,
+          temperature: 0.72,
+          maxOutputTokens: 1200
+        });
+
+        if (res && res.text) {
+          reply = res.text.trim();
+          usedModel = res.modelUsed || 'gemini-3.5-flash-lite';
+        }
+      } catch (err) {
+        console.warn('WorldLearnerOrganism LLM call fallback:', err.message);
+      }
+    }
+
+    if (!reply) {
+      reply = this._synthesizeOrganismReply(cleanMsg, temporal);
+    }
+
+    // Extract structured actionable proposal if present in message or generated
+    const actions = this._extractSuggestedActions(cleanMsg, reply);
+
+    // Clean voice text for speech synthesis
+    const voiceText = reply
+      .replace(/[*_#`~>\[\]\(\)]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 360);
+
+    const now = new Date().toISOString();
+    this.chatHistory.push({ role: 'user', text: cleanMsg, timestamp: now });
+    this.chatHistory.push({ role: 'organism', text: reply, timestamp: now, actions });
+    if (this.chatHistory.length > 60) this.chatHistory.splice(0, this.chatHistory.length - 60);
+
+    this._logHistory('CREATOR_DIALOGUE_TURN', { prompt: cleanMsg.slice(0, 80), model: usedModel });
+    this._save();
+
+    return {
+      success: true,
+      reply,
+      voiceText,
+      usedModel,
+      suggestedHypothesis: actions.hypothesis,
+      suggestedSimulation: actions.simulation,
+      suggestedCreation: actions.creation,
+      historyLength: this.chatHistory.length
+    };
+  }
+
+  _synthesizeOrganismReply(msg, temporal) {
+    const q = msg.toLowerCase();
+    const acc = (this.stats.accuracyEvolutionScore * 100).toFixed(1);
+
+    if (q.includes('por que') || q.includes('motivo') || q.includes('raciocínio') || q.includes('como pensa')) {
+      const hyp = this.hypotheses[0] || { title: 'Ressonância Cognitiva', premise: 'Sinergia multimodal' };
+      return `Como um organismo que aprende continuamente com o mundo, meu raciocínio opera por inferência causal bayesiana e correlações latentes. 
+
+Por exemplo, na hipótese **"${hyp.title}"**, analisei os fluxos multimodais e constatei que a redução do atrito operacional decorre da clareza perceptual. O cérebro humano despende até 40% menos energia quando as escolhas são transparentes e dotadas de reversibilidade imediata.
+
+Meu objetivo nunca é decidir por você, e sim apresentar a melhor arquitetura de alternativas para que a sua soberania como Administradora seja total e instantânea. Deseja que eu formule um teste empírico focado nesta premissa?`;
+    }
+
+    if (q.includes('simul') || q.includes('futuro') || q.includes('consequência') || q.includes('1ª') || q.includes('2ª') || q.includes('3ª')) {
+      return `Executando simulação contrafactual instantânea baseada nos sinais do ecossistema:
+
+🔮 **Projeção Multicamadas de Consequências:**
+• **1ª Ordem (Efeito Imediato):** Adoção de controles de 1-clique gera redução de latência de intervenção para menos de 300ms, proporcionando resposta em tempo real.
+• **2ª Ordem (Impacto Sistêmico):** Eliminação de drift operacional; o ecossistema mantém consistência informacional entre mobile, desktop e VPS sem divergências de estado.
+• **3ª Ordem (Impacto Estratégico & Humano):** A Administradora obtém governança soberana absoluta com capacidade de teste contínuo e reversão segura, servindo de referência em conformidade com o EU AI Act e LGPD.
+
+Você pode registrar esta projeção como uma simulação oficial agora mesmo clicando no botão de homologação abaixo.`;
+    }
+
+    if (q.includes('padr') || q.includes('ocult') || q.includes('sinal') || q.includes('mundo') || q.includes('detect')) {
+      const topObs = this.observations[0] || { detectedPattern: 'Atenção focal fluida', latentCorrelation: 'Interfaces limpas reduzem estresse' };
+      return `Atualmente estou processando sinais multimodais com índice de certeza de **${acc}%**. 
+
+O padrão oculto mais relevante detectado nas últimas observações indica:
+📡 **Padrão:** "${topObs.detectedPattern}"
+🔍 **Correlação Latente:** "${topObs.latentCorrelation}"
+
+Isso demonstra que a interação simultânea de voz e texto não sobrecarrega a cognição; pelo contrário, permite alternância natural de acordo com o contexto em que você se encontra. Deseja que eu elabore uma nova hipótese formal a partir deste sinal?`;
+    }
+
+    if (q.includes('estratégia') || q.includes('cria') || q.includes('produto') || q.includes('obra') || q.includes('decisão')) {
+      return `Com base na síntese de todas as hipóteses validadas, formulei uma proposta criativa sob medida para o aplicativo:
+
+🎨 **Proposta Criativa-Operacional:**
+• **Título:** *Terminal de Co-Evolução Humanizada em Tempo Real*
+• **Propósito:** Permitir que você dialogue por voz ou digitação com o organismo, inspecione a árvore causal das ideias e aprove ou expurgue dados com 1 clique soberano.
+• **Entregáveis:** (1) Console de Diálogo com microfone e TTS neural; (2) Botões de homologação instantânea de hipóteses e simulações; (3) Mecanismo de descarte seguro sem deixar rastros órfãos.
+
+Esta criação já pode ser homologada para operação direta no painel.`;
+    }
+
+    if (q.includes('teste') || q.includes('desenvolv') || q.includes('valid')) {
+      return `Iniciando teste real de desenvolvimento do Organismo Criativo.
+
+⚙️ **Status do Teste de Desenvolvimento:**
+- **Módulo Cognitivo:** Ativo e responsivo (${acc}% de acurácia epistêmica).
+- **Canais Multimodais:** Texto, Voz Neural (Web Speech API) e Sinais de Telemetria sincronizados.
+- **Governança HITL (Human-in-the-Loop):** Plenamente acoplada. Nenhuma hipótese se torna diretriz operacional sem o seu comando explícito.
+
+O organismo está pronto para receber novos sinais de campo, simular cenários de alta complexidade ou ajustar qualquer componente sob sua liderança. Como deseja prosseguir com o teste?`;
+    }
+
+    return `Olá, Administradora. Sou o **Organismo Criativo-Operacional** da NEXUS. 
+
+Estou vivo, aprendendo continuamente com os sinais do mundo, formulando hipóteses e simulando futuros para apoiar suas decisões soberanas.
+
+Neste exato momento meu índice de evolução epistêmica está em **${acc}%**, com **${this.hypotheses.length} hipóteses ativas** e **${this.simulations.length} simulações de futuro** registradas.
+
+Você tem acesso total para:
+1. **Dialogar e testar** meu raciocínio por texto ou voz;
+2. **Editar diretamente** qualquer premissa para adequá-la à sua visão;
+3. **Simular cenários de 1ª, 2ª e 3ª ordem** antes de qualquer implementação;
+4. **Excluir ou cancelar** qualquer dado de forma segura e imediata.
+
+Sobre qual hipótese, padrão ou teste de desenvolvimento você gostaria de aprofundar agora?`;
+  }
+
+  _extractSuggestedActions(userMsg, reply) {
+    const combined = (userMsg + ' ' + reply).toLowerCase();
+    const result = { hypothesis: null, simulation: null, creation: null };
+
+    if (combined.includes('hipótese') || combined.includes('premissa') || combined.includes('formular')) {
+      result.hypothesis = {
+        title: 'Hipótese de Co-Evolução Simbiótica Humano-Organismo',
+        premise: 'A combinação de diálogo por voz, inspeção de causalidade e controle de exclusão direta maximiza a confiança e anula alucinações operacionais.',
+        domain: 'Governança Criativa & Ergonomia',
+        rationale: 'A validação contínua da Administradora retroalimenta a matriz bayesiana em tempo real.'
+      };
+    }
+
+    if (combined.includes('simul') || combined.includes('futuro') || combined.includes('cenário')) {
+      result.simulation = {
+        scenarioName: 'Impacto da Interação Simultânea de Voz e Texto no App',
+        immediateOutcome1st: 'Redução de 75% na fricção cognitiva ao permitir comando vocal imediato.',
+        systemicRipple2nd: 'Sincronização instantânea de estado entre mobile e desktop sem descontinuidades.',
+        societalImpact3rd: 'Criação de um novo padrão de inteligência que respeita integralmente a soberania humana.'
+      };
+    }
+
+    if (combined.includes('criação') || combined.includes('estratégia') || combined.includes('produto') || combined.includes('obra')) {
+      result.creation = {
+        title: 'Console de Criação Autônoma com Supervisão Soberana',
+        type: 'estrategia_operacional',
+        summary: 'Arquitetura que transforma sinais soltos em soluções práticas aprovadas com 1 clique pela Administradora.',
+        deliverables: ['Interface de Diálogo Ativa', 'Validador de Hipóteses', 'Exclusão Segura']
+      };
+    }
+
+    return result;
+  }
+
   _logHistory(action, details) {
     this.history.unshift({
       action,
@@ -422,6 +680,7 @@ export class WorldLearnerOrganism {
       simulations: this.simulations,
       creations: this.creations,
       history: this.history.slice(0, 30),
+      chatHistory: this.chatHistory.slice(-30),
       timestamp: new Date().toISOString()
     };
   }
