@@ -242,7 +242,8 @@ const VoiceEngine = (function () {
    */
   function splitIntoBreathGroups(text) {
     if (!text) return [];
-    if (text.length <= 320) return [text];
+    const MAX_TURN_LEN = 900;
+    if (text.length <= MAX_TURN_LEN) return [text];
 
     const rawSentences = text.match(/[^.!?…]+[.!?…]*/g) || [text];
     const result = [];
@@ -251,15 +252,15 @@ const VoiceEngine = (function () {
     for (const sentence of rawSentences) {
       const trimmed = sentence.trim();
       if (!trimmed) continue;
-      if ((currentTurn + ' ' + trimmed).trim().length <= 320) {
+      if ((currentTurn + ' ' + trimmed).trim().length <= MAX_TURN_LEN) {
         currentTurn = (currentTurn + ' ' + trimmed).trim();
       } else {
         if (currentTurn) result.push(currentTurn);
-        if (trimmed.length > 320) {
+        if (trimmed.length > MAX_TURN_LEN) {
           const subClauses = trimmed.match(/[^,;:]+\s*[,;:]*/g) || [trimmed];
           let acc = '';
           for (const sc of subClauses) {
-            if ((acc + ' ' + sc).trim().length <= 320) {
+            if ((acc + ' ' + sc).trim().length <= MAX_TURN_LEN) {
               acc = (acc + ' ' + sc).trim();
             } else {
               if (acc) result.push(acc);
@@ -278,7 +279,7 @@ const VoiceEngine = (function () {
 
   /**
    * Plays text using the Expressive Gemini 3.8 Neural Audio Stream (/api/tts, voice 'Leda')
-   * with next-chunk prebuffering. Falls back to browser SpeechSynthesis ONLY if offline.
+   * as a continuous full-response stream. Falls back to browser SpeechSynthesis ONLY if offline.
    */
   function playCloudNeuralChunks(chunks, bcp47, rate, persona, onChunk, onDone, resolve, fallbackFn) {
     let idx = 0;
@@ -334,8 +335,7 @@ const VoiceEngine = (function () {
           resolve();
           return;
         }
-        const pauseMs = currentPhrase.endsWith('...') ? 120 : 40;
-        setTimeout(playNext, pauseMs);
+        playNext();
       };
 
       audio.onerror = () => {
@@ -350,9 +350,7 @@ const VoiceEngine = (function () {
         if (fallbackFn && currentIndex === 0) {
           fallbackFn();
         } else {
-          isSpeaking = false;
-          if (onDone) onDone();
-          resolve();
+          playNext();
         }
       });
     }

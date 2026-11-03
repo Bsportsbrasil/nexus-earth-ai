@@ -938,9 +938,9 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 5a-3. Expressive Gemini 3.8 Neural Audio TTS Proxy (/api/tts) — Sweet, Cute, Gentle & Human Voice (Leda)
+  // 5a-3. Expressive Gemini Neural Audio TTS Proxy (/api/tts) — Sweet, Cute, Gentle & Human Voice (Leda)
   if (pathname === '/api/tts' && req.method === 'GET') {
-    const q = (url.searchParams.get('q') || '').trim().slice(0, 600);
+    const q = (url.searchParams.get('q') || '').trim().slice(0, 1200);
     const tl = (url.searchParams.get('tl') || 'pt-BR').trim();
     const persona = (url.searchParams.get('persona') || 'aura').trim().toLowerCase();
     const clientKey = (url.searchParams.get('key') || '').trim();
@@ -953,7 +953,11 @@ const server = http.createServer(async (req, res) => {
     if (!globalThis.__nexusTtsCache) {
       globalThis.__nexusTtsCache = new Map();
     }
+    if (!globalThis.__nexusTtsCooldowns) {
+      globalThis.__nexusTtsCooldowns = new Map();
+    }
     const ttsCache = globalThis.__nexusTtsCache;
+    const ttsCooldowns = globalThis.__nexusTtsCooldowns;
 
     if (ttsCache.has(cacheKey)) {
       const cached = ttsCache.get(cacheKey);
@@ -973,108 +977,216 @@ const server = http.createServer(async (req, res) => {
       const voiceName = isSupervisor ? 'Charon' : 'Leda';
       const voiceStyle = isSupervisor
         ? 'calm, warm, natural, empathetic and clear conversational male voice'
-        : 'gentle, polite, warm, natural, clear and friendly female voice';
+        : 'sweet, cute, gentle, warm, polite, natural and friendly young female voice';
+
+      const pcm24kToWav = (pcmBuffer) => {
+        const sampleRate = 24000;
+        const numChannels = 1;
+        const bitsPerSample = 16;
+        const byteRate = sampleRate * numChannels * (bitsPerSample / 8);
+        const blockAlign = numChannels * (bitsPerSample / 8);
+        const dataSize = pcmBuffer.length;
+        const header = Buffer.alloc(44);
+        header.write('RIFF', 0);
+        header.writeUInt32LE(36 + dataSize, 4);
+        header.write('WAVE', 8);
+        header.write('fmt ', 12);
+        header.writeUInt32LE(16, 16);
+        header.writeUInt16LE(1, 20);
+        header.writeUInt16LE(numChannels, 22);
+        header.writeUInt32LE(sampleRate, 24);
+        header.writeUInt32LE(byteRate, 28);
+        header.writeUInt16LE(blockAlign, 32);
+        header.writeUInt16LE(bitsPerSample, 34);
+        header.write('data', 36);
+        header.writeUInt32LE(dataSize, 40);
+        return Buffer.concat([header, pcmBuffer]);
+      };
 
       try {
         let wavBuffer = null;
-        for (const ttsModel of ['gemini-3.8-flash-lite-tts', 'gemini-3.8-flash-tts']) {
-          const gResp = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
-            method: 'POST',
-            signal: AbortSignal.timeout(7500),
-            headers: {
-              'x-goog-api-key': geminiKey,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              model: ttsModel,
-              input: [{
-                type: 'user_input',
-                content: [{
-                  type: 'text',
-                  text: q,
-                  annotations: [{
-                    type: 'speech_metadata',
-                    style: voiceStyle
-                  }]
-                }]
-              }],
-              response_format: { type: 'audio' },
-              generation_config: {
-                speech_config: [{ voice: voiceName }]
-              }
-            })
-          });
+        let usedModel = '';
 
-          if (gResp.ok) {
-            const gJson = await gResp.json();
-            let b64Audio = null;
-            if (Array.isArray(gJson.steps)) {
-              for (const step of gJson.steps) {
-                if (step.type === 'model_output' && Array.isArray(step.content)) {
-                  for (const item of step.content) {
-                    if (item.type === 'audio' && item.data) {
-                      b64Audio = item.data;
+        // Tier A: /v1beta/interactions neural TTS models
+        const interactionModels = [
+          { name: 'gemini-3.8-flash-lite-tts', supportsMeta: true },
+          { name: 'gemini-3.8-flash-tts', supportsMeta: true },
+          { name: 'gemini-3.1-flash-tts-preview', supportsMeta: false }
+        ];
+
+        for (const m of interactionModels) {
+          const cooldownUntil = ttsCooldowns.get(m.name) || 0;
+          if (Date.now() < cooldownUntil) continue;
+
+          try {
+            const contentObj = { type: 'text', text: q };
+            if (m.supportsMeta) {
+              contentObj.annotations = [{ type: 'speech_metadata', style: voiceStyle }];
+            }
+            const gResp = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
+              method: 'POST',
+              signal: AbortSignal.timeout(18000),
+              headers: {
+                'x-goog-api-key': geminiKey,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                model: m.name,
+                input: [{
+                  type: 'user_input',
+                  content: [contentObj]
+                }],
+                response_format: { type: 'audio' },
+                generation_config: {
+                  speech_config: [{ voice: voiceName }]
+                }
+              })
+            });
+
+            if (gResp.status === 429) {
+              ttsCooldowns.set(m.name, Date.now() + 15 * 60 * 1000);
+              continue;
+            }
+
+            if (gResp.ok) {
+              const gJson = await gResp.json();
+              let b64Audio = null;
+              if (Array.isArray(gJson.steps)) {
+                for (const step of gJson.steps) {
+                  if (step.type === 'model_output' && Array.isArray(step.content)) {
+                    for (const item of step.content) {
+                      if (item.type === 'audio' && item.data) {
+                        b64Audio = item.data;
+                      }
                     }
                   }
                 }
               }
+              if (b64Audio) {
+                const rawBuf = Buffer.from(b64Audio, 'base64');
+                wavBuffer = (rawBuf.slice(0, 4).toString('ascii') === 'RIFF') ? rawBuf : pcm24kToWav(rawBuf);
+                usedModel = m.name;
+                break;
+              }
             }
-            if (b64Audio) {
-              wavBuffer = Buffer.from(b64Audio, 'base64');
-              break;
-            }
+          } catch (_) {}
+        }
+
+        // Tier B: /v1beta/models/:generateContent AUDIO modality (24kHz PCM -> WAV)
+        if (!wavBuffer) {
+          for (const genModel of ['gemini-2.5-flash-preview-tts', 'gemini-3.1-flash-tts-preview']) {
+            const cooldownKey = `gen:${genModel}`;
+            if (Date.now() < (ttsCooldowns.get(cooldownKey) || 0)) continue;
+            try {
+              const gResp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${genModel}:generateContent?key=${encodeURIComponent(geminiKey)}`, {
+                method: 'POST',
+                signal: AbortSignal.timeout(20000),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  contents: [{ parts: [{ text: q }] }],
+                  generationConfig: {
+                    responseModalities: ['AUDIO'],
+                    speechConfig: {
+                      voiceConfig: { prebuiltVoiceConfig: { voiceName } }
+                    }
+                  }
+                })
+              });
+              if (gResp.status === 429) {
+                ttsCooldowns.set(cooldownKey, Date.now() + 15 * 60 * 1000);
+                continue;
+              }
+              if (gResp.ok) {
+                const gJson = await gResp.json();
+                const b64 = gJson?.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+                if (b64) {
+                  const rawBuf = Buffer.from(b64, 'base64');
+                  wavBuffer = (rawBuf.slice(0, 4).toString('ascii') === 'RIFF') ? rawBuf : pcm24kToWav(rawBuf);
+                  usedModel = genModel;
+                  break;
+                }
+              }
+            } catch (_) {}
           }
         }
 
         if (wavBuffer && wavBuffer.length > 100) {
-          if (ttsCache.size >= 200) {
+          if (ttsCache.size >= 250) {
             const oldestKey = ttsCache.keys().next().value;
             if (oldestKey) ttsCache.delete(oldestKey);
           }
+          const engineTag = `gemini-neural-${voiceName.toLowerCase()}-${usedModel}`;
           ttsCache.set(cacheKey, {
             buffer: wavBuffer,
             contentType: 'audio/wav',
-            engine: `gemini-3.8-neural-${voiceName.toLowerCase()}`
+            engine: engineTag
           });
           res.writeHead(200, {
             'Content-Type': 'audio/wav',
             'Content-Length': wavBuffer.length,
             'Cache-Control': 'public, max-age=86400',
             'Access-Control-Allow-Origin': '*',
-            'X-Voice-Engine': `gemini-3.8-neural-${voiceName.toLowerCase()}`
+            'X-Voice-Engine': engineTag
           });
           return res.end(wavBuffer);
         }
       } catch (_) {
-        // Fall through to stream fallback if Gemini TTS is unreachable
+        // Fall through to multi-chunk complete stream fallback if Gemini TTS is unreachable
       }
     }
 
-    const ttsUrl = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(q.slice(0, 200))}&tl=${encodeURIComponent(tl)}&client=tw-ob`;
-    https.get(ttsUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
-        'Referer': 'https://translate.google.com/'
+    // Complete multi-sentence concatenation fallback (never truncates at 200 chars!)
+    const splitForFallback = (str) => {
+      const parts = [];
+      const sentences = str.match(/[^.!?…]+[.!?…]*/g) || [str];
+      let cur = '';
+      for (const s of sentences) {
+        if ((cur + ' ' + s).trim().length <= 180) {
+          cur = (cur + ' ' + s).trim();
+        } else {
+          if (cur) parts.push(cur);
+          cur = s.trim().slice(0, 180);
+        }
       }
-    }, (ttsRes) => {
-      if (ttsRes.statusCode !== 200) {
-        res.writeHead(502);
-        return res.end('Upstream TTS status ' + ttsRes.statusCode);
+      if (cur) parts.push(cur);
+      return parts.length ? parts : [str.slice(0, 180)];
+    };
+
+    try {
+      const subParts = splitForFallback(q);
+      const mp3Buffers = [];
+      for (const part of subParts) {
+        const ttsUrl = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(part)}&tl=${encodeURIComponent(tl)}&client=tw-ob`;
+        const r = await fetch(ttsUrl, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+            'Referer': 'https://translate.google.com/'
+          }
+        });
+        if (r.ok) {
+          mp3Buffers.push(Buffer.from(await r.arrayBuffer()));
+        }
       }
-      res.writeHead(200, {
-        'Content-Type': 'audio/mpeg',
-        'Cache-Control': 'public, max-age=86400',
-        'Access-Control-Allow-Origin': '*',
-        'X-Voice-Engine': 'cloud-fallback'
-      });
-      ttsRes.pipe(res);
-    }).on('error', () => {
+      if (mp3Buffers.length > 0) {
+        const fullMp3 = Buffer.concat(mp3Buffers);
+        res.writeHead(200, {
+          'Content-Type': 'audio/mpeg',
+          'Content-Length': fullMp3.length,
+          'Cache-Control': 'public, max-age=3600',
+          'Access-Control-Allow-Origin': '*',
+          'X-Voice-Engine': 'cloud-fallback-full'
+        });
+        return res.end(fullMp3);
+      }
+      res.writeHead(502);
+      return res.end('Upstream TTS empty');
+    } catch (_) {
       if (!res.headersSent) {
         res.writeHead(502);
         res.end('Upstream TTS error');
       }
-    });
-    return;
+      return;
+    }
   }
 
   // 5b. Task & Calendar Automation Endpoints (/api/tasks, /api/tasks/ics, /api/tasks/plan)
@@ -1888,18 +2000,4 @@ graphDB.ingestTopic('Artificial intelligence').catch(() => {});
 const HOST = process.env.HOST || '0.0.0.0';
 server.listen(PORT, HOST, () => {
   console.log(`NEXUS Enterprise Engine listening safely on http://${HOST}:${PORT}`);
-  if (process.env.GEMINI_API_KEY && !process.env.NEXUS_TEST_MODE) {
-    setTimeout(async () => {
-      const warmPhrases = [
-        'Olá! É um prazer receber você aqui. Como posso ajudar você hoje?',
-        'Estou pronta e à disposição. Você pode falar comigo pelo microfone ou escrever aqui abaixo.',
-        'Olá! Estou conectada para auxiliar você com clareza e gentileza. O que vamos analisar hoje?'
-      ];
-      for (const phrase of warmPhrases) {
-        try {
-          await fetch(`http://127.0.0.1:${PORT}/api/tts?persona=aura&tl=pt-BR&q=${encodeURIComponent(phrase)}`);
-        } catch (_) {}
-      }
-    }, 1200);
-  }
 });

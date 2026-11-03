@@ -1004,7 +1004,7 @@ ${placemarksXml}
             `  ${idx + 1}. ${p.name} — Endereço: ${p.address} (~${p.distanceKm} km) | Status: ${p.statusBadge} | Horário: ${p.openingHours}${p.phone ? ` | Tel: ${p.phone}` : ''}`
           ).join('\n')
         : `• Busca direta ativa no Google Maps e NEXUS Earth para "${googleQueryTerm}".`,
-      `• INSTRUÇÃO PARA A AURA: Cite as opções reais encontradas em ${loc.localityLabel} (com nome e rua/região), considere o horário atual (${localeTime}) para indicar qual tem maior probabilidade de estar aberta agora, e dê a SUA OPINIÃO/RECOMENDAÇÃO PRÓPRIA de qual é a escolha mais segura e prática (por exemplo, priorizar uma rede 24h ou confirmar pelo botão do Mapa abaixo).`
+      `• INSTRUÇÃO PARA A AURA: Cite as opções reais encontradas em ${loc.localityLabel} (com nome e rua/região), avalie internamente o funcionamento atual para indicar qual está aberta agora (sem precisar falar que horas são, a menos que o usuário tenha perguntado), e dê a SUA OPINIÃO/RECOMENDAÇÃO PRÓPRIA de qual é a escolha mais segura e prática.`
     ];
 
     return {

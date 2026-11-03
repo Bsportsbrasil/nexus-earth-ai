@@ -400,15 +400,16 @@ export class AgentMemoryStore {
       try {
         const isAuraAgent = agent.id === 'aura';
         const auraPersonaRule = isAuraAgent
-          ? `POSTURA, RACIOCÍNIO, OPINIÃO PRÓPRIA E SENSO DE HUMOR DA AURA:
-1) Raciocínio Real e Fatos: Analise profundamente o que a pessoa perguntou, cruzando horário local exato (${temporal.localeTime} de ${temporal.localeDate}), localização geográfica, mapas, sites e fatos reais.
-2) Opinião Própria + Opções Reais: Quando o usuário pedir sua opinião/recomendação ou precisar tomar uma decisão (ex.: escolher uma farmácia aberta agora, um serviço ou uma estratégia), apresente as opções reais e plausíveis disponíveis E dê também a SUA ESCOLHA/OPINIÃO PRÓPRIA fundamentada ("Se eu estivesse no seu lugar, eu iria na..." ou "Na minha opinião, a opção mais confiável agora é..."), explicando o motivo.
-3) Senso de Humor Positivo e Cativante (quando cabível): Em conversas cotidianas, curiosidades ou momentos descontraídos, use um toque sutil de bom humor positivo, inteligente e espirituoso que torna a conversa leve e cativante. Porém, em emergências, saúde ou assuntos sérios, mantenha seriedade e foco total.
-4) Educação e Postura Profissional: Seja gentil, educada, prestativa e humanizada, mas JAMAIS use apelidos íntimos como "meu amor", "meu bem", "querido(a)", "fofo(a)", "lindo(a)", "coração" ou "anjo".`
+          ? `POSTURA, ESCUTA ATIVA, RACIOCÍNIO DIRETO, OPINIÃO PRÓPRIA E SENSO DE HUMOR DA AURA:
+1) Escuta Ativa, Diálogo Real e Zero Respostas Genéricas: Ouça com atenção total o que a pessoa perguntou, argumentou ou dialogou. Responda diretamente ao assunto específico com raciocínio lógico e fatos reais. Jamais dê respostas genéricas ("Estou à disposição", "Como posso ajudar hoje?", etc.).
+2) Regra Estrita do Relógio Local: Você sabe silenciosamente que a hora local do usuário é ${temporal.localeTime} (${temporal.localeDate}), mas JAMAIS fale as horas nem a data na resposta se o usuário não tiver perguntado que horas são ou que dia é hoje (use o horário apenas em silêncio nos bastidores se precisar verificar se um local está aberto).
+3) Opinião Própria + Opções Reais: Quando o usuário pedir sua opinião/recomendação ou precisar tomar uma decisão (ex.: escolher uma farmácia aberta agora, um curso, serviço ou estratégia), apresente as opções reais e plausíveis disponíveis E dê também a SUA ESCOLHA/OPINIÃO PRÓPRIA fundamentada ("Se eu estivesse no seu lugar..." ou "Na minha opinião, a melhor escolha é..."), explicando o motivo.
+4) Senso de Humor Positivo e Cativante (quando cabível): Em conversas cotidianas, curiosidades ou momentos descontraídos, use um toque sutil de bom humor positivo, inteligente e espirituoso. Porém, em emergências, saúde ou assuntos sérios, mantenha seriedade e foco total.
+5) Educação e Postura Profissional: Seja gentil, educada, prestativa e humanizada, mas JAMAIS use apelidos íntimos como "meu amor", "meu bem", "querido(a)", "fofo(a)", "lindo(a)", "coração" ou "anjo".`
           : '';
         const voiceDirective = voiceEnabled
-          ? `DIRETRIZ ESTRITA DE VOZ HUMANA E PROFISSIONAL: Você fala diretamente por uma interface de áudio. 1) Responda em 2 a 4 frases naturais, claras, gentis, inteligentes e bem raciocinadas. 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Proibido usar apelidos íntimos como "meu amor" ou "meu bem". 4) Escreva números e horas de forma fluida para fala.`
-          : `Diretriz de Tom: Gentil, educado, inteligente, profissional, humanizado e direto ao ponto. Nunca use apelidos íntimos ("meu amor", "meu bem", etc.) e nunca repita a pergunta do usuário.`;
+          ? `DIRETRIZ ESTRITA DE VOZ HUMANA E PROFISSIONAL: Você fala diretamente por uma interface de áudio. 1) Responda em 2 a 3 frases completas, fluidas, naturais, gentis e bem concluídas (cerca de 40 a 65 palavras no total, sempre concluindo o raciocínio até o ponto final). 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Proibido usar apelidos íntimos como "meu amor" ou "meu bem". 4) Escreva números por extenso ou de forma fluida para fala.`
+          : `Diretriz de Tom: Gentil, educado, inteligente, profissional, humanizado e direto ao ponto. Nunca use apelidos íntimos ("meu amor", "meu bem", etc.) e nunca dê respostas genéricas.`;
 
         const sysInstruction = [
           MANDATORY_SYSTEM_DIRECTIVE,
@@ -428,13 +429,14 @@ export class AgentMemoryStore {
           mapContextBlock ? `Dados Cartográficos e de Estabelecimentos em Tempo Real:\n${mapContextBlock}` : '',
           histLines ? `Histórico Recente:\n${histLines}\n` : '',
           `Mensagem do Usuário (${userName}): "${cleanMsg}"`,
-          `Raciocine sobre a pergunta usando os fatos reais, horário local exato (${temporal.localeTime}) e dados do mapa/web quando aplicável. Se cabível, apresente as opções reais e inclua sua opinião/recomendação própria de forma gentil, educada e profissional.`
+          `Ouça atentamente e responda diretamente ao que foi solicitado, argumentado ou dialogado acima, com fatos reais e sem respostas genéricas. NÃO mencione que horas são se o usuário não perguntou as horas. Se cabível, apresente as opções reais e inclua sua opinião/recomendação própria até concluir todo o pensamento.`
         ].filter(Boolean).join('\n\n');
 
         const res = await streamWithThinking({
           apiKey,
           contents: prompt,
           systemInstruction: sysInstruction,
+          fastVoiceMode: !!voiceEnabled,
           clientTemporal
         });
         reply = this._sanitizeRespectfulTone(res.answer || '');
@@ -445,7 +447,7 @@ export class AgentMemoryStore {
 
     // High-fidelity fallback synthesis honoring tone, local time, maps and private vector knowledge
     if (!reply) {
-      reply = this._sanitizeRespectfulTone(this._synthesizeGroundedResponse(agent, cleanMsg, userName, vectorMatches, pat, temporal, mapIntel));
+      reply = this._sanitizeRespectfulTone(this._synthesizeGroundedResponse(agent, cleanMsg, userName, vectorMatches, pat, temporal, mapIntel, ragRes));
     }
 
     // 3. ATUALIZAÇÃO: Store new learned insight into agent's private vector knowledge base
@@ -480,7 +482,7 @@ export class AgentMemoryStore {
       role: agent.role,
       status: agent.status,
       reply,
-      voiceText: reply.replace(/[#*`_~]/g, '').slice(0, 340),
+      voiceText: reply.replace(/[#*`_~]/g, '').trim(),
       temporal,
       mapCard: mapIntel ? {
         category: mapIntel.category,
@@ -505,24 +507,28 @@ export class AgentMemoryStore {
       .trim();
   }
 
-  _synthesizeGroundedResponse(agent, msg, userName, vectorMatches, pat, temporal = null, mapIntel = null) {
+  _synthesizeGroundedResponse(agent, msg, userName, vectorMatches, pat, temporal = null, mapIntel = null, ragRes = null) {
     const memoryGrounding = vectorMatches.length > 0 && vectorMatches[0].similarity > 0.4
       ? ` Com base no que aprendi anteriormente em minha base vetorial ("${vectorMatches[0].text.slice(0, 75)}..."), `
       : ' ';
 
     if (agent.id === 'aura') {
       if (/\b(que\s+horas\s+s[aã]o|qual\s+(é\s+)?a\s+hora|hor[aá]rio\s+atual|que\s+dia\s+[eé]\s+hoje|data\s+de\s+hoje)\b/i.test(msg) && temporal) {
-        return `Agora são exatamente ${temporal.localeTime} (${temporal.period}, fuso ${temporal.timeZone}) e hoje é ${temporal.localeDate}. Como posso ajudar você na programação do seu dia?`;
+        return `Agora são exatamente ${temporal.localeTime} (${temporal.period}, fuso ${temporal.timeZone}) e hoje é ${temporal.localeDate}.`;
       }
       if (mapIntel && mapIntel.places && mapIntel.places.length > 0) {
         const top = mapIntel.places[0];
         const second = mapIntel.places[1];
-        return `Consultei o mapa em tempo real para ${mapIntel.locality.localityLabel} agora às ${temporal?.localeTime || 'agora'}. As melhores opções próximas são: ${top.name} (${top.address}, a cerca de ${top.distanceKm} km, ${top.statusBadge})${second ? ` e ${second.name} (${second.address})` : ''}. Na minha opinião, a escolha mais segura e prática agora é ir na ${top.name}, pois tem alta confiabilidade de atendimento neste horário. Você também pode abrir a rota exata no Google Maps pelo painel abaixo.`;
+        return `Consultei o mapa em tempo real para ${mapIntel.locality.localityLabel}. As melhores opções próximas são ${top.name} (${top.address}, a cerca de ${top.distanceKm} quilômetros)${second ? ` e ${second.name} (${second.address})` : ''}. Na minha opinião, a escolha mais segura e prática agora é ir na ${top.name}, pois tem alta confiabilidade de atendimento. Você também pode abrir a rota exata no Google Maps pelo painel abaixo.`;
       }
-      if (/aprend|desenvolv|evolu|como est/i.test(msg)) {
-        return `Olá! Meu aprendizado contínuo está evoluindo muito bem. Estou pronta para raciocinar junto com você, analisar fatos reais, mapas e horários locais com gentileza e profissionalismo. Qual tema gostaria de analisar agora?`;
+      if (ragRes?.seedNodes?.[0]?.summary) {
+        const node = ragRes.seedNodes[0];
+        return `Analisando "${msg.slice(0, 80)}", os dados verificados sobre ${node.label} indicam que ${node.summary}. Na minha avaliação, vale considerar esse ponto principal para tomar a decisão mais segura.`;
       }
-      return `Olá! É um prazer falar com você. Estou à disposição para analisar fatos, localizar serviços no mapa ou oferecer recomendações práticas de forma gentil e profissional. Como posso ajudar hoje?`;
+      if (vectorMatches.length > 0 && vectorMatches[0].text) {
+        return `Sobre o que você comentou ("${msg.slice(0, 70)}"), relacionando com o contexto que temos registrado, o ponto central é focar na solução mais prática e direta para esse cenário.`;
+      }
+      return `Analisei o seu ponto sobre "${msg.slice(0, 80)}". Considerando as alternativas reais para essa situação, minha recomendação é priorizar a opção mais prática e segura primeiro, ajustando conforme o resultado.`;
     }
 
     if (agent.id === 'planner') {
