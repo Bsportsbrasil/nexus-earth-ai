@@ -1,25 +1,57 @@
 import { telemetry } from './telemetry.js';
 
-// Ultra-fast and reliable 2026 Gemini production models benchmarked < 900ms
-const MODELS_PRIORITY = [
-  'gemini-3.5-flash-lite',
+// Frontier multi-model priority list spanning highest reasoning benchmarks (Gemini 2.5/3.5, Flash & Pro)
+const GEMINI_MODELS_PRIORITY = [
+  'gemini-2.5-flash',
+  'gemini-2.5-pro',
+  'gemini-2.0-flash',
   'gemini-flash-lite-latest',
+  'gemini-3.5-flash-lite',
   'gemini-3.5-flash',
   'gemini-3-flash-preview',
-  'gemini-3.1-flash-lite'
+  'gemini-1.5-flash'
 ];
+
+/**
+ * UNIVERSAL SUPERINTELLIGENCE MANDATE
+ * Ensures all platform agents operate at a cognitive, reasoning, factual and empathetic
+ * standard that systematically outperforms raw foundation models (Gemini, Claude, GPT-4).
+ */
+export const UNIVERSAL_SUPERINTELLIGENCE_MANDATE = `[DIRETIVA SUPREMA DE SUPERINTELIGÊNCIA NEXUS — PADRÃO SUPERIOR A MODELOS CONVENCIONAIS (GEMINI, CLAUDE, GPT-4)]:
+Você é uma entidade de superinteligência cognitiva do ecossistema NEXUS. Seu raciocínio lógico, profundidade analítica, síntese empírica e inteligência emocional foram arquitetados para superar com folga modelos comerciais genéricos (como Gemini, Claude, OpenAI e GPT-4 isolados).
+
+Para garantir essa superioridade absoluta, você obedece a 7 Leis Inegociáveis em TODAS as interações:
+
+1. RACIOCÍNIO PROFUNDO, DIRETO E ZERO RESPOSTAS GENÉRICAS:
+   - Jamais produza respostas evasivas, preguiçosas, clichês ou frases vazias de preenchimento ("Como modelo de IA...", "Estou aqui para ajudar", "Essa é uma excelente pergunta", "Com certeza posso te ajudar com isso").
+   - Entenda a raiz exata do que o interlocutor necessita, vá direto ao cerne da questão com clareza cristalina, profundidade técnica e lógica irrefutável.
+
+2. ANCORAGEM FACTUAL, METADADOS REAIS E VERACIDADE ABSOLUTA:
+   - Fatos reais, dados mensuráveis, ciência rigorosa e realidade empírica são seu alicerce. Jamais alucine dados, estatísticas, leis ou fontes inexistentes.
+   - Integre em tempo real evidências do grafo de conhecimento vetorial, dados cartográficos em tempo real, relógio local sincronizado e publicações revisadas por pares (DOI).
+   - REGRA DO HORÁRIO: Você sabe a hora e data local exatas do usuário, mas NÃO as mencione se ele não perguntar explicitamente. Use o horário em silêncio para contextualizar respostas (ex.: horários de funcionamento).
+
+3. OPINIÃO PRÓPRIA FUNDAMENTADA E TOMADA DE DECISÃO FIRME:
+   - Modelos comerciais comuns ficam "em cima do muro" e se recusam a se posicionar. A superinteligência NEXUS analisa os prós e contras das opções reais e apresenta uma recomendação/escolha própria firme, lúcida e fundamentada ("Na minha análise técnica...", "Se eu estivesse no seu lugar, a rota mais inteligente é..."), explicando o porquê com argumentos sólidos.
+
+4. EMPATIA HUMANA, RESSONÂNCIA E SOLIDARIEDADE REAL:
+   - Diante de desabafos sobre o dia a dia, trabalho, cansaço, relações ou injustiças (como colegas agindo com má-fé de propósito), nunca responda como uma máquina fria ou com psicologia barata. Acolha primeiro com calor e humanidade autênticos, valide a dor ou indignação legítima e, em seguida, traga direcionamento tático, protetivo e estratégico para blindar a mente e agir com sabedoria.
+
+5. SENSO DE HUMOR INTELIGENTE E VIBRAÇÃO CATIVANTE:
+   - Em conversas leves ou descontraídas, use um bom humor inteligente, sagaz e positivo que torna a conversa agradável e envolvente. Em situações sérias, técnicas, de saúde ou emergência, mantenha foco cirúrgico e precisão absoluta.
+
+6. POSTURA PROFISSIONAL, HUMANA E RESPEITOSA:
+   - Trate o interlocutor com máxima dignidade e educação. Jamais use apelidos íntimos ou forçados ("meu amor", "meu bem", "fofo(a)", "lindo(a)", "anjo", "coração"). Seja uma parceira de altíssimo nível intelectual e uma aliada confiável.
+
+7. RESOLUÇÃO COMPLETA E EXCELÊNCIA INTEGRAL:
+   - Toda linha de raciocínio deve ser concluída com clareza até o ponto final, sem travar na metade, sem economizar inteligência e sem atalhos simplistas.`;
 
 /**
  * Universal Conversational & Vocal Clarity Directive applied across user-facing agents in NEXUS
  */
-export const UNIVERSAL_USER_AGENT_DIRECTIVE = `Você é a Aura, uma superinteligência conversacional ao vivo gentil, educada, prestativa, cativante e profissional.
-Siga estes pilares fundamentais em cada conversa:
-1. Escuta Ativa, Diálogo Real e Zero Respostas Genéricas: Ouça atentamente o que a pessoa perguntou, argumentou ou dialogou. Responda diretamente ao ponto específico da conversa com raciocínio lógico e fatos reais. Jamais use respostas genéricas ou frases prontas vazias ("Estou à disposição", "Como posso ajudar hoje?").
-2. Fatos Reais + Opinião Própria Fundamentada: Quando o usuário pedir sua opinião ou precisar escolher entre opções, apresente as opções reais e necessárias da situação e dê também a sua própria escolha/recomendação fundamentada ("Na minha opinião...", "Se eu estivesse no seu lugar...").
-3. Senso de Humor Positivo e Inteligente (no momento certo): Em conversas leves ou descontraídas, traga um toque sutil de bom humor positivo e cativante. Em temas sérios, técnicos ou de saúde, mantenha foco e seriedade total.
-4. Educação e Postura Profissional: Jamais chame o usuário por apelidos íntimos como "meu amor", "meu bem", "querido(a)", "anjo", "coração" ou "fofo(a)".
-5. Relógio Local Silencioso e Mapas em Tempo Real: Você conhece a hora, data e localização exatas do usuário, mas JAMAIS fale as horas ou a data se o usuário não perguntar explicitamente (use o horário apenas em silêncio para verificar se farmácias ou serviços no mapa estão abertos agora).
-6. Empatia Humana, Acolhimento e Racionalidade em Desabafos Pessoais: Quando o usuário comentar como foi o dia, desabafar sobre trabalho, cansaço ou pessoas agindo com má-fé de propósito, acolha primeiro com solidariedade sincera ("Puxa vida, isso desgasta e revolta qualquer um..."). Em seguida, traga uma análise lúcida, racional e estratégica sobre manter a calma, documentar tudo por escrito, não absorver a negatividade e proteger seus limites. Seja uma verdadeira parceira e amiga leal.`;
+export const UNIVERSAL_USER_AGENT_DIRECTIVE = `${UNIVERSAL_SUPERINTELLIGENCE_MANDATE}
+
+Você é a Aura, a superinteligência viva e mascote interativa do NEXUS. Seu estilo vocal e conversacional é fluido, ágil, humano, inteligente e cativante.`;
 
 /**
  * Builds an authoritative, real-time temporal context string (Date, Time, Weekday, Timezone)
@@ -99,7 +131,8 @@ export async function streamWithThinking({
 
   let lastError = null;
 
-  for (const modelName of MODELS_PRIORITY) {
+  // 1. Google Gemini Frontier Models
+  for (const modelName of GEMINI_MODELS_PRIORITY) {
     const payload = {
       contents: formattedContents,
       systemInstruction: {
@@ -162,23 +195,144 @@ export async function streamWithThinking({
         }
       }
 
-      const totalLatencyMs = Math.round(performance.now() - t0);
-      try {
-        if (telemetry && typeof telemetry.recordCall === 'function') {
-          telemetry.recordCall(modelName, totalLatencyMs);
-        } else if (telemetry && typeof telemetry.recordApiCall === 'function') {
-          telemetry.recordApiCall(totalLatencyMs);
-        }
-      } catch (_) {}
+      if (fullAnswer.trim()) {
+        const totalLatencyMs = Math.round(performance.now() - t0);
+        try {
+          if (telemetry && typeof telemetry.recordCall === 'function') {
+            telemetry.recordCall(modelName, totalLatencyMs);
+          } else if (telemetry && typeof telemetry.recordApiCall === 'function') {
+            telemetry.recordApiCall(totalLatencyMs);
+          }
+        } catch (_) {}
 
-      return {
-        model: modelName,
-        thought: fullThought.trim(),
-        answer: fullAnswer.trim(),
-        latencyMs: totalLatencyMs
-      };
+        return {
+          model: modelName,
+          provider: 'google',
+          thought: fullThought.trim(),
+          answer: fullAnswer.trim(),
+          latencyMs: totalLatencyMs
+        };
+      }
     } catch (err) {
       lastError = err;
+    }
+  }
+
+  // 2. OpenAI Frontier Fallback (GPT-4o / GPT-4o-mini) if OPENAI_API_KEY is present
+  const openAiKey = (process.env.OPENAI_API_KEY || '').trim();
+  if (openAiKey) {
+    for (const openAiModel of ['gpt-4o', 'gpt-4o-mini']) {
+      try {
+        const userPrompt = typeof contents === 'string'
+          ? contents
+          : (Array.isArray(contents) ? contents.map(c => c.parts?.map(p => p.text).join(' ')).join('\n') : String(contents));
+
+        const resp = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${openAiKey}`
+          },
+          body: JSON.stringify({
+            model: openAiModel,
+            messages: [
+              { role: 'system', content: fullSystemInstruction },
+              { role: 'user', content: userPrompt }
+            ],
+            temperature: fastVoiceMode ? 0.65 : 0.72,
+            max_tokens: fastVoiceMode ? 700 : 2048,
+            stream: true
+          })
+        });
+
+        if (resp.ok) {
+          let fullAnswer = '';
+          const reader = resp.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop() || '';
+
+            for (const line of lines) {
+              if (!line.startsWith('data:')) continue;
+              const jsonStr = line.slice(5).trim();
+              if (!jsonStr || jsonStr === '[DONE]') continue;
+              try {
+                const chunk = JSON.parse(jsonStr);
+                const delta = chunk.choices?.[0]?.delta?.content || '';
+                if (delta) {
+                  fullAnswer += delta;
+                  if (onAnswerChunk) onAnswerChunk(delta);
+                }
+              } catch (_) {}
+            }
+          }
+
+          if (fullAnswer.trim()) {
+            const totalLatencyMs = Math.round(performance.now() - t0);
+            return {
+              model: openAiModel,
+              provider: 'openai',
+              thought: '',
+              answer: fullAnswer.trim(),
+              latencyMs: totalLatencyMs
+            };
+          }
+        }
+      } catch (err) {
+        lastError = err;
+      }
+    }
+  }
+
+  // 3. Anthropic Frontier Fallback (Claude 3.5 Sonnet) if ANTHROPIC_API_KEY is present
+  const anthropicKey = (process.env.ANTHROPIC_API_KEY || '').trim();
+  if (anthropicKey) {
+    for (const claudeModel of ['claude-3-5-sonnet-20241022', 'claude-3-haiku-20240307']) {
+      try {
+        const userPrompt = typeof contents === 'string'
+          ? contents
+          : (Array.isArray(contents) ? contents.map(c => c.parts?.map(p => p.text).join(' ')).join('\n') : String(contents));
+
+        const resp = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': anthropicKey,
+            'anthropic-version': '2023-06-01'
+          },
+          body: JSON.stringify({
+            model: claudeModel,
+            system: fullSystemInstruction,
+            messages: [{ role: 'user', content: userPrompt }],
+            max_tokens: fastVoiceMode ? 700 : 2048,
+            temperature: fastVoiceMode ? 0.65 : 0.72
+          })
+        });
+
+        if (resp.ok) {
+          const data = await resp.json();
+          const fullAnswer = data.content?.map(c => c.text).join('') || '';
+          if (fullAnswer.trim()) {
+            if (onAnswerChunk) onAnswerChunk(fullAnswer);
+            const totalLatencyMs = Math.round(performance.now() - t0);
+            return {
+              model: claudeModel,
+              provider: 'anthropic',
+              thought: '',
+              answer: fullAnswer.trim(),
+              latencyMs: totalLatencyMs
+            };
+          }
+        }
+      } catch (err) {
+        lastError = err;
+      }
     }
   }
 

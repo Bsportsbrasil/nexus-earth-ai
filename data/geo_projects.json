@@ -3375,5 +3375,140 @@
         "color": "#38bdf8"
       }
     ]
+  },
+  {
+    "id": "proj_1793745461006_n4ha0",
+    "title": "Projeto Salvo via Teste",
+    "description": "",
+    "created": "2026-11-03T22:37:41.006Z",
+    "updated": "2026-11-03T22:37:41.006Z",
+    "center": {
+      "lat": -37.81365318,
+      "lon": 144.96255856,
+      "zoom": 15
+    },
+    "features": [
+      {
+        "id": "kml_1793745461004_0",
+        "type": "Point",
+        "name": "Vértice Central",
+        "description": "Ponto de referência KML",
+        "coordinates": [
+          144.96255856,
+          -37.81365318,
+          25
+        ],
+        "color": "#00f5ff"
+      },
+      {
+        "id": "kml_line_1793745461004_1",
+        "type": "LineString",
+        "name": "Trajeto de Teste",
+        "description": "",
+        "coordinates": [
+          [
+            144.96,
+            -37.815,
+            0
+          ],
+          [
+            144.965,
+            -37.816,
+            0
+          ]
+        ],
+        "color": "#38bdf8"
+      }
+    ]
+  },
+  {
+    "id": "proj_1793746464581_eq8vl",
+    "title": "Projeto Salvo via Teste",
+    "description": "",
+    "created": "2026-11-03T22:54:24.581Z",
+    "updated": "2026-11-03T22:54:24.581Z",
+    "center": {
+      "lat": -37.81365318,
+      "lon": 144.96255856,
+      "zoom": 15
+    },
+    "features": [
+      {
+        "id": "kml_1793746464580_0",
+        "type": "Point",
+        "name": "Vértice Central",
+        "description": "Ponto de referência KML",
+        "coordinates": [
+          144.96255856,
+          -37.81365318,
+          25
+        ],
+        "color": "#00f5ff"
+      },
+      {
+        "id": "kml_line_1793746464580_1",
+        "type": "LineString",
+        "name": "Trajeto de Teste",
+        "description": "",
+        "coordinates": [
+          [
+            144.96,
+            -37.815,
+            0
+          ],
+          [
+            144.965,
+            -37.816,
+            0
+          ]
+        ],
+        "color": "#38bdf8"
+      }
+    ]
+  },
+  {
+    "id": "proj_1793746569914_kfgcc",
+    "title": "Projeto Salvo via Teste",
+    "description": "",
+    "created": "2026-11-03T22:56:09.914Z",
+    "updated": "2026-11-03T22:56:09.914Z",
+    "center": {
+      "lat": -37.81365318,
+      "lon": 144.96255856,
+      "zoom": 15
+    },
+    "features": [
+      {
+        "id": "kml_1793746569913_0",
+        "type": "Point",
+        "name": "Vértice Central",
+        "description": "Ponto de referência KML",
+        "coordinates": [
+          144.96255856,
+          -37.81365318,
+          25
+        ],
+        "color": "#00f5ff"
+      },
+      {
+        "id": "kml_line_1793746569913_1",
+        "type": "LineString",
+        "name": "Trajeto de Teste",
+        "description": "",
+        "coordinates": [
+          [
+            144.96,
+            -37.815,
+            0
+          ],
+          [
+            144.965,
+            -37.816,
+            0
+          ]
+        ],
+        "color": "#38bdf8"
+      }
+    ]
   }
 ]

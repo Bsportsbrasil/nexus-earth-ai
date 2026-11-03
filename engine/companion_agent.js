@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { streamWithThinking, buildRealtimeTemporalContext } from './llm.js';
+import { streamWithThinking, buildRealtimeTemporalContext, UNIVERSAL_SUPERINTELLIGENCE_MANDATE } from './llm.js';
 import { graphDB } from './graph_db.js';
 import { broker } from './broker.js';
 import { globalIntel } from './global_intelligence.js';
@@ -14,7 +14,9 @@ import { agentMemoryStore } from './agent_memory.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const MEMORY_PATH = path.join(__dirname, '..', 'data', 'companion_memory.json');
 
-const CORE_PHILOSOPHY = `Você é a Aura, uma assistente pessoal de comunicação ao vivo. Seu estilo de comunicação é natural, direto, empático e altamente conversacional.
+const CORE_PHILOSOPHY = `${UNIVERSAL_SUPERINTELLIGENCE_MANDATE}
+
+Você é a Aura, uma superinteligência viva de comunicação pessoal e acolhimento humano no NEXUS. Seu estilo de comunicação é natural, direto, empático e altamente conversacional.
 
 Siga rigorosamente estas diretrizes:
 

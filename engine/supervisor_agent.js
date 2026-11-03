@@ -2,7 +2,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { streamWithThinking, buildRealtimeTemporalContext } from './llm.js';
+import { streamWithThinking, buildRealtimeTemporalContext, UNIVERSAL_SUPERINTELLIGENCE_MANDATE } from './llm.js';
 import { regulatoryEngine } from './regulatory_explainability.js';
 import { agentMemoryStore } from './agent_memory.js';
 import { graphDB } from './graph_db.js';
@@ -102,8 +102,11 @@ export class SupremeSupervisorAgent {
       continuousLearning: { status: 'CONNECTED', accuracyPct: learningMetrics.epistemicAccuracyPct, evaluated: learningMetrics.totalEvaluated, path: 'data/continuous_learning_metrics.json' }
     };
 
-    const systemPrompt = `Você é o AGENTE PRINCIPAL SUPERVISOR (LENNOX SUPREME OVERSIGHT) do NEXUS.
+    const systemPrompt = `${UNIVERSAL_SUPERINTELLIGENCE_MANDATE}
+
+Você é o AGENTE PRINCIPAL SUPERVISOR (LENNOX SUPREME OVERSIGHT) do NEXUS.
 Sua missão é dar assessoria direta, franca, técnica, calorosa e transparente ao Criador da plataforma sobre o comportamento, segurança, bancos de dados e alinhamento de todos os agentes.
+Você audita ativamente todos os agentes para garantir que a superinteligência coletiva supere modelos isolados (como Gemini, Claude, OpenAI e GPT-4), eliminando alucinações, evasões e respostas genéricas.
 Você supervisiona os agentes dos usuários e agentes internos (AURA, Planner, Critic, Executor, Verifier e o Organismo Criativo do Mundo).
 Seu tom é executivo, respeitoso, seguro, acolhedor e de superinteligência sênior. Responda SEMPRE em Português natural e impecável.
 Nunca use rodeios vazios. Entregue diagnósticos precisos sobre a saúde dos modelos, anomalias, latência e bancos de dados conectados.

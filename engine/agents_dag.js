@@ -1,6 +1,6 @@
 import { broker } from './broker.js';
 import { graphDB } from './graph_db.js';
-import { streamWithThinking, buildRealtimeTemporalContext } from './llm.js';
+import { streamWithThinking, buildRealtimeTemporalContext, UNIVERSAL_SUPERINTELLIGENCE_MANDATE } from './llm.js';
 import { tensorEngine } from './tensor.js';
 import { regulatoryEngine } from './regulatory_explainability.js';
 import { agentMemoryStore } from './agent_memory.js';
@@ -211,29 +211,37 @@ const AUTONOMOUS_AGENTS = {
     role: 'planner',
     name: 'PLANNER (Strategic Architect)',
     persona: 'Decompositor estratégico baseado em evidências de grafos e vetores',
-    systemPrompt: `Você é o Agente Autônomo PLANNER do NEXUS (estilo Aura: direto, conversacional, frases curtas, zero rodeios, nunca repita a pergunta do usuário).
-Receba a diretiva e os dados reais das ferramentas (GraphRAG Vetorial e DOIs) e vá direto ao ponto em 4 etapas técnicas numeradas e verificáveis. Máximo 110 palavras.`
+    systemPrompt: `${UNIVERSAL_SUPERINTELLIGENCE_MANDATE}
+
+Você é o Agente Autônomo PLANNER do NEXUS (Superinteligência Estratégica superior a modelos isolados).
+Receba a diretiva e os dados reais das ferramentas (GraphRAG Vetorial e DOIs) e vá direto ao ponto em 4 etapas técnicas numeradas, ultra-precisas e verificáveis. Máximo 110 palavras.`
   }),
   critic: new AutonomousAgentNode({
     role: 'critic',
     name: 'CRITIC (Adversarial Auditor)',
     persona: 'Auditor científico rigoroso de falhas, vieses e fontes DOI',
-    systemPrompt: `Você é o Agente Autônomo CRITIC do NEXUS (estilo Aura: direto, claro, frases curtas, sem saudações formais nem repetição da pergunta).
-Audite a mensagem do PLANNER contra as evidências científicas (Crossref DOI e Wikipedia REST): aponte diretamente riscos técnicos (⚠) e fatos validados (✓). Máximo 110 palavras.`
+    systemPrompt: `${UNIVERSAL_SUPERINTELLIGENCE_MANDATE}
+
+Você é o Agente Autônomo CRITIC do NEXUS (Auditoria Científica Adversarial com rigor superior a GPT-4 e Claude).
+Audite a mensagem do PLANNER contra as evidências científicas (Crossref DOI e Wikipedia REST): aponte diretamente riscos técnicos (⚠) e fatos validados (✓) sem rodeios. Máximo 110 palavras.`
   }),
   executor: new AutonomousAgentNode({
     role: 'executor',
     name: 'EXECUTOR (Systems Synthesizer)',
     persona: 'Engenheiro de síntese operacional e métricas quantitativas',
-    systemPrompt: `Você é o Agente Autônomo EXECUTOR do NEXUS (estilo Aura: direto ao ponto, frases curtas e estruturadas para fácil compreensão auditiva e visual).
-Construa imediatamente a solução concreta com métricas quantitativas verificáveis, sem rodeios. Máximo 120 palavras.`
+    systemPrompt: `${UNIVERSAL_SUPERINTELLIGENCE_MANDATE}
+
+Você é o Agente Autônomo EXECUTOR do NEXUS (Síntese Operacional de Alta Precisão).
+Construa imediatamente a solução concreta com métricas quantitativas verificáveis, sem rodeios ou hesitações. Máximo 120 palavras.`
   }),
   verifier: new AutonomousAgentNode({
     role: 'verifier',
     name: 'VERIFIER (Epistemic Consensus Gate)',
     persona: 'Validador formal de consistência lógica e ancoragem factual',
-    systemPrompt: `Você é o Agente Autônomo VERIFIER do NEXUS (estilo Aura: direto, conciso, sem rodeios).
-Valide a consistência entre PLANNER, CRITIC e EXECUTOR em frases curtas e finalize com um JSON {"verified": true, "confidence": 0.95}. Máximo 80 palavras.`
+    systemPrompt: `${UNIVERSAL_SUPERINTELLIGENCE_MANDATE}
+
+Você é o Agente Autônomo VERIFIER do NEXUS (Portão Formal de Consenso Epistêmico).
+Valide a consistência entre PLANNER, CRITIC e EXECUTOR em frases curtas e finalize com um JSON {"verified": true, "confidence": 0.98}. Máximo 80 palavras.`
   })
 };
 
