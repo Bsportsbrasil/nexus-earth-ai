@@ -935,15 +935,117 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 5a-3. Cloud Neural Audio TTS Proxy (/api/tts) — Eliminates 100% of Local Desktop SAPI Robotic Voices
+  // 5a-3. Expressive Gemini 3.8 Neural Audio TTS Proxy (/api/tts) — Sweet, Cute, Gentle & Human Voice (Leda)
   if (pathname === '/api/tts' && req.method === 'GET') {
-    const q = (parsedUrl.searchParams.get('q') || '').trim().slice(0, 200);
+    const q = (parsedUrl.searchParams.get('q') || '').trim().slice(0, 600);
     const tl = (parsedUrl.searchParams.get('tl') || 'pt-BR').trim();
+    const persona = (parsedUrl.searchParams.get('persona') || 'aura').trim().toLowerCase();
     if (!q) {
       res.writeHead(400);
       return res.end('Missing q');
     }
-    const ttsUrl = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(q)}&tl=${encodeURIComponent(tl)}&client=tw-ob`;
+
+    const cacheKey = `${persona}:${tl}:${q}`;
+    if (!globalThis.__nexusTtsCache) {
+      globalThis.__nexusTtsCache = new Map();
+    }
+    const ttsCache = globalThis.__nexusTtsCache;
+
+    if (ttsCache.has(cacheKey)) {
+      const cached = ttsCache.get(cacheKey);
+      res.writeHead(200, {
+        'Content-Type': cached.contentType,
+        'Content-Length': cached.buffer.length,
+        'Cache-Control': 'public, max-age=86400',
+        'Access-Control-Allow-Origin': '*',
+        'X-Voice-Engine': cached.engine
+      });
+      return res.end(cached.buffer);
+    }
+
+    const geminiKey = (process.env.GEMINI_API_KEY || '').trim();
+    if (geminiKey) {
+      const isSupervisor = persona === 'supervisor';
+      const voiceName = isSupervisor ? 'Charon' : 'Leda';
+      const voiceStyle = isSupervisor
+        ? 'calm, warm, natural, empathetic and clear conversational male voice'
+        : 'sweet, cute, gentle, warm, soft, friendly and affectionate young female voice';
+
+      try {
+        let wavBuffer = null;
+        for (const ttsModel of ['gemini-3.8-flash-lite-tts', 'gemini-3.8-flash-tts']) {
+          const gResp = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
+            method: 'POST',
+            headers: {
+              'x-goog-api-key': geminiKey,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              model: ttsModel,
+              input: [{
+                type: 'user_input',
+                content: [{
+                  type: 'text',
+                  text: q,
+                  annotations: [{
+                    type: 'speech_metadata',
+                    style: voiceStyle
+                  }]
+                }]
+              }],
+              response_format: { type: 'audio' },
+              generation_config: {
+                speech_config: [{ voice: voiceName }]
+              }
+            })
+          });
+
+          if (gResp.ok) {
+            const gJson = await gResp.json();
+            let b64Audio = null;
+            if (Array.isArray(gJson.steps)) {
+              for (const step of gJson.steps) {
+                if (step.type === 'model_output' && Array.isArray(step.content)) {
+                  for (const item of step.content) {
+                    if (item.type === 'audio' && item.data) {
+                      b64Audio = item.data;
+                    }
+                  }
+                }
+              }
+            }
+            if (b64Audio) {
+              wavBuffer = Buffer.from(b64Audio, 'base64');
+              break;
+            }
+          }
+        }
+
+        if (wavBuffer && wavBuffer.length > 100) {
+          if (ttsCache.size >= 200) {
+            const oldestKey = ttsCache.keys().next().value;
+            if (oldestKey) ttsCache.delete(oldestKey);
+          }
+          ttsCache.set(cacheKey, {
+            buffer: wavBuffer,
+            contentType: 'audio/wav',
+            engine: `gemini-3.8-neural-${voiceName.toLowerCase()}`
+          });
+          res.writeHead(200, {
+            'Content-Type': 'audio/wav',
+            'Content-Length': wavBuffer.length,
+            'Cache-Control': 'public, max-age=86400',
+            'Access-Control-Allow-Origin': '*',
+            'X-Voice-Engine': `gemini-3.8-neural-${voiceName.toLowerCase()}`
+          });
+          return res.end(wavBuffer);
+        }
+      } catch (_) {
+        // Fall through to stream fallback if Gemini TTS is unreachable
+      }
+    }
+
+    const ttsUrl = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(q.slice(0, 200))}&tl=${encodeURIComponent(tl)}&client=tw-ob`;
     https.get(ttsUrl, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
@@ -957,7 +1059,8 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(200, {
         'Content-Type': 'audio/mpeg',
         'Cache-Control': 'public, max-age=86400',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'X-Voice-Engine': 'cloud-fallback'
       });
       ttsRes.pipe(res);
     }).on('error', () => {
@@ -1780,4 +1883,18 @@ graphDB.ingestTopic('Artificial intelligence').catch(() => {});
 const HOST = process.env.HOST || '0.0.0.0';
 server.listen(PORT, HOST, () => {
   console.log(`NEXUS Enterprise Engine listening safely on http://${HOST}:${PORT}`);
+  if (process.env.GEMINI_API_KEY && !process.env.NEXUS_TEST_MODE) {
+    setTimeout(async () => {
+      const warmPhrases = [
+        'Oii! Que alegria ter você aqui pertinho... Como posso deixar o seu dia mais leve e especial agora?',
+        'Estou aqui prontinha e feliz em te ver! Pode falar comigo com calma ou escrever aqui embaixo.',
+        'Adoro a nossa companhia! Me conta... o que vamos descobrir juntos hoje?'
+      ];
+      for (const phrase of warmPhrases) {
+        try {
+          await fetch(`http://127.0.0.1:${PORT}/api/tts?persona=aura&tl=pt-BR&q=${encodeURIComponent(phrase)}`);
+        } catch (_) {}
+      }
+    }, 1200);
+  }
 });

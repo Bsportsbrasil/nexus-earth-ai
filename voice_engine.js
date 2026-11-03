@@ -75,8 +75,8 @@ const VoiceEngine = (function () {
   function isTrueNeuralVoice(voice) {
     if (!voice || !voice.name) return false;
     const name = voice.name;
-    if (/desktop|sapi|compact|espeak/i.test(name)) return false;
-    return /natural|neural|online|wavenet|studio|siri|premium|enhanced|google\s+portugu|google\s+us|google\s+espa/i.test(name);
+    if (/desktop|sapi|compact|espeak|google\s+portugu|google\s+us|google\s+espa/i.test(name)) return false;
+    return /natural|neural|online|wavenet|studio|siri|premium|enhanced/i.test(name);
   }
 
   /**
@@ -199,64 +199,64 @@ const VoiceEngine = (function () {
   }
 
   /**
-   * Splits utterance into semantic breath-groups (< 155 chars) for smooth streaming & natural pauses
+   * Splits utterance into natural conversational turns (up to 320 chars) so Gemini 3.8 Neural TTS
+   * synthesizes whole multi-sentence expressions with unified human prosody and emotional warmth.
    */
   function splitIntoBreathGroups(text) {
     if (!text) return [];
-    const rawChunks = text.match(/[^.!?…]+[.!?…]*/g) || [text];
-    const result = [];
+    if (text.length <= 320) return [text];
 
-    for (const chunk of rawChunks) {
-      const trimmed = chunk.trim();
+    const rawSentences = text.match(/[^.!?…]+[.!?…]*/g) || [text];
+    const result = [];
+    let currentTurn = '';
+
+    for (const sentence of rawSentences) {
+      const trimmed = sentence.trim();
       if (!trimmed) continue;
-      if (trimmed.length > 155) {
-        const subClauses = trimmed.match(/[^,;:]+\s*[,;:]*/g) || [trimmed];
-        let acc = '';
-        for (const sc of subClauses) {
-          if ((acc + ' ' + sc).trim().length <= 155) {
-            acc = (acc + ' ' + sc).trim();
-          } else {
-            if (acc) result.push(acc);
-            acc = sc.trim();
-          }
-        }
-        if (acc) result.push(acc);
+      if ((currentTurn + ' ' + trimmed).trim().length <= 320) {
+        currentTurn = (currentTurn + ' ' + trimmed).trim();
       } else {
-        result.push(trimmed);
+        if (currentTurn) result.push(currentTurn);
+        if (trimmed.length > 320) {
+          const subClauses = trimmed.match(/[^,;:]+\s*[,;:]*/g) || [trimmed];
+          let acc = '';
+          for (const sc of subClauses) {
+            if ((acc + ' ' + sc).trim().length <= 320) {
+              acc = (acc + ' ' + sc).trim();
+            } else {
+              if (acc) result.push(acc);
+              acc = sc.trim();
+            }
+          }
+          currentTurn = acc;
+        } else {
+          currentTurn = trimmed;
+        }
       }
     }
+    if (currentTurn) result.push(currentTurn);
     return result.length ? result : [text];
   }
 
   /**
-   * Plays text using the Cloud Neural Audio Stream (/api/tts) with next-chunk prebuffering
-   * and Sweet/Cute Acoustic Timbre Shaping (pitch-preserved formant brightness via preservesPitch = false).
-   * Falls back to browser SpeechSynthesis ONLY if offline.
+   * Plays text using the Expressive Gemini 3.8 Neural Audio Stream (/api/tts, voice 'Leda')
+   * with next-chunk prebuffering. Falls back to browser SpeechSynthesis ONLY if offline.
    */
   function playCloudNeuralChunks(chunks, bcp47, rate, persona, onChunk, onDone, resolve, fallbackFn) {
     let idx = 0;
     let preloadedAudio = null;
 
     function buildAudioUrl(phrase) {
-      return `/api/tts?tl=${encodeURIComponent(bcp47)}&q=${encodeURIComponent(phrase)}`;
+      return `/api/tts?persona=${encodeURIComponent(persona || 'aura')}&tl=${encodeURIComponent(bcp47)}&q=${encodeURIComponent(phrase)}`;
     }
 
-    function applyCuteGentleTimbre(audioEl, phrase) {
-      const isAura = !persona || persona === 'aura';
-      if (isAura) {
-        // Disable pitch preservation so a subtle 1.12x speed increase raises vocal pitch (+2 semitones)
-        // giving AURA a sweet, cute, youthful and gentle voice without sounding rushed!
-        if ('preservesPitch' in audioEl) audioEl.preservesPitch = false;
-        if ('mozPreservesPitch' in audioEl) audioEl.mozPreservesPitch = false;
-        if ('webkitPreservesPitch' in audioEl) audioEl.webkitPreservesPitch = false;
-
-        let targetRate = 1.12;
-        if (phrase && phrase.endsWith('?')) targetRate = 1.15; // extra cute inquisitive lift on questions
-        else if (phrase && (phrase.endsWith('...') || phrase.endsWith('…'))) targetRate = 1.08; // gentle thoughtful warmth
-        audioEl.playbackRate = targetRate;
-      } else {
-        audioEl.playbackRate = Math.min(1.15, Math.max(0.95, rate || 1.02));
-      }
+    function applyPureStudioTimbre(audioEl) {
+      // Gemini 3.8 Neural TTS (Leda) natively generates a sweet, cute, gentle and warm 24kHz voice.
+      // Keep preservesPitch = true and natural 1.0x rate so zero time-stretch artifacts occur.
+      if ('preservesPitch' in audioEl) audioEl.preservesPitch = true;
+      if ('mozPreservesPitch' in audioEl) audioEl.mozPreservesPitch = true;
+      if ('webkitPreservesPitch' in audioEl) audioEl.webkitPreservesPitch = true;
+      audioEl.playbackRate = 1.0;
     }
 
     function playNext() {
@@ -279,7 +279,7 @@ const VoiceEngine = (function () {
 
       const audio = preloadedAudio || new Audio(buildAudioUrl(currentPhrase));
       preloadedAudio = null;
-      applyCuteGentleTimbre(audio, currentPhrase);
+      applyPureStudioTimbre(audio);
       activeAudioElement = audio;
 
       // Preload next chunk in background so transition has zero network lag
@@ -300,7 +300,7 @@ const VoiceEngine = (function () {
           resolve();
           return;
         }
-        const pauseMs = currentPhrase.endsWith('...') ? 150 : 50;
+        const pauseMs = currentPhrase.endsWith('...') ? 120 : 40;
         setTimeout(playNext, pauseMs);
       };
 
@@ -327,8 +327,9 @@ const VoiceEngine = (function () {
   }
 
   /**
-   * Speaks utterance with humanized breathing cadence, optimal 1.02x rate and natural prosody contour.
-   * Automatically uses True Cloud Neural Audio whenever the local OS only offers robotic SAPI voices.
+   * Speaks utterance using Expressive Gemini 3.8 Neural TTS (/api/tts — voice 'Leda' for AURA:
+   * sweet, cute, gentle, warm & affectionate human female voice).
+   * Falls back to local browser SpeechSynthesis only if completely offline.
    */
   function speak(text, options = {}) {
     const {
@@ -337,8 +338,8 @@ const VoiceEngine = (function () {
       onStart = null,
       onDone = null,
       onChunk = null,
-      rate = 1.02,
-      pitch = 1.01
+      rate = 1.0,
+      pitch = 1.04
     } = options;
 
     stop();
@@ -353,14 +354,13 @@ const VoiceEngine = (function () {
     }
 
     const bestLocalVoice = pickBestVoice(persona, activeLang);
-    const hasLocalNeural = isTrueNeuralVoice(bestLocalVoice);
     const chunks = splitIntoBreathGroups(clean);
     isSpeaking = true;
 
     if (onStart) {
       onStart({
         totalChunks: chunks.length,
-        voiceName: hasLocalNeural ? bestLocalVoice.name : `NEXUS Cloud Neural (${bcp47})`,
+        voiceName: `Gemini 3.8 Neural (${persona === 'supervisor' ? 'Charon' : 'Leda - Doce & Gentil'})`,
         lang: bcp47
       });
     }
@@ -396,20 +396,8 @@ const VoiceEngine = (function () {
           u.lang = bestLocalVoice?.lang || bcp47;
           if (bestLocalVoice) u.voice = bestLocalVoice;
 
-          const isAuraPersona = !persona || persona === 'aura';
-          let phraseRate = isAuraPersona ? Math.max(rate, 1.04) : rate;
-          let phrasePitch = isAuraPersona ? Math.max(pitch, 1.16) : pitch; // sweet, cute & gentle vocal timbre
-
-          if (phrase.endsWith('?')) {
-            phrasePitch = Math.min(1.26, phrasePitch * 1.06);
-          } else if (phrase.endsWith('...')) {
-            phraseRate = Math.max(0.96, phraseRate * 0.96);
-          } else if (phrase.endsWith('.')) {
-            phraseRate = Math.max(0.98, phraseRate * 0.98);
-          }
-
-          u.rate = phraseRate;
-          u.pitch = phrasePitch;
+          u.rate = rate;
+          u.pitch = pitch;
           u.volume = 1.0;
           activeUtterance = u;
 
@@ -418,10 +406,7 @@ const VoiceEngine = (function () {
           };
 
           u.onend = () => {
-            let pauseMs = 65;
-            if (phrase.endsWith('...') || phrase.endsWith('…')) pauseMs = 200;
-            else if (phrase.endsWith('.') || phrase.endsWith('!') || phrase.endsWith('?')) pauseMs = 110;
-            setTimeout(speakNextLocal, pauseMs);
+            setTimeout(speakNextLocal, 75);
           };
 
           u.onerror = (e) => {
@@ -439,13 +424,9 @@ const VoiceEngine = (function () {
         speakNextLocal();
       }
 
-      // If the user's browser has a true Online Neural Voice (e.g. Edge Francisca Natural), use it;
-      // otherwise, stream real 24kHz Cloud Neural Audio via /api/tts so Chrome/Windows NEVER sounds robotic!
-      if (hasLocalNeural) {
-        speakLocalBrowserFallback();
-      } else {
-        playCloudNeuralChunks(chunks, bcp47, rate, persona, onChunk, onDone, resolve, speakLocalBrowserFallback);
-      }
+      // Always prioritize Expressive Gemini 3.8 Neural Audio (/api/tts — Leda) for a genuinely human,
+      // sweet, cute and gentle voice on every device and browser!
+      playCloudNeuralChunks(chunks, bcp47, rate, persona, onChunk, onDone, resolve, speakLocalBrowserFallback);
     });
   }
 
