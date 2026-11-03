@@ -142,12 +142,15 @@ export class ContinuousLearningValidator {
   }
 
   /* --- Epistemic Evaluation Gate --- */
-  evaluateAssertion({ statement, agentId = 'AURA_AGENT', category = 'GENERAL_LEARNING', spatialPoint = null }) {
-    this.totalEvaluated++;
+  evaluateAssertion({ statement, agentId = 'AURA_AGENT', category = 'GENERAL_LEARNING', spatialPoint = null, isDiagnosticTest = false }) {
+    const isSyntheticTest = isDiagnosticTest || agentId === 'HALLUCINATING_TESTER';
+    if (!isSyntheticTest) {
+      this.totalEvaluated++;
+    }
     const cleanText = String(statement || '').trim();
 
     if (cleanText.length < 5) {
-      this.totalBlocked++;
+      if (!isSyntheticTest) this.totalBlocked++;
       return {
         verdict: 'REJECTED_EMPTY',
         confidenceScore: 0,
@@ -175,7 +178,9 @@ export class ContinuousLearningValidator {
       entropy -= p * Math.log2(p);
     }
     entropy = Number(entropy.toFixed(2));
-    this.averageEntropy = (this.averageEntropy * 0.95) + (entropy * 0.05);
+    if (!isSyntheticTest) {
+      this.averageEntropy = (this.averageEntropy * 0.95) + (entropy * 0.05);
+    }
 
     // 3. Verification Score & Determination
     let confidenceScore = 0.95;
@@ -186,14 +191,14 @@ export class ContinuousLearningValidator {
       confidenceScore = 0.25;
       verdict = 'REJECTED_HALLUCINATION';
       rejectionReason = 'Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).';
-      this.totalBlocked++;
+      if (!isSyntheticTest) this.totalBlocked++;
     } else if (entropy > 5.2) {
       confidenceScore = 0.45;
       verdict = 'REJECTED_HIGH_ENTROPY';
       rejectionReason = 'Entropia lexical anômala indicativa de alucinação sintética desordenada.';
-      this.totalBlocked++;
+      if (!isSyntheticTest) this.totalBlocked++;
     } else {
-      this.totalApproved++;
+      if (!isSyntheticTest) this.totalApproved++;
       
       // Auto-commit approved knowledge into the Spatial RAG Vector Database!
       try {
@@ -225,29 +230,31 @@ export class ContinuousLearningValidator {
       timestamp: new Date().toISOString()
     };
 
-    this.history.unshift(eventRecord);
-    if (this.history.length > 150) this.history.pop();
+    if (!isSyntheticTest) {
+      this.history.unshift(eventRecord);
+      if (this.history.length > 150) this.history.pop();
 
-    // Update learning curve today's datapoint
-    const today = new Date().toISOString().split('T')[0];
-    let todayPoint = this.learningCurve.find(p => p.date === today);
-    if (!todayPoint) {
-      todayPoint = {
-        date: today,
-        accuracy: Number(((this.totalApproved / this.totalEvaluated) * 100).toFixed(1)),
-        totalKnowledge: this.totalApproved,
-        hallucinationsBlocked: this.totalBlocked,
-        entropy: Number(this.averageEntropy.toFixed(2))
-      };
-      this.learningCurve.push(todayPoint);
-    } else {
-      todayPoint.accuracy = Number(((this.totalApproved / this.totalEvaluated) * 100).toFixed(1));
-      todayPoint.totalKnowledge = this.totalApproved;
-      todayPoint.hallucinationsBlocked = this.totalBlocked;
-      todayPoint.entropy = Number(this.averageEntropy.toFixed(2));
+      // Update learning curve today's datapoint
+      const today = new Date().toISOString().split('T')[0];
+      let todayPoint = this.learningCurve.find(p => p.date === today);
+      if (!todayPoint) {
+        todayPoint = {
+          date: today,
+          accuracy: Number(((this.totalApproved / this.totalEvaluated) * 100).toFixed(1)),
+          totalKnowledge: this.totalApproved,
+          hallucinationsBlocked: this.totalBlocked,
+          entropy: Number(this.averageEntropy.toFixed(2))
+        };
+        this.learningCurve.push(todayPoint);
+      } else {
+        todayPoint.accuracy = Number(((this.totalApproved / this.totalEvaluated) * 100).toFixed(1));
+        todayPoint.totalKnowledge = this.totalApproved;
+        todayPoint.hallucinationsBlocked = this.totalBlocked;
+        todayPoint.entropy = Number(this.averageEntropy.toFixed(2));
+      }
+
+      this._saveState();
     }
-
-    this._saveState();
 
     return {
       ok: verdict === 'APPROVED_VERIFIED_KNOWLEDGE',

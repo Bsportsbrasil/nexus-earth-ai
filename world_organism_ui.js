@@ -514,11 +514,18 @@ const WorldOrganismUI = (function () {
       }
     }
 
+    // Barge-In: Immediately stop ongoing TTS when user activates mic
+    if (window.VoiceEngine) window.VoiceEngine.stop();
+    else if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
     if (isListening) {
       recognizer.stop();
       isListening = false;
     } else {
       try {
+        if (window.VoiceEngine && window.VoiceEngine.getActiveBcp47) {
+          recognizer.lang = window.VoiceEngine.getActiveBcp47();
+        }
         recognizer.start();
         isListening = true;
       } catch (e) {
@@ -547,7 +554,7 @@ const WorldOrganismUI = (function () {
   function speakOrganismReply(text) {
     if (!ttsEnabled) return;
     if (window.VoiceEngine) {
-      VoiceEngine.speak(text, { persona: 'neutral', rate: 1.0, pitch: 0.98 });
+      VoiceEngine.speak(text, { persona: 'aura', rate: 1.02, pitch: 1.01 });
       return;
     }
     if (!('speechSynthesis' in window)) return;

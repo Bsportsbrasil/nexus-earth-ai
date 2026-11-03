@@ -450,6 +450,9 @@ async function runTests() {
   assert.equal(purgeRes.status, 'MEMORY_PURGED_SUCCESSFULLY', 'Purge memory failed');
   assert.equal((agentMemoryStore.vectorStores.get('planner') || []).length, 0, 'Planner vectors not wiped to zero');
   assert.ok((agentMemoryStore.vectorStores.get('aura') || []).length > 0, 'Aura vectors should remain intact after Planner purge (isolated deletion)');
+  // Restore baseline operational knowledge for Planner after purge test
+  agentMemoryStore.addAgentVectorMemory('planner', 'Decomposição em 4 etapas objetivas: Entidades, 1-Hop Subgrafo, Entropia H(a) e Auditoria.', 'workflow_rule', { initialSeed: true });
+  agentMemoryStore.addAgentVectorMemory('planner', 'Prioridade máxima em planejamento estruturado com validação cruzada nos grafos de conhecimento.', 'architecture_rule', { initialSeed: true });
 
   // Test Custom Agent Creation & Deletion
   const customAgent = agentMemoryStore.createCustomAgent({

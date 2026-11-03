@@ -1552,7 +1552,7 @@ html, body {
               <div class="dag-node-name">
                 <span>📐</span> 1. PLANNER (Arquiteto)
               </div>
-              <span class="hud-badge cyan" id="dag-step-badge-planner">QUEUED</span>
+              <span class="hud-badge cyan" id="dag-step-badge-planner">NA FILA</span>
             </div>
             <div class="dag-node-output" id="dag-step-out-planner">Aguardando disparo da tarefa...</div>
           </div>
@@ -1564,7 +1564,7 @@ html, body {
               <div class="dag-node-name">
                 <span>⚖️</span> 2. CRITIC (Auditor)
               </div>
-              <span class="hud-badge purple" id="dag-step-badge-critic">QUEUED</span>
+              <span class="hud-badge purple" id="dag-step-badge-critic">NA FILA</span>
             </div>
             <div class="dag-node-output" id="dag-step-out-critic">Aguardando auditoria epistêmica...</div>
           </div>
@@ -1576,7 +1576,7 @@ html, body {
               <div class="dag-node-name">
                 <span>⚙️</span> 3. EXECUTOR (Sintetizador)
               </div>
-              <span class="hud-badge emerald" id="dag-step-badge-executor">QUEUED</span>
+              <span class="hud-badge emerald" id="dag-step-badge-executor">NA FILA</span>
             </div>
             <div class="dag-node-output" id="dag-step-out-executor">Aguardando síntese operacional...</div>
           </div>
@@ -1588,7 +1588,7 @@ html, body {
               <div class="dag-node-name">
                 <span>🛡️</span> 4. VERIFIER (Portão de Consenso)
               </div>
-              <span class="hud-badge amber" id="dag-step-badge-verifier">QUEUED</span>
+              <span class="hud-badge amber" id="dag-step-badge-verifier">NA FILA</span>
             </div>
             <div class="dag-node-output" id="dag-step-out-verifier">Aguardando convergência de consenso...</div>
           </div>
@@ -1715,15 +1715,39 @@ html, body {
           <p class="card-desc-hud" style="margin-top: 6px;">
             Tradução dinâmica completa da interface, páginas e respostas do ecossistema.
           </p>
-          <div style="display: flex; gap: 6px; margin-top: 10px;">
-            <button type="button" class="mobile-lang-btn active" data-lang="pt" style="flex:1; min-width: 0; padding: 7px 4px; border-radius: 8px; border: 1px solid #00f5ff; background: rgba(0,245,255,0.15); color: #00f5ff; font-size: 0.74rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px;">
+            <button type="button" class="mobile-lang-btn active" data-lang="pt" style="padding: 7px 4px; border-radius: 8px; border: 1px solid #00f5ff; background: rgba(0,245,255,0.15); color: #00f5ff; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
               🇧🇷 Português
             </button>
-            <button type="button" class="mobile-lang-btn" data-lang="en" style="flex:1; min-width: 0; padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.74rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
+            <button type="button" class="mobile-lang-btn" data-lang="en" style="padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
               🇺🇸 English
             </button>
-            <button type="button" class="mobile-lang-btn" data-lang="es" style="flex:1; min-width: 0; padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.74rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
+            <button type="button" class="mobile-lang-btn" data-lang="es" style="padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
               🇪🇸 Español
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="fr" style="padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
+              🇫🇷 Français
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="de" style="padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
+              🇩🇪 Deutsch
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="it" style="padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
+              🇮🇹 Italiano
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="zh" style="padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
+              🇨🇳 中文
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="ja" style="padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
+              🇯🇵 日本語
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="ar" style="padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
+              🇸🇦 العربية
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="ru" style="padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
+              🇷🇺 Русский
+            </button>
+            <button type="button" class="mobile-lang-btn" data-lang="hi" style="padding: 7px 4px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; text-align: center;">
+              🇮🇳 हिन्दी
             </button>
           </div>
         </div>
@@ -1751,7 +1775,7 @@ html, body {
             </button>
           </div>
           <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Voz Neural em Português</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Voz Neural Humanizada (Multi-Idioma)</div>
             <input type="checkbox" id="set-toggle-tts" checked style="width: 22px; height: 22px; accent-color: var(--cyan);" />
           </div>
         </div>
@@ -1844,8 +1868,9 @@ html, body {
 
   </div>
 
+  <script src="/voice_engine.js?v=20261103_01"></script>
   <script src="/quantum_holo_3d.js?v=20261025_03"></script>
-  <script src="/mobile.js?v=20261025_03"></script>
+  <script src="/mobile.js?v=20261103_01"></script>
   <!-- Enterprise Zero-Trust Identity, Registration, Login, 2FA/MFA, Sessions & LGPD Modal -->
   <div id="auth-modal" class="auth-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="auth-card">

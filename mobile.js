@@ -76,9 +76,12 @@ const NexusMobile = (function () {
     });
 
     if (headerLangBtn) {
+      const cycleOrder = ['pt', 'en', 'es', 'fr', 'de', 'it', 'zh', 'ja', 'ar', 'ru', 'hi'];
       headerLangBtn.addEventListener('click', () => {
-        const cur = (headerLangBtn.textContent || '').includes('PT') ? 'en' : ((headerLangBtn.textContent || '').includes('EN') ? 'es' : 'pt');
-        setMobileLanguage(cur);
+        const curText = (headerLangBtn.textContent || 'PT').replace(/[^A-Za-z]/g, '').toLowerCase();
+        const idx = cycleOrder.indexOf(curText);
+        const nextCode = cycleOrder[(idx + 1) % cycleOrder.length];
+        setMobileLanguage(nextCode);
       });
     }
   }
@@ -375,6 +378,12 @@ const NexusMobile = (function () {
       if (micBtn) {
         micBtn.addEventListener('click', () => {
           triggerHaptic(15);
+          // Barge-in: immediately stop any ongoing speech output when user speaks
+          if (window.VoiceEngine) window.VoiceEngine.stop();
+          else if (window.speechSynthesis) window.speechSynthesis.cancel();
+          if (window.VoiceEngine && window.VoiceEngine.getActiveBcp47) {
+            recognition.lang = window.VoiceEngine.getActiveBcp47();
+          }
           if (isListening) recognition.stop();
           else recognition.start();
         });
@@ -485,7 +494,7 @@ const NexusMobile = (function () {
         const badge = document.getElementById(`dag-step-badge-${k}`);
         const card = document.getElementById(`dag-step-card-${k}`);
         const out = document.getElementById(`dag-step-out-${k}`);
-        if (badge) { badge.className = 'hud-badge amber'; badge.textContent = 'THINKING'; }
+        if (badge) { badge.className = 'hud-badge amber'; badge.textContent = 'PENSANDO'; }
         if (card) { card.className = 'dag-node-item active'; }
         if (out) out.textContent = 'Processando tensores cognitivos...';
       });
@@ -507,7 +516,7 @@ const NexusMobile = (function () {
             const badge = document.getElementById(`dag-step-badge-${k}`);
             const card = document.getElementById(`dag-step-card-${k}`);
             const out = document.getElementById(`dag-step-out-${k}`);
-            if (badge) { badge.className = 'hud-badge emerald'; badge.textContent = 'DONE'; }
+            if (badge) { badge.className = 'hud-badge emerald'; badge.textContent = 'CONCLUÍDO'; }
             if (card) { card.className = 'dag-node-item done'; }
             if (out && data.agentOutputs?.[k]) {
               out.textContent = data.agentOutputs[k];
@@ -776,15 +785,26 @@ const NexusMobile = (function () {
     if (settingsInstallBtn) settingsInstallBtn.addEventListener('click', runInstall);
   }
 
-  /* --- Neural Text to Speech --- */
-  function speakNeural(text) {
-    if (!window.speechSynthesis || !ttsEnabled) return;
+  /* --- Neural Text to Speech (Multi-Language & Humanized via VoiceEngine) --- */
+  function speakNeural(text, persona = 'aura') {
+    if (!ttsEnabled) return;
+    if (window.VoiceEngine) {
+      window.VoiceEngine.speak(text, {
+        persona,
+        rate: 1.02,
+        pitch: 1.01,
+        onStart: () => { isSpeaking = true; },
+        onDone: () => { isSpeaking = false; }
+      });
+      return;
+    }
+    if (!window.speechSynthesis) return;
     try {
       window.speechSynthesis.cancel();
       const clean = text.replace(/[*#_`>]/g, '').trim();
       const utt = new SpeechSynthesisUtterance(clean);
       utt.lang = 'pt-BR';
-      utt.rate = 1.05;
+      utt.rate = 1.02;
 
       utt.onstart = () => { isSpeaking = true; };
       utt.onend = () => { isSpeaking = false; };

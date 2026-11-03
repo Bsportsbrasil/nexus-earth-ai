@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-10-27T20:03:47.142Z",
-  "totalEvaluated": 304,
-  "totalApproved": 235,
-  "totalBlocked": 69,
-  "averageEntropy": 4.123,
-  "epistemicAccuracyPct": 77.3,
+  "updatedAt": "2026-11-03T17:56:55.806Z",
+  "totalEvaluated": 255,
+  "totalApproved": 241,
+  "totalBlocked": 14,
+  "averageEntropy": 2.953,
+  "epistemicAccuracyPct": 94.5,
   "learningCurve": [
     {
       "date": "2026-10-12",
@@ -106,20 +106,87 @@
     },
     {
       "date": "2026-10-26",
-      "accuracy": 77.9,
+      "accuracy": 94.4,
       "totalKnowledge": 225,
-      "hallucinationsBlocked": 64,
-      "entropy": 4.08
+      "hallucinationsBlocked": 14,
+      "entropy": 2.48
     },
     {
       "date": "2026-10-27",
-      "accuracy": 77.3,
+      "accuracy": 94.4,
       "totalKnowledge": 235,
-      "hallucinationsBlocked": 69,
-      "entropy": 4.12
+      "hallucinationsBlocked": 14,
+      "entropy": 2.48
+    },
+    {
+      "date": "2026-11-03",
+      "accuracy": 94.5,
+      "totalKnowledge": 241,
+      "hallucinationsBlocked": 14,
+      "entropy": 2.95
     }
   ],
   "history": [
+    {
+      "id": "eval_1793728615806",
+      "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",
+      "agentId": "GLOBAL_OMNISCIENCE_REASONER",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 4.74,
+      "rejectionReason": null,
+      "timestamp": "2026-11-03T17:56:55.806Z"
+    },
+    {
+      "id": "eval_1793728615743",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-11-03T17:56:55.743Z"
+    },
+    {
+      "id": "eval_1793714446085",
+      "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",
+      "agentId": "GLOBAL_OMNISCIENCE_REASONER",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 4.74,
+      "rejectionReason": null,
+      "timestamp": "2026-11-03T14:00:46.085Z"
+    },
+    {
+      "id": "eval_1793714446054",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-11-03T14:00:46.054Z"
+    },
+    {
+      "id": "eval_1793714315548",
+      "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",
+      "agentId": "GLOBAL_OMNISCIENCE_REASONER",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 4.74,
+      "rejectionReason": null,
+      "timestamp": "2026-11-03T13:58:35.548Z"
+    },
+    {
+      "id": "eval_1793714315520",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-11-03T13:58:35.521Z"
+    },
     {
       "id": "eval_1793131427142",
       "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",
@@ -129,16 +196,6 @@
       "entropyBits": 4.74,
       "rejectionReason": null,
       "timestamp": "2026-10-27T20:03:47.142Z"
-    },
-    {
-      "id": "eval_1793131427113",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-27T20:03:47.113Z"
     },
     {
       "id": "eval_1793131427112",
@@ -161,16 +218,6 @@
       "timestamp": "2026-10-27T18:57:54.291Z"
     },
     {
-      "id": "eval_1793127474232",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-27T18:57:54.232Z"
-    },
-    {
       "id": "eval_1793127474228",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -189,16 +236,6 @@
       "entropyBits": 4.74,
       "rejectionReason": null,
       "timestamp": "2026-10-27T18:53:36.637Z"
-    },
-    {
-      "id": "eval_1793127216577",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-27T18:53:36.577Z"
     },
     {
       "id": "eval_1793127216575",
@@ -221,16 +258,6 @@
       "timestamp": "2026-10-27T17:01:03.869Z"
     },
     {
-      "id": "eval_1793120463773",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-27T17:01:03.773Z"
-    },
-    {
       "id": "eval_1793120463764",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -249,16 +276,6 @@
       "entropyBits": 4.74,
       "rejectionReason": null,
       "timestamp": "2026-10-27T16:53:01.885Z"
-    },
-    {
-      "id": "eval_1793119981778",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-27T16:53:01.778Z"
     },
     {
       "id": "eval_1793119981772",
@@ -281,16 +298,6 @@
       "timestamp": "2026-10-26T22:48:30.123Z"
     },
     {
-      "id": "eval_1793054910096",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T22:48:30.096Z"
-    },
-    {
       "id": "eval_1793054910095",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -309,16 +316,6 @@
       "entropyBits": 4.74,
       "rejectionReason": null,
       "timestamp": "2026-10-26T22:43:03.393Z"
-    },
-    {
-      "id": "eval_1793054583367",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T22:43:03.367Z"
     },
     {
       "id": "eval_1793054583366",
@@ -341,16 +338,6 @@
       "timestamp": "2026-10-26T16:31:12.301Z"
     },
     {
-      "id": "eval_1793032272271",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T16:31:12.271Z"
-    },
-    {
       "id": "eval_1793032272270",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -369,16 +356,6 @@
       "entropyBits": 4.74,
       "rejectionReason": null,
       "timestamp": "2026-10-26T15:04:29.253Z"
-    },
-    {
-      "id": "eval_1793027069229",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T15:04:29.229Z"
     },
     {
       "id": "eval_1793027069228",
@@ -401,16 +378,6 @@
       "timestamp": "2026-10-26T15:03:36.979Z"
     },
     {
-      "id": "eval_1793027016954",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T15:03:36.954Z"
-    },
-    {
       "id": "eval_1793027016953",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -429,16 +396,6 @@
       "entropyBits": 4.74,
       "rejectionReason": null,
       "timestamp": "2026-10-26T14:58:38.428Z"
-    },
-    {
-      "id": "eval_1793026718401",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T14:58:38.401Z"
     },
     {
       "id": "eval_1793026718400",
@@ -461,16 +418,6 @@
       "timestamp": "2026-10-26T14:46:48.799Z"
     },
     {
-      "id": "eval_1793026008773",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T14:46:48.773Z"
-    },
-    {
       "id": "eval_1793026008772",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -489,16 +436,6 @@
       "entropyBits": 4.74,
       "rejectionReason": null,
       "timestamp": "2026-10-26T14:35:26.735Z"
-    },
-    {
-      "id": "eval_1793025326708",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T14:35:26.708Z"
     },
     {
       "id": "eval_1793025326707",
@@ -521,16 +458,6 @@
       "timestamp": "2026-10-26T14:18:10.518Z"
     },
     {
-      "id": "eval_1793024290486",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T14:18:10.486Z"
-    },
-    {
       "id": "eval_1793024290485",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -549,16 +476,6 @@
       "entropyBits": 4.74,
       "rejectionReason": null,
       "timestamp": "2026-10-26T14:12:08.895Z"
-    },
-    {
-      "id": "eval_1793023928848",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T14:12:08.848Z"
     },
     {
       "id": "eval_1793023928847",
@@ -581,16 +498,6 @@
       "timestamp": "2026-10-26T11:54:01.240Z"
     },
     {
-      "id": "eval_1793015641213",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T11:54:01.213Z"
-    },
-    {
       "id": "eval_1793015641212",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -609,16 +516,6 @@
       "entropyBits": 4.74,
       "rejectionReason": null,
       "timestamp": "2026-10-26T11:44:37.301Z"
-    },
-    {
-      "id": "eval_1793015077248",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T11:44:37.248Z"
     },
     {
       "id": "eval_1793015077246",
@@ -641,16 +538,6 @@
       "timestamp": "2026-10-26T11:30:17.410Z"
     },
     {
-      "id": "eval_1793014217323",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T11:30:17.323Z"
-    },
-    {
       "id": "eval_1793014217319",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -669,16 +556,6 @@
       "entropyBits": 4.74,
       "rejectionReason": null,
       "timestamp": "2026-10-26T11:04:57.269Z"
-    },
-    {
-      "id": "eval_1793012697230",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T11:04:57.230Z"
     },
     {
       "id": "eval_1793012697229",
@@ -701,16 +578,6 @@
       "timestamp": "2026-10-26T08:52:04.183Z"
     },
     {
-      "id": "eval_1793004724154",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T08:52:04.154Z"
-    },
-    {
       "id": "eval_1793004724151",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -719,16 +586,6 @@
       "entropyBits": 3.77,
       "rejectionReason": null,
       "timestamp": "2026-10-26T08:52:04.151Z"
-    },
-    {
-      "id": "eval_1793004670109",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T08:51:10.109Z"
     },
     {
       "id": "eval_1793004670107",
@@ -751,16 +608,6 @@
       "timestamp": "2026-10-26T02:17:49.728Z"
     },
     {
-      "id": "eval_1792981069702",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T02:17:49.702Z"
-    },
-    {
       "id": "eval_1792981069701",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -779,16 +626,6 @@
       "entropyBits": 4.74,
       "rejectionReason": null,
       "timestamp": "2026-10-26T01:51:11.765Z"
-    },
-    {
-      "id": "eval_1792979471734",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T01:51:11.734Z"
     },
     {
       "id": "eval_1792979471733",
@@ -811,16 +648,6 @@
       "timestamp": "2026-10-26T01:50:04.203Z"
     },
     {
-      "id": "eval_1792979404181",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T01:50:04.181Z"
-    },
-    {
       "id": "eval_1792979404180",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -829,16 +656,6 @@
       "entropyBits": 3.77,
       "rejectionReason": null,
       "timestamp": "2026-10-26T01:50:04.180Z"
-    },
-    {
-      "id": "eval_1792979364104",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T01:49:24.104Z"
     },
     {
       "id": "eval_1792979364102",
@@ -851,16 +668,6 @@
       "timestamp": "2026-10-26T01:49:24.102Z"
     },
     {
-      "id": "eval_1792979328029",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T01:48:48.029Z"
-    },
-    {
       "id": "eval_1792979328028",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -871,16 +678,6 @@
       "timestamp": "2026-10-26T01:48:48.028Z"
     },
     {
-      "id": "eval_1792979288899",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T01:48:08.899Z"
-    },
-    {
       "id": "eval_1792979288897",
       "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
       "agentId": "VERIFIER_AGENT",
@@ -889,16 +686,6 @@
       "entropyBits": 3.77,
       "rejectionReason": null,
       "timestamp": "2026-10-26T01:48:08.897Z"
-    },
-    {
-      "id": "eval_1792978602103",
-      "statement": "Eu acho que a terra é oca e tem discos voadores dentro sem confirmação científica.",
-      "agentId": "HALLUCINATING_TESTER",
-      "verdict": "REJECTED_HALLUCINATION",
-      "confidenceScore": 0.25,
-      "entropyBits": 3.91,
-      "rejectionReason": "Detectado linguajar especulativo ou incerteza sem comprovação factual (Filtro Zero-Achismos).",
-      "timestamp": "2026-10-26T01:36:42.103Z"
     },
     {
       "id": "eval_1792978602102",

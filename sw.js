@@ -1,10 +1,11 @@
-const CACHE_NAME = 'nexus-pwa-v6';
+const CACHE_NAME = 'nexus-pwa-v7';
 const CORE_ASSETS = [
   '/',
   '/index.html',
   '/mobile.html',
   '/mobile.css',
   '/mobile.js',
+  '/voice_engine.js',
   '/quantum_holo_3d.js',
   '/style.css',
   '/auth.css',

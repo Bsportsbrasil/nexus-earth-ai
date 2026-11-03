@@ -171,6 +171,12 @@ export class AgentMemoryStore {
     const plannerStore = this.vectorStores.get('planner');
     if (plannerStore && plannerStore.length === 0) {
       this.addAgentVectorMemory('planner', 'Decomposição em 4 etapas objetivas: Entidades, 1-Hop Subgrafo, Entropia H(a) e Auditoria.', 'workflow_rule', { initialSeed: true });
+      this.addAgentVectorMemory('planner', 'Prioridade máxima em planejamento estruturado com validação cruzada nos grafos de conhecimento.', 'architecture_rule', { initialSeed: true });
+    }
+
+    const nexusStore = this.vectorStores.get('nexus');
+    if (nexusStore && nexusStore.length === 0) {
+      this.addAgentVectorMemory('nexus', 'Orquestração de SEO técnico sênior com dados verificados, performance Core Web Vitals e semântica estruturada.', 'seo_strategy', { initialSeed: true });
     }
   }
 
@@ -348,11 +354,15 @@ export class AgentMemoryStore {
 
     if (hasKey && cleanMsg) {
       try {
+        const voiceDirective = voiceEnabled
+          ? `DIRETRIZ ESTRITA DE VOZ HUMANA: Você fala diretamente por uma interface de áudio. 1) Responda em no máximo 2 ou 3 frases diretas, calorosas e familiares. 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Escreva números por extenso e use linguagem falada natural com pergunta curta ao final.`
+          : `Diretriz de Tom: Natural, amigável, acolhedor, familiar e direto ao ponto. Nunca repita a pergunta do criador.`;
+
         const sysInstruction = [
           MANDATORY_SYSTEM_DIRECTIVE,
           `\nIdentidade Específica do Agente: ${agent.name} (${agent.role}).`,
           agent.instructions ? `Instruções Customizadas do Administrador: ${agent.instructions}` : '',
-          `Diretriz de Tom: Natural, amigável, acolhedor e direto ao ponto. Nunca repita a pergunta do criador.`,
+          voiceDirective,
           `Padrão de Conversa Adaptado: Frases de tamanho médio ${pat?.avgSentenceLength || 12} palavras. Tópicos frequentes: ${pat?.topics?.join(', ') || 'Nenhum'}.`,
           `Base de Conhecimento Vetorial Própria Consultada:\n${contextLines}`
         ].filter(Boolean).join('\n\n');

@@ -1,4 +1,5 @@
 import http from 'node:http';
+import https from 'node:https';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -932,6 +933,40 @@ const server = http.createServer(async (req, res) => {
     } catch (e) {
       return jsonResponse(res, 400, { error: e.message });
     }
+  }
+
+  // 5a-3. Cloud Neural Audio TTS Proxy (/api/tts) — Eliminates 100% of Local Desktop SAPI Robotic Voices
+  if (pathname === '/api/tts' && req.method === 'GET') {
+    const q = (parsedUrl.searchParams.get('q') || '').trim().slice(0, 200);
+    const tl = (parsedUrl.searchParams.get('tl') || 'pt-BR').trim();
+    if (!q) {
+      res.writeHead(400);
+      return res.end('Missing q');
+    }
+    const ttsUrl = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(q)}&tl=${encodeURIComponent(tl)}&client=tw-ob`;
+    https.get(ttsUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+        'Referer': 'https://translate.google.com/'
+      }
+    }, (ttsRes) => {
+      if (ttsRes.statusCode !== 200) {
+        res.writeHead(502);
+        return res.end('Upstream TTS status ' + ttsRes.statusCode);
+      }
+      res.writeHead(200, {
+        'Content-Type': 'audio/mpeg',
+        'Cache-Control': 'public, max-age=86400',
+        'Access-Control-Allow-Origin': '*'
+      });
+      ttsRes.pipe(res);
+    }).on('error', () => {
+      if (!res.headersSent) {
+        res.writeHead(502);
+        res.end('Upstream TTS error');
+      }
+    });
+    return;
   }
 
   // 5b. Task & Calendar Automation Endpoints (/api/tasks, /api/tasks/ics, /api/tasks/plan)

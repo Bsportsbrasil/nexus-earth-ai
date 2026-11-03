@@ -473,10 +473,17 @@ const AgentDashboardUI = (function () {
       return;
     }
 
+    // Barge-In: Immediately cancel ongoing speech when user activates mic
+    if (window.VoiceEngine) window.VoiceEngine.stop();
+    else if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
     if (isListening) {
       recognizer.stop();
     } else {
       try {
+        if (window.VoiceEngine && window.VoiceEngine.getActiveBcp47) {
+          recognizer.lang = window.VoiceEngine.getActiveBcp47();
+        }
         recognizer.start();
       } catch (e) {
         console.warn('Erro ao iniciar reconhecimento:', e.message);
@@ -499,7 +506,7 @@ const AgentDashboardUI = (function () {
   function speakAgentReply(text) {
     if (!ttsEnabled) return;
     if (window.VoiceEngine) {
-      VoiceEngine.speak(text, { persona: 'neutral', rate: 0.98, pitch: 1.0 });
+      VoiceEngine.speak(text, { persona: activeAgentId === 'aura' ? 'aura' : 'neutral', rate: 1.02, pitch: 1.01 });
       return;
     }
     if (!('speechSynthesis' in window)) return;
