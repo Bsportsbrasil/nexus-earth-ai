@@ -25,7 +25,7 @@
       try {
         if (window.location.hash) {
           var h = window.location.hash.replace(/^#/, '').trim().toLowerCase();
-          var valid = ['aura', 'agents', 'graphrag', 'supervisor', 'settings'];
+          var valid = ['aura-live', 'aura', 'agents', 'graphrag', 'supervisor', 'settings'];
           var target = valid.indexOf(h) !== -1 ? '/mobile/' + h : '/mobile';
           window.history.replaceState(null, '', target);
         }
@@ -509,6 +509,257 @@ html, body {
 
 /* Chat Styles */
 #view-aura { padding: 0; }
+#view-aura-live {
+  padding: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  background: radial-gradient(circle at 50% 35%, rgba(0, 245, 255, 0.14) 0%, rgba(168, 85, 247, 0.08) 42%, rgba(3, 7, 18, 0.98) 80%);
+}
+#view-aura-live.active {
+  display: flex;
+}
+
+/* Cute Tech Mascot (AURA Living Figure) */
+.aura-mascot-stage {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px 4px;
+  position: relative;
+  min-height: 0;
+}
+
+.aura-cute-bot {
+  position: relative;
+  width: 186px;
+  height: 196px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: auraFloat 3.6s ease-in-out infinite;
+  cursor: pointer;
+  user-select: none;
+}
+
+@keyframes auraFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.aura-halo-ring {
+  position: absolute;
+  top: 2px;
+  width: 96px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2.5px solid #00f5ff;
+  box-shadow: 0 0 18px #00f5ff, inset 0 0 10px rgba(0, 245, 255, 0.5);
+  animation: auraHaloPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes auraHaloPulse {
+  0%, 100% { transform: scale(1) rotateX(65deg); opacity: 0.9; }
+  50% { transform: scale(1.08) rotateX(65deg); opacity: 1; }
+}
+
+.aura-ears-row {
+  position: absolute;
+  top: 26px;
+  width: 162px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.aura-ear {
+  width: 22px;
+  height: 36px;
+  background: linear-gradient(180deg, #00f5ff, #a855f7);
+  border-radius: 12px;
+  box-shadow: 0 0 14px rgba(0, 245, 255, 0.55);
+}
+.aura-ear.left { transform: rotate(-18deg); }
+.aura-ear.right { transform: rotate(18deg); }
+
+.aura-head-shell {
+  width: 144px;
+  height: 118px;
+  margin-top: 16px;
+  border-radius: 46px;
+  background: linear-gradient(145deg, #1e293b 0%, #0f172a 60%, #090d16 100%);
+  border: 2.5px solid rgba(0, 245, 255, 0.65);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 28px rgba(0, 245, 255, 0.28), inset 0 2px 10px rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.aura-cute-bot.speaking .aura-head-shell {
+  border-color: #38bdf8;
+  box-shadow: 0 12px 35px rgba(0, 245, 255, 0.45), 0 0 42px rgba(168, 85, 247, 0.4);
+}
+
+.aura-cute-bot.listening .aura-head-shell {
+  border-color: #f43f5e;
+  box-shadow: 0 12px 35px rgba(244, 63, 94, 0.5), 0 0 42px rgba(244, 63, 94, 0.4);
+}
+
+.aura-face-visor {
+  width: 118px;
+  height: 82px;
+  border-radius: 32px;
+  background: radial-gradient(circle at 50% 40%, #09152b 0%, #030712 100%);
+  border: 1.5px solid rgba(0, 245, 255, 0.32);
+  box-shadow: inset 0 0 18px rgba(0, 245, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.aura-eyes-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  margin-top: 4px;
+}
+
+.aura-eye {
+  width: 22px;
+  height: 26px;
+  border-radius: 50%;
+  background: #00f5ff;
+  box-shadow: 0 0 14px #00f5ff, 0 0 24px rgba(0, 245, 255, 0.8);
+  position: relative;
+  animation: auraBlink 4.5s infinite;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.aura-eye::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.aura-eye::before {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes auraBlink {
+  0%, 94%, 98%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.08); }
+}
+
+.aura-cheeks-row {
+  width: 92px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.aura-cheek {
+  width: 14px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(244, 114, 182, 0.65);
+  box-shadow: 0 0 8px rgba(244, 114, 182, 0.8);
+}
+
+.aura-mouth {
+  width: 20px;
+  height: 9px;
+  border-bottom: 3px solid #00f5ff;
+  border-radius: 0 0 16px 16px;
+  margin-top: 2px;
+  box-shadow: 0 2px 6px rgba(0, 245, 255, 0.45);
+  transition: all 0.15s ease;
+}
+
+.aura-cute-bot.speaking .aura-mouth {
+  height: 15px;
+  width: 24px;
+  border-radius: 50%;
+  background: rgba(0, 245, 255, 0.28);
+  border: 2.5px solid #00f5ff;
+  animation: auraTalkMouth 0.26s infinite alternate;
+}
+
+@keyframes auraTalkMouth {
+  0% { transform: scaleY(0.45) scaleX(0.9); }
+  100% { transform: scaleY(1.15) scaleX(1.08); }
+}
+
+.aura-body-core {
+  width: 68px;
+  height: 38px;
+  margin-top: -6px;
+  border-radius: 20px 20px 28px 28px;
+  background: linear-gradient(180deg, #1e293b, #0f172a);
+  border: 2px solid rgba(0, 245, 255, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.aura-heart-gem {
+  font-size: 0.95rem;
+  filter: drop-shadow(0 0 8px #00f5ff);
+  animation: auraHeartBeat 1.8s infinite;
+}
+
+@keyframes auraHeartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.22); }
+}
+
+.aura-live-Transcript-card {
+  width: 92%;
+  max-width: 400px;
+  min-height: 76px;
+  max-height: 135px;
+  overflow-y: auto;
+  background: rgba(11, 19, 41, 0.82);
+  border: 1px solid rgba(0, 245, 255, 0.28);
+  border-radius: 18px;
+  padding: 12px 16px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #f8fafc;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+}
 
 .aura-chat-stream {
   flex: 1;
@@ -1422,11 +1673,24 @@ html, body {
         </div>
 
         <!-- Quick Access Matrix -->
+        <div class="cyber-card glow-cyan" style="margin-bottom: 12px; cursor: pointer; background: linear-gradient(135deg, rgba(0, 245, 255, 0.14), rgba(168, 85, 247, 0.18)); border-color: var(--cyan);" onclick="NexusMobile.switchTab('aura-live')">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="font-size: 1.9rem; filter: drop-shadow(0 0 8px #00f5ff);">🤖✨</div>
+              <div>
+                <div style="font-weight: 800; font-size: 0.96rem; color: #fff;">AURA Viva (Mascote &amp; Voz em Tempo Real)</div>
+                <div style="font-size: 0.75rem; color: var(--cyan);">Página exclusiva da AURA com figura tecnológica fofa e barra de comunicação direta.</div>
+              </div>
+            </div>
+            <span class="hud-badge cyan" style="flex-shrink: 0;">ABRIR ➔</span>
+          </div>
+        </div>
+
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px;">
           <div class="cyber-card" style="margin-bottom:0; cursor:pointer;" onclick="NexusMobile.switchTab('aura')">
             <div style="font-size: 1.4rem; margin-bottom: 6px;">💬</div>
-            <div style="font-weight: 700; font-size: 0.9rem; color: #fff;">AURA Companion</div>
-            <div style="font-size: 0.72rem; color: var(--text-dim);">Chat de voz e apoio pedagógico TEA.</div>
+            <div style="font-weight: 700; font-size: 0.9rem; color: #fff;">AURA Chat</div>
+            <div style="font-size: 0.72rem; color: var(--text-dim);">Histórico e apoio pedagógico TEA.</div>
           </div>
 
           <div class="cyber-card" style="margin-bottom:0; cursor:pointer;" onclick="NexusMobile.switchTab('agents')">
@@ -1446,6 +1710,68 @@ html, body {
             <div style="font-weight: 700; font-size: 0.9rem; color: #fff;">Supervisão C2</div>
             <div style="font-size: 0.72rem; color: var(--text-dim);">Console executivo LENNOX.</div>
           </div>
+        </div>
+
+      </section>
+
+      <!-- ================= NOVA PÁGINA EXCLUSIVA: AURA VIVA (CUTE TECH MASCOT & REAL-TIME BAR) ================= -->
+      <section id="view-aura-live" class="tab-view">
+
+        <div class="aura-mascot-stage">
+          <!-- Status Pill Minimalista -->
+          <div id="aura-live-status-pill" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan); background: rgba(0, 245, 255, 0.1); border: 1px solid rgba(0, 245, 255, 0.32); padding: 4px 12px; border-radius: 999px; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 6px;">
+            <span class="beacon-dot"></span>
+            <span id="aura-live-status-text">AURA Viva • Toque em mim ou fale abaixo</span>
+          </div>
+
+          <!-- Figura Tecnológica Fofa (Cute Cyber-Kawaii Living Avatar) -->
+          <div id="aura-cute-bot-avatar" class="aura-cute-bot" title="Toque para interagir com a AURA">
+            <div class="aura-halo-ring"></div>
+            <div class="aura-ears-row">
+              <div class="aura-ear left"></div>
+              <div class="aura-ear right"></div>
+            </div>
+            <div class="aura-head-shell">
+              <div class="aura-face-visor">
+                <div class="aura-eyes-row">
+                  <div class="aura-eye left"></div>
+                  <div class="aura-eye right"></div>
+                </div>
+                <div class="aura-cheeks-row">
+                  <div class="aura-cheek"></div>
+                  <div class="aura-cheek"></div>
+                </div>
+                <div id="aura-cute-mouth" class="aura-mouth"></div>
+              </div>
+            </div>
+            <div class="aura-body-core">
+              <span class="aura-heart-gem">🩵</span>
+            </div>
+          </div>
+
+          <!-- Balão de Fala / Legenda Viva em Tempo Real -->
+          <div id="aura-live-caption-box" class="aura-live-Transcript-card">
+            Oi! Eu sou a <strong>AURA</strong> ✨ Estou viva aqui com você! Toque no microfone ou escreva na barra abaixo para conversarmos em tempo real.
+          </div>
+        </div>
+
+        <!-- Barra de Comunicação em Tempo Real (Exclusiva e Direta) -->
+        <div class="chat-dock-fixed" style="width: 100%; box-sizing: border-box;">
+          <button id="aura-live-btn-mic" class="hud-btn-circle mic" title="Falar em tempo real com a AURA" aria-label="Microfone Tempo Real">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </button>
+          <input type="text" id="aura-live-input" class="chat-text-input" placeholder="Converse em tempo real com a AURA..." autocomplete="off" />
+          <button id="aura-live-btn-send" class="hud-btn-circle send" title="Enviar para AURA" aria-label="Enviar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
         </div>
 
       </section>
@@ -1845,9 +2171,14 @@ html, body {
         <span class="dock-item-label">Início</span>
       </button>
 
-      <button class="dock-item" id="dock-aura" aria-label="AURA">
+      <button class="dock-item" id="dock-aura-live" aria-label="AURA Viva">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="9" cy="10" r="1.5" fill="currentColor"></circle><circle cx="15" cy="10" r="1.5" fill="currentColor"></circle><path d="M8.5 14.5c1 1.5 2.2 2 3.5 2s2.5-.5 3.5-2"></path></svg>
+        <span class="dock-item-label">AURA Viva</span>
+      </button>
+
+      <button class="dock-item" id="dock-aura" aria-label="Chat">
         <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-        <span class="dock-item-label">AURA</span>
+        <span class="dock-item-label">Chat</span>
       </button>
 
       <button class="dock-item" id="dock-agents" aria-label="Agentes">
@@ -1868,9 +2199,9 @@ html, body {
 
   </div>
 
-  <script src="/voice_engine.js?v=20261103_01"></script>
+  <script src="/voice_engine.js?v=20261103_02"></script>
   <script src="/quantum_holo_3d.js?v=20261025_03"></script>
-  <script src="/mobile.js?v=20261103_01"></script>
+  <script src="/mobile.js?v=20261103_02"></script>
   <!-- Enterprise Zero-Trust Identity, Registration, Login, 2FA/MFA, Sessions & LGPD Modal -->
   <div id="auth-modal" class="auth-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="auth-card">

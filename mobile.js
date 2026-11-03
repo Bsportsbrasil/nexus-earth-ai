@@ -97,7 +97,7 @@ const NexusMobile = (function () {
   }
 
   function init() {
-    ['home', 'aura', 'agents', 'graphrag', 'supervisor', 'settings'].forEach(id => {
+    ['home', 'aura-live', 'aura', 'agents', 'graphrag', 'supervisor', 'settings'].forEach(id => {
       views[id] = document.getElementById(`view-${id}`);
       dockItems[id] = document.getElementById(`dock-${id}`);
     });
@@ -106,6 +106,7 @@ const NexusMobile = (function () {
     initEmpathyAndI18n();
     initQuantumOrb();
     initCyberGrid();
+    initAuraLiveMascot();
     initAuraChat();
     initMultiAgentDAG();
     initGraphRAGExplorer();
@@ -175,6 +176,7 @@ const NexusMobile = (function () {
     }
 
     const path = window.location.pathname.toLowerCase();
+    if (path.includes('/aura-live') || path.includes('/aura-viva')) return 'aura-live';
     if (path.includes('/aura')) return 'aura';
     if (path.includes('/agent')) return 'agents';
     if (path.includes('/graph') || path.includes('/knowledge')) return 'graphrag';
@@ -309,6 +311,167 @@ const NexusMobile = (function () {
     }
     update();
     setInterval(update, 10000);
+  }
+
+  /* --- Dedicated AURA Viva Mascot Page (Cute Tech Figure + Real-Time Communication Bar) --- */
+  function initAuraLiveMascot() {
+    const botAvatar = document.getElementById('aura-cute-bot-avatar');
+    const statusText = document.getElementById('aura-live-status-text');
+    const captionBox = document.getElementById('aura-live-caption-box');
+    const input = document.getElementById('aura-live-input');
+    const sendBtn = document.getElementById('aura-live-btn-send');
+    const micBtn = document.getElementById('aura-live-btn-mic');
+    let liveRec = null;
+    let liveListening = false;
+
+    function setBotState(state, statusLabel) {
+      if (botAvatar) {
+        botAvatar.classList.remove('speaking', 'listening');
+        if (state === 'speaking') botAvatar.classList.add('speaking');
+        if (state === 'listening') botAvatar.classList.add('listening');
+      }
+      if (statusText && statusLabel) statusText.textContent = statusLabel;
+    }
+
+    if (botAvatar) {
+      botAvatar.addEventListener('click', () => {
+        triggerHaptic(22);
+        const greetings = [
+          'Oi! Que alegria conversar com você! Como posso iluminar o seu dia agora?',
+          'Estou aqui prontinha! Pode falar comigo por voz ou digitar aqui embaixo.',
+          'Adoro aprender coisas novas com você! O que vamos explorar hoje?'
+        ];
+        const msg = greetings[Math.floor(Math.random() * greetings.length)];
+        if (captionBox) captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(msg)}`;
+        setBotState('speaking', 'AURA falando com você...');
+        if (window.VoiceEngine) {
+          window.VoiceEngine.speak(msg, {
+            persona: 'aura',
+            rate: 1.02,
+            pitch: 1.03,
+            onDone: () => setBotState('idle', 'AURA Viva • Pronta para você')
+          });
+        } else {
+          speakNeural(msg, 'aura');
+          setTimeout(() => setBotState('idle', 'AURA Viva • Pronta para você'), 3200);
+        }
+      });
+    }
+
+    async function sendLiveAuraTurn(rawText, fromVoice = false) {
+      const q = (rawText !== undefined ? rawText : (input?.value || '')).trim();
+      if (!q) return;
+
+      triggerHaptic(18);
+      if (input) {
+        input.value = '';
+        input.blur();
+      }
+
+      if (window.VoiceEngine) window.VoiceEngine.stop();
+      else if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+      setBotState('listening', 'AURA pensando com carinho...');
+      if (captionBox) {
+        captionBox.innerHTML = `<span style="color:var(--cyan);">Você: "${escapeHtml(q)}"</span><br/><em>Sintonizando resposta...</em>`;
+      }
+
+      try {
+        const res = await fetch('/api/agents/converse', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            agentId: 'aura',
+            message: q,
+            voiceEnabled: true,
+            apiKey: localStorage.getItem('nexus_gemini_key') || ''
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const reply = data.reply || 'Estou aqui com você! Como posso te apoiar agora?';
+          if (captionBox) {
+            captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}`;
+          }
+          if (ttsEnabled) {
+            setBotState('speaking', 'AURA falando em tempo real...');
+            if (window.VoiceEngine) {
+              window.VoiceEngine.speak(data.voiceText || reply, {
+                persona: 'aura',
+                rate: 1.02,
+                pitch: 1.02,
+                onDone: () => setBotState('idle', 'AURA Viva • Toque ou fale abaixo')
+              });
+            } else {
+              speakNeural(data.voiceText || reply, 'aura');
+              setTimeout(() => setBotState('idle', 'AURA Viva • Toque ou fale abaixo'), 4000);
+            }
+          } else {
+            setBotState('idle', 'AURA Viva • Toque ou fale abaixo');
+          }
+        } else {
+          setBotState('idle', 'AURA Viva • Pronta');
+          if (captionBox) captionBox.textContent = 'Tive uma leve oscilação de sinal, pode falar comigo de novo?';
+        }
+      } catch (_) {
+        setBotState('idle', 'AURA Viva • Modo Local');
+        if (captionBox) captionBox.textContent = 'Estou conectada com você em modo local! Como posso ajudar?';
+      }
+    }
+
+    if (sendBtn) sendBtn.addEventListener('click', () => sendLiveAuraTurn());
+    if (input) {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') sendLiveAuraTurn();
+      });
+    }
+
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRec && micBtn) {
+      liveRec = new SpeechRec();
+      liveRec.lang = 'pt-BR';
+      liveRec.continuous = false;
+      liveRec.interimResults = false;
+
+      liveRec.onstart = () => {
+        liveListening = true;
+        triggerHaptic(30);
+        micBtn.classList.add('listening');
+        setBotState('listening', '🎙️ AURA ouvindo sua voz agora...');
+      };
+
+      liveRec.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        if (transcript) {
+          sendLiveAuraTurn(transcript, true);
+        }
+      };
+
+      liveRec.onerror = () => {
+        liveListening = false;
+        micBtn.classList.remove('listening');
+        setBotState('idle', 'AURA Viva • Toque ou fale abaixo');
+      };
+
+      liveRec.onend = () => {
+        liveListening = false;
+        micBtn.classList.remove('listening');
+      };
+
+      micBtn.addEventListener('click', () => {
+        triggerHaptic(18);
+        if (window.VoiceEngine) window.VoiceEngine.stop();
+        else if (window.speechSynthesis) window.speechSynthesis.cancel();
+        if (window.VoiceEngine && window.VoiceEngine.getActiveBcp47) {
+          liveRec.lang = window.VoiceEngine.getActiveBcp47();
+        }
+        if (liveListening) liveRec.stop();
+        else {
+          try { liveRec.start(); } catch (_) {}
+        }
+      });
+    }
   }
 
   /* --- AURA Live Companion & Speech Recognition --- */
