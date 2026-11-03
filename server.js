@@ -639,6 +639,14 @@ const server = http.createServer(async (req, res) => {
         userMessage: body.message || '',
         agentReply: convRes.reply || ''
       });
+      // Immediately pre-synthesize the first sentence in background so /api/tts is already warm/in-flight when client requests it
+      if (body.voiceEnabled && convRes.voiceText && !process.env.NEXUS_TEST_MODE) {
+        const firstSentMatch = convRes.voiceText.match(/[^.!?…]+[.!?…]*/);
+        const firstSent = (firstSentMatch ? firstSentMatch[0] : convRes.voiceText).trim().slice(0, 115);
+        if (firstSent) {
+          fetch(`http://127.0.0.1:${PORT}/api/tts?persona=${encodeURIComponent(convRes.agentId || 'aura')}&tl=pt-BR&q=${encodeURIComponent(firstSent)}`).catch(() => {});
+        }
+      }
       return jsonResponse(res, 200, convRes);
     } catch (e) {
       return jsonResponse(res, 400, { error: e.message });
@@ -953,11 +961,28 @@ const server = http.createServer(async (req, res) => {
     if (!globalThis.__nexusTtsCache) {
       globalThis.__nexusTtsCache = new Map();
     }
+    const cooldownFile = path.join(os.tmpdir(), 'nexus_tts_cooldowns.json');
     if (!globalThis.__nexusTtsCooldowns) {
-      globalThis.__nexusTtsCooldowns = new Map();
+      let savedCooldowns = {};
+      try {
+        if (fs.existsSync(cooldownFile)) {
+          savedCooldowns = JSON.parse(fs.readFileSync(cooldownFile, 'utf8'));
+        }
+      } catch (_) {}
+      globalThis.__nexusTtsCooldowns = new Map(Object.entries(savedCooldowns));
+    }
+    if (!globalThis.__nexusTtsInFlight) {
+      globalThis.__nexusTtsInFlight = new Map();
     }
     const ttsCache = globalThis.__nexusTtsCache;
     const ttsCooldowns = globalThis.__nexusTtsCooldowns;
+    const ttsInFlight = globalThis.__nexusTtsInFlight;
+    const recordCooldown = (key, durationMs) => {
+      ttsCooldowns.set(key, Date.now() + durationMs);
+      try {
+        fs.writeFileSync(cooldownFile, JSON.stringify(Object.fromEntries(ttsCooldowns)), 'utf8');
+      } catch (_) {}
+    };
 
     if (ttsCache.has(cacheKey)) {
       const cached = ttsCache.get(cacheKey);
@@ -969,6 +994,22 @@ const server = http.createServer(async (req, res) => {
         'X-Voice-Engine': cached.engine
       });
       return res.end(cached.buffer);
+    }
+
+    if (ttsInFlight.has(cacheKey)) {
+      try {
+        const result = await ttsInFlight.get(cacheKey);
+        if (result && result.buffer) {
+          res.writeHead(200, {
+            'Content-Type': result.contentType,
+            'Content-Length': result.buffer.length,
+            'Cache-Control': 'public, max-age=86400',
+            'Access-Control-Allow-Origin': '*',
+            'X-Voice-Engine': result.engine
+          });
+          return res.end(result.buffer);
+        }
+      } catch (_) {}
     }
 
     const geminiKey = (clientKey || process.env.GEMINI_API_KEY || '').trim();
@@ -1003,7 +1044,7 @@ const server = http.createServer(async (req, res) => {
         return Buffer.concat([header, pcmBuffer]);
       };
 
-      try {
+      const synthPromise = (async () => {
         let wavBuffer = null;
         let usedModel = '';
 
@@ -1025,7 +1066,7 @@ const server = http.createServer(async (req, res) => {
             }
             const gResp = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
               method: 'POST',
-              signal: AbortSignal.timeout(18000),
+              signal: AbortSignal.timeout(16000),
               headers: {
                 'x-goog-api-key': geminiKey,
                 'Content-Type': 'application/json'
@@ -1044,7 +1085,7 @@ const server = http.createServer(async (req, res) => {
             });
 
             if (gResp.status === 429) {
-              ttsCooldowns.set(m.name, Date.now() + 15 * 60 * 1000);
+              recordCooldown(m.name, 30 * 60 * 1000);
               continue;
             }
 
@@ -1080,7 +1121,7 @@ const server = http.createServer(async (req, res) => {
             try {
               const gResp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${genModel}:generateContent?key=${encodeURIComponent(geminiKey)}`, {
                 method: 'POST',
-                signal: AbortSignal.timeout(20000),
+                signal: AbortSignal.timeout(18000),
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   contents: [{ parts: [{ text: q }] }],
@@ -1093,7 +1134,7 @@ const server = http.createServer(async (req, res) => {
                 })
               });
               if (gResp.status === 429) {
-                ttsCooldowns.set(cooldownKey, Date.now() + 15 * 60 * 1000);
+                recordCooldown(cooldownKey, 30 * 60 * 1000);
                 continue;
               }
               if (gResp.ok) {
@@ -1116,22 +1157,33 @@ const server = http.createServer(async (req, res) => {
             if (oldestKey) ttsCache.delete(oldestKey);
           }
           const engineTag = `gemini-neural-${voiceName.toLowerCase()}-${usedModel}`;
-          ttsCache.set(cacheKey, {
+          const entry = {
             buffer: wavBuffer,
             contentType: 'audio/wav',
             engine: engineTag
-          });
+          };
+          ttsCache.set(cacheKey, entry);
+          return entry;
+        }
+        return null;
+      })();
+
+      ttsInFlight.set(cacheKey, synthPromise);
+      try {
+        const entry = await synthPromise;
+        ttsInFlight.delete(cacheKey);
+        if (entry) {
           res.writeHead(200, {
-            'Content-Type': 'audio/wav',
-            'Content-Length': wavBuffer.length,
+            'Content-Type': entry.contentType,
+            'Content-Length': entry.buffer.length,
             'Cache-Control': 'public, max-age=86400',
             'Access-Control-Allow-Origin': '*',
-            'X-Voice-Engine': engineTag
+            'X-Voice-Engine': entry.engine
           });
-          return res.end(wavBuffer);
+          return res.end(entry.buffer);
         }
       } catch (_) {
-        // Fall through to multi-chunk complete stream fallback if Gemini TTS is unreachable
+        ttsInFlight.delete(cacheKey);
       }
     }
 

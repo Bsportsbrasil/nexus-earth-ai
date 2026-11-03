@@ -240,27 +240,36 @@ const VoiceEngine = (function () {
    * Splits utterance into natural conversational turns (up to 320 chars) so Gemini 3.8 Neural TTS
    * synthesizes whole multi-sentence expressions with unified human prosody and emotional warmth.
    */
+  /**
+   * Splits utterance so Chunk 0 is ALWAYS a short first sentence (<= 115 chars) for instant (<1.6s)
+   * voice start, while subsequent sentences (<= 240 chars) are synthesized in parallel in the background!
+   */
   function splitIntoBreathGroups(text) {
     if (!text) return [];
-    const MAX_TURN_LEN = 900;
-    if (text.length <= MAX_TURN_LEN) return [text];
+    if (text.length <= 115) return [text];
 
     const rawSentences = text.match(/[^.!?…]+[.!?…]*/g) || [text];
     const result = [];
     let currentTurn = '';
 
-    for (const sentence of rawSentences) {
-      const trimmed = sentence.trim();
+    for (let i = 0; i < rawSentences.length; i++) {
+      const trimmed = rawSentences[i].trim();
       if (!trimmed) continue;
-      if ((currentTurn + ' ' + trimmed).trim().length <= MAX_TURN_LEN) {
-        currentTurn = (currentTurn + ' ' + trimmed).trim();
-      } else {
-        if (currentTurn) result.push(currentTurn);
-        if (trimmed.length > MAX_TURN_LEN) {
+      const maxLen = result.length === 0 ? 115 : 240;
+
+      if (!currentTurn) {
+        if (trimmed.length <= maxLen) {
+          currentTurn = trimmed;
+          if (result.length === 0) {
+            result.push(currentTurn);
+            currentTurn = '';
+          }
+        } else {
           const subClauses = trimmed.match(/[^,;:]+\s*[,;:]*/g) || [trimmed];
           let acc = '';
           for (const sc of subClauses) {
-            if ((acc + ' ' + sc).trim().length <= MAX_TURN_LEN) {
+            const limit = result.length === 0 ? 115 : 240;
+            if ((acc + ' ' + sc).trim().length <= limit) {
               acc = (acc + ' ' + sc).trim();
             } else {
               if (acc) result.push(acc);
@@ -268,9 +277,12 @@ const VoiceEngine = (function () {
             }
           }
           currentTurn = acc;
-        } else {
-          currentTurn = trimmed;
         }
+      } else if ((currentTurn + ' ' + trimmed).trim().length <= maxLen) {
+        currentTurn = (currentTurn + ' ' + trimmed).trim();
+      } else {
+        result.push(currentTurn);
+        currentTurn = trimmed;
       }
     }
     if (currentTurn) result.push(currentTurn);
@@ -278,11 +290,15 @@ const VoiceEngine = (function () {
   }
 
   /**
-   * Plays text using the Expressive Gemini 3.8 Neural Audio Stream (/api/tts, voice 'Leda')
-   * as a continuous full-response stream. Falls back to browser SpeechSynthesis ONLY if offline.
+   * Plays text using Expressive Gemini Neural Audio (/api/tts, voice 'Leda')
+   * with PARALLEL t=0 Blob pre-fetching:
+   *  - All sentence chunks are requested in parallel at t=0.
+   *  - Chunk 0 (short first sentence) starts playing in ~1.5s.
+   *  - Chunks 1..N finish downloading in RAM while Chunk 0 is playing, so transitions are 0ms and never freeze!
    */
   function playCloudNeuralChunks(chunks, bcp47, rate, persona, onChunk, onDone, resolve, fallbackFn) {
     let idx = 0;
+    const objectUrlsToRevoke = [];
 
     function buildAudioUrl(phrase) {
       let localKey = '';
@@ -299,10 +315,37 @@ const VoiceEngine = (function () {
       audioEl.volume = 1.0;
     }
 
+    function cleanupUrls() {
+      while (objectUrlsToRevoke.length > 0) {
+        const u = objectUrlsToRevoke.pop();
+        try { URL.revokeObjectURL(u); } catch (_) {}
+      }
+    }
+
+    // Launch ALL chunk fetches in parallel at t=0 so chunk 1+ are already in RAM when chunk 0 ends
+    const preFetchedBlobs = chunks.map((phrase) => {
+      const cleanPhrase = (phrase || '').trim();
+      if (!cleanPhrase) return Promise.resolve(null);
+      const url = buildAudioUrl(cleanPhrase);
+      return fetch(url)
+        .then((r) => {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.blob();
+        })
+        .then((blob) => {
+          if (!blob || blob.size < 64) throw new Error('Empty audio blob');
+          const objUrl = URL.createObjectURL(blob);
+          objectUrlsToRevoke.push(objUrl);
+          return objUrl;
+        })
+        .catch(() => url); // fallback to direct URL stream if blob creation fails
+    });
+
     function playNext() {
       if (stopRequested || !isSpeaking || idx >= chunks.length) {
         isSpeaking = false;
         activeAudioElement = null;
+        cleanupUrls();
         if (onDone) onDone();
         resolve();
         return;
@@ -310,48 +353,61 @@ const VoiceEngine = (function () {
 
       const currentPhrase = (chunks[idx] || '').trim();
       const currentIndex = idx;
+      const blobPromise = preFetchedBlobs[currentIndex];
       idx++;
 
-      if (!currentPhrase) {
+      if (!currentPhrase || !blobPromise) {
         playNext();
         return;
       }
 
-      const audio = ensureSharedAudio() || new Audio();
-      audio.onplay = null;
-      audio.onended = null;
-      audio.onerror = null;
-      audio.src = buildAudioUrl(currentPhrase);
-      applyPureStudioTimbre(audio);
-      activeAudioElement = audio;
-
-      audio.onplay = () => {
-        if (onChunk) onChunk({ phrase: currentPhrase, index: currentIndex, total: chunks.length });
-      };
-
-      audio.onended = () => {
+      blobPromise.then((resolvedSrc) => {
         if (stopRequested || !isSpeaking) {
           isSpeaking = false;
+          cleanupUrls();
           resolve();
           return;
         }
-        playNext();
-      };
 
-      audio.onerror = () => {
-        if (fallbackFn && currentIndex === 0) {
-          fallbackFn();
-        } else {
-          playNext();
-        }
-      };
+        const audio = ensureSharedAudio() || new Audio();
+        audio.onplay = null;
+        audio.onended = null;
+        audio.onerror = null;
+        audio.src = resolvedSrc;
+        applyPureStudioTimbre(audio);
+        activeAudioElement = audio;
 
-      audio.play().catch(() => {
-        if (fallbackFn && currentIndex === 0) {
-          fallbackFn();
-        } else {
+        audio.onplay = () => {
+          if (onChunk) onChunk({ phrase: currentPhrase, index: currentIndex, total: chunks.length });
+        };
+
+        audio.onended = () => {
+          if (stopRequested || !isSpeaking) {
+            isSpeaking = false;
+            cleanupUrls();
+            resolve();
+            return;
+          }
           playNext();
-        }
+        };
+
+        audio.onerror = () => {
+          if (fallbackFn && currentIndex === 0) {
+            cleanupUrls();
+            fallbackFn();
+          } else {
+            playNext();
+          }
+        };
+
+        audio.play().catch(() => {
+          if (fallbackFn && currentIndex === 0) {
+            cleanupUrls();
+            fallbackFn();
+          } else {
+            playNext();
+          }
+        });
       });
     }
 

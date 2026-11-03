@@ -353,20 +353,26 @@ export class AgentMemoryStore {
     const pat = this.patterns.get(agentId);
 
     const isMapOrPlaceQuery = cleanMsg && geoEngine.isPlaceOrMapQuery(cleanMsg);
-    const wantsLiveWebOrSocial = cleanMsg && (isMapOrPlaceQuery || /\b(not[ií]cia|hoje|atual|atuais|agora|rede\s+social|redes\s+sociais|avalia[cç][aã]o|opini[aã]o|recomenda|melhor|escolha|escolher|qual\s+voc[eê]|o\s+que\s+voc[eê]\s+acha)\b/i.test(cleanMsg));
+    const wantsLiveWebOrSocial = cleanMsg && /\b(not[ií]cias?\s+de\s+hoje|[uú]ltimas\s+not[ií]cias|manchetes|redes\s+sociais)\b/i.test(cleanMsg);
+    const wantsDeepScienceRag = cleanMsg && !voiceEnabled && cleanMsg.length > 12 && /\b(artigo|cient[ií]fico|doi|estudo|pesquisa|f[ií]sica|biologia|hist[oó]ria| teorema)\b/i.test(cleanMsg);
+
+    const withTimeout = (promise, ms) => Promise.race([
+      promise,
+      new Promise(resolve => setTimeout(() => resolve(null), ms))
+    ]);
 
     const [mapIntel, ragRes, liveIntel] = await Promise.all([
       isMapOrPlaceQuery
-        ? geoEngine.searchRealTimePlacesAndMap({
+        ? withTimeout(geoEngine.searchRealTimePlacesAndMap({
             query: cleanMsg,
             clientGeo,
             clientIp,
             currentHour: temporal.hour,
             localeTime: temporal.localeTime
-          }).catch(() => null)
+          }).catch(() => null), 2200)
         : Promise.resolve(null),
-      cleanMsg.length > 3 ? graphDB.queryGraphRAG(cleanMsg, 2).catch(() => null) : Promise.resolve(null),
-      wantsLiveWebOrSocial ? globalIntel.queryOmniscientIntelligence(cleanMsg).catch(() => null) : Promise.resolve(null)
+      wantsDeepScienceRag ? withTimeout(graphDB.queryGraphRAG(cleanMsg, 2).catch(() => null), 1200) : Promise.resolve(null),
+      wantsLiveWebOrSocial ? withTimeout(globalIntel.queryOmniscientIntelligence(cleanMsg).catch(() => null), 1400) : Promise.resolve(null)
     ]);
 
     // 2. CONTEXTUALIZAÇÃO: Build private context + real-time map/web/factual context
@@ -408,7 +414,7 @@ export class AgentMemoryStore {
 5) Educação e Postura Profissional: Seja gentil, educada, prestativa e humanizada, mas JAMAIS use apelidos íntimos como "meu amor", "meu bem", "querido(a)", "fofo(a)", "lindo(a)", "coração" ou "anjo".`
           : '';
         const voiceDirective = voiceEnabled
-          ? `DIRETRIZ ESTRITA DE VOZ HUMANA E PROFISSIONAL: Você fala diretamente por uma interface de áudio. 1) Responda em 2 a 3 frases completas, fluidas, naturais, gentis e bem concluídas (cerca de 40 a 65 palavras no total, sempre concluindo o raciocínio até o ponto final). 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Proibido usar apelidos íntimos como "meu amor" ou "meu bem". 4) Escreva números por extenso ou de forma fluida para fala.`
+          ? `DIRETRIZ ESTRITA DE VOZ HUMANA DE RESPOSTA IMEDIATA: Você fala diretamente por uma interface de áudio em tempo real. 1) Comece SEMPRE com uma primeira frase curta e direta (de 8 a 14 palavras) respondendo imediatamente ao ponto principal, seguida de mais 1 ou 2 frases concisas com os fatos e sua opinião/recomendação (total de 28 a 48 palavras, sempre concluindo até o ponto final). 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Proibido usar apelidos íntimos como "meu amor" ou "meu bem". 4) Escreva números de forma fluida para fala.`
           : `Diretriz de Tom: Gentil, educado, inteligente, profissional, humanizado e direto ao ponto. Nunca use apelidos íntimos ("meu amor", "meu bem", etc.) e nunca dê respostas genéricas.`;
 
         const sysInstruction = [
