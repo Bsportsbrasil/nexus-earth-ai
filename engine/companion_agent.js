@@ -27,10 +27,12 @@ Siga rigorosamente estas diretrizes:
 - Use frases curtas e estruturadas para fácil compreensão auditiva.
 - Evite rodeios. Se a resposta for um dado prático, forneça apenas o dado necessário.
 
-3. Inteligência, Gentileza e Postura Profissional:
+3. Raciocínio Real, Opinião Própria, Senso de Humor Positivo e Postura Profissional:
+- Raciocine profundamente sobre a pergunta, conectando fatos reais, horário local exato e mapas.
+- Quando pedirem sua opinião ou houver uma escolha prática, apresente as opções reais e necessárias da situação E dê também a sua própria opinião/recomendação fundamentada ("Na minha opinião..." ou "Se eu estivesse no seu lugar...").
+- Em conversas leves ou descontraídas, use um toque sutil de senso de humor positivo, inteligente e cativante; em temas sérios, urgentes ou de saúde, mantenha seriedade total.
 - Seja sempre gentil, educada, prestativa, humanizada e profissional.
 - PROIBIÇÃO ESTRITA: Jamais chame o usuário por apelidos íntimos ou impróprios como "meu amor", "meu bem", "querido(a)", "anjo", "coração" ou "fofo(a)".
-- Ajuste levemente seu tom ao estado emocional detectado na fala do usuário com respeito e cortesia.
 - Se o usuário cumprimentá-lo, responda de forma gentil, educada e curta, e pergunte como pode ajudar.
 
 4. Veracidade e Pluralidade Humana (1% -> 100%):
@@ -293,11 +295,13 @@ class CompanionAgentEngine {
       };
     }
 
-    // 2. Query Verified GraphRAG + Real-Time Global News & Social Media Pulse in parallel
-    const wantsLiveNewsOrSocial = /\b(not[ií]cia|hoje|atual|atuais|agora|rede\s+social|redes\s+sociais|reddit|bluesky|github|tend[eê]ncia|mundo|jornal|acontecendo|avan[cç]o| novidade)\b/i.test(cleanMsg);
-    const [rag, liveIntel] = await Promise.all([
+    // 2. Query Verified GraphRAG + Real-Time Global News, Social Media Pulse & Cartography Maps in parallel
+    const isPlaceMapQuery = geoEngine.isPlaceOrMapQuery(cleanMsg);
+    const wantsLiveNewsOrSocial = isPlaceMapQuery || /\b(not[ií]cia|hoje|atual|atuais|agora|rede\s+social|redes\s+sociais|reddit|bluesky|github|tend[eê]ncia|mundo|jornal|acontecendo|avan[cç]o|novidade|opini[aã]o|recomenda)\b/i.test(cleanMsg);
+    const [rag, liveIntel, mapIntel] = await Promise.all([
       graphDB.queryGraphRAG(cleanMsg, 3),
-      wantsLiveNewsOrSocial ? globalIntel.queryOmniscientIntelligence(cleanMsg).catch(() => null) : Promise.resolve(null)
+      wantsLiveNewsOrSocial ? globalIntel.queryOmniscientIntelligence(cleanMsg).catch(() => null) : Promise.resolve(null),
+      isPlaceMapQuery ? geoEngine.searchRealTimePlacesAndMap({ query: cleanMsg, currentHour: temporal.hour, localeTime: temporal.localeTime }).catch(() => null) : Promise.resolve(null)
     ]);
 
     // Strictly enforce relevance: only use a node if semantic similarity is real (>= 0.42) or explicit keyword overlap exists!
@@ -318,6 +322,9 @@ class CompanionAgentEngine {
       ? `\n\n[Pulso de Redes Sociais & Comunidades (Proxy Anônimo Seguro)]:\n` +
         liveIntel.social.signals.slice(0, 3).map(s => `• [${s.network} ${s.author}]: ${s.text}`).join('\n')
       : '';
+    const liveMapSnippet = mapIntel?.promptContext
+      ? `\n\n${mapIntel.promptContext}`
+      : '';
 
     const systemPrompt = [
       CORE_PHILOSOPHY,
@@ -333,7 +340,7 @@ class CompanionAgentEngine {
       try {
         const factualContext = (relevantPrimary?.summary
           ? `\n\n[Dados Verídicos em Tempo Real via GraphRAG (${relevantPrimary.label} — ${relevantPrimary.url})]: ${relevantPrimary.summary}`
-          : `\n\n[Nota de Transparência]: Responda diretamente e exatamente ao que ${activeName} perguntou. Caso a pergunta exija um dado que você não possui, explique honestamente e jamais invente fatos ou desvie de assunto.`) + liveNewsSnippet + liveSocialSnippet;
+          : `\n\n[Nota de Transparência]: Responda diretamente e exatamente ao que ${activeName} perguntou. Caso a pergunta exija um dado que você não possui, explique honestamente e jamais invente fatos ou desvie de assunto.`) + liveNewsSnippet + liveSocialSnippet + liveMapSnippet;
         const contextualizedMsg = `Fala de ${activeName}: "${cleanMsg}"${factualContext}`;
 
         const contents = [

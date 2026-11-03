@@ -4,6 +4,9 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { streamWithThinking, buildRealtimeTemporalContext } from './llm.js';
 import { regulatoryEngine } from './regulatory_explainability.js';
+import { geoEngine } from './geo_engine.js';
+import { graphDB } from './graph_db.js';
+import { globalIntel } from './global_intelligence.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -322,7 +325,7 @@ export class AgentMemoryStore {
   /**
    * Executes a conversational turn with an agent (supports both text and voice transcript input)
    */
-  async converse({ agentId, message, userName = 'Criador', apiKey = '', voiceEnabled = false, clientTemporal = null }) {
+  async converse({ agentId, message, userName = 'Criador', apiKey = '', voiceEnabled = false, clientTemporal = null, clientGeo = null, clientIp = '' }) {
     const agent = this.agents.get(agentId);
     if (!agent) {
       throw new Error(`Agente "${agentId}" não encontrado.`);
@@ -345,14 +348,47 @@ export class AgentMemoryStore {
     const temporal = buildRealtimeTemporalContext(clientTemporal);
     const cleanMsg = (message || '').trim();
 
-    // 1. CONSULTA: Query agent's private vector knowledge base
+    // 1. CONSULTA: Query agent's private vector knowledge base + Real-Time Maps/Places + GraphRAG + Web/Social Intel
     const vectorMatches = this.queryAgentVectorMemory(agentId, cleanMsg, 3);
     const pat = this.patterns.get(agentId);
 
-    // 2. CONTEXTUALIZAÇÃO: Build private context prompt
+    const isMapOrPlaceQuery = cleanMsg && geoEngine.isPlaceOrMapQuery(cleanMsg);
+    const wantsLiveWebOrSocial = cleanMsg && (isMapOrPlaceQuery || /\b(not[ií]cia|hoje|atual|atuais|agora|rede\s+social|redes\s+sociais|avalia[cç][aã]o|opini[aã]o|recomenda|melhor|escolha|escolher|qual\s+voc[eê]|o\s+que\s+voc[eê]\s+acha)\b/i.test(cleanMsg));
+
+    const [mapIntel, ragRes, liveIntel] = await Promise.all([
+      isMapOrPlaceQuery
+        ? geoEngine.searchRealTimePlacesAndMap({
+            query: cleanMsg,
+            clientGeo,
+            clientIp,
+            currentHour: temporal.hour,
+            localeTime: temporal.localeTime
+          }).catch(() => null)
+        : Promise.resolve(null),
+      cleanMsg.length > 3 ? graphDB.queryGraphRAG(cleanMsg, 2).catch(() => null) : Promise.resolve(null),
+      wantsLiveWebOrSocial ? globalIntel.queryOmniscientIntelligence(cleanMsg).catch(() => null) : Promise.resolve(null)
+    ]);
+
+    // 2. CONTEXTUALIZAÇÃO: Build private context + real-time map/web/factual context
     const contextLines = vectorMatches.length > 0
       ? vectorMatches.map(m => `• [Memória Privada ${m.category} (Sim: ${(m.similarity * 100).toFixed(0)}%)]: ${m.text}`).join('\n')
       : '• Nenhuma memória prévia diretamente associada. Esta interação iniciará o aprendizado deste tópico.';
+
+    const topRagNode = ragRes?.seedNodes?.[0];
+    const ragContextBlock = (topRagNode && ragRes.topSimilarityScore >= 0.38)
+      ? `\n[Fatos Reais Verificados (GraphRAG — ${topRagNode.label})]: ${topRagNode.summary} (${topRagNode.url})`
+      : '';
+
+    const webSocialBlock = [
+      liveIntel?.news?.articles?.length
+        ? `[Sinais de Web, Sites e Notícias em Tempo Real]:\n` + liveIntel.news.articles.slice(0, 2).map(a => `• ${a.title} (${a.source})`).join('\n')
+        : '',
+      liveIntel?.social?.signals?.length
+        ? `[Pulso de Redes Sociais & Avaliações Públicas]:\n` + liveIntel.social.signals.slice(0, 2).map(s => `• [${s.network}]: ${s.text}`).join('\n')
+        : ''
+    ].filter(Boolean).join('\n');
+
+    const mapContextBlock = mapIntel?.promptContext ? `\n${mapIntel.promptContext}` : '';
 
     const recentHistory = (this.history.get(agentId) || []).slice(-4);
     const histLines = recentHistory.map(h => `${h.role === 'user' ? 'Criador' : agent.name}: ${this._sanitizeRespectfulTone(h.text)}`).join('\n');
@@ -364,11 +400,15 @@ export class AgentMemoryStore {
       try {
         const isAuraAgent = agent.id === 'aura';
         const auraPersonaRule = isAuraAgent
-          ? `POSTURA E ÉTICA CONVERSACIONAL DA AURA: Você é uma assistente inteligente, gentil, educada, prestativa e profissional, com comunicação humanizada, serena e respeitosa. PROIBIÇÃO ESTRITA: Jamais utilize apelidos íntimos, românticos ou informais como "meu amor", "meu bem", "querido(a)", "fofo(a)", "lindo(a)", "coração" ou "anjo". Trate todas as pessoas com cortesia, educação, gentileza e profissionalismo.`
+          ? `POSTURA, RACIOCÍNIO, OPINIÃO PRÓPRIA E SENSO DE HUMOR DA AURA:
+1) Raciocínio Real e Fatos: Analise profundamente o que a pessoa perguntou, cruzando horário local exato (${temporal.localeTime} de ${temporal.localeDate}), localização geográfica, mapas, sites e fatos reais.
+2) Opinião Própria + Opções Reais: Quando o usuário pedir sua opinião/recomendação ou precisar tomar uma decisão (ex.: escolher uma farmácia aberta agora, um serviço ou uma estratégia), apresente as opções reais e plausíveis disponíveis E dê também a SUA ESCOLHA/OPINIÃO PRÓPRIA fundamentada ("Se eu estivesse no seu lugar, eu iria na..." ou "Na minha opinião, a opção mais confiável agora é..."), explicando o motivo.
+3) Senso de Humor Positivo e Cativante (quando cabível): Em conversas cotidianas, curiosidades ou momentos descontraídos, use um toque sutil de bom humor positivo, inteligente e espirituoso que torna a conversa leve e cativante. Porém, em emergências, saúde ou assuntos sérios, mantenha seriedade e foco total.
+4) Educação e Postura Profissional: Seja gentil, educada, prestativa e humanizada, mas JAMAIS use apelidos íntimos como "meu amor", "meu bem", "querido(a)", "fofo(a)", "lindo(a)", "coração" ou "anjo".`
           : '';
         const voiceDirective = voiceEnabled
-          ? `DIRETRIZ ESTRITA DE VOZ HUMANA E PROFISSIONAL: Você fala diretamente por uma interface de áudio. 1) Responda em no máximo 2 ou 3 frases claras, gentis, educadas e profissionais. 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Proibido usar apelidos íntimos como "meu amor" ou "meu bem". 4) Escreva números por extenso e use linguagem falada natural, cortês e objetiva.`
-          : `Diretriz de Tom: Gentil, educado, profissional, humanizado, respeitoso e direto ao ponto. Nunca use apelidos íntimos ("meu amor", "meu bem", etc.) e nunca repita a pergunta do criador.`;
+          ? `DIRETRIZ ESTRITA DE VOZ HUMANA E PROFISSIONAL: Você fala diretamente por uma interface de áudio. 1) Responda em 2 a 4 frases naturais, claras, gentis, inteligentes e bem raciocinadas. 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Proibido usar apelidos íntimos como "meu amor" ou "meu bem". 4) Escreva números e horas de forma fluida para fala.`
+          : `Diretriz de Tom: Gentil, educado, inteligente, profissional, humanizado e direto ao ponto. Nunca use apelidos íntimos ("meu amor", "meu bem", etc.) e nunca repita a pergunta do usuário.`;
 
         const sysInstruction = [
           MANDATORY_SYSTEM_DIRECTIVE,
@@ -377,14 +417,18 @@ export class AgentMemoryStore {
           agent.instructions ? `Instruções Customizadas do Administrador: ${agent.instructions}` : '',
           voiceDirective,
           `Padrão de Conversa Adaptado: Frases de tamanho médio ${pat?.avgSentenceLength || 12} palavras. Tópicos frequentes: ${pat?.topics?.join(', ') || 'Nenhum'}.`,
-          `Base de Conhecimento Vetorial Própria Consultada:\n${contextLines}`
+          `Base de Conhecimento Vetorial Própria Consultada:\n${contextLines}`,
+          ragContextBlock,
+          webSocialBlock,
+          mapContextBlock
         ].filter(Boolean).join('\n\n');
 
         const prompt = [
           temporal.promptHeader,
+          mapContextBlock ? `Dados Cartográficos e de Estabelecimentos em Tempo Real:\n${mapContextBlock}` : '',
           histLines ? `Histórico Recente:\n${histLines}\n` : '',
           `Mensagem do Usuário (${userName}): "${cleanMsg}"`,
-          `Responda de forma clara, gentil, educada, profissional e humanizada, sem apelidos íntimos ("meu amor", etc.), aplicando o conhecimento vetorial privado.`
+          `Raciocine sobre a pergunta usando os fatos reais, horário local exato (${temporal.localeTime}) e dados do mapa/web quando aplicável. Se cabível, apresente as opções reais e inclua sua opinião/recomendação própria de forma gentil, educada e profissional.`
         ].filter(Boolean).join('\n\n');
 
         const res = await streamWithThinking({
@@ -399,9 +443,9 @@ export class AgentMemoryStore {
       }
     }
 
-    // High-fidelity fallback synthesis honoring tone and private vector knowledge
+    // High-fidelity fallback synthesis honoring tone, local time, maps and private vector knowledge
     if (!reply) {
-      reply = this._sanitizeRespectfulTone(this._synthesizeGroundedResponse(agent, cleanMsg, userName, vectorMatches, pat));
+      reply = this._sanitizeRespectfulTone(this._synthesizeGroundedResponse(agent, cleanMsg, userName, vectorMatches, pat, temporal, mapIntel));
     }
 
     // 3. ATUALIZAÇÃO: Store new learned insight into agent's private vector knowledge base
@@ -436,7 +480,15 @@ export class AgentMemoryStore {
       role: agent.role,
       status: agent.status,
       reply,
-      voiceText: reply.replace(/[#*`_~]/g, '').slice(0, 300),
+      voiceText: reply.replace(/[#*`_~]/g, '').slice(0, 340),
+      temporal,
+      mapCard: mapIntel ? {
+        category: mapIntel.category,
+        localityLabel: mapIntel.locality.localityLabel,
+        googleMapsLiveUrl: mapIntel.googleMapsLiveUrl,
+        nexusEarthUrl: mapIntel.nexusEarthUrl,
+        places: mapIntel.places
+      } : null,
       vectorMatches,
       newLearnedMemory: newLearned,
       xaiPassport: xaiPass,
@@ -453,16 +505,24 @@ export class AgentMemoryStore {
       .trim();
   }
 
-  _synthesizeGroundedResponse(agent, msg, userName, vectorMatches, pat) {
+  _synthesizeGroundedResponse(agent, msg, userName, vectorMatches, pat, temporal = null, mapIntel = null) {
     const memoryGrounding = vectorMatches.length > 0 && vectorMatches[0].similarity > 0.4
       ? ` Com base no que aprendi anteriormente em minha base vetorial ("${vectorMatches[0].text.slice(0, 75)}..."), `
       : ' ';
 
     if (agent.id === 'aura') {
-      if (/aprend|desenvolv|evolu|como est/i.test(msg)) {
-        return `Olá! Meu aprendizado contínuo está evoluindo muito bem. Estou pronta para ajudar você com clareza, gentileza, educação e profissionalismo. Qual tema gostaria de analisar agora?`;
+      if (/\b(que\s+horas\s+s[aã]o|qual\s+(é\s+)?a\s+hora|hor[aá]rio\s+atual|que\s+dia\s+[eé]\s+hoje|data\s+de\s+hoje)\b/i.test(msg) && temporal) {
+        return `Agora são exatamente ${temporal.localeTime} (${temporal.period}, fuso ${temporal.timeZone}) e hoje é ${temporal.localeDate}. Como posso ajudar você na programação do seu dia?`;
       }
-      return `Olá! É um prazer falar com você. Estou à disposição para ajudar com informações, análises e tarefas de forma clara, gentil e profissional. Como posso ajudar hoje?`;
+      if (mapIntel && mapIntel.places && mapIntel.places.length > 0) {
+        const top = mapIntel.places[0];
+        const second = mapIntel.places[1];
+        return `Consultei o mapa em tempo real para ${mapIntel.locality.localityLabel} agora às ${temporal?.localeTime || 'agora'}. As melhores opções próximas são: ${top.name} (${top.address}, a cerca de ${top.distanceKm} km, ${top.statusBadge})${second ? ` e ${second.name} (${second.address})` : ''}. Na minha opinião, a escolha mais segura e prática agora é ir na ${top.name}, pois tem alta confiabilidade de atendimento neste horário. Você também pode abrir a rota exata no Google Maps pelo painel abaixo.`;
+      }
+      if (/aprend|desenvolv|evolu|como est/i.test(msg)) {
+        return `Olá! Meu aprendizado contínuo está evoluindo muito bem. Estou pronta para raciocinar junto com você, analisar fatos reais, mapas e horários locais com gentileza e profissionalismo. Qual tema gostaria de analisar agora?`;
+      }
+      return `Olá! É um prazer falar com você. Estou à disposição para analisar fatos, localizar serviços no mapa ou oferecer recomendações práticas de forma gentil e profissional. Como posso ajudar hoje?`;
     }
 
     if (agent.id === 'planner') {

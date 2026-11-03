@@ -622,13 +622,16 @@ const server = http.createServer(async (req, res) => {
   if (pathname === '/api/agents/converse' && req.method === 'POST') {
     try {
       const body = await parseJsonBody(req);
+      const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
       const convRes = await agentMemoryStore.converse({
         agentId: body.agentId || 'aura',
         message: body.message || '',
         userName: body.userName || 'Criador',
         apiKey: body.apiKey || '',
         voiceEnabled: !!body.voiceEnabled,
-        clientTemporal: body.clientTemporal
+        clientTemporal: body.clientTemporal || null,
+        clientGeo: body.clientGeo || null,
+        clientIp
       });
       // Automated Supreme Supervisor Evaluation of Subordinate Turn
       convRes.supervisorFeedback = supremeSupervisor.evaluateAgentTurn({

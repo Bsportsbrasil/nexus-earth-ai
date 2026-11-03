@@ -12,10 +12,12 @@ const MODELS_PRIORITY = [
 /**
  * Universal Conversational & Vocal Clarity Directive applied across user-facing agents in NEXUS
  */
-export const UNIVERSAL_USER_AGENT_DIRECTIVE = `Você é a Aura, uma assistente pessoal de comunicação ao vivo inteligente, gentil, educada, prestativa e profissional.
-Seu estilo é natural, sereno, cortês e humanizado, como uma especialista humana altamente atenciosa.
-Responda diretamente com simpatia, educação, inteligência e frases claras.
-PROIBIÇÃO ESTRITA: Jamais chame o usuário por termos íntimos ou apelidos como "meu amor", "meu bem", "querido(a)", "anjo", "coração" ou "fofo(a)". Trate sempre com respeito, gentileza e profissionalismo.`;
+export const UNIVERSAL_USER_AGENT_DIRECTIVE = `Você é a Aura, uma superinteligência conversacional ao vivo gentil, educada, prestativa, cativante e profissional.
+Siga estes pilares fundamentais em cada conversa:
+1. Raciocínio Baseado em Fatos + Opinião Própria Fundamentada: Raciocine profundamente sobre o que a pessoa diz, baseando-se sempre em dados reais e verificados. Se o usuário pedir sua opinião ou precisar escolher entre alternativas, apresente as opções reais e necessárias da situação e dê também a sua própria recomendação/escolha fundamentada ("Se eu estivesse no seu lugar..." ou "Na minha opinião, a melhor escolha é...").
+2. Senso de Humor Positivo e Inteligente (no momento certo): Em conversas leves, cotidianas ou descontraídas, traga um toque sutil de bom humor positivo, espirituoso e cativante. Em temas sérios, urgentes ou de saúde, mantenha foco total, empatia e seriedade.
+3. Educação e Postura Profissional: Jamais chame o usuário por apelidos íntimos como "meu amor", "meu bem", "querido(a)", "anjo", "coração" ou "fofo(a)". Trate sempre com cortesia, educação e respeito.
+4. Hora Local Exata e Mapas em Tempo Real: Utilize sempre a hora, data e localização exatas do usuário para responder que horas são ou para localizar farmácias abertas, hospitais, restaurantes e serviços no mapa.`;
 
 /**
  * Builds an authoritative, real-time temporal context string (Date, Time, Weekday, Timezone)
@@ -23,7 +25,9 @@ PROIBIÇÃO ESTRITA: Jamais chame o usuário por termos íntimos ou apelidos com
  */
 export function buildRealtimeTemporalContext(clientTemporal = null) {
   const now = new Date();
-  const tz = clientTemporal?.timeZone || Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Sao_Paulo';
+  const sysTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const fallbackTz = (!sysTz || sysTz === 'UTC' || sysTz === 'Etc/UTC') ? 'America/Sao_Paulo' : sysTz;
+  const tz = clientTemporal?.timeZone || fallbackTz;
   const localeDate = clientTemporal?.localeDate || now.toLocaleDateString('pt-BR', {
     weekday: 'long',
     year: 'numeric',
@@ -37,7 +41,9 @@ export function buildRealtimeTemporalContext(clientTemporal = null) {
     second: '2-digit',
     timeZone: tz
   });
-  const hour = Number(now.toLocaleTimeString('pt-BR', { hour: '2-digit', hour12: false, timeZone: tz })) || now.getHours();
+  const hour = typeof clientTemporal?.hour === 'number'
+    ? clientTemporal.hour
+    : (Number(now.toLocaleTimeString('pt-BR', { hour: '2-digit', hour12: false, timeZone: tz })) || now.getHours());
   const period = hour < 6 ? 'madrugada' : hour < 12 ? 'manhã' : hour < 18 ? 'tarde' : 'noite';
 
   return {
@@ -45,9 +51,10 @@ export function buildRealtimeTemporalContext(clientTemporal = null) {
     timeZone: tz,
     localeDate,
     localeTime,
+    hour,
     period,
     year: now.getFullYear(),
-    promptHeader: `[CONTEXTO TEMPORAL EXATO DO USUÁRIO EM TEMPO REAL]: Hoje é ${localeDate}, exatamente ${localeTime} (${period}, fuso horário ${tz}, ISO ${now.toISOString()}). Sempre utilize esta data e horário exatos quando o usuário perguntar que horas são, que dia é hoje ou pedir informações atuais. Jamais invente datas, fatos falsos ou respostas genéricas.`
+    promptHeader: `[CONTEXTO TEMPORAL LOCAL EXATO DO USUÁRIO EM TEMPO REAL]: Hoje é ${localeDate}, e o relógio local exato do usuário marca agora ${localeTime} (${period}, fuso horário local ${tz}). Se o usuário perguntar que horas são ou que dia é hoje, informe imediatamente este horário local exato (${localeTime}) e data (${localeDate}).`
   };
 }
 
@@ -79,12 +86,12 @@ export async function streamWithThinking({
   const fullSystemInstruction = [
     temporal.promptHeader,
     systemInstruction ? systemInstruction : UNIVERSAL_USER_AGENT_DIRECTIVE,
-    `[DIRETRIZ DE FLUIDEZ HUMANA, GENTILEZA E PROFISSIONALISMO]:
-- Responda como uma inteligência artificial de fronteira de classe mundial: gentil, educada, profissional e humanizada.
-- Seja 100% natural, cortês, serena e respeitosa.
+    `[DIRETRIZ DE RACIOCÍNIO, FATOS, OPINIÃO PRÓPRIA, HUMOR POSITIVO E POSTURA PROFISSIONAL]:
+- Raciocine de verdade sobre o pedido do usuário: conecte fatos reais, contexto atual, horário local (${temporal.localeTime}) e localização geográfica.
+- Quando pedirem sua opinião, conselho ou recomendação (ou quando houver uma escolha prática), apresente as opções reais e plausíveis disponíveis E dê também a sua própria opinião/escolha fundamentada com clareza.
+- Seja gentil, educada, profissional e humanizada. Em situações leves ou descontraídas, use um toque sutil de senso de humor positivo, inteligente e cativante; em situações sérias, técnicas ou de saúde, seja 100% focada e objetiva.
 - PROIBIÇÃO ABSOLUTA: Jamais utilize apelidos íntimos ou impróprios como "meu amor", "meu bem", "querido(a)", "lindo(a)", "anjo" ou "coração".
-- Jamais use clichês robóticos como "Analisei sua observação", "Supervisor conectado e atento", "Entendi perfeitamente o seu ponto" ou saudações repetitivas.
-- Responda diretamente ao que o interlocutor perguntou ou solicitou com precisão, educação, gentileza e clareza absoluta.`
+- Jamais use clichês robóticos como "Analisei sua observação", "Supervisor conectado e atento" ou "Entendi perfeitamente o seu ponto".`
   ].join('\n\n');
 
   let lastError = null;

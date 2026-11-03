@@ -313,6 +313,95 @@ const NexusMobile = (function () {
     setInterval(update, 10000);
   }
 
+  /* --- Real-Time User Local Clock, Timezone & Geolocation Helper --- */
+  let cachedClientGeo = null;
+
+  function getClientTemporalContext() {
+    const now = new Date();
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Sao_Paulo';
+    return {
+      iso: now.toISOString(),
+      timeZone: tz,
+      localeDate: now.toLocaleDateString('pt-BR', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: tz
+      }),
+      localeTime: now.toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZone: tz
+      }),
+      hour: now.getHours()
+    };
+  }
+
+  function resolveClientGeoIfNeeded(queryText) {
+    if (cachedClientGeo) return Promise.resolve(cachedClientGeo);
+    const needsGeo = /\b(onde|farm[aá]cia|drogaria|abert[oa]|perto|pr[oó]xim[oa]|mapa|google\s+maps|google\s+earth|hospital|pronto\s*socorro|upa|restaurante|mercado|supermercado|posto|banco|localiza)\b/i.test(queryText || '');
+    if (!needsGeo || !('geolocation' in navigator)) return Promise.resolve(null);
+    return new Promise((resolve) => {
+      let settled = false;
+      const timer = setTimeout(() => {
+        if (!settled) { settled = true; resolve(cachedClientGeo); }
+      }, 1600);
+      try {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            if (!settled) {
+              settled = true;
+              clearTimeout(timer);
+              cachedClientGeo = {
+                lat: pos.coords.latitude,
+                lon: pos.coords.longitude
+              };
+              resolve(cachedClientGeo);
+            }
+          },
+          () => {
+            if (!settled) { settled = true; clearTimeout(timer); resolve(null); }
+          },
+          { enableHighAccuracy: false, timeout: 1500, maximumAge: 300000 }
+        );
+      } catch (_) {
+        if (!settled) { settled = true; clearTimeout(timer); resolve(null); }
+      }
+    });
+  }
+
+  function buildMapCardHtml(mapCard) {
+    if (!mapCard) return '';
+    const placesHtml = Array.isArray(mapCard.places) && mapCard.places.length > 0
+      ? mapCard.places.slice(0, 3).map(p => `
+          <div style="background:rgba(15,23,42,0.75);border:1px solid rgba(56,189,248,0.25);border-radius:10px;padding:8px 10px;margin-top:6px;text-align:left;">
+            <div style="font-weight:700;color:#fff;font-size:0.8rem;display:flex;justify-content:space-between;align-items:center;gap:6px;">
+              <span>📍 ${escapeHtml(p.name)}</span>
+              <span style="font-size:0.68rem;color:#38bdf8;white-space:nowrap;">~${escapeHtml(String(p.distanceKm))} km</span>
+            </div>
+            <div style="font-size:0.72rem;color:#cbd5e1;margin-top:2px;">${escapeHtml(p.address)}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:5px;gap:6px;flex-wrap:wrap;">
+              <span style="font-size:0.68rem;color:#4ade80;">${escapeHtml(p.statusBadge)}</span>
+              <a href="${escapeHtml(p.googleMapsUrl)}" target="_blank" rel="noopener" style="font-size:0.7rem;color:#00f5ff;text-decoration:none;font-weight:700;background:rgba(0,245,255,0.12);padding:3px 8px;border-radius:6px;border:1px solid rgba(0,245,255,0.3);">🗺️ Rota no Maps</a>
+            </div>
+          </div>
+        `).join('')
+      : '';
+
+    return `
+      <div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(56,189,248,0.22);text-align:left;">
+        <div style="font-size:0.72rem;font-weight:700;color:#38bdf8;margin-bottom:4px;">🛰️ RADAR CARTOGRÁFICO AO VIVO (${escapeHtml(mapCard.localityLabel || 'Localização Atual')})</div>
+        ${placesHtml}
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+          <a href="${escapeHtml(mapCard.googleMapsLiveUrl)}" target="_blank" rel="noopener" style="flex:1;min-width:140px;text-align:center;font-size:0.74rem;font-weight:700;color:#020617;background:linear-gradient(135deg,#38bdf8,#00f5ff);padding:7px 10px;border-radius:8px;text-decoration:none;">🗺️ Abrir Google Maps</a>
+          <a href="${escapeHtml(mapCard.nexusEarthUrl)}" style="flex:1;min-width:130px;text-align:center;font-size:0.74rem;font-weight:700;color:#e2e8f0;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);padding:7px 10px;border-radius:8px;text-decoration:none;">🌍 NEXUS Earth 3D</a>
+        </div>
+      </div>
+    `;
+  }
+
   /* --- Dedicated AURA Viva Mascot Page (Cute Tech Figure + Real-Time Communication Bar) --- */
   function initAuraLiveMascot() {
     const botAvatar = document.getElementById('aura-cute-bot-avatar');
@@ -377,6 +466,8 @@ const NexusMobile = (function () {
       }
 
       try {
+        const clientTemporal = getClientTemporalContext();
+        const clientGeo = await resolveClientGeoIfNeeded(q);
         const res = await fetch('/api/agents/converse', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -384,6 +475,8 @@ const NexusMobile = (function () {
             agentId: 'aura',
             message: q,
             voiceEnabled: true,
+            clientTemporal,
+            clientGeo,
             apiKey: localStorage.getItem('nexus_gemini_key') || ''
           })
         });
@@ -392,7 +485,7 @@ const NexusMobile = (function () {
           const data = await res.json();
           const reply = data.reply || 'Olá! Estou à disposição. Como posso ajudar você agora?';
           if (captionBox) {
-            captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}`;
+            captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}${buildMapCardHtml(data.mapCard)}`;
           }
           if (ttsEnabled) {
             setBotState('speaking', 'AURA respondendo...');
@@ -570,12 +663,16 @@ const NexusMobile = (function () {
       const typingId = appendTypingBeacon();
 
       try {
+        const clientTemporal = getClientTemporalContext();
+        const clientGeo = await resolveClientGeoIfNeeded(q);
         const res = await fetch('/api/agents/converse', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             agentId: 'aura',
             message: q,
+            clientTemporal,
+            clientGeo,
             apiKey: localStorage.getItem('nexus_gemini_key') || ''
           })
         });
@@ -585,7 +682,7 @@ const NexusMobile = (function () {
         if (res.ok) {
           const data = await res.json();
           const reply = data.reply || 'Olá! Estou aqui para colaborar com você.';
-          appendChatBubble(reply, 'aura');
+          appendChatBubble(reply, 'aura', data.mapCard);
           if (ttsEnabled) speakNeural(data.voiceText || reply);
         } else {
           appendChatBubble('Identifiquei uma oscilação momentânea de rede. Pode tentar novamente?', 'aura');
@@ -596,14 +693,14 @@ const NexusMobile = (function () {
       }
     }
 
-    function appendChatBubble(text, sender) {
+    function appendChatBubble(text, sender, mapCard = null) {
       if (!streamArea) return;
       const b = document.createElement('div');
       b.className = `chat-bubble ${sender}`;
       const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
       b.innerHTML = `
-        <div class="bubble-content">${escapeHtml(text)}</div>
+        <div class="bubble-content">${escapeHtml(text)}${sender === 'aura' ? buildMapCardHtml(mapCard) : ''}</div>
         <div class="bubble-meta-hud">
           <span>${sender === 'user' ? 'Você' : 'AURA • GEMINI 3.5'}</span>
           <span>•</span>
