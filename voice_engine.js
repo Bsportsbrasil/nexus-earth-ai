@@ -22,8 +22,46 @@ const VoiceEngine = (function () {
   let isSpeaking = false;
   let activeUtterance = null;
   let activeAudioElement = null;
+  let sharedAudio = null;
+  let audioUnlocked = false;
   let stopRequested = false;
   let preferredVoiceName = localStorage.getItem('nexus_preferred_voice') || '';
+
+  function ensureSharedAudio() {
+    if (!sharedAudio && typeof Audio !== 'undefined') {
+      sharedAudio = new Audio();
+      sharedAudio.preload = 'auto';
+    }
+    return sharedAudio;
+  }
+
+  function unlockAudioOnGesture() {
+    if (audioUnlocked) return;
+    const el = ensureSharedAudio();
+    if (!el) return;
+    audioUnlocked = true;
+    try {
+      el.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
+      el.volume = 0.01;
+      const p = el.play();
+      if (p && p.then) {
+        p.then(() => {
+          el.pause();
+          el.volume = 1.0;
+        }).catch(() => {
+          audioUnlocked = false;
+        });
+      }
+    } catch (_) {
+      audioUnlocked = false;
+    }
+  }
+
+  if (typeof window !== 'undefined' && window.addEventListener) {
+    ['pointerdown', 'touchstart', 'click', 'keydown'].forEach((ev) => {
+      window.addEventListener(ev, unlockAudioOnGesture, { passive: true });
+    });
+  }
 
   const LANG_LOCALE_MAP = {
     pt: { bcp47: 'pt-BR', prefix: 'pt', regex: /pt[-_]?br|pt[-_]?pt|portugu/i },
@@ -244,19 +282,20 @@ const VoiceEngine = (function () {
    */
   function playCloudNeuralChunks(chunks, bcp47, rate, persona, onChunk, onDone, resolve, fallbackFn) {
     let idx = 0;
-    let preloadedAudio = null;
 
     function buildAudioUrl(phrase) {
-      return `/api/tts?persona=${encodeURIComponent(persona || 'aura')}&tl=${encodeURIComponent(bcp47)}&q=${encodeURIComponent(phrase)}`;
+      let localKey = '';
+      try { localKey = localStorage.getItem('nexus_gemini_key') || ''; } catch (_) {}
+      const keyParam = localKey ? `&key=${encodeURIComponent(localKey)}` : '';
+      return `/api/tts?persona=${encodeURIComponent(persona || 'aura')}&tl=${encodeURIComponent(bcp47)}&q=${encodeURIComponent(phrase)}${keyParam}`;
     }
 
     function applyPureStudioTimbre(audioEl) {
-      // Gemini 3.8 Neural TTS (Leda) natively generates a sweet, cute, gentle and warm 24kHz voice.
-      // Keep preservesPitch = true and natural 1.0x rate so zero time-stretch artifacts occur.
       if ('preservesPitch' in audioEl) audioEl.preservesPitch = true;
       if ('mozPreservesPitch' in audioEl) audioEl.mozPreservesPitch = true;
       if ('webkitPreservesPitch' in audioEl) audioEl.webkitPreservesPitch = true;
       audioEl.playbackRate = 1.0;
+      audioEl.volume = 1.0;
     }
 
     function playNext() {
@@ -277,18 +316,13 @@ const VoiceEngine = (function () {
         return;
       }
 
-      const audio = preloadedAudio || new Audio(buildAudioUrl(currentPhrase));
-      preloadedAudio = null;
+      const audio = ensureSharedAudio() || new Audio();
+      audio.onplay = null;
+      audio.onended = null;
+      audio.onerror = null;
+      audio.src = buildAudioUrl(currentPhrase);
       applyPureStudioTimbre(audio);
       activeAudioElement = audio;
-
-      // Preload next chunk in background so transition has zero network lag
-      if (idx < chunks.length && chunks[idx]) {
-        try {
-          preloadedAudio = new Audio(buildAudioUrl(chunks[idx].trim()));
-          preloadedAudio.preload = 'auto';
-        } catch (_) {}
-      }
 
       audio.onplay = () => {
         if (onChunk) onChunk({ phrase: currentPhrase, index: currentIndex, total: chunks.length });
@@ -439,8 +473,10 @@ const VoiceEngine = (function () {
     activeUtterance = null;
     if (activeAudioElement) {
       try {
+        activeAudioElement.onplay = null;
+        activeAudioElement.onended = null;
+        activeAudioElement.onerror = null;
         activeAudioElement.pause();
-        activeAudioElement.src = '';
       } catch (_) {}
       activeAudioElement = null;
     }

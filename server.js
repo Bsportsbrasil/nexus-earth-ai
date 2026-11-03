@@ -937,9 +937,10 @@ const server = http.createServer(async (req, res) => {
 
   // 5a-3. Expressive Gemini 3.8 Neural Audio TTS Proxy (/api/tts) — Sweet, Cute, Gentle & Human Voice (Leda)
   if (pathname === '/api/tts' && req.method === 'GET') {
-    const q = (parsedUrl.searchParams.get('q') || '').trim().slice(0, 600);
-    const tl = (parsedUrl.searchParams.get('tl') || 'pt-BR').trim();
-    const persona = (parsedUrl.searchParams.get('persona') || 'aura').trim().toLowerCase();
+    const q = (url.searchParams.get('q') || '').trim().slice(0, 600);
+    const tl = (url.searchParams.get('tl') || 'pt-BR').trim();
+    const persona = (url.searchParams.get('persona') || 'aura').trim().toLowerCase();
+    const clientKey = (url.searchParams.get('key') || '').trim();
     if (!q) {
       res.writeHead(400);
       return res.end('Missing q');
@@ -963,7 +964,7 @@ const server = http.createServer(async (req, res) => {
       return res.end(cached.buffer);
     }
 
-    const geminiKey = (process.env.GEMINI_API_KEY || '').trim();
+    const geminiKey = (clientKey || process.env.GEMINI_API_KEY || '').trim();
     if (geminiKey) {
       const isSupervisor = persona === 'supervisor';
       const voiceName = isSupervisor ? 'Charon' : 'Leda';
@@ -976,6 +977,7 @@ const server = http.createServer(async (req, res) => {
         for (const ttsModel of ['gemini-3.8-flash-lite-tts', 'gemini-3.8-flash-tts']) {
           const gResp = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
             method: 'POST',
+            signal: AbortSignal.timeout(7500),
             headers: {
               'x-goog-api-key': geminiKey,
               'Content-Type': 'application/json'
