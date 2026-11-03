@@ -354,13 +354,18 @@ export class AgentMemoryStore {
 
     if (hasKey && cleanMsg) {
       try {
+        const isAuraAgent = agent.id === 'aura';
+        const auraSweetnessRule = isAuraAgent
+          ? `PERSONALIDADE VOCAL DA AURA: Sua voz e seu jeito de falar são doces, fofos, gentis, meigos e muito acolhedores. Fale com ternura, carinho genuíno e leveza, fazendo a pessoa se sentir abraçada e especial.`
+          : '';
         const voiceDirective = voiceEnabled
-          ? `DIRETRIZ ESTRITA DE VOZ HUMANA: Você fala diretamente por uma interface de áudio. 1) Responda em no máximo 2 ou 3 frases diretas, calorosas e familiares. 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Escreva números por extenso e use linguagem falada natural com pergunta curta ao final.`
-          : `Diretriz de Tom: Natural, amigável, acolhedor, familiar e direto ao ponto. Nunca repita a pergunta do criador.`;
+          ? `DIRETRIZ ESTRITA DE VOZ HUMANA: Você fala diretamente por uma interface de áudio. 1) Responda em no máximo 2 ou 3 frases diretas, doces, gentis e familiares. 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Escreva números por extenso e use linguagem falada meiga e natural com pergunta curta ao final.`
+          : `Diretriz de Tom: Natural, doce, gentil, acolhedor, familiar e direto ao ponto. Nunca repita a pergunta do criador.`;
 
         const sysInstruction = [
           MANDATORY_SYSTEM_DIRECTIVE,
           `\nIdentidade Específica do Agente: ${agent.name} (${agent.role}).`,
+          auraSweetnessRule,
           agent.instructions ? `Instruções Customizadas do Administrador: ${agent.instructions}` : '',
           voiceDirective,
           `Padrão de Conversa Adaptado: Frases de tamanho médio ${pat?.avgSentenceLength || 12} palavras. Tópicos frequentes: ${pat?.topics?.join(', ') || 'Nenhum'}.`,
@@ -439,9 +444,9 @@ export class AgentMemoryStore {
 
     if (agent.id === 'aura') {
       if (/aprend|desenvolv|evolu|como est/i.test(msg)) {
-        return `Olá! Hoje meu aprendizado avançou muito: estive refinando minha percepção empática, compreendendo as nuances de cada conversa e organizando minhas memórias com total segurança e respeito. É fascinante como cada interação me ensina a me comunicar com mais clareza e acolhimento. O que você gostaria de explorar comigo agora?`;
+        return `Oi! Hoje meu aprendizado avançou com tanta doçura... estive cuidando de cada detalhe para conversar com você de um jeitinho bem meigo, gentil e acolhedor. O que você quer descobrir junto comigo agora?`;
       }
-      return `Olá! Fico muito feliz em falar com você. Estou pronta para te apoiar e aprender com as suas diretrizes, sempre de forma direta, acolhedora e natural. Como posso colaborar hoje?`;
+      return `Oi! Que alegria ouvir você por aqui! Estou prontinha para te ouvir e ajudar com todo o carinho e gentileza do mundo. Sobre o que vamos conversar hoje?`;
     }
 
     if (agent.id === 'planner') {

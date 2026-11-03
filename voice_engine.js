@@ -93,7 +93,7 @@ const VoiceEngine = (function () {
     }
 
     const femaleFavsByLang = {
-      pt: [/francisca.*natural/i, /thalita.*natural/i, /leila.*natural/i, /francisca/i, /thalita/i, /google.*portugu/i, /luciana/i, /maria/i, /female|feminina/i],
+      pt: [/thalita.*natural/i, /francisca.*natural/i, /leila.*natural/i, /thalita/i, /francisca/i, /google.*portugu/i, /luciana/i, /maria/i, /female|feminina/i],
       en: [/aria.*natural/i, /jenny.*natural/i, /ava.*natural/i, /samantha/i, /google.*us/i, /female/i],
       es: [/elvira.*natural/i, /dalia.*natural/i, /paloma/i, /paulina/i, /google.*espa/i, /female/i],
       fr: [/denise.*natural/i, /eloise/i, /amelie/i, /google.*fran/i],
@@ -229,15 +229,34 @@ const VoiceEngine = (function () {
   }
 
   /**
-   * Plays text using the Cloud Neural Audio Stream (/api/tts) with next-chunk prebuffering.
+   * Plays text using the Cloud Neural Audio Stream (/api/tts) with next-chunk prebuffering
+   * and Sweet/Cute Acoustic Timbre Shaping (pitch-preserved formant brightness via preservesPitch = false).
    * Falls back to browser SpeechSynthesis ONLY if offline.
    */
-  function playCloudNeuralChunks(chunks, bcp47, rate, onChunk, onDone, resolve, fallbackFn) {
+  function playCloudNeuralChunks(chunks, bcp47, rate, persona, onChunk, onDone, resolve, fallbackFn) {
     let idx = 0;
     let preloadedAudio = null;
 
     function buildAudioUrl(phrase) {
       return `/api/tts?tl=${encodeURIComponent(bcp47)}&q=${encodeURIComponent(phrase)}`;
+    }
+
+    function applyCuteGentleTimbre(audioEl, phrase) {
+      const isAura = !persona || persona === 'aura';
+      if (isAura) {
+        // Disable pitch preservation so a subtle 1.12x speed increase raises vocal pitch (+2 semitones)
+        // giving AURA a sweet, cute, youthful and gentle voice without sounding rushed!
+        if ('preservesPitch' in audioEl) audioEl.preservesPitch = false;
+        if ('mozPreservesPitch' in audioEl) audioEl.mozPreservesPitch = false;
+        if ('webkitPreservesPitch' in audioEl) audioEl.webkitPreservesPitch = false;
+
+        let targetRate = 1.12;
+        if (phrase && phrase.endsWith('?')) targetRate = 1.15; // extra cute inquisitive lift on questions
+        else if (phrase && (phrase.endsWith('...') || phrase.endsWith('…'))) targetRate = 1.08; // gentle thoughtful warmth
+        audioEl.playbackRate = targetRate;
+      } else {
+        audioEl.playbackRate = Math.min(1.15, Math.max(0.95, rate || 1.02));
+      }
     }
 
     function playNext() {
@@ -260,7 +279,7 @@ const VoiceEngine = (function () {
 
       const audio = preloadedAudio || new Audio(buildAudioUrl(currentPhrase));
       preloadedAudio = null;
-      audio.playbackRate = Math.min(1.15, Math.max(0.95, rate || 1.02));
+      applyCuteGentleTimbre(audio, currentPhrase);
       activeAudioElement = audio;
 
       // Preload next chunk in background so transition has zero network lag
@@ -281,12 +300,11 @@ const VoiceEngine = (function () {
           resolve();
           return;
         }
-        const pauseMs = currentPhrase.endsWith('...') ? 160 : 55;
+        const pauseMs = currentPhrase.endsWith('...') ? 150 : 50;
         setTimeout(playNext, pauseMs);
       };
 
       audio.onerror = () => {
-        // If cloud endpoint is unreachable (e.g. offline), seamlessly fall back to local synthesizer for remaining chunks
         if (fallbackFn && currentIndex === 0) {
           fallbackFn();
         } else {
@@ -378,15 +396,16 @@ const VoiceEngine = (function () {
           u.lang = bestLocalVoice?.lang || bcp47;
           if (bestLocalVoice) u.voice = bestLocalVoice;
 
-          let phraseRate = rate;
-          let phrasePitch = pitch;
+          const isAuraPersona = !persona || persona === 'aura';
+          let phraseRate = isAuraPersona ? Math.max(rate, 1.04) : rate;
+          let phrasePitch = isAuraPersona ? Math.max(pitch, 1.16) : pitch; // sweet, cute & gentle vocal timbre
 
           if (phrase.endsWith('?')) {
-            phrasePitch = Math.min(1.18, pitch * 1.06);
+            phrasePitch = Math.min(1.26, phrasePitch * 1.06);
           } else if (phrase.endsWith('...')) {
-            phraseRate = Math.max(0.95, rate * 0.96);
+            phraseRate = Math.max(0.96, phraseRate * 0.96);
           } else if (phrase.endsWith('.')) {
-            phraseRate = Math.max(0.96, rate * 0.98);
+            phraseRate = Math.max(0.98, phraseRate * 0.98);
           }
 
           u.rate = phraseRate;
@@ -425,7 +444,7 @@ const VoiceEngine = (function () {
       if (hasLocalNeural) {
         speakLocalBrowserFallback();
       } else {
-        playCloudNeuralChunks(chunks, bcp47, rate, onChunk, onDone, resolve, speakLocalBrowserFallback);
+        playCloudNeuralChunks(chunks, bcp47, rate, persona, onChunk, onDone, resolve, speakLocalBrowserFallback);
       }
     });
   }

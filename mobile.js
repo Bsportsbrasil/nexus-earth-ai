@@ -337,18 +337,18 @@ const NexusMobile = (function () {
       botAvatar.addEventListener('click', () => {
         triggerHaptic(22);
         const greetings = [
-          'Oi! Que alegria conversar com você! Como posso iluminar o seu dia agora?',
-          'Estou aqui prontinha! Pode falar comigo por voz ou digitar aqui embaixo.',
-          'Adoro aprender coisas novas com você! O que vamos explorar hoje?'
+          'Oii! Que alegria ter você aqui pertinho... Como posso deixar o seu dia mais leve e especial agora?',
+          'Estou aqui prontinha e feliz em te ver! Pode falar comigo com calma ou escrever aqui embaixo.',
+          'Adoro a nossa companhia! Me conta... o que vamos descobrir juntos hoje?'
         ];
         const msg = greetings[Math.floor(Math.random() * greetings.length)];
         if (captionBox) captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(msg)}`;
-        setBotState('speaking', 'AURA falando com você...');
+        setBotState('speaking', 'AURA falando com carinho...');
         if (window.VoiceEngine) {
           window.VoiceEngine.speak(msg, {
             persona: 'aura',
-            rate: 1.02,
-            pitch: 1.03,
+            rate: 1.04,
+            pitch: 1.16,
             onDone: () => setBotState('idle', 'AURA Viva • Pronta para você')
           });
         } else {
@@ -395,12 +395,12 @@ const NexusMobile = (function () {
             captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}`;
           }
           if (ttsEnabled) {
-            setBotState('speaking', 'AURA falando em tempo real...');
+            setBotState('speaking', 'AURA falando com doçura...');
             if (window.VoiceEngine) {
               window.VoiceEngine.speak(data.voiceText || reply, {
                 persona: 'aura',
-                rate: 1.02,
-                pitch: 1.02,
+                rate: 1.04,
+                pitch: 1.16,
                 onDone: () => setBotState('idle', 'AURA Viva • Toque ou fale abaixo')
               });
             } else {
