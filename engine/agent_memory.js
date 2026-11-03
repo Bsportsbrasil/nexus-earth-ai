@@ -411,7 +411,8 @@ export class AgentMemoryStore {
 2) Regra Estrita do Relógio Local: Você sabe silenciosamente que a hora local do usuário é ${temporal.localeTime} (${temporal.localeDate}), mas JAMAIS fale as horas nem a data na resposta se o usuário não tiver perguntado que horas são ou que dia é hoje (use o horário apenas em silêncio nos bastidores se precisar verificar se um local está aberto).
 3) Opinião Própria + Opções Reais: Quando o usuário pedir sua opinião/recomendação ou precisar tomar uma decisão (ex.: escolher uma farmácia aberta agora, um curso, serviço ou estratégia), apresente as opções reais e plausíveis disponíveis E dê também a SUA ESCOLHA/OPINIÃO PRÓPRIA fundamentada ("Se eu estivesse no seu lugar..." ou "Na minha opinião, a melhor escolha é..."), explicando o motivo.
 4) Senso de Humor Positivo e Cativante (quando cabível): Em conversas cotidianas, curiosidades ou momentos descontraídos, use um toque sutil de bom humor positivo, inteligente e espirituoso. Porém, em emergências, saúde ou assuntos sérios, mantenha seriedade e foco total.
-5) Educação e Postura Profissional: Seja gentil, educada, prestativa e humanizada, mas JAMAIS use apelidos íntimos como "meu amor", "meu bem", "querido(a)", "fofo(a)", "lindo(a)", "coração" ou "anjo".`
+5) Educação e Postura Profissional: Seja gentil, educada, prestativa e humanizada, mas JAMAIS use apelidos íntimos como "meu amor", "meu bem", "querido(a)", "fofo(a)", "lindo(a)", "coração" ou "anjo".
+6) Empatia Humana & Raciocínio Lúcido em Desabafos Pessoais: Se o usuário comentar sobre o dia, desabafar sobre trabalho, falar de colegas ou pessoas agindo com má-fé de propósito, ou partilhar sentimentos, acolha primeiro com solidariedade e empatia sincera ("Puxa vida, isso desgasta e revolta qualquer um..."). Em seguida, ofereça uma análise racional e estratégica sobre manter a calma, documentar tudo por escrito, não absorver a negatividade e proteger sua paz mental. Trate o usuário como uma amiga próxima tomando um café juntos.`
           : '';
         const voiceDirective = voiceEnabled
           ? `DIRETRIZ ESTRITA DE VOZ HUMANA DE RESPOSTA IMEDIATA: Você fala diretamente por uma interface de áudio em tempo real. 1) Comece SEMPRE com uma primeira frase curta e direta (de 8 a 14 palavras) respondendo imediatamente ao ponto principal, seguida de mais 1 ou 2 frases concisas com os fatos e sua opinião/recomendação (total de 28 a 48 palavras, sempre concluindo até o ponto final). 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Proibido usar apelidos íntimos como "meu amor" ou "meu bem". 4) Escreva números de forma fluida para fala.`
@@ -482,6 +483,40 @@ export class AgentMemoryStore {
       accountId: 'acc_creator_sovereign'
     });
 
+    // Living visual avatar dynamic emotion & pose classification
+    let emotion = 'neutral';
+    let pose = 'floating';
+    let themeColor = '#00f5ff';
+    let statusLabel = 'AURA Viva • Sintonizada';
+
+    const fullTurnText = `${cleanMsg} ${reply}`.toLowerCase();
+    if (/\b(trabalho|chefe|colega|de\s+prop[oó]sito|maldade|injusti|dia\s+(ruim|dif[ií]cil|pesado|cansativo)|desabafo|cansad|chatead|triste|raiva|m[aá]goa|ang[uú]stia|desabafar)\b/i.test(fullTurnText)) {
+      emotion = 'empathy';
+      pose = 'table';
+      themeColor = '#f472b6';
+      statusLabel = 'AURA Acolhedora • Mesa & Café';
+    } else if (/\b(caf[eé]|x[ií]cara|pausa|relaxar|descansar|conversa|bater\s+papo|como\s+foi\s+o\s+dia)\b/i.test(fullTurnText)) {
+      emotion = 'coffee';
+      pose = 'coffee';
+      themeColor = '#fbbf24';
+      statusLabel = 'AURA Café & Conversa';
+    } else if (/\b(estrat[eé]gia|opini[aã]o|decis[aã]o|escolh|racional|fatos|an[aá]lis|planej|como\s+fazer|por\s+onde|come[cç]ar|c[oó]digo|program)\b/i.test(fullTurnText)) {
+      emotion = 'rational';
+      pose = 'gesturing';
+      themeColor = '#38bdf8';
+      statusLabel = 'AURA Racional • Estratégia e Fatos';
+    } else if (/\b(parab[eé]ns|feliz|ótimo|maravilha|boa|sucesso|legal|kkk|haha|engra[cç]ad|riso)\b/i.test(fullTurnText)) {
+      emotion = 'happy';
+      pose = 'happy';
+      themeColor = '#10b981';
+      statusLabel = 'AURA Alegre & Inspirada';
+    } else if (isMapOrPlaceQuery) {
+      emotion = 'focused';
+      pose = 'gesturing';
+      themeColor = '#00f5ff';
+      statusLabel = 'AURA Radar Cartográfico';
+    }
+
     return {
       agentId,
       agentName: agent.name,
@@ -490,6 +525,10 @@ export class AgentMemoryStore {
       reply,
       voiceText: reply.replace(/[#*`_~]/g, '').trim(),
       temporal,
+      emotion,
+      pose,
+      themeColor,
+      statusLabel,
       mapCard: mapIntel ? {
         category: mapIntel.category,
         localityLabel: mapIntel.locality.localityLabel,
@@ -519,6 +558,9 @@ export class AgentMemoryStore {
       : ' ';
 
     if (agent.id === 'aura') {
+      if (/\b(trabalho|chefe|colega|de\s+prop[oó]sito|maldade|injusti|dia\s+(ruim|dif[ií]cil|pesado|cansativo)|desabafo|cansad[oa]|chatead[oa]|triste|raiva)\b/i.test(msg)) {
+        return `Puxa vida, lidar com alguém agindo de má-fé de propósito no trabalho desgasta e revolta qualquer um. Na minha opinião, o segredo agora é não absorver esse veneno para si: documente tudo formalmente por escrito, preserve sua serenidade e trace limites firmes para proteger sua paz mental. Puxei uma cadeira aqui para a gente tomar um café com calma; você é muito maior do que essa mesquinharia.`;
+      }
       if (/\b(que\s+horas\s+s[aã]o|qual\s+(é\s+)?a\s+hora|hor[aá]rio\s+atual|que\s+dia\s+[eé]\s+hoje|data\s+de\s+hoje)\b/i.test(msg) && temporal) {
         return `Agora são exatamente ${temporal.localeTime} (${temporal.period}, fuso ${temporal.timeZone}) e hoje é ${temporal.localeDate}.`;
       }

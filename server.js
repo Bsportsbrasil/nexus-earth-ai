@@ -644,7 +644,7 @@ const server = http.createServer(async (req, res) => {
         const firstSentMatch = convRes.voiceText.match(/[^.!?…]+[.!?…]*/);
         const firstSent = (firstSentMatch ? firstSentMatch[0] : convRes.voiceText).trim().slice(0, 115);
         if (firstSent) {
-          fetch(`http://127.0.0.1:${PORT}/api/tts?persona=${encodeURIComponent(convRes.agentId || 'aura')}&tl=pt-BR&q=${encodeURIComponent(firstSent)}`).catch(() => {});
+          fetch(`http://127.0.0.1:${PORT}/api/tts?persona=${encodeURIComponent(convRes.agentId || 'aura')}&tl=pt-BR&emotion=${encodeURIComponent(convRes.emotion || 'neutral')}&q=${encodeURIComponent(firstSent)}`).catch(() => {});
         }
       }
       return jsonResponse(res, 200, convRes);
@@ -951,13 +951,14 @@ const server = http.createServer(async (req, res) => {
     const q = (url.searchParams.get('q') || '').trim().slice(0, 1200);
     const tl = (url.searchParams.get('tl') || 'pt-BR').trim();
     const persona = (url.searchParams.get('persona') || 'aura').trim().toLowerCase();
+    const emotion = (url.searchParams.get('emotion') || 'neutral').trim().toLowerCase();
     const clientKey = (url.searchParams.get('key') || '').trim();
     if (!q) {
       res.writeHead(400);
       return res.end('Missing q');
     }
 
-    const cacheKey = `${persona}:${tl}:${q}`;
+    const cacheKey = `${persona}:${tl}:${emotion}:${q}`;
     if (!globalThis.__nexusTtsCache) {
       globalThis.__nexusTtsCache = new Map();
     }
@@ -1016,9 +1017,21 @@ const server = http.createServer(async (req, res) => {
     if (geminiKey) {
       const isSupervisor = persona === 'supervisor';
       const voiceName = isSupervisor ? 'Charon' : 'Leda';
-      const voiceStyle = isSupervisor
+      let voiceStyle = isSupervisor
         ? 'calm, warm, natural, empathetic and clear conversational male voice'
         : 'sweet, cute, gentle, warm, polite, natural and friendly young female voice';
+
+      if (!isSupervisor) {
+        if (emotion === 'empathy') {
+          voiceStyle = 'deeply empathetic, comforting, warm, gentle, supportive, polite and soothing young female voice';
+        } else if (emotion === 'rational') {
+          voiceStyle = 'calm, articulate, intelligent, objective, polite and friendly young female voice';
+        } else if (emotion === 'coffee') {
+          voiceStyle = 'cozy, gentle, relaxed, friendly, polite and natural conversational young female voice';
+        } else if (emotion === 'happy') {
+          voiceStyle = 'cheerful, lively, warm, cute, polite and affectionate young female voice';
+        }
+      }
 
       const pcm24kToWav = (pcmBuffer) => {
         const sampleRate = 24000;

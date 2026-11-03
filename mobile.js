@@ -402,16 +402,54 @@ const NexusMobile = (function () {
     `;
   }
 
-  /* --- Dedicated AURA Viva Mascot Page (Cute Tech Figure + Real-Time Communication Bar) --- */
+  /* --- Dedicated AURA Viva Mascot Page (Living Cyber-Kawaii Avatar, Emotions, Gestures & Duplex Voice) --- */
   function initAuraLiveMascot() {
     const botAvatar = document.getElementById('aura-cute-bot-avatar');
+    const heartGem = document.getElementById('aura-heart-gem');
     const statusText = document.getElementById('aura-live-status-text');
     const captionBox = document.getElementById('aura-live-caption-box');
     const input = document.getElementById('aura-live-input');
     const sendBtn = document.getElementById('aura-live-btn-send');
     const micBtn = document.getElementById('aura-live-btn-mic');
+
+    const btnFly = document.getElementById('btn-pose-fly');
+    const btnTable = document.getElementById('btn-pose-table');
+    const btnCoffee = document.getElementById('btn-pose-coffee');
+    const btnDuplex = document.getElementById('btn-aura-duplex');
+
     let liveRec = null;
     let liveListening = false;
+    let duplexMode = false;
+    let activePose = 'pose-flying';
+    let activeEmotion = 'neutral';
+
+    function setMascotPose(poseClass) {
+      if (!botAvatar) return;
+      activePose = poseClass;
+      botAvatar.classList.remove('pose-flying', 'pose-table', 'pose-coffee');
+      botAvatar.classList.add(poseClass);
+
+      if (btnFly) btnFly.classList.toggle('active', poseClass === 'pose-flying');
+      if (btnTable) btnTable.classList.toggle('active', poseClass === 'pose-table');
+      if (btnCoffee) btnCoffee.classList.toggle('active', poseClass === 'pose-coffee');
+    }
+
+    function setMascotEmotion(emotionName) {
+      if (!botAvatar) return;
+      activeEmotion = emotionName || 'neutral';
+      botAvatar.classList.remove('emotion-empathy', 'emotion-rational', 'emotion-coffee', 'emotion-happy', 'emotion-focused');
+
+      if (activeEmotion && activeEmotion !== 'neutral') {
+        botAvatar.classList.add(`emotion-${activeEmotion}`);
+      }
+
+      if (heartGem) {
+        if (activeEmotion === 'empathy') heartGem.textContent = '💖';
+        else if (activeEmotion === 'coffee') heartGem.textContent = '💛';
+        else if (activeEmotion === 'happy') heartGem.textContent = '💚';
+        else heartGem.textContent = '🩵';
+      }
+    }
 
     function setBotState(state, statusLabel) {
       if (botAvatar) {
@@ -422,27 +460,68 @@ const NexusMobile = (function () {
       if (statusText && statusLabel) statusText.textContent = statusLabel;
     }
 
+    if (btnFly) btnFly.addEventListener('click', () => {
+      triggerHaptic(15);
+      setMascotPose('pose-flying');
+    });
+
+    if (btnTable) btnTable.addEventListener('click', () => {
+      triggerHaptic(15);
+      setMascotPose('pose-table');
+    });
+
+    if (btnCoffee) btnCoffee.addEventListener('click', () => {
+      triggerHaptic(15);
+      setMascotPose('pose-coffee');
+      setMascotEmotion('coffee');
+    });
+
+    if (btnDuplex) btnDuplex.addEventListener('click', () => {
+      triggerHaptic(25);
+      duplexMode = !duplexMode;
+      btnDuplex.classList.toggle('duplex-active', duplexMode);
+      if (duplexMode) {
+        btnDuplex.textContent = '🟢 Mãos Livres Ativo';
+        if (captionBox) {
+          captionBox.innerHTML = `<strong>AURA ✨:</strong> Modo Conversa Real ativado! Pode falar livremente comigo, eu escuto e respondo em sequência contínua.`;
+        }
+        if (!liveListening && liveRec) {
+          try { liveRec.start(); } catch (_) {}
+        }
+      } else {
+        btnDuplex.textContent = '🎙️ Mãos Livres';
+        if (liveListening && liveRec) {
+          try { liveRec.stop(); } catch (_) {}
+        }
+      }
+    });
+
     if (botAvatar) {
       botAvatar.addEventListener('click', () => {
         triggerHaptic(22);
         const greetings = [
-          'Olá! É um prazer receber você aqui. Como posso ajudar você hoje?',
-          'Estou pronta e à disposição. Você pode falar comigo pelo microfone ou escrever aqui abaixo.',
-          'Olá! Estou conectada para auxiliar você com clareza e gentileza. O que vamos analisar hoje?'
+          'Olá! Puxei uma cadeira e um café quentinho para conversarmos. Como foi o seu dia hoje?',
+          'Estou viva aqui ao seu lado! Me conte o que está acontecendo ou desabafe sobre qualquer situação.',
+          'Pode desabafar ou conversar comigo livremente. Estou aqui para te apoiar com o coração aberto e raciocínio prático.'
         ];
         const msg = greetings[Math.floor(Math.random() * greetings.length)];
+        setMascotPose('pose-table');
+        setMascotEmotion('coffee');
         if (captionBox) captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(msg)}`;
-        setBotState('speaking', 'AURA falando...');
+        setBotState('speaking', 'AURA conversando...');
         if (window.VoiceEngine) {
           window.VoiceEngine.speak(msg, {
             persona: 'aura',
-            rate: 1.04,
-            pitch: 1.16,
-            onDone: () => setBotState('idle', 'AURA Viva • Pronta para você')
+            emotion: 'coffee',
+            rate: 1.0,
+            pitch: 1.04,
+            onDone: () => {
+              setBotState('idle', 'AURA Viva • Toque ou fale abaixo');
+              if (duplexMode && liveRec && !liveListening) {
+                setTimeout(() => { try { liveRec.start(); } catch (_) {} }, 450);
+              }
+            }
           });
-        } else {
-          speakNeural(msg, 'aura');
-          setTimeout(() => setBotState('idle', 'AURA Viva • Pronta para você'), 3200);
         }
       });
     }
@@ -460,9 +539,9 @@ const NexusMobile = (function () {
       if (window.VoiceEngine) window.VoiceEngine.stop();
       else if (window.speechSynthesis) window.speechSynthesis.cancel();
 
-      setBotState('listening', 'AURA processando sua mensagem...');
+      setBotState('listening', 'AURA escutando atentamente...');
       if (captionBox) {
-        captionBox.innerHTML = `<span style="color:var(--cyan);">Você: "${escapeHtml(q)}"</span><br/><em>Sintonizando resposta...</em>`;
+        captionBox.innerHTML = `<span style="color:var(--cyan);">Você: "${escapeHtml(q)}"</span><br/><em>AURA sintonizando emoção e raciocínio...</em>`;
       }
 
       try {
@@ -483,25 +562,43 @@ const NexusMobile = (function () {
 
         if (res.ok) {
           const data = await res.json();
-          const reply = data.reply || 'Olá! Estou à disposição. Como posso ajudar você agora?';
+          const reply = data.reply || 'Olá! Estou com você. Pode me contar tudo.';
+          const emotion = data.emotion || 'neutral';
+          const pose = data.pose || (emotion === 'empathy' ? 'table' : 'flying');
+
+          setMascotEmotion(emotion);
+          setMascotPose(pose === 'table' ? 'pose-table' : pose === 'coffee' ? 'pose-coffee' : 'pose-flying');
+
           if (captionBox) {
             captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}${buildMapCardHtml(data.mapCard)}`;
           }
+
           if (ttsEnabled) {
-            setBotState('speaking', 'AURA respondendo...');
+            setBotState('speaking', data.statusLabel || 'AURA conversando com você...');
             if (window.VoiceEngine) {
               window.VoiceEngine.speak(data.voiceText || reply, {
                 persona: 'aura',
-                rate: 1.0,
-                pitch: 1.04,
-                onDone: () => setBotState('idle', 'AURA Viva • Toque ou fale abaixo')
+                emotion,
+                onDone: () => {
+                  setBotState('idle', 'AURA Viva • Sintonizada');
+                  if (duplexMode && liveRec && !liveListening) {
+                    setTimeout(() => {
+                      try { liveRec.start(); } catch (_) {}
+                    }, 400);
+                  }
+                }
               });
             } else {
               speakNeural(data.voiceText || reply, 'aura');
-              setTimeout(() => setBotState('idle', 'AURA Viva • Toque ou fale abaixo'), 4000);
+              setTimeout(() => {
+                setBotState('idle', 'AURA Viva • Sintonizada');
+                if (duplexMode && liveRec && !liveListening) {
+                  setTimeout(() => { try { liveRec.start(); } catch (_) {} }, 400);
+                }
+              }, 4000);
             }
           } else {
-            setBotState('idle', 'AURA Viva • Toque ou fale abaixo');
+            setBotState('idle', 'AURA Viva • Sintonizada');
           }
         } else {
           setBotState('idle', 'AURA Viva • Pronta');
@@ -529,9 +626,9 @@ const NexusMobile = (function () {
 
       liveRec.onstart = () => {
         liveListening = true;
-        triggerHaptic(30);
+        triggerHaptic(25);
         micBtn.classList.add('listening');
-        setBotState('listening', '🎙️ AURA ouvindo sua voz agora...');
+        setBotState('listening', '🎙️ AURA ouvindo sua voz em tempo real...');
       };
 
       liveRec.onresult = (event) => {
@@ -541,10 +638,18 @@ const NexusMobile = (function () {
         }
       };
 
-      liveRec.onerror = () => {
+      liveRec.onerror = (e) => {
         liveListening = false;
         micBtn.classList.remove('listening');
-        setBotState('idle', 'AURA Viva • Toque ou fale abaixo');
+        if (!duplexMode) {
+          setBotState('idle', 'AURA Viva • Toque ou fale abaixo');
+        } else if (duplexMode && e.error !== 'aborted') {
+          setTimeout(() => {
+            if (duplexMode && !liveListening) {
+              try { liveRec.start(); } catch (_) {}
+            }
+          }, 800);
+        }
       };
 
       liveRec.onend = () => {

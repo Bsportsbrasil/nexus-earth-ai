@@ -296,7 +296,7 @@ const VoiceEngine = (function () {
    *  - Chunk 0 (short first sentence) starts playing in ~1.5s.
    *  - Chunks 1..N finish downloading in RAM while Chunk 0 is playing, so transitions are 0ms and never freeze!
    */
-  function playCloudNeuralChunks(chunks, bcp47, rate, persona, onChunk, onDone, resolve, fallbackFn) {
+  function playCloudNeuralChunks(chunks, bcp47, rate, persona, emotion, onChunk, onDone, resolve, fallbackFn) {
     let idx = 0;
     const objectUrlsToRevoke = [];
 
@@ -304,7 +304,8 @@ const VoiceEngine = (function () {
       let localKey = '';
       try { localKey = localStorage.getItem('nexus_gemini_key') || ''; } catch (_) {}
       const keyParam = localKey ? `&key=${encodeURIComponent(localKey)}` : '';
-      return `/api/tts?persona=${encodeURIComponent(persona || 'aura')}&tl=${encodeURIComponent(bcp47)}&q=${encodeURIComponent(phrase)}${keyParam}`;
+      const emotionParam = emotion && emotion !== 'neutral' ? `&emotion=${encodeURIComponent(emotion)}` : '';
+      return `/api/tts?persona=${encodeURIComponent(persona || 'aura')}&tl=${encodeURIComponent(bcp47)}${emotionParam}&q=${encodeURIComponent(phrase)}${keyParam}`;
     }
 
     function applyPureStudioTimbre(audioEl) {
@@ -422,12 +423,13 @@ const VoiceEngine = (function () {
   function speak(text, options = {}) {
     const {
       persona = 'aura',
+      emotion = 'neutral',
       lang = null,
       onStart = null,
       onDone = null,
       onChunk = null,
-      rate = 1.0,
-      pitch = 1.04
+      rate = (options.emotion === 'empathy' ? 0.98 : options.emotion === 'happy' ? 1.05 : 1.0),
+      pitch = (options.emotion === 'empathy' ? 1.02 : options.emotion === 'happy' ? 1.08 : 1.04)
     } = options;
 
     stop();
@@ -449,7 +451,8 @@ const VoiceEngine = (function () {
       onStart({
         totalChunks: chunks.length,
         voiceName: `Gemini 3.8 Neural (${persona === 'supervisor' ? 'Charon' : 'Leda - Doce & Gentil'})`,
-        lang: bcp47
+        lang: bcp47,
+        emotion
       });
     }
 
@@ -514,7 +517,7 @@ const VoiceEngine = (function () {
 
       // Always prioritize Expressive Gemini 3.8 Neural Audio (/api/tts — Leda) for a genuinely human,
       // sweet, cute and gentle voice on every device and browser!
-      playCloudNeuralChunks(chunks, bcp47, rate, persona, onChunk, onDone, resolve, speakLocalBrowserFallback);
+      playCloudNeuralChunks(chunks, bcp47, rate, persona, emotion, onChunk, onDone, resolve, speakLocalBrowserFallback);
     });
   }
 
