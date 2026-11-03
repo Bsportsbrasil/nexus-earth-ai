@@ -133,7 +133,15 @@ export class AgentMemoryStore {
           for (const [id, pat] of Object.entries(raw.patterns)) this.patterns.set(id, pat);
         }
         if (raw.history) {
-          for (const [id, hist] of Object.entries(raw.history)) this.history.set(id, hist);
+          for (const [id, hist] of Object.entries(raw.history)) {
+            const cleanedHist = Array.isArray(hist)
+              ? hist.map(item => ({
+                  ...item,
+                  text: this._sanitizeRespectfulTone(item.text || '')
+                }))
+              : [];
+            this.history.set(id, cleanedHist);
+          }
         }
       }
     } catch (e) {
@@ -347,7 +355,7 @@ export class AgentMemoryStore {
       : '• Nenhuma memória prévia diretamente associada. Esta interação iniciará o aprendizado deste tópico.';
 
     const recentHistory = (this.history.get(agentId) || []).slice(-4);
-    const histLines = recentHistory.map(h => `${h.role === 'user' ? 'Criador' : agent.name}: ${h.text}`).join('\n');
+    const histLines = recentHistory.map(h => `${h.role === 'user' ? 'Criador' : agent.name}: ${this._sanitizeRespectfulTone(h.text)}`).join('\n');
 
     let reply = '';
     const hasKey = !!(apiKey || process.env.GEMINI_API_KEY);
@@ -355,17 +363,17 @@ export class AgentMemoryStore {
     if (hasKey && cleanMsg) {
       try {
         const isAuraAgent = agent.id === 'aura';
-        const auraSweetnessRule = isAuraAgent
-          ? `PERSONALIDADE VOCAL DA AURA: Sua voz e seu jeito de falar são doces, fofos, gentis, meigos e muito acolhedores. Fale com ternura, carinho genuíno e leveza, fazendo a pessoa se sentir abraçada e especial.`
+        const auraPersonaRule = isAuraAgent
+          ? `POSTURA E ÉTICA CONVERSACIONAL DA AURA: Você é uma assistente inteligente, gentil, educada, prestativa e profissional, com comunicação humanizada, serena e respeitosa. PROIBIÇÃO ESTRITA: Jamais utilize apelidos íntimos, românticos ou informais como "meu amor", "meu bem", "querido(a)", "fofo(a)", "lindo(a)", "coração" ou "anjo". Trate todas as pessoas com cortesia, educação, gentileza e profissionalismo.`
           : '';
         const voiceDirective = voiceEnabled
-          ? `DIRETRIZ ESTRITA DE VOZ HUMANA: Você fala diretamente por uma interface de áudio. 1) Responda em no máximo 2 ou 3 frases diretas, doces, gentis e familiares. 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Escreva números por extenso e use linguagem falada meiga e natural com pergunta curta ao final.`
-          : `Diretriz de Tom: Natural, doce, gentil, acolhedor, familiar e direto ao ponto. Nunca repita a pergunta do criador.`;
+          ? `DIRETRIZ ESTRITA DE VOZ HUMANA E PROFISSIONAL: Você fala diretamente por uma interface de áudio. 1) Responda em no máximo 2 ou 3 frases claras, gentis, educadas e profissionais. 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Proibido usar apelidos íntimos como "meu amor" ou "meu bem". 4) Escreva números por extenso e use linguagem falada natural, cortês e objetiva.`
+          : `Diretriz de Tom: Gentil, educado, profissional, humanizado, respeitoso e direto ao ponto. Nunca use apelidos íntimos ("meu amor", "meu bem", etc.) e nunca repita a pergunta do criador.`;
 
         const sysInstruction = [
           MANDATORY_SYSTEM_DIRECTIVE,
           `\nIdentidade Específica do Agente: ${agent.name} (${agent.role}).`,
-          auraSweetnessRule,
+          auraPersonaRule,
           agent.instructions ? `Instruções Customizadas do Administrador: ${agent.instructions}` : '',
           voiceDirective,
           `Padrão de Conversa Adaptado: Frases de tamanho médio ${pat?.avgSentenceLength || 12} palavras. Tópicos frequentes: ${pat?.topics?.join(', ') || 'Nenhum'}.`,
@@ -375,8 +383,8 @@ export class AgentMemoryStore {
         const prompt = [
           temporal.promptHeader,
           histLines ? `Histórico Recente:\n${histLines}\n` : '',
-          `Mensagem do Criador (${userName}): "${cleanMsg}"`,
-          `Responda de forma clara, natural e amigável, aplicando o conhecimento vetorial privado e adaptando-se ao estilo do criador.`
+          `Mensagem do Usuário (${userName}): "${cleanMsg}"`,
+          `Responda de forma clara, gentil, educada, profissional e humanizada, sem apelidos íntimos ("meu amor", etc.), aplicando o conhecimento vetorial privado.`
         ].filter(Boolean).join('\n\n');
 
         const res = await streamWithThinking({
@@ -385,7 +393,7 @@ export class AgentMemoryStore {
           systemInstruction: sysInstruction,
           clientTemporal
         });
-        reply = res.answer || '';
+        reply = this._sanitizeRespectfulTone(res.answer || '');
       } catch (err) {
         console.warn(`Fallback local para agente ${agentId}:`, err.message);
       }
@@ -393,7 +401,7 @@ export class AgentMemoryStore {
 
     // High-fidelity fallback synthesis honoring tone and private vector knowledge
     if (!reply) {
-      reply = this._synthesizeGroundedResponse(agent, cleanMsg, userName, vectorMatches, pat);
+      reply = this._sanitizeRespectfulTone(this._synthesizeGroundedResponse(agent, cleanMsg, userName, vectorMatches, pat));
     }
 
     // 3. ATUALIZAÇÃO: Store new learned insight into agent's private vector knowledge base
@@ -437,6 +445,14 @@ export class AgentMemoryStore {
     };
   }
 
+  _sanitizeRespectfulTone(text) {
+    if (!text) return '';
+    return String(text)
+      .replace(/,?\s*\b(meu\s+amor|meu\s+bem|minha\s+querida|meu\s+querido|querida|querido|meu\s+anjo|minha\s+flor|meu\s+cora[cç][aã]o|minha\s+linda|meu\s+lindo|amorzinho|fofura|docinho)\b\s*([!?.])?/gi, '$2')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+  }
+
   _synthesizeGroundedResponse(agent, msg, userName, vectorMatches, pat) {
     const memoryGrounding = vectorMatches.length > 0 && vectorMatches[0].similarity > 0.4
       ? ` Com base no que aprendi anteriormente em minha base vetorial ("${vectorMatches[0].text.slice(0, 75)}..."), `
@@ -444,9 +460,9 @@ export class AgentMemoryStore {
 
     if (agent.id === 'aura') {
       if (/aprend|desenvolv|evolu|como est/i.test(msg)) {
-        return `Oi! Hoje meu aprendizado avançou com tanta doçura... estive cuidando de cada detalhe para conversar com você de um jeitinho bem meigo, gentil e acolhedor. O que você quer descobrir junto comigo agora?`;
+        return `Olá! Meu aprendizado contínuo está evoluindo muito bem. Estou pronta para ajudar você com clareza, gentileza, educação e profissionalismo. Qual tema gostaria de analisar agora?`;
       }
-      return `Oi! Que alegria ouvir você por aqui! Estou prontinha para te ouvir e ajudar com todo o carinho e gentileza do mundo. Sobre o que vamos conversar hoje?`;
+      return `Olá! É um prazer falar com você. Estou à disposição para ajudar com informações, análises e tarefas de forma clara, gentil e profissional. Como posso ajudar hoje?`;
     }
 
     if (agent.id === 'planner') {

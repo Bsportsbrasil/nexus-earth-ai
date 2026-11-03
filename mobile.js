@@ -337,13 +337,13 @@ const NexusMobile = (function () {
       botAvatar.addEventListener('click', () => {
         triggerHaptic(22);
         const greetings = [
-          'Oii! Que alegria ter você aqui pertinho... Como posso deixar o seu dia mais leve e especial agora?',
-          'Estou aqui prontinha e feliz em te ver! Pode falar comigo com calma ou escrever aqui embaixo.',
-          'Adoro a nossa companhia! Me conta... o que vamos descobrir juntos hoje?'
+          'Olá! É um prazer receber você aqui. Como posso ajudar você hoje?',
+          'Estou pronta e à disposição. Você pode falar comigo pelo microfone ou escrever aqui abaixo.',
+          'Olá! Estou conectada para auxiliar você com clareza e gentileza. O que vamos analisar hoje?'
         ];
         const msg = greetings[Math.floor(Math.random() * greetings.length)];
         if (captionBox) captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(msg)}`;
-        setBotState('speaking', 'AURA falando com carinho...');
+        setBotState('speaking', 'AURA falando...');
         if (window.VoiceEngine) {
           window.VoiceEngine.speak(msg, {
             persona: 'aura',
@@ -371,7 +371,7 @@ const NexusMobile = (function () {
       if (window.VoiceEngine) window.VoiceEngine.stop();
       else if (window.speechSynthesis) window.speechSynthesis.cancel();
 
-      setBotState('listening', 'AURA pensando com carinho...');
+      setBotState('listening', 'AURA processando sua mensagem...');
       if (captionBox) {
         captionBox.innerHTML = `<span style="color:var(--cyan);">Você: "${escapeHtml(q)}"</span><br/><em>Sintonizando resposta...</em>`;
       }
@@ -390,17 +390,17 @@ const NexusMobile = (function () {
 
         if (res.ok) {
           const data = await res.json();
-          const reply = data.reply || 'Estou aqui com você! Como posso te apoiar agora?';
+          const reply = data.reply || 'Olá! Estou à disposição. Como posso ajudar você agora?';
           if (captionBox) {
             captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}`;
           }
           if (ttsEnabled) {
-            setBotState('speaking', 'AURA falando com doçura...');
+            setBotState('speaking', 'AURA respondendo...');
             if (window.VoiceEngine) {
               window.VoiceEngine.speak(data.voiceText || reply, {
                 persona: 'aura',
-                rate: 1.04,
-                pitch: 1.16,
+                rate: 1.0,
+                pitch: 1.04,
                 onDone: () => setBotState('idle', 'AURA Viva • Toque ou fale abaixo')
               });
             } else {

@@ -970,7 +970,7 @@ const server = http.createServer(async (req, res) => {
       const voiceName = isSupervisor ? 'Charon' : 'Leda';
       const voiceStyle = isSupervisor
         ? 'calm, warm, natural, empathetic and clear conversational male voice'
-        : 'sweet, cute, gentle, warm, soft, friendly and affectionate young female voice';
+        : 'gentle, polite, warm, natural, clear and friendly female voice';
 
       try {
         let wavBuffer = null;
@@ -1888,9 +1888,9 @@ server.listen(PORT, HOST, () => {
   if (process.env.GEMINI_API_KEY && !process.env.NEXUS_TEST_MODE) {
     setTimeout(async () => {
       const warmPhrases = [
-        'Oii! Que alegria ter você aqui pertinho... Como posso deixar o seu dia mais leve e especial agora?',
-        'Estou aqui prontinha e feliz em te ver! Pode falar comigo com calma ou escrever aqui embaixo.',
-        'Adoro a nossa companhia! Me conta... o que vamos descobrir juntos hoje?'
+        'Olá! É um prazer receber você aqui. Como posso ajudar você hoje?',
+        'Estou pronta e à disposição. Você pode falar comigo pelo microfone ou escrever aqui abaixo.',
+        'Olá! Estou conectada para auxiliar você com clareza e gentileza. O que vamos analisar hoje?'
       ];
       for (const phrase of warmPhrases) {
         try {
