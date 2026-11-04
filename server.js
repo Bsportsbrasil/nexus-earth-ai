@@ -709,6 +709,45 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  if (pathname === '/api/c2/human-teachings' && req.method === 'GET') {
+    try {
+      const data = agentMemoryStore.getHumanTeachings();
+      return jsonResponse(res, 200, data);
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/c2/human-teachings' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const added = agentMemoryStore.addHumanTeaching(body);
+      return jsonResponse(res, 201, { success: true, teaching: added });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/c2/human-teachings' && req.method === 'PUT') {
+    try {
+      const body = await parseJsonBody(req);
+      const updated = agentMemoryStore.editHumanTeaching(body);
+      return jsonResponse(res, 200, { success: true, teaching: updated });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/c2/human-teachings' && req.method === 'DELETE') {
+    try {
+      const body = await parseJsonBody(req);
+      const deleted = agentMemoryStore.deleteHumanTeaching(body.id);
+      return jsonResponse(res, 200, { success: true, result: deleted });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
   if (pathname === '/api/agents/create' && req.method === 'POST') {
     try {
       const body = await parseJsonBody(req);

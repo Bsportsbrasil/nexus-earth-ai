@@ -520,9 +520,22 @@ const NexusMobile = (function () {
 
     const btnSofa = document.getElementById('btn-pose-sofa');
     const btnCoffee = document.getElementById('btn-pose-coffee');
-    const btnListening = document.getElementById('btn-pose-listening');
-    const btnFly = document.getElementById('btn-pose-fly');
+    const btnWindow = document.getElementById('btn-pose-window');
+    const btnScreenClose = document.getElementById('btn-pose-screen-close');
     const btnDuplex = document.getElementById('btn-aura-duplex');
+
+    const comfortRoom = document.getElementById('aura-comfort-room');
+    const headShell = document.getElementById('aura-head-shell');
+    const eyesRow = document.getElementById('aura-eyes-row');
+    const mouthEl = document.getElementById('aura-cute-mouth');
+    const haloEl = document.querySelector('.aura-halo-ring');
+
+    const drawerEl = document.getElementById('aura-live-chat-drawer');
+    const drawerStream = document.getElementById('aura-drawer-stream');
+    const btnToggleHistory = document.getElementById('btn-toggle-aura-history');
+    const btnCloseDrawer = document.getElementById('btn-close-aura-drawer');
+    const btnClearHistory = document.getElementById('btn-clear-aura-history');
+    const historyCountBadge = document.getElementById('aura-chat-history-count');
 
     let liveRec = null;
     let liveListening = false;
@@ -531,16 +544,22 @@ const NexusMobile = (function () {
     let activeEmotion = 'neutral';
     let idleLifeTimer = null;
 
+    let gazeTargetX = 0, gazeTargetY = 0;
+    let currentGazeX = 0, currentGazeY = 0;
+    let gazeAnimId = null;
+    let isSpeakingAnim = false;
+    let speechVisemeId = null;
+
     function setMascotPose(poseClass) {
       if (!botAvatar) return;
       activePose = poseClass;
-      botAvatar.classList.remove('pose-sofa', 'pose-flying', 'pose-table', 'pose-coffee', 'pose-listening');
+      botAvatar.classList.remove('pose-sofa', 'pose-flying', 'pose-table', 'pose-coffee', 'pose-listening', 'pose-window', 'pose-screen-close', 'pose-reading');
       botAvatar.classList.add(poseClass);
 
       if (btnSofa) btnSofa.classList.toggle('active', poseClass === 'pose-sofa' || poseClass === 'pose-table');
       if (btnCoffee) btnCoffee.classList.toggle('active', poseClass === 'pose-coffee');
-      if (btnListening) btnListening.classList.toggle('active', poseClass === 'pose-listening');
-      if (btnFly) btnFly.classList.toggle('active', poseClass === 'pose-flying');
+      if (btnWindow) btnWindow.classList.toggle('active', poseClass === 'pose-window');
+      if (btnScreenClose) btnScreenClose.classList.toggle('active', poseClass === 'pose-screen-close');
     }
 
     function setMascotEmotion(emotionName) {
@@ -560,56 +579,228 @@ const NexusMobile = (function () {
       }
     }
 
+    /* 60 FPS Procedural Lip-Syncing & Visemes Engine */
+    function startRealtimeVisemes() {
+      if (speechVisemeId) cancelAnimationFrame(speechVisemeId);
+      isSpeakingAnim = true;
+      let frame = 0;
+      function visemeLoop() {
+        if (!isSpeakingAnim) {
+          if (mouthEl) {
+            mouthEl.style.height = '4px';
+            mouthEl.style.width = '14px';
+            mouthEl.style.borderRadius = '50%';
+          }
+          return;
+        }
+        frame++;
+        const openness = Math.abs(Math.sin(frame * 0.28) * 0.7 + Math.sin(frame * 0.52) * 0.3);
+        const mouthHeight = 4 + openness * 14;
+        const mouthWidth = 12 + Math.sin(frame * 0.18) * 6;
+        if (mouthEl) {
+          mouthEl.style.height = `${mouthHeight.toFixed(1)}px`;
+          mouthEl.style.width = `${mouthWidth.toFixed(1)}px`;
+          mouthEl.style.borderRadius = openness > 0.4 ? '40%' : '50%';
+        }
+        speechVisemeId = requestAnimationFrame(visemeLoop);
+      }
+      speechVisemeId = requestAnimationFrame(visemeLoop);
+    }
+
+    function stopRealtimeVisemes() {
+      isSpeakingAnim = false;
+      if (speechVisemeId) cancelAnimationFrame(speechVisemeId);
+      if (mouthEl) {
+        mouthEl.style.height = '4px';
+        mouthEl.style.width = '14px';
+        mouthEl.style.borderRadius = '50%';
+      }
+    }
+
     function setBotState(state, statusLabel) {
       if (botAvatar) {
         botAvatar.classList.remove('speaking', 'listening');
         if (state === 'speaking') {
           botAvatar.classList.add('speaking');
+          startRealtimeVisemes();
+        } else {
+          stopRealtimeVisemes();
         }
         if (state === 'listening') {
           botAvatar.classList.add('listening');
-          setMascotPose('pose-listening');
+          setMascotPose('pose-screen-close');
         }
       }
       if (statusText && statusLabel) statusText.textContent = statusLabel;
     }
 
-    // Autonomous Lifelike Behavior Loop (AURA se mexe naturalmente como alguém real)
-    function startLifelikeIdleLoop() {
+    /* Real-Time Interactive Spatial Gaze Tracking */
+    function updateGazeLoop() {
+      currentGazeX += (gazeTargetX - currentGazeX) * 0.12;
+      currentGazeY += (gazeTargetY - currentGazeY) * 0.12;
+
+      if (headShell && !botAvatar.classList.contains('speaking')) {
+        headShell.style.transform = `rotateY(${currentGazeX * 18}deg) rotateX(${-currentGazeY * 14}deg) translateZ(8px)`;
+      }
+      if (eyesRow) {
+        eyesRow.style.transform = `translateX(${currentGazeX * 7}px) translateY(${currentGazeY * 5}px)`;
+      }
+
+      gazeAnimId = requestAnimationFrame(updateGazeLoop);
+    }
+    gazeAnimId = requestAnimationFrame(updateGazeLoop);
+
+    if (comfortRoom) {
+      function handlePointerMove(e) {
+        const rect = comfortRoom.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const x = (clientX - rect.left) / rect.width;
+        const y = (clientY - rect.top) / rect.height;
+        gazeTargetX = Math.max(-1, Math.min(1, (x - 0.5) * 2));
+        gazeTargetY = Math.max(-1, Math.min(1, (y - 0.5) * 2));
+      }
+
+      function handlePointerLeave() {
+        gazeTargetX = 0;
+        gazeTargetY = 0;
+      }
+
+      comfortRoom.addEventListener('mousemove', handlePointerMove);
+      comfortRoom.addEventListener('touchmove', handlePointerMove, { passive: true });
+      comfortRoom.addEventListener('mouseleave', handlePointerLeave);
+      comfortRoom.addEventListener('touchend', handlePointerLeave);
+
+      comfortRoom.addEventListener('click', (e) => {
+        if (e.target.closest('#aura-cute-bot-avatar')) return;
+        triggerHaptic(12);
+        const rect = comfortRoom.getBoundingClientRect();
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+        gazeTargetX = ((clientX - rect.left) / rect.width - 0.5) * 2;
+        gazeTargetY = ((clientY - rect.top) / rect.height - 0.5) * 2;
+        if (haloEl) {
+          haloEl.style.transform = 'scale(1.18) rotate(20deg)';
+          setTimeout(() => { if (haloEl) haloEl.style.transform = ''; }, 600);
+        }
+        setTimeout(() => { gazeTargetX = 0; gazeTargetY = 0; }, 1600);
+      });
+    }
+
+    /* Autonomous Human-Like Life Routine (Vida Própria na Tela) */
+    const lifeActivities = [
+      { pose: 'pose-window', emotion: 'rational', label: 'AURA admirando a janela de estrelas...' },
+      { pose: 'pose-coffee', emotion: 'coffee', label: 'AURA saboreando café quentinho...' },
+      { pose: 'pose-screen-close', emotion: 'empathy', label: 'AURA perto de você com carinho...' },
+      { pose: 'pose-reading', emotion: 'rational', label: 'AURA lendo novos aprendizados no santuário...' },
+      { pose: 'pose-sofa', emotion: 'neutral', label: 'AURA descansando na poltrona do seu espaço...' }
+    ];
+    let lifeIndex = 0;
+
+    function startLivingRoutine() {
       if (idleLifeTimer) clearInterval(idleLifeTimer);
       idleLifeTimer = setInterval(() => {
         if (!botAvatar || botAvatar.classList.contains('speaking') || botAvatar.classList.contains('listening')) {
           return;
         }
-        const actions = ['glance_user', 'head_tilt', 'sip_coffee', 'gentle_shift', 'soft_blink'];
-        const action = actions[Math.floor(Math.random() * actions.length)];
-
-        if (action === 'glance_user') {
-          const eyes = document.getElementById('aura-eyes-row');
-          if (eyes) {
-            eyes.style.transform = 'translateX(3px) translateY(-1px)';
-            setTimeout(() => { if (eyes) eyes.style.transform = 'none'; }, 1600);
-          }
-        } else if (action === 'head_tilt') {
-          const head = document.getElementById('aura-head-shell');
-          if (head) {
-            head.style.transform = 'rotate(2.5deg)';
-            setTimeout(() => { if (head) head.style.transform = 'none'; }, 2000);
-          }
-        } else if (action === 'sip_coffee' && activePose !== 'pose-flying') {
-          setMascotPose('pose-coffee');
-          setTimeout(() => {
-            if (botAvatar && !botAvatar.classList.contains('speaking') && !botAvatar.classList.contains('listening')) {
-              setMascotPose('pose-sofa');
-            }
-          }, 3200);
-        } else if (action === 'gentle_shift') {
-          botAvatar.style.transform = 'translateY(3px)';
-          setTimeout(() => { if (botAvatar) botAvatar.style.transform = ''; }, 1800);
-        }
-      }, 5000);
+        lifeIndex = (lifeIndex + 1) % lifeActivities.length;
+        const act = lifeActivities[lifeIndex];
+        setMascotPose(act.pose);
+        setMascotEmotion(act.emotion);
+        if (statusText) statusText.textContent = act.label;
+      }, 16000);
     }
-    startLifelikeIdleLoop();
+    startLivingRoutine();
+
+    /* Retractable Chat History Drawer System (ChatGPT / Gemini style) */
+    function getSavedChatHistory() {
+      try {
+        return JSON.parse(localStorage.getItem('nexus_aura_chat_history') || '[]');
+      } catch (_) { return []; }
+    }
+
+    function saveChatHistory(history) {
+      try {
+        localStorage.setItem('nexus_aura_chat_history', JSON.stringify(history.slice(-100)));
+      } catch (_) {}
+      updateHistoryBadge();
+    }
+
+    function updateHistoryBadge() {
+      const h = getSavedChatHistory();
+      if (historyCountBadge) historyCountBadge.textContent = String(h.length);
+    }
+
+    function renderDrawerHistory() {
+      if (!drawerStream) return;
+      const history = getSavedChatHistory();
+      if (history.length === 0) {
+        drawerStream.innerHTML = `
+          <div style="text-align:center;padding:30px 10px;color:#94a3b8;font-size:0.78rem;">
+            <span>✨ Nenhuma conversa arquivada ainda.</span><br/>
+            <span style="font-size:0.7rem;color:#64748b;margin-top:4px;display:block;">Todas as mensagens com a AURA são preservadas com segurança aqui.</span>
+          </div>
+        `;
+        return;
+      }
+      drawerStream.innerHTML = history.map(item => {
+        const isUser = item.role === 'user';
+        const cardsHtml = (item.mapCard ? buildMapCardHtml(item.mapCard) : '') +
+                          (item.emergencyCard ? buildEmergencyCardHtml(item.emergencyCard) : '') +
+                          (item.taskReminderCard ? buildTaskReminderCardHtml(item.taskReminderCard) : '') +
+                          (item.spreadsheetCard ? buildSpreadsheetCardHtml(item.spreadsheetCard) : '');
+        return `
+          <div style="display:flex;flex-direction:column;align-items:${isUser ? 'flex-end' : 'flex-start'};">
+            <div style="max-width:85%;padding:10px 14px;border-radius:${isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px'};background:${isUser ? 'linear-gradient(135deg,rgba(0,245,255,0.22),rgba(56,189,248,0.15))' : 'rgba(15,23,42,0.85)'};border:1px solid ${isUser ? 'rgba(0,245,255,0.45)' : 'rgba(255,255,255,0.12)'};color:#fff;font-size:0.8rem;line-height:1.45;box-shadow:0 4px 14px rgba(0,0,0,0.3);">
+              <div style="font-size:0.65rem;color:${isUser ? '#38bdf8' : '#c084fc'};font-weight:700;margin-bottom:3px;">
+                ${isUser ? 'Você' : 'AURA ✨'} • ${escapeHtml(item.time || '')}
+              </div>
+              <div>${escapeHtml(item.text || '')}</div>
+              ${cardsHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+      drawerStream.scrollTop = drawerStream.scrollHeight;
+    }
+
+    function addTurnToHistory(role, text, extra = {}) {
+      const history = getSavedChatHistory();
+      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      history.push({ role, text, time, ...extra });
+      saveChatHistory(history);
+      renderDrawerHistory();
+    }
+
+    if (btnToggleHistory) {
+      btnToggleHistory.addEventListener('click', () => {
+        triggerHaptic(15);
+        if (drawerEl) {
+          const isClosed = drawerEl.style.display === 'none' || !drawerEl.style.display;
+          drawerEl.style.display = isClosed ? 'flex' : 'none';
+          if (isClosed) renderDrawerHistory();
+        }
+      });
+    }
+
+    if (btnCloseDrawer) {
+      btnCloseDrawer.addEventListener('click', () => {
+        triggerHaptic(15);
+        if (drawerEl) drawerEl.style.display = 'none';
+      });
+    }
+
+    if (btnClearHistory) {
+      btnClearHistory.addEventListener('click', () => {
+        if (confirm('Deseja limpar todo o histórico de conversas com a AURA?')) {
+          localStorage.removeItem('nexus_aura_chat_history');
+          updateHistoryBadge();
+          renderDrawerHistory();
+        }
+      });
+    }
+
+    updateHistoryBadge();
 
     if (btnSofa) btnSofa.addEventListener('click', () => {
       triggerHaptic(15);
@@ -622,14 +813,16 @@ const NexusMobile = (function () {
       setMascotEmotion('coffee');
     });
 
-    if (btnListening) btnListening.addEventListener('click', () => {
+    if (btnWindow) btnWindow.addEventListener('click', () => {
       triggerHaptic(15);
-      setMascotPose('pose-listening');
+      setMascotPose('pose-window');
+      setMascotEmotion('rational');
     });
 
-    if (btnFly) btnFly.addEventListener('click', () => {
+    if (btnScreenClose) btnScreenClose.addEventListener('click', () => {
       triggerHaptic(15);
-      setMascotPose('pose-flying');
+      setMascotPose('pose-screen-close');
+      setMascotEmotion('empathy');
     });
 
     if (btnDuplex) btnDuplex.addEventListener('click', () => {
@@ -697,6 +890,7 @@ const NexusMobile = (function () {
       else if (window.speechSynthesis) window.speechSynthesis.cancel();
 
       setBotState('listening', 'AURA escutando atentamente...');
+      addTurnToHistory('user', q);
       if (captionBox) {
         captionBox.innerHTML = `<span style="color:var(--cyan);">Você: "${escapeHtml(q)}"</span><br/><em>AURA sintonizando emoção e raciocínio...</em>`;
       }
@@ -732,6 +926,7 @@ const NexusMobile = (function () {
           if (captionBox) {
             captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}${buildMapCardHtml(data.mapCard)}${buildEmergencyCardHtml(data.emergencyCard)}${buildTaskReminderCardHtml(data.taskReminderCard)}${buildSpreadsheetCardHtml(data.spreadsheetCard)}`;
           }
+          addTurnToHistory('aura', reply, { mapCard: data.mapCard, emergencyCard: data.emergencyCard, taskReminderCard: data.taskReminderCard, spreadsheetCard: data.spreadsheetCard });
 
           if (ttsEnabled) {
             setBotState('speaking', data.statusLabel || 'AURA conversando no espaço de conforto...');
@@ -921,6 +1116,11 @@ const NexusMobile = (function () {
       triggerHaptic(20);
       if (holo3DInstance) holo3DInstance.triggerAudioPulse(30);
       appendChatBubble(q, 'user');
+      try {
+        const hist = JSON.parse(localStorage.getItem('nexus_aura_chat_history') || '[]');
+        hist.push({ role: 'user', text: q, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+        localStorage.setItem('nexus_aura_chat_history', JSON.stringify(hist.slice(-100)));
+      } catch (_) {}
       if (input) {
         input.value = '';
         input.focus();
@@ -949,6 +1149,19 @@ const NexusMobile = (function () {
           const data = await res.json();
           const reply = data.reply || 'Olá! Estou aqui para colaborar com você.';
           appendChatBubble(reply, 'aura', data.mapCard, data.emergencyCard, data.taskReminderCard, data.spreadsheetCard);
+          try {
+            const hist = JSON.parse(localStorage.getItem('nexus_aura_chat_history') || '[]');
+            hist.push({
+              role: 'aura',
+              text: reply,
+              mapCard: data.mapCard,
+              emergencyCard: data.emergencyCard,
+              taskReminderCard: data.taskReminderCard,
+              spreadsheetCard: data.spreadsheetCard,
+              time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            });
+            localStorage.setItem('nexus_aura_chat_history', JSON.stringify(hist.slice(-100)));
+          } catch (_) {}
           if (ttsEnabled) speakNeural(data.voiceText || reply);
         } else {
           appendChatBubble('Identifiquei uma oscilação momentânea de rede. Pode tentar novamente?', 'aura');
@@ -1174,9 +1387,101 @@ const NexusMobile = (function () {
       if (saved === 'NEXUS-SOVEREIGN-2026') {
         if (gate) gate.style.display = 'none';
         if (cockpit) cockpit.style.display = 'block';
+        initHumanTeachingsSupervisor();
       }
     }
     checkPass();
+
+    function initHumanTeachingsSupervisor() {
+      const qText = document.getElementById('sup-current-q-text');
+      const answerInput = document.getElementById('sup-teaching-answer-input');
+      const teachBtn = document.getElementById('sup-btn-teach');
+      const nextQBtn = document.getElementById('sup-btn-next-q');
+      const countBadge = document.getElementById('sup-teachings-count');
+      const listEl = document.getElementById('sup-teachings-list');
+
+      let allQuestions = [];
+      let currentQIndex = 0;
+
+      async function loadTeachings() {
+        try {
+          const res = await fetch('/api/c2/human-teachings');
+          if (!res.ok) return;
+          const data = await res.json();
+          allQuestions = data.activeQuestions || [];
+          renderCurrentQuestion();
+          renderTeachingsList(data.teachings || []);
+        } catch (_) {}
+      }
+
+      function renderCurrentQuestion() {
+        if (!qText || allQuestions.length === 0) return;
+        const q = allQuestions[currentQIndex % allQuestions.length];
+        qText.textContent = `[${q.topic}]: "${q.question}"`;
+      }
+
+      function renderTeachingsList(teachings) {
+        if (countBadge) countBadge.textContent = `${teachings.length} ensinamentos`;
+        if (!listEl) return;
+        if (teachings.length === 0) {
+          listEl.innerHTML = '<div style="font-size:0.7rem;color:#64748b;text-align:center;padding:8px;">Nenhum ensinamento personalizado cadastrado ainda.</div>';
+          return;
+        }
+        listEl.innerHTML = teachings.map(t => `
+          <div style="background:rgba(15,23,42,0.85);border:1.5px solid rgba(168,85,247,0.35);border-radius:10px;padding:8px 10px;font-size:0.74rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+              <span style="font-weight:700;color:#c084fc;">🏷️ ${escapeHtml(t.topic)}</span>
+              <div style="display:flex;gap:4px;">
+                <button onclick="NexusMobile.editTeaching('${t.id}')" style="background:rgba(0,245,255,0.15);border:1px solid #00f5ff;color:#00f5ff;font-size:0.62rem;border-radius:6px;padding:2px 6px;cursor:pointer;">✏️ Editar</button>
+                <button onclick="NexusMobile.deleteTeaching('${t.id}')" style="background:rgba(239,68,68,0.15);border:1px solid #ef4444;color:#ef4444;font-size:0.62rem;border-radius:6px;padding:2px 6px;cursor:pointer;">🗑️ Excluir</button>
+              </div>
+            </div>
+            <div style="color:#cbd5e1;margin-bottom:4px;font-style:italic;">"${escapeHtml(t.creatorAnswer)}"</div>
+            <div style="font-size:0.65rem;color:#94a3b8;">${new Date(t.answeredAt).toLocaleString()}</div>
+          </div>
+        `).join('');
+      }
+
+      if (nextQBtn) {
+        nextQBtn.addEventListener('click', () => {
+          triggerHaptic(12);
+          currentQIndex++;
+          renderCurrentQuestion();
+        });
+      }
+
+      if (teachBtn) {
+        teachBtn.addEventListener('click', async () => {
+          const ans = (answerInput?.value || '').trim();
+          if (!ans) {
+            alert('Por favor, digite o ensinamento para a AURA.');
+            return;
+          }
+          triggerHaptic(20);
+          const q = allQuestions[currentQIndex % allQuestions.length] || {};
+          try {
+            const res = await fetch('/api/c2/human-teachings', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                questionId: q.id,
+                question: q.question,
+                topic: q.topic,
+                creatorAnswer: ans
+              })
+            });
+            if (res.ok) {
+              if (answerInput) answerInput.value = '';
+              alert('AURA absorveu o ensinamento no seu cérebro vetorial com sucesso!');
+              currentQIndex++;
+              loadTeachings();
+            }
+          } catch (_) {}
+        });
+      }
+
+      loadTeachings();
+    }
 
     if (unlockBtn && passkey) {
       unlockBtn.addEventListener('click', () => {
@@ -1423,11 +1728,37 @@ const NexusMobile = (function () {
     if (modal) modal.style.display = 'none';
   }
 
+  async function editTeaching(id) {
+    const newText = prompt('Editar o ensinamento humano para a AURA:');
+    if (newText !== null && newText.trim()) {
+      await fetch('/api/c2/human-teachings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, creatorAnswer: newText.trim() })
+      });
+      // Refresh supervisor panel
+      const btn = document.getElementById('sup-btn-next-q');
+      if (btn) btn.click();
+    }
+  }
+
+  async function deleteTeaching(id) {
+    if (confirm('Tem certeza que deseja excluir este ensinamento da memória vetorial de AURA?')) {
+      await fetch('/api/c2/human-teachings', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      });
+      const btn = document.getElementById('sup-btn-next-q');
+      if (btn) btn.click();
+    }
+  }
+
   function escapeHtml(str) {
     return String(str || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   }
 
-  return { init, switchTab, promptEmergencyContact, showEmergencyModal, closeEmergencyModal };
+  return { init, switchTab, promptEmergencyContact, showEmergencyModal, closeEmergencyModal, editTeaching, deleteTeaching };
 })();
 
 document.addEventListener('DOMContentLoaded', () => {

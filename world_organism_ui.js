@@ -41,6 +41,7 @@ const WorldOrganismUI = (function () {
       renderSimulations();
       renderCreations();
       renderSavedChatHistory();
+      loadAdminTeachings();
     } catch (e) {
       console.warn('Erro ao carregar organismo:', e.message);
       renderErrorFallbacks(e.message);
@@ -1011,6 +1012,109 @@ ${s.scenarioName}
     }
   }
 
+  let adminQuestions = [];
+  let currentAdminQIdx = 0;
+
+  async function loadAdminTeachings() {
+    try {
+      const res = await fetch('/api/c2/human-teachings');
+      if (!res.ok) return;
+      const data = await res.json();
+      adminQuestions = data.activeQuestions || [];
+      renderAdminQuestion();
+      renderAdminTeachingsList(data.teachings || []);
+    } catch (_) {}
+  }
+
+  function renderAdminQuestion() {
+    const qEl = document.getElementById('admin-teach-q-text');
+    if (!qEl || adminQuestions.length === 0) return;
+    const q = adminQuestions[currentAdminQIdx % adminQuestions.length];
+    qEl.textContent = `[${q.topic}]: "${q.question}"`;
+  }
+
+  function renderAdminTeachingsList(teachings) {
+    const cntEl = document.getElementById('admin-teach-count');
+    const listEl = document.getElementById('admin-teach-list');
+    if (cntEl) cntEl.textContent = `${teachings.length} ensinamentos ativos`;
+    if (!listEl) return;
+    if (teachings.length === 0) {
+      listEl.innerHTML = '<div style="font-size:0.75rem;color:var(--text-dim);text-align:center;padding:1rem;">Nenhum ensinamento cadastrado ainda.</div>';
+      return;
+    }
+    listEl.innerHTML = teachings.map(t => `
+      <div style="background:rgba(15,23,42,0.85);border:1px solid rgba(192,132,252,0.3);border-radius:8px;padding:8px 10px;font-size:0.76rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <span style="font-weight:700;color:#c084fc;">🏷️ ${esc(t.topic)}</span>
+          <div style="display:flex;gap:4px;">
+            <button onclick="WorldOrganismUI.editAdminTeaching('${t.id}')" style="background:rgba(0,245,255,0.15);border:1px solid #00f5ff;color:#00f5ff;font-size:0.65rem;border-radius:4px;padding:2px 6px;cursor:pointer;">✏️ Editar</button>
+            <button onclick="WorldOrganismUI.deleteAdminTeaching('${t.id}')" style="background:rgba(239,68,68,0.15);border:1px solid #ef4444;color:#ef4444;font-size:0.65rem;border-radius:4px;padding:2px 6px;cursor:pointer;">🗑️ Excluir</button>
+          </div>
+        </div>
+        <div style="color:#cbd5e1;margin-bottom:4px;font-style:italic;">"${esc(t.creatorAnswer)}"</div>
+        <div style="font-size:0.66rem;color:var(--text-dim);">${new Date(t.answeredAt).toLocaleString('pt-BR')}</div>
+      </div>
+    `).join('');
+  }
+
+  function nextAdminQuestion() {
+    currentAdminQIdx++;
+    renderAdminQuestion();
+  }
+
+  async function submitAdminTeaching() {
+    const input = document.getElementById('admin-teach-answer');
+    const ans = (input?.value || '').trim();
+    if (!ans) {
+      alert('Por favor, digite o ensinamento para educar a AURA.');
+      return;
+    }
+    const q = adminQuestions[currentAdminQIdx % adminQuestions.length] || {};
+    try {
+      const res = await fetch('/api/c2/human-teachings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          questionId: q.id,
+          question: q.question,
+          topic: q.topic,
+          creatorAnswer: ans
+        })
+      });
+      if (res.ok) {
+        if (input) input.value = '';
+        alert('Ensinamento gravado na base vetorial da AURA com sucesso!');
+        currentAdminQIdx++;
+        loadAdminTeachings();
+      }
+    } catch (e) {
+      alert('Erro ao enviar ensinamento: ' + e.message);
+    }
+  }
+
+  async function editAdminTeaching(id) {
+    const newText = prompt('Editar ensinamento humano para a AURA:');
+    if (newText !== null && newText.trim()) {
+      await fetch('/api/c2/human-teachings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, creatorAnswer: newText.trim() })
+      });
+      loadAdminTeachings();
+    }
+  }
+
+  async function deleteAdminTeaching(id) {
+    if (confirm('Tem certeza que deseja remover este ensinamento da memória vetorial de AURA?')) {
+      await fetch('/api/c2/human-teachings', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      });
+      loadAdminTeachings();
+    }
+  }
+
   return {
     init,
     loadDashboard,
@@ -1036,7 +1140,11 @@ ${s.scenarioName}
     adoptCreation,
     editCreationPrompt,
     deleteCreationPrompt,
-    deleteObservationPrompt
+    deleteObservationPrompt,
+    submitAdminTeaching,
+    nextAdminQuestion,
+    editAdminTeaching,
+    deleteAdminTeaching
   };
 })();
 

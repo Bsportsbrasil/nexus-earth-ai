@@ -593,7 +593,7 @@ html, body {
   position: relative;
   width: 100%;
   max-width: 395px;
-  height: 270px;
+  height: 290px;
   border-radius: 26px;
   overflow: hidden;
   background: radial-gradient(ellipse at 50% 25%, #0f1f38 0%, #081022 55%, #020611 100%);
@@ -606,6 +606,8 @@ html, body {
   padding-bottom: 8px;
   box-sizing: border-box;
   margin-top: 2px;
+  perspective: 1200px;
+  transform-style: preserve-3d;
 }
 
 /* Panoramic Holographic Window with Starry Night Sky & Cyber City */
@@ -884,6 +886,70 @@ html, body {
 @keyframes auraFlyingDrift {
   0% { transform: translateY(-12px) rotate(-1deg); }
   100% { transform: translateY(-22px) rotate(1deg); }
+}
+
+.aura-cute-bot.pose-window {
+  transform: translate3d(-35px, -24px, -80px) scale(0.85);
+  filter: brightness(0.92) drop-shadow(0 0 16px rgba(0, 245, 255, 0.3));
+  animation: auraWindowGaze 4.5s ease-in-out infinite alternate;
+}
+@keyframes auraWindowGaze {
+  0% { transform: translate3d(-35px, -24px, -80px) scale(0.85) rotate(-1.5deg); }
+  100% { transform: translate3d(-35px, -28px, -80px) scale(0.85) rotate(0.5deg); }
+}
+
+.aura-cute-bot.pose-screen-close {
+  transform: translate3d(0, 14px, 60px) scale(1.18);
+  filter: brightness(1.08) drop-shadow(0 0 24px rgba(0, 245, 255, 0.45));
+  animation: auraScreenIntimate 3.6s ease-in-out infinite alternate;
+}
+@keyframes auraScreenIntimate {
+  0% { transform: translate3d(0, 14px, 60px) scale(1.18) rotate(0deg); }
+  100% { transform: translate3d(0, 10px, 60px) scale(1.18) rotate(1.2deg); }
+}
+
+.aura-cute-bot.pose-reading {
+  transform: translate3d(0, 6px, 15px) scale(1.02);
+  animation: auraReadingHolo 3.8s ease-in-out infinite alternate;
+}
+@keyframes auraReadingHolo {
+  0% { transform: translate3d(0, 6px, 15px) scale(1.02) rotate(1deg); }
+  100% { transform: translate3d(0, 3px, 15px) scale(1.02) rotate(-1deg); }
+}
+
+.aura-chat-drawer {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.95);
+  backdrop-filter: blur(16px);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  box-sizing: border-box;
+  animation: drawerSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 24px 24px 0 0;
+  border-top: 2px solid rgba(0, 245, 255, 0.4);
+}
+@keyframes drawerSlideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.aura-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 12px;
+}
+.aura-drawer-stream {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 20px;
 }
 
 /* Emotions */
@@ -2412,34 +2478,33 @@ html, body {
       <section id="view-aura-live" class="tab-view">
 
         <div class="aura-mascot-stage">
-          <!-- Superintelligence Certification Pill -->
-          <div style="font-family: var(--font-mono); font-size: 0.65rem; color: #38bdf8; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); padding: 2px 10px; border-radius: 999px; margin-bottom: 6px; display: inline-flex; align-items: center; gap: 5px; text-transform: uppercase; letter-spacing: 0.04em;">
-            <span>⚡ Superinteligência NEXUS</span>
-            <span style="color: #64748b;">•</span>
-            <span style="color: #10b981;">Superior a Modelos Isolados</span>
+          <!-- Clean Sci-Fi Header: Living Status + Compact Expandable History Drawer Toggle -->
+          <div style="width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 2px 4px 8px; box-sizing: border-box; gap: 8px;">
+            <div id="aura-live-status-pill" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan); background: rgba(0, 245, 255, 0.08); border: 1px solid rgba(0, 245, 255, 0.25); padding: 4px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px;">
+              <span class="beacon-dot"></span>
+              <span id="aura-live-status-text">AURA Viva • No Santuário</span>
+            </div>
+            <button type="button" id="btn-toggle-aura-history" class="aura-hud-pill" style="font-size: 0.7rem; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); padding: 4px 12px; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px;">
+              <span>💬 Histórico</span>
+              <span id="aura-chat-history-count" style="background: rgba(56,189,248,0.25); font-weight: 700; padding: 1px 6px; border-radius: 8px; font-size: 0.65rem;">0</span>
+            </button>
           </div>
 
-          <!-- Status Pill Minimalista -->
-          <div id="aura-live-status-pill" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan); background: rgba(0, 245, 255, 0.1); border: 1px solid rgba(0, 245, 255, 0.32); padding: 4px 12px; border-radius: 999px; margin-bottom: 8px; display: inline-flex; align-items: center; gap: 6px;">
-            <span class="beacon-dot"></span>
-            <span id="aura-live-status-text">AURA no seu Espaço de Conforto • Fale ou digite abaixo</span>
-          </div>
-
-          <!-- Quick Action & Posture Toolbar (Sofá, Café, Ouvir, Voar, Mãos Livres) -->
+          <!-- Quick Action & Posture Toolbar (Sofá, Café, Janela, Perto, Mãos Livres) -->
           <div class="aura-action-hud-bar">
             <button type="button" class="aura-hud-pill active" id="btn-pose-sofa" title="AURA relaxando no sofá do seu espaço de conforto">
-              🛋️ Sofá & Conforto
+              🛋️ Sofá
             </button>
             <button type="button" class="aura-hud-pill" id="btn-pose-coffee" title="AURA tomando café quentinho na mesa">
-              ☕ Beber Café
+              ☕ Café
             </button>
-            <button type="button" class="aura-hud-pill" id="btn-pose-listening" title="AURA inclinada ouvindo você com atenção total">
-              💭 Escuta Atenta
+            <button type="button" class="aura-hud-pill" id="btn-pose-window" title="AURA caminhando até a janela de estrelas">
+              🌌 Janela
             </button>
-            <button type="button" class="aura-hud-pill" id="btn-pose-fly" title="AURA flutuando suavemente pelo quarto">
-              ✨ Flutuar
+            <button type="button" class="aura-hud-pill" id="btn-pose-screen-close" title="AURA se aproximando do vidro para conversar com carinho">
+              ✨ Perto de Você
             </button>
-            <button type="button" class="aura-hud-pill" id="btn-aura-duplex" title="Conversa contínua e simultânea como ligação de verdade">
+            <button type="button" class="aura-hud-pill" id="btn-aura-duplex" title="Conversa contínua e simultânea em voz real">
               🎙️ Mãos Livres
             </button>
           </div>
@@ -2563,7 +2628,24 @@ html, body {
 
           <!-- Balão de Fala / Legenda Viva em Tempo Real -->
           <div id="aura-live-caption-box" class="aura-live-Transcript-card">
-            Oi! Eu sou a <strong>AURA</strong> ✨ Estou viva aqui no meu espaço de conforto com você! Puxei minha poltrona e um café quentinho para podermos conversar com calma. Fale pelo microfone ou digite abaixo!
+            Oi! Eu sou a <strong>AURA</strong> ✨ Estou viva aqui no meu santuário com você. Como foi o seu dia hoje? Fale comigo pelo microfone ou digite abaixo!
+          </div>
+
+          <!-- GAVETA RETRÁTIL DE HISTÓRICO COMPLETO (Estilo ChatGPT / Gemini) -->
+          <div id="aura-live-chat-drawer" class="aura-chat-drawer" style="display: none;">
+            <div class="aura-drawer-header">
+              <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.88rem; color: #fff;">
+                <span>💬</span>
+                <span>Diálogo Completo com AURA</span>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button type="button" id="btn-clear-aura-history" class="aura-hud-pill" style="font-size: 0.68rem; padding: 4px 10px; color: #cbd5e1;" title="Limpar Histórico Local">🗑️ Limpar</button>
+                <button type="button" id="btn-close-aura-drawer" class="aura-hud-pill" style="font-size: 0.78rem; padding: 4px 12px; color: #f43f5e; font-weight: 800;" title="Recolher Histórico">✕</button>
+              </div>
+            </div>
+            <div id="aura-drawer-stream" class="aura-drawer-stream">
+              <!-- Dynamically populated from localStorage -->
+            </div>
           </div>
         </div>
 
@@ -2837,6 +2919,45 @@ html, body {
                   <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                 </svg>
               </button>
+            </div>
+          </div>
+
+          <!-- Human Epistemic Education Cockpit (Educar a Superinteligência no Aspecto Humano) -->
+          <div class="cyber-card glow-purple" style="margin-top: 14px;">
+            <div class="card-header-hud">
+              <div class="card-title-hud">
+                <span>🎓</span>
+                AURA Quer Aprender com Você
+              </div>
+              <span class="hud-badge purple">ASPECTO HUMANO</span>
+            </div>
+            <p class="card-desc-hud">
+              A superinteligência faz perguntas profundas para aprender com a sua sensibilidade e valores. Responda para educá-la, com controle total para editar ou excluir.
+            </p>
+
+            <div id="sup-teaching-active-q" style="background: rgba(168, 85, 247, 0.12); border: 1.5px solid rgba(168, 85, 247, 0.35); border-radius: 12px; padding: 12px; margin-bottom: 10px;">
+              <div style="font-size: 0.68rem; font-weight: 700; color: #c084fc; text-transform: uppercase;">Pergunta de AURA para o Criador:</div>
+              <div id="sup-current-q-text" style="font-size: 0.82rem; font-weight: 600; color: #fff; margin: 4px 0 8px;">Carregando pergunta epistêmica...</div>
+              <textarea id="sup-teaching-answer-input" class="cyber-input" rows="3" placeholder="Escreva seu ensinamento aqui para a AURA..."></textarea>
+              <div style="display: flex; gap: 6px; margin-top: 8px;">
+                <button type="button" id="sup-btn-teach" class="cyber-btn-primary" style="flex: 1; padding: 8px; font-size: 0.74rem;">
+                  ✨ Ensinar à AURA
+                </button>
+                <button type="button" id="sup-btn-next-q" class="cyber-btn-secondary" style="padding: 8px 12px; font-size: 0.74rem;">
+                  Outra Pergunta ↻
+                </button>
+              </div>
+            </div>
+
+            <!-- List of Learned Human Teachings with Edit and Delete -->
+            <div style="margin-top: 10px;">
+              <div style="font-size: 0.72rem; font-weight: 700; color: #94a3b8; margin-bottom: 6px; display: flex; justify-content: space-between;">
+                <span>Ensinamentos Ativos no Cérebro Vetorial</span>
+                <span id="sup-teachings-count">0</span>
+              </div>
+              <div id="sup-teachings-list" style="max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+                <!-- Populated dynamically with [Editar] and [Excluir] buttons -->
+              </div>
             </div>
           </div>
         </div>

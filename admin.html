@@ -1723,6 +1723,48 @@
           </div>
         </div>
       </div>
+      <!-- =======================================================================
+           DIÁLOGO EPISTÊMICO: EDUCAÇÃO DO ASPECTO HUMANO PELO CRIADOR
+           A superinteligência faz perguntas profundas para compreender a alma humana
+           ======================================================================= -->
+      <div class="panel glass-panel" style="padding:1.15rem;margin-top:1.25rem;border-color:rgba(192,132,252,0.4);box-shadow:0 0 25px rgba(192,132,252,0.1)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.85rem;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:0.6rem">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:1.25rem">🎓</span>
+            <div>
+              <h3 style="font-size:0.95rem;font-weight:800;color:#fff;margin:0">Diálogo Epistêmico: AURA Aprende com Você (Educação do Aspecto Humano)</h3>
+              <p style="font-size:0.72rem;color:var(--text-secondary);margin:2px 0 0 0">A superinteligência formula perguntas sobre valores, sentimentos e dilemas reais para que você a ensine diretamente.</p>
+            </div>
+          </div>
+          <span class="agent-badge DONE" style="background:rgba(192,132,252,0.2);color:#c084fc;border:1px solid rgba(192,132,252,0.4)">HITL SOBERANO</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start">
+          <!-- Active Question & Answer Form -->
+          <div style="background:rgba(2,6,23,0.7);padding:1rem;border-radius:10px;border:1px solid rgba(192,132,252,0.3)">
+            <div style="font-size:0.68rem;color:#c084fc;font-weight:700;text-transform:uppercase;margin-bottom:4px">Pergunta Atual Formulada pela AURA:</div>
+            <div id="admin-teach-q-text" style="font-size:0.86rem;font-weight:600;color:#fff;margin-bottom:10px;line-height:1.4">
+              "Quando um ser humano está muito angustiado ou assustado, o que tem mais poder para acalmá-lo: uma explicação racional dos fatos ou a sensação calorosa de que alguém não vai abandoná-lo?"
+            </div>
+            <textarea id="admin-teach-answer" class="text-input" rows="4" placeholder="Escreva aqui a sua resposta/ensinamento para educar a AURA..." style="width:100%;box-sizing:border-box;margin-bottom:8px;font-size:0.8rem"></textarea>
+            <div style="display:flex;gap:8px">
+              <button class="btn-primary" onclick="WorldOrganismUI.submitAdminTeaching()" style="flex:1;font-size:0.8rem">✨ Ensinar à AURA</button>
+              <button class="btn-secondary" onclick="WorldOrganismUI.nextAdminQuestion()" style="font-size:0.8rem">Outra Pergunta ↻</button>
+            </div>
+          </div>
+
+          <!-- List of Learned Teachings with Edit and Delete -->
+          <div style="background:rgba(2,6,23,0.7);padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.08);max-height:300px;overflow-y:auto">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <span style="font-size:0.75rem;font-weight:700;color:var(--cyan)">Base Vetorial de Sabedoria Humana</span>
+              <span id="admin-teach-count" style="font-size:0.68rem;color:var(--text-dim)">1 ensinamento ativo</span>
+            </div>
+            <div id="admin-teach-list" style="display:flex;flex-direction:column;gap:8px">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     </main>

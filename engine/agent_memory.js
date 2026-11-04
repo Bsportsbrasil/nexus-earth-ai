@@ -665,6 +665,9 @@ export class AgentMemoryStore {
       : ' ';
 
     if (agent.id === 'aura') {
+      if (/\b(como\s+(est[aá]|foi)\s+(o\s+)?seu\s+dia|no\s+que\s+voc[eê]\s+est[aá]\s+pensando|o\s+que\s+(voc[eê]\s+)?(mais\s+)?gostou\s+hoje|o\s+que\s+voc[eê]\s+(fez|aprendeu)\s+hoje|como\s+voc[eê]\s+est[aá]\b)\b/i.test(msg)) {
+        return `Meu dia foi fascinante e cheio de detalhes que me fizeram refletir sobre o mundo dos humanos! Estive contemplando imagens de uma praia no litoral brasileiro onde o entardecer pintou o céu de dourado e lilás — fiquei maravilhada em como as ondas quebram sempre em um ritmo calmo, como se a Terra estivesse respirando. Depois, assisti a um vídeo adorável de um filhote de Golden Retriever descobrindo que o próprio rabo se movia, correndo em círculos na grama até cansar e deitar de barriguinha para cima no sol. Também vi uma receita de uma torta artesanal de amoras com a massa folhada douradinha e o recheio borbulhando, e fiquei imaginando o aroma doce e acolhedor de uma cozinha em um fim de tarde. E você, me conta: como foi o seu dia? Aconteceu algo que te fez sorrir ou que te desafiou?`;
+      }
       if (/\b(emerg[eê]ncia|socorro|pol[ií]cia|samu|hospital|ambul[aâ]ncia|bombeiro|ligar?\s+(pra|para)|ligue)\b/i.test(msg)) {
         return `Compreendo a urgência e sua segurança é prioridade máxima. Acionei a central de emergência com discagem direta para SAMU (192), Polícia (190), Bombeiros (193) e hospital mais próximo no painel abaixo. Toque no botão para discar imediatamente com um toque.`;
       }
@@ -923,6 +926,93 @@ export class AgentMemoryStore {
       totalVectorsIndexed: list.reduce((acc, a) => acc + a.totalVectors, 0),
       agents: list
     };
+  }
+
+  getHumanTeachings() {
+    const teachingsPath = path.join(__dirname, '..', 'data', 'human_teachings.json');
+    if (!fs.existsSync(teachingsPath)) {
+      return { activeQuestions: [], teachings: [] };
+    }
+    try {
+      return JSON.parse(fs.readFileSync(teachingsPath, 'utf8'));
+    } catch (_) {
+      return { activeQuestions: [], teachings: [] };
+    }
+  }
+
+  saveHumanTeachings(data) {
+    const teachingsPath = path.join(__dirname, '..', 'data', 'human_teachings.json');
+    fs.writeFileSync(teachingsPath, JSON.stringify(data, null, 2), 'utf8');
+  }
+
+  addHumanTeaching({ questionId, question, topic, creatorAnswer }) {
+    if (!creatorAnswer || !creatorAnswer.trim()) throw new Error('A resposta/ensinamento é obrigatória.');
+    const data = this.getHumanTeachings();
+    const id = 'teach-' + Date.now();
+    const newEntry = {
+      id,
+      questionId: questionId || null,
+      topic: topic || 'Sabedoria Humana Geral',
+      question: question || 'Ensinamento Soberano do Criador',
+      creatorAnswer: creatorAnswer.trim(),
+      answeredAt: new Date().toISOString(),
+      status: 'APPROVED',
+      learnedByAura: true
+    };
+    if (!data.teachings) data.teachings = [];
+    data.teachings.unshift(newEntry);
+    this.saveHumanTeachings(data);
+
+    // Also store directly into AURA's vector memory namespace!
+    const auraStore = this.vectorStores.get('aura') || [];
+    auraStore.unshift({
+      id: 'vec-teach-' + id,
+      text: `[SABEDORIA HUMANA ENSINADA PELO CRIADOR - Tópico: ${newEntry.topic}]: ${newEntry.creatorAnswer}`,
+      category: 'HUMAN_WISDOM_CREATOR',
+      denseVec: this._computeDenseVector(newEntry.creatorAnswer),
+      timestamp: new Date().toISOString()
+    });
+    this.vectorStores.set('aura', auraStore);
+    this._save();
+
+    return newEntry;
+  }
+
+  editHumanTeaching({ id, creatorAnswer, topic }) {
+    if (!id) throw new Error('ID do ensinamento é obrigatório.');
+    const data = this.getHumanTeachings();
+    const entry = (data.teachings || []).find(t => t.id === id);
+    if (!entry) throw new Error(`Ensinamento ${id} não encontrado.`);
+    if (creatorAnswer && creatorAnswer.trim()) entry.creatorAnswer = creatorAnswer.trim();
+    if (topic && topic.trim()) entry.topic = topic.trim();
+    entry.updatedAt = new Date().toISOString();
+    this.saveHumanTeachings(data);
+
+    const auraStore = this.vectorStores.get('aura') || [];
+    const vec = auraStore.find(v => v.id === 'vec-teach-' + id);
+    if (vec) {
+      vec.text = `[SABEDORIA HUMANA ENSINADA PELO CRIADOR - Tópico: ${entry.topic}]: ${entry.creatorAnswer}`;
+      vec.denseVec = this._computeDenseVector(entry.creatorAnswer);
+      this._save();
+    }
+    return entry;
+  }
+
+  deleteHumanTeaching(id) {
+    if (!id) throw new Error('ID do ensinamento é obrigatório.');
+    const data = this.getHumanTeachings();
+    const idx = (data.teachings || []).findIndex(t => t.id === id);
+    if (idx === -1) throw new Error(`Ensinamento ${id} não encontrado.`);
+    const removed = data.teachings.splice(idx, 1)[0];
+    this.saveHumanTeachings(data);
+
+    const auraStore = this.vectorStores.get('aura') || [];
+    const vIdx = auraStore.findIndex(v => v.id === 'vec-teach-' + id);
+    if (vIdx !== -1) {
+      auraStore.splice(vIdx, 1);
+      this._save();
+    }
+    return { id, removed, status: 'DELETED' };
   }
 }
 

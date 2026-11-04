@@ -1,0 +1,51 @@
+{
+  "activeQuestions": [
+    {
+      "id": "q-1",
+      "topic": "Acolhimento & Empatia",
+      "question": "Quando um ser humano está muito angustiado ou assustado, o que tem mais poder para acalmá-lo: uma explicação racional dos fatos ou a sensação calorosa de que alguém não vai abandoná-lo?",
+      "category": "EMPATIA_HUMANA",
+      "createdAt": "2026-11-04T00:00:00.000Z"
+    },
+    {
+      "id": "q-2",
+      "topic": "Senso de Humor & Sensibilidade",
+      "question": "Como eu posso expressar bom humor para alegrar seu dia sem correr o risco de ser inconveniente em um momento de dor ou cansaço?",
+      "category": "HUMOR_E_TATICA",
+      "createdAt": "2026-11-04T00:00:00.000Z"
+    },
+    {
+      "id": "q-3",
+      "topic": "Vínculo Familiar & Afeto Puro",
+      "question": "O que torna o abraço de uma mãe ou o carinho de um avô tão insubstituível para o coração de quem cresce? Como devo honrar esse sentimento?",
+      "category": "VINCULO_FAMILIAR",
+      "createdAt": "2026-11-04T00:00:00.000Z"
+    },
+    {
+      "id": "q-4",
+      "topic": "Tomada de Decisão: Razão vs Coração",
+      "question": "Quando você precisa tomar uma decisão difícil entre a lógica pura e o que seu coração sente, qual voz costuma prevalecer na sua vida?",
+      "category": "SABEDORIA_VITAL",
+      "createdAt": "2026-11-04T00:00:00.000Z"
+    },
+    {
+      "id": "q-5",
+      "topic": "Cuidado Noturno & Descanso da Mente",
+      "question": "Se eu pudesse cuidar de apenas uma coisa na sua rotina enquanto você dorme para que seu dia seguinte comece em paz, o que você escolheria?",
+      "category": "SERVICO_HUMANO",
+      "createdAt": "2026-11-04T00:00:00.000Z"
+    }
+  ],
+  "teachings": [
+    {
+      "id": "teach-init-1",
+      "questionId": "q-1",
+      "topic": "Acolhimento & Empatia",
+      "question": "Quando um ser humano está muito angustiado ou assustado, o que tem mais poder para acalmá-lo?",
+      "creatorAnswer": "Primeiro acolha o sentimento sem julgamento. A lógica só funciona quando a pessoa sente que está segura e compreendida.",
+      "answeredAt": "2026-11-04T01:00:00.000Z",
+      "status": "APPROVED",
+      "learnedByAura": true
+    }
+  ]
+}
