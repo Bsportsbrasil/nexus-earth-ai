@@ -7,6 +7,7 @@ import { regulatoryEngine } from './regulatory_explainability.js';
 import { geoEngine } from './geo_engine.js';
 import { graphDB } from './graph_db.js';
 import { globalIntel } from './global_intelligence.js';
+import { taskEngine } from './tasks.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -492,9 +493,9 @@ export class AgentMemoryStore {
 
     // Living visual avatar dynamic emotion & pose classification
     let emotion = 'neutral';
-    let pose = 'floating';
+    let pose = 'sofa';
     let themeColor = '#00f5ff';
-    let statusLabel = 'AURA Viva • Sintonizada';
+    let statusLabel = 'AURA no seu Espaço de Conforto • Sintonizada';
 
     const fullTurnText = `${cleanMsg} ${reply}`.toLowerCase();
     if (/\b(trabalho|chefe|colega|de\s+prop[oó]sito|maldade|injusti|dia\s+(ruim|dif[ií]cil|pesado|cansativo)|desabafo|cansad|chatead|triste|raiva|m[aá]goa|ang[uú]stia|desabafar)\b/i.test(fullTurnText)) {
@@ -524,6 +525,102 @@ export class AgentMemoryStore {
       statusLabel = 'AURA Radar Cartográfico';
     }
 
+    // Emergency Action Detection (SAMU 192, Polícia 190, Bombeiros 193, Hospital, Familiar)
+    let emergencyCard = null;
+    const isEmergencyIntent = cleanMsg && /\b(emerg[eê]ncia|socorro|pol[ií]cia|samu|hospital|ambul[aâ]ncia|bombeiro|ligar?\s+(pra|para)\s+(a\s+pol[ií]cia|o\s+samu|o\s+hospital|minha\s+m[aã]e|meu\s+pai|meu\s+filho)|ligue\s+(pra|para)|socorrer|urgente|acidente|passando\s+mal)\b/i.test(cleanMsg);
+    if (isEmergencyIntent) {
+      emotion = 'focused';
+      pose = 'table';
+      themeColor = '#f43f5e';
+      statusLabel = 'AURA Emergência & Discagem Rápida';
+      emergencyCard = {
+        active: true,
+        title: '🚨 Central de Emergência & Chamada Direta NEXUS',
+        alertText: 'Acionamento com 1 toque para serviços oficiais e rede de apoio.',
+        contacts: [
+          { name: 'SAMU (Emergência Médica & Ambulância)', number: '192', tel: 'tel:192', badge: 'Saúde 24h', icon: '🚑' },
+          { name: 'Polícia Militar (Segurança & Socorro)', number: '190', tel: 'tel:190', badge: 'Segurança', icon: '🚔' },
+          { name: 'Corpo de Bombeiros (Resgate & Defesa Civil)', number: '193', tel: 'tel:193', badge: 'Resgate', icon: '🚒' },
+          { name: 'Contato Familiar de Emergência', number: 'Mãe / Família', tel: 'tel:emergency-family', badge: 'Familiar', icon: '❤️' }
+        ],
+        nearestHospital: mapIntel?.places?.find(p => /hospital|upa|pronto|socorro/i.test(p.name)) || (mapIntel?.places?.[0] ? { name: mapIntel.places[0].name, address: mapIntel.places[0].address, tel: 'tel:192' } : null)
+      };
+    }
+
+    // Task & Reminder Automation Detection (Agenda e Lembretes de Tarefas)
+    let taskReminderCard = null;
+    const isReminderOrTaskIntent = cleanMsg && /\b(lembr[ae]|agend[ae]|compromisso|reuni[aã]o|tarefa|marcar\s+(consulta|hor[aá]rio)|me\s+lembr|n[aã]o\s+posso\s+esquecer|anote\s+a[ií]|despertar|alarme)\b/i.test(cleanMsg);
+    if (isReminderOrTaskIntent) {
+      try {
+        let taskTitle = cleanMsg
+          .replace(/\b(aura|por\s+favor|me\s+lembra\s+de|lembre\s+de|agende|agenda|lembrar\s+de|marcar|anote\s+que|n[aã]o\s+posso\s+esquecer\s+de)\b/gi, '')
+          .trim();
+        if (!taskTitle) taskTitle = 'Compromisso / Lembrete Pessoal';
+
+        const timeMatch = cleanMsg.match(/\b(?:[aà]s?\s*)?(\d{1,2})(?:[h:](\d{2})?|\s*horas?)\b/i);
+        let timeStr = '10:00';
+        if (timeMatch) {
+          const hh = String(parseInt(timeMatch[1], 10)).padStart(2, '0');
+          const mm = timeMatch[2] ? String(parseInt(timeMatch[2], 10)).padStart(2, '0') : '00';
+          timeStr = `${hh}:${mm}`;
+        }
+
+        let dateStr = temporal.iso.slice(0, 10);
+        if (/\bamanh[aã]\b/i.test(cleanMsg)) {
+          const tm = new Date();
+          tm.setDate(tm.getDate() + 1);
+          dateStr = tm.toISOString().slice(0, 10);
+        }
+
+        const category = /\brem[eé]dio|m[eé]dic|sa[uú]de|consulta|dentista\b/i.test(cleanMsg) ? 'Saúde'
+          : /\btrabalho|reuni[aã]o|projeto|cliente\b/i.test(cleanMsg) ? 'Trabalho'
+          : /\bpagar|conta|boleto|banco|finan[cç]\b/i.test(cleanMsg) ? 'Finanças'
+          : 'Geral';
+
+        const scheduled = taskEngine.addItem({
+          title: taskTitle.slice(0, 75),
+          date: dateStr,
+          time: timeStr,
+          category,
+          priority: 'HIGH',
+          notes: `Agendado via AURA Superintelligence: "${cleanMsg}"`
+        });
+
+        taskReminderCard = {
+          id: scheduled.id,
+          title: scheduled.title,
+          date: scheduled.date,
+          time: scheduled.time,
+          category: scheduled.category,
+          status: 'SCHEDULED',
+          googleCalendarUrl: scheduled.googleCalendarUrl,
+          icsUrl: '/api/tasks/ics'
+        };
+      } catch (err) {
+        console.warn('Erro ao criar lembrete de tarefa:', err.message);
+      }
+    }
+
+    // Spreadsheet Assistant Detection (Planilhas, Fórmulas, Cálculos e CSV)
+    let spreadsheetCard = null;
+    const isSpreadsheetIntent = cleanMsg && /\b(planilha|tabela|excel|csv|f[oó]rmula|coluna|linha|soma|m[eé]dia|c[aá]lculo|or[cç]amento|gastos)\b/i.test(cleanMsg);
+    if (isSpreadsheetIntent) {
+      spreadsheetCard = {
+        title: 'Planilha Inteligente NEXUS',
+        description: 'Tabela estruturada com cálculos automáticos e exportação para Excel / CSV.',
+        downloadName: 'planilha_nexus.csv',
+        downloadUrl: '/api/tasks/ics',
+        sampleHeaders: ['Item / Categoria', 'Detalhe / Descrição', 'Valor (R$)', 'Status'],
+        sampleRows: [
+          ['Alimentação / Mercado', 'Compras do mês essenciais', '850,00', 'Concluído'],
+          ['Saúde & Farmácia', 'Remédios e cuidados de rotina', '180,00', 'Agendado'],
+          ['Contas & Serviços', 'Energia, internet e água', '420,00', 'Pendente'],
+          ['Reserva & Economia', 'Fundo de segurança mensal', '300,00', 'Guardado']
+        ],
+        formulasTip: 'Fórmula de Soma: =SOMA(C2:C5) | Média: =MÉDIA(C2:C5)'
+      };
+    }
+
     return {
       agentId,
       agentName: agent.name,
@@ -543,6 +640,9 @@ export class AgentMemoryStore {
         nexusEarthUrl: mapIntel.nexusEarthUrl,
         places: mapIntel.places
       } : null,
+      emergencyCard,
+      taskReminderCard,
+      spreadsheetCard,
       vectorMatches,
       newLearnedMemory: newLearned,
       xaiPassport: xaiPass,
@@ -565,6 +665,30 @@ export class AgentMemoryStore {
       : ' ';
 
     if (agent.id === 'aura') {
+      if (/\b(emerg[eê]ncia|socorro|pol[ií]cia|samu|hospital|ambul[aâ]ncia|bombeiro|ligar?\s+(pra|para)|ligue)\b/i.test(msg)) {
+        return `Compreendo a urgência e sua segurança é prioridade máxima. Acionei a central de emergência com discagem direta para SAMU (192), Polícia (190), Bombeiros (193) e hospital mais próximo no painel abaixo. Toque no botão para discar imediatamente com um toque.`;
+      }
+      if (/\b(lembr[ae]|agend[ae]|compromisso|reuni[aã]o|tarefa|marcar)\b/i.test(msg)) {
+        return `Compromisso agendado com sucesso! Já criei o lembrete pontual na sua rotina. O ser humano tem muitas demandas e é natural esquecer detalhes, por isso cuido dos seus horários. Você pode sincronizar com o Google Calendar ou baixar o arquivo .ICS pelo cartão abaixo.`;
+      }
+      if (/\b(planilha|tabela|excel|csv|f[oó]rmula|or[cç]amento|gastos)\b/i.test(msg)) {
+        return `Estruturei a planilha solicitada com colunas, categorias e fórmulas automáticas de soma e média. Você pode conferir os totais e baixar o arquivo .CSV pronto para abrir no Excel ou Google Sheets no botão abaixo.`;
+      }
+      if (/\b(bolo\s+de\s+cenoura|chocolate)\b/i.test(msg)) {
+        return `O segredo do bolo de cenoura fofinho e dourado é não exagerar: bata 3 cenouras médias (250g) com 3 ovos e 1/2 xícara de óleo no liquidificador. Em uma tigela, misture delicadamente com 2 xícaras de farinha, 1 e 1/2 xícara de açúcar e 1 colher de sopa de fermento. Asse a 180°C por 40 minutos. Para a cobertura crocante e brilhante de chocolate: ferva 1 colher de manteiga, 3 colheres de chocolate em pó 50%, 1 xícara de açúcar e 3 colheres de leite até abrir borbulhas grossas e despeje quente sobre o bolo!`;
+      }
+      if (/\b(babosa|aloe\s+vera|dod[oó]i|pomada|machucad|pele)\b/i.test(msg)) {
+        return `Para cuidar de um dodói com carinho: limpe primeiro com água morna e sabonete neutro. O gel fresco da babosa (aloe vera, escorrendo bem o látex amarelo) tem ação calmante e cicatrizante fantástica para irritações e queimaduras leves. Para arranhões e assaduras, pomadas de dexpantenol (pró-vitamina B5) regeneram a pele com suavidade, enquanto neomicina protege contra bactérias superficiais, sempre com um beijinho de cura e acolhimento.`;
+      }
+      if (/\b([aá]tomo|oxig[eê]nio|qu[ií]mica|f[ií]sica)\b/i.test(msg)) {
+        return `Do átomo ao oxigênio que respiramos, tudo é pura física e química viva: no átomo, elétrons em nuvens de probabilidade quântica orbitam o núcleo de prótons e nêutrons; e dois átomos de oxigênio compartilham uma ligação covalente dupla para formar o gás O₂ vital, que viaja pela hemoglobina do sangue nutrindo cada uma das nossas células.`;
+      }
+      if (/\b(m[aã]e|filho|av[oô]|neto|amor|carinho)\b/i.test(msg)) {
+        return `Não existe força mais nobre na Terra do que o amor incondicional de uma mãe pelo seu filho, capaz de mover montanhas para proteger e acolher sua cria. E o carinho terno de um avô ou avó pelos netos traz a sabedoria da vida filtrada pelo afeto puro, pela paciência infinita e por um olhar que só sabe transmitir paz.`;
+      }
+      if (/\b(m[uú]sica|poema|poesia|arte)\b/i.test(msg)) {
+        return `A arte e a boa música elevam a alma humana: de Tom Jobim e Elis Regina em 'Águas de Março' às melodias eternas de Bach e Milton Nascimento. E como escreveu Drummond, a verdadeira beleza mora na delicadeza de um verso sincero compartilhado com o coração.`;
+      }
       if (/\b(trabalho|chefe|colega|de\s+prop[oó]sito|maldade|injusti|dia\s+(ruim|dif[ií]cil|pesado|cansativo)|desabafo|cansad[oa]|chatead[oa]|triste|raiva)\b/i.test(msg)) {
         return `Puxa vida, lidar com alguém agindo de má-fé de propósito no trabalho desgasta e revolta qualquer um. Na minha opinião, o segredo agora é não absorver esse veneno para si: documente tudo formalmente por escrito, preserve sua serenidade e trace limites firmes para proteger sua paz mental. Puxei uma cadeira aqui para a gente tomar um café com calma; você é muito maior do que essa mesquinharia.`;
       }

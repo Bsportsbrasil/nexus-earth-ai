@@ -402,6 +402,112 @@ const NexusMobile = (function () {
     `;
   }
 
+  function buildEmergencyCardHtml(emCard) {
+    if (!emCard || !emCard.active) return '';
+    const contactsHtml = (emCard.contacts || []).map(c => {
+      let targetHref = c.tel;
+      if (c.tel === 'tel:emergency-family') {
+        const customNumber = localStorage.getItem('nexus_emergency_contact') || '';
+        targetHref = customNumber ? `tel:${encodeURIComponent(customNumber)}` : 'javascript:NexusMobile.promptEmergencyContact()';
+      }
+      return `
+        <a href="${escapeHtml(targetHref)}" style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:rgba(239,68,68,0.14);border:1.5px solid rgba(239,68,68,0.45);border-radius:12px;text-decoration:none;margin-top:6px;transition:all 0.2s ease;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:1.4rem;">${c.icon || '📞'}</span>
+            <div>
+              <div style="font-weight:700;color:#fff;font-size:0.82rem;">${escapeHtml(c.name)}</div>
+              <div style="font-size:0.7rem;color:#fca5a5;">Número oficial direto: <strong>${escapeHtml(c.number)}</strong></div>
+            </div>
+          </div>
+          <span style="background:#dc2626;color:#fff;font-size:0.68rem;font-weight:700;padding:5px 10px;border-radius:8px;">LIGAR AGORA</span>
+        </a>
+      `;
+    }).join('');
+
+    const hospHtml = emCard.nearestHospital ? `
+      <div style="margin-top:8px;padding:8px 10px;background:rgba(15,23,42,0.8);border:1px solid rgba(239,68,68,0.3);border-radius:10px;text-align:left;">
+        <div style="font-weight:700;color:#fff;font-size:0.78rem;">🏥 Pronto Socorro / Hospital Mais Próximo:</div>
+        <div style="font-size:0.74rem;color:#cbd5e1;margin-top:2px;">${escapeHtml(emCard.nearestHospital.name)}</div>
+        <div style="font-size:0.7rem;color:#94a3b8;">${escapeHtml(emCard.nearestHospital.address || 'Localização mapeada em tempo real')}</div>
+        <div style="margin-top:6px;display:flex;gap:6px;">
+          <a href="tel:192" style="flex:1;text-align:center;font-size:0.72rem;font-weight:700;color:#fff;background:#dc2626;padding:6px;border-radius:6px;text-decoration:none;">🚨 Ligar SAMU 192</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(emCard.nearestHospital.name)}" target="_blank" rel="noopener" style="flex:1;text-align:center;font-size:0.72rem;font-weight:700;color:#38bdf8;background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.35);padding:6px;border-radius:6px;text-decoration:none;">🗺️ Traçar Rota</a>
+        </div>
+      </div>
+    ` : '';
+
+    return `
+      <div style="margin-top:10px;padding:12px;background:linear-gradient(135deg,rgba(153,27,27,0.25),rgba(69,10,10,0.35));border:2px solid #ef4444;border-radius:16px;text-align:left;box-shadow:0 0 20px rgba(239,68,68,0.35);">
+        <div style="display:flex;align-items:center;gap:8px;font-size:0.84rem;font-weight:800;color:#fee2e2;">
+          <span style="font-size:1.1rem;">🚨</span>
+          <span>${escapeHtml(emCard.title)}</span>
+        </div>
+        <div style="font-size:0.72rem;color:#fca5a5;margin:4px 0 8px;">${escapeHtml(emCard.alertText)}</div>
+        ${contactsHtml}
+        ${hospHtml}
+      </div>
+    `;
+  }
+
+  function buildTaskReminderCardHtml(taskCard) {
+    if (!taskCard) return '';
+    return `
+      <div style="margin-top:10px;padding:12px;background:rgba(15,23,42,0.85);border:1.5px solid #10b981;border-radius:14px;text-align:left;box-shadow:0 0 16px rgba(16,185,129,0.25);">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
+          <div style="display:flex;align-items:center;gap:6px;font-weight:700;color:#6ee7b7;font-size:0.8rem;">
+            <span>📅 LEMBRETE & AGENDA ATIVA</span>
+          </div>
+          <span style="font-size:0.65rem;background:rgba(16,185,129,0.2);color:#34d399;padding:2px 8px;border-radius:999px;font-weight:700;">AGENDADO</span>
+        </div>
+        <div style="font-weight:700;color:#fff;font-size:0.88rem;margin:6px 0 2px;">📌 ${escapeHtml(taskCard.title)}</div>
+        <div style="font-size:0.73rem;color:#94a3b8;display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;">
+          <span>🗓️ Data: <strong style="color:#e2e8f0;">${escapeHtml(taskCard.date)}</strong></span>
+          <span>⏰ Horário: <strong style="color:#e2e8f0;">${escapeHtml(taskCard.time)}</strong></span>
+          <span>🏷️ ${escapeHtml(taskCard.category)}</span>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <a href="${escapeHtml(taskCard.googleCalendarUrl)}" target="_blank" rel="noopener" style="flex:1;min-width:130px;text-align:center;font-size:0.72rem;font-weight:700;color:#020617;background:linear-gradient(135deg,#34d399,#10b981);padding:6px 10px;border-radius:8px;text-decoration:none;">🗓️ Google Calendar</a>
+          <a href="/api/tasks/ics" download="tarefa_nexus.ics" style="flex:1;min-width:130px;text-align:center;font-size:0.72rem;font-weight:700;color:#e2e8f0;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);padding:6px 10px;border-radius:8px;text-decoration:none;">📥 Baixar Arquivo .ICS</a>
+        </div>
+      </div>
+    `;
+  }
+
+  function buildSpreadsheetCardHtml(sheetCard) {
+    if (!sheetCard) return '';
+    const headers = sheetCard.sampleHeaders || ['Item / Categoria', 'Detalhe', 'Valor (R$)', 'Status'];
+    const rows = sheetCard.sampleRows || [];
+    const tableHeaderHtml = headers.map(h => `<th style="padding:6px 8px;border-bottom:1px solid rgba(56,189,248,0.3);color:#38bdf8;font-size:0.7rem;text-align:left;">${escapeHtml(h)}</th>`).join('');
+    const tableRowsHtml = rows.map(r => `
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+        ${r.map(cell => `<td style="padding:5px 8px;font-size:0.7rem;color:#cbd5e1;">${escapeHtml(String(cell))}</td>`).join('')}
+      </tr>
+    `).join('');
+
+    const csvContent = 'data:text/csv;charset=utf-8,' + encodeURIComponent(
+      [headers.join(';'), ...rows.map(r => r.join(';'))].join('\n')
+    );
+
+    return `
+      <div style="margin-top:10px;padding:12px;background:rgba(15,23,42,0.9);border:1.5px solid #38bdf8;border-radius:14px;text-align:left;box-shadow:0 0 16px rgba(56,189,248,0.25);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <div style="font-weight:700;color:#38bdf8;font-size:0.8rem;display:flex;align-items:center;gap:6px;">
+            <span>📊 ${escapeHtml(sheetCard.title)}</span>
+          </div>
+          <span style="font-size:0.65rem;color:#94a3b8;">Planilha / CSV</span>
+        </div>
+        <div style="overflow-x:auto;max-width:100%;border-radius:8px;border:1px solid rgba(255,255,255,0.1);margin:6px 0;">
+          <table style="width:100%;border-collapse:collapse;font-family:var(--font-mono, monospace);">
+            <thead><tr style="background:rgba(56,189,248,0.1);">${tableHeaderHtml}</tr></thead>
+            <tbody>${tableRowsHtml}</tbody>
+          </table>
+        </div>
+        <div style="font-size:0.68rem;color:#94a3b8;margin-bottom:8px;">💡 ${escapeHtml(sheetCard.formulasTip || 'Fórmulas prontas aplicadas')}</div>
+        <a href="${csvContent}" download="${escapeHtml(sheetCard.downloadName || 'planilha.csv')}" style="display:block;text-align:center;font-size:0.74rem;font-weight:700;color:#020617;background:linear-gradient(135deg,#38bdf8,#00f5ff);padding:7px 12px;border-radius:8px;text-decoration:none;">📥 Baixar Planilha Pronta (.CSV / Excel)</a>
+      </div>
+    `;
+  }
+
   /* --- Dedicated AURA Viva Mascot Page (Living Cyber-Kawaii Avatar, Emotions, Gestures & Duplex Voice) --- */
   function initAuraLiveMascot() {
     const botAvatar = document.getElementById('aura-cute-bot-avatar');
@@ -624,7 +730,7 @@ const NexusMobile = (function () {
           setMascotPose(targetPose);
 
           if (captionBox) {
-            captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}${buildMapCardHtml(data.mapCard)}`;
+            captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}${buildMapCardHtml(data.mapCard)}${buildEmergencyCardHtml(data.emergencyCard)}${buildTaskReminderCardHtml(data.taskReminderCard)}${buildSpreadsheetCardHtml(data.spreadsheetCard)}`;
           }
 
           if (ttsEnabled) {
@@ -842,7 +948,7 @@ const NexusMobile = (function () {
         if (res.ok) {
           const data = await res.json();
           const reply = data.reply || 'Olá! Estou aqui para colaborar com você.';
-          appendChatBubble(reply, 'aura', data.mapCard);
+          appendChatBubble(reply, 'aura', data.mapCard, data.emergencyCard, data.taskReminderCard, data.spreadsheetCard);
           if (ttsEnabled) speakNeural(data.voiceText || reply);
         } else {
           appendChatBubble('Identifiquei uma oscilação momentânea de rede. Pode tentar novamente?', 'aura');
@@ -853,14 +959,20 @@ const NexusMobile = (function () {
       }
     }
 
-    function appendChatBubble(text, sender, mapCard = null) {
+    function appendChatBubble(text, sender, mapCard = null, emergencyCard = null, taskReminderCard = null, spreadsheetCard = null) {
       if (!streamArea) return;
       const b = document.createElement('div');
       b.className = `chat-bubble ${sender}`;
       const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
       b.innerHTML = `
-        <div class="bubble-content">${escapeHtml(text)}${sender === 'aura' ? buildMapCardHtml(mapCard) : ''}</div>
+        <div class="bubble-content">
+          ${escapeHtml(text)}
+          ${sender === 'aura' ? buildMapCardHtml(mapCard) : ''}
+          ${sender === 'aura' ? buildEmergencyCardHtml(emergencyCard) : ''}
+          ${sender === 'aura' ? buildTaskReminderCardHtml(taskReminderCard) : ''}
+          ${sender === 'aura' ? buildSpreadsheetCardHtml(spreadsheetCard) : ''}
+        </div>
         <div class="bubble-meta-hud">
           <span>${sender === 'user' ? 'Você' : 'AURA • GEMINI 3.5'}</span>
           <span>•</span>
@@ -1239,11 +1351,83 @@ const NexusMobile = (function () {
     } catch (_) {}
   }
 
+  function promptEmergencyContact() {
+    const current = localStorage.getItem('nexus_emergency_contact') || '';
+    const phone = prompt('Digite o número de emergência da sua família ou contato de confiança (com DDD):', current);
+    if (phone !== null && phone.trim()) {
+      localStorage.setItem('nexus_emergency_contact', phone.trim());
+      alert('Contato de emergência salvo com sucesso: ' + phone.trim());
+    }
+  }
+
+  function showEmergencyModal() {
+    let modal = document.getElementById('nexus-emergency-modal');
+    const customNumber = localStorage.getItem('nexus_emergency_contact') || '';
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'nexus-emergency-modal';
+      modal.style.cssText = 'position:fixed;inset:0;background:rgba(2,6,23,0.85);backdrop-filter:blur(10px);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;';
+      document.body.appendChild(modal);
+    }
+    modal.style.display = 'flex';
+    modal.innerHTML = `
+      <div style="background:linear-gradient(135deg,#1e1b4b,#0f172a);border:2px solid #ef4444;border-radius:20px;padding:20px;max-width:380px;width:100%;box-shadow:0 0 35px rgba(239,68,68,0.45);color:#fff;animation:fadeIn 0.2s ease;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:900;color:#fee2e2;">
+            <span style="font-size:1.3rem;">🚨</span>
+            <span>SOS EMERGÊNCIA DIRETA</span>
+          </div>
+          <button onclick="NexusMobile.closeEmergencyModal()" style="background:transparent;border:none;color:#94a3b8;font-size:1.2rem;cursor:pointer;padding:4px;">✕</button>
+        </div>
+        <p style="font-size:0.75rem;color:#fca5a5;margin:0 0 14px;line-height:1.4;">
+          A AURA conecta você imediatamente aos canais vitais de socorro ou ao seu contato familiar com um toque:
+        </p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="tel:192" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(239,68,68,0.2);border:1.5px solid #ef4444;border-radius:12px;text-decoration:none;color:#fff;font-weight:700;font-size:0.85rem;">
+            <span style="display:flex;align-items:center;gap:8px;"><span>🚑</span> SAMU (Emergência Médica)</span>
+            <span style="background:#dc2626;padding:4px 10px;border-radius:6px;font-size:0.72rem;">192</span>
+          </a>
+          <a href="tel:190" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(59,130,246,0.2);border:1.5px solid #3b82f6;border-radius:12px;text-decoration:none;color:#fff;font-weight:700;font-size:0.85rem;">
+            <span style="display:flex;align-items:center;gap:8px;"><span>🚓</span> Polícia Militar (Segurança)</span>
+            <span style="background:#2563eb;padding:4px 10px;border-radius:6px;font-size:0.72rem;">190</span>
+          </a>
+          <a href="tel:193" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(249,115,22,0.2);border:1.5px solid #f97316;border-radius:12px;text-decoration:none;color:#fff;font-weight:700;font-size:0.85rem;">
+            <span style="display:flex;align-items:center;gap:8px;"><span>🚒</span> Corpo de Bombeiros</span>
+            <span style="background:#ea580c;padding:4px 10px;border-radius:6px;font-size:0.72rem;">193</span>
+          </a>
+          <a href="https://www.google.com/maps/search/?api=1&query=hospital+pronto+socorro+mais+proximo" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(16,185,129,0.2);border:1.5px solid #10b981;border-radius:12px;text-decoration:none;color:#fff;font-weight:700;font-size:0.85rem;">
+            <span style="display:flex;align-items:center;gap:8px;"><span>🏥</span> Hospital / Pronto Socorro</span>
+            <span style="background:#059669;padding:4px 10px;border-radius:6px;font-size:0.72rem;">ROTA GPS</span>
+          </a>
+          <div style="margin-top:6px;padding:10px;background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.2);border-radius:12px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+              <span style="font-size:0.75rem;font-weight:700;color:#cbd5e1;">👨‍👩‍👧 Contato de Família</span>
+              <button onclick="NexusMobile.promptEmergencyContact(); NexusMobile.showEmergencyModal();" style="background:transparent;border:1px solid #38bdf8;color:#38bdf8;font-size:0.65rem;border-radius:6px;padding:2px 8px;cursor:pointer;">${customNumber ? 'Alterar' : '+ Configurar'}</button>
+            </div>
+            ${customNumber ? `
+              <a href="tel:${encodeURIComponent(customNumber)}" style="display:block;text-align:center;padding:8px;background:linear-gradient(135deg,#10b981,#059669);border-radius:8px;color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;">
+                📞 Ligar: ${escapeHtml(customNumber)}
+              </a>
+            ` : `
+              <div style="font-size:0.7rem;color:#94a3b8;text-align:center;">Nenhum número salvo ainda. Clique em "+ Configurar".</div>
+            `}
+          </div>
+        </div>
+        <button onclick="NexusMobile.closeEmergencyModal()" style="margin-top:14px;width:100%;padding:10px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:10px;color:#cbd5e1;font-size:0.75rem;font-weight:700;cursor:pointer;">Fechar</button>
+      </div>
+    `;
+  }
+
+  function closeEmergencyModal() {
+    const modal = document.getElementById('nexus-emergency-modal');
+    if (modal) modal.style.display = 'none';
+  }
+
   function escapeHtml(str) {
     return String(str || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   }
 
-  return { init, switchTab };
+  return { init, switchTab, promptEmergencyContact, showEmergencyModal, closeEmergencyModal };
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
