@@ -385,6 +385,63 @@ class SovereignC2Engine {
     return { deletedId: accountId };
   }
 
+  syncWithAuthEngine(authEngineInstance) {
+    if (!authEngineInstance || !authEngineInstance.usersById) return;
+    let modified = false;
+    for (const u of authEngineInstance.usersById.values()) {
+      if (!this.accounts.has(u.id)) {
+        this.accounts.set(u.id, {
+          id: u.id,
+          name: u.name,
+          email: u.email,
+          company: u.company || 'Usuário Cadastrado Web/App',
+          role: u.role || 'TENANT_PRO',
+          plan: 'PRO_COOPERATIVE',
+          status: 'ACTIVE',
+          quotaTokens: 100000,
+          usedTokens: 0,
+          rateLimitRpm: 60,
+          threatScore: 0,
+          learningStyle: u.learningStyle || 'VISUAL_SCHEMATIC',
+          createdAt: u.createdAt || new Date().toISOString(),
+          lastActive: u.lastLoginAt || u.createdAt || new Date().toISOString(),
+          isRegisteredUser: true
+        });
+
+        // Auto-provision companion agent for this user
+        const agId = 'ag_' + u.id;
+        if (!this.agents.has(agId)) {
+          this.agents.set(agId, {
+            id: agId,
+            accountId: u.id,
+            name: `AURA (${(u.name || 'Usuário').split(' ')[0]})`,
+            type: 'PLURALISTIC_COMPANION',
+            status: 'ACTIVE',
+            learningFrozen: false,
+            autonomyScope: 'SANDBOX_L2_DEDICATED',
+            memoryItems: 0,
+            cpuSharePct: 1.5,
+            ramMB: 32,
+            lastReasoning: 'Agente sincronizado com conta real de usuário cadastrado.'
+          });
+        }
+        modified = true;
+      } else {
+        const existing = this.accounts.get(u.id);
+        if (existing.name !== u.name || existing.email !== u.email) {
+          existing.name = u.name;
+          existing.email = u.email;
+          existing.company = u.company || existing.company;
+          modified = true;
+        }
+        existing.isRegisteredUser = true;
+      }
+    }
+    if (modified) {
+      this._save();
+    }
+  }
+
   // ── PILLAR 2: PER-USER AI AGENT GOVERNANCE & COGNITIVE INTERVENTION ──
 
   interveneAgent(agentId, action) {

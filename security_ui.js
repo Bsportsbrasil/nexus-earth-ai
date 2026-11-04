@@ -115,12 +115,16 @@ const SecurityUI = (function () {
         : `<span class="agent-badge ERROR">${statusLabel}</span>`;
       const riskColor = (acc.threatScore || 0) >= 70 ? 'var(--rose)' : (acc.threatScore || 0) > 20 ? '#f59e0b' : 'var(--emerald)';
       const pct = Math.min(100, Math.round(((acc.usedTokens || 0) / Math.max(1, acc.quotaTokens || 1)) * 100));
+      const isRealUserBadge = (acc.isRegisteredUser || acc.role === 'TENANT_PRO' || (acc.id && !['acc_owner_root', 'acc_vip_bioneuro', 'acc_edu_tea', 'acc_public_live', 'acc_flagged_intruder'].includes(acc.id)))
+        ? '<span style="display:inline-block;margin-left:6px;font-size:0.62rem;font-weight:700;color:#00f5ff;background:rgba(0,245,255,0.14);border:1px solid rgba(0,245,255,0.35);padding:1px 6px;border-radius:999px;">👤 USUÁRIO REAL</span>'
+        : '';
+      const createdStr = acc.createdAt ? ` • Desde ${new Date(acc.createdAt).toLocaleDateString('pt-BR')}` : '';
 
       return `
         <tr>
           <td>
-            <strong style="color:#fff">${esc(acc.name)}</strong><br/>
-            <span style="font-size:0.72rem;color:var(--text-secondary)">${esc(acc.email)} • ${esc(acc.company)}</span>
+            <strong style="color:#fff">${esc(acc.name)}</strong>${isRealUserBadge}<br/>
+            <span style="font-size:0.72rem;color:var(--text-secondary)">${esc(acc.email)} • ${esc(acc.company)}${createdStr}</span>
           </td>
           <td>
             <code style="color:var(--cyan);font-size:0.72rem">${esc(acc.role)}</code><br/>

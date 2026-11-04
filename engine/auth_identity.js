@@ -494,6 +494,26 @@ export class IdentityAuthEngine {
     this._saveEncryptedStore();
     return true;
   }
+
+  deleteUserPermanently(userId) {
+    return this.deleteOwnAccount(userId);
+  }
+
+  getAllRegisteredUsers() {
+    return Array.from(this.usersById.values()).map(u => ({
+      id: u.id,
+      name: u.name,
+      email: u.email,
+      company: u.company || 'Usuário Cadastrado Web/App',
+      role: u.role || 'TENANT_PRO',
+      learningStyle: u.learningStyle,
+      mfaEnabled: !!u.mfaEnabled,
+      lgpdConsent: !!u.lgpdConsent,
+      createdAt: u.createdAt,
+      lastLoginAt: u.lastLoginAt,
+      lastLoginIp: u.lastLoginIp
+    }));
+  }
 }
 
 export const authEngine = new IdentityAuthEngine();

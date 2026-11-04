@@ -448,6 +448,7 @@ const server = http.createServer(async (req, res) => {
       return jsonResponse(res, 401, { error: 'UNAUTHORIZED_ADMIN_ONLY: Apenas a administradora possui acesso a este painel.' });
     }
     if (req.method === 'GET') {
+      try { c2Engine.syncWithAuthEngine(authEngine); } catch (_) {}
       const gStats = { totalNodes: graphDB.nodes.size, totalEdges: graphDB.edges.length };
       const bStats = broker.getStats();
       return jsonResponse(res, 200, {
@@ -478,10 +479,14 @@ const server = http.createServer(async (req, res) => {
           extra.createdAccount = c2Engine.createDirectAccount(body);
         } else if (body.action === 'set_account_status') {
           extra.updatedAccount = c2Engine.setAccountStatus(body.accountId, body.status, body.reason);
+          if (body.status === 'BLOCKED' || body.status === 'SUSPENDED') {
+            try { authEngine.logoutAllDevices(body.accountId); } catch (_) {}
+          }
         } else if (body.action === 'update_account_quota') {
           extra.updatedAccount = c2Engine.updateAccountRbacAndQuota(body.accountId, body);
         } else if (body.action === 'delete_account') {
           extra.deleted = c2Engine.deleteAccountPermanently(body.accountId);
+          try { authEngine.deleteUserPermanently(body.accountId); } catch (_) {}
         } else if (body.action === 'intervene_agent') {
           extra.agent = c2Engine.interveneAgent(body.agentId, body.intervention);
         } else if (body.action === 'toggle_tool') {
@@ -2102,6 +2107,9 @@ broker.subscribe('c2.threat_alert', (ev) => {
 
 // Seed initial GraphDB on startup so GraphRAG has immediate indexed entities
 graphDB.ingestTopic('Artificial intelligence').catch(() => {});
+
+// Synchronize all registered users into Master C2 Sovereign Engine on startup
+try { c2Engine.syncWithAuthEngine(authEngine); } catch (_) {}
 
 const HOST = process.env.HOST || '0.0.0.0';
 server.listen(PORT, HOST, () => {
