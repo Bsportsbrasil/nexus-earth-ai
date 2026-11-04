@@ -428,6 +428,7 @@ const server = http.createServer(async (req, res) => {
       if (!token) {
         return jsonResponse(res, 401, { error: 'Chave de Administradora inválida. Acesso negado.' });
       }
+      try { c2Engine.syncWithAuthEngine(authEngine); } catch (_) {}
       return jsonResponse(res, 200, {
         token,
         state: securityController.getState(),
