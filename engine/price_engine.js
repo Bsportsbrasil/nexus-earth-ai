@@ -127,23 +127,31 @@ Responda APENAS com um bloco \`\`\`json contendo um array de até 8 objetos:
 [{"store":"Nome da loja","domain":"dominio.com.br","product":"nome exato do anúncio","price":1234.56,"type":"online"|"fisica","note":"ex.: à vista no Pix, frete grátis, usado"}]`;
 
   let data;
-  try {
-    const resp = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
-      body: JSON.stringify({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        tools: [{ google_search: {} }],
-        generationConfig: { temperature: 0.1, maxOutputTokens: 2048 }
-      })
-    });
-    if (!resp.ok) {
-      const t = await resp.text();
-      return { ...base, status: 'ERROR', note: `Busca indisponível (HTTP ${resp.status}).`, debug: t.slice(0, 160) };
+  const searchModels = ['gemini-2.0-flash', 'gemini-1.5-flash'];
+  let lastErrText = '';
+  for (const m of searchModels) {
+    try {
+      const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: prompt }] }],
+          tools: [{ google_search: {} }],
+          generationConfig: { temperature: 0.1, maxOutputTokens: 2048 }
+        })
+      });
+      if (resp.ok) {
+        data = await resp.json();
+        break;
+      }
+      lastErrText = await resp.text();
+    } catch (e) {
+      lastErrText = e.message;
     }
-    data = await resp.json();
-  } catch (e) {
-    return { ...base, status: 'ERROR', note: 'Falha de rede na busca de preços.' };
+  }
+
+  if (!data) {
+    return { ...base, status: 'ERROR', note: 'Busca indisponível no momento.', debug: lastErrText.slice(0, 160) };
   }
 
   const cand = data?.candidates?.[0];
