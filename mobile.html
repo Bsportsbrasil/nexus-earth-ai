@@ -917,15 +917,35 @@ html, body {
   100% { transform: translate3d(0, 3px, 15px) scale(1.02) rotate(-1deg); }
 }
 
+.aura-back-btn {
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #020617;
+  background: linear-gradient(135deg, #00f5ff, #38bdf8);
+  border: none;
+  border-radius: 999px;
+  padding: 9px 16px;
+  cursor: pointer;
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.35);
+  white-space: nowrap;
+}
+.aura-back-btn:active { transform: scale(0.96); }
+.aura-back-btn-wide {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px 16px;
+  font-size: 0.88rem;
+}
 .aura-chat-drawer {
   position: fixed;
   inset: 0;
-  background: rgba(2, 6, 23, 0.95);
+  background: rgba(2, 6, 23, 0.97);
   backdrop-filter: blur(16px);
-  z-index: 9999;
+  z-index: 100000;
   display: flex;
   flex-direction: column;
-  padding: 16px;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) 16px calc(14px + env(safe-area-inset-bottom, 0px));
   box-sizing: border-box;
   animation: drawerSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   border-radius: 24px 24px 0 0;
@@ -2634,10 +2654,9 @@ html, body {
           <!-- GAVETA RETRÁTIL DE HISTÓRICO COMPLETO (Estilo ChatGPT / Gemini) -->
           <div id="aura-live-chat-drawer" class="aura-chat-drawer" style="display: none;">
             <div class="aura-drawer-header">
-              <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.88rem; color: #fff;">
-                <span>💬</span>
-                <span>Diálogo Completo com AURA</span>
-              </div>
+              <button type="button" id="btn-back-to-aura" class="aura-back-btn" aria-label="Voltar para a AURA">
+                ← Voltar para a AURA
+              </button>
               <div style="display: flex; gap: 8px;">
                 <button type="button" id="btn-clear-aura-history" class="aura-hud-pill" style="font-size: 0.68rem; padding: 4px 10px; color: #cbd5e1;" title="Limpar Histórico Local">🗑️ Limpar</button>
                 <button type="button" id="btn-close-aura-drawer" class="aura-hud-pill" style="font-size: 0.78rem; padding: 4px 12px; color: #f43f5e; font-weight: 800;" title="Recolher Histórico">✕</button>
@@ -2646,6 +2665,9 @@ html, body {
             <div id="aura-drawer-stream" class="aura-drawer-stream">
               <!-- Dynamically populated from localStorage -->
             </div>
+            <button type="button" id="btn-back-to-aura-bottom" class="aura-back-btn aura-back-btn-wide" aria-label="Voltar para a AURA">
+              ✨ Voltar para a AURA
+            </button>
           </div>
         </div>
 

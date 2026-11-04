@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nexus-pwa-v20';
+const CACHE_NAME = 'nexus-pwa-v21';
 const CORE_ASSETS = [
   '/',
   '/index.html',

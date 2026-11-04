@@ -772,23 +772,41 @@ const NexusMobile = (function () {
       renderDrawerHistory();
     }
 
+    function openHistoryDrawer() {
+      if (!drawerEl) return;
+      drawerEl.style.display = 'flex';
+      renderDrawerHistory();
+      try { window.history.pushState({ tab: 'aura-live', drawer: true }, '', window.location.pathname); } catch (_) {}
+    }
+
+    function closeHistoryDrawer(fromPopState = false) {
+      if (!drawerEl || drawerEl.style.display === 'none') return;
+      triggerHaptic(12);
+      drawerEl.style.display = 'none';
+      if (!fromPopState && window.history.state && window.history.state.drawer) {
+        try { window.history.back(); } catch (_) {}
+      }
+    }
+
+    // Move the drawer to <body> so it always covers the full screen above the header
+    if (drawerEl && drawerEl.parentElement !== document.body) {
+      document.body.appendChild(drawerEl);
+    }
+
     if (btnToggleHistory) {
       btnToggleHistory.addEventListener('click', () => {
         triggerHaptic(15);
-        if (drawerEl) {
-          const isClosed = drawerEl.style.display === 'none' || !drawerEl.style.display;
-          drawerEl.style.display = isClosed ? 'flex' : 'none';
-          if (isClosed) renderDrawerHistory();
-        }
+        if (drawerEl && drawerEl.style.display === 'flex') closeHistoryDrawer();
+        else openHistoryDrawer();
       });
     }
 
-    if (btnCloseDrawer) {
-      btnCloseDrawer.addEventListener('click', () => {
-        triggerHaptic(15);
-        if (drawerEl) drawerEl.style.display = 'none';
-      });
-    }
+    [btnCloseDrawer, document.getElementById('btn-back-to-aura'), document.getElementById('btn-back-to-aura-bottom')]
+      .forEach(btn => { if (btn) btn.addEventListener('click', () => closeHistoryDrawer()); });
+
+    // Phone/browser "Back" button and Esc key close the history instead of leaving the page
+    window.addEventListener('popstate', () => closeHistoryDrawer(true));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeHistoryDrawer(); });
 
     if (btnClearHistory) {
       btnClearHistory.addEventListener('click', () => {
