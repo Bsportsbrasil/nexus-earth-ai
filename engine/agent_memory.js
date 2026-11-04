@@ -382,10 +382,11 @@ export class AgentMemoryStore {
       wantsPriceAnalysis
         ? withTimeout(searchRealPrices({
             query: cleanMsg,
+            rawMsg: cleanMsg,
             apiKey: apiKey || process.env.GEMINI_API_KEY || '',
             clientGeo,
             locality: clientGeo?.localityLabel || ''
-          }).catch(() => null), 3500)
+          }).catch(() => null), 3800)
         : Promise.resolve(null)
     ]);
 

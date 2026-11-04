@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-04T16:56:00.872Z",
-  "totalEvaluated": 287,
-  "totalApproved": 273,
+  "updatedAt": "2026-11-04T18:57:00.470Z",
+  "totalEvaluated": 289,
+  "totalApproved": 275,
   "totalBlocked": 14,
-  "averageEntropy": 4.013,
-  "epistemicAccuracyPct": 95.1,
+  "averageEntropy": 4.038,
+  "epistemicAccuracyPct": 95.2,
   "learningCurve": [
     {
       "date": "2026-10-12",
@@ -127,13 +127,33 @@
     },
     {
       "date": "2026-11-04",
-      "accuracy": 95.1,
-      "totalKnowledge": 273,
+      "accuracy": 95.2,
+      "totalKnowledge": 275,
       "hallucinationsBlocked": 14,
-      "entropy": 4.01
+      "entropy": 4.04
     }
   ],
   "history": [
+    {
+      "id": "eval_1793818620469",
+      "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",
+      "agentId": "GLOBAL_OMNISCIENCE_REASONER",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 4.74,
+      "rejectionReason": null,
+      "timestamp": "2026-11-04T18:57:00.469Z"
+    },
+    {
+      "id": "eval_1793818620403",
+      "statement": "A velocidade da luz no vácuo é exatamente 299.792.458 metros por segundo segundo o BIPM.",
+      "agentId": "VERIFIER_AGENT",
+      "verdict": "APPROVED_VERIFIED_KNOWLEDGE",
+      "confidenceScore": 0.95,
+      "entropyBits": 3.77,
+      "rejectionReason": null,
+      "timestamp": "2026-11-04T18:57:00.403Z"
+    },
     {
       "id": "eval_1793811360872",
       "statement": "Síntese Holística Global: A partir de 6 nós ontológicos, 0 âncoras geoespaciais e 4 memórias dos agentes, o raciocínio foi integrado com êxito sob a perspectiva de Instituto Global...",

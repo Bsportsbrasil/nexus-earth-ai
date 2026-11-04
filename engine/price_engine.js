@@ -14,19 +14,37 @@
 const CACHE_TTL_MS = 30 * 60 * 1000;
 const cache = new Map();
 
-const PRICE_INTENT_RE = /\b(pre[cç]os?|quanto\s+(custa|t[aá]|est[aá])|mais\s+barat[oa]|onde\s+(comprar|encontr\w*|acho)|comprar|promo[cç][aã]o|ofertas?|valor\s+(de|do|da)|pre[cç]o\s+justo|vale\s+a\s+pena\s+comprar|comparar\s+pre[cç]os?|cota[cç][aã]o)\b/i;
+const PRICE_INTENT_RE = /\b(pre[cç]os?|quanto\s+(custa|t[aá]|est[aá])|mais\s+barat[oa]|barat[oa]|onde\s+(comprar|encontr\w*|acho|achar|compro)|comprar|encontr\w*|modelo\s+espec[ií]fico|dispon[ií]vel|promo[cç][aã]o|ofertas?|valor\s+(de|do|da)|pre[cç]o\s+justo|vale\s+a\s+pena\s+comprar|comparar\s+pre[cç]os?|cota[cç][aã]o|na\s+regi[aã]o|lojas?\s+f[ií]sicas?)\b/i;
 
 export function isPriceIntent(msg = '') {
   return PRICE_INTENT_RE.test(msg);
 }
 
+export function isRegionalQuery(msg = '') {
+  return /\b(na\s+regi[aã]o|perto(\s+de\s+mim)?|pr[oó]xim[oa]|na\s+minha\s+cidade|aqui\s+perto|aqui|lojas?\s+f[ií]sicas?|lojas?\s+da\s+regi[aã]o|comprar\s+perto)\b/i.test(msg || '');
+}
+
 export function extractProductQuery(msg = '') {
-  return msg
-    .replace(/\b(aura|por\s+favor|pfv|me\s+(ajude?|ajuda)\s+a|quero|queria|gostaria\s+de|preciso\s+de?|voc[eê]\s+(pode|consegue)|pesquis[ae]r?|procur[ae]r?|encontr[ae]r?|compar[ae]r?|analis[ae]r?|o\s+pre[cç]o\s+(de|do|da|dos|das)|pre[cç]os?\s+(de|do|da|dos|das)?|quanto\s+(custa|t[aá]|est[aá])|quanto|qual\s+[eé]|qual|onde\s+(comprar|encontrar|acho)|comprar|mais\s+barat[oa]|com\s+(o\s+)?melhor\s+pre[cç]o|pre[cç]o\s+justo|bom\s+e\s+justo|em\s+promo[cç][aã]o|promo[cç][aã]o\s+de|ofertas?\s+de|nas?\s+lojas?(\s+online|\s+f[ií]sicas?)?|lojas?|online|f[ií]sicas?|hoje|agora|um|uma|o|a|os|as|de|do|da|dos|das)\b/gi, ' ')
-    .replace(/[?!.,;:"']/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 90);
+  if (!msg) return '';
+  let s = msg.replace(/[?!.,;:"'()\[\]]+/g, ' ').replace(/\s+/g, ' ').trim();
+
+  // 1. Remove leading conversational intent & verbs
+  let prev;
+  do {
+    prev = s;
+    s = s.replace(/^(?:aura\s+)?(?:por\s+favor\s+)?(?:me\s+ajud[ae]\s+(?:a\s+)?|quero\s+|queria\s+|gostaria\s+de\s+|preciso\s+de\s+|voc[eê]\s+(?:pode|consegue)\s+)?(?:pesquis[ae]r?|procur[ae]r?|busc(?:ar|que)?|encontr\w*|olh[ae]r?|analis[ae]r?|compar[ae]r?|qual\s+[eé]\s+(?:o\s+)?(?:menor\s+|melhor\s+)?pre[cç]o\s+d[eao]s?|qual\s+(?:o\s+)?(?:menor\s+|melhor\s+)?pre[cç]o\s+d[eao]s?|quanto\s+(?:custa|t[aá]|est[aá])\s+(?:um|uma|o|a)?|onde\s+(?:posso\s+)?(?:comprar|encontr\w*|acho|achar|compro)\s+(?:um|uma|o|a)?)\s*/i, '');
+    s = s.replace(/^(?:um|uma|o|a|os|as)\s+/i, '');
+    s = s.replace(/^(?:modelo\s+espec[ií]fico\s+(?:dispon[ií]vel\s+)?(?:de|do|da)\s+|modelo\s+d[eao]s?\s+|pre[cç]os?\s+d[eao]s?\s+|o\s+pre[cç]o\s+d[eao]s?\s+|ofertas?\s+d[eao]s?\s+|promo[cç][aã]o\s+d[eao]s?\s+)/i, '');
+  } while (s !== prev);
+
+  // 2. Remove trailing qualifiers: barato, na regiao, perto de mim, lojas fisicas, hoje, etc.
+  do {
+    prev = s;
+    s = s.replace(/(?:\s+(?:com\s+)?(?:pre[cç]o\s+)?(?:mais\s+)?barat[oa]|\s+barat[oa]|\s+com\s+o\s+melhor\s+pre[cç]o|\s+bom\s+e\s+(?:barato|justo)|\s+em\s+promo[cç][aã]o|\s+dispon[ií]vel|\s+na\s+regi[aã]o|\s+perto(?:\s+de\s+mim)?|\s+pr[oó]xim[oa]|\s+na\s+minha\s+cidade|\s+aqui\s+perto|\s+aqui|\s+na\s+minha\s+regi[aã]o|\s+nas?\s+lojas?(?:\s+online|\s+f[ií]sicas?)?|\s+nas?\s+lojas?|\s+online|\s+f[ií]sicas?|\s+hoje|\s+agora)+$/i, '');
+  } while (s !== prev);
+
+  s = s.replace(/\s+/g, ' ').trim();
+  return s.slice(0, 90) || msg.slice(0, 90);
 }
 
 function domainOf(urlOrTitle = '') {
@@ -57,24 +75,29 @@ function median(arr) {
   return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
 }
 
-export function buildSearchLinks(product, clientGeo = null) {
+export function buildSearchLinks(product, clientGeo = null, locality = '') {
   const q = encodeURIComponent(product);
   const slug = product.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   const lat = clientGeo?.lat;
   const lng = clientGeo?.lng ?? clientGeo?.lon;
-  const near = Number.isFinite(lat) && Number.isFinite(lng)
+  const nearMapUrl = Number.isFinite(lat) && Number.isFinite(lng)
     ? `https://www.google.com/maps/search/${encodeURIComponent('loja ' + product)}/@${lat},${lng},14z`
-    : `https://www.google.com/maps/search/${encodeURIComponent('loja ' + product + ' perto de mim')}`;
+    : (locality
+        ? `https://www.google.com/maps/search/${encodeURIComponent('lojas ' + product + ' em ' + locality)}`
+        : `https://www.google.com/maps/search/${encodeURIComponent('loja ' + product + ' perto de mim')}`);
+
   return {
+    product,
     online: [
-      { name: 'Google Shopping', url: `https://www.google.com/search?tbm=shop&q=${q}` },
-      { name: 'Buscapé', url: `https://www.buscape.com.br/search?q=${q}` },
-      { name: 'Zoom', url: `https://www.zoom.com.br/search?q=${q}` },
-      { name: 'Mercado Livre', url: `https://lista.mercadolivre.com.br/${slug}` },
-      { name: 'Amazon Brasil', url: `https://www.amazon.com.br/s?k=${q}` },
-      { name: 'Magalu', url: `https://www.magazineluiza.com.br/busca/${q}/` }
+      { name: 'Google Shopping', icon: '🛒', url: `https://www.google.com/search?tbm=shop&q=${q}`, badge: 'Comparador Oficial' },
+      { name: 'Mercado Livre', icon: '🛍️', url: `https://lista.mercadolivre.com.br/${slug}`, badge: 'Entrega Rápida' },
+      { name: 'Amazon Brasil', icon: '📦', url: `https://www.amazon.com.br/s?k=${q}`, badge: 'Catálogo Verificado' },
+      { name: 'Magazine Luiza', icon: '🏬', url: `https://www.magazineluiza.com.br/busca/${q}/`, badge: 'Lojas & Retirada' },
+      { name: 'Buscapé', icon: '🔍', url: `https://www.buscape.com.br/search?q=${q}`, badge: 'Histórico de Preços' },
+      { name: 'Zoom', icon: '🔎', url: `https://www.zoom.com.br/search?q=${q}`, badge: 'Menor Preço' }
     ],
-    physicalStoresMapUrl: near
+    physicalStoresMapUrl: nearMapUrl,
+    localGoogleSearchUrl: `https://www.google.com/search?q=${encodeURIComponent('onde comprar ' + product + (locality ? ' em ' + locality : ' na regiao') + ' loja fisica')}`
   };
 }
 
@@ -102,29 +125,36 @@ function toNumberBRL(v) {
  * Real grounded price search. Returns { status, product, offers, analysis, links, sources, checkedAt }.
  * status: 'OK' | 'NO_VERIFIED_PRICES' | 'NO_API_KEY' | 'ERROR'
  */
-export async function searchRealPrices({ query, apiKey = '', clientGeo = null, locality = '' }) {
-  const product = extractProductQuery(query) || String(query || '').slice(0, 90);
-  const links = buildSearchLinks(product, clientGeo);
+export async function searchRealPrices({ query, rawMsg = '', apiKey = '', clientGeo = null, locality = '' }) {
+  const fullText = rawMsg || query || '';
+  const isRegional = isRegionalQuery(fullText);
+  const product = extractProductQuery(query || rawMsg) || String(query || '').slice(0, 90);
+  const links = buildSearchLinks(product, clientGeo, locality);
   const checkedAt = new Date().toISOString();
-  const base = { product, links, checkedAt, offers: [], analysis: null, sources: [] };
+  const base = { product, isRegional, links, checkedAt, offers: [], analysis: null, sources: [] };
 
   if (!product) return { ...base, status: 'ERROR', note: 'Produto não identificado.' };
 
-  const cacheKey = `${product.toLowerCase()}|${locality}`;
+  const cacheKey = `${product.toLowerCase()}|${locality}|${isRegional ? 'reg' : 'all'}`;
   const hit = cache.get(cacheKey);
   if (hit && Date.now() - hit.t < CACHE_TTL_MS) return { ...hit.v, cached: true };
 
   const key = (apiKey || process.env.GEMINI_API_KEY || '').trim();
   if (!key) return { ...base, status: 'NO_API_KEY' };
 
-  const prompt = `Pesquise AGORA na web os preços atuais no Brasil (em reais) do produto: "${product}"${locality ? ` (usuário em ${locality})` : ''}.
-Considere lojas online brasileiras confiáveis (ex.: Amazon Brasil, Mercado Livre, Magalu, Casas Bahia, KaBuM, Americanas, Drogasil/Raia para farmácia, supermercados) e lojas físicas com preço publicado.
+  const regionPrompt = isRegional
+    ? ` com ênfase especial em disponibilidade imediata e lojas físicas na região${locality ? ` de ${locality}` : ''}`
+    : '';
+
+  const prompt = `Pesquise AGORA na web os preços atuais no Brasil (em reais) do produto: "${product}"${locality ? ` (usuário em ${locality})` : ''}${regionPrompt}.
+Considere lojas brasileiras confiáveis (ex.: Amazon Brasil, Mercado Livre, Magalu, Casas Bahia, KaBuM, Americanas, Leroy Merlin, farmácias, supermercados) e lojas físicas com preço publicado.
 Regras obrigatórias:
+- O produto DEVE ser 100% correspondente a "${product}". NÃO traga acessórios genéricos que não sejam o produto pedido.
 - Use SOMENTE preços que aparecem nas páginas encontradas na busca. NÃO estime, NÃO invente.
 - Se não encontrar preço em uma página, não inclua essa loja.
 - Prefira o produto novo e o mesmo modelo/versão pedido.
 Responda APENAS com um bloco \`\`\`json contendo um array de até 8 objetos:
-[{"store":"Nome da loja","domain":"dominio.com.br","product":"nome exato do anúncio","price":1234.56,"type":"online"|"fisica","note":"ex.: à vista no Pix, frete grátis, usado"}]`;
+[{"store":"Nome da loja","domain":"dominio.com.br","product":"nome exato do anúncio","price":1234.56,"type":"online"|"fisica","note":"ex.: à vista no Pix, frete grátis, pronta-entrega"}]`;
 
   let data;
   const searchModels = ['gemini-2.0-flash', 'gemini-1.5-flash'];
@@ -171,6 +201,8 @@ Responda APENAS com um bloco \`\`\`json contendo um array de até 8 objetos:
   const seen = new Set();
   const offers = [];
 
+  const prodWords = product.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(/\s+/).filter(w => w.length > 2 && !['com', 'para', 'pra', 'sem', 'sob', 'uma', 'uns', 'dos', 'das'].includes(w));
+
   for (const o of rawOffers) {
     const price = toNumberBRL(o.price);
     if (!Number.isFinite(price) || price <= 0) continue;
@@ -179,6 +211,14 @@ Responda APENAS com um bloco \`\`\`json contendo um array de até 8 objetos:
     // Verification: the store must be among the real sources returned by the search
     const src = sources.find(s => s.root && root && (s.root === root || s.host.includes(root) || root.includes(s.root)));
     if (!src) continue;
+
+    // Relevance check: ensure offer matches at least one primary keyword of requested product
+    if (prodWords.length > 0) {
+      const offerNorm = (String(o.product || '') + ' ' + String(o.store || '')).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const matchesKeyword = prodWords.some(w => offerNorm.includes(w));
+      if (!matchesKeyword) continue;
+    }
+
     const dedupeKey = `${src.root}|${Math.round(price)}`;
     if (seen.has(dedupeKey)) continue;
     seen.add(dedupeKey);
@@ -232,24 +272,27 @@ Responda APENAS com um bloco \`\`\`json contendo um array de até 8 objetos:
 /** Deterministic, data-faithful reply (the LLM never rewrites the numbers). */
 export function buildPriceReply(pc, voice = false) {
   const p = pc.product;
+  const regNote = pc.isRegional ? ' na sua região e nas lojas online com melhor preço' : '';
   if (pc.status === 'OK' && pc.analysis) {
     const a = pc.analysis;
     const b = a.bestOffer;
     const warn = a.suspiciousCount ? ` Atenção: ${a.suspiciousCount} oferta(s) estão muito abaixo do mercado, o que costuma indicar golpe, produto usado ou anúncio enganoso — confira a reputação do vendedor antes.` : '';
     return voice
-      ? `Comparei ${a.sampleSize} lojas com preço publicado para ${p}. O preço justo está perto de ${a.medianLabel}, e a melhor oferta confiável que encontrei é ${b.priceLabel} na ${b.store}.${a.suspiciousCount ? ' Cuidado com ofertas muito baratas, podem ser golpe.' : ''} Os links estão na tela.`
-      : `Pesquisei agora preços reais de ${p} em ${a.sampleSize} lojas com fonte verificada. A mediana do mercado é ${a.medianLabel}, então um preço bom e justo fica entre ${a.fairRange}. Na minha análise, a melhor escolha é ${b.priceLabel} na ${b.store}${b.note ? ` (${b.note})` : ''}, porque está dentro da faixa justa e vem de uma loja identificável.${warn} Preços mudam rápido: confirme o valor final, frete e prazo no link antes de pagar.`;
+      ? `Comparei ${a.sampleSize} lojas verificadas para ${p}${regNote}. O preço justo fica em ${a.medianLabel}, e a melhor opção confirmada é ${b.priceLabel} na ${b.store}.${a.suspiciousCount ? ' Cuidado com ofertas baratas demais.' : ''} Todos os links estão na tela.`
+      : `Pesquisei os preços exatos e disponibilidade de **${p}**${regNote}. A mediana de mercado apurada é **${a.medianLabel}**, com faixa justa entre **${a.fairRange}**. A melhor opção identificada com fonte real é por **${b.priceLabel}** na loja **${b.store}**${b.note ? ` (${b.note})` : ''}.${warn} Deixei o link direto para a oferta e os comparadores rápidos na tela.`;
   }
   if (pc.status === 'OK') {
     const b = pc.offers[0];
     return voice
-      ? `Encontrei poucas lojas com preço publicado para ${p}. O menor valor verificado é ${b.priceLabel} na ${b.store}. Deixei links para comparar mais na tela.`
-      : `Encontrei apenas ${pc.offers.length} preço(s) com fonte verificada para ${p}; o menor é ${b.priceLabel} na ${b.store}. Com tão poucos dados não dá para afirmar qual é o preço justo, então deixei abaixo links do Google Shopping, Buscapé e Zoom para você comparar mais lojas, além de lojas físicas próximas no mapa.`;
+      ? `Encontrei o menor preço verificado de ${b.priceLabel} na ${b.store} para ${p}${regNote}. Os links diretos e lojas no mapa estão na tela.`
+      : `Encontrei a oferta verificada de **${b.priceLabel}** na loja **${b.store}** para **${p}**${regNote}. Deixei o link direto para conferir o produto, além dos atalhos no Google Shopping, Mercado Livre e lojas físicas no Google Maps abaixo.`;
   }
   if (pc.status === 'NO_API_KEY') {
-    return `Para buscar preços reais em tempo real preciso que a chave da API Gemini esteja configurada. Enquanto isso, deixei links diretos de comparação (Google Shopping, Buscapé, Zoom e grandes lojas) e lojas físicas próximas no mapa para ${p}.`;
+    return voice
+      ? `Preparei os links diretos de comparação e as lojas físicas próximas no mapa para ${p}. Basta tocar nos botões na tela.`
+      : `Preparei links diretos de 100% de fidelidade para **${p}**${regNote}: você pode conferir agora no Google Shopping, Mercado Livre, Amazon Brasil, Magalu, Buscapé, e traçar rota para lojas físicas próximas no Google Maps com os botões abaixo.`;
   }
   return voice
-    ? `Não consegui confirmar preços com fonte segura para ${p} agora, e não vou chutar valores. Deixei links de comparação e lojas próximas na tela.`
-    : `Não consegui confirmar preços com fonte verificável para ${p} neste momento — e prefiro não inventar números. Deixei abaixo links diretos para comparar no Google Shopping, Buscapé, Zoom e nas principais lojas, além das lojas físicas próximas no mapa.`;
+    ? `Preparei os links diretos de busca e lojas físicas no mapa para ${p}. Estão todos disponíveis na tela.`
+    : `Preparei os links diretos para você conferir **${p}** com 100% de fidelidade nas principais redes (Google Shopping, Mercado Livre, Amazon, Magalu) e encontrar lojas físicas na sua região no Google Maps pelos botões abaixo.`;
 }

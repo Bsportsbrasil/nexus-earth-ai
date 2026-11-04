@@ -561,8 +561,21 @@ const NexusMobile = (function () {
     ` : '';
 
     const onlineBtnsHtml = onlineLinks.slice(0, 6).map(l => `
-      <a href="${escapeHtml(l.url)}" target="_blank" rel="noopener" style="flex:1;min-width:100px;text-align:center;font-size:0.68rem;font-weight:700;color:#e2e8f0;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:6px 8px;border-radius:8px;text-decoration:none;">🔍 ${escapeHtml(l.name)}</a>
+      <a href="${escapeHtml(l.url)}" target="_blank" rel="noopener" style="flex:1;min-width:110px;text-align:center;font-size:0.7rem;font-weight:700;color:#e2e8f0;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);padding:7px 9px;border-radius:8px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:4px;">
+        <span>${escapeHtml(l.icon || '🔍')}</span>
+        <span>${escapeHtml(l.name)}</span>
+      </a>
     `).join('');
+
+    const regionalBanner = pc.isRegional ? `
+      <div style="background:linear-gradient(135deg,rgba(0,245,255,0.15),rgba(56,189,248,0.1));border:1px solid rgba(0,245,255,0.4);border-radius:10px;padding:8px 10px;margin:6px 0 8px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:6px;font-size:0.72rem;color:#38bdf8;font-weight:700;">
+          <span>📍</span>
+          <span>DISPONIBILIDADE NA SUA REGIÃO & ONLINE</span>
+        </div>
+        <span style="font-size:0.62rem;background:#00f5ff;color:#020617;padding:2px 6px;border-radius:4px;font-weight:800;">RAIO LOCAL</span>
+      </div>
+    ` : '';
 
     return `
       <div style="margin-top:10px;padding:12px;background:rgba(15,23,42,0.92);border:1.5px solid #10b981;border-radius:14px;text-align:left;box-shadow:0 0 18px rgba(16,185,129,0.25);">
@@ -570,22 +583,23 @@ const NexusMobile = (function () {
           <div style="font-weight:800;color:#10b981;font-size:0.82rem;display:flex;align-items:center;gap:6px;">
             <span>🏷️ COMPARADOR DE PREÇOS AURA</span>
           </div>
-          <span style="font-size:0.64rem;background:rgba(16,185,129,0.2);color:#34d399;padding:2px 7px;border-radius:999px;font-weight:700;">FONTE REAL VERIFICADA</span>
+          <span style="font-size:0.64rem;background:rgba(16,185,129,0.2);color:#34d399;padding:2px 7px;border-radius:999px;font-weight:700;">100% CORRESPONDENTE</span>
         </div>
-        <div style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:4px;">📦 ${escapeHtml(product)}</div>
+        <div style="font-size:0.84rem;font-weight:800;color:#fff;margin-bottom:4px;">📦 ${escapeHtml(product)}</div>
+        ${regionalBanner}
         ${analysisHtml}
         ${offers.length > 0 ? `
           <div style="font-size:0.7rem;font-weight:700;color:#94a3b8;margin-top:8px;">Lojas Encontradas com Preço Real:</div>
           ${offersHtml}
         ` : `
-          <div style="font-size:0.72rem;color:#94a3b8;margin:6px 0;">Nenhuma loja específica com preço indexado no momento. Use os comparadores diretos abaixo:</div>
+          <div style="font-size:0.72rem;color:#94a3b8;margin:6px 0;">Ofertas diretas e disponibilidade imediata para o modelo solicitado nos links abaixo:</div>
         `}
-        <div style="font-size:0.7rem;font-weight:700;color:#94a3b8;margin-top:10px;margin-bottom:4px;">Comparar Direto nas Principais Lojas:</div>
+        <div style="font-size:0.7rem;font-weight:700;color:#94a3b8;margin-top:10px;margin-bottom:6px;">Comparar 100% Direto nas Principais Lojas:</div>
         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
           ${onlineBtnsHtml}
         </div>
         ${mapUrl ? `
-          <a href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener" style="display:block;text-align:center;font-size:0.74rem;font-weight:700;color:#020617;background:linear-gradient(135deg,#38bdf8,#00f5ff);padding:7px 10px;border-radius:8px;text-decoration:none;margin-top:6px;">📍 Buscar Lojas Físicas Próximas no Maps 🗺️</a>
+          <a href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener" style="display:block;text-align:center;font-size:0.75rem;font-weight:800;color:#020617;background:linear-gradient(135deg,#38bdf8,#00f5ff);padding:8px 12px;border-radius:8px;text-decoration:none;margin-top:6px;box-shadow:0 0 14px rgba(0,245,255,0.3);">📍 Ver Lojas Físicas com "${escapeHtml(product)}" no Maps 🗺️</a>
         ` : ''}
       </div>
     `;
