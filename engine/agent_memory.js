@@ -8,6 +8,7 @@ import { geoEngine } from './geo_engine.js';
 import { graphDB } from './graph_db.js';
 import { globalIntel } from './global_intelligence.js';
 import { taskEngine } from './tasks.js';
+import { isPriceIntent, searchRealPrices, buildPriceReply } from './price_engine.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -352,11 +353,12 @@ export class AgentMemoryStore {
     const temporal = buildRealtimeTemporalContext(clientTemporal);
     const cleanMsg = (message || '').trim();
 
-    // 1. CONSULTA: Query agent's private vector knowledge base + Real-Time Maps/Places + GraphRAG + Web/Social Intel
+    // 1. CONSULTA: Query agent's private vector knowledge base + Real-Time Maps/Places + GraphRAG + Web/Social Intel + Price Intel
     const vectorMatches = this.queryAgentVectorMemory(agentId, cleanMsg, 3);
     const pat = this.patterns.get(agentId);
 
     const isMapOrPlaceQuery = cleanMsg && geoEngine.isPlaceOrMapQuery(cleanMsg);
+    const wantsPriceAnalysis = cleanMsg && isPriceIntent(cleanMsg);
     const wantsLiveWebOrSocial = cleanMsg && /\b(not[ií]cias?\s+de\s+hoje|[uú]ltimas\s+not[ií]cias|manchetes|redes\s+sociais)\b/i.test(cleanMsg);
     const wantsDeepScienceRag = cleanMsg && !voiceEnabled && cleanMsg.length > 12 && /\b(artigo|cient[ií]fico|doi|estudo|pesquisa|f[ií]sica|biologia|hist[oó]ria| teorema)\b/i.test(cleanMsg);
 
@@ -365,7 +367,7 @@ export class AgentMemoryStore {
       new Promise(resolve => setTimeout(() => resolve(null), ms))
     ]);
 
-    const [mapIntel, ragRes, liveIntel] = await Promise.all([
+    const [mapIntel, ragRes, liveIntel, priceIntel] = await Promise.all([
       isMapOrPlaceQuery
         ? withTimeout(geoEngine.searchRealTimePlacesAndMap({
             query: cleanMsg,
@@ -376,7 +378,15 @@ export class AgentMemoryStore {
           }).catch(() => null), 2200)
         : Promise.resolve(null),
       wantsDeepScienceRag ? withTimeout(graphDB.queryGraphRAG(cleanMsg, 2).catch(() => null), 1200) : Promise.resolve(null),
-      wantsLiveWebOrSocial ? withTimeout(globalIntel.queryOmniscientIntelligence(cleanMsg).catch(() => null), 1400) : Promise.resolve(null)
+      wantsLiveWebOrSocial ? withTimeout(globalIntel.queryOmniscientIntelligence(cleanMsg).catch(() => null), 1400) : Promise.resolve(null),
+      wantsPriceAnalysis
+        ? withTimeout(searchRealPrices({
+            query: cleanMsg,
+            apiKey: apiKey || process.env.GEMINI_API_KEY || '',
+            clientGeo,
+            locality: clientGeo?.localityLabel || ''
+          }).catch(() => null), 3500)
+        : Promise.resolve(null)
     ]);
 
     // 2. CONTEXTUALIZAÇÃO: Build private context + real-time map/web/factual context
@@ -406,7 +416,9 @@ export class AgentMemoryStore {
     let reply = '';
     const hasKey = !!(apiKey || process.env.GEMINI_API_KEY);
 
-    if (hasKey && cleanMsg) {
+    if (wantsPriceAnalysis && priceIntel) {
+      reply = this._sanitizeRespectfulTone(buildPriceReply(priceIntel, voiceEnabled));
+    } else if (hasKey && cleanMsg) {
       try {
         const isAuraAgent = agent.id === 'aura';
         const personaDirective = isAuraAgent
@@ -518,6 +530,11 @@ export class AgentMemoryStore {
       pose = 'happy';
       themeColor = '#10b981';
       statusLabel = 'AURA Alegre & Inspirada';
+    } else if (priceIntel) {
+      emotion = 'rational';
+      pose = 'gesturing';
+      themeColor = '#10b981';
+      statusLabel = 'AURA Comparador de Preços • Fatos Verificados';
     } else if (isMapOrPlaceQuery) {
       emotion = 'focused';
       pose = 'gesturing';
@@ -643,6 +660,7 @@ export class AgentMemoryStore {
       emergencyCard,
       taskReminderCard,
       spreadsheetCard,
+      priceCard: priceIntel,
       vectorMatches,
       newLearnedMemory: newLearned,
       xaiPassport: xaiPass,

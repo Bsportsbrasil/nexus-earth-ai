@@ -3645,5 +3645,95 @@
         "color": "#38bdf8"
       }
     ]
+  },
+  {
+    "id": "proj_1793809709633_bu9u3",
+    "title": "Projeto Salvo via Teste",
+    "description": "",
+    "created": "2026-11-04T16:28:29.633Z",
+    "updated": "2026-11-04T16:28:29.633Z",
+    "center": {
+      "lat": -37.81365318,
+      "lon": 144.96255856,
+      "zoom": 15
+    },
+    "features": [
+      {
+        "id": "kml_1793809709632_0",
+        "type": "Point",
+        "name": "Vértice Central",
+        "description": "Ponto de referência KML",
+        "coordinates": [
+          144.96255856,
+          -37.81365318,
+          25
+        ],
+        "color": "#00f5ff"
+      },
+      {
+        "id": "kml_line_1793809709633_1",
+        "type": "LineString",
+        "name": "Trajeto de Teste",
+        "description": "",
+        "coordinates": [
+          [
+            144.96,
+            -37.815,
+            0
+          ],
+          [
+            144.965,
+            -37.816,
+            0
+          ]
+        ],
+        "color": "#38bdf8"
+      }
+    ]
+  },
+  {
+    "id": "proj_1793810798157_9s76m",
+    "title": "Projeto Salvo via Teste",
+    "description": "",
+    "created": "2026-11-04T16:46:38.157Z",
+    "updated": "2026-11-04T16:46:38.157Z",
+    "center": {
+      "lat": -37.81365318,
+      "lon": 144.96255856,
+      "zoom": 15
+    },
+    "features": [
+      {
+        "id": "kml_1793810798155_0",
+        "type": "Point",
+        "name": "Vértice Central",
+        "description": "Ponto de referência KML",
+        "coordinates": [
+          144.96255856,
+          -37.81365318,
+          25
+        ],
+        "color": "#00f5ff"
+      },
+      {
+        "id": "kml_line_1793810798156_1",
+        "type": "LineString",
+        "name": "Trajeto de Teste",
+        "description": "",
+        "coordinates": [
+          [
+            144.96,
+            -37.815,
+            0
+          ],
+          [
+            144.965,
+            -37.816,
+            0
+          ]
+        ],
+        "color": "#38bdf8"
+      }
+    ]
   }
 ]

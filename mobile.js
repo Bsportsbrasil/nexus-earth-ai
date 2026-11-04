@@ -508,6 +508,89 @@ const NexusMobile = (function () {
     `;
   }
 
+  function buildPriceCardHtml(pc) {
+    if (!pc) return '';
+    const product = pc.product || 'Produto';
+    const offers = Array.isArray(pc.offers) ? pc.offers : [];
+    const analysis = pc.analysis;
+    const links = pc.links || {};
+    const onlineLinks = Array.isArray(links.online) ? links.online : [];
+    const mapUrl = links.physicalStoresMapUrl || '';
+
+    const flagBadge = (flag) => {
+      if (flag === 'JUSTO') return '<span style="font-size:0.64rem;background:rgba(16,185,129,0.22);color:#34d399;border:1px solid rgba(16,185,129,0.4);padding:2px 6px;border-radius:6px;font-weight:700;">✅ Preço Justo</span>';
+      if (flag === 'SUSPEITO') return '<span style="font-size:0.64rem;background:rgba(239,68,68,0.22);color:#f87171;border:1px solid rgba(239,68,68,0.4);padding:2px 6px;border-radius:6px;font-weight:700;">🚨 Muito Abaixo (Risco)</span>';
+      if (flag === 'ACIMA') return '<span style="font-size:0.64rem;background:rgba(245,158,11,0.22);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);padding:2px 6px;border-radius:6px;font-weight:700;">⚠️ Acima da Média</span>';
+      return '<span style="font-size:0.64rem;background:rgba(148,163,184,0.2);color:#cbd5e1;padding:2px 6px;border-radius:6px;">Fonte Verificada</span>';
+    };
+
+    const offersHtml = offers.map(o => `
+      <div style="background:rgba(15,23,42,0.85);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:8px 10px;margin-top:6px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:180px;">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span style="font-weight:700;color:#fff;font-size:0.8rem;">🏷️ ${escapeHtml(o.store)}</span>
+            <span style="font-size:0.62rem;color:#94a3b8;background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:4px;">${o.type === 'fisica' ? '🏢 Loja Física' : '🌐 Online'}</span>
+            ${flagBadge(o.flag)}
+          </div>
+          <div style="font-size:0.7rem;color:#94a3b8;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:260px;" title="${escapeHtml(o.product)}">${escapeHtml(o.product)}</div>
+          ${o.note ? `<div style="font-size:0.65rem;color:#38bdf8;margin-top:1px;">ℹ️ ${escapeHtml(o.note)}</div>` : ''}
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-weight:800;color:#10b981;font-size:0.92rem;">${escapeHtml(o.priceLabel)}</span>
+          ${o.sourceUrl ? `<a href="${escapeHtml(o.sourceUrl)}" target="_blank" rel="noopener" style="font-size:0.7rem;font-weight:700;color:#020617;background:linear-gradient(135deg,#10b981,#34d399);padding:5px 9px;border-radius:6px;text-decoration:none;white-space:nowrap;">Ver Oferta ↗</a>` : ''}
+        </div>
+      </div>
+    `).join('');
+
+    const analysisHtml = analysis ? `
+      <div style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.35);border-radius:10px;padding:8px 10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:0.68rem;color:#6ee7b7;font-weight:700;">MEDIANA DE MERCADO (PREÇO JUSTO):</div>
+          <div style="font-size:1.05rem;font-weight:800;color:#10b981;">${escapeHtml(analysis.medianLabel)}</div>
+        </div>
+        <div style="font-size:0.7rem;color:#cbd5e1;text-align:right;">
+          <div>Faixa justa: <strong style="color:#fff;">${escapeHtml(analysis.fairRange)}</strong></div>
+          <div style="color:#94a3b8;font-size:0.64rem;">Baseado em ${escapeHtml(String(analysis.sampleSize))} lojas verificadas</div>
+        </div>
+      </div>
+      ${analysis.suspiciousCount > 0 ? `
+        <div style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);border-radius:8px;padding:6px 10px;margin-bottom:8px;font-size:0.7rem;color:#fca5a5;">
+          ⚠️ <strong>Alerta de Segurança:</strong> ${analysis.suspiciousCount} oferta(s) estão muito abaixo da média de mercado. Desconfie de golpes, produtos falsificados ou usados sem garantia.
+        </div>
+      ` : ''}
+    ` : '';
+
+    const onlineBtnsHtml = onlineLinks.slice(0, 6).map(l => `
+      <a href="${escapeHtml(l.url)}" target="_blank" rel="noopener" style="flex:1;min-width:100px;text-align:center;font-size:0.68rem;font-weight:700;color:#e2e8f0;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:6px 8px;border-radius:8px;text-decoration:none;">🔍 ${escapeHtml(l.name)}</a>
+    `).join('');
+
+    return `
+      <div style="margin-top:10px;padding:12px;background:rgba(15,23,42,0.92);border:1.5px solid #10b981;border-radius:14px;text-align:left;box-shadow:0 0 18px rgba(16,185,129,0.25);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <div style="font-weight:800;color:#10b981;font-size:0.82rem;display:flex;align-items:center;gap:6px;">
+            <span>🏷️ COMPARADOR DE PREÇOS AURA</span>
+          </div>
+          <span style="font-size:0.64rem;background:rgba(16,185,129,0.2);color:#34d399;padding:2px 7px;border-radius:999px;font-weight:700;">FONTE REAL VERIFICADA</span>
+        </div>
+        <div style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:4px;">📦 ${escapeHtml(product)}</div>
+        ${analysisHtml}
+        ${offers.length > 0 ? `
+          <div style="font-size:0.7rem;font-weight:700;color:#94a3b8;margin-top:8px;">Lojas Encontradas com Preço Real:</div>
+          ${offersHtml}
+        ` : `
+          <div style="font-size:0.72rem;color:#94a3b8;margin:6px 0;">Nenhuma loja específica com preço indexado no momento. Use os comparadores diretos abaixo:</div>
+        `}
+        <div style="font-size:0.7rem;font-weight:700;color:#94a3b8;margin-top:10px;margin-bottom:4px;">Comparar Direto nas Principais Lojas:</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
+          ${onlineBtnsHtml}
+        </div>
+        ${mapUrl ? `
+          <a href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener" style="display:block;text-align:center;font-size:0.74rem;font-weight:700;color:#020617;background:linear-gradient(135deg,#38bdf8,#00f5ff);padding:7px 10px;border-radius:8px;text-decoration:none;margin-top:6px;">📍 Buscar Lojas Físicas Próximas no Maps 🗺️</a>
+        ` : ''}
+      </div>
+    `;
+  }
+
   /* --- Dedicated AURA Viva Mascot Page (Living Cyber-Kawaii Avatar, Emotions, Gestures & Duplex Voice) --- */
   function initAuraLiveMascot() {
     const botAvatar = document.getElementById('aura-cute-bot-avatar');
@@ -748,6 +831,7 @@ const NexusMobile = (function () {
         const cardsHtml = (item.mapCard ? buildMapCardHtml(item.mapCard) : '') +
                           (item.emergencyCard ? buildEmergencyCardHtml(item.emergencyCard) : '') +
                           (item.taskReminderCard ? buildTaskReminderCardHtml(item.taskReminderCard) : '') +
+                          (item.priceCard ? buildPriceCardHtml(item.priceCard) : '') +
                           (item.spreadsheetCard ? buildSpreadsheetCardHtml(item.spreadsheetCard) : '');
         return `
           <div style="display:flex;flex-direction:column;align-items:${isUser ? 'flex-end' : 'flex-start'};">
@@ -942,9 +1026,9 @@ const NexusMobile = (function () {
           setMascotPose(targetPose);
 
           if (captionBox) {
-            captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}${buildMapCardHtml(data.mapCard)}${buildEmergencyCardHtml(data.emergencyCard)}${buildTaskReminderCardHtml(data.taskReminderCard)}${buildSpreadsheetCardHtml(data.spreadsheetCard)}`;
+            captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}${buildMapCardHtml(data.mapCard)}${buildEmergencyCardHtml(data.emergencyCard)}${buildTaskReminderCardHtml(data.taskReminderCard)}${buildPriceCardHtml(data.priceCard)}${buildSpreadsheetCardHtml(data.spreadsheetCard)}`;
           }
-          addTurnToHistory('aura', reply, { mapCard: data.mapCard, emergencyCard: data.emergencyCard, taskReminderCard: data.taskReminderCard, spreadsheetCard: data.spreadsheetCard });
+          addTurnToHistory('aura', reply, { mapCard: data.mapCard, emergencyCard: data.emergencyCard, taskReminderCard: data.taskReminderCard, priceCard: data.priceCard, spreadsheetCard: data.spreadsheetCard });
 
           if (ttsEnabled) {
             setBotState('speaking', data.statusLabel || 'AURA conversando no espaço de conforto...');
@@ -1166,7 +1250,7 @@ const NexusMobile = (function () {
         if (res.ok) {
           const data = await res.json();
           const reply = data.reply || 'Olá! Estou aqui para colaborar com você.';
-          appendChatBubble(reply, 'aura', data.mapCard, data.emergencyCard, data.taskReminderCard, data.spreadsheetCard);
+          appendChatBubble(reply, 'aura', data.mapCard, data.emergencyCard, data.taskReminderCard, data.spreadsheetCard, data.priceCard);
           try {
             const hist = JSON.parse(localStorage.getItem('nexus_aura_chat_history') || '[]');
             hist.push({
@@ -1175,6 +1259,7 @@ const NexusMobile = (function () {
               mapCard: data.mapCard,
               emergencyCard: data.emergencyCard,
               taskReminderCard: data.taskReminderCard,
+              priceCard: data.priceCard,
               spreadsheetCard: data.spreadsheetCard,
               time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             });
@@ -1190,7 +1275,7 @@ const NexusMobile = (function () {
       }
     }
 
-    function appendChatBubble(text, sender, mapCard = null, emergencyCard = null, taskReminderCard = null, spreadsheetCard = null) {
+    function appendChatBubble(text, sender, mapCard = null, emergencyCard = null, taskReminderCard = null, spreadsheetCard = null, priceCard = null) {
       if (!streamArea) return;
       const b = document.createElement('div');
       b.className = `chat-bubble ${sender}`;
@@ -1202,6 +1287,7 @@ const NexusMobile = (function () {
           ${sender === 'aura' ? buildMapCardHtml(mapCard) : ''}
           ${sender === 'aura' ? buildEmergencyCardHtml(emergencyCard) : ''}
           ${sender === 'aura' ? buildTaskReminderCardHtml(taskReminderCard) : ''}
+          ${sender === 'aura' ? buildPriceCardHtml(priceCard) : ''}
           ${sender === 'aura' ? buildSpreadsheetCardHtml(spreadsheetCard) : ''}
         </div>
         <div class="bubble-meta-hud">

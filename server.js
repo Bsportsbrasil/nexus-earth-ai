@@ -1921,12 +1921,14 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(302, { 'Location': '/admin.html#tab-supervisor' });
     return res.end();
   }
-  // Mobile Native Experience & Legal Policy Routes
+  // Mobile Native Experience, Admin & Legal Policy Routes
   let filePath = pathname;
   if (pathname === '/privacy' || pathname === '/privacidade') {
     filePath = '/privacy.html';
   } else if (pathname === '/terms' || pathname === '/termos') {
     filePath = '/terms.html';
+  } else if (pathname === '/admin' || pathname === '/c2' || pathname === '/painel' || pathname === '/dashboard') {
+    filePath = '/admin.html';
   } else if (
     pathname === '/mobile' ||
     pathname.startsWith('/mobile/') ||
