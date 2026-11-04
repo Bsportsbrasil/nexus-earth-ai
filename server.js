@@ -627,7 +627,7 @@ const server = http.createServer(async (req, res) => {
         agentId: body.agentId || 'aura',
         message: body.message || '',
         userName: body.userName || 'Criador',
-        apiKey: body.apiKey || '',
+        apiKey: body.apiKey || process.env.GEMINI_API_KEY || '',
         voiceEnabled: !!body.voiceEnabled,
         clientTemporal: body.clientTemporal || null,
         clientGeo: body.clientGeo || null,
