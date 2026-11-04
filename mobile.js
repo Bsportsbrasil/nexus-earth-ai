@@ -412,26 +412,29 @@ const NexusMobile = (function () {
     const sendBtn = document.getElementById('aura-live-btn-send');
     const micBtn = document.getElementById('aura-live-btn-mic');
 
-    const btnFly = document.getElementById('btn-pose-fly');
-    const btnTable = document.getElementById('btn-pose-table');
+    const btnSofa = document.getElementById('btn-pose-sofa');
     const btnCoffee = document.getElementById('btn-pose-coffee');
+    const btnListening = document.getElementById('btn-pose-listening');
+    const btnFly = document.getElementById('btn-pose-fly');
     const btnDuplex = document.getElementById('btn-aura-duplex');
 
     let liveRec = null;
     let liveListening = false;
     let duplexMode = false;
-    let activePose = 'pose-flying';
+    let activePose = 'pose-sofa';
     let activeEmotion = 'neutral';
+    let idleLifeTimer = null;
 
     function setMascotPose(poseClass) {
       if (!botAvatar) return;
       activePose = poseClass;
-      botAvatar.classList.remove('pose-flying', 'pose-table', 'pose-coffee');
+      botAvatar.classList.remove('pose-sofa', 'pose-flying', 'pose-table', 'pose-coffee', 'pose-listening');
       botAvatar.classList.add(poseClass);
 
-      if (btnFly) btnFly.classList.toggle('active', poseClass === 'pose-flying');
-      if (btnTable) btnTable.classList.toggle('active', poseClass === 'pose-table');
+      if (btnSofa) btnSofa.classList.toggle('active', poseClass === 'pose-sofa' || poseClass === 'pose-table');
       if (btnCoffee) btnCoffee.classList.toggle('active', poseClass === 'pose-coffee');
+      if (btnListening) btnListening.classList.toggle('active', poseClass === 'pose-listening');
+      if (btnFly) btnFly.classList.toggle('active', poseClass === 'pose-flying');
     }
 
     function setMascotEmotion(emotionName) {
@@ -454,26 +457,73 @@ const NexusMobile = (function () {
     function setBotState(state, statusLabel) {
       if (botAvatar) {
         botAvatar.classList.remove('speaking', 'listening');
-        if (state === 'speaking') botAvatar.classList.add('speaking');
-        if (state === 'listening') botAvatar.classList.add('listening');
+        if (state === 'speaking') {
+          botAvatar.classList.add('speaking');
+        }
+        if (state === 'listening') {
+          botAvatar.classList.add('listening');
+          setMascotPose('pose-listening');
+        }
       }
       if (statusText && statusLabel) statusText.textContent = statusLabel;
     }
 
-    if (btnFly) btnFly.addEventListener('click', () => {
-      triggerHaptic(15);
-      setMascotPose('pose-flying');
-    });
+    // Autonomous Lifelike Behavior Loop (AURA se mexe naturalmente como alguém real)
+    function startLifelikeIdleLoop() {
+      if (idleLifeTimer) clearInterval(idleLifeTimer);
+      idleLifeTimer = setInterval(() => {
+        if (!botAvatar || botAvatar.classList.contains('speaking') || botAvatar.classList.contains('listening')) {
+          return;
+        }
+        const actions = ['glance_user', 'head_tilt', 'sip_coffee', 'gentle_shift', 'soft_blink'];
+        const action = actions[Math.floor(Math.random() * actions.length)];
 
-    if (btnTable) btnTable.addEventListener('click', () => {
+        if (action === 'glance_user') {
+          const eyes = document.getElementById('aura-eyes-row');
+          if (eyes) {
+            eyes.style.transform = 'translateX(3px) translateY(-1px)';
+            setTimeout(() => { if (eyes) eyes.style.transform = 'none'; }, 1600);
+          }
+        } else if (action === 'head_tilt') {
+          const head = document.getElementById('aura-head-shell');
+          if (head) {
+            head.style.transform = 'rotate(2.5deg)';
+            setTimeout(() => { if (head) head.style.transform = 'none'; }, 2000);
+          }
+        } else if (action === 'sip_coffee' && activePose !== 'pose-flying') {
+          setMascotPose('pose-coffee');
+          setTimeout(() => {
+            if (botAvatar && !botAvatar.classList.contains('speaking') && !botAvatar.classList.contains('listening')) {
+              setMascotPose('pose-sofa');
+            }
+          }, 3200);
+        } else if (action === 'gentle_shift') {
+          botAvatar.style.transform = 'translateY(3px)';
+          setTimeout(() => { if (botAvatar) botAvatar.style.transform = ''; }, 1800);
+        }
+      }, 5000);
+    }
+    startLifelikeIdleLoop();
+
+    if (btnSofa) btnSofa.addEventListener('click', () => {
       triggerHaptic(15);
-      setMascotPose('pose-table');
+      setMascotPose('pose-sofa');
     });
 
     if (btnCoffee) btnCoffee.addEventListener('click', () => {
       triggerHaptic(15);
       setMascotPose('pose-coffee');
       setMascotEmotion('coffee');
+    });
+
+    if (btnListening) btnListening.addEventListener('click', () => {
+      triggerHaptic(15);
+      setMascotPose('pose-listening');
+    });
+
+    if (btnFly) btnFly.addEventListener('click', () => {
+      triggerHaptic(15);
+      setMascotPose('pose-flying');
     });
 
     if (btnDuplex) btnDuplex.addEventListener('click', () => {
@@ -505,10 +555,10 @@ const NexusMobile = (function () {
           'Pode desabafar ou conversar comigo livremente. Estou aqui para te apoiar com o coração aberto e raciocínio prático.'
         ];
         const msg = greetings[Math.floor(Math.random() * greetings.length)];
-        setMascotPose('pose-table');
+        setMascotPose('pose-coffee');
         setMascotEmotion('coffee');
         if (captionBox) captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(msg)}`;
-        setBotState('speaking', 'AURA conversando...');
+        setBotState('speaking', 'AURA conversando no espaço de conforto...');
         if (window.VoiceEngine) {
           window.VoiceEngine.speak(msg, {
             persona: 'aura',
@@ -516,7 +566,8 @@ const NexusMobile = (function () {
             rate: 1.0,
             pitch: 1.04,
             onDone: () => {
-              setBotState('idle', 'AURA Viva • Toque ou fale abaixo');
+              setBotState('idle', 'AURA no seu Espaço de Conforto • Toque ou fale abaixo');
+              setMascotPose('pose-sofa');
               if (duplexMode && liveRec && !liveListening) {
                 setTimeout(() => { try { liveRec.start(); } catch (_) {} }, 450);
               }
@@ -567,20 +618,24 @@ const NexusMobile = (function () {
           const pose = data.pose || (emotion === 'empathy' ? 'table' : 'flying');
 
           setMascotEmotion(emotion);
-          setMascotPose(pose === 'table' ? 'pose-table' : pose === 'coffee' ? 'pose-coffee' : 'pose-flying');
+          const targetPose = (pose === 'coffee') ? 'pose-coffee'
+            : (pose === 'table' || pose === 'sofa' || emotion === 'empathy') ? 'pose-sofa'
+            : (pose === 'flying') ? 'pose-flying' : 'pose-sofa';
+          setMascotPose(targetPose);
 
           if (captionBox) {
             captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(reply)}${buildMapCardHtml(data.mapCard)}`;
           }
 
           if (ttsEnabled) {
-            setBotState('speaking', data.statusLabel || 'AURA conversando com você...');
+            setBotState('speaking', data.statusLabel || 'AURA conversando no espaço de conforto...');
             if (window.VoiceEngine) {
               window.VoiceEngine.speak(data.voiceText || reply, {
                 persona: 'aura',
                 emotion,
                 onDone: () => {
-                  setBotState('idle', 'AURA Viva • Sintonizada');
+                  setBotState('idle', 'AURA no seu Espaço de Conforto • Sintonizada');
+                  setMascotPose('pose-sofa');
                   if (duplexMode && liveRec && !liveListening) {
                     setTimeout(() => {
                       try { liveRec.start(); } catch (_) {}

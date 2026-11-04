@@ -588,18 +588,229 @@ html, body {
   50% { box-shadow: 0 0 20px rgba(244, 63, 94, 0.6); }
 }
 
-/* Character Stage wrapper */
-.aura-character-stage {
+/* ================= ESPAÇO DE CONFORTO DA AURA (CYBER COMFORT LOUNGE) ================= */
+.aura-comfort-room {
   position: relative;
-  width: 210px;
-  height: 210px;
+  width: 100%;
+  max-width: 395px;
+  height: 270px;
+  border-radius: 26px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 25%, #0f1f38 0%, #081022 55%, #020611 100%);
+  border: 1.5px solid rgba(0, 245, 255, 0.28);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 0 35px rgba(0, 245, 255, 0.08);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-bottom: 8px;
+  box-sizing: border-box;
   margin-top: 2px;
 }
 
-/* Mascot Base */
+/* Panoramic Holographic Window with Starry Night Sky & Cyber City */
+.aura-room-window {
+  position: absolute;
+  top: 10px;
+  width: 240px;
+  height: 105px;
+  border-radius: 65px 65px 16px 16px;
+  border: 1.5px solid rgba(0, 245, 255, 0.35);
+  overflow: hidden;
+  background: #020611;
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.14), inset 0 0 24px rgba(0, 0, 0, 0.85);
+  z-index: 1;
+}
+
+.aura-window-sky {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #020617 0%, #09152b 60%, #172554 100%);
+  overflow: hidden;
+}
+
+.aura-window-stars {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1px 1px at 20px 25px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 60px 45px, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1px 1px at 110px 18px, rgba(0,245,255,0.8), transparent),
+    radial-gradient(1.5px 1.5px at 170px 35px, #fff, transparent),
+    radial-gradient(1px 1px at 215px 22px, rgba(244,114,182,0.8), transparent);
+  animation: auraStarsTwinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes auraStarsTwinkle {
+  0% { opacity: 0.65; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.02); }
+}
+
+.aura-window-nebula {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 120px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, transparent 70%);
+  filter: blur(12px);
+}
+
+.aura-window-city-skyline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: 
+    linear-gradient(to right, #090e1a 0%, #090e1a 12%, transparent 12%, transparent 15%, #0d1526 15%, #0d1526 26%, transparent 26%, transparent 30%, #090e1a 30%, #090e1a 45%, transparent 45%, transparent 50%, #0f1b33 50%, #0f1b33 65%, transparent 65%, transparent 70%, #090e1a 70%, #090e1a 85%, transparent 85%, #0d1526 90%, #0d1526 100%);
+  border-top: 1px solid rgba(0, 245, 255, 0.3);
+  box-shadow: 0 -2px 10px rgba(0, 245, 255, 0.25);
+}
+
+/* Warm Holographic Room Lamp */
+.aura-room-lamp {
+  position: absolute;
+  top: 22px;
+  left: 18px;
+  width: 22px;
+  height: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.aura-lamp-head {
+  width: 16px;
+  height: 10px;
+  border-radius: 6px 6px 0 0;
+  background: var(--aura-theme, #00f5ff);
+  box-shadow: 0 0 12px var(--aura-theme, #00f5ff);
+}
+.aura-lamp-glow {
+  width: 60px;
+  height: 90px;
+  background: radial-gradient(ellipse at 15% 10%, var(--aura-theme-glow, rgba(0, 245, 255, 0.35)) 0%, transparent 75%);
+  filter: blur(10px);
+  margin-left: -18px;
+}
+
+/* Ambient Floating Particles in the Living Room */
+.aura-room-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+.p-mote {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--aura-theme, #00f5ff);
+  box-shadow: 0 0 8px var(--aura-theme, #00f5ff);
+  opacity: 0.6;
+  animation: auraMoteDrift 6s infinite ease-in-out;
+}
+.p-mote.p1 { top: 30%; left: 20%; animation-duration: 5.5s; }
+.p-mote.p2 { top: 55%; left: 75%; animation-duration: 7s; animation-delay: 1s; }
+.p-mote.p3 { top: 75%; left: 30%; animation-duration: 6.2s; animation-delay: 2s; }
+.p-mote.p4 { top: 40%; left: 85%; animation-duration: 8s; animation-delay: 1.5s; }
+.p-mote.p5 { top: 20%; left: 60%; animation-duration: 6.8s; animation-delay: 0.5s; }
+
+@keyframes auraMoteDrift {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+  50% { transform: translateY(-16px) translateX(8px); opacity: 0.85; }
+}
+
+/* Floor Rug with Soft Cyan/Violet Halo */
+.aura-comfort-rug {
+  position: absolute;
+  bottom: 12px;
+  width: 250px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 245, 255, 0.16) 0%, rgba(168, 85, 247, 0.08) 50%, transparent 75%);
+  border: 1px dashed rgba(0, 245, 255, 0.22);
+  box-shadow: 0 0 25px rgba(0, 245, 255, 0.15);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Cozy Cyber Armchair / Sofa */
+.aura-cozy-sofa {
+  position: absolute;
+  bottom: 24px;
+  width: 200px;
+  height: 125px;
+  z-index: 2;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aura-sofa-backrest {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 90px;
+  border-radius: 36px 36px 16px 16px;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 4px 12px rgba(255, 255, 255, 0.1), 0 10px 24px rgba(0, 0, 0, 0.6);
+}
+
+.aura-sofa-cushion {
+  position: absolute;
+  bottom: 10px;
+  left: 14px;
+  right: 14px;
+  height: 38px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+  border: 1.5px solid rgba(0, 245, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), inset 0 2px 6px rgba(255, 255, 255, 0.15);
+}
+
+.aura-sofa-armrest {
+  position: absolute;
+  bottom: 14px;
+  width: 24px;
+  height: 58px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #1e293b, #090e17);
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+.aura-sofa-armrest.left { left: 4px; }
+.aura-sofa-armrest.right { right: 4px; }
+
+.aura-sofa-pillow {
+  position: absolute;
+  bottom: 22px;
+  right: 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.35), rgba(168, 85, 247, 0.35));
+  border: 1px solid rgba(244, 114, 182, 0.4);
+  transform: rotate(18deg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Character Stage inside the Comfort Lounge */
+.aura-character-stage {
+  position: relative;
+  width: 210px;
+  height: 205px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* Mascot Base — Living Cyber Companion */
 .aura-cute-bot {
   --aura-theme: #00f5ff;
   --aura-theme-glow: rgba(0, 245, 255, 0.45);
@@ -608,48 +819,80 @@ html, body {
   --aura-cheeks: rgba(244, 114, 182, 0.65);
   position: relative;
   width: 196px;
-  height: 206px;
+  height: 195px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  animation: auraFloat 3.8s ease-in-out infinite;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  animation: auraHumanBreathe 3.8s ease-in-out infinite;
 }
 
-@keyframes auraFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-12px) rotate(0.8deg); }
+/* Natural Human-like Breathing & Sway */
+@keyframes auraHumanBreathe {
+  0%, 100% {
+    transform: translateY(0px) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.01) rotate(0.6deg);
+  }
 }
 
-/* Pose Variations */
+/* Poses */
+.aura-cute-bot.pose-sofa {
+  transform: translateY(8px);
+  animation: auraSofaRelax 4.2s ease-in-out infinite;
+}
+@keyframes auraSofaRelax {
+  0%, 100% { transform: translateY(8px) rotate(0deg); }
+  50% { transform: translateY(5px) rotate(-0.5deg); }
+}
+
 .aura-cute-bot.pose-table {
-  animation: auraTableBreathe 4s ease-in-out infinite;
-  transform: translateY(14px);
+  transform: translateY(10px);
+  animation: auraTableBreathe 3.6s ease-in-out infinite;
 }
 @keyframes auraTableBreathe {
-  0%, 100% { transform: translateY(14px); }
-  50% { transform: translateY(10px); }
+  0%, 100% { transform: translateY(10px) rotate(0deg); }
+  50% { transform: translateY(6px) rotate(0.4deg); }
 }
 
 .aura-cute-bot.pose-coffee {
-  animation: auraCoffeeSip 3.5s ease-in-out infinite;
-  transform: translateY(12px);
+  transform: translateY(8px);
+  animation: auraCoffeeSipCycle 4s ease-in-out infinite;
 }
-@keyframes auraCoffeeSip {
-  0%, 100% { transform: translateY(12px); }
-  50% { transform: translateY(8px); }
+@keyframes auraCoffeeSipCycle {
+  0%, 100% { transform: translateY(8px) rotate(0deg); }
+  50% { transform: translateY(4px) rotate(-0.8deg); }
 }
 
-/* Emotion Color Palettes */
+.aura-cute-bot.pose-listening {
+  transform: translateY(6px) rotate(-2.5deg);
+  animation: auraListeningLean 2.8s ease-in-out infinite alternate;
+}
+@keyframes auraListeningLean {
+  0% { transform: translateY(6px) rotate(-2.5deg); }
+  100% { transform: translateY(3px) rotate(-1.5deg); }
+}
+
+.aura-cute-bot.pose-flying {
+  transform: translateY(-12px);
+  animation: auraFlyingDrift 3.2s ease-in-out infinite alternate;
+}
+@keyframes auraFlyingDrift {
+  0% { transform: translateY(-12px) rotate(-1deg); }
+  100% { transform: translateY(-22px) rotate(1deg); }
+}
+
+/* Emotions */
 .aura-cute-bot.emotion-empathy {
   --aura-theme: #f472b6;
   --aura-theme-glow: rgba(244, 114, 182, 0.55);
   --aura-halo-color: #f472b6;
   --aura-visor-border: rgba(244, 114, 182, 0.75);
-  --aura-cheeks: rgba(251, 113, 133, 0.85);
+  --aura-cheeks: rgba(251, 113, 133, 0.9);
 }
 .aura-cute-bot.emotion-rational {
   --aura-theme: #38bdf8;
@@ -662,14 +905,14 @@ html, body {
   --aura-theme-glow: rgba(251, 191, 36, 0.55);
   --aura-halo-color: #f59e0b;
   --aura-visor-border: rgba(251, 191, 36, 0.75);
-  --aura-cheeks: rgba(251, 146, 60, 0.75);
+  --aura-cheeks: rgba(251, 146, 60, 0.8);
 }
 .aura-cute-bot.emotion-happy {
   --aura-theme: #10b981;
   --aura-theme-glow: rgba(16, 185, 129, 0.55);
   --aura-halo-color: #34d399;
   --aura-visor-border: rgba(16, 185, 129, 0.75);
-  --aura-cheeks: rgba(244, 114, 182, 0.8);
+  --aura-cheeks: rgba(244, 114, 182, 0.85);
 }
 .aura-cute-bot.listening {
   --aura-theme: #f43f5e;
@@ -718,8 +961,10 @@ html, body {
 .aura-ear.left { transform: rotate(-18deg); }
 .aura-ear.right { transform: rotate(18deg); }
 
-.aura-cute-bot.listening .aura-ear.left { transform: rotate(-8deg) scaleY(1.08); }
-.aura-cute-bot.listening .aura-ear.right { transform: rotate(8deg) scaleY(1.08); }
+.aura-cute-bot.listening .aura-ear.left,
+.aura-cute-bot.pose-listening .aura-ear.left { transform: rotate(-6deg) scaleY(1.12); }
+.aura-cute-bot.listening .aura-ear.right,
+.aura-cute-bot.pose-listening .aura-ear.right { transform: rotate(10deg) scaleY(1.12); }
 .aura-cute-bot.emotion-empathy .aura-ear.left { transform: rotate(-24deg); }
 .aura-cute-bot.emotion-empathy .aura-ear.right { transform: rotate(24deg); }
 
@@ -741,11 +986,11 @@ html, body {
 }
 
 .aura-cute-bot.speaking .aura-head-shell {
-  animation: auraSpeakingPulse 1.2s ease-in-out infinite alternate;
+  animation: auraSpeakingPulse 0.4s ease-in-out infinite alternate;
 }
 @keyframes auraSpeakingPulse {
-  0% { transform: scale(1); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 24px var(--aura-theme-glow); }
-  100% { transform: scale(1.02); box-shadow: 0 14px 38px rgba(0, 0, 0, 0.8), 0 0 38px var(--aura-theme-glow); }
+  0% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1.02) translateY(-2px); }
 }
 
 /* Face Visor */
@@ -780,7 +1025,7 @@ html, body {
   background: var(--aura-theme);
   box-shadow: 0 0 14px var(--aura-theme), 0 0 24px var(--aura-theme-glow);
   position: relative;
-  animation: auraBlink 4.5s infinite;
+  animation: auraBlinkRealistic 4.2s infinite;
   transition: all 0.3s ease;
 }
 
@@ -826,9 +1071,10 @@ html, body {
   transform: scaleY(0.92) rotate(-3deg);
 }
 
-@keyframes auraBlink {
-  0%, 94%, 98%, 100% { transform: scaleY(1); }
-  96% { transform: scaleY(0.08); }
+@keyframes auraBlinkRealistic {
+  0%, 92%, 96%, 100% { transform: scaleY(1); }
+  94% { transform: scaleY(0.08); }
+  98% { transform: scaleY(0.08); }
 }
 
 /* Cheeks */
@@ -865,12 +1111,32 @@ html, body {
   border-radius: 50%;
   background: var(--aura-theme-glow);
   border: 2.5px solid var(--aura-theme);
-  animation: auraTalkMouth 0.24s infinite alternate;
+  animation: auraTalkMouth 0.22s infinite alternate;
 }
 
 @keyframes auraTalkMouth {
-  0% { transform: scaleY(0.4) scaleX(0.85); }
-  100% { transform: scaleY(1.2) scaleX(1.1); }
+  0% { transform: scaleY(0.35) scaleX(0.8); }
+  100% { transform: scaleY(1.25) scaleX(1.15); }
+}
+
+/* Upper Torso & Shoulders */
+.aura-upper-torso {
+  position: absolute;
+  top: 124px;
+  width: 110px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.aura-shoulder {
+  width: 16px;
+  height: 14px;
+  border-radius: 8px;
+  background: #1e293b;
+  border: 1.5px solid var(--aura-visor-border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Body & Arms Container */
@@ -913,12 +1179,13 @@ html, body {
 /* Cute Robotic Arms & Living Gestures */
 .aura-arm {
   position: absolute;
-  top: 6px;
+  top: 4px;
   width: 26px;
   height: 44px;
   pointer-events: none;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   transform-origin: top center;
+  z-index: 3;
 }
 
 .aura-arm.left {
@@ -954,21 +1221,39 @@ html, body {
   box-shadow: 0 0 8px var(--aura-theme-glow);
 }
 
-/* Gesturing while speaking */
+/* Natural Conversational Gestures While Speaking */
 .aura-cute-bot.speaking .aura-arm.left {
-  animation: auraGestureArmLeft 1.4s ease-in-out infinite alternate;
+  animation: auraGestureArmLeft 1.2s ease-in-out infinite alternate;
 }
 .aura-cute-bot.speaking .aura-arm.right {
-  animation: auraGestureArmRight 1.6s ease-in-out infinite alternate;
+  animation: auraGestureArmRight 1.4s ease-in-out infinite alternate;
 }
 
 @keyframes auraGestureArmLeft {
   0% { transform: rotate(14deg) translateY(0); }
-  100% { transform: rotate(-26deg) translateY(-8px); }
+  100% { transform: rotate(-32deg) translateY(-10px); }
 }
 @keyframes auraGestureArmRight {
   0% { transform: rotate(-14deg) translateY(0); }
-  100% { transform: rotate(28deg) translateY(-10px); }
+  100% { transform: rotate(32deg) translateY(-12px); }
+}
+
+/* Sofa Relaxed Pose: Arms resting on the couch armrests */
+.aura-cute-bot.pose-sofa .aura-arm.left {
+  transform: rotate(26deg) translateY(6px);
+}
+.aura-cute-bot.pose-sofa .aura-arm.right {
+  transform: rotate(-26deg) translateY(6px);
+}
+
+/* Listening Pose: Head tilted, right hand to cheek/chin */
+.aura-cute-bot.pose-listening .aura-arm.right,
+.aura-cute-bot.listening .aura-arm.right {
+  transform: rotate(-64deg) translateY(-22px) translateX(-4px);
+}
+.aura-cute-bot.pose-listening .aura-arm.left,
+.aura-cute-bot.listening .aura-arm.left {
+  transform: rotate(12deg) translateY(4px);
 }
 
 /* Empathy Pose: Little hands over heart */
@@ -993,10 +1278,55 @@ html, body {
 
 .aura-cute-bot.pose-coffee .aura-hand-held-cup {
   opacity: 1;
-  transform: scale(1.1) rotate(-12deg);
+  transform: scale(1.15) rotate(-14deg);
 }
 .aura-cute-bot.pose-coffee .aura-arm.right {
-  transform: rotate(-58deg) translateY(-18px) translateX(-6px);
+  transform: rotate(-62deg) translateY(-20px) translateX(-6px);
+  animation: auraArmCoffeeSip 3.8s ease-in-out infinite;
+}
+
+@keyframes auraArmCoffeeSip {
+  0%, 100% { transform: rotate(-62deg) translateY(-20px) translateX(-6px); }
+  50% { transform: rotate(-74deg) translateY(-26px) translateX(-10px); }
+}
+
+/* Cute Robotic Legs Resting in the Armchair */
+.aura-legs-row {
+  position: absolute;
+  bottom: -14px;
+  width: 54px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 1;
+  transition: all 0.4s ease;
+}
+
+.aura-leg {
+  width: 12px;
+  height: 20px;
+  background: linear-gradient(180deg, #1e293b, #090e17);
+  border: 1.5px solid var(--aura-visor-border);
+  border-radius: 6px;
+  position: relative;
+}
+.aura-leg.left { transform: rotate(-8deg); }
+.aura-leg.right { transform: rotate(8deg); }
+
+.aura-foot {
+  position: absolute;
+  bottom: -4px;
+  left: -2px;
+  width: 16px;
+  height: 8px;
+  border-radius: 6px;
+  background: var(--aura-theme);
+  box-shadow: 0 0 6px var(--aura-theme-glow);
+}
+
+.aura-cute-bot.pose-flying .aura-legs-row {
+  transform: translateY(-4px) scale(0.85);
+  opacity: 0.6;
 }
 
 /* Floating Thrusters */
@@ -1009,7 +1339,7 @@ html, body {
   background: radial-gradient(circle, var(--aura-theme) 0%, transparent 70%);
   filter: blur(2px);
   animation: auraThruster 0.8s ease-in-out infinite alternate;
-  opacity: 0.9;
+  opacity: 0;
   transition: opacity 0.4s ease;
 }
 @keyframes auraThruster {
@@ -1017,51 +1347,42 @@ html, body {
   100% { transform: scaleX(1.3) scaleY(1.3); opacity: 1; }
 }
 
-.aura-cute-bot.pose-table .aura-thruster-flame,
-.aura-cute-bot.pose-coffee .aura-thruster-flame {
-  opacity: 0;
+.aura-cute-bot.pose-flying .aura-thruster-flame {
+  opacity: 0.95;
 }
 
-/* Cyber Desk / Table with Holographic Coffee */
+/* Cyber Coffee Table in front with Steaming Cup and Holographic Plant */
 .aura-cyber-desk {
   position: absolute;
-  bottom: 6px;
-  width: 190px;
+  bottom: 4px;
+  width: 195px;
   height: 38px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   pointer-events: none;
-  opacity: 0;
-  transform: translateY(22px);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 4;
 }
 
-.aura-cute-bot.pose-table ~ .aura-cyber-desk,
-.aura-cute-bot.pose-coffee ~ .aura-cyber-desk {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .aura-desk-surface {
   width: 100%;
-  height: 16px;
-  background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.85));
+  height: 18px;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.96), rgba(15, 23, 42, 0.9));
   border: 1.5px solid var(--aura-theme-glow);
   border-radius: 14px 14px 6px 6px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 16px var(--aura-theme-glow);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), 0 0 16px var(--aura-theme-glow);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding: 0 20px;
+  justify-content: space-between;
+  padding: 0 18px;
   box-sizing: border-box;
 }
 
 .aura-desk-glow-bar {
-  width: 70%;
+  width: 75%;
   height: 2px;
   background: var(--aura-theme);
   box-shadow: 0 0 10px var(--aura-theme);
@@ -1070,16 +1391,46 @@ html, body {
 }
 
 .aura-cup-on-table {
-  font-size: 1rem;
+  font-size: 1.05rem;
   filter: drop-shadow(0 0 6px var(--aura-theme));
   position: relative;
   margin-top: -12px;
-  animation: auraCoffeeSteam 2.2s infinite ease-in-out;
 }
 
-@keyframes auraCoffeeSteam {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+.aura-cup-steam {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.steam-wisp {
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  filter: blur(1.5px);
+  animation: auraSteamRise 2.2s infinite ease-out;
+}
+.steam-wisp.w1 { left: 2px; animation-delay: 0s; }
+.steam-wisp.w2 { left: 6px; animation-delay: 0.6s; height: 14px; }
+.steam-wisp.w3 { left: 10px; animation-delay: 1.2s; }
+
+@keyframes auraSteamRise {
+  0% { transform: translateY(0) scaleX(0.8); opacity: 0.7; }
+  50% { transform: translateY(-8px) scaleX(1.3); opacity: 0.4; }
+  100% { transform: translateY(-16px) scaleX(2); opacity: 0; }
+}
+
+.aura-mini-bonsai {
+  font-size: 0.95rem;
+  margin-top: -10px;
+  filter: drop-shadow(0 0 6px #10b981);
 }
 
 .aura-live-Transcript-card {
@@ -2068,79 +2419,148 @@ html, body {
           <!-- Status Pill Minimalista -->
           <div id="aura-live-status-pill" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan); background: rgba(0, 245, 255, 0.1); border: 1px solid rgba(0, 245, 255, 0.32); padding: 4px 12px; border-radius: 999px; margin-bottom: 8px; display: inline-flex; align-items: center; gap: 6px;">
             <span class="beacon-dot"></span>
-            <span id="aura-live-status-text">AURA Viva • Toque em mim ou fale abaixo</span>
+            <span id="aura-live-status-text">AURA no seu Espaço de Conforto • Fale ou digite abaixo</span>
           </div>
 
-          <!-- Quick Action & Posture Toolbar (Voar, Mesa & Café, Tomar Café, Mãos Livres) -->
+          <!-- Quick Action & Posture Toolbar (Sofá, Café, Ouvir, Voar, Mãos Livres) -->
           <div class="aura-action-hud-bar">
-            <button type="button" class="aura-hud-pill active" id="btn-pose-fly" title="AURA voando suavemente">
-              ✨ Voar
+            <button type="button" class="aura-hud-pill active" id="btn-pose-sofa" title="AURA relaxando no sofá do seu espaço de conforto">
+              🛋️ Sofá & Conforto
             </button>
-            <button type="button" class="aura-hud-pill" id="btn-pose-table" title="AURA sentada na mesa com você">
-              🪑 Mesa & Café
-            </button>
-            <button type="button" class="aura-hud-pill" id="btn-pose-coffee" title="AURA tomando café">
+            <button type="button" class="aura-hud-pill" id="btn-pose-coffee" title="AURA tomando café quentinho na mesa">
               ☕ Beber Café
+            </button>
+            <button type="button" class="aura-hud-pill" id="btn-pose-listening" title="AURA inclinada ouvindo você com atenção total">
+              💭 Escuta Atenta
+            </button>
+            <button type="button" class="aura-hud-pill" id="btn-pose-fly" title="AURA flutuando suavemente pelo quarto">
+              ✨ Flutuar
             </button>
             <button type="button" class="aura-hud-pill" id="btn-aura-duplex" title="Conversa contínua e simultânea como ligação de verdade">
               🎙️ Mãos Livres
             </button>
           </div>
 
-          <!-- Palco do Avatar com Mesa e Efeitos -->
-          <div class="aura-character-stage">
-            <!-- Figura Tecnológica Fofa (Living Cyber-Kawaii Avatar) -->
-            <div id="aura-cute-bot-avatar" class="aura-cute-bot pose-flying" title="Toque para interagir com a AURA">
-              <div class="aura-halo-ring"></div>
-              <div class="aura-ears-row">
-                <div class="aura-ear left"></div>
-                <div class="aura-ear right"></div>
-              </div>
-              <div class="aura-head-shell">
-                <div class="aura-face-visor">
-                  <div class="aura-eyes-row">
-                    <div class="aura-eye left"></div>
-                    <div class="aura-eye right"></div>
-                  </div>
-                  <div class="aura-cheeks-row">
-                    <div class="aura-cheek"></div>
-                    <div class="aura-cheek"></div>
-                  </div>
-                  <div id="aura-cute-mouth" class="aura-mouth"></div>
-                </div>
-              </div>
-              <!-- Body with Arms and Coffee Cup -->
-              <div class="aura-body-container">
-                <div class="aura-arm left">
-                  <div class="aura-forearm">
-                    <div class="aura-hand"></div>
-                  </div>
-                </div>
-                <div class="aura-body-core">
-                  <span id="aura-heart-gem" class="aura-heart-gem">🩵</span>
-                </div>
-                <div class="aura-arm right">
-                  <div class="aura-forearm">
-                    <div class="aura-hand"></div>
-                    <div class="aura-hand-held-cup">☕</div>
-                  </div>
-                </div>
-                <div class="aura-thruster-flame"></div>
+          <!-- ESPAÇO DE CONFORTO DA AURA (Cyber Living Comfort Lounge) -->
+          <div class="aura-comfort-room" id="aura-comfort-room">
+            <!-- Janela Panorâmica Holográfica com Céu Estrelado e Cidade Cyber -->
+            <div class="aura-room-window">
+              <div class="aura-window-sky">
+                <div class="aura-window-stars"></div>
+                <div class="aura-window-nebula"></div>
+                <div class="aura-window-city-skyline"></div>
               </div>
             </div>
 
-            <!-- Mesa Holográfica Flutuante com Xícara de Café -->
-            <div class="aura-cyber-desk">
-              <div class="aura-desk-surface">
-                <div class="aura-cup-on-table" title="Café quentinho">☕</div>
+            <!-- Abajur Holográfico com Luz Acolhedora -->
+            <div class="aura-room-lamp">
+              <div class="aura-lamp-head"></div>
+              <div class="aura-lamp-glow"></div>
+            </div>
+
+            <!-- Partículas de Luz Flutuando no Ar -->
+            <div class="aura-room-particles">
+              <span class="p-mote p1"></span>
+              <span class="p-mote p2"></span>
+              <span class="p-mote p3"></span>
+              <span class="p-mote p4"></span>
+              <span class="p-mote p5"></span>
+            </div>
+
+            <!-- Tapete de Conforto Iluminado no Chão -->
+            <div class="aura-comfort-rug"></div>
+
+            <!-- Poltrona / Sofá de Conforto Futurista e Acolhedor -->
+            <div class="aura-cozy-sofa">
+              <div class="aura-sofa-backrest"></div>
+              <div class="aura-sofa-cushion"></div>
+              <div class="aura-sofa-armrest left"></div>
+              <div class="aura-sofa-armrest right"></div>
+              <div class="aura-sofa-pillow"></div>
+            </div>
+
+            <!-- Palco do Avatar com Articulação Corporal Viva -->
+            <div class="aura-character-stage">
+              <!-- AURA Viva (Living Cyber Companion) -->
+              <div id="aura-cute-bot-avatar" class="aura-cute-bot pose-sofa" title="Toque para conversar com a AURA no espaço de conforto">
+                <div class="aura-halo-ring"></div>
+                <div class="aura-ears-row">
+                  <div class="aura-ear left"></div>
+                  <div class="aura-ear right"></div>
+                </div>
+                
+                <!-- Cabeça Articulada com Visor e Expressões Vivas -->
+                <div class="aura-head-shell" id="aura-head-shell">
+                  <div class="aura-face-visor">
+                    <div class="aura-eyes-row" id="aura-eyes-row">
+                      <div class="aura-eye left"></div>
+                      <div class="aura-eye right"></div>
+                    </div>
+                    <div class="aura-cheeks-row">
+                      <div class="aura-cheek left"></div>
+                      <div class="aura-cheek right"></div>
+                    </div>
+                    <div id="aura-cute-mouth" class="aura-mouth"></div>
+                  </div>
+                </div>
+
+                <!-- Ombros e Torso Superior -->
+                <div class="aura-upper-torso">
+                  <div class="aura-shoulder left"></div>
+                  <div class="aura-shoulder right"></div>
+                </div>
+
+                <!-- Corpo e Braços Articulados com Gestos e Xícara -->
+                <div class="aura-body-container">
+                  <div class="aura-arm left" id="aura-arm-left">
+                    <div class="aura-forearm">
+                      <div class="aura-hand"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="aura-body-core">
+                    <span id="aura-heart-gem" class="aura-heart-gem">🩵</span>
+                  </div>
+
+                  <div class="aura-arm right" id="aura-arm-right">
+                    <div class="aura-forearm">
+                      <div class="aura-hand"></div>
+                      <div class="aura-hand-held-cup" id="aura-hand-cup">☕</div>
+                    </div>
+                  </div>
+
+                  <!-- Perninhas Robóticas Sentadas Confortavelmente -->
+                  <div class="aura-legs-row" id="aura-legs-row">
+                    <div class="aura-leg left"><div class="aura-foot"></div></div>
+                    <div class="aura-leg right"><div class="aura-foot"></div></div>
+                  </div>
+
+                  <!-- Chama do Propulsor quando voando -->
+                  <div class="aura-thruster-flame"></div>
+                </div>
               </div>
-              <div class="aura-desk-glow-bar"></div>
+
+              <!-- Mesinha Baixa de Café com Vapor Quente e Bonsai -->
+              <div class="aura-cyber-desk">
+                <div class="aura-desk-surface">
+                  <div class="aura-cup-on-table" title="Café quentinho">
+                    <span class="aura-cup-emoji">☕</span>
+                    <div class="aura-cup-steam">
+                      <span class="steam-wisp w1"></span>
+                      <span class="steam-wisp w2"></span>
+                      <span class="steam-wisp w3"></span>
+                    </div>
+                  </div>
+                  <div class="aura-mini-bonsai" title="Bonsai holográfico">🌱</div>
+                </div>
+                <div class="aura-desk-glow-bar"></div>
+              </div>
             </div>
           </div>
 
           <!-- Balão de Fala / Legenda Viva em Tempo Real -->
           <div id="aura-live-caption-box" class="aura-live-Transcript-card">
-            Oi! Eu sou a <strong>AURA</strong> ✨ Estou viva aqui com você! Toque no microfone ou escreva na barra abaixo para conversarmos em tempo real.
+            Oi! Eu sou a <strong>AURA</strong> ✨ Estou viva aqui no meu espaço de conforto com você! Puxei minha poltrona e um café quentinho para podermos conversar com calma. Fale pelo microfone ou digite abaixo!
           </div>
         </div>
 
