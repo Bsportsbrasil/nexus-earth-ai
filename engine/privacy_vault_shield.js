@@ -34,7 +34,9 @@ export class PrivacyVaultShield {
       // Chaves Pix
       { name: 'PIX_KEY', regex: /\b(?:chave\s*pix|pix\s*key)[\s:]+([A-Za-z0-9@._+-]+)/gi, replace: 'chave pix: [PIX_SEGURO_INTERNO]' },
       // Passwords e Tokens
-      { name: 'SECRETS', regex: /(?:token|secret|password|senha|key|jwt)[\s:=]+["']?([A-Za-z0-9_\-\.]{16,})["']?/gi, replace: 'secret: [TOKEN_BLINDADO_NO_VAULT]' }
+      { name: 'SECRETS', regex: /(?:token|secret|password|senha|key|jwt)[\s:=]+["']?([A-Za-z0-9_\-\.]{16,})["']?/gi, replace: 'secret: [TOKEN_BLINDADO_NO_VAULT]' },
+      // Proteção de Endereços Físicos e Logradouros Privados
+      { name: 'STREET_ADDRESS', regex: /\b(?:rua|avenida|travessa|alameda|rodovia|estrada|r\.|av\.)\s+[A-Za-z0-9À-ÿ\s,.-]+(?:\d{1,5}|\b)/gi, replace: '[ENDERECO_FISICO_BLINDADO]' }
     ];
   }
 

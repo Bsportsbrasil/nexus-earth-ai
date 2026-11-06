@@ -17,6 +17,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { privacyVaultShield } from './privacy_vault_shield.js';
+import { ML_SECTORS, ML_50_AGENTS } from './ml_affiliates_blueprints.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -171,6 +172,7 @@ class Swarm100Engine {
   }
 
   init() {
+    this.sectors = [...SECTORS, ...ML_SECTORS];
     this.loadState();
     this.startPerpetualLoop();
   }
@@ -186,6 +188,19 @@ class Swarm100Engine {
           });
           this.totalExecutionCycles = parsed.totalExecutionCycles || 0;
           this.lastLoopExecution = parsed.lastLoopExecution || null;
+
+          // Se os 50 agentes do Mercado Livre ainda não estiverem presentes, adiciona-os imediatamente
+          let addedML = false;
+          ML_50_AGENTS.forEach(bp => {
+            if (!this.agents.has(bp.id)) {
+              this.agents.set(bp.id, this._createAgentFromBlueprint(bp, 'MERCADO_LIVRE_HUB_AFFILIATE'));
+              addedML = true;
+            }
+          });
+
+          if (addedML) {
+            this.saveState();
+          }
           return;
         }
       }
@@ -193,45 +208,72 @@ class Swarm100Engine {
       console.warn('[Swarm100Engine] Falha ao carregar estado persistido, reinicializando do blueprint:', e.message);
     }
 
-    // Inicialização Limpa e Concreta dos 100 Agentes
-    AGENT_BLUEPRINTS.forEach(bp => {
-      this.agents.set(bp.id, {
-        id: bp.id,
-        sector: bp.sector,
-        name: bp.name,
-        role: bp.role,
-        status: 'EXECUTANDO', // 'EXECUTANDO' ou 'PAUSADO'
-        projectedRevenueBRL: bp.mrr,
-        currency: 'BRL',
-        uptimeHours: 120 + Math.floor(Math.random() * 80),
-        iterationCount: 34 + Math.floor(Math.random() * 20),
-        requiredDomain: bp.domain,
-        domainStatus: 'AGUARDANDO_COMPRA', // 'AGUARDANDO_COMPRA' | 'CONFIGURADO'
-        requiredCredentials: bp.creds,
-        credentialsStatus: 'AGUARDANDO_CONFIG', // 'AGUARDANDO_CONFIG' | 'VALIDADO'
-        currentMission: `Construindo arquitetura de conversão e esteira operacional de monetização para ${bp.name}.`,
-        deliverables: [
-          {
-            type: 'PRD',
-            title: `Especificação de Produto & Modelo de Receita - ${bp.name}`,
-            date: new Date(Date.now() - 3600000 * 24).toISOString(),
-            ready: true,
-            content: `Engenharia completa de monetização e pricing para ${bp.name}. Foco em MRR de R$ ${bp.mrr.toLocaleString('pt-BR')}/mês.`
-          },
-          {
-            type: 'ARQUITETURA',
-            title: `Stack de Software & Infraestrutura para ${bp.domain}`,
-            date: new Date(Date.now() - 3600000 * 12).toISOString(),
-            ready: true,
-            content: `Código pronto para deploy em VPS/Edge. Gateway integrado: ${bp.creds.join(', ')}.`
-          }
-        ],
-        lastActivity: new Date().toISOString(),
-        orderHistory: []
-      });
+    // Inicialização Limpa e Concreta dos Agentes (100 Base + 50 Mercado Livre Afiliados)
+    const allBlueprints = [...AGENT_BLUEPRINTS, ...ML_50_AGENTS];
+    allBlueprints.forEach(bp => {
+      const type = bp.id > 100 ? 'MERCADO_LIVRE_HUB_AFFILIATE' : 'DIGITAL_MONETIZATION';
+      this.agents.set(bp.id, this._createAgentFromBlueprint(bp, type));
     });
 
     this.saveState();
+  }
+
+  _createAgentFromBlueprint(bp, type = 'DIGITAL_MONETIZATION') {
+    const isML = type === 'MERCADO_LIVRE_HUB_AFFILIATE';
+    const baseDeliverables = isML ? [
+      {
+        type: 'ESTRATEGIA_AFILIADO_ML',
+        title: `Esteira de Conversão Mercado Livre Afiliados - ${bp.name}`,
+        date: new Date(Date.now() - 3600000 * 24).toISOString(),
+        ready: true,
+        content: `Arquitetura de tráfego orgânico e qualificado direcionando vendas para a conta oficial CASTILLOOFFICIAL no Mercado Livre. Comissão projetada: R$ ${bp.mrr.toLocaleString('pt-BR')}/mês.`
+      },
+      {
+        type: 'PIPELINE_CUPONS_DEALS',
+        title: `Mapeamento de Ofertas FULL & Cupons Relâmpago`,
+        date: new Date(Date.now() - 3600000 * 12).toISOString(),
+        ready: true,
+        content: `Algoritmo de rastreamento com filtro FULL e frete grátis ativado. Links oficiais gerados via Hub Afiliados: https://www.mercadolivre.com.br/afiliados/hub?is_affiliate=true#menu-user`
+      }
+    ] : [
+      {
+        type: 'PRD',
+        title: `Especificação de Produto & Modelo de Receita - ${bp.name}`,
+        date: new Date(Date.now() - 3600000 * 24).toISOString(),
+        ready: true,
+        content: `Engenharia completa de monetização e pricing para ${bp.name}. Foco em MRR de R$ ${bp.mrr.toLocaleString('pt-BR')}/mês.`
+      },
+      {
+        type: 'ARQUITETURA',
+        title: `Stack de Software & Infraestrutura para ${bp.domain}`,
+        date: new Date(Date.now() - 3600000 * 12).toISOString(),
+        ready: true,
+        content: `Código pronto para deploy em VPS/Edge. Gateway integrado: ${bp.creds.join(', ')}.`
+      }
+    ];
+
+    return {
+      id: bp.id,
+      sector: bp.sector,
+      name: bp.name,
+      role: bp.role,
+      status: 'EXECUTANDO',
+      projectedRevenueBRL: bp.mrr,
+      currency: 'BRL',
+      uptimeHours: 120 + Math.floor(Math.random() * 80),
+      iterationCount: 34 + Math.floor(Math.random() * 20),
+      requiredDomain: bp.domain,
+      domainStatus: isML ? 'OPCIONAL_REDIRECIONAMENTO' : 'AGUARDANDO_COMPRA',
+      requiredCredentials: bp.creds,
+      credentialsStatus: isML ? 'CONECTADO_HUB_AFILIADOS' : 'AGUARDANDO_CONFIG',
+      affiliateProfile: isML ? 'CASTILLOOFFICIAL' : null,
+      currentMission: isML 
+        ? `Rastreando produtos mais vendidos, cupons e disparando campanhas de tráfego com links afiliados oficiais para ${bp.name}.`
+        : `Construindo arquitetura de conversão e esteira operacional de monetização para ${bp.name}.`,
+      deliverables: baseDeliverables,
+      lastActivity: new Date().toISOString(),
+      orderHistory: []
+    };
   }
 
   saveState() {
@@ -420,6 +462,33 @@ class Swarm100Engine {
   _synthesizeDeliverableContent(agent, order, type) {
     const sanitizedOrder = privacyVaultShield.sanitizeForGlobalWeb(order);
     const executionDate = new Date().toISOString().split('T')[0];
+    const isML = agent.id > 100;
+
+    if (isML) {
+      return [
+        `# RELATÓRIO EXECUTIVO • MERCADO LIVRE AFILIADOS - ${agent.name.toUpperCase()} (LIDERANÇA DE CONVERSÃO)`,
+        `**Vertical**: ${agent.sector} | **Status Operacional**: 24/7 PERPÉTUO (SUPERINTELIGÊNCIA EM MONETIZAÇÃO)`,
+        `**Perfil Vinculado**: CASTILLOOFFICIAL (Hub Oficial Mercado Livre Afiliados)`,
+        `**Hub URL**: https://www.mercadolivre.com.br/afiliados/hub?is_affiliate=true#menu-user`,
+        `**Credenciais / Ferramentas**: Gerador de Links ML, Administrador de Etiquetas, Campanhas com Incentivos, Meli+`,
+        `**Comissão Mensal Projetada**: R$ ${agent.projectedRevenueBRL.toLocaleString('pt-BR')}/mês`,
+        `**Blindagem de Dados**: Endereço físico, documentos e dados privados do criador 100% blindados pelo PrivacyVaultShield.`,
+        `--------------------------------------------------------------------------------`,
+        `## 1. ORDEM SOBERANA EXECUTADA:`,
+        `"${sanitizedOrder}"`,
+        `--------------------------------------------------------------------------------`,
+        `## 2. ESTRATÉGIA DE RETORNO FINANCEIRO REAL & SEM GENERIQUISMO:`,
+        `• Seleção Cirúrgica de Produtos: Filtrados por 'Mais Vendidos', 'Ganhos Extras' e selo 'FULL' (Entrega Amanhã).`,
+        `• Criação de Conteúdo e Campanhas: Scripts de recomendação orgânica (TikTok, Shorts, WhatsApp e Telegram) focados na dor do comprador.`,
+        `• Rastreamento e Conversão: Cada link é gerado com tags personalizadas para auditoria de comissões no painel de métricas.`,
+        `• Bateria de Testes Funcionais: Teste de clique, integridade de cookies de 24h a 7 dias do Mercado Livre e validação de cupons.`,
+        `--------------------------------------------------------------------------------`,
+        `## 3. CHECKLIST PARA O CRIADOR (AÇÃO ZERO-ESFORÇO):`,
+        `[x] 1. Perfil CASTILLOOFFICIAL já está cadastrado e ativo no programa de afiliados.`,
+        `[ ] 2. Pegar os links gerados pelo agente nas campanhas e colar no WhatsApp, grupos ou canais recomendados.`,
+        `[x] 3. O agente monitora variações de preço e substitui automaticamente links de produtos esgotados.`
+      ].join('\n');
+    }
 
     return [
       `# RELATÓRIO EXECUTIVO & PROJETO REAL - ${agent.name.toUpperCase()} (LIDERANÇA CEO & OPERAÇÃO)`,

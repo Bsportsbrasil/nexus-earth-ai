@@ -27,7 +27,12 @@ const Swarm100UI = (() => {
     premium_info: '📚',
     financial_data: '💎',
     digital_stores: '📦',
-    paid_curation: '📬'
+    paid_curation: '📬',
+    ml_high_ticket: '📱',
+    ml_viral_deals: '🔥',
+    ml_home_decor: '🏡',
+    ml_auto_tech: '🚗',
+    ml_beauty_health: '✨'
   };
 
   async function init() {
@@ -300,15 +305,15 @@ const Swarm100UI = (() => {
             <!-- Revenue & Mission Box -->
             <div style="background:rgba(2,6,23,0.8); border:1px solid rgba(255,255,255,0.06); border-radius:6px; padding:0.6rem; margin-bottom:0.75rem;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                <span style="font-size:0.65rem; color:#64748b; font-family:var(--font-mono);">RECEITA ESTIMADA:</span>
+                <span style="font-size:0.65rem; color:#64748b; font-family:var(--font-mono);">${agent.id > 100 ? 'COMISSÃO ESTIMADA:' : 'RECEITA ESTIMADA:'}</span>
                 <span style="font-size:0.78rem; font-weight:700; color:#10b981; font-family:var(--font-mono);">${mrrFormatted}/mês</span>
               </div>
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                <span style="font-size:0.65rem; color:#64748b; font-family:var(--font-mono);">DOMÍNIO ALVO:</span>
-                <span style="font-size:0.72rem; color:#38bdf8; font-family:var(--font-mono);">${agent.requiredDomain}</span>
+                <span style="font-size:0.65rem; color:#64748b; font-family:var(--font-mono);">${agent.id > 100 ? 'CANAL / HUB:' : 'DOMÍNIO ALVO:'}</span>
+                <span style="font-size:0.72rem; color:#38bdf8; font-family:var(--font-mono);">${agent.id > 100 ? 'Mercado Livre (CASTILLOOFFICIAL)' : agent.requiredDomain}</span>
               </div>
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.65rem; color:#64748b; font-family:var(--font-mono);">GATEWAY/CREDS:</span>
+                <span style="font-size:0.65rem; color:#64748b; font-family:var(--font-mono);">${agent.id > 100 ? 'RECURSOS HUB:' : 'GATEWAY/CREDS:'}</span>
                 <span style="font-size:0.68rem; color:#cbd5e1; font-family:var(--font-mono); max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${credsList}">${credsList}</span>
               </div>
             </div>

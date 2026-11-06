@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-11-06T15:23:03.621Z",
+  "updatedAt": "2026-11-06T16:37:53.694Z",
   "totalAgents": 100,
-  "totalExecutionCycles": 1,
-  "lastLoopExecution": "2026-11-06T15:23:03.618Z",
+  "totalExecutionCycles": 6,
+  "lastLoopExecution": "2026-11-06T16:37:53.687Z",
   "agents": [
     {
       "id": 1,
@@ -12,8 +12,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 8500,
       "currency": "BRL",
-      "uptimeHours": 177.25,
-      "iterationCount": 54,
+      "uptimeHours": 178.5,
+      "iterationCount": 59,
       "requiredDomain": "nexusdocusign.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -39,7 +39,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, OpenAI API, AWS S3."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "lastActivity": "2026-11-06T16:37:53.687Z",
       "orderHistory": []
     },
     {
@@ -50,8 +50,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14200,
       "currency": "BRL",
-      "uptimeHours": 189.25,
-      "iterationCount": 45,
+      "uptimeHours": 190.5,
+      "iterationCount": 50,
       "requiredDomain": "promptshield.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -75,9 +75,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Cloudflare Workers, Redis."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T16:07:53.649Z",
+          "ready": true,
+          "content": "Código validado para produção em promptshield.io."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "lastActivity": "2026-11-06T16:37:53.687Z",
       "orderHistory": []
     },
     {
@@ -88,8 +95,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 6800,
       "currency": "BRL",
-      "uptimeHours": 163.25,
-      "iterationCount": 53,
+      "uptimeHours": 164.5,
+      "iterationCount": 58,
       "requiredDomain": "voicetranscribe.app",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -114,7 +121,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Groq API, Mercado Pago."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "lastActivity": "2026-11-06T16:37:53.687Z",
       "orderHistory": []
     },
     {
@@ -125,8 +132,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 19500,
       "currency": "BRL",
-      "uptimeHours": 168.25,
-      "iterationCount": 50,
+      "uptimeHours": 169.5,
+      "iterationCount": 55,
       "requiredDomain": "fiscalaudit.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -152,7 +159,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, SEFAZ Gateway, PostgreSQL."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "lastActivity": "2026-11-06T16:37:53.687Z",
       "orderHistory": []
     },
     {
@@ -163,8 +170,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 5400,
       "currency": "BRL",
-      "uptimeHours": 190.25,
-      "iterationCount": 35,
+      "uptimeHours": 191.5,
+      "iterationCount": 40,
       "requiredDomain": "metatagpulse.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -187,9 +194,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Cloudflare API, Stripe."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v3.0",
+          "date": "2026-11-06T15:37:53.631Z",
+          "ready": true,
+          "content": "Código validado para produção em metatagpulse.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "lastActivity": "2026-11-06T16:37:53.687Z",
       "orderHistory": []
     },
     {
@@ -200,8 +214,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 7200,
       "currency": "BRL",
-      "uptimeHours": 169.25,
-      "iterationCount": 43,
+      "uptimeHours": 170.5,
+      "iterationCount": 48,
       "requiredDomain": "feedsyncembed.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -224,9 +238,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, AWS DynamoDB."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T16:37:53.688Z",
+          "ready": true,
+          "content": "Código validado para produção em feedsyncembed.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "lastActivity": "2026-11-06T16:37:53.687Z",
       "orderHistory": []
     },
     {
@@ -237,8 +258,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16800,
       "currency": "BRL",
-      "uptimeHours": 159.25,
-      "iterationCount": 38,
+      "uptimeHours": 160.5,
+      "iterationCount": 43,
       "requiredDomain": "leadenrich.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -263,7 +284,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Receita Federal Mirror, Mercado Pago."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -274,8 +295,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 4300,
       "currency": "BRL",
-      "uptimeHours": 122.25,
-      "iterationCount": 50,
+      "uptimeHours": 123.5,
+      "iterationCount": 55,
       "requiredDomain": "changelogauto.dev",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -300,7 +321,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: GitHub OAuth, Lemon Squeezy."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -311,8 +332,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 5900,
       "currency": "BRL",
-      "uptimeHours": 195.25,
-      "iterationCount": 45,
+      "uptimeHours": 196.5,
+      "iterationCount": 50,
       "requiredDomain": "pdfcompressedge.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -335,9 +356,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Wasabi S3."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T16:07:53.649Z",
+          "ready": true,
+          "content": "Código validado para produção em pdfcompressedge.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -348,8 +376,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 6100,
       "currency": "BRL",
-      "uptimeHours": 125.25,
-      "iterationCount": 54,
+      "uptimeHours": 126.5,
+      "iterationCount": 59,
       "requiredDomain": "statuspulse.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -374,7 +402,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Uptime Kuma."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -385,8 +413,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18000,
       "currency": "BRL",
-      "uptimeHours": 129.25,
-      "iterationCount": 36,
+      "uptimeHours": 130.5,
+      "iterationCount": 41,
       "requiredDomain": "whatsagentimob.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -418,7 +446,7 @@
           "content": "Código validado para produção em whatsagentimob.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -429,8 +457,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 22000,
       "currency": "BRL",
-      "uptimeHours": 142.25,
-      "iterationCount": 36,
+      "uptimeHours": 143.5,
+      "iterationCount": 41,
       "requiredDomain": "clinicflow.med.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -462,7 +490,7 @@
           "content": "Código validado para produção em clinicflow.med.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -473,8 +501,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 26000,
       "currency": "BRL",
-      "uptimeHours": 182.25,
-      "iterationCount": 54,
+      "uptimeHours": 183.5,
+      "iterationCount": 59,
       "requiredDomain": "legaldraft.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -499,7 +527,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: OpenRouter API, Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -510,8 +538,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 12500,
       "currency": "BRL",
-      "uptimeHours": 131.25,
-      "iterationCount": 42,
+      "uptimeHours": 132.5,
+      "iterationCount": 47,
       "requiredDomain": "autoproposta.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -536,7 +564,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago, Resend Email API."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -547,8 +575,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 15400,
       "currency": "BRL",
-      "uptimeHours": 157.25,
-      "iterationCount": 46,
+      "uptimeHours": 158.5,
+      "iterationCount": 51,
       "requiredDomain": "ticketresolve.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -571,9 +599,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Zendesk Webhook, Stripe."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:52:53.636Z",
+          "ready": true,
+          "content": "Código validado para produção em ticketresolve.io."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -584,8 +619,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 17800,
       "currency": "BRL",
-      "uptimeHours": 147.25,
-      "iterationCount": 38,
+      "uptimeHours": 148.5,
+      "iterationCount": 43,
       "requiredDomain": "cobrancaamigavel.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -610,7 +645,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Banco Central Pix Webhook, Meta API."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -621,8 +656,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14900,
       "currency": "BRL",
-      "uptimeHours": 162.25,
-      "iterationCount": 35,
+      "uptimeHours": 163.5,
+      "iterationCount": 40,
       "requiredDomain": "rhscreening.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -645,9 +680,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Whisper API."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v3.0",
+          "date": "2026-11-06T15:37:53.631Z",
+          "ready": true,
+          "content": "Código validado para produção em rhscreening.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -658,8 +700,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16200,
       "currency": "BRL",
-      "uptimeHours": 155.25,
-      "iterationCount": 51,
+      "uptimeHours": 156.5,
+      "iterationCount": 56,
       "requiredDomain": "restaurantorder.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -684,7 +726,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago, Twilio WhatsApp."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -695,8 +737,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 11800,
       "currency": "BRL",
-      "uptimeHours": 150.25,
-      "iterationCount": 35,
+      "uptimeHours": 151.5,
+      "iterationCount": 40,
       "requiredDomain": "logisticstrack.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -719,9 +761,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Melhor Envio API, Asaas."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v3.0",
+          "date": "2026-11-06T15:37:53.631Z",
+          "ready": true,
+          "content": "Código validado para produção em logisticstrack.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -732,8 +781,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 13500,
       "currency": "BRL",
-      "uptimeHours": 122.25,
-      "iterationCount": 48,
+      "uptimeHours": 123.5,
+      "iterationCount": 53,
       "requiredDomain": "edututorbot.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -765,7 +814,7 @@
           "content": "Código validado para produção em edututorbot.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -776,8 +825,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 24000,
       "currency": "BRL",
-      "uptimeHours": 145.25,
-      "iterationCount": 38,
+      "uptimeHours": 146.5,
+      "iterationCount": 43,
       "requiredDomain": "calculadorafinanceira.net.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -802,7 +851,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Mediavine."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -813,8 +862,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 21000,
       "currency": "BRL",
-      "uptimeHours": 191.25,
-      "iterationCount": 36,
+      "uptimeHours": 192.5,
+      "iterationCount": 41,
       "requiredDomain": "guiaprevidencia.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -846,7 +895,7 @@
           "content": "Código validado para produção em guiaprevidencia.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -857,8 +906,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18500,
       "currency": "BRL",
-      "uptimeHours": 180.25,
-      "iterationCount": 35,
+      "uptimeHours": 181.5,
+      "iterationCount": 40,
       "requiredDomain": "techcomparehub.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -881,9 +930,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Amazon Associates."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v3.0",
+          "date": "2026-11-06T15:37:53.631Z",
+          "ready": true,
+          "content": "Código validado para produção em techcomparehub.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -894,8 +950,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 12000,
       "currency": "BRL",
-      "uptimeHours": 143.25,
-      "iterationCount": 46,
+      "uptimeHours": 144.5,
+      "iterationCount": 51,
       "requiredDomain": "simuladorcusto.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -917,9 +973,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:52:53.636Z",
+          "ready": true,
+          "content": "Código validado para produção em simuladorcusto.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -930,8 +993,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 28000,
       "currency": "BRL",
-      "uptimeHours": 173.25,
-      "iterationCount": 39,
+      "uptimeHours": 174.5,
+      "iterationCount": 44,
       "requiredDomain": "saudebemestar.med.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -956,7 +1019,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Ezoic."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -967,8 +1030,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16500,
       "currency": "BRL",
-      "uptimeHours": 129.25,
-      "iterationCount": 53,
+      "uptimeHours": 130.5,
+      "iterationCount": 58,
       "requiredDomain": "carroconsumo.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -992,7 +1055,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1003,8 +1066,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 31000,
       "currency": "BRL",
-      "uptimeHours": 189.25,
-      "iterationCount": 41,
+      "uptimeHours": 190.5,
+      "iterationCount": 46,
       "requiredDomain": "trabalhodireitos.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1029,7 +1092,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Mediavine."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1040,8 +1103,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 19800,
       "currency": "BRL",
-      "uptimeHours": 128.25,
-      "iterationCount": 50,
+      "uptimeHours": 129.5,
+      "iterationCount": 55,
       "requiredDomain": "energiasolarcalculo.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1066,7 +1129,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Lead Gen B2B."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1077,8 +1140,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 25000,
       "currency": "BRL",
-      "uptimeHours": 132.25,
-      "iterationCount": 51,
+      "uptimeHours": 133.5,
+      "iterationCount": 56,
       "requiredDomain": "concursosradar.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1102,7 +1165,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1113,8 +1176,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14000,
       "currency": "BRL",
-      "uptimeHours": 142.25,
-      "iterationCount": 51,
+      "uptimeHours": 143.5,
+      "iterationCount": 56,
       "requiredDomain": "viagembaratadicas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1139,7 +1202,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Booking Affiliate, AdSense."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1150,8 +1213,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 29000,
       "currency": "BRL",
-      "uptimeHours": 178.25,
-      "iterationCount": 47,
+      "uptimeHours": 179.5,
+      "iterationCount": 52,
       "requiredDomain": "cloudhostcompare.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1174,9 +1237,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Hostinger Affiliate, DigitalOcean API."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:37:53.631Z",
+          "ready": true,
+          "content": "Código validado para produção em cloudhostcompare.io."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1187,8 +1257,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 22500,
       "currency": "BRL",
-      "uptimeHours": 144.25,
-      "iterationCount": 49,
+      "uptimeHours": 145.5,
+      "iterationCount": 54,
       "requiredDomain": "saasreviewpro.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1213,7 +1283,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Impact Radius, CJ Affiliate."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1224,8 +1294,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 15300,
       "currency": "BRL",
-      "uptimeHours": 195.25,
-      "iterationCount": 52,
+      "uptimeHours": 196.5,
+      "iterationCount": 57,
       "requiredDomain": "cadeirasergonomicas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1250,7 +1320,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Amazon Associates, Mercado Livre Afiliados."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1261,8 +1331,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18700,
       "currency": "BRL",
-      "uptimeHours": 141.25,
-      "iterationCount": 39,
+      "uptimeHours": 142.5,
+      "iterationCount": 44,
       "requiredDomain": "hardwareminertracker.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1287,7 +1357,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: KaBuM! Afiliados, Amazon."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1298,8 +1368,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 13900,
       "currency": "BRL",
-      "uptimeHours": 181.25,
-      "iterationCount": 49,
+      "uptimeHours": 182.5,
+      "iterationCount": 54,
       "requiredDomain": "smarthomedeals.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1323,7 +1393,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Amazon Associates."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1334,8 +1404,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 34000,
       "currency": "BRL",
-      "uptimeHours": 141.25,
-      "iterationCount": 39,
+      "uptimeHours": 142.5,
+      "iterationCount": 44,
       "requiredDomain": "cartoespontosradar.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1360,7 +1430,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Awin Financeiro, Bancos Afiliados."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1371,8 +1441,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16800,
       "currency": "BRL",
-      "uptimeHours": 148.25,
-      "iterationCount": 45,
+      "uptimeHours": 149.5,
+      "iterationCount": 50,
       "requiredDomain": "cursostiavaliacoes.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1395,9 +1465,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Hotmart, Udemy Affiliate."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T16:07:53.649Z",
+          "ready": true,
+          "content": "Código validado para produção em cursostiavaliacoes.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1408,8 +1485,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 27500,
       "currency": "BRL",
-      "uptimeHours": 131.25,
-      "iterationCount": 40,
+      "uptimeHours": 132.5,
+      "iterationCount": 45,
       "requiredDomain": "maquininhataxas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1434,7 +1511,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: PagSeguro Afiliados, Stone/Ton."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1445,8 +1522,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14200,
       "currency": "BRL",
-      "uptimeHours": 141.25,
-      "iterationCount": 49,
+      "uptimeHours": 142.5,
+      "iterationCount": 54,
       "requiredDomain": "suplementosprecoradar.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1471,7 +1548,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Growth/Max Afiliados, Amazon."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1482,8 +1559,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 12800,
       "currency": "BRL",
-      "uptimeHours": 191.25,
-      "iterationCount": 36,
+      "uptimeHours": 192.5,
+      "iterationCount": 41,
       "requiredDomain": "ferramentaseletricas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1514,7 +1591,7 @@
           "content": "Código validado para produção em ferramentaseletricas.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1525,8 +1602,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16500,
       "currency": "BRL",
-      "uptimeHours": 156.25,
-      "iterationCount": 45,
+      "uptimeHours": 157.5,
+      "iterationCount": 50,
       "requiredDomain": "linkedinoutreachcopilot.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1549,9 +1626,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Chrome Web Store Account."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T16:07:53.649Z",
+          "ready": true,
+          "content": "Código validado para produção em linkedinoutreachcopilot.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1562,8 +1646,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 11000,
       "currency": "BRL",
-      "uptimeHours": 129.25,
-      "iterationCount": 39,
+      "uptimeHours": 130.5,
+      "iterationCount": 44,
       "requiredDomain": "pricehistextension.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1588,7 +1672,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Amazon Associates, Chrome Web Store."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1599,8 +1683,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 13500,
       "currency": "BRL",
-      "uptimeHours": 193.25,
-      "iterationCount": 42,
+      "uptimeHours": 194.5,
+      "iterationCount": 47,
       "requiredDomain": "grammarfixptbr.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1625,7 +1709,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, LanguageTool API."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1636,8 +1720,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 9200,
       "currency": "BRL",
-      "uptimeHours": 130.25,
-      "iterationCount": 42,
+      "uptimeHours": 131.5,
+      "iterationCount": 47,
       "requiredDomain": "youtubetldrpro.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1662,7 +1746,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, OpenAI API."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1673,8 +1757,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14800,
       "currency": "BRL",
-      "uptimeHours": 175.25,
-      "iterationCount": 48,
+      "uptimeHours": 176.5,
+      "iterationCount": 53,
       "requiredDomain": "emailscraperethical.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1706,7 +1790,7 @@
           "content": "Código validado para produção em emailscraperethical.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1717,8 +1801,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 7500,
       "currency": "BRL",
-      "uptimeHours": 182.25,
-      "iterationCount": 53,
+      "uptimeHours": 183.5,
+      "iterationCount": 58,
       "requiredDomain": "cookieconsentblock.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1742,7 +1826,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1753,8 +1837,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 8300,
       "currency": "BRL",
-      "uptimeHours": 146.25,
-      "iterationCount": 41,
+      "uptimeHours": 147.5,
+      "iterationCount": 46,
       "requiredDomain": "tabcluttersuspender.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1778,7 +1862,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Chrome Web Store Developer."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1789,8 +1873,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 6900,
       "currency": "BRL",
-      "uptimeHours": 128.25,
-      "iterationCount": 46,
+      "uptimeHours": 129.5,
+      "iterationCount": 51,
       "requiredDomain": "colorpickersvg.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1812,9 +1896,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:52:53.636Z",
+          "ready": true,
+          "content": "Código validado para produção em colorpickersvg.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1825,8 +1916,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 5800,
       "currency": "BRL",
-      "uptimeHours": 190.25,
-      "iterationCount": 47,
+      "uptimeHours": 191.5,
+      "iterationCount": 52,
       "requiredDomain": "focussessionpro.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1848,9 +1939,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:37:53.631Z",
+          "ready": true,
+          "content": "Código validado para produção em focussessionpro.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1861,8 +1959,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 4500,
       "currency": "BRL",
-      "uptimeHours": 198.25,
-      "iterationCount": 50,
+      "uptimeHours": 199.5,
+      "iterationCount": 55,
       "requiredDomain": "cryptogasticker.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1886,7 +1984,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Etherscan API."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1897,8 +1995,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 11200,
       "currency": "BRL",
-      "uptimeHours": 157.25,
-      "iterationCount": 37,
+      "uptimeHours": 158.5,
+      "iterationCount": 42,
       "requiredDomain": "recibofacilpwa.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1923,7 +2021,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago, Cloudflare Pages."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1934,8 +2032,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 15400,
       "currency": "BRL",
-      "uptimeHours": 126.25,
-      "iterationCount": 46,
+      "uptimeHours": 127.5,
+      "iterationCount": 51,
       "requiredDomain": "qrgeneratordynamic.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1958,9 +2056,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, PostgreSQL."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:52:53.636Z",
+          "ready": true,
+          "content": "Código validado para produção em qrgeneratordynamic.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -1971,8 +2076,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18900,
       "currency": "BRL",
-      "uptimeHours": 154.25,
-      "iterationCount": 42,
+      "uptimeHours": 155.5,
+      "iterationCount": 47,
       "requiredDomain": "contratolocacaoexpress.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1996,7 +2101,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2007,8 +2112,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 6200,
       "currency": "BRL",
-      "uptimeHours": 185.25,
-      "iterationCount": 40,
+      "uptimeHours": 186.5,
+      "iterationCount": 45,
       "requiredDomain": "pixelartmakerweb.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2032,7 +2137,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2043,8 +2148,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 8800,
       "currency": "BRL",
-      "uptimeHours": 178.25,
-      "iterationCount": 46,
+      "uptimeHours": 179.5,
+      "iterationCount": 51,
       "requiredDomain": "audiocutterpro.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2067,9 +2172,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Stripe."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:52:53.636Z",
+          "ready": true,
+          "content": "Código validado para produção em audiocutterpro.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2080,8 +2192,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 4700,
       "currency": "BRL",
-      "uptimeHours": 132.25,
-      "iterationCount": 51,
+      "uptimeHours": 133.5,
+      "iterationCount": 56,
       "requiredDomain": "jsontotypescript.dev",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2106,7 +2218,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: BuyMeACoffee, AdSense."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2117,8 +2229,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 9600,
       "currency": "BRL",
-      "uptimeHours": 183.25,
-      "iterationCount": 52,
+      "uptimeHours": 184.5,
+      "iterationCount": 57,
       "requiredDomain": "calculadorameifacil.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2142,7 +2254,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2153,8 +2265,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 7300,
       "currency": "BRL",
-      "uptimeHours": 128.25,
-      "iterationCount": 51,
+      "uptimeHours": 129.5,
+      "iterationCount": 56,
       "requiredDomain": "markdowntopdfstyler.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2178,7 +2290,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2189,8 +2301,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 5100,
       "currency": "BRL",
-      "uptimeHours": 150.25,
-      "iterationCount": 54,
+      "uptimeHours": 151.5,
+      "iterationCount": 59,
       "requiredDomain": "favicongensuite.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2214,7 +2326,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2225,8 +2337,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 3900,
       "currency": "BRL",
-      "uptimeHours": 130.25,
-      "iterationCount": 47,
+      "uptimeHours": 131.5,
+      "iterationCount": 52,
       "requiredDomain": "cronexpressionhelper.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2248,9 +2360,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: AdSense."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:37:53.631Z",
+          "ready": true,
+          "content": "Código validado para produção em cronexpressionhelper.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2261,8 +2380,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 21500,
       "currency": "BRL",
-      "uptimeHours": 174.25,
-      "iterationCount": 42,
+      "uptimeHours": 175.5,
+      "iterationCount": 47,
       "requiredDomain": "fullstackboilerplate.dev",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2287,7 +2406,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, GitHub Private Org."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2298,8 +2417,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14000,
       "currency": "BRL",
-      "uptimeHours": 150.25,
-      "iterationCount": 49,
+      "uptimeHours": 151.5,
+      "iterationCount": 54,
       "requiredDomain": "notionosempreendedor.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2324,7 +2443,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Kiwify, Hotmart."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2335,8 +2454,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 11800,
       "currency": "BRL",
-      "uptimeHours": 187.25,
-      "iterationCount": 54,
+      "uptimeHours": 188.5,
+      "iterationCount": 59,
       "requiredDomain": "engenhariadeprompt.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2360,7 +2479,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Hotmart."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2371,8 +2490,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 17200,
       "currency": "BRL",
-      "uptimeHours": 160.25,
-      "iterationCount": 42,
+      "uptimeHours": 161.5,
+      "iterationCount": 47,
       "requiredDomain": "devopsrunbooks.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2396,7 +2515,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Lemon Squeezy."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2407,8 +2526,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 15600,
       "currency": "BRL",
-      "uptimeHours": 180.25,
-      "iterationCount": 53,
+      "uptimeHours": 181.5,
+      "iterationCount": 58,
       "requiredDomain": "designsystemkit.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2433,7 +2552,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Gumroad, Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2444,8 +2563,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 19400,
       "currency": "BRL",
-      "uptimeHours": 188.25,
-      "iterationCount": 47,
+      "uptimeHours": 189.5,
+      "iterationCount": 52,
       "requiredDomain": "guiatributarioti.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2467,9 +2586,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Kiwify."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:37:53.631Z",
+          "ready": true,
+          "content": "Código validado para produção em guiatributarioti.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2480,8 +2606,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 13200,
       "currency": "BRL",
-      "uptimeHours": 142.25,
-      "iterationCount": 43,
+      "uptimeHours": 143.5,
+      "iterationCount": 48,
       "requiredDomain": "webscrapingmaster.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2503,9 +2629,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Hotmart."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T16:37:53.688Z",
+          "ready": true,
+          "content": "Código validado para produção em webscrapingmaster.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2516,8 +2649,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 10500,
       "currency": "BRL",
-      "uptimeHours": 140.25,
-      "iterationCount": 38,
+      "uptimeHours": 141.5,
+      "iterationCount": 43,
       "requiredDomain": "livromicrosaas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2542,7 +2675,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Amazon KDP, Hotmart."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2553,8 +2686,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16700,
       "currency": "BRL",
-      "uptimeHours": 145.25,
-      "iterationCount": 39,
+      "uptimeHours": 146.5,
+      "iterationCount": 44,
       "requiredDomain": "copyaltaconversao.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2578,7 +2711,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Kiwify."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2589,8 +2722,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18900,
       "currency": "BRL",
-      "uptimeHours": 176.25,
-      "iterationCount": 40,
+      "uptimeHours": 177.5,
+      "iterationCount": 45,
       "requiredDomain": "modelosfinanceirostop.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2614,7 +2747,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2625,8 +2758,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 32000,
       "currency": "BRL",
-      "uptimeHours": 146.25,
-      "iterationCount": 41,
+      "uptimeHours": 147.5,
+      "iterationCount": 46,
       "requiredDomain": "arbicryptoscanner.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2651,7 +2784,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Binance API, Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2662,8 +2795,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 24500,
       "currency": "BRL",
-      "uptimeHours": 167.25,
-      "iterationCount": 49,
+      "uptimeHours": 168.5,
+      "iterationCount": 54,
       "requiredDomain": "fundingrateradar.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2688,7 +2821,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Bybit API, Telegram Bot Token."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2699,8 +2832,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 27800,
       "currency": "BRL",
-      "uptimeHours": 154.25,
-      "iterationCount": 38,
+      "uptimeHours": 155.5,
+      "iterationCount": 43,
       "requiredDomain": "whaletrackerb3.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2725,7 +2858,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: B3 Data Feed, Mercado Pago."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2736,8 +2869,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 21900,
       "currency": "BRL",
-      "uptimeHours": 152.25,
-      "iterationCount": 40,
+      "uptimeHours": 153.5,
+      "iterationCount": 45,
       "requiredDomain": "dolarvolatilidade.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2761,7 +2894,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: MetaTrader 5 API."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2772,8 +2905,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18400,
       "currency": "BRL",
-      "uptimeHours": 152.25,
-      "iterationCount": 38,
+      "uptimeHours": 153.5,
+      "iterationCount": 43,
       "requiredDomain": "defiyieldscreener.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2798,7 +2931,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Alchemy RPC, Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2809,8 +2942,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14700,
       "currency": "BRL",
-      "uptimeHours": 154.25,
-      "iterationCount": 40,
+      "uptimeHours": 155.5,
+      "iterationCount": 45,
       "requiredDomain": "dividendoagendabrasil.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2835,7 +2968,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: CVM Open Data, AdSense."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2846,8 +2979,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16100,
       "currency": "BRL",
-      "uptimeHours": 158.25,
-      "iterationCount": 39,
+      "uptimeHours": 159.5,
+      "iterationCount": 44,
       "requiredDomain": "fiisrendaimobiliaria.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2871,7 +3004,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2882,8 +3015,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 22000,
       "currency": "BRL",
-      "uptimeHours": 148.25,
-      "iterationCount": 37,
+      "uptimeHours": 149.5,
+      "iterationCount": 42,
       "requiredDomain": "forexspreadauditor.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2907,7 +3040,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Forex Affiliate Network."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2918,8 +3051,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 15300,
       "currency": "BRL",
-      "uptimeHours": 125.25,
-      "iterationCount": 44,
+      "uptimeHours": 126.5,
+      "iterationCount": 49,
       "requiredDomain": "stablecoinyieldbot.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2942,9 +3075,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Telegram API, Stripe."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T16:22:53.660Z",
+          "ready": true,
+          "content": "Código validado para produção em stablecoinyieldbot.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2955,8 +3095,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 19800,
       "currency": "BRL",
-      "uptimeHours": 184.25,
-      "iterationCount": 47,
+      "uptimeHours": 185.5,
+      "iterationCount": 52,
       "requiredDomain": "opcoesgreek.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2978,9 +3118,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:37:53.631Z",
+          "ready": true,
+          "content": "Código validado para produção em opcoesgreek.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -2991,8 +3138,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 17500,
       "currency": "BRL",
-      "uptimeHours": 189.25,
-      "iterationCount": 42,
+      "uptimeHours": 190.5,
+      "iterationCount": 47,
       "requiredDomain": "cleantechtheme.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3017,7 +3164,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Shopify Partner, Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3028,8 +3175,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14200,
       "currency": "BRL",
-      "uptimeHours": 178.25,
-      "iterationCount": 47,
+      "uptimeHours": 179.5,
+      "iterationCount": 52,
       "requiredDomain": "landingpagebooster.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3052,9 +3199,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Gumroad."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:37:53.631Z",
+          "ready": true,
+          "content": "Código validado para produção em landingpagebooster.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3065,8 +3219,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 12900,
       "currency": "BRL",
-      "uptimeHours": 146.25,
-      "iterationCount": 44,
+      "uptimeHours": 147.5,
+      "iterationCount": 49,
       "requiredDomain": "woocommercestorepronta.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3088,9 +3242,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T16:22:53.660Z",
+          "ready": true,
+          "content": "Código validado para produção em woocommercestorepronta.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3101,8 +3262,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 9800,
       "currency": "BRL",
-      "uptimeHours": 170.25,
-      "iterationCount": 39,
+      "uptimeHours": 171.5,
+      "iterationCount": 44,
       "requiredDomain": "socialmediapackimob.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3126,7 +3287,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Kiwify."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3137,8 +3298,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 11400,
       "currency": "BRL",
-      "uptimeHours": 149.25,
-      "iterationCount": 37,
+      "uptimeHours": 150.5,
+      "iterationCount": 42,
       "requiredDomain": "pack3dminimal.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3162,7 +3323,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3173,8 +3334,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 13600,
       "currency": "BRL",
-      "uptimeHours": 127.25,
-      "iterationCount": 46,
+      "uptimeHours": 128.5,
+      "iterationCount": 51,
       "requiredDomain": "emailtemplatespack.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3196,9 +3357,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Lemon Squeezy."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:52:53.636Z",
+          "ready": true,
+          "content": "Código validado para produção em emailtemplatespack.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3209,8 +3377,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 10800,
       "currency": "BRL",
-      "uptimeHours": 178.25,
-      "iterationCount": 42,
+      "uptimeHours": 179.5,
+      "iterationCount": 47,
       "requiredDomain": "restaurantecardapioqr.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3234,7 +3402,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3245,8 +3413,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 8400,
       "currency": "BRL",
-      "uptimeHours": 195.25,
-      "iterationCount": 49,
+      "uptimeHours": 196.5,
+      "iterationCount": 54,
       "requiredDomain": "podcastbrandkit.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3270,7 +3438,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3281,8 +3449,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16900,
       "currency": "BRL",
-      "uptimeHours": 194.25,
-      "iterationCount": 52,
+      "uptimeHours": 195.5,
+      "iterationCount": 57,
       "requiredDomain": "fitnesscoachingkit.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3306,7 +3474,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3317,8 +3485,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 21000,
       "currency": "BRL",
-      "uptimeHours": 164.25,
-      "iterationCount": 46,
+      "uptimeHours": 165.5,
+      "iterationCount": 51,
       "requiredDomain": "tailadminpro.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3340,9 +3508,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:52:53.636Z",
+          "ready": true,
+          "content": "Código validado para produção em tailadminpro.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3353,8 +3528,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 28500,
       "currency": "BRL",
-      "uptimeHours": 158.25,
-      "iterationCount": 39,
+      "uptimeHours": 159.5,
+      "iterationCount": 44,
       "requiredDomain": "aialphadispatch.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3379,7 +3554,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Beehiiv, Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3390,8 +3565,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 19800,
       "currency": "BRL",
-      "uptimeHours": 156.25,
-      "iterationCount": 46,
+      "uptimeHours": 157.5,
+      "iterationCount": 51,
       "requiredDomain": "microsaasinsider.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3414,9 +3589,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Substack Subscriptions, Mercado Pago."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:52:53.636Z",
+          "ready": true,
+          "content": "Código validado para produção em microsaasinsider.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3427,8 +3609,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 23400,
       "currency": "BRL",
-      "uptimeHours": 157.25,
-      "iterationCount": 39,
+      "uptimeHours": 158.5,
+      "iterationCount": 44,
       "requiredDomain": "venturebrasilradar.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3452,7 +3634,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3463,8 +3645,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 17200,
       "currency": "BRL",
-      "uptimeHours": 142.25,
-      "iterationCount": 51,
+      "uptimeHours": 143.5,
+      "iterationCount": 56,
       "requiredDomain": "editaltechalertas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3488,7 +3670,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Asaas."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3499,8 +3681,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 36000,
       "currency": "BRL",
-      "uptimeHours": 135.25,
-      "iterationCount": 46,
+      "uptimeHours": 136.5,
+      "iterationCount": 51,
       "requiredDomain": "smallcapsdiamantes.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3523,9 +3705,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago, Stripe."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:52:53.636Z",
+          "ready": true,
+          "content": "Código validado para produção em smallcapsdiamantes.com.br."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3536,8 +3725,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 21500,
       "currency": "BRL",
-      "uptimeHours": 167.25,
-      "iterationCount": 54,
+      "uptimeHours": 168.5,
+      "iterationCount": 59,
       "requiredDomain": "ecommtrendsglobal.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3561,7 +3750,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Lemon Squeezy."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3572,8 +3761,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 31000,
       "currency": "BRL",
-      "uptimeHours": 124.25,
-      "iterationCount": 46,
+      "uptimeHours": 125.5,
+      "iterationCount": 51,
       "requiredDomain": "cyberthreatintelbrief.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3595,9 +3784,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:52:53.636Z",
+          "ready": true,
+          "content": "Código validado para produção em cyberthreatintelbrief.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3608,8 +3804,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 24800,
       "currency": "BRL",
-      "uptimeHours": 159.25,
-      "iterationCount": 50,
+      "uptimeHours": 160.5,
+      "iterationCount": 55,
       "requiredDomain": "jurisnovalegaltech.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3633,7 +3829,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Asaas."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3644,8 +3840,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18200,
       "currency": "BRL",
-      "uptimeHours": 120.25,
-      "iterationCount": 54,
+      "uptimeHours": 121.5,
+      "iterationCount": 59,
       "requiredDomain": "remotejobsdevint.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3669,7 +3865,7 @@
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     },
     {
@@ -3680,8 +3876,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 22700,
       "currency": "BRL",
-      "uptimeHours": 125.25,
-      "iterationCount": 47,
+      "uptimeHours": 126.5,
+      "iterationCount": 52,
       "requiredDomain": "biotechlongevidade.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3703,9 +3899,16 @@
           "date": "2026-11-06T03:22:53.607Z",
           "ready": true,
           "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Substack Pro."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:37:53.631Z",
+          "ready": true,
+          "content": "Código validado para produção em biotechlongevidade.com."
         }
       ],
-      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "lastActivity": "2026-11-06T16:37:53.688Z",
       "orderHistory": []
     }
   ]
