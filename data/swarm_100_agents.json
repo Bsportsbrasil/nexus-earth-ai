@@ -1,0 +1,3712 @@
+{
+  "updatedAt": "2026-11-06T15:23:03.621Z",
+  "totalAgents": 100,
+  "totalExecutionCycles": 1,
+  "lastLoopExecution": "2026-11-06T15:23:03.618Z",
+  "agents": [
+    {
+      "id": 1,
+      "sector": "micro_saas",
+      "name": "NexusDocuSign AI",
+      "role": "API de Extração e Assinatura Automatizada de Documentos",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 8500,
+      "currency": "BRL",
+      "uptimeHours": 177.25,
+      "iterationCount": 54,
+      "requiredDomain": "nexusdocusign.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "OpenAI API",
+        "AWS S3"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para NexusDocuSign AI.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - NexusDocuSign AI",
+          "date": "2026-11-05T15:22:53.588Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para NexusDocuSign AI. Foco em MRR de R$ 8.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para nexusdocusign.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, OpenAI API, AWS S3."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "orderHistory": []
+    },
+    {
+      "id": 2,
+      "sector": "micro_saas",
+      "name": "PromptShield Sentinel",
+      "role": "Gateway de Firewall e Auditoria para Chamadas LLM de Empresas",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 14200,
+      "currency": "BRL",
+      "uptimeHours": 189.25,
+      "iterationCount": 45,
+      "requiredDomain": "promptshield.io",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "Cloudflare Workers",
+        "Redis"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para PromptShield Sentinel.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - PromptShield Sentinel",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para PromptShield Sentinel. Foco em MRR de R$ 14.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para promptshield.io",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Cloudflare Workers, Redis."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "orderHistory": []
+    },
+    {
+      "id": 3,
+      "sector": "micro_saas",
+      "name": "VoiceTranscribe Pro",
+      "role": "Microsserviço de Transcrição e Resumo Executivo em Tempo Real",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 6800,
+      "currency": "BRL",
+      "uptimeHours": 163.25,
+      "iterationCount": 53,
+      "requiredDomain": "voicetranscribe.app",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Groq API",
+        "Mercado Pago"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para VoiceTranscribe Pro.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - VoiceTranscribe Pro",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para VoiceTranscribe Pro. Foco em MRR de R$ 6.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para voicetranscribe.app",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Groq API, Mercado Pago."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "orderHistory": []
+    },
+    {
+      "id": 4,
+      "sector": "micro_saas",
+      "name": "FiscalAudit Express",
+      "role": "API de Pré-Auditoria e Validação de NF-e/SPED para Contabilidades",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 19500,
+      "currency": "BRL",
+      "uptimeHours": 168.25,
+      "iterationCount": 50,
+      "requiredDomain": "fiscalaudit.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "SEFAZ Gateway",
+        "PostgreSQL"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para FiscalAudit Express.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - FiscalAudit Express",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para FiscalAudit Express. Foco em MRR de R$ 19.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para fiscalaudit.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, SEFAZ Gateway, PostgreSQL."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "orderHistory": []
+    },
+    {
+      "id": 5,
+      "sector": "micro_saas",
+      "name": "MetaTag SEO Pulse",
+      "role": "Otimizador Dinâmico de Meta Tags e Schemas JSON-LD via Edge",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 5400,
+      "currency": "BRL",
+      "uptimeHours": 190.25,
+      "iterationCount": 35,
+      "requiredDomain": "metatagpulse.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Cloudflare API",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para MetaTag SEO Pulse.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - MetaTag SEO Pulse",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para MetaTag SEO Pulse. Foco em MRR de R$ 5.400/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para metatagpulse.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Cloudflare API, Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "orderHistory": []
+    },
+    {
+      "id": 6,
+      "sector": "micro_saas",
+      "name": "FeedSync Embed",
+      "role": "Widget de Prova Social e Avaliações Automáticas para Lojas Virtuais",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 7200,
+      "currency": "BRL",
+      "uptimeHours": 169.25,
+      "iterationCount": 43,
+      "requiredDomain": "feedsyncembed.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "AWS DynamoDB"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para FeedSync Embed.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - FeedSync Embed",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para FeedSync Embed. Foco em MRR de R$ 7.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para feedsyncembed.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, AWS DynamoDB."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "orderHistory": []
+    },
+    {
+      "id": 7,
+      "sector": "micro_saas",
+      "name": "LeadEnrich API",
+      "role": "Enriquecimento Instantâneo de CNPJs e Decisores B2B via API REST",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 16800,
+      "currency": "BRL",
+      "uptimeHours": 159.25,
+      "iterationCount": 38,
+      "requiredDomain": "leadenrich.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Receita Federal Mirror",
+        "Mercado Pago"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para LeadEnrich API.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - LeadEnrich API",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para LeadEnrich API. Foco em MRR de R$ 16.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para leadenrich.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Receita Federal Mirror, Mercado Pago."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "orderHistory": []
+    },
+    {
+      "id": 8,
+      "sector": "micro_saas",
+      "name": "ChangelogAuto",
+      "role": "Gerador Automático de Releases e Changelogs a partir de Commits GitHub",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 4300,
+      "currency": "BRL",
+      "uptimeHours": 122.25,
+      "iterationCount": 50,
+      "requiredDomain": "changelogauto.dev",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "GitHub OAuth",
+        "Lemon Squeezy"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para ChangelogAuto.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - ChangelogAuto",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para ChangelogAuto. Foco em MRR de R$ 4.300/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para changelogauto.dev",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: GitHub OAuth, Lemon Squeezy."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "orderHistory": []
+    },
+    {
+      "id": 9,
+      "sector": "micro_saas",
+      "name": "PdfCompress Edge",
+      "role": "Compressor de PDFs Sem Perda de Vetores com Limite Freemium",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 5900,
+      "currency": "BRL",
+      "uptimeHours": 195.25,
+      "iterationCount": 45,
+      "requiredDomain": "pdfcompressedge.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "Wasabi S3"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para PdfCompress Edge.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - PdfCompress Edge",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para PdfCompress Edge. Foco em MRR de R$ 5.900/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para pdfcompressedge.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Wasabi S3."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "orderHistory": []
+    },
+    {
+      "id": 10,
+      "sector": "micro_saas",
+      "name": "StatusPulse Monitor",
+      "role": "Páginas Públicas de Status e Monitor de Ping para Startups",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 6100,
+      "currency": "BRL",
+      "uptimeHours": 125.25,
+      "iterationCount": 54,
+      "requiredDomain": "statuspulse.io",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "Uptime Kuma"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para StatusPulse Monitor.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - StatusPulse Monitor",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para StatusPulse Monitor. Foco em MRR de R$ 6.100/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para statuspulse.io",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Uptime Kuma."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "orderHistory": []
+    },
+    {
+      "id": 11,
+      "sector": "b2b_automation",
+      "name": "WhatsAgent Imob",
+      "role": "Agente de Qualificação e Agendamento Automático para Imobiliárias",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 18000,
+      "currency": "BRL",
+      "uptimeHours": 129.25,
+      "iterationCount": 36,
+      "requiredDomain": "whatsagentimob.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "WhatsApp Business API",
+        "Mercado Pago"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para WhatsAgent Imob.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - WhatsAgent Imob",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para WhatsAgent Imob. Foco em MRR de R$ 18.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para whatsagentimob.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: WhatsApp Business API, Mercado Pago."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v3.0",
+          "date": "2026-11-06T15:23:03.619Z",
+          "ready": true,
+          "content": "Código validado para produção em whatsagentimob.com.br."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.618Z",
+      "orderHistory": []
+    },
+    {
+      "id": 12,
+      "sector": "b2b_automation",
+      "name": "ClinicFlow WhatsApp",
+      "role": "Confirmação e Triagem Ativa de Consultas Médicas e Odontológicas",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 22000,
+      "currency": "BRL",
+      "uptimeHours": 142.25,
+      "iterationCount": 36,
+      "requiredDomain": "clinicflow.med.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Meta Cloud API",
+        "Asaas"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para ClinicFlow WhatsApp.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - ClinicFlow WhatsApp",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para ClinicFlow WhatsApp. Foco em MRR de R$ 22.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para clinicflow.med.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Meta Cloud API, Asaas."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v3.0",
+          "date": "2026-11-06T15:23:03.619Z",
+          "ready": true,
+          "content": "Código validado para produção em clinicflow.med.br."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 13,
+      "sector": "b2b_automation",
+      "name": "LegalDraft AI",
+      "role": "Automação de Petições Iniciais e Contestação Padronizada para Advogados",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 26000,
+      "currency": "BRL",
+      "uptimeHours": 182.25,
+      "iterationCount": 54,
+      "requiredDomain": "legaldraft.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "OpenRouter API",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para LegalDraft AI.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - LegalDraft AI",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para LegalDraft AI. Foco em MRR de R$ 26.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para legaldraft.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: OpenRouter API, Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 14,
+      "sector": "b2b_automation",
+      "name": "AutoProposta 360",
+      "role": "Gerador Dinâmico de Propostas Comerciais e Contratos com IA",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 12500,
+      "currency": "BRL",
+      "uptimeHours": 131.25,
+      "iterationCount": 42,
+      "requiredDomain": "autoproposta.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Mercado Pago",
+        "Resend Email API"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para AutoProposta 360.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - AutoProposta 360",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para AutoProposta 360. Foco em MRR de R$ 12.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para autoproposta.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago, Resend Email API."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 15,
+      "sector": "b2b_automation",
+      "name": "TicketResolve AI",
+      "role": "Atendimento Nível 1 Autônomo com RAG para E-commerces",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 15400,
+      "currency": "BRL",
+      "uptimeHours": 157.25,
+      "iterationCount": 46,
+      "requiredDomain": "ticketresolve.io",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Zendesk Webhook",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para TicketResolve AI.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - TicketResolve AI",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para TicketResolve AI. Foco em MRR de R$ 15.400/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para ticketresolve.io",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Zendesk Webhook, Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 16,
+      "sector": "b2b_automation",
+      "name": "CobrançaAmigável Bot",
+      "role": "Régua de Cobrança Educada via WhatsApp com Pix Copia e Cola",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 17800,
+      "currency": "BRL",
+      "uptimeHours": 147.25,
+      "iterationCount": 38,
+      "requiredDomain": "cobrancaamigavel.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Banco Central Pix Webhook",
+        "Meta API"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CobrançaAmigável Bot.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CobrançaAmigável Bot",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CobrançaAmigável Bot. Foco em MRR de R$ 17.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para cobrancaamigavel.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Banco Central Pix Webhook, Meta API."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 17,
+      "sector": "b2b_automation",
+      "name": "RHScreening Pilot",
+      "role": "Triagem de Currículos e Entrevistas Preliminares por Áudio IA",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 14900,
+      "currency": "BRL",
+      "uptimeHours": 162.25,
+      "iterationCount": 35,
+      "requiredDomain": "rhscreening.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "Whisper API"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para RHScreening Pilot.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - RHScreening Pilot",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para RHScreening Pilot. Foco em MRR de R$ 14.900/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para rhscreening.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Whisper API."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 18,
+      "sector": "b2b_automation",
+      "name": "RestaurantOrder Sync",
+      "role": "Cardápio Digital com Atendente IA Integrado ao Sistema PDV",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 16200,
+      "currency": "BRL",
+      "uptimeHours": 155.25,
+      "iterationCount": 51,
+      "requiredDomain": "restaurantorder.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Mercado Pago",
+        "Twilio WhatsApp"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para RestaurantOrder Sync.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - RestaurantOrder Sync",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para RestaurantOrder Sync. Foco em MRR de R$ 16.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para restaurantorder.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago, Twilio WhatsApp."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 19,
+      "sector": "b2b_automation",
+      "name": "LogisticsTrack Bot",
+      "role": "Rastreamento Automatizado de Cargas e Alertas Ativos ao Cliente",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 11800,
+      "currency": "BRL",
+      "uptimeHours": 150.25,
+      "iterationCount": 35,
+      "requiredDomain": "logisticstrack.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Melhor Envio API",
+        "Asaas"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para LogisticsTrack Bot.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - LogisticsTrack Bot",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para LogisticsTrack Bot. Foco em MRR de R$ 11.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para logisticstrack.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Melhor Envio API, Asaas."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 20,
+      "sector": "b2b_automation",
+      "name": "EduTutor Bot",
+      "role": "Tutor de Dúvidas para Plataformas de Cursos Online 24/7",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 13500,
+      "currency": "BRL",
+      "uptimeHours": 122.25,
+      "iterationCount": 48,
+      "requiredDomain": "edututorbot.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Hotmart Webhook",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para EduTutor Bot.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - EduTutor Bot",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para EduTutor Bot. Foco em MRR de R$ 13.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para edututorbot.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Hotmart Webhook, Stripe."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:23:03.619Z",
+          "ready": true,
+          "content": "Código validado para produção em edututorbot.com.br."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 21,
+      "sector": "traffic_arbitrage",
+      "name": "CalculadoraFinanceira Web",
+      "role": "Portal de Finanças Pessoais, Simulação de Financiamento e CDI",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 24000,
+      "currency": "BRL",
+      "uptimeHours": 145.25,
+      "iterationCount": 38,
+      "requiredDomain": "calculadorafinanceira.net.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense",
+        "Mediavine"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CalculadoraFinanceira Web.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CalculadoraFinanceira Web",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CalculadoraFinanceira Web. Foco em MRR de R$ 24.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para calculadorafinanceira.net.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Mediavine."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 22,
+      "sector": "traffic_arbitrage",
+      "name": "GuiaPrevidência Online",
+      "role": "Artigos Especializados em Aposentadoria, INSS e Planejamento",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 21000,
+      "currency": "BRL",
+      "uptimeHours": 191.25,
+      "iterationCount": 36,
+      "requiredDomain": "guiaprevidencia.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense",
+        "Taboola"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para GuiaPrevidência Online.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - GuiaPrevidência Online",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para GuiaPrevidência Online. Foco em MRR de R$ 21.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para guiaprevidencia.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Taboola."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v3.0",
+          "date": "2026-11-06T15:23:03.619Z",
+          "ready": true,
+          "content": "Código validado para produção em guiaprevidencia.com.br."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 23,
+      "sector": "traffic_arbitrage",
+      "name": "TechCompare Hub",
+      "role": "Portal de Benchmarks, Comparativo de GPUs e Processadores",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 18500,
+      "currency": "BRL",
+      "uptimeHours": 180.25,
+      "iterationCount": 35,
+      "requiredDomain": "techcomparehub.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense",
+        "Amazon Associates"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para TechCompare Hub.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - TechCompare Hub",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para TechCompare Hub. Foco em MRR de R$ 18.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para techcomparehub.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Amazon Associates."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 24,
+      "sector": "traffic_arbitrage",
+      "name": "SimuladorCusto Brasil",
+      "role": "Cálculo de Custo de Vida em 500 Cidades Brasileiras",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 12000,
+      "currency": "BRL",
+      "uptimeHours": 143.25,
+      "iterationCount": 46,
+      "requiredDomain": "simuladorcusto.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para SimuladorCusto Brasil.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - SimuladorCusto Brasil",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para SimuladorCusto Brasil. Foco em MRR de R$ 12.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para simuladorcusto.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 25,
+      "sector": "traffic_arbitrage",
+      "name": "SaudeBemEstar Portal",
+      "role": "Enciclopédia de Sintomas e Dicionário de Termos Médicos Aprovados",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 28000,
+      "currency": "BRL",
+      "uptimeHours": 173.25,
+      "iterationCount": 39,
+      "requiredDomain": "saudebemestar.med.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense",
+        "Ezoic"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para SaudeBemEstar Portal.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - SaudeBemEstar Portal",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para SaudeBemEstar Portal. Foco em MRR de R$ 28.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para saudebemestar.med.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Ezoic."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 26,
+      "sector": "traffic_arbitrage",
+      "name": "CarroConsumo Real",
+      "role": "Guia de Consumo Km/L de Todos os Carros Vendidos no Brasil",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 16500,
+      "currency": "BRL",
+      "uptimeHours": 129.25,
+      "iterationCount": 53,
+      "requiredDomain": "carroconsumo.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CarroConsumo Real.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CarroConsumo Real",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CarroConsumo Real. Foco em MRR de R$ 16.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para carroconsumo.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 27,
+      "sector": "traffic_arbitrage",
+      "name": "TrabalhoDireitos Guia",
+      "role": "Simulador de Rescisão de Trabalho, Férias e Décimo Terceiro",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 31000,
+      "currency": "BRL",
+      "uptimeHours": 189.25,
+      "iterationCount": 41,
+      "requiredDomain": "trabalhodireitos.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense",
+        "Mediavine"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para TrabalhoDireitos Guia.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - TrabalhoDireitos Guia",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para TrabalhoDireitos Guia. Foco em MRR de R$ 31.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para trabalhodireitos.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Mediavine."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 28,
+      "sector": "traffic_arbitrage",
+      "name": "EnergiaSolar Calculo",
+      "role": "Simulador de Economia de Painéis Solares por Região e Tarifa",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 19800,
+      "currency": "BRL",
+      "uptimeHours": 128.25,
+      "iterationCount": 50,
+      "requiredDomain": "energiasolarcalculo.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense",
+        "Lead Gen B2B"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para EnergiaSolar Calculo.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - EnergiaSolar Calculo",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para EnergiaSolar Calculo. Foco em MRR de R$ 19.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para energiasolarcalculo.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Lead Gen B2B."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 29,
+      "sector": "traffic_arbitrage",
+      "name": "ConcursosRadar Brasil",
+      "role": "Portal de Notícias de Editais de Concursos com Alto Volume Orgânico",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 25000,
+      "currency": "BRL",
+      "uptimeHours": 132.25,
+      "iterationCount": 51,
+      "requiredDomain": "concursosradar.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para ConcursosRadar Brasil.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - ConcursosRadar Brasil",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para ConcursosRadar Brasil. Foco em MRR de R$ 25.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para concursosradar.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 30,
+      "sector": "traffic_arbitrage",
+      "name": "ViagemBarata Dicas",
+      "role": "Roteiros Econômicos e Calculadora de Pedágio e Combustível",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 14000,
+      "currency": "BRL",
+      "uptimeHours": 142.25,
+      "iterationCount": 51,
+      "requiredDomain": "viagembaratadicas.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Booking Affiliate",
+        "AdSense"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para ViagemBarata Dicas.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - ViagemBarata Dicas",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para ViagemBarata Dicas. Foco em MRR de R$ 14.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para viagembaratadicas.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Booking Affiliate, AdSense."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 31,
+      "sector": "affiliate_engines",
+      "name": "CloudHost Compare",
+      "role": "Comparador de VPS, Cloud e Hospedagens com Bônus de Afiliado",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 29000,
+      "currency": "BRL",
+      "uptimeHours": 178.25,
+      "iterationCount": 47,
+      "requiredDomain": "cloudhostcompare.io",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Hostinger Affiliate",
+        "DigitalOcean API"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CloudHost Compare.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CloudHost Compare",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CloudHost Compare. Foco em MRR de R$ 29.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para cloudhostcompare.io",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Hostinger Affiliate, DigitalOcean API."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 32,
+      "sector": "affiliate_engines",
+      "name": "SaaSReview Pro",
+      "role": "Catálogo de Softwares B2B com Cupom de Teste Gratuito",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 22500,
+      "currency": "BRL",
+      "uptimeHours": 144.25,
+      "iterationCount": 49,
+      "requiredDomain": "saasreviewpro.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Impact Radius",
+        "CJ Affiliate"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para SaaSReview Pro.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - SaaSReview Pro",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para SaaSReview Pro. Foco em MRR de R$ 22.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para saasreviewpro.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Impact Radius, CJ Affiliate."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 33,
+      "sector": "affiliate_engines",
+      "name": "CadeirasErgonômicas Top",
+      "role": "Guia de Compra Especializado para Home Office e Produtividade",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 15300,
+      "currency": "BRL",
+      "uptimeHours": 195.25,
+      "iterationCount": 52,
+      "requiredDomain": "cadeirasergonomicas.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Amazon Associates",
+        "Mercado Livre Afiliados"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CadeirasErgonômicas Top.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CadeirasErgonômicas Top",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CadeirasErgonômicas Top. Foco em MRR de R$ 15.300/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para cadeirasergonomicas.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Amazon Associates, Mercado Livre Afiliados."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 34,
+      "sector": "affiliate_engines",
+      "name": "HardwareMiner Tracker",
+      "role": "Monitor de Placas de Vídeo e Laptops Gamer em Promoção Real",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 18700,
+      "currency": "BRL",
+      "uptimeHours": 141.25,
+      "iterationCount": 39,
+      "requiredDomain": "hardwareminertracker.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "KaBuM! Afiliados",
+        "Amazon"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para HardwareMiner Tracker.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - HardwareMiner Tracker",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para HardwareMiner Tracker. Foco em MRR de R$ 18.700/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para hardwareminertracker.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: KaBuM! Afiliados, Amazon."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 35,
+      "sector": "affiliate_engines",
+      "name": "SmartHome Deals",
+      "role": "Comparador de Automação Residencial (Lâmpadas, Fechaduras, Alexas)",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 13900,
+      "currency": "BRL",
+      "uptimeHours": 181.25,
+      "iterationCount": 49,
+      "requiredDomain": "smarthomedeals.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Amazon Associates"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para SmartHome Deals.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - SmartHome Deals",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para SmartHome Deals. Foco em MRR de R$ 13.900/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para smarthomedeals.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Amazon Associates."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 36,
+      "sector": "affiliate_engines",
+      "name": "CartõesPontos Radar",
+      "role": "Comparador de Melhores Cartões de Crédito sem Anuidade e Milhas",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 34000,
+      "currency": "BRL",
+      "uptimeHours": 141.25,
+      "iterationCount": 39,
+      "requiredDomain": "cartoespontosradar.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Awin Financeiro",
+        "Bancos Afiliados"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CartõesPontos Radar.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CartõesPontos Radar",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CartõesPontos Radar. Foco em MRR de R$ 34.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para cartoespontosradar.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Awin Financeiro, Bancos Afiliados."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 37,
+      "sector": "affiliate_engines",
+      "name": "CursosTI Avaliações",
+      "role": "Ranking e Cupons para Cursos de Programação e Certificações Cloud",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 16800,
+      "currency": "BRL",
+      "uptimeHours": 148.25,
+      "iterationCount": 45,
+      "requiredDomain": "cursostiavaliacoes.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Hotmart",
+        "Udemy Affiliate"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CursosTI Avaliações.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CursosTI Avaliações",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CursosTI Avaliações. Foco em MRR de R$ 16.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para cursostiavaliacoes.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Hotmart, Udemy Affiliate."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 38,
+      "sector": "affiliate_engines",
+      "name": "MaquininhaTaxas Comparar",
+      "role": "Comparativo Transparente de Taxas de Maquininhas de Cartão",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 27500,
+      "currency": "BRL",
+      "uptimeHours": 131.25,
+      "iterationCount": 40,
+      "requiredDomain": "maquininhataxas.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "PagSeguro Afiliados",
+        "Stone/Ton"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para MaquininhaTaxas Comparar.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - MaquininhaTaxas Comparar",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para MaquininhaTaxas Comparar. Foco em MRR de R$ 27.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para maquininhataxas.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: PagSeguro Afiliados, Stone/Ton."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 39,
+      "sector": "affiliate_engines",
+      "name": "SuplementosPreço Radar",
+      "role": "Rastreador de Whey Protein e Creatina com Menor Custo por Grama",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 14200,
+      "currency": "BRL",
+      "uptimeHours": 141.25,
+      "iterationCount": 49,
+      "requiredDomain": "suplementosprecoradar.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Growth/Max Afiliados",
+        "Amazon"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para SuplementosPreço Radar.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - SuplementosPreço Radar",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para SuplementosPreço Radar. Foco em MRR de R$ 14.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para suplementosprecoradar.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Growth/Max Afiliados, Amazon."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 40,
+      "sector": "affiliate_engines",
+      "name": "FerramentasEletricas Top",
+      "role": "Testes de Furadeiras, Parafusadeiras e Ferramentas Profissionais",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 12800,
+      "currency": "BRL",
+      "uptimeHours": 191.25,
+      "iterationCount": 36,
+      "requiredDomain": "ferramentaseletricas.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Mercado Livre Afiliados"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para FerramentasEletricas Top.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - FerramentasEletricas Top",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para FerramentasEletricas Top. Foco em MRR de R$ 12.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para ferramentaseletricas.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Livre Afiliados."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v3.0",
+          "date": "2026-11-06T15:23:03.619Z",
+          "ready": true,
+          "content": "Código validado para produção em ferramentaseletricas.com.br."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 41,
+      "sector": "browser_extensions",
+      "name": "LinkedinOutreach Copilot",
+      "role": "Extensão de Personalização de Conexões e Mensagens B2B com IA",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 16500,
+      "currency": "BRL",
+      "uptimeHours": 156.25,
+      "iterationCount": 45,
+      "requiredDomain": "linkedinoutreachcopilot.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "Chrome Web Store Account"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para LinkedinOutreach Copilot.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - LinkedinOutreach Copilot",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para LinkedinOutreach Copilot. Foco em MRR de R$ 16.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para linkedinoutreachcopilot.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Chrome Web Store Account."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 42,
+      "sector": "browser_extensions",
+      "name": "PriceHist Amazon ML",
+      "role": "Gráfico Flutuante de Histórico Real de Preços Direto na Página do Produto",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 11000,
+      "currency": "BRL",
+      "uptimeHours": 129.25,
+      "iterationCount": 39,
+      "requiredDomain": "pricehistextension.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Amazon Associates",
+        "Chrome Web Store"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para PriceHist Amazon ML.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - PriceHist Amazon ML",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para PriceHist Amazon ML. Foco em MRR de R$ 11.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para pricehistextension.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Amazon Associates, Chrome Web Store."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 43,
+      "sector": "browser_extensions",
+      "name": "GrammarFix PTBR",
+      "role": "Corretor Gramatical e de Estilo Corporativo Especializado em Português",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 13500,
+      "currency": "BRL",
+      "uptimeHours": 193.25,
+      "iterationCount": 42,
+      "requiredDomain": "grammarfixptbr.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "LanguageTool API"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para GrammarFix PTBR.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - GrammarFix PTBR",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para GrammarFix PTBR. Foco em MRR de R$ 13.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para grammarfixptbr.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, LanguageTool API."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 44,
+      "sector": "browser_extensions",
+      "name": "YoutubeTLDR Pro",
+      "role": "Resumos Instantâneos e Tópicos de Vídeos em 5 Segundos via Extensão",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 9200,
+      "currency": "BRL",
+      "uptimeHours": 130.25,
+      "iterationCount": 42,
+      "requiredDomain": "youtubetldrpro.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "OpenAI API"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para YoutubeTLDR Pro.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - YoutubeTLDR Pro",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para YoutubeTLDR Pro. Foco em MRR de R$ 9.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para youtubetldrpro.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, OpenAI API."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 45,
+      "sector": "browser_extensions",
+      "name": "EmailScraper Ethical",
+      "role": "Localizador de E-mails Públicos de Imprensa e Contatos de Suporte",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 14800,
+      "currency": "BRL",
+      "uptimeHours": 175.25,
+      "iterationCount": 48,
+      "requiredDomain": "emailscraperethical.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Lemon Squeezy",
+        "Chrome Store"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para EmailScraper Ethical.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - EmailScraper Ethical",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para EmailScraper Ethical. Foco em MRR de R$ 14.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para emailscraperethical.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Lemon Squeezy, Chrome Store."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v4.0",
+          "date": "2026-11-06T15:23:03.619Z",
+          "ready": true,
+          "content": "Código validado para produção em emailscraperethical.com."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 46,
+      "sector": "browser_extensions",
+      "name": "CookieConsent Blocker",
+      "role": "Bloqueador Automático de Banners de Cookies Irritantes com Modo PRO",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 7500,
+      "currency": "BRL",
+      "uptimeHours": 182.25,
+      "iterationCount": 53,
+      "requiredDomain": "cookieconsentblock.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CookieConsent Blocker.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CookieConsent Blocker",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CookieConsent Blocker. Foco em MRR de R$ 7.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para cookieconsentblock.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 47,
+      "sector": "browser_extensions",
+      "name": "TabClutter Suspender",
+      "role": "Gerenciador Leve de Abas que Libera até 85% de Memória RAM",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 8300,
+      "currency": "BRL",
+      "uptimeHours": 146.25,
+      "iterationCount": 41,
+      "requiredDomain": "tabcluttersuspender.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Chrome Web Store Developer"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para TabClutter Suspender.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - TabClutter Suspender",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para TabClutter Suspender. Foco em MRR de R$ 8.300/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para tabcluttersuspender.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Chrome Web Store Developer."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 48,
+      "sector": "browser_extensions",
+      "name": "ColorPicker SVG Inspector",
+      "role": "Inspecionador de Paletas de Cores e Exportador de SVGs para Designers",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 6900,
+      "currency": "BRL",
+      "uptimeHours": 128.25,
+      "iterationCount": 46,
+      "requiredDomain": "colorpickersvg.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para ColorPicker SVG Inspector.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - ColorPicker SVG Inspector",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para ColorPicker SVG Inspector. Foco em MRR de R$ 6.900/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para colorpickersvg.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 49,
+      "sector": "browser_extensions",
+      "name": "FocusSession Blocker",
+      "role": "Pomodoro com Bloqueio Rígido de Redes Sociais e Métricas de Foco",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 5800,
+      "currency": "BRL",
+      "uptimeHours": 190.25,
+      "iterationCount": 47,
+      "requiredDomain": "focussessionpro.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para FocusSession Blocker.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - FocusSession Blocker",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para FocusSession Blocker. Foco em MRR de R$ 5.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para focussessionpro.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 50,
+      "sector": "browser_extensions",
+      "name": "CryptoGas Ticker",
+      "role": "Monitor de Taxas de Gas da Ethereum e Solana na Barra de Ferramentas",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 4500,
+      "currency": "BRL",
+      "uptimeHours": 198.25,
+      "iterationCount": 50,
+      "requiredDomain": "cryptogasticker.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Etherscan API"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CryptoGas Ticker.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CryptoGas Ticker",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CryptoGas Ticker. Foco em MRR de R$ 4.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para cryptogasticker.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Etherscan API."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 51,
+      "sector": "pwa_utilities",
+      "name": "ReciboFacil PWA",
+      "role": "Gerador Instantâneo de Recibos em PDF com Assinatura na Tela e Pix",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 11200,
+      "currency": "BRL",
+      "uptimeHours": 157.25,
+      "iterationCount": 37,
+      "requiredDomain": "recibofacilpwa.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Mercado Pago",
+        "Cloudflare Pages"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para ReciboFacil PWA.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - ReciboFacil PWA",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para ReciboFacil PWA. Foco em MRR de R$ 11.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para recibofacilpwa.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago, Cloudflare Pages."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 52,
+      "sector": "pwa_utilities",
+      "name": "QRGenerator Dynamic",
+      "role": "Gerador de QR Codes Dinâmicos Editáveis com Métricas de Acesso",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 15400,
+      "currency": "BRL",
+      "uptimeHours": 126.25,
+      "iterationCount": 46,
+      "requiredDomain": "qrgeneratordynamic.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "PostgreSQL"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para QRGenerator Dynamic.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - QRGenerator Dynamic",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para QRGenerator Dynamic. Foco em MRR de R$ 15.400/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para qrgeneratordynamic.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, PostgreSQL."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 53,
+      "sector": "pwa_utilities",
+      "name": "ContratoLocacao Express",
+      "role": "Gerador Jurídico Guiado de Contratos de Aluguel sem Advogado",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 18900,
+      "currency": "BRL",
+      "uptimeHours": 154.25,
+      "iterationCount": 42,
+      "requiredDomain": "contratolocacaoexpress.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Mercado Pago"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para ContratoLocacao Express.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - ContratoLocacao Express",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para ContratoLocacao Express. Foco em MRR de R$ 18.900/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para contratolocacaoexpress.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 54,
+      "sector": "pwa_utilities",
+      "name": "PixelArt Maker Web",
+      "role": "Editor Rápido de Sprite e Ícones para Criadores de Jogos e Indie Devs",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 6200,
+      "currency": "BRL",
+      "uptimeHours": 185.25,
+      "iterationCount": 40,
+      "requiredDomain": "pixelartmakerweb.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para PixelArt Maker Web.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - PixelArt Maker Web",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para PixelArt Maker Web. Foco em MRR de R$ 6.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para pixelartmakerweb.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 55,
+      "sector": "pwa_utilities",
+      "name": "AudioCutter Pro",
+      "role": "Cortador e Normalizador de Áudio Diretamente no Navegador sem Servidor",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 8800,
+      "currency": "BRL",
+      "uptimeHours": 178.25,
+      "iterationCount": 46,
+      "requiredDomain": "audiocutterpro.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para AudioCutter Pro.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - AudioCutter Pro",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para AudioCutter Pro. Foco em MRR de R$ 8.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para audiocutterpro.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense, Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 56,
+      "sector": "pwa_utilities",
+      "name": "JsonToTypeScript Hub",
+      "role": "Conversor Automático de JSON para Interfaces TypeScript e Zod Schemas",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 4700,
+      "currency": "BRL",
+      "uptimeHours": 132.25,
+      "iterationCount": 51,
+      "requiredDomain": "jsontotypescript.dev",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "BuyMeACoffee",
+        "AdSense"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para JsonToTypeScript Hub.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - JsonToTypeScript Hub",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para JsonToTypeScript Hub. Foco em MRR de R$ 4.700/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para jsontotypescript.dev",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: BuyMeACoffee, AdSense."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 57,
+      "sector": "pwa_utilities",
+      "name": "CalculadoraSimples MEI",
+      "role": "Controle de Faturamento Mensal e Alerta do Teto do MEI em Tempo Real",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 9600,
+      "currency": "BRL",
+      "uptimeHours": 183.25,
+      "iterationCount": 52,
+      "requiredDomain": "calculadorameifacil.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Mercado Pago"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CalculadoraSimples MEI.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CalculadoraSimples MEI",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CalculadoraSimples MEI. Foco em MRR de R$ 9.600/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para calculadorameifacil.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 58,
+      "sector": "pwa_utilities",
+      "name": "MarkdownToPDF Styler",
+      "role": "Renderizador de Documentos Elegantes e Relatórios a partir de Markdown",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 7300,
+      "currency": "BRL",
+      "uptimeHours": 128.25,
+      "iterationCount": 51,
+      "requiredDomain": "markdowntopdfstyler.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para MarkdownToPDF Styler.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - MarkdownToPDF Styler",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para MarkdownToPDF Styler. Foco em MRR de R$ 7.300/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para markdowntopdfstyler.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 59,
+      "sector": "pwa_utilities",
+      "name": "FaviconGen Suite",
+      "role": "Gerador Completo de Favicons para iOS, Android, PWA e Safari Mac",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 5100,
+      "currency": "BRL",
+      "uptimeHours": 150.25,
+      "iterationCount": 54,
+      "requiredDomain": "favicongensuite.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para FaviconGen Suite.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - FaviconGen Suite",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para FaviconGen Suite. Foco em MRR de R$ 5.100/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para favicongensuite.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 60,
+      "sector": "pwa_utilities",
+      "name": "CronExpression Helper",
+      "role": "Gerador Visual e Explicador de Expressões Cron em Linguagem Natural",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 3900,
+      "currency": "BRL",
+      "uptimeHours": 130.25,
+      "iterationCount": 47,
+      "requiredDomain": "cronexpressionhelper.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "AdSense"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CronExpression Helper.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CronExpression Helper",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CronExpression Helper. Foco em MRR de R$ 3.900/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para cronexpressionhelper.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: AdSense."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 61,
+      "sector": "premium_info",
+      "name": "FullStackBoilerplate Pro",
+      "role": "Kit Pronto de Código Next.js + Tailwind + Stripe + Auth para Lançar em 24h",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 21500,
+      "currency": "BRL",
+      "uptimeHours": 174.25,
+      "iterationCount": 42,
+      "requiredDomain": "fullstackboilerplate.dev",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "GitHub Private Org"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para FullStackBoilerplate Pro.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - FullStackBoilerplate Pro",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para FullStackBoilerplate Pro. Foco em MRR de R$ 21.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para fullstackboilerplate.dev",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, GitHub Private Org."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 62,
+      "sector": "premium_info",
+      "name": "NotionOS Empreendedor",
+      "role": "Sistema Operacional no Notion para Gestão de Agências e Freelancers",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 14000,
+      "currency": "BRL",
+      "uptimeHours": 150.25,
+      "iterationCount": 49,
+      "requiredDomain": "notionosempreendedor.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Kiwify",
+        "Hotmart"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para NotionOS Empreendedor.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - NotionOS Empreendedor",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para NotionOS Empreendedor. Foco em MRR de R$ 14.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para notionosempreendedor.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Kiwify, Hotmart."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 63,
+      "sector": "premium_info",
+      "name": "EngenhariaDePrompt Playbook",
+      "role": "Manual Definitivo com 500+ Prompts Testados para Negócios e Vendas",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 11800,
+      "currency": "BRL",
+      "uptimeHours": 187.25,
+      "iterationCount": 54,
+      "requiredDomain": "engenhariadeprompt.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Hotmart"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para EngenhariaDePrompt Playbook.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - EngenhariaDePrompt Playbook",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para EngenhariaDePrompt Playbook. Foco em MRR de R$ 11.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para engenhariadeprompt.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Hotmart."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 64,
+      "sector": "premium_info",
+      "name": "DevOpsKubernetes Runbook",
+      "role": "Checklists e Scripts de Resolução de Incidentes em Produção",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 17200,
+      "currency": "BRL",
+      "uptimeHours": 160.25,
+      "iterationCount": 42,
+      "requiredDomain": "devopsrunbooks.io",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Lemon Squeezy"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para DevOpsKubernetes Runbook.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - DevOpsKubernetes Runbook",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para DevOpsKubernetes Runbook. Foco em MRR de R$ 17.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para devopsrunbooks.io",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Lemon Squeezy."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 65,
+      "sector": "premium_info",
+      "name": "DesignSystem Figma UI Kit",
+      "role": "Biblioteca Completa de 2.000 Componentes Prontos para Figma",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 15600,
+      "currency": "BRL",
+      "uptimeHours": 180.25,
+      "iterationCount": 53,
+      "requiredDomain": "designsystemkit.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Gumroad",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para DesignSystem Figma UI Kit.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - DesignSystem Figma UI Kit",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para DesignSystem Figma UI Kit. Foco em MRR de R$ 15.600/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para designsystemkit.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Gumroad, Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 66,
+      "sector": "premium_info",
+      "name": "GuiaTributario TI",
+      "role": "Estratégias Legais de Redução Tributária para Programadores PJ e Remote",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 19400,
+      "currency": "BRL",
+      "uptimeHours": 188.25,
+      "iterationCount": 47,
+      "requiredDomain": "guiatributarioti.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Kiwify"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para GuiaTributario TI.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - GuiaTributario TI",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para GuiaTributario TI. Foco em MRR de R$ 19.400/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para guiatributarioti.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Kiwify."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 67,
+      "sector": "premium_info",
+      "name": "WebScraping Python Master",
+      "role": "Curso Prático com Projetos de Raspagem Sem Bloqueio e Captcha",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 13200,
+      "currency": "BRL",
+      "uptimeHours": 142.25,
+      "iterationCount": 43,
+      "requiredDomain": "webscrapingmaster.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Hotmart"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para WebScraping Python Master.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - WebScraping Python Master",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para WebScraping Python Master. Foco em MRR de R$ 13.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para webscrapingmaster.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Hotmart."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 68,
+      "sector": "premium_info",
+      "name": "MicroSaaSFundamentos Livro",
+      "role": "Guia Passo a Passo de Validação e Escala de Software B2B de Nicho",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 10500,
+      "currency": "BRL",
+      "uptimeHours": 140.25,
+      "iterationCount": 38,
+      "requiredDomain": "livromicrosaas.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Amazon KDP",
+        "Hotmart"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para MicroSaaSFundamentos Livro.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - MicroSaaSFundamentos Livro",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para MicroSaaSFundamentos Livro. Foco em MRR de R$ 10.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para livromicrosaas.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Amazon KDP, Hotmart."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 69,
+      "sector": "premium_info",
+      "name": "CopywritingAltaConversao",
+      "role": "Swipe File com 300 Páginas de Vendas Que Mais Faturaram no Brasil",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 16700,
+      "currency": "BRL",
+      "uptimeHours": 145.25,
+      "iterationCount": 39,
+      "requiredDomain": "copyaltaconversao.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Kiwify"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CopywritingAltaConversao.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CopywritingAltaConversao",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CopywritingAltaConversao. Foco em MRR de R$ 16.700/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para copyaltaconversao.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Kiwify."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 70,
+      "sector": "premium_info",
+      "name": "EstatisticaParaInvestidores",
+      "role": "Planilhas Avançadas e Modelos de Precificação Black-Scholes para Opções",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 18900,
+      "currency": "BRL",
+      "uptimeHours": 176.25,
+      "iterationCount": 40,
+      "requiredDomain": "modelosfinanceirostop.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para EstatisticaParaInvestidores.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - EstatisticaParaInvestidores",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para EstatisticaParaInvestidores. Foco em MRR de R$ 18.900/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para modelosfinanceirostop.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 71,
+      "sector": "financial_data",
+      "name": "ArbiCrypto Scanner",
+      "role": "Rastreador de Spreads de Preço entre Exchanges Brasileiras (Mercado Bitcoin vs Binance)",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 32000,
+      "currency": "BRL",
+      "uptimeHours": 146.25,
+      "iterationCount": 41,
+      "requiredDomain": "arbicryptoscanner.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Binance API",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para ArbiCrypto Scanner.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - ArbiCrypto Scanner",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para ArbiCrypto Scanner. Foco em MRR de R$ 32.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para arbicryptoscanner.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Binance API, Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 72,
+      "sector": "financial_data",
+      "name": "FundingRate Radar",
+      "role": "Alerta em Tempo Real de Taxas de Financiamento Perpétuas e Oportunidades Neutras",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 24500,
+      "currency": "BRL",
+      "uptimeHours": 167.25,
+      "iterationCount": 49,
+      "requiredDomain": "fundingrateradar.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Bybit API",
+        "Telegram Bot Token"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para FundingRate Radar.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - FundingRate Radar",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para FundingRate Radar. Foco em MRR de R$ 24.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para fundingrateradar.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Bybit API, Telegram Bot Token."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 73,
+      "sector": "financial_data",
+      "name": "WhaleTracker B3",
+      "role": "Monitor de Fluxo Institucional e Grandes Blocos de Negociação de Ações",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 27800,
+      "currency": "BRL",
+      "uptimeHours": 154.25,
+      "iterationCount": 38,
+      "requiredDomain": "whaletrackerb3.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "B3 Data Feed",
+        "Mercado Pago"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para WhaleTracker B3.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - WhaleTracker B3",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para WhaleTracker B3. Foco em MRR de R$ 27.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para whaletrackerb3.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: B3 Data Feed, Mercado Pago."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 74,
+      "sector": "financial_data",
+      "name": "DolarFuturo Volatilidade",
+      "role": "Indicador Quantitativo de Pressão Compradora no Mini-Dólar (WDO)",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 21900,
+      "currency": "BRL",
+      "uptimeHours": 152.25,
+      "iterationCount": 40,
+      "requiredDomain": "dolarvolatilidade.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "MetaTrader 5 API"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para DolarFuturo Volatilidade.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - DolarFuturo Volatilidade",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para DolarFuturo Volatilidade. Foco em MRR de R$ 21.900/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para dolarvolatilidade.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: MetaTrader 5 API."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 75,
+      "sector": "financial_data",
+      "name": "DeFiYield Screener",
+      "role": "Scanner de Maiores Retornos Reais em Pools de Liquidez Uniswap e Raydium",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 18400,
+      "currency": "BRL",
+      "uptimeHours": 152.25,
+      "iterationCount": 38,
+      "requiredDomain": "defiyieldscreener.io",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Alchemy RPC",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para DeFiYield Screener.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - DeFiYield Screener",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para DeFiYield Screener. Foco em MRR de R$ 18.400/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para defiyieldscreener.io",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Alchemy RPC, Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 76,
+      "sector": "financial_data",
+      "name": "DividendoAgenda Brasil",
+      "role": "Calendário Preditivo de Dividendos e JCP de Empresas Brasileiras",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 14700,
+      "currency": "BRL",
+      "uptimeHours": 154.25,
+      "iterationCount": 40,
+      "requiredDomain": "dividendoagendabrasil.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "CVM Open Data",
+        "AdSense"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para DividendoAgenda Brasil.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - DividendoAgenda Brasil",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para DividendoAgenda Brasil. Foco em MRR de R$ 14.700/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para dividendoagendabrasil.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: CVM Open Data, AdSense."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 77,
+      "sector": "financial_data",
+      "name": "FIIsRenda Imobiliária",
+      "role": "Calculadora de Preço Teto pelo Método Graham e Décio Bazin para FIIs",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 16100,
+      "currency": "BRL",
+      "uptimeHours": 158.25,
+      "iterationCount": 39,
+      "requiredDomain": "fiisrendaimobiliaria.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Google AdSense"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para FIIsRenda Imobiliária.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - FIIsRenda Imobiliária",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para FIIsRenda Imobiliária. Foco em MRR de R$ 16.100/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para fiisrendaimobiliaria.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Google AdSense."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 78,
+      "sector": "financial_data",
+      "name": "ForexSpread Auditor",
+      "role": "Comparador de Spreads Reais entre Corretoras Internacionais Reguladas",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 22000,
+      "currency": "BRL",
+      "uptimeHours": 148.25,
+      "iterationCount": 37,
+      "requiredDomain": "forexspreadauditor.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Forex Affiliate Network"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para ForexSpread Auditor.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - ForexSpread Auditor",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para ForexSpread Auditor. Foco em MRR de R$ 22.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para forexspreadauditor.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Forex Affiliate Network."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 79,
+      "sector": "financial_data",
+      "name": "StablecoinYield Bot",
+      "role": "Alertas de Oportunidades de Renda Fixa em Dólar Digital (USDC/USDT)",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 15300,
+      "currency": "BRL",
+      "uptimeHours": 125.25,
+      "iterationCount": 44,
+      "requiredDomain": "stablecoinyieldbot.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Telegram API",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para StablecoinYield Bot.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - StablecoinYield Bot",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para StablecoinYield Bot. Foco em MRR de R$ 15.300/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para stablecoinyieldbot.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Telegram API, Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 80,
+      "sector": "financial_data",
+      "name": "OpcoesGreek Calculator",
+      "role": "Plataforma Web com Cálculo de Volatilidade Implícita e Gregas das Ações",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 19800,
+      "currency": "BRL",
+      "uptimeHours": 184.25,
+      "iterationCount": 47,
+      "requiredDomain": "opcoesgreek.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Mercado Pago"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para OpcoesGreek Calculator.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - OpcoesGreek Calculator",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para OpcoesGreek Calculator. Foco em MRR de R$ 19.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para opcoesgreek.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 81,
+      "sector": "digital_stores",
+      "name": "ShopifyTheme CleanTech",
+      "role": "Tema de Alta Velocidade Otimizado para 99 no Google PageSpeed",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 17500,
+      "currency": "BRL",
+      "uptimeHours": 189.25,
+      "iterationCount": 42,
+      "requiredDomain": "cleantechtheme.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Shopify Partner",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para ShopifyTheme CleanTech.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - ShopifyTheme CleanTech",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para ShopifyTheme CleanTech. Foco em MRR de R$ 17.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para cleantechtheme.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Shopify Partner, Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 82,
+      "sector": "digital_stores",
+      "name": "LandingPageLead Booster",
+      "role": "Pacote de 50 Páginas de Venda em HTML/Tailwind Prontas para Subir",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 14200,
+      "currency": "BRL",
+      "uptimeHours": 178.25,
+      "iterationCount": 47,
+      "requiredDomain": "landingpagebooster.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe",
+        "Gumroad"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para LandingPageLead Booster.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - LandingPageLead Booster",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para LandingPageLead Booster. Foco em MRR de R$ 14.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para landingpagebooster.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe, Gumroad."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 83,
+      "sector": "digital_stores",
+      "name": "WooCommerceFast Store",
+      "role": "Loja Pronta em WooCommerce Otimizada sem Plugins Pesados",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 12900,
+      "currency": "BRL",
+      "uptimeHours": 146.25,
+      "iterationCount": 44,
+      "requiredDomain": "woocommercestorepronta.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Mercado Pago"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para WooCommerceFast Store.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - WooCommerceFast Store",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para WooCommerceFast Store. Foco em MRR de R$ 12.900/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para woocommercestorepronta.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 84,
+      "sector": "digital_stores",
+      "name": "SocialMediaPack Imob",
+      "role": "Pack com 200 Artes Editáveis no Canva e Legendas para Corretores",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 9800,
+      "currency": "BRL",
+      "uptimeHours": 170.25,
+      "iterationCount": 39,
+      "requiredDomain": "socialmediapackimob.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Kiwify"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para SocialMediaPack Imob.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - SocialMediaPack Imob",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para SocialMediaPack Imob. Foco em MRR de R$ 9.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para socialmediapackimob.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Kiwify."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 85,
+      "sector": "digital_stores",
+      "name": "Pack3DIcons Minimal",
+      "role": "Coleção de 500 Ícones em 3D Renderizados em Alta Resolução e PNG Transparente",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 11400,
+      "currency": "BRL",
+      "uptimeHours": 149.25,
+      "iterationCount": 37,
+      "requiredDomain": "pack3dminimal.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para Pack3DIcons Minimal.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - Pack3DIcons Minimal",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para Pack3DIcons Minimal. Foco em MRR de R$ 11.400/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para pack3dminimal.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 86,
+      "sector": "digital_stores",
+      "name": "EmailMarketing Templates",
+      "role": "Sequências de E-mail de Boas-Vindas, Carrinho Abandonado e Black Friday",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 13600,
+      "currency": "BRL",
+      "uptimeHours": 127.25,
+      "iterationCount": 46,
+      "requiredDomain": "emailtemplatespack.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Lemon Squeezy"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para EmailMarketing Templates.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - EmailMarketing Templates",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para EmailMarketing Templates. Foco em MRR de R$ 13.600/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para emailtemplatespack.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Lemon Squeezy."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 87,
+      "sector": "digital_stores",
+      "name": "RestauranteCardapio QR",
+      "role": "Template Pronto para Restaurantes Criarem Cardápio Digital em 15 Minutos",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 10800,
+      "currency": "BRL",
+      "uptimeHours": 178.25,
+      "iterationCount": 42,
+      "requiredDomain": "restaurantecardapioqr.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Mercado Pago"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para RestauranteCardapio QR.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - RestauranteCardapio QR",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para RestauranteCardapio QR. Foco em MRR de R$ 10.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para restaurantecardapioqr.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 88,
+      "sector": "digital_stores",
+      "name": "PodcastBrand Kit",
+      "role": "Identidade Visual Completa e Capas para Podcasts no Spotify e YouTube",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 8400,
+      "currency": "BRL",
+      "uptimeHours": 195.25,
+      "iterationCount": 49,
+      "requiredDomain": "podcastbrandkit.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para PodcastBrand Kit.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - PodcastBrand Kit",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para PodcastBrand Kit. Foco em MRR de R$ 8.400/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para podcastbrandkit.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 89,
+      "sector": "digital_stores",
+      "name": "FitnessCoaching AppKit",
+      "role": "Template de App para Personal Trainers Acompanharem Alunos",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 16900,
+      "currency": "BRL",
+      "uptimeHours": 194.25,
+      "iterationCount": 52,
+      "requiredDomain": "fitnesscoachingkit.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para FitnessCoaching AppKit.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - FitnessCoaching AppKit",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para FitnessCoaching AppKit. Foco em MRR de R$ 16.900/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para fitnesscoachingkit.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 90,
+      "sector": "digital_stores",
+      "name": "DashboardAdmin TailAdmin",
+      "role": "Template de Painel Administrativo em React e Vue com Gráficos Prontos",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 21000,
+      "currency": "BRL",
+      "uptimeHours": 164.25,
+      "iterationCount": 46,
+      "requiredDomain": "tailadminpro.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para DashboardAdmin TailAdmin.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - DashboardAdmin TailAdmin",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para DashboardAdmin TailAdmin. Foco em MRR de R$ 21.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para tailadminpro.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 91,
+      "sector": "paid_curation",
+      "name": "AIAlpha Dispatch",
+      "role": "Newsletter Semanal de Ferramentas IA com Alto Potencial de Lucro e Aplicação",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 28500,
+      "currency": "BRL",
+      "uptimeHours": 158.25,
+      "iterationCount": 39,
+      "requiredDomain": "aialphadispatch.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Beehiiv",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para AIAlpha Dispatch.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - AIAlpha Dispatch",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para AIAlpha Dispatch. Foco em MRR de R$ 28.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para aialphadispatch.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Beehiiv, Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 92,
+      "sector": "paid_curation",
+      "name": "MicroSaaS Insider BR",
+      "role": "Casos Reais de Softwares Faturando de R$ 5k a R$ 50k no Brasil",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 19800,
+      "currency": "BRL",
+      "uptimeHours": 156.25,
+      "iterationCount": 46,
+      "requiredDomain": "microsaasinsider.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Substack Subscriptions",
+        "Mercado Pago"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para MicroSaaS Insider BR.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - MicroSaaS Insider BR",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para MicroSaaS Insider BR. Foco em MRR de R$ 19.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para microsaasinsider.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Substack Subscriptions, Mercado Pago."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 93,
+      "sector": "paid_curation",
+      "name": "VentureBrasil Radar",
+      "role": "Relatório Mensal de Startups Recém-Investidas e Tendências de Mercado",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 23400,
+      "currency": "BRL",
+      "uptimeHours": 157.25,
+      "iterationCount": 39,
+      "requiredDomain": "venturebrasilradar.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para VentureBrasil Radar.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - VentureBrasil Radar",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para VentureBrasil Radar. Foco em MRR de R$ 23.400/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para venturebrasilradar.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 94,
+      "sector": "paid_curation",
+      "name": "EditalTech Alertas",
+      "role": "Curadoria Exclusiva de Subvenções e Editais de Inovação (FINEP, FAPESP)",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 17200,
+      "currency": "BRL",
+      "uptimeHours": 142.25,
+      "iterationCount": 51,
+      "requiredDomain": "editaltechalertas.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Asaas"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para EditalTech Alertas.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - EditalTech Alertas",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para EditalTech Alertas. Foco em MRR de R$ 17.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para editaltechalertas.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Asaas."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 95,
+      "sector": "paid_curation",
+      "name": "SmallCaps Diamantes",
+      "role": "Análise Fundamentalista Aprofundada de Ações Fora do Radar na B3",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 36000,
+      "currency": "BRL",
+      "uptimeHours": 135.25,
+      "iterationCount": 46,
+      "requiredDomain": "smallcapsdiamantes.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Mercado Pago",
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para SmallCaps Diamantes.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - SmallCaps Diamantes",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para SmallCaps Diamantes. Foco em MRR de R$ 36.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para smallcapsdiamantes.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Mercado Pago, Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 96,
+      "sector": "paid_curation",
+      "name": "EcommTrends Global",
+      "role": "Produtos Virais em Ascensão no TikTok e AliExpress antes de Estourarem",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 21500,
+      "currency": "BRL",
+      "uptimeHours": 167.25,
+      "iterationCount": 54,
+      "requiredDomain": "ecommtrendsglobal.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Lemon Squeezy"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para EcommTrends Global.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - EcommTrends Global",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para EcommTrends Global. Foco em MRR de R$ 21.500/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para ecommtrendsglobal.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Lemon Squeezy."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 97,
+      "sector": "paid_curation",
+      "name": "CyberThreat Intel Brief",
+      "role": "Boletim Executivo Semanal de Vulnerabilidades Críticas para CISOs",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 31000,
+      "currency": "BRL",
+      "uptimeHours": 124.25,
+      "iterationCount": 46,
+      "requiredDomain": "cyberthreatintelbrief.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para CyberThreat Intel Brief.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - CyberThreat Intel Brief",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para CyberThreat Intel Brief. Foco em MRR de R$ 31.000/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para cyberthreatintelbrief.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 98,
+      "sector": "paid_curation",
+      "name": "LegalTech JurisInova",
+      "role": "Inteligência de Decisões do STJ e STF com Impacto Tributário para Empresas",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 24800,
+      "currency": "BRL",
+      "uptimeHours": 159.25,
+      "iterationCount": 50,
+      "requiredDomain": "jurisnovalegaltech.com.br",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Asaas"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para LegalTech JurisInova.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - LegalTech JurisInova",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para LegalTech JurisInova. Foco em MRR de R$ 24.800/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para jurisnovalegaltech.com.br",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Asaas."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 99,
+      "sector": "paid_curation",
+      "name": "RemoteJobs Dev Internacional",
+      "role": "Vagas Remotas em Dólar e Euro com Salários Acima de $6.000/mês",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 18200,
+      "currency": "BRL",
+      "uptimeHours": 120.25,
+      "iterationCount": 54,
+      "requiredDomain": "remotejobsdevint.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Stripe"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para RemoteJobs Dev Internacional.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - RemoteJobs Dev Internacional",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para RemoteJobs Dev Internacional. Foco em MRR de R$ 18.200/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para remotejobsdevint.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Stripe."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    },
+    {
+      "id": 100,
+      "sector": "paid_curation",
+      "name": "BioTech Longevidade Report",
+      "role": "Investimentos em Biotecnologia, Saúde Celular e Medicina Preventiva",
+      "status": "EXECUTANDO",
+      "projectedRevenueBRL": 22700,
+      "currency": "BRL",
+      "uptimeHours": 125.25,
+      "iterationCount": 47,
+      "requiredDomain": "biotechlongevidade.com",
+      "domainStatus": "AGUARDANDO_COMPRA",
+      "requiredCredentials": [
+        "Substack Pro"
+      ],
+      "credentialsStatus": "AGUARDANDO_CONFIG",
+      "currentMission": "Construindo arquitetura de conversão e esteira operacional de monetização para BioTech Longevidade Report.",
+      "deliverables": [
+        {
+          "type": "PRD",
+          "title": "Especificação de Produto & Modelo de Receita - BioTech Longevidade Report",
+          "date": "2026-11-05T15:22:53.607Z",
+          "ready": true,
+          "content": "Engenharia completa de monetização e pricing para BioTech Longevidade Report. Foco em MRR de R$ 22.700/mês."
+        },
+        {
+          "type": "ARQUITETURA",
+          "title": "Stack de Software & Infraestrutura para biotechlongevidade.com",
+          "date": "2026-11-06T03:22:53.607Z",
+          "ready": true,
+          "content": "Código pronto para deploy em VPS/Edge. Gateway integrado: Substack Pro."
+        }
+      ],
+      "lastActivity": "2026-11-06T15:23:03.619Z",
+      "orderHistory": []
+    }
+  ]
+}

@@ -34,6 +34,7 @@ import { continuousLearningValidator } from './engine/continuous_learning_valida
 import { serverI18n } from './engine/i18n_server.js';
 import { globalOmniscienceRAG } from './engine/global_omniscience_rag.js';
 import { worldLearnerOrganism } from './engine/world_learner_organism.js';
+import { swarm100Engine } from './engine/swarm_100_engine.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -1888,6 +1889,52 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // 6n. Exclusive Sovereign Swarm of 100 Autonomous Superintelligence Agents (/api/swarm/*)
+  if (pathname.startsWith('/api/swarm')) {
+    try {
+      // 1. Estado Completo do Enxame (Agentes, Métricas Financeiras MRR, Domínios e Credenciais)
+      if (req.method === 'GET' && pathname === '/api/swarm/state') {
+        const sector = url.searchParams.get('sector') || null;
+        const state = swarm100Engine.getSwarmState(sector);
+        return jsonResponse(res, 200, state);
+      }
+
+      // 2. Transmissão de Ordem Soberana (Global ou Agente Individual)
+      if (req.method === 'POST' && pathname === '/api/swarm/order') {
+        const body = await parseJsonBody(req);
+        const orderRes = swarm100Engine.executeCreatorOrder({
+          agentId: body.agentId,
+          sectorId: body.sectorId,
+          order: body.order,
+          requestedDeliverableType: body.deliverableType || 'DOCUMENTO'
+        });
+        return jsonResponse(res, orderRes.success ? 200 : 400, orderRes);
+      }
+
+      // 3. Controle Perpétuo de Estado (Pausar / Retomar Execução)
+      if (req.method === 'POST' && pathname === '/api/swarm/agent-control') {
+        const body = await parseJsonBody(req);
+        const ctrlRes = swarm100Engine.setAgentState(body.agentId, body.status);
+        return jsonResponse(res, ctrlRes.success ? 200 : 400, ctrlRes);
+      }
+
+      // 4. Exclusão Permanente de Agente pelo Criador
+      if (req.method === 'DELETE' && pathname.startsWith('/api/swarm/agent/')) {
+        const agentId = pathname.slice('/api/swarm/agent/'.length).trim();
+        const delRes = swarm100Engine.deleteAgent(agentId);
+        return jsonResponse(res, delRes.success ? 200 : 400, delRes);
+      }
+
+      // 5. Restauração do Enxame (Hard Reset)
+      if (req.method === 'POST' && pathname === '/api/swarm/reset') {
+        const resetRes = swarm100Engine.resetSwarm();
+        return jsonResponse(res, 200, resetRes);
+      }
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
   // 7. Static File Serving + Clean SPA Route Fallback (/aura, /neural, /agents, /knowledge, /studio, /proofs, /guide, /articles, /faq, /about, /earth)
   const SPA_ROUTES = new Set([
     '/',
@@ -1919,12 +1966,19 @@ const server = http.createServer(async (req, res) => {
     '/sobre-nos',
     '/earth',
     '/geo',
-    '/geolocalizacao'
+    '/geolocalizacao',
+    '/enxame-100',
+    '/swarm-100'
   ]);
 
   // Creator-Only Redirect: /supervisor navigates to Master C2 Tab 10
   if (pathname === '/supervisor' || pathname === '/agente-supervisor') {
     res.writeHead(302, { 'Location': '/admin.html#tab-supervisor' });
+    return res.end();
+  }
+  // Creator-Only Redirect: /enxame-100 or /swarm-100 navigates directly to Master C2 Tab 12
+  if (pathname === '/enxame-100' || pathname === '/swarm-100' || pathname === '/enxame') {
+    res.writeHead(302, { 'Location': '/admin.html#tab-swarm-100' });
     return res.end();
   }
   // Mobile Native Experience, Admin & Legal Policy Routes

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nexus-pwa-v23';
+const CACHE_NAME = 'nexus-pwa-v25';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -7,6 +7,8 @@ const CORE_ASSETS = [
   '/mobile.js',
   '/voice_engine.js',
   '/quantum_holo_3d.js',
+  '/floating_nexus.js',
+  '/swarm_100_ui.js',
   '/style.css',
   '/auth.css',
   '/manifest.json',
