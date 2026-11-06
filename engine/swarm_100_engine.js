@@ -18,6 +18,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { privacyVaultShield } from './privacy_vault_shield.js';
 import { ML_SECTORS, ML_50_AGENTS } from './ml_affiliates_blueprints.js';
+import { REAL_ML_PRODUCTS, getProductForAgent } from './ml_active_products_catalog.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -220,20 +221,36 @@ class Swarm100Engine {
 
   _createAgentFromBlueprint(bp, type = 'DIGITAL_MONETIZATION') {
     const isML = type === 'MERCADO_LIVRE_HUB_AFFILIATE';
+    const assignedProduct = isML ? getProductForAgent(bp.id, bp.sector) : null;
+
     const baseDeliverables = isML ? [
+      {
+        type: 'PRODUTO_AFILIADO_ATIVO',
+        title: `Campanha de Conversão Imediata: ${assignedProduct.title.substring(0, 50)}...`,
+        date: new Date(Date.now() - 3600000 * 2).toISOString(),
+        ready: true,
+        content: [
+          `# CAMPANHA ATIVA DE AFILIADO MERCADO LIVRE (${assignedProduct.badge})`,
+          `**Produto Oficial**: ${assignedProduct.title}`,
+          `**Preço Normal**: ${assignedProduct.oldPrice} | **Preço Oferta**: ${assignedProduct.currentPrice} (${assignedProduct.discount})`,
+          `**Parcelamento**: ${assignedProduct.installments}`,
+          `**Comissão Estimada por Venda**: ${assignedProduct.commissionRate} (aprox. R$ ${assignedProduct.estCommissionBRL.toFixed(2)})`,
+          `**Público-Alvo Definido**: ${assignedProduct.targetAudience}`,
+          `**Tag de Rastreamento**: ${assignedProduct.tag}`,
+          `--------------------------------------------------------------------------------`,
+          `## LINK DE AFILIADO OFICIAL PRONTO PARA MONETIZAR:`,
+          `${assignedProduct.directHubUrl}`,
+          `--------------------------------------------------------------------------------`,
+          `## SCRIPT DE VENDA (COPY PRONTA PARA WHATSAPP / TIKTOK / REELS):`,
+          `"🚨 OPORTUNIDADE: ${assignedProduct.title} com ${assignedProduct.discount}! De ${assignedProduct.oldPrice} por apenas ${assignedProduct.currentPrice} no Mercado Livre! Aproveite antes que acabe o estoque FULL: ${assignedProduct.directHubUrl}"`
+        ].join('\n')
+      },
       {
         type: 'ESTRATEGIA_AFILIADO_ML',
         title: `Esteira de Conversão Mercado Livre Afiliados - ${bp.name}`,
         date: new Date(Date.now() - 3600000 * 24).toISOString(),
         ready: true,
         content: `Arquitetura de tráfego orgânico e qualificado direcionando vendas para a conta oficial CASTILLOOFFICIAL no Mercado Livre. Comissão projetada: R$ ${bp.mrr.toLocaleString('pt-BR')}/mês.`
-      },
-      {
-        type: 'PIPELINE_CUPONS_DEALS',
-        title: `Mapeamento de Ofertas FULL & Cupons Relâmpago`,
-        date: new Date(Date.now() - 3600000 * 12).toISOString(),
-        ready: true,
-        content: `Algoritmo de rastreamento com filtro FULL e frete grátis ativado. Links oficiais gerados via Hub Afiliados: https://www.mercadolivre.com.br/afiliados/hub?is_affiliate=true#menu-user`
       }
     ] : [
       {
@@ -267,10 +284,25 @@ class Swarm100Engine {
       requiredCredentials: bp.creds,
       credentialsStatus: isML ? 'CONECTADO_HUB_AFILIADOS' : 'AGUARDANDO_CONFIG',
       affiliateProfile: isML ? 'CASTILLOOFFICIAL' : null,
+      activeProduct: assignedProduct ? {
+        title: assignedProduct.title,
+        price: assignedProduct.currentPrice,
+        discount: assignedProduct.discount,
+        commission: assignedProduct.commissionRate,
+        tag: assignedProduct.tag,
+        link: assignedProduct.directHubUrl
+      } : null,
       currentMission: isML 
-        ? `Rastreando produtos mais vendidos, cupons e disparando campanhas de tráfego com links afiliados oficiais para ${bp.name}.`
+        ? `Operando campanha ativa para "${assignedProduct ? assignedProduct.title.substring(0, 45) : bp.name}" com comissão de ${assignedProduct ? assignedProduct.commissionRate : '12%'}.`
         : `Construindo arquitetura de conversão e esteira operacional de monetização para ${bp.name}.`,
       deliverables: baseDeliverables,
+      customConfigs: {
+        domain: bp.domain || '',
+        apiKey: '',
+        customLink: isML && assignedProduct ? assignedProduct.directHubUrl : '',
+        confirmedByCreator: false,
+        lastConfigUpdate: null
+      },
       lastActivity: new Date().toISOString(),
       orderHistory: []
     };
@@ -513,6 +545,53 @@ class Swarm100Engine {
       `[ ] 2. Fornecer as credenciais no .env: ${agent.requiredCredentials.map(c => c.toUpperCase().replace(/\s+/g, '_') + '_KEY').join(', ')}`,
       `[x] 3. O agente assume 100% da operação perpétua, manutenção contínua e correção de bugs 24 horas por dia.`
     ].join('\n');
+  }
+
+  updateAgentConfig(agentId, { domain, apiKey, customLink, confirmed = true }) {
+    const parsedId = parseInt(agentId, 10);
+    const agent = this.agents.get(parsedId);
+    if (!agent) {
+      return { success: false, error: `Agente #${parsedId} não encontrado.` };
+    }
+
+    if (!agent.customConfigs) {
+      agent.customConfigs = {};
+    }
+
+    if (domain !== undefined && domain !== null) {
+      agent.customConfigs.domain = String(domain).trim();
+      agent.requiredDomain = agent.customConfigs.domain || agent.requiredDomain;
+      agent.domainStatus = agent.customConfigs.domain ? 'CONFIGURADO' : agent.domainStatus;
+    }
+
+    if (apiKey !== undefined && apiKey !== null) {
+      // Blindagem prévia da API Key no Vault
+      agent.customConfigs.apiKey = privacyVaultShield.sanitizeForGlobalWeb(String(apiKey).trim());
+      agent.credentialsStatus = agent.customConfigs.apiKey ? 'VALIDADO' : agent.credentialsStatus;
+    }
+
+    if (customLink !== undefined && customLink !== null) {
+      agent.customConfigs.customLink = String(customLink).trim();
+      if (agent.activeProduct) {
+        agent.activeProduct.link = agent.customConfigs.customLink || agent.activeProduct.link;
+      }
+    }
+
+    agent.customConfigs.confirmedByCreator = !!confirmed;
+    agent.customConfigs.lastConfigUpdate = new Date().toISOString();
+    agent.status = 'EXECUTANDO'; // Garante retomada imediata ao confirmar
+    agent.lastActivity = new Date().toISOString();
+    agent.currentMission = `Parâmetros confirmados pelo criador. Executando em alta intensidade operacional com domínio [${agent.requiredDomain}] e credenciais validadas.`;
+
+    this.saveState();
+
+    return {
+      success: true,
+      agentId: parsedId,
+      name: agent.name,
+      customConfigs: agent.customConfigs,
+      message: `Configuração do Agente #${parsedId} salva e confirmada com sucesso! O agente já está trabalhando com os novos dados.`
+    };
   }
 
   setAgentState(agentId, newStatus) {

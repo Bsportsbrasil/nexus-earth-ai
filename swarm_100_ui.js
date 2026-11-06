@@ -325,23 +325,31 @@ const Swarm100UI = (() => {
           </div>
 
           <!-- Actions Toolbar -->
-          <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:0.75rem; display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
+          <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:0.75rem; display:flex; flex-direction:column; gap:0.45rem;">
             
-            <button class="btn-secondary" onclick="Swarm100UI.viewDeliverable(${agent.id})" style="font-size:0.7rem; padding:0.35rem 0.6rem; flex:1; display:flex; align-items:center; justify-content:center; gap:4px;" title="Ver Projetos, Códigos e PRDs">
-              <span>📄 Projetos (${delivCount})</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
+              <button class="btn-secondary" onclick="Swarm100UI.viewDeliverable(${agent.id})" style="font-size:0.7rem; padding:0.35rem 0.6rem; flex:1; display:flex; align-items:center; justify-content:center; gap:4px;" title="Ver Projetos, Campanhas e Códigos">
+                <span>📄 Campanhas &amp; Ações (${delivCount})</span>
+              </button>
+
+              <button class="btn-secondary" onclick="Swarm100UI.promptAgentOrder(${agent.id}, '${agent.name}')" style="font-size:0.7rem; padding:0.35rem 0.6rem; flex:1; border-color:rgba(0,245,255,0.3); color:#38bdf8;" title="Dar Ordem Direta a este Agente">
+                <span>⚡ Ordenar</span>
+              </button>
+
+              <button class="btn-secondary" onclick="Swarm100UI.toggleAgent(${agent.id}, '${isRunning ? 'PAUSADO' : 'EXECUTANDO'}')" style="font-size:0.7rem; padding:0.35rem 0.5rem; color:${isRunning ? '#fbbf24' : '#10b981'};" title="${isRunning ? 'Pausar Operação' : 'Retomar Operação'}">
+                ${isRunning ? '⏸️' : '▶️'}
+              </button>
+
+              <button class="btn-secondary" onclick="Swarm100UI.deleteAgent(${agent.id}, '${agent.name}')" style="font-size:0.7rem; padding:0.35rem 0.45rem; border-color:rgba(239,68,68,0.25); color:#f87171;" title="Excluir Agente Definitivamente">
+                🗑️
+              </button>
+            </div>
+
+            <!-- Single-Click Config & Confirmation Panel Trigger -->
+            <button class="btn-primary" onclick="Swarm100UI.openConfigModal(${agent.id})" style="font-size:0.68rem; padding:0.35rem 0.6rem; width:100%; display:flex; align-items:center; justify-content:center; gap:6px; background:linear-gradient(135deg, rgba(0,245,255,0.15), rgba(16,185,129,0.2)); border:1px solid rgba(0,245,255,0.3); color:#e2e8f0;">
+              <span>⚙️ Passar Dados / Domínio / API / Confirmar</span>
             </button>
 
-            <button class="btn-secondary" onclick="Swarm100UI.promptAgentOrder(${agent.id}, '${agent.name}')" style="font-size:0.7rem; padding:0.35rem 0.6rem; flex:1; border-color:rgba(0,245,255,0.3); color:#38bdf8;" title="Dar Ordem Direta a este Agente">
-              <span>⚡ Ordenar</span>
-            </button>
-
-            <button class="btn-secondary" onclick="Swarm100UI.toggleAgent(${agent.id}, '${isRunning ? 'PAUSADO' : 'EXECUTANDO'}')" style="font-size:0.7rem; padding:0.35rem 0.5rem; color:${isRunning ? '#fbbf24' : '#10b981'};" title="${isRunning ? 'Pausar Operação' : 'Retomar Operação'}">
-              ${isRunning ? '⏸️' : '▶️'}
-            </button>
-
-            <button class="btn-secondary" onclick="Swarm100UI.deleteAgent(${agent.id}, '${agent.name}')" style="font-size:0.7rem; padding:0.35rem 0.45rem; border-color:rgba(239,68,68,0.25); color:#f87171;" title="Excluir Agente Definitivamente">
-              🗑️
-            </button>
           </div>
 
         </div>
@@ -444,6 +452,75 @@ const Swarm100UI = (() => {
     modal.style.display = 'flex';
   }
 
+  function openConfigModal(agentId) {
+    if (!swarmState || !swarmState.agents) return;
+    const agent = swarmState.agents.find(a => a.id === agentId);
+    if (!agent) return;
+
+    const modal = document.getElementById('swarm-config-modal');
+    const titleEl = document.getElementById('swarm-config-agent-title');
+    const roleEl = document.getElementById('swarm-config-agent-role');
+    const idInput = document.getElementById('swarm-config-agent-id');
+    const domainInput = document.getElementById('swarm-config-domain');
+    const apiKeyInput = document.getElementById('swarm-config-apikey');
+    const linkInput = document.getElementById('swarm-config-link');
+
+    if (!modal || !titleEl) return;
+
+    titleEl.textContent = `#${agent.id} • ${agent.name}`;
+    roleEl.textContent = agent.role;
+    idInput.value = agent.id;
+
+    const cfgs = agent.customConfigs || {};
+    domainInput.value = cfgs.domain || agent.requiredDomain || '';
+    apiKeyInput.value = cfgs.apiKey || '';
+    linkInput.value = cfgs.customLink || (agent.activeProduct ? agent.activeProduct.link : '');
+
+    modal.style.display = 'flex';
+  }
+
+  async function submitAgentConfig() {
+    const idInput = document.getElementById('swarm-config-agent-id');
+    const domainInput = document.getElementById('swarm-config-domain');
+    const apiKeyInput = document.getElementById('swarm-config-apikey');
+    const linkInput = document.getElementById('swarm-config-link');
+    const modal = document.getElementById('swarm-config-modal');
+    const saveBtn = document.getElementById('swarm-config-save-btn');
+
+    if (!idInput) return;
+    const agentId = idInput.value;
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Salvando & Confirmando...';
+
+    try {
+      const res = await fetch('/api/swarm/agent-config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          agentId,
+          domain: domainInput ? domainInput.value.trim() : '',
+          apiKey: apiKeyInput ? apiKeyInput.value.trim() : '',
+          customLink: linkInput ? linkInput.value.trim() : '',
+          confirmed: true
+        })
+      });
+      const json = await res.json();
+      if (json.success) {
+        alert(json.message || 'Configuração confirmada com sucesso!');
+        modal.style.display = 'none';
+        await fetchState();
+      } else {
+        alert('Erro: ' + (json.error || 'Falha ao salvar.'));
+      }
+    } catch (e) {
+      alert('Erro de rede: ' + e.message);
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = '✓ Confirmar e Colocar em Operação';
+    }
+  }
+
   // Inicialização Automática quando o DOM estiver pronto
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -457,7 +534,9 @@ const Swarm100UI = (() => {
     toggleAgent,
     deleteAgent,
     promptAgentOrder,
-    viewDeliverable
+    viewDeliverable,
+    openConfigModal,
+    submitAgentConfig
   };
 })();
 

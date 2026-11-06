@@ -1918,6 +1918,18 @@ const server = http.createServer(async (req, res) => {
         return jsonResponse(res, ctrlRes.success ? 200 : 400, ctrlRes);
       }
 
+      // 3b. Atualização e Confirmação de Parâmetros, Domínios e Credenciais (/api/swarm/agent-config)
+      if (req.method === 'POST' && pathname === '/api/swarm/agent-config') {
+        const body = await parseJsonBody(req);
+        const cfgRes = swarm100Engine.updateAgentConfig(body.agentId, {
+          domain: body.domain,
+          apiKey: body.apiKey,
+          customLink: body.customLink,
+          confirmed: body.confirmed !== false
+        });
+        return jsonResponse(res, cfgRes.success ? 200 : 400, cfgRes);
+      }
+
       // 4. Exclusão Permanente de Agente pelo Criador
       if (req.method === 'DELETE' && pathname.startsWith('/api/swarm/agent/')) {
         const agentId = pathname.slice('/api/swarm/agent/'.length).trim();
