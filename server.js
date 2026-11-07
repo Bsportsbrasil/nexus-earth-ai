@@ -1930,6 +1930,13 @@ const server = http.createServer(async (req, res) => {
         return jsonResponse(res, cfgRes.success ? 200 : 400, cfgRes);
       }
 
+      // 3c. Chat Interativo em Tempo Real com o Agente (/api/swarm/agent-chat)
+      if (req.method === 'POST' && pathname === '/api/swarm/agent-chat') {
+        const body = await parseJsonBody(req);
+        const chatRes = await swarm100Engine.chatWithAgent(body.agentId, body.message);
+        return jsonResponse(res, chatRes.success ? 200 : 400, chatRes);
+      }
+
       // 4. Exclusão Permanente de Agente pelo Criador
       if (req.method === 'DELETE' && pathname.startsWith('/api/swarm/agent/')) {
         const agentId = pathname.slice('/api/swarm/agent/'.length).trim();

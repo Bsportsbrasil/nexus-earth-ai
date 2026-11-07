@@ -4005,5 +4005,50 @@
         "color": "#38bdf8"
       }
     ]
+  },
+  {
+    "id": "proj_1794083992988_8v0ye",
+    "title": "Projeto Salvo via Teste",
+    "description": "",
+    "created": "2026-11-07T20:39:52.988Z",
+    "updated": "2026-11-07T20:39:52.988Z",
+    "center": {
+      "lat": -37.81365318,
+      "lon": 144.96255856,
+      "zoom": 15
+    },
+    "features": [
+      {
+        "id": "kml_1794083992985_0",
+        "type": "Point",
+        "name": "Vértice Central",
+        "description": "Ponto de referência KML",
+        "coordinates": [
+          144.96255856,
+          -37.81365318,
+          25
+        ],
+        "color": "#00f5ff"
+      },
+      {
+        "id": "kml_line_1794083992987_1",
+        "type": "LineString",
+        "name": "Trajeto de Teste",
+        "description": "",
+        "coordinates": [
+          [
+            144.96,
+            -37.815,
+            0
+          ],
+          [
+            144.965,
+            -37.816,
+            0
+          ]
+        ],
+        "color": "#38bdf8"
+      }
+    ]
   }
 ]

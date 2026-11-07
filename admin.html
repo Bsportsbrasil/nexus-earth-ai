@@ -1943,6 +1943,46 @@
       </div>
     </div>
 
+    <!-- Interactive Direct Agent Chat Modal (Talk with Agent to update, continue or adjust project) -->
+    <div id="swarm-chat-modal" class="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:99999; align-items:center; justify-content:center;">
+      <div class="modal-box glass-panel" style="width:min(720px, 94vw); height:min(640px, 88vh); display:flex; flex-direction:column; padding:1.25rem; border:1px solid rgba(0,245,255,0.35); border-radius:14px; background:rgba(10,15,30,0.96);">
+        
+        <!-- Header -->
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.75rem; margin-bottom:0.85rem;">
+          <div>
+            <div id="swarm-chat-agent-title" style="font-family:var(--font-display); font-size:1.15rem; font-weight:700; color:#00f5ff; display:flex; align-items:center; gap:6px;">
+              💬 Conversar com Agente
+            </div>
+            <div id="swarm-chat-agent-meta" style="font-size:0.7rem; color:#94a3b8; font-family:var(--font-mono); margin-top:2px;">
+              Atuando com Superinteligência Dedicada ao Projeto
+            </div>
+          </div>
+          <button onclick="document.getElementById('swarm-chat-modal').style.display='none'" class="btn-secondary" style="padding:4px 10px; font-size:0.75rem;">✕ Fechar</button>
+        </div>
+
+        <input type="hidden" id="swarm-chat-agent-id" />
+
+        <!-- Messages Flow -->
+        <div id="swarm-chat-messages" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:8px; padding:0.75rem; background:rgba(2,6,23,0.7); border:1px solid rgba(255,255,255,0.06); border-radius:8px; margin-bottom:0.85rem;">
+          <!-- Dynamically populated by renderChatHistory -->
+        </div>
+
+        <!-- Input Box -->
+        <div style="display:flex; gap:8px; align-items:center;">
+          <input type="text" id="swarm-chat-input" class="text-input" placeholder="Digite sua mensagem, link, nova instrução ou alteração de rumo para o agente..." style="flex:1; font-size:0.82rem; padding:0.6rem 0.85rem;" onkeydown="if(event.key==='Enter') Swarm100UI.sendAgentChatMessage()" />
+          <button id="swarm-chat-send-btn" class="btn-primary" onclick="Swarm100UI.sendAgentChatMessage()" style="font-size:0.8rem; padding:0.6rem 1.2rem; background:#00f5ff; color:#020617; font-weight:800; white-space:nowrap;">
+            Enviar ⚡
+          </button>
+        </div>
+
+        <div style="font-size:0.65rem; color:#64748b; font-family:var(--font-mono); margin-top:6px; display:flex; justify-content:space-between;">
+          <span>🛡️ Todas as informações inseridas são blindadas pelo PrivacyVaultShield.</span>
+          <span>Pressione [Enter] para enviar</span>
+        </div>
+
+      </div>
+    </div>
+
 
         <!-- Formal Legal / Technical Markdown Dossier Viewer Modal -->
     <div id="xai-dossier-modal" class="modal">

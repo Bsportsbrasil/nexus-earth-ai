@@ -318,6 +318,26 @@ const Swarm100UI = (() => {
               </div>
             </div>
 
+            <!-- Project Progress Indicator & Visual Status -->
+            <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.06); border-radius:6px; padding:0.6rem; margin-bottom:0.75rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <span style="font-size:0.65rem; color:#94a3b8; font-family:var(--font-mono); font-weight:700;">ANDAMENTO DO PROJETO:</span>
+                <span style="font-size:0.7rem; font-weight:800; color:${isRunning ? '#10b981' : '#f59e0b'}; font-family:var(--font-mono);">
+                  ${agent.projectProgress ? agent.projectProgress.progressPercent : (isRunning ? 75 : 0)}%
+                </span>
+              </div>
+              
+              <!-- Progress Bar -->
+              <div style="width:100%; height:6px; background:rgba(255,255,255,0.08); border-radius:3px; overflow:hidden; margin-bottom:6px;">
+                <div style="width:${agent.projectProgress ? agent.projectProgress.progressPercent : (isRunning ? 75 : 0)}%; height:100%; background:linear-gradient(90deg, #00f5ff, #10b981); transition:width 0.4s ease;"></div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; font-size:0.65rem; color:#64748b; font-family:var(--font-mono);">
+                <span>Fase: <strong style="color:#e2e8f0">${agent.projectProgress ? agent.projectProgress.stage : (isRunning ? 'OPERANDO' : 'PARADO')}</strong></span>
+                <span style="color:#38bdf8">${isRunning ? '⚡ Projeto Ativo' : '⏸️ Projeto Pausado'}</span>
+              </div>
+            </div>
+
             <!-- Current Mission -->
             <div style="font-size:0.68rem; color:#64748b; margin-bottom:10px; font-family:var(--font-mono); line-height:1.3;">
               <span style="color:#e2e8f0; font-weight:600;">Missão Atual:</span> ${agent.currentMission || 'Em execução contínua.'}
@@ -328,27 +348,31 @@ const Swarm100UI = (() => {
           <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:0.75rem; display:flex; flex-direction:column; gap:0.45rem;">
             
             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
-              <button class="btn-secondary" onclick="Swarm100UI.viewDeliverable(${agent.id})" style="font-size:0.7rem; padding:0.35rem 0.6rem; flex:1; display:flex; align-items:center; justify-content:center; gap:4px;" title="Ver Projetos, Campanhas e Códigos">
-                <span>📄 Campanhas &amp; Ações (${delivCount})</span>
+              <!-- Start / Pause Toggle Button -->
+              <button class="btn-secondary" onclick="Swarm100UI.toggleAgent(${agent.id}, '${isRunning ? 'PAUSADO' : 'EXECUTANDO'}')" style="font-size:0.7rem; padding:0.4rem 0.6rem; flex:1.2; font-weight:700; background:${isRunning ? 'rgba(239,68,68,0.1)' : 'rgba(16,185,129,0.15)'}; border-color:${isRunning ? 'rgba(239,68,68,0.3)' : 'rgba(16,185,129,0.4)'}; color:${isRunning ? '#f87171' : '#10b981'}; display:flex; align-items:center; justify-content:center; gap:4px;" title="${isRunning ? 'Parar este Projeto' : 'Iniciar este Projeto'}">
+                <span>${isRunning ? '⏸️ Parar Projeto' : '▶️ Iniciar Projeto'}</span>
               </button>
 
-              <button class="btn-secondary" onclick="Swarm100UI.promptAgentOrder(${agent.id}, '${agent.name}')" style="font-size:0.7rem; padding:0.35rem 0.6rem; flex:1; border-color:rgba(0,245,255,0.3); color:#38bdf8;" title="Dar Ordem Direta a este Agente">
-                <span>⚡ Ordenar</span>
+              <!-- Interactive Direct Agent Chat -->
+              <button class="btn-primary" onclick="Swarm100UI.openAgentChatModal(${agent.id})" style="font-size:0.7rem; padding:0.4rem 0.6rem; flex:1.4; border-color:rgba(0,245,255,0.4); color:#020617; background:#00f5ff; font-weight:800; display:flex; align-items:center; justify-content:center; gap:4px;" title="Conversar em tempo real com este agente para alterar ou continuar o projeto">
+                <span>💬 Falar com Agente</span>
               </button>
 
-              <button class="btn-secondary" onclick="Swarm100UI.toggleAgent(${agent.id}, '${isRunning ? 'PAUSADO' : 'EXECUTANDO'}')" style="font-size:0.7rem; padding:0.35rem 0.5rem; color:${isRunning ? '#fbbf24' : '#10b981'};" title="${isRunning ? 'Pausar Operação' : 'Retomar Operação'}">
-                ${isRunning ? '⏸️' : '▶️'}
-              </button>
-
-              <button class="btn-secondary" onclick="Swarm100UI.deleteAgent(${agent.id}, '${agent.name}')" style="font-size:0.7rem; padding:0.35rem 0.45rem; border-color:rgba(239,68,68,0.25); color:#f87171;" title="Excluir Agente Definitivamente">
+              <button class="btn-secondary" onclick="Swarm100UI.deleteAgent(${agent.id}, '${agent.name}')" style="font-size:0.7rem; padding:0.4rem 0.5rem; border-color:rgba(239,68,68,0.25); color:#f87171;" title="Excluir Agente Definitivamente">
                 🗑️
               </button>
             </div>
 
-            <!-- Single-Click Config & Confirmation Panel Trigger -->
-            <button class="btn-primary" onclick="Swarm100UI.openConfigModal(${agent.id})" style="font-size:0.68rem; padding:0.35rem 0.6rem; width:100%; display:flex; align-items:center; justify-content:center; gap:6px; background:linear-gradient(135deg, rgba(0,245,255,0.15), rgba(16,185,129,0.2)); border:1px solid rgba(0,245,255,0.3); color:#e2e8f0;">
-              <span>⚙️ Passar Dados / Domínio / API / Confirmar</span>
-            </button>
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
+              <button class="btn-secondary" onclick="Swarm100UI.viewDeliverable(${agent.id})" style="font-size:0.68rem; padding:0.35rem 0.5rem; flex:1; display:flex; align-items:center; justify-content:center; gap:4px;" title="Ver Relatórios, Códigos e Links Gerados">
+                <span>📄 Entregas (${delivCount})</span>
+              </button>
+
+              <!-- Single-Click Config & Confirmation Panel Trigger -->
+              <button class="btn-secondary" onclick="Swarm100UI.openConfigModal(${agent.id})" style="font-size:0.68rem; padding:0.35rem 0.5rem; flex:1.6; display:flex; align-items:center; justify-content:center; gap:4px; border-color:rgba(16,185,129,0.3); color:#34d399;" title="Inserir Dados, Domínios ou Chaves de API">
+                <span>⚙️ Dados, Domínio &amp; API</span>
+              </button>
+            </div>
 
           </div>
 
@@ -521,6 +545,135 @@ const Swarm100UI = (() => {
     }
   }
 
+  function openAgentChatModal(agentId) {
+    if (!swarmState || !swarmState.agents) return;
+    const agent = swarmState.agents.find(a => a.id === agentId);
+    if (!agent) return;
+
+    const modal = document.getElementById('swarm-chat-modal');
+    const titleEl = document.getElementById('swarm-chat-agent-title');
+    const metaEl = document.getElementById('swarm-chat-agent-meta');
+    const idInput = document.getElementById('swarm-chat-agent-id');
+    const msgsContainer = document.getElementById('swarm-chat-messages');
+    const chatInput = document.getElementById('swarm-chat-input');
+
+    if (!modal || !titleEl || !msgsContainer) return;
+
+    titleEl.textContent = `💬 Conversar com #${agent.id} • ${agent.name}`;
+    metaEl.textContent = `${agent.role} | Status: ${agent.status} | Progresso: ${agent.projectProgress ? agent.projectProgress.progressPercent : 75}%`;
+    idInput.value = agent.id;
+
+    renderChatHistory(agent);
+
+    modal.style.display = 'flex';
+    if (chatInput) {
+      chatInput.value = '';
+      setTimeout(() => chatInput.focus(), 100);
+    }
+  }
+
+  function renderChatHistory(agent) {
+    const msgsContainer = document.getElementById('swarm-chat-messages');
+    if (!msgsContainer) return;
+
+    const history = agent.chatHistory || [];
+    if (history.length === 0) {
+      msgsContainer.innerHTML = `
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(0,245,255,0.2); border-radius:8px; padding:10px 14px; font-size:0.78rem; color:#cbd5e1; line-height:1.45;">
+          <strong>${agent.name} (Líder do Projeto):</strong> Olá Criador! Estou operando com foco total em ${agent.role}. Envie qualquer dúvida, link, alteração de rumo ou diretriz para continuarmos com máxima precisão.
+        </div>
+      `;
+      return;
+    }
+
+    msgsContainer.innerHTML = history.map(h => {
+      const isUser = h.sender === 'user';
+      return `
+        <div style="display:flex; flex-direction:column; align-self:${isUser ? 'flex-end' : 'flex-start'}; max-width:85%; margin-bottom:8px;">
+          <span style="font-size:0.62rem; color:#64748b; font-family:var(--font-mono); margin-bottom:2px; ${isUser ? 'text-align:right' : ''}">
+            ${isUser ? 'Você (Criador)' : agent.name} • ${new Date(h.timestamp || Date.now()).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+          </span>
+          <div style="background:${isUser ? 'linear-gradient(135deg, #0284c7, #2563eb)' : 'rgba(15,23,42,0.9)'}; color:#f8fafc; border:${isUser ? 'none' : '1px solid rgba(0,245,255,0.2)'}; border-radius:10px; padding:10px 14px; font-size:0.78rem; line-height:1.5; white-space:pre-wrap;">${h.message}</div>
+        </div>
+      `;
+    }).join('');
+
+    msgsContainer.scrollTop = msgsContainer.scrollHeight;
+  }
+
+  async function sendAgentChatMessage() {
+    const idInput = document.getElementById('swarm-chat-agent-id');
+    const input = document.getElementById('swarm-chat-input');
+    const sendBtn = document.getElementById('swarm-chat-send-btn');
+    const msgsContainer = document.getElementById('swarm-chat-messages');
+
+    if (!idInput || !input) return;
+    const agentId = idInput.value;
+    const message = input.value.trim();
+    if (!message) return;
+
+    // Renderiza mensagem do usuário imediatamente
+    const userBubble = document.createElement('div');
+    userBubble.style.cssText = 'display:flex; flex-direction:column; align-self:flex-end; max-width:85%; margin-bottom:8px;';
+    userBubble.innerHTML = `
+      <span style="font-size:0.62rem; color:#64748b; font-family:var(--font-mono); margin-bottom:2px; text-align:right">Você (Criador)</span>
+      <div style="background:linear-gradient(135deg, #0284c7, #2563eb); color:#f8fafc; border-radius:10px; padding:10px 14px; font-size:0.78rem; line-height:1.5;">${message}</div>
+    `;
+    msgsContainer.appendChild(userBubble);
+    msgsContainer.scrollTop = msgsContainer.scrollHeight;
+
+    input.value = '';
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Pensando...';
+
+    // Bubble temporária de carregamento
+    const loadingBubble = document.createElement('div');
+    loadingBubble.id = 'swarm-chat-loading-bubble';
+    loadingBubble.style.cssText = 'display:flex; flex-direction:column; align-self:flex-start; max-width:85%; margin-bottom:8px;';
+    loadingBubble.innerHTML = `
+      <span style="font-size:0.62rem; color:#64748b; font-family:var(--font-mono); margin-bottom:2px;">Agente</span>
+      <div style="background:rgba(15,23,42,0.9); border:1px solid rgba(0,245,255,0.2); color:#94a3b8; border-radius:10px; padding:10px 14px; font-size:0.78rem;">Processando raciocínio...</div>
+    `;
+    msgsContainer.appendChild(loadingBubble);
+    msgsContainer.scrollTop = msgsContainer.scrollHeight;
+
+    try {
+      const res = await fetch('/api/swarm/agent-chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ agentId, message })
+      });
+      const json = await res.json();
+
+      const loadingEl = document.getElementById('swarm-chat-loading-bubble');
+      if (loadingEl) loadingEl.remove();
+
+      if (json.success) {
+        const agentBubble = document.createElement('div');
+        agentBubble.style.cssText = 'display:flex; flex-direction:column; align-self:flex-start; max-width:85%; margin-bottom:8px;';
+        agentBubble.innerHTML = `
+          <span style="font-size:0.62rem; color:#64748b; font-family:var(--font-mono); margin-bottom:2px;">${json.name}</span>
+          <div style="background:rgba(15,23,42,0.9); border:1px solid rgba(0,245,255,0.2); color:#f8fafc; border-radius:10px; padding:10px 14px; font-size:0.78rem; line-height:1.5; white-space:pre-wrap;">${json.reply}</div>
+        `;
+        msgsContainer.appendChild(agentBubble);
+        msgsContainer.scrollTop = msgsContainer.scrollHeight;
+
+        // Atualiza o estado em memória local
+        const targetAgent = swarmState.agents.find(a => String(a.id) === String(agentId));
+        if (targetAgent) {
+          targetAgent.chatHistory = json.chatHistory;
+        }
+      } else {
+        alert('Erro ao falar com agente: ' + (json.error || 'Erro desconhecido'));
+      }
+    } catch (e) {
+      alert('Erro de conexão: ' + e.message);
+    } finally {
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Enviar ⚡';
+    }
+  }
+
   // Inicialização Automática quando o DOM estiver pronto
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -536,7 +689,9 @@ const Swarm100UI = (() => {
     promptAgentOrder,
     viewDeliverable,
     openConfigModal,
-    submitAgentConfig
+    submitAgentConfig,
+    openAgentChatModal,
+    sendAgentChatMessage
   };
 })();
 
