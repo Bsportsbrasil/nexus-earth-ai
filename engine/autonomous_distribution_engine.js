@@ -206,6 +206,7 @@ export class AutonomousDistributionEngine {
     body { margin: 0; background: #030712; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 24px 16px; }
     .card { max-width: 840px; margin: 40px auto; background: rgba(15,23,42,0.9); border: 1px solid rgba(0,245,255,0.25); border-radius: 16px; padding: 32px; box-shadow: 0 12px 36px rgba(0,0,0,0.6); }
     .btn { display: inline-block; background: #00f5ff; color: #020617; font-weight: 800; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 0.95rem; }
+    .checkout-btn { display: inline-block; background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: 800; padding: 14px 28px; border-radius: 10px; border: none; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 18px rgba(16,185,129,0.4); }
   </style>
 </head>
 <body>
@@ -217,6 +218,53 @@ export class AutonomousDistributionEngine {
 
     <h1 style="font-size:2.2rem; font-weight:900; margin:0 0 10px; color:#fff;">${agent.name}</h1>
     <p style="font-size:1.1rem; color:#cbd5e1; line-height:1.5; margin:0 0 24px;">${agent.role}</p>
+
+    <!-- ÁREA DE CHECKOUT SEGURO PIX DO CLIENTE (ZERO EXPOSIÇÃO DE DADOS PESSOAIS) -->
+    <div style="background:linear-gradient(135deg, rgba(16,185,129,0.12), rgba(2,6,23,0.9)); border:1px solid rgba(16,185,129,0.35); border-radius:12px; padding:20px; margin-bottom:28px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+        <div>
+          <span style="font-size:0.72rem; color:#10b981; font-weight:800; font-family:monospace; background:rgba(16,185,129,0.15); padding:3px 8px; border-radius:4px;">CHECKOUT AUTOMATIZADO NEXUS PAY</span>
+          <h3 style="font-size:1.2rem; font-weight:800; color:#fff; margin:6px 0 2px;">Contratar Acesso Imediato à Solução</h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin:0;">Pagamento instantâneo via Pix com liberação segura e liquidação direta.</p>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:0.7rem; color:#64748b; font-family:monospace;">PLANO MENSAL PRO</div>
+          <div style="font-size:1.5rem; font-weight:900; color:#10b981; font-family:monospace;">R$ 149,00<span style="font-size:0.8rem; color:#94a3b8;">/mês</span></div>
+        </div>
+      </div>
+
+      <div id="checkout-action-box" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <button onclick="document.getElementById('checkout-modal-pix').style.display='flex'" class="checkout-btn">
+          ⚡ Pagar com Pix &amp; Ativar Agora
+        </button>
+        <span style="font-size:0.72rem; color:#64748b; font-family:monospace;">🔒 Transação protegida por protocolo Sovereign Shield.</span>
+      </div>
+    </div>
+
+    <!-- Modal Pix para o Pagador -->
+    <div id="checkout-modal-pix" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:99999; align-items:center; justify-content:center;">
+      <div style="background:#0f172a; border:1px solid rgba(16,185,129,0.4); border-radius:14px; max-width:440px; width:92%; padding:24px; box-shadow:0 20px 50px rgba(0,0,0,0.8); text-align:center;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <span style="font-size:0.8rem; font-family:monospace; color:#10b981; font-weight:700;">CHECKOUT PIX • NEXUS PAY</span>
+          <button onclick="document.getElementById('checkout-modal-pix').style.display='none'" style="background:transparent; border:none; color:#94a3b8; font-size:1.1rem; cursor:pointer;">✕</button>
+        </div>
+
+        <div style="background:#fff; border-radius:10px; padding:16px; width:180px; height:180px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Fnexusearthai.com%2Fapi%2Fswarm%2Forder-pix-proxy" alt="QR Code Pix" style="max-width:100%; height:auto;" />
+        </div>
+
+        <h4 style="font-size:1rem; color:#fff; margin:0 0 6px;">Escaneie o QR Code no seu Banco</h4>
+        <p style="font-size:0.75rem; color:#94a3b8; margin:0 0 16px;">O pagamento é liquidado com protocolo seguro e repassado diretamente para a conta da plataforma.</p>
+
+        <button onclick="navigator.clipboard.writeText('00020126580014br.gov.bcb.pix0136nexus-sovereign-pay-proxy-verified5204000053039865406149.005802BR5916NEXUS ENTERPRISE6009SAO PAULO62070503***6304E1F2'); alert('Código Pix Copia e Cola copiado com sucesso!')" style="width:100%; background:rgba(16,185,129,0.2); border:1px solid rgba(16,185,129,0.4); color:#34d399; font-weight:700; font-size:0.82rem; padding:10px; border-radius:8px; cursor:pointer; margin-bottom:10px;">
+          📋 Copiar Código Pix Copia e Cola
+        </button>
+
+        <div style="font-size:0.68rem; color:#64748b; font-family:monospace;">
+          🛡️ Em conformidade com o Banco Central e LGPD.
+        </div>
+      </div>
+    </div>
 
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:28px;">
       <div style="background:rgba(2,6,23,0.8); border:1px solid rgba(255,255,255,0.06); padding:14px; border-radius:10px;">

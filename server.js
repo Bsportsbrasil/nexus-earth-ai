@@ -36,6 +36,7 @@ import { globalOmniscienceRAG } from './engine/global_omniscience_rag.js';
 import { worldLearnerOrganism } from './engine/world_learner_organism.js';
 import { swarm100Engine } from './engine/swarm_100_engine.js';
 import { autonomousDistributionEngine } from './engine/autonomous_distribution_engine.js';
+import { publicLinksManager } from './engine/public_links_manager.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -223,7 +224,7 @@ const server = http.createServer(async (req, res) => {
 
   if (req.method === 'GET' && pathname === '/sitemap.xml') {
     const today = new Date().toISOString().slice(0, 10);
-    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+    let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
@@ -241,7 +242,31 @@ const server = http.createServer(async (req, res) => {
       <image:caption>Plataforma de Superinteligência Cooperativa com Transparência Cognitiva Glass-Box, Multi-Agentes DAG, GraphRAG e Pedagogia Inclusiva TEA.</image:caption>
     </image:image>
   </url>
-</urlset>`;
+  <url>
+    <loc>${origin}/ofertas</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${origin}/projetos</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.95</priority>
+  </url>`;
+
+    // Indexa as 100 páginas individuais de projetos para o Google rastrear
+    for (let i = 1; i <= 100; i++) {
+      sitemap += `
+  <url>
+    <loc>${origin}/api/swarm/solution/${i}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+    }
+
+    sitemap += `\n</urlset>`;
     res.writeHead(200, { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=3600' });
     return res.end(sitemap);
   }
@@ -2029,6 +2054,49 @@ const server = http.createServer(async (req, res) => {
         fs.writeFileSync(payoutFile, JSON.stringify(payoutData, null, 2), 'utf8');
         return jsonResponse(res, 200, { success: true, message: 'Dados de recebimento salvos com sucesso.', payoutData });
       }
+
+      // 6e. Central Soberana de Links & Governança de Páginas (/api/admin/links)
+      if (req.method === 'GET' && pathname === '/api/admin/links') {
+        const authHeader = req.headers['authorization'] || '';
+        if (!securityController.verifyAdminToken(authHeader)) {
+          return jsonResponse(res, 401, { error: 'Acesso negado. Exclusivo para a Administradora Soberana.' });
+        }
+        return jsonResponse(res, 200, { success: true, links: publicLinksManager.getAllLinks() });
+      }
+
+      if (req.method === 'POST' && pathname === '/api/admin/links/status') {
+        const authHeader = req.headers['authorization'] || '';
+        if (!securityController.verifyAdminToken(authHeader)) {
+          return jsonResponse(res, 401, { error: 'Acesso negado. Exclusivo para a Administradora Soberana.' });
+        }
+        const body = await parseJsonBody(req);
+        const result = publicLinksManager.updateLinkStatus(body.id, body.status);
+        return jsonResponse(res, result.success ? 200 : 400, result);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/admin/links/edit') {
+        const authHeader = req.headers['authorization'] || '';
+        if (!securityController.verifyAdminToken(authHeader)) {
+          return jsonResponse(res, 401, { error: 'Acesso negado. Exclusivo para a Administradora Soberana.' });
+        }
+        const body = await parseJsonBody(req);
+        const result = publicLinksManager.updateLinkDetails(body.id, {
+          title: body.title,
+          description: body.description,
+          category: body.category
+        });
+        return jsonResponse(res, result.success ? 200 : 400, result);
+      }
+
+      if (req.method === 'DELETE' && pathname.startsWith('/api/admin/links/')) {
+        const authHeader = req.headers['authorization'] || '';
+        if (!securityController.verifyAdminToken(authHeader)) {
+          return jsonResponse(res, 401, { error: 'Acesso negado. Exclusivo para a Administradora Soberana.' });
+        }
+        const linkId = pathname.slice('/api/admin/links/'.length).trim();
+        const result = publicLinksManager.deleteLink(linkId);
+        return jsonResponse(res, result.success ? 200 : 400, result);
+      }
     } catch (e) {
       return jsonResponse(res, 500, { error: e.message });
     }
@@ -2069,6 +2137,12 @@ const server = http.createServer(async (req, res) => {
     '/enxame-100',
     '/swarm-100'
   ]);
+
+  // Public Access Governance: Se a rota foi bloqueada pelo criador no C2, retorna 403 amigável
+  if (publicLinksManager.isPathBlocked(pathname)) {
+    res.writeHead(403, { 'Content-Type': 'text/html; charset=utf-8' });
+    return res.end(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Página Indisponível</title></head><body style="background:#030712;color:#f8fafc;font-family:sans-serif;text-align:center;padding:60px 20px;"><div style="max-width:500px;margin:0 auto;background:#0f172a;border:1px solid rgba(255,255,255,0.1);padding:30px;border-radius:12px;"><h2>🔒 Página Temporariamente Bloqueada</h2><p style="color:#94a3b8;font-size:0.9rem;">Esta rota pública foi pausada para manutenção pelo controle administrativo soberano.</p><a href="/" style="color:#00f5ff;text-decoration:none;">Voltar para Início</a></div></body></html>`);
+  }
 
   // Public Autonomous Deals Showcase Route (/ofertas, /promocoes, /radar-ofertas)
   if (pathname === '/ofertas' || pathname === '/promocoes' || pathname === '/radar-ofertas' || pathname === '/achadinhos') {
