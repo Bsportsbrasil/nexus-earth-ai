@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-11-08T21:30:39.382Z",
+  "updatedAt": "2026-11-08T21:45:39.390Z",
   "totalAgents": 100,
-  "totalExecutionCycles": 98,
-  "lastLoopExecution": "2026-11-08T21:30:39.379Z",
+  "totalExecutionCycles": 99,
+  "lastLoopExecution": "2026-11-08T21:45:39.389Z",
   "agents": [
     {
       "id": 1,
@@ -12,8 +12,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 8500,
       "currency": "BRL",
-      "uptimeHours": 201.5,
-      "iterationCount": 151,
+      "uptimeHours": 201.75,
+      "iterationCount": 152,
       "requiredDomain": "nexusdocusign.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -95,7 +95,7 @@
           "content": "Código validado para produção em nexusdocusign.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -106,8 +106,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14200,
       "currency": "BRL",
-      "uptimeHours": 213.5,
-      "iterationCount": 142,
+      "uptimeHours": 213.75,
+      "iterationCount": 143,
       "requiredDomain": "promptshield.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -189,7 +189,7 @@
           "content": "Código validado para produção em promptshield.io."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -200,8 +200,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 6800,
       "currency": "BRL",
-      "uptimeHours": 187.5,
-      "iterationCount": 150,
+      "uptimeHours": 187.75,
+      "iterationCount": 151,
       "requiredDomain": "voicetranscribe.app",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -282,7 +282,7 @@
           "content": "Código validado para produção em voicetranscribe.app."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -293,8 +293,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 19500,
       "currency": "BRL",
-      "uptimeHours": 192.5,
-      "iterationCount": 147,
+      "uptimeHours": 192.75,
+      "iterationCount": 148,
       "requiredDomain": "fiscalaudit.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -376,7 +376,7 @@
           "content": "Código validado para produção em fiscalaudit.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -387,8 +387,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 5400,
       "currency": "BRL",
-      "uptimeHours": 214.5,
-      "iterationCount": 132,
+      "uptimeHours": 214.75,
+      "iterationCount": 133,
       "requiredDomain": "metatagpulse.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -476,7 +476,7 @@
           "content": "Código validado para produção em metatagpulse.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -487,8 +487,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 7200,
       "currency": "BRL",
-      "uptimeHours": 193.5,
-      "iterationCount": 140,
+      "uptimeHours": 193.75,
+      "iterationCount": 141,
       "requiredDomain": "feedsyncembed.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -569,7 +569,7 @@
           "content": "Código validado para produção em feedsyncembed.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -580,8 +580,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16800,
       "currency": "BRL",
-      "uptimeHours": 183.5,
-      "iterationCount": 135,
+      "uptimeHours": 183.75,
+      "iterationCount": 136,
       "requiredDomain": "leadenrich.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -662,7 +662,7 @@
           "content": "Código validado para produção em leadenrich.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -673,8 +673,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 4300,
       "currency": "BRL",
-      "uptimeHours": 146.5,
-      "iterationCount": 147,
+      "uptimeHours": 146.75,
+      "iterationCount": 148,
       "requiredDomain": "changelogauto.dev",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -755,7 +755,7 @@
           "content": "Código validado para produção em changelogauto.dev."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -766,8 +766,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 5900,
       "currency": "BRL",
-      "uptimeHours": 219.5,
-      "iterationCount": 142,
+      "uptimeHours": 219.75,
+      "iterationCount": 143,
       "requiredDomain": "pdfcompressedge.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -848,7 +848,7 @@
           "content": "Código validado para produção em pdfcompressedge.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -859,8 +859,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 6100,
       "currency": "BRL",
-      "uptimeHours": 149.5,
-      "iterationCount": 151,
+      "uptimeHours": 149.75,
+      "iterationCount": 152,
       "requiredDomain": "statuspulse.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -941,7 +941,7 @@
           "content": "Código validado para produção em statuspulse.io."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -952,8 +952,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18000,
       "currency": "BRL",
-      "uptimeHours": 153.5,
-      "iterationCount": 133,
+      "uptimeHours": 153.75,
+      "iterationCount": 134,
       "requiredDomain": "whatsagentimob.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1041,7 +1041,7 @@
           "content": "Código validado para produção em whatsagentimob.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -1052,8 +1052,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 22000,
       "currency": "BRL",
-      "uptimeHours": 166.5,
-      "iterationCount": 133,
+      "uptimeHours": 166.75,
+      "iterationCount": 134,
       "requiredDomain": "clinicflow.med.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1141,7 +1141,7 @@
           "content": "Código validado para produção em clinicflow.med.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -1152,8 +1152,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 26000,
       "currency": "BRL",
-      "uptimeHours": 206.5,
-      "iterationCount": 151,
+      "uptimeHours": 206.75,
+      "iterationCount": 152,
       "requiredDomain": "legaldraft.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1234,7 +1234,7 @@
           "content": "Código validado para produção em legaldraft.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -1245,8 +1245,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 12500,
       "currency": "BRL",
-      "uptimeHours": 155.5,
-      "iterationCount": 139,
+      "uptimeHours": 155.75,
+      "iterationCount": 140,
       "requiredDomain": "autoproposta.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1327,7 +1327,7 @@
           "content": "Código validado para produção em autoproposta.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -1338,8 +1338,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 15400,
       "currency": "BRL",
-      "uptimeHours": 181.5,
-      "iterationCount": 143,
+      "uptimeHours": 181.75,
+      "iterationCount": 144,
       "requiredDomain": "ticketresolve.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1418,9 +1418,16 @@
           "date": "2026-11-07T18:15:19.713Z",
           "ready": true,
           "content": "Código validado para produção em ticketresolve.io."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v14.0",
+          "date": "2026-11-08T21:45:39.389Z",
+          "ready": true,
+          "content": "Código validado para produção em ticketresolve.io."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -1431,8 +1438,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 17800,
       "currency": "BRL",
-      "uptimeHours": 171.5,
-      "iterationCount": 135,
+      "uptimeHours": 171.75,
+      "iterationCount": 136,
       "requiredDomain": "cobrancaamigavel.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1513,7 +1520,7 @@
           "content": "Código validado para produção em cobrancaamigavel.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.379Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -1524,8 +1531,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14900,
       "currency": "BRL",
-      "uptimeHours": 186.5,
-      "iterationCount": 132,
+      "uptimeHours": 186.75,
+      "iterationCount": 133,
       "requiredDomain": "rhscreening.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1613,7 +1620,7 @@
           "content": "Código validado para produção em rhscreening.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -1624,8 +1631,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16200,
       "currency": "BRL",
-      "uptimeHours": 179.5,
-      "iterationCount": 148,
+      "uptimeHours": 179.75,
+      "iterationCount": 149,
       "requiredDomain": "restaurantorder.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1706,7 +1713,7 @@
           "content": "Código validado para produção em restaurantorder.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -1717,8 +1724,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 11800,
       "currency": "BRL",
-      "uptimeHours": 174.5,
-      "iterationCount": 132,
+      "uptimeHours": 174.75,
+      "iterationCount": 133,
       "requiredDomain": "logisticstrack.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1806,7 +1813,7 @@
           "content": "Código validado para produção em logisticstrack.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -1817,8 +1824,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 13500,
       "currency": "BRL",
-      "uptimeHours": 146.5,
-      "iterationCount": 145,
+      "uptimeHours": 146.75,
+      "iterationCount": 146,
       "requiredDomain": "edututorbot.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1906,7 +1913,7 @@
           "content": "Código validado para produção em edututorbot.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -1917,8 +1924,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 24000,
       "currency": "BRL",
-      "uptimeHours": 169.5,
-      "iterationCount": 135,
+      "uptimeHours": 169.75,
+      "iterationCount": 136,
       "requiredDomain": "calculadorafinanceira.net.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -1999,7 +2006,7 @@
           "content": "Código validado para produção em calculadorafinanceira.net.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -2010,8 +2017,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 21000,
       "currency": "BRL",
-      "uptimeHours": 215.5,
-      "iterationCount": 133,
+      "uptimeHours": 215.75,
+      "iterationCount": 134,
       "requiredDomain": "guiaprevidencia.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2099,7 +2106,7 @@
           "content": "Código validado para produção em guiaprevidencia.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -2110,8 +2117,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18500,
       "currency": "BRL",
-      "uptimeHours": 204.5,
-      "iterationCount": 132,
+      "uptimeHours": 204.75,
+      "iterationCount": 133,
       "requiredDomain": "techcomparehub.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2199,7 +2206,7 @@
           "content": "Código validado para produção em techcomparehub.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -2210,8 +2217,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 12000,
       "currency": "BRL",
-      "uptimeHours": 167.5,
-      "iterationCount": 143,
+      "uptimeHours": 167.75,
+      "iterationCount": 144,
       "requiredDomain": "simuladorcusto.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2289,9 +2296,16 @@
           "date": "2026-11-07T18:15:19.713Z",
           "ready": true,
           "content": "Código validado para produção em simuladorcusto.com.br."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v14.0",
+          "date": "2026-11-08T21:45:39.389Z",
+          "ready": true,
+          "content": "Código validado para produção em simuladorcusto.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -2302,8 +2316,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 28000,
       "currency": "BRL",
-      "uptimeHours": 197.5,
-      "iterationCount": 136,
+      "uptimeHours": 197.75,
+      "iterationCount": 137,
       "requiredDomain": "saudebemestar.med.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2384,7 +2398,7 @@
           "content": "Código validado para produção em saudebemestar.med.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -2395,8 +2409,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16500,
       "currency": "BRL",
-      "uptimeHours": 153.5,
-      "iterationCount": 150,
+      "uptimeHours": 153.75,
+      "iterationCount": 151,
       "requiredDomain": "carroconsumo.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2476,7 +2490,7 @@
           "content": "Código validado para produção em carroconsumo.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -2487,8 +2501,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 31000,
       "currency": "BRL",
-      "uptimeHours": 213.5,
-      "iterationCount": 138,
+      "uptimeHours": 213.75,
+      "iterationCount": 139,
       "requiredDomain": "trabalhodireitos.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2569,7 +2583,7 @@
           "content": "Código validado para produção em trabalhodireitos.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -2580,8 +2594,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 19800,
       "currency": "BRL",
-      "uptimeHours": 152.5,
-      "iterationCount": 147,
+      "uptimeHours": 152.75,
+      "iterationCount": 148,
       "requiredDomain": "energiasolarcalculo.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2662,7 +2676,7 @@
           "content": "Código validado para produção em energiasolarcalculo.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -2673,8 +2687,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 25000,
       "currency": "BRL",
-      "uptimeHours": 156.5,
-      "iterationCount": 148,
+      "uptimeHours": 156.75,
+      "iterationCount": 149,
       "requiredDomain": "concursosradar.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2754,7 +2768,7 @@
           "content": "Código validado para produção em concursosradar.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -2765,8 +2779,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14000,
       "currency": "BRL",
-      "uptimeHours": 166.5,
-      "iterationCount": 148,
+      "uptimeHours": 166.75,
+      "iterationCount": 149,
       "requiredDomain": "viagembaratadicas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2847,7 +2861,7 @@
           "content": "Código validado para produção em viagembaratadicas.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -2858,8 +2872,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 29000,
       "currency": "BRL",
-      "uptimeHours": 202.5,
-      "iterationCount": 144,
+      "uptimeHours": 202.75,
+      "iterationCount": 145,
       "requiredDomain": "cloudhostcompare.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -2947,7 +2961,7 @@
           "content": "Código validado para produção em cloudhostcompare.io."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -2958,8 +2972,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 22500,
       "currency": "BRL",
-      "uptimeHours": 168.5,
-      "iterationCount": 146,
+      "uptimeHours": 168.75,
+      "iterationCount": 147,
       "requiredDomain": "saasreviewpro.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3040,7 +3054,7 @@
           "content": "Código validado para produção em saasreviewpro.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -3051,8 +3065,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 15300,
       "currency": "BRL",
-      "uptimeHours": 219.5,
-      "iterationCount": 149,
+      "uptimeHours": 219.75,
+      "iterationCount": 150,
       "requiredDomain": "cadeirasergonomicas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3133,7 +3147,7 @@
           "content": "Código validado para produção em cadeirasergonomicas.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -3144,8 +3158,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18700,
       "currency": "BRL",
-      "uptimeHours": 165.5,
-      "iterationCount": 136,
+      "uptimeHours": 165.75,
+      "iterationCount": 137,
       "requiredDomain": "hardwareminertracker.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3226,7 +3240,7 @@
           "content": "Código validado para produção em hardwareminertracker.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -3237,8 +3251,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 13900,
       "currency": "BRL",
-      "uptimeHours": 205.5,
-      "iterationCount": 146,
+      "uptimeHours": 205.75,
+      "iterationCount": 147,
       "requiredDomain": "smarthomedeals.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3318,7 +3332,7 @@
           "content": "Código validado para produção em smarthomedeals.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -3329,8 +3343,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 34000,
       "currency": "BRL",
-      "uptimeHours": 165.5,
-      "iterationCount": 136,
+      "uptimeHours": 165.75,
+      "iterationCount": 137,
       "requiredDomain": "cartoespontosradar.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3411,7 +3425,7 @@
           "content": "Código validado para produção em cartoespontosradar.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -3422,8 +3436,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16800,
       "currency": "BRL",
-      "uptimeHours": 172.5,
-      "iterationCount": 142,
+      "uptimeHours": 172.75,
+      "iterationCount": 143,
       "requiredDomain": "cursostiavaliacoes.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3504,7 +3518,7 @@
           "content": "Código validado para produção em cursostiavaliacoes.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -3515,8 +3529,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 27500,
       "currency": "BRL",
-      "uptimeHours": 155.5,
-      "iterationCount": 137,
+      "uptimeHours": 155.75,
+      "iterationCount": 138,
       "requiredDomain": "maquininhataxas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3597,7 +3611,7 @@
           "content": "Código validado para produção em maquininhataxas.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -3608,8 +3622,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14200,
       "currency": "BRL",
-      "uptimeHours": 165.5,
-      "iterationCount": 146,
+      "uptimeHours": 165.75,
+      "iterationCount": 147,
       "requiredDomain": "suplementosprecoradar.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3690,7 +3704,7 @@
           "content": "Código validado para produção em suplementosprecoradar.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -3701,8 +3715,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 12800,
       "currency": "BRL",
-      "uptimeHours": 215.5,
-      "iterationCount": 133,
+      "uptimeHours": 215.75,
+      "iterationCount": 134,
       "requiredDomain": "ferramentaseletricas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3789,7 +3803,7 @@
           "content": "Código validado para produção em ferramentaseletricas.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -3800,8 +3814,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16500,
       "currency": "BRL",
-      "uptimeHours": 180.5,
-      "iterationCount": 142,
+      "uptimeHours": 180.75,
+      "iterationCount": 143,
       "requiredDomain": "linkedinoutreachcopilot.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3882,7 +3896,7 @@
           "content": "Código validado para produção em linkedinoutreachcopilot.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -3893,8 +3907,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 11000,
       "currency": "BRL",
-      "uptimeHours": 153.5,
-      "iterationCount": 136,
+      "uptimeHours": 153.75,
+      "iterationCount": 137,
       "requiredDomain": "pricehistextension.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -3975,7 +3989,7 @@
           "content": "Código validado para produção em pricehistextension.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -3986,8 +4000,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 13500,
       "currency": "BRL",
-      "uptimeHours": 217.5,
-      "iterationCount": 139,
+      "uptimeHours": 217.75,
+      "iterationCount": 140,
       "requiredDomain": "grammarfixptbr.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -4068,7 +4082,7 @@
           "content": "Código validado para produção em grammarfixptbr.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -4079,8 +4093,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 9200,
       "currency": "BRL",
-      "uptimeHours": 154.5,
-      "iterationCount": 139,
+      "uptimeHours": 154.75,
+      "iterationCount": 140,
       "requiredDomain": "youtubetldrpro.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -4161,7 +4175,7 @@
           "content": "Código validado para produção em youtubetldrpro.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -4172,8 +4186,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14800,
       "currency": "BRL",
-      "uptimeHours": 199.5,
-      "iterationCount": 145,
+      "uptimeHours": 199.75,
+      "iterationCount": 146,
       "requiredDomain": "emailscraperethical.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -4261,7 +4275,7 @@
           "content": "Código validado para produção em emailscraperethical.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -4272,8 +4286,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 7500,
       "currency": "BRL",
-      "uptimeHours": 206.5,
-      "iterationCount": 150,
+      "uptimeHours": 206.75,
+      "iterationCount": 151,
       "requiredDomain": "cookieconsentblock.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -4353,7 +4367,7 @@
           "content": "Código validado para produção em cookieconsentblock.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -4364,8 +4378,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 8300,
       "currency": "BRL",
-      "uptimeHours": 170.5,
-      "iterationCount": 138,
+      "uptimeHours": 170.75,
+      "iterationCount": 139,
       "requiredDomain": "tabcluttersuspender.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -4445,7 +4459,7 @@
           "content": "Código validado para produção em tabcluttersuspender.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -4456,8 +4470,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 6900,
       "currency": "BRL",
-      "uptimeHours": 152.5,
-      "iterationCount": 143,
+      "uptimeHours": 152.75,
+      "iterationCount": 144,
       "requiredDomain": "colorpickersvg.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -4535,9 +4549,16 @@
           "date": "2026-11-07T18:15:19.713Z",
           "ready": true,
           "content": "Código validado para produção em colorpickersvg.com."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v14.0",
+          "date": "2026-11-08T21:45:39.389Z",
+          "ready": true,
+          "content": "Código validado para produção em colorpickersvg.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -4548,8 +4569,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 5800,
       "currency": "BRL",
-      "uptimeHours": 214.5,
-      "iterationCount": 144,
+      "uptimeHours": 214.75,
+      "iterationCount": 145,
       "requiredDomain": "focussessionpro.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -4636,7 +4657,7 @@
           "content": "Código validado para produção em focussessionpro.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -4647,8 +4668,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 4500,
       "currency": "BRL",
-      "uptimeHours": 222.5,
-      "iterationCount": 147,
+      "uptimeHours": 222.75,
+      "iterationCount": 148,
       "requiredDomain": "cryptogasticker.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -4728,7 +4749,7 @@
           "content": "Código validado para produção em cryptogasticker.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -4739,8 +4760,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 11200,
       "currency": "BRL",
-      "uptimeHours": 181.5,
-      "iterationCount": 134,
+      "uptimeHours": 181.75,
+      "iterationCount": 135,
       "requiredDomain": "recibofacilpwa.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -4821,7 +4842,7 @@
           "content": "Código validado para produção em recibofacilpwa.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -4832,8 +4853,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 15400,
       "currency": "BRL",
-      "uptimeHours": 150.5,
-      "iterationCount": 143,
+      "uptimeHours": 150.75,
+      "iterationCount": 144,
       "requiredDomain": "qrgeneratordynamic.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -4912,9 +4933,16 @@
           "date": "2026-11-07T18:15:19.713Z",
           "ready": true,
           "content": "Código validado para produção em qrgeneratordynamic.com."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v14.0",
+          "date": "2026-11-08T21:45:39.389Z",
+          "ready": true,
+          "content": "Código validado para produção em qrgeneratordynamic.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -4925,8 +4953,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18900,
       "currency": "BRL",
-      "uptimeHours": 178.5,
-      "iterationCount": 139,
+      "uptimeHours": 178.75,
+      "iterationCount": 140,
       "requiredDomain": "contratolocacaoexpress.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -5006,7 +5034,7 @@
           "content": "Código validado para produção em contratolocacaoexpress.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -5017,8 +5045,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 6200,
       "currency": "BRL",
-      "uptimeHours": 209.5,
-      "iterationCount": 137,
+      "uptimeHours": 209.75,
+      "iterationCount": 138,
       "requiredDomain": "pixelartmakerweb.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -5098,7 +5126,7 @@
           "content": "Código validado para produção em pixelartmakerweb.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -5109,8 +5137,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 8800,
       "currency": "BRL",
-      "uptimeHours": 202.5,
-      "iterationCount": 143,
+      "uptimeHours": 202.75,
+      "iterationCount": 144,
       "requiredDomain": "audiocutterpro.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -5189,9 +5217,16 @@
           "date": "2026-11-07T18:15:19.713Z",
           "ready": true,
           "content": "Código validado para produção em audiocutterpro.com."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v14.0",
+          "date": "2026-11-08T21:45:39.389Z",
+          "ready": true,
+          "content": "Código validado para produção em audiocutterpro.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -5202,8 +5237,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 4700,
       "currency": "BRL",
-      "uptimeHours": 156.5,
-      "iterationCount": 148,
+      "uptimeHours": 156.75,
+      "iterationCount": 149,
       "requiredDomain": "jsontotypescript.dev",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -5284,7 +5319,7 @@
           "content": "Código validado para produção em jsontotypescript.dev."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -5295,8 +5330,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 9600,
       "currency": "BRL",
-      "uptimeHours": 207.5,
-      "iterationCount": 149,
+      "uptimeHours": 207.75,
+      "iterationCount": 150,
       "requiredDomain": "calculadorameifacil.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -5376,7 +5411,7 @@
           "content": "Código validado para produção em calculadorameifacil.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -5387,8 +5422,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 7300,
       "currency": "BRL",
-      "uptimeHours": 152.5,
-      "iterationCount": 148,
+      "uptimeHours": 152.75,
+      "iterationCount": 149,
       "requiredDomain": "markdowntopdfstyler.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -5468,7 +5503,7 @@
           "content": "Código validado para produção em markdowntopdfstyler.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -5479,8 +5514,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 5100,
       "currency": "BRL",
-      "uptimeHours": 174.5,
-      "iterationCount": 151,
+      "uptimeHours": 174.75,
+      "iterationCount": 152,
       "requiredDomain": "favicongensuite.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -5560,7 +5595,7 @@
           "content": "Código validado para produção em favicongensuite.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -5571,8 +5606,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 3900,
       "currency": "BRL",
-      "uptimeHours": 154.5,
-      "iterationCount": 144,
+      "uptimeHours": 154.75,
+      "iterationCount": 145,
       "requiredDomain": "cronexpressionhelper.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -5659,7 +5694,7 @@
           "content": "Código validado para produção em cronexpressionhelper.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -5670,8 +5705,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 21500,
       "currency": "BRL",
-      "uptimeHours": 198.5,
-      "iterationCount": 139,
+      "uptimeHours": 198.75,
+      "iterationCount": 140,
       "requiredDomain": "fullstackboilerplate.dev",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -5752,7 +5787,7 @@
           "content": "Código validado para produção em fullstackboilerplate.dev."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -5763,8 +5798,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14000,
       "currency": "BRL",
-      "uptimeHours": 174.5,
-      "iterationCount": 146,
+      "uptimeHours": 174.75,
+      "iterationCount": 147,
       "requiredDomain": "notionosempreendedor.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -5845,7 +5880,7 @@
           "content": "Código validado para produção em notionosempreendedor.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -5856,8 +5891,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 11800,
       "currency": "BRL",
-      "uptimeHours": 211.5,
-      "iterationCount": 151,
+      "uptimeHours": 211.75,
+      "iterationCount": 152,
       "requiredDomain": "engenhariadeprompt.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -5937,7 +5972,7 @@
           "content": "Código validado para produção em engenhariadeprompt.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -5948,8 +5983,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 17200,
       "currency": "BRL",
-      "uptimeHours": 184.5,
-      "iterationCount": 139,
+      "uptimeHours": 184.75,
+      "iterationCount": 140,
       "requiredDomain": "devopsrunbooks.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -6029,7 +6064,7 @@
           "content": "Código validado para produção em devopsrunbooks.io."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -6040,8 +6075,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 15600,
       "currency": "BRL",
-      "uptimeHours": 204.5,
-      "iterationCount": 150,
+      "uptimeHours": 204.75,
+      "iterationCount": 151,
       "requiredDomain": "designsystemkit.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -6122,7 +6157,7 @@
           "content": "Código validado para produção em designsystemkit.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -6133,8 +6168,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 19400,
       "currency": "BRL",
-      "uptimeHours": 212.5,
-      "iterationCount": 144,
+      "uptimeHours": 212.75,
+      "iterationCount": 145,
       "requiredDomain": "guiatributarioti.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -6221,7 +6256,7 @@
           "content": "Código validado para produção em guiatributarioti.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -6232,8 +6267,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 13200,
       "currency": "BRL",
-      "uptimeHours": 166.5,
-      "iterationCount": 140,
+      "uptimeHours": 166.75,
+      "iterationCount": 141,
       "requiredDomain": "webscrapingmaster.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -6313,7 +6348,7 @@
           "content": "Código validado para produção em webscrapingmaster.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -6324,8 +6359,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 10500,
       "currency": "BRL",
-      "uptimeHours": 164.5,
-      "iterationCount": 135,
+      "uptimeHours": 164.75,
+      "iterationCount": 136,
       "requiredDomain": "livromicrosaas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -6406,7 +6441,7 @@
           "content": "Código validado para produção em livromicrosaas.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -6417,8 +6452,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16700,
       "currency": "BRL",
-      "uptimeHours": 169.5,
-      "iterationCount": 136,
+      "uptimeHours": 169.75,
+      "iterationCount": 137,
       "requiredDomain": "copyaltaconversao.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -6498,7 +6533,7 @@
           "content": "Código validado para produção em copyaltaconversao.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -6509,8 +6544,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18900,
       "currency": "BRL",
-      "uptimeHours": 200.5,
-      "iterationCount": 137,
+      "uptimeHours": 200.75,
+      "iterationCount": 138,
       "requiredDomain": "modelosfinanceirostop.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -6590,7 +6625,7 @@
           "content": "Código validado para produção em modelosfinanceirostop.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -6601,8 +6636,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 32000,
       "currency": "BRL",
-      "uptimeHours": 170.5,
-      "iterationCount": 138,
+      "uptimeHours": 170.75,
+      "iterationCount": 139,
       "requiredDomain": "arbicryptoscanner.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -6683,7 +6718,7 @@
           "content": "Código validado para produção em arbicryptoscanner.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -6694,8 +6729,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 24500,
       "currency": "BRL",
-      "uptimeHours": 191.5,
-      "iterationCount": 146,
+      "uptimeHours": 191.75,
+      "iterationCount": 147,
       "requiredDomain": "fundingrateradar.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -6776,7 +6811,7 @@
           "content": "Código validado para produção em fundingrateradar.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -6787,8 +6822,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 27800,
       "currency": "BRL",
-      "uptimeHours": 178.5,
-      "iterationCount": 135,
+      "uptimeHours": 178.75,
+      "iterationCount": 136,
       "requiredDomain": "whaletrackerb3.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -6869,7 +6904,7 @@
           "content": "Código validado para produção em whaletrackerb3.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -6880,8 +6915,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 21900,
       "currency": "BRL",
-      "uptimeHours": 176.5,
-      "iterationCount": 137,
+      "uptimeHours": 176.75,
+      "iterationCount": 138,
       "requiredDomain": "dolarvolatilidade.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -6961,7 +6996,7 @@
           "content": "Código validado para produção em dolarvolatilidade.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -6972,8 +7007,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18400,
       "currency": "BRL",
-      "uptimeHours": 176.5,
-      "iterationCount": 135,
+      "uptimeHours": 176.75,
+      "iterationCount": 136,
       "requiredDomain": "defiyieldscreener.io",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -7054,7 +7089,7 @@
           "content": "Código validado para produção em defiyieldscreener.io."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -7065,8 +7100,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14700,
       "currency": "BRL",
-      "uptimeHours": 178.5,
-      "iterationCount": 137,
+      "uptimeHours": 178.75,
+      "iterationCount": 138,
       "requiredDomain": "dividendoagendabrasil.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -7147,7 +7182,7 @@
           "content": "Código validado para produção em dividendoagendabrasil.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -7158,8 +7193,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16100,
       "currency": "BRL",
-      "uptimeHours": 182.5,
-      "iterationCount": 136,
+      "uptimeHours": 182.75,
+      "iterationCount": 137,
       "requiredDomain": "fiisrendaimobiliaria.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -7239,7 +7274,7 @@
           "content": "Código validado para produção em fiisrendaimobiliaria.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -7250,8 +7285,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 22000,
       "currency": "BRL",
-      "uptimeHours": 172.5,
-      "iterationCount": 134,
+      "uptimeHours": 172.75,
+      "iterationCount": 135,
       "requiredDomain": "forexspreadauditor.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -7331,7 +7366,7 @@
           "content": "Código validado para produção em forexspreadauditor.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -7342,8 +7377,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 15300,
       "currency": "BRL",
-      "uptimeHours": 149.5,
-      "iterationCount": 141,
+      "uptimeHours": 149.75,
+      "iterationCount": 142,
       "requiredDomain": "stablecoinyieldbot.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -7424,7 +7459,7 @@
           "content": "Código validado para produção em stablecoinyieldbot.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -7435,8 +7470,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 19800,
       "currency": "BRL",
-      "uptimeHours": 208.5,
-      "iterationCount": 144,
+      "uptimeHours": 208.75,
+      "iterationCount": 145,
       "requiredDomain": "opcoesgreek.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -7523,7 +7558,7 @@
           "content": "Código validado para produção em opcoesgreek.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -7534,8 +7569,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 17500,
       "currency": "BRL",
-      "uptimeHours": 213.5,
-      "iterationCount": 139,
+      "uptimeHours": 213.75,
+      "iterationCount": 140,
       "requiredDomain": "cleantechtheme.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -7616,7 +7651,7 @@
           "content": "Código validado para produção em cleantechtheme.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -7627,8 +7662,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 14200,
       "currency": "BRL",
-      "uptimeHours": 202.5,
-      "iterationCount": 144,
+      "uptimeHours": 202.75,
+      "iterationCount": 145,
       "requiredDomain": "landingpagebooster.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -7716,7 +7751,7 @@
           "content": "Código validado para produção em landingpagebooster.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -7727,8 +7762,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 12900,
       "currency": "BRL",
-      "uptimeHours": 170.5,
-      "iterationCount": 141,
+      "uptimeHours": 170.75,
+      "iterationCount": 142,
       "requiredDomain": "woocommercestorepronta.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -7808,7 +7843,7 @@
           "content": "Código validado para produção em woocommercestorepronta.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -7819,8 +7854,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 9800,
       "currency": "BRL",
-      "uptimeHours": 194.5,
-      "iterationCount": 136,
+      "uptimeHours": 194.75,
+      "iterationCount": 137,
       "requiredDomain": "socialmediapackimob.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -7900,7 +7935,7 @@
           "content": "Código validado para produção em socialmediapackimob.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -7911,8 +7946,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 11400,
       "currency": "BRL",
-      "uptimeHours": 173.5,
-      "iterationCount": 134,
+      "uptimeHours": 173.75,
+      "iterationCount": 135,
       "requiredDomain": "pack3dminimal.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -7992,7 +8027,7 @@
           "content": "Código validado para produção em pack3dminimal.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -8003,8 +8038,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 13600,
       "currency": "BRL",
-      "uptimeHours": 151.5,
-      "iterationCount": 143,
+      "uptimeHours": 151.75,
+      "iterationCount": 144,
       "requiredDomain": "emailtemplatespack.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -8082,9 +8117,16 @@
           "date": "2026-11-07T18:15:19.713Z",
           "ready": true,
           "content": "Código validado para produção em emailtemplatespack.com."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v14.0",
+          "date": "2026-11-08T21:45:39.389Z",
+          "ready": true,
+          "content": "Código validado para produção em emailtemplatespack.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -8095,8 +8137,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 10800,
       "currency": "BRL",
-      "uptimeHours": 202.5,
-      "iterationCount": 139,
+      "uptimeHours": 202.75,
+      "iterationCount": 140,
       "requiredDomain": "restaurantecardapioqr.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -8176,7 +8218,7 @@
           "content": "Código validado para produção em restaurantecardapioqr.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -8187,8 +8229,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 8400,
       "currency": "BRL",
-      "uptimeHours": 219.5,
-      "iterationCount": 146,
+      "uptimeHours": 219.75,
+      "iterationCount": 147,
       "requiredDomain": "podcastbrandkit.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -8268,7 +8310,7 @@
           "content": "Código validado para produção em podcastbrandkit.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -8279,8 +8321,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 16900,
       "currency": "BRL",
-      "uptimeHours": 218.5,
-      "iterationCount": 149,
+      "uptimeHours": 218.75,
+      "iterationCount": 150,
       "requiredDomain": "fitnesscoachingkit.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -8360,7 +8402,7 @@
           "content": "Código validado para produção em fitnesscoachingkit.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -8371,8 +8413,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 21000,
       "currency": "BRL",
-      "uptimeHours": 188.5,
-      "iterationCount": 143,
+      "uptimeHours": 188.75,
+      "iterationCount": 144,
       "requiredDomain": "tailadminpro.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -8450,9 +8492,16 @@
           "date": "2026-11-07T18:15:19.713Z",
           "ready": true,
           "content": "Código validado para produção em tailadminpro.com."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v14.0",
+          "date": "2026-11-08T21:45:39.389Z",
+          "ready": true,
+          "content": "Código validado para produção em tailadminpro.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -8463,8 +8512,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 28500,
       "currency": "BRL",
-      "uptimeHours": 182.5,
-      "iterationCount": 136,
+      "uptimeHours": 182.75,
+      "iterationCount": 137,
       "requiredDomain": "aialphadispatch.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -8545,7 +8594,7 @@
           "content": "Código validado para produção em aialphadispatch.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -8556,8 +8605,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 19800,
       "currency": "BRL",
-      "uptimeHours": 180.5,
-      "iterationCount": 143,
+      "uptimeHours": 180.75,
+      "iterationCount": 144,
       "requiredDomain": "microsaasinsider.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -8636,9 +8685,16 @@
           "date": "2026-11-07T18:15:19.713Z",
           "ready": true,
           "content": "Código validado para produção em microsaasinsider.com.br."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v14.0",
+          "date": "2026-11-08T21:45:39.389Z",
+          "ready": true,
+          "content": "Código validado para produção em microsaasinsider.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -8649,8 +8705,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 23400,
       "currency": "BRL",
-      "uptimeHours": 181.5,
-      "iterationCount": 136,
+      "uptimeHours": 181.75,
+      "iterationCount": 137,
       "requiredDomain": "venturebrasilradar.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -8730,7 +8786,7 @@
           "content": "Código validado para produção em venturebrasilradar.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -8741,8 +8797,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 17200,
       "currency": "BRL",
-      "uptimeHours": 166.5,
-      "iterationCount": 148,
+      "uptimeHours": 166.75,
+      "iterationCount": 149,
       "requiredDomain": "editaltechalertas.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -8822,7 +8878,7 @@
           "content": "Código validado para produção em editaltechalertas.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -8833,8 +8889,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 36000,
       "currency": "BRL",
-      "uptimeHours": 159.5,
-      "iterationCount": 143,
+      "uptimeHours": 159.75,
+      "iterationCount": 144,
       "requiredDomain": "smallcapsdiamantes.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -8913,9 +8969,16 @@
           "date": "2026-11-07T18:15:19.713Z",
           "ready": true,
           "content": "Código validado para produção em smallcapsdiamantes.com.br."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v14.0",
+          "date": "2026-11-08T21:45:39.389Z",
+          "ready": true,
+          "content": "Código validado para produção em smallcapsdiamantes.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -8926,8 +8989,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 21500,
       "currency": "BRL",
-      "uptimeHours": 191.5,
-      "iterationCount": 151,
+      "uptimeHours": 191.75,
+      "iterationCount": 152,
       "requiredDomain": "ecommtrendsglobal.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -9007,7 +9070,7 @@
           "content": "Código validado para produção em ecommtrendsglobal.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -9018,8 +9081,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 31000,
       "currency": "BRL",
-      "uptimeHours": 148.5,
-      "iterationCount": 143,
+      "uptimeHours": 148.75,
+      "iterationCount": 144,
       "requiredDomain": "cyberthreatintelbrief.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -9097,9 +9160,16 @@
           "date": "2026-11-07T18:15:19.713Z",
           "ready": true,
           "content": "Código validado para produção em cyberthreatintelbrief.com."
+        },
+        {
+          "type": "CODIGO",
+          "title": "Módulo Operacional v14.0",
+          "date": "2026-11-08T21:45:39.389Z",
+          "ready": true,
+          "content": "Código validado para produção em cyberthreatintelbrief.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -9110,8 +9180,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 24800,
       "currency": "BRL",
-      "uptimeHours": 183.5,
-      "iterationCount": 147,
+      "uptimeHours": 183.75,
+      "iterationCount": 148,
       "requiredDomain": "jurisnovalegaltech.com.br",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -9191,7 +9261,7 @@
           "content": "Código validado para produção em jurisnovalegaltech.com.br."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -9202,8 +9272,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 18200,
       "currency": "BRL",
-      "uptimeHours": 144.5,
-      "iterationCount": 151,
+      "uptimeHours": 144.75,
+      "iterationCount": 152,
       "requiredDomain": "remotejobsdevint.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -9283,7 +9353,7 @@
           "content": "Código validado para produção em remotejobsdevint.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     },
     {
@@ -9294,8 +9364,8 @@
       "status": "EXECUTANDO",
       "projectedRevenueBRL": 22700,
       "currency": "BRL",
-      "uptimeHours": 149.5,
-      "iterationCount": 144,
+      "uptimeHours": 149.75,
+      "iterationCount": 145,
       "requiredDomain": "biotechlongevidade.com",
       "domainStatus": "AGUARDANDO_COMPRA",
       "requiredCredentials": [
@@ -9382,7 +9452,7 @@
           "content": "Código validado para produção em biotechlongevidade.com."
         }
       ],
-      "lastActivity": "2026-11-08T21:30:39.380Z",
+      "lastActivity": "2026-11-08T21:45:39.389Z",
       "orderHistory": []
     }
   ]

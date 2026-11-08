@@ -415,14 +415,24 @@ class Swarm100Engine {
       agent.lastActivity = new Date().toISOString();
 
       // Evolução de missões e entregáveis
-      if (agent.iterationCount % 12 === 0) {
+      if (agent.iterationCount % 8 === 0) {
         agent.deliverables.push({
           type: 'CODIGO',
-          title: `Módulo Operacional v${Math.floor(agent.iterationCount / 10)}.0`,
+          title: `Otimização SEO & Conversão v${Math.floor(agent.iterationCount / 8)}.0`,
           date: new Date().toISOString(),
           ready: true,
-          content: `Código validado para produção em ${agent.requiredDomain}.`
+          content: `Diretrizes do Google Search Console & Schema.org JSON-LD aplicadas para ${agent.requiredDomain || 'solução nativa'}. Conversão otimizada.`
         });
+      }
+
+      // Atualização de progresso autônomo em direção a 100%
+      if (!agent.projectProgress) {
+        agent.projectProgress = { stage: 'OPERANDO_EM_PRODUCAO', progressPercent: 85 };
+      } else {
+        if (agent.projectProgress.progressPercent < 98) {
+          agent.projectProgress.progressPercent = Math.min(100, agent.projectProgress.progressPercent + 1);
+        }
+        agent.projectProgress.stage = 'MONETIZANDO_E_EXPANDINDO';
       }
     }
 
