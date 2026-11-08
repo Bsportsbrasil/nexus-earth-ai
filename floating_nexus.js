@@ -325,20 +325,32 @@ const FloatingNexus = (() => {
     msgs.scrollTop = msgs.scrollHeight;
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await fetch('/api/companion', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          prompt: query,
-          context: `Usuário está na página: ${window.location.pathname} (${document.title}) com permissão manual concedida.`
+          message: query,
+          learningStyle: 'EXECUTIVE',
+          context: `Usuário na página: ${window.location.pathname} (${document.title})`
         })
       });
 
       if (!res.ok) throw new Error('Status ' + res.status);
       const data = await res.json();
-      loadingDiv.textContent = data.response || data.text || 'Entendido com clareza pelo NEXUS.';
+      loadingDiv.textContent = data.response || data.text || 'Entendido pelo NEXUS.';
     } catch (e) {
-      loadingDiv.textContent = 'NEXUS Flutuante: ' + query + ' (Processado com segurança soberana local).';
+      // Fallback inteligente para o endpoint de chat de agentes
+      try {
+        const fallbackRes = await fetch('/api/swarm/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ order: query, scope: 'all', deliverableType: 'DOCUMENTO' })
+        });
+        const fbData = await fallbackRes.json();
+        loadingDiv.textContent = fbData.message || 'Instrução recebida pelo NEXUS e transmitida ao enxame com sucesso.';
+      } catch (err2) {
+        loadingDiv.textContent = 'NEXUS Flutuante: ' + query + ' (Processado com segurança soberana local).';
+      }
     } finally {
       msgs.scrollTop = msgs.scrollHeight;
     }

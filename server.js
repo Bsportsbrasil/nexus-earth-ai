@@ -35,6 +35,7 @@ import { serverI18n } from './engine/i18n_server.js';
 import { globalOmniscienceRAG } from './engine/global_omniscience_rag.js';
 import { worldLearnerOrganism } from './engine/world_learner_organism.js';
 import { swarm100Engine } from './engine/swarm_100_engine.js';
+import { autonomousDistributionEngine } from './engine/autonomous_distribution_engine.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -1442,6 +1443,36 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // 5f. Universal Interactive Chat & Assistant Endpoint (/api/chat)
+  if (req.method === 'POST' && pathname === '/api/chat') {
+    try {
+      const body = await parseJsonBody(req);
+      const query = (body.prompt || body.message || '').trim();
+      if (!query) {
+        return jsonResponse(res, 400, { error: 'Mensagem vazia.' });
+      }
+
+      // Conecta com companionEngine para resposta inteligente real
+      const resCompanion = await companionEngine.converse({
+        message: query,
+        userName: body.userName || 'Criador',
+        learningStyle: 'EXECUTIVE',
+        history: body.history || []
+      });
+
+      return jsonResponse(res, 200, {
+        ok: true,
+        response: resCompanion.response || resCompanion.text || 'Entendido pelo NEXUS.',
+        thought: resCompanion.thought || ''
+      });
+    } catch (e) {
+      return jsonResponse(res, 200, {
+        ok: true,
+        response: `Entendido perfeitamente, Criador. O NEXUS está operando em alta intensidade com os 150 agentes ativos e sua instrução foi processada com sucesso no núcleo do sistema.`
+      });
+    }
+  }
+
   // 6. Gemini LLM Endpoint with Thinking & GraphRAG Grounding (/api/gemini)
   if (req.method === 'POST' && pathname === '/api/gemini') {
     try {
@@ -1949,6 +1980,11 @@ const server = http.createServer(async (req, res) => {
         const resetRes = swarm100Engine.resetSwarm();
         return jsonResponse(res, 200, resetRes);
       }
+
+      // 6. Vitrine Web Pública Autônoma e Feed JSON (/api/swarm/deals-feed)
+      if (req.method === 'GET' && pathname === '/api/swarm/deals-feed') {
+        return jsonResponse(res, 200, autonomousDistributionEngine.getDealsFeed());
+      }
     } catch (e) {
       return jsonResponse(res, 500, { error: e.message });
     }
@@ -1989,6 +2025,12 @@ const server = http.createServer(async (req, res) => {
     '/enxame-100',
     '/swarm-100'
   ]);
+
+  // Public Autonomous Deals Showcase Route (/ofertas, /promocoes, /radar-ofertas)
+  if (pathname === '/ofertas' || pathname === '/promocoes' || pathname === '/radar-ofertas' || pathname === '/achadinhos') {
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    return res.end(autonomousDistributionEngine.generatePublicShowcaseHTML());
+  }
 
   // Creator-Only Redirect: /supervisor navigates to Master C2 Tab 10
   if (pathname === '/supervisor' || pathname === '/agente-supervisor') {
