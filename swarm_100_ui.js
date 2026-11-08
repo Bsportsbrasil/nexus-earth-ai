@@ -38,7 +38,81 @@ const Swarm100UI = (() => {
   async function init() {
     bindEvents();
     await fetchState();
+    await fetchPayoutSettings();
     startPolling();
+  }
+
+  async function fetchPayoutSettings() {
+    try {
+      const res = await fetch('/api/swarm/payout-settings');
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data && data.pixKey) {
+        const typeEl = document.getElementById('payout-pix-type');
+        const keyEl = document.getElementById('payout-pix-key');
+        const nameEl = document.getElementById('payout-holder-name');
+        const bankEl = document.getElementById('payout-bank-name');
+        const msgEl = document.getElementById('payout-status-msg');
+
+        if (typeEl && data.pixType) typeEl.value = data.pixType;
+        if (keyEl && data.pixKey) keyEl.value = data.pixKey;
+        if (nameEl && data.holderName) nameEl.value = data.holderName;
+        if (bankEl && data.bankName) bankEl.value = data.bankName;
+        if (msgEl) {
+          msgEl.innerHTML = `<span style="color:#10b981;">✓ Conta ativa para recebimento: Chave Pix cadastrada (${data.pixKey}) vinculada a ${data.holderName || 'Proprietária'}.</span>`;
+        }
+      }
+    } catch (_) {}
+  }
+
+  async function savePayoutSettings() {
+    const typeEl = document.getElementById('payout-pix-type');
+    const keyEl = document.getElementById('payout-pix-key');
+    const nameEl = document.getElementById('payout-holder-name');
+    const bankEl = document.getElementById('payout-bank-name');
+    const btn = document.getElementById('payout-save-btn');
+    const msgEl = document.getElementById('payout-status-msg');
+
+    const pixKey = keyEl ? keyEl.value.trim() : '';
+    if (!pixKey) {
+      alert('Por favor, informe sua chave Pix para receber os pagamentos.');
+      return;
+    }
+
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Salvando Cofragem...';
+    }
+
+    try {
+      const res = await fetch('/api/swarm/payout-settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pixType: typeEl ? typeEl.value : 'cpf',
+          pixKey,
+          holderName: nameEl ? nameEl.value.trim() : '',
+          bankName: bankEl ? bankEl.value.trim() : ''
+        })
+      });
+
+      const json = await res.json();
+      if (json.success) {
+        if (msgEl) {
+          msgEl.innerHTML = `<span style="color:#10b981; font-weight:700;">✓ SUCESSO: Conta salva! Chave Pix configurada com sucesso. Os rendimentos serão direcionados para esta conta.</span>`;
+        }
+        alert('Conta cadastrada com sucesso! Todas as soluções e comissões estão direcionadas para a sua chave Pix.');
+      } else {
+        alert('Erro ao salvar conta: ' + (json.error || 'Erro desconhecido'));
+      }
+    } catch (e) {
+      alert('Erro de conexão ao salvar conta: ' + e.message);
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = '💾 Salvar Minha Conta para Recebimento';
+      }
+    }
   }
 
   function bindEvents() {
@@ -691,7 +765,8 @@ const Swarm100UI = (() => {
     openConfigModal,
     submitAgentConfig,
     openAgentChatModal,
-    sendAgentChatMessage
+    sendAgentChatMessage,
+    savePayoutSettings
   };
 })();
 

@@ -2002,6 +2002,33 @@ const server = http.createServer(async (req, res) => {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         return res.end(autonomousDistributionEngine.generateSingleSolutionHTML(agent));
       }
+
+      // 6d. Configurações de Recebimento Direto (Chave Pix / Conta Bancária)
+      if (req.method === 'GET' && pathname === '/api/swarm/payout-settings') {
+        const payoutFile = path.join(__dirname, 'data', 'creator_payout_settings.json');
+        if (fs.existsSync(payoutFile)) {
+          try {
+            const data = JSON.parse(fs.readFileSync(payoutFile, 'utf8'));
+            return jsonResponse(res, 200, data);
+          } catch (_) {}
+        }
+        return jsonResponse(res, 200, { configured: false });
+      }
+
+      if (req.method === 'POST' && pathname === '/api/swarm/payout-settings') {
+        const body = await parseJsonBody(req);
+        const payoutFile = path.join(__dirname, 'data', 'creator_payout_settings.json');
+        const payoutData = {
+          configured: true,
+          pixType: body.pixType || 'cpf',
+          pixKey: String(body.pixKey || '').trim(),
+          holderName: String(body.holderName || '').trim(),
+          bankName: String(body.bankName || '').trim(),
+          updatedAt: new Date().toISOString()
+        };
+        fs.writeFileSync(payoutFile, JSON.stringify(payoutData, null, 2), 'utf8');
+        return jsonResponse(res, 200, { success: true, message: 'Dados de recebimento salvos com sucesso.', payoutData });
+      }
     } catch (e) {
       return jsonResponse(res, 500, { error: e.message });
     }
