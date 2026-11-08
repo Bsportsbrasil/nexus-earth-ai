@@ -1985,6 +1985,23 @@ const server = http.createServer(async (req, res) => {
       if (req.method === 'GET' && pathname === '/api/swarm/deals-feed') {
         return jsonResponse(res, 200, autonomousDistributionEngine.getDealsFeed());
       }
+
+      // 6b. Feed JSON dos 100 Projetos Digitais (/api/swarm/projects-feed)
+      if (req.method === 'GET' && pathname === '/api/swarm/projects-feed') {
+        const fullState = swarm100Engine.getSwarmState();
+        return jsonResponse(res, 200, autonomousDistributionEngine.getProjectsFeed(fullState.agents));
+      }
+
+      // 6c. Página Individual de Solução do Projeto (/api/swarm/solution/:id)
+      if (req.method === 'GET' && pathname.startsWith('/api/swarm/solution/')) {
+        const agentId = parseInt(pathname.slice('/api/swarm/solution/'.length), 10);
+        const agent = swarm100Engine.agents.get(agentId);
+        if (!agent) {
+          return jsonResponse(res, 404, { error: `Projeto #${agentId} não encontrado.` });
+        }
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        return res.end(autonomousDistributionEngine.generateSingleSolutionHTML(agent));
+      }
     } catch (e) {
       return jsonResponse(res, 500, { error: e.message });
     }
@@ -2030,6 +2047,13 @@ const server = http.createServer(async (req, res) => {
   if (pathname === '/ofertas' || pathname === '/promocoes' || pathname === '/radar-ofertas' || pathname === '/achadinhos') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     return res.end(autonomousDistributionEngine.generatePublicShowcaseHTML());
+  }
+
+  // Public Autonomous Projects Showcase Route (/projetos, /solutions, /marketplace, /portfolio)
+  if (pathname === '/projetos' || pathname === '/solutions' || pathname === '/marketplace' || pathname === '/portfolio') {
+    const fullState = swarm100Engine.getSwarmState();
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    return res.end(autonomousDistributionEngine.generateProjectsShowcaseHTML(fullState.agents));
   }
 
   // Creator-Only Redirect: /supervisor navigates to Master C2 Tab 10
