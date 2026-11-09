@@ -282,8 +282,8 @@ const server = http.createServer(async (req, res) => {
     return res.end(sitemap);
   }
 
-  // 1. Prometheus Observability Scraping Endpoint (/metrics)
-  if (req.method === 'GET' && pathname === '/metrics') {
+  // 1. Prometheus Observability Scraping Endpoint (/metrics & /api/metrics)
+  if (req.method === 'GET' && (pathname === '/metrics' || pathname === '/api/metrics')) {
     const gStats = { totalNodes: graphDB.nodes.size, totalEdges: graphDB.edges.length };
     const bStats = broker.getStats();
     const promText = telemetry.toPrometheusText(gStats, bStats);
