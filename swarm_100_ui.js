@@ -116,6 +116,30 @@ const Swarm100UI = (() => {
   }
 
   function bindEvents() {
+    // Botão de Aceleração para 100% (Produção Imediata)
+    const accBtn = document.getElementById('swarm-accelerate-btn');
+    if (accBtn) {
+      accBtn.addEventListener('click', async () => {
+        if (!confirm('Deseja acelerar todos os 150 agentes para 100% de conclusão do projeto e colocá-los em modo de produção máxima imediatamente?')) return;
+        accBtn.textContent = '🚀 Acelerando...';
+        accBtn.disabled = true;
+        try {
+          const res = await fetch('/api/swarm/accelerate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+          });
+          const data = await res.json();
+          alert(data.message || 'Todos os agentes foram promovidos para 100% com sucesso!');
+          await fetchState();
+        } catch (e) {
+          alert('Erro ao acelerar agentes: ' + e.message);
+        } finally {
+          accBtn.textContent = '🚀 Acelerar Todos para 100% (Produção Imediata)';
+          accBtn.disabled = false;
+        }
+      });
+    }
+
     // Botão de Refresh
     const refreshBtn = document.getElementById('swarm-refresh-btn');
     if (refreshBtn) {

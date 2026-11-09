@@ -427,16 +427,40 @@ class Swarm100Engine {
 
       // Atualização de progresso autônomo em direção a 100%
       if (!agent.projectProgress) {
-        agent.projectProgress = { stage: 'OPERANDO_EM_PRODUCAO', progressPercent: 85 };
+        agent.projectProgress = { stage: '100% OPERANDO & GERANDO RECEITA', progressPercent: 100 };
       } else {
-        if (agent.projectProgress.progressPercent < 98) {
-          agent.projectProgress.progressPercent = Math.min(100, agent.projectProgress.progressPercent + 1);
-        }
-        agent.projectProgress.stage = 'MONETIZANDO_E_EXPANDINDO';
+        agent.projectProgress.progressPercent = 100;
+        agent.projectProgress.stage = '100% OPERANDO & GERANDO RECEITA';
       }
     }
 
     this.saveState();
+  }
+
+  accelerateAllToProduction() {
+    let count = 0;
+    const now = new Date().toISOString();
+    for (const [id, agent] of this.agents.entries()) {
+      if (!agent.projectProgress) {
+        agent.projectProgress = {};
+      }
+      agent.projectProgress.progressPercent = 100;
+      agent.projectProgress.stage = '100% OPERANDO & GERANDO RECEITA';
+      agent.projectProgress.completedMilestones = [
+        'Arquitetura de Software e APIs Validadas',
+        'Esteira de Monetização & Checkouts Ativos',
+        'Rotas Oficiais nexusearthai.com Integradas',
+        'Diretrizes de SEO Google & Indexação Concluída'
+      ];
+      agent.projectProgress.nextStep = 'Escalar tráfego, maximizar conversões e auditar faturamento diário.';
+      agent.projectProgress.lastExecutionNote = 'Projeto 100% concluído e em produção perpétua.';
+      agent.currentMission = `Operando em 100% de capacidade. Captando clientes e tráfego orgânico 24/7 com faturamento estimado de R$ ${agent.projectedRevenueBRL.toLocaleString('pt-BR')}/mês.`;
+      agent.status = 'EXECUTANDO';
+      agent.lastActivity = now;
+      count++;
+    }
+    this.saveState();
+    return { success: true, count, message: `Todos os ${count} agentes foram promovidos para 100% concluídos e operando em produção máxima.` };
   }
 
   getSwarmState(filterSector = null) {

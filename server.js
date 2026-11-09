@@ -1978,6 +1978,12 @@ const server = http.createServer(async (req, res) => {
         return jsonResponse(res, orderRes.success ? 200 : 400, orderRes);
       }
 
+      // 2b. Aceleração Soberana de Conclusão para 100% (Produção Imediata)
+      if (req.method === 'POST' && pathname === '/api/swarm/accelerate') {
+        const accRes = swarm100Engine.accelerateAllToProduction();
+        return jsonResponse(res, 200, accRes);
+      }
+
       // 3. Controle Perpétuo de Estado (Pausar / Retomar Execução)
       if (req.method === 'POST' && pathname === '/api/swarm/agent-control') {
         const body = await parseJsonBody(req);
