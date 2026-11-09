@@ -8,7 +8,7 @@ const PublicLinksUI = (() => {
   let allLinks = [];
 
   function getAuthHeader() {
-    const token = localStorage.getItem('nexus_admin_token') || sessionStorage.getItem('nexus_admin_token') || 'NEXUS-SOVEREIGN-2026';
+    const token = sessionStorage.getItem('nexus_admin_token') || localStorage.getItem('nexus_admin_token') || 'NEXUS-SOVEREIGN-2026';
     return { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' };
   }
 

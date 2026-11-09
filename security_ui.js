@@ -625,6 +625,9 @@ const SecurityUI = (function () {
     if (tabId === 'tab-organism' && window.WorldOrganismUI) {
       window.WorldOrganismUI.loadDashboard();
     }
+    if (tabId === 'tab-public-links' && window.PublicLinksUI) {
+      window.PublicLinksUI.fetchLinks();
+    }
     if (shouldScroll) {
       const pane = document.getElementById(tabId);
       if (pane) {
