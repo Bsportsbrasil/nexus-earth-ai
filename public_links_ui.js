@@ -182,13 +182,37 @@ const PublicLinksUI = (() => {
     }
   }
 
+  // Carrega imediatamente no boot se a aba ativa já for a Tab 13
+  function autoInit() {
+    if (window.location.hash === '#tab-public-links') {
+      fetchLinks();
+    }
+    // Também inicializa se o container já existir
+    const container = document.getElementById('public-links-container');
+    if (container && (!container.children || container.children.length === 0)) {
+      fetchLinks();
+    }
+  }
+
   // Monitora a troca de abas para carregar automaticamente ao abrir a Tab 13
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-tab="tab-public-links"]');
     if (btn) {
-      setTimeout(fetchLinks, 100);
+      setTimeout(fetchLinks, 50);
     }
   });
+
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash === '#tab-public-links') {
+      fetchLinks();
+    }
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit);
+  } else {
+    setTimeout(autoInit, 200);
+  }
 
   return {
     fetchLinks,

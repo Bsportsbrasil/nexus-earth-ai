@@ -1950,8 +1950,8 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 6n. Exclusive Sovereign Swarm of 100 Autonomous Superintelligence Agents (/api/swarm/*)
-  if (pathname.startsWith('/api/swarm')) {
+  // 6n. Exclusive Sovereign Swarm of 100 Autonomous Superintelligence Agents (/api/swarm/*, /api/admin/links*)
+  if (pathname.startsWith('/api/swarm') || pathname.startsWith('/api/admin/links')) {
     try {
       // 1. Estado Completo do Enxame (Agentes, Métricas Financeiras MRR, Domínios e Credenciais)
       if (req.method === 'GET' && pathname === '/api/swarm/state') {
