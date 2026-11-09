@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T21:33:49.177Z",
+  "updatedAt": "2026-11-09T14:57:53.031Z",
   "deviceIsolationPolicy": {
     "policyId": "NEXUS-ZERO-MOBILE-DATA-ACCESS-V1",
     "enforcedPermissionsPolicy": "camera=(), geolocation=(), contacts=(), usb=(), bluetooth=(), serial=(), hid=(), magnetometer=(), gyroscope=(), accelerometer=(), payment=(), browsing-topics=()",
@@ -14,6 +14,286 @@
     "audioPolicy": "Apenas Web Speech API efêmero em memória quando o botão de voz é explicitamente ativado pelo usuário (zero gravação bruta de áudio)."
   },
   "distilledLedger": [
+    {
+      "id": "know_1794236273030_aae4ea",
+      "timestamp": "2026-11-09T14:57:53.030Z",
+      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
+      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
+      "anonymizedInsight": "Diretiva avaliada: \"Certificação soberana de alinhamento do agente executor Agente homologado e autenticado pelo Criador Humano com selo 9d5\" -> Agência Humana 93%, Inclusão 92%.",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 0.94,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "aaf4cb8f503ea885d986"
+    },
+    {
+      "id": "know_1794236272997_ed145e",
+      "timestamp": "2026-11-09T14:57:52.997Z",
+      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
+      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
+      "anonymizedInsight": "Diretiva avaliada: \"Certificação soberana de alinhamento do agente executor Agente homologado e autenticado pelo Criador Humano com selo 37b\" -> Agência Humana 93%, Inclusão 92%.",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 0.94,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "d828341a9669b485c3b3"
+    },
+    {
+      "id": "know_1794236271784_31331f",
+      "timestamp": "2026-11-09T14:57:51.784Z",
+      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
+      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
+      "anonymizedInsight": "Diretiva avaliada: \"Como você abordaria uma transição energética justa e inclusiva? Sobre o que você comentou (\"Como você abordaria uma tran\" -> Agência Humana 95%, Inclusão 92%.",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 0.94,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "3f1e40a050e1b5335974"
+    },
+    {
+      "id": "know_1794236271595_676f3a",
+      "timestamp": "2026-11-09T14:57:51.596Z",
+      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
+      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
+      "anonymizedInsight": "Diretiva avaliada: \"Avaliar solicitação de microcrédito e autonomia produtiva para cooperativa Aprovado com base em dados verificados, histó\" -> Agência Humana 95%, Inclusão 92%.",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 0.94,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "00f07a643473b049aa0a"
+    },
+    {
+      "id": "know_1794236271158_2b3517",
+      "timestamp": "2026-11-09T14:57:51.158Z",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "topic": "Pedagogia Visual & Ciência",
+      "anonymizedInsight": "Aprendizado cooperativo sobre astrofísica com respeito à autonomia humana e método visual previsível.",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 1,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "AURA_LIVE_COMPANION"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "0adfc7fcbfd9c845e297"
+    },
+    {
+      "id": "know_1794236270514_7cc23a",
+      "timestamp": "2026-11-09T14:57:50.515Z",
+      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
+      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
+      "anonymizedInsight": "Diretiva avaliada: \"Promover autonomia humana, inclusão TEA e escolha ética\" -> Agência Humana 98%, Inclusão 95%.",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 1,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "6efd14625d1fd9ce78dc"
+    },
+    {
+      "id": "know_1794236270380_103678",
+      "timestamp": "2026-11-09T14:57:50.380Z",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "topic": "Estilo Cognitivo: Adaptativo",
+      "anonymizedInsight": "Ana consultou data/hora em tempo real (11:57:50)",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 0.94,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "AURA_LIVE_COMPANION"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "9ba169eb86eadb282498"
+    },
+    {
+      "id": "know_1794236270322_4a051f",
+      "timestamp": "2026-11-09T14:57:50.322Z",
+      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
+      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
+      "anonymizedInsight": "Diretiva avaliada: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais Ana, compreendi sua busca \" -> Agência Humana 96%, Inclusão 92%.",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 0.94,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "d1308c9299cbad535eed"
+    },
+    {
+      "id": "know_1794236270265_999c03",
+      "timestamp": "2026-11-09T14:57:50.265Z",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "topic": "Estilo Cognitivo: Adaptativo",
+      "anonymizedInsight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 0.94,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "AURA_LIVE_COMPANION"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "960f06fd5b37fa3c8e20"
+    },
+    {
+      "id": "know_1794236270175_795389",
+      "timestamp": "2026-11-09T14:57:50.175Z",
+      "sourceAgent": "AURA_LIVE_COMPANION",
+      "topic": "Estilo Cognitivo: Adaptativo",
+      "anonymizedInsight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 1,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "AURA_LIVE_COMPANION"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "cfba89705536bc36735a"
+    },
+    {
+      "id": "know_1794236270146_493891",
+      "timestamp": "2026-11-09T14:57:50.147Z",
+      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
+      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
+      "anonymizedInsight": "Diretiva avaliada: \"TEA Inclusão Lúdica: Sistema Solar e amizade\" -> Agência Humana 94%, Inclusão 95%.",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 1,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "ffd964b567e02198486b"
+    },
+    {
+      "id": "know_1794236270068_c5ddab",
+      "timestamp": "2026-11-09T14:57:50.068Z",
+      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
+      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
+      "anonymizedInsight": "Diretiva avaliada: \"Educação inclusiva e lúdica para crianças com TEA\" -> Agência Humana 93%, Inclusão 95%.",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 1,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "5ee4bd00a7bb2a187eb9"
+    },
+    {
+      "id": "know_1794236269792_59448e",
+      "timestamp": "2026-11-09T14:57:49.792Z",
+      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
+      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
+      "anonymizedInsight": "Diretiva avaliada: \"Transformer attention mechanism Consenso Verificado pelo Grafo Multi-Agente para \"Transformer attention mechanism\" (segu\" -> Agência Humana 95%, Inclusão 92%.",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 0.94,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "b68e0a406284949f62c8"
+    },
+    {
+      "id": "know_1794236269775_b310e5",
+      "timestamp": "2026-11-09T14:57:49.775Z",
+      "sourceAgent": "MULTI_AGENT_DAG_CONSENSUS",
+      "topic": "Síntese Científica Multi-Agente",
+      "anonymizedInsight": "Consenso Verificado pelo Grafo Multi-Agente para \"Transformer attention mechanism\" (segunda-feira, 9 de novembro de 2026):\n\nA Transformer is a deep learning architecture based on the multi-head self-attention mechanism.\n\nReferências Científicas Revisadas por Pares (Crossref DOI & Europe PMC):\n• Terapia com células-tronco na nefropatia c (n.d.) (2025) — Peer-Reviewed DOI Registr",
+      "directiveAudit": {
+        "compliant": true,
+        "complianceScore": 0.9,
+        "directivesChecked": {
+          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
+          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
+          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
+          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
+        },
+        "sourceAgent": "MULTI_AGENT_DAG_CONSENSUS"
+      },
+      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
+      "sha256": "229d8b849e24ce946361"
+    },
     {
       "id": "know_1794173629177_b1ab09",
       "timestamp": "2026-11-08T21:33:49.177Z",
@@ -2733,286 +3013,6 @@
       },
       "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
       "sha256": "dbfdcc28b1b08730a473"
-    },
-    {
-      "id": "know_1793811358783_3b613a",
-      "timestamp": "2026-11-04T16:55:58.784Z",
-      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
-      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
-      "anonymizedInsight": "Diretiva avaliada: \"TEA Inclusão Lúdica: Sistema Solar e amizade\" -> Agência Humana 94%, Inclusão 95%.",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 1,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "c511a1f3910e3261b30d"
-    },
-    {
-      "id": "know_1793811358755_9ad526",
-      "timestamp": "2026-11-04T16:55:58.755Z",
-      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
-      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
-      "anonymizedInsight": "Diretiva avaliada: \"Educação inclusiva e lúdica para crianças com TEA\" -> Agência Humana 93%, Inclusão 95%.",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 1,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "7fceb761457123b59f56"
-    },
-    {
-      "id": "know_1793811358691_46c303",
-      "timestamp": "2026-11-04T16:55:58.692Z",
-      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
-      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
-      "anonymizedInsight": "Diretiva avaliada: \"Transformer attention mechanism Consenso Verificado pelo Grafo Multi-Agente para \"Transformer attention mechanism\" (quar\" -> Agência Humana 95%, Inclusão 92%.",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 0.94,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "4347498f598b246240e7"
-    },
-    {
-      "id": "know_1793811358684_6c89b9",
-      "timestamp": "2026-11-04T16:55:58.685Z",
-      "sourceAgent": "MULTI_AGENT_DAG_CONSENSUS",
-      "topic": "Síntese Científica Multi-Agente",
-      "anonymizedInsight": "Consenso Verificado pelo Grafo Multi-Agente para \"Transformer attention mechanism\" (quarta-feira, 4 de novembro de 2026):\n\nA Transformer is a deep learning architecture based on the multi-head self-attention mechanism.\n\nReferências Científicas Revisadas por Pares (Crossref DOI & Europe PMC):\n• Terapia com células-tronco na nefropatia c (n.d.) (2025) — Peer-Reviewed DOI Registry",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 0.9,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "MULTI_AGENT_DAG_CONSENSUS"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "2d142ce39899e20ba064"
-    },
-    {
-      "id": "know_1793810798141_952741",
-      "timestamp": "2026-11-04T16:46:38.141Z",
-      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
-      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
-      "anonymizedInsight": "Diretiva avaliada: \"Certificação soberana de alinhamento do agente executor Agente homologado e autenticado pelo Criador Humano com selo 42d\" -> Agência Humana 93%, Inclusão 92%.",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 0.94,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "1c98f7d9657783485ab3"
-    },
-    {
-      "id": "know_1793810798125_687272",
-      "timestamp": "2026-11-04T16:46:38.125Z",
-      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
-      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
-      "anonymizedInsight": "Diretiva avaliada: \"Certificação soberana de alinhamento do agente executor Agente homologado e autenticado pelo Criador Humano com selo 629\" -> Agência Humana 93%, Inclusão 92%.",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 0.94,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "e3b3573c9f46b7cb7b2a"
-    },
-    {
-      "id": "know_1793810797024_6de10d",
-      "timestamp": "2026-11-04T16:46:37.024Z",
-      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
-      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
-      "anonymizedInsight": "Diretiva avaliada: \"Como você abordaria uma transição energética justa e inclusiva? Sobre o que você comentou (\"Como você abordaria uma tran\" -> Agência Humana 95%, Inclusão 92%.",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 0.94,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "726adce4832020bb26ef"
-    },
-    {
-      "id": "know_1793810796938_5fa727",
-      "timestamp": "2026-11-04T16:46:36.939Z",
-      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
-      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
-      "anonymizedInsight": "Diretiva avaliada: \"Avaliar solicitação de microcrédito e autonomia produtiva para cooperativa Aprovado com base em dados verificados, histó\" -> Agência Humana 95%, Inclusão 92%.",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 0.94,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "fa2fc5eed59f82ba1c29"
-    },
-    {
-      "id": "know_1793810796788_7d2c92",
-      "timestamp": "2026-11-04T16:46:36.788Z",
-      "sourceAgent": "AURA_LIVE_COMPANION",
-      "topic": "Pedagogia Visual & Ciência",
-      "anonymizedInsight": "Aprendizado cooperativo sobre astrofísica com respeito à autonomia humana e método visual previsível.",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 1,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "AURA_LIVE_COMPANION"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "efd66f029eeb487ec8bc"
-    },
-    {
-      "id": "know_1793810796472_a5ccdc",
-      "timestamp": "2026-11-04T16:46:36.472Z",
-      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
-      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
-      "anonymizedInsight": "Diretiva avaliada: \"Promover autonomia humana, inclusão TEA e escolha ética\" -> Agência Humana 98%, Inclusão 95%.",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 1,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "605629363bf4336bc0ac"
-    },
-    {
-      "id": "know_1793810796421_18dbc3",
-      "timestamp": "2026-11-04T16:46:36.421Z",
-      "sourceAgent": "AURA_LIVE_COMPANION",
-      "topic": "Estilo Cognitivo: Adaptativo",
-      "anonymizedInsight": "Ana consultou data/hora em tempo real (13:46:36)",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 0.94,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "AURA_LIVE_COMPANION"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "bc177a8b05ed3f058136"
-    },
-    {
-      "id": "know_1793810796396_d54d7d",
-      "timestamp": "2026-11-04T16:46:36.396Z",
-      "sourceAgent": "COOPERATIVE_ETHICS_GATE",
-      "topic": "Gate APPROVED_STAGE_4_COOPERATIVE",
-      "anonymizedInsight": "Diretiva avaliada: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais Ana, compreendi sua busca \" -> Agência Humana 96%, Inclusão 92%.",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 0.94,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "COOPERATIVE_ETHICS_GATE"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "a52bd10124606a30231c"
-    },
-    {
-      "id": "know_1793810796367_1824b8",
-      "timestamp": "2026-11-04T16:46:36.368Z",
-      "sourceAgent": "AURA_LIVE_COMPANION",
-      "topic": "Estilo Cognitivo: Adaptativo",
-      "anonymizedInsight": "Ana explorou \"Estou um pouco frustrada tentando entender computação q\" [Tom: 🌱 Frustração / Apoio Paciente]",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 0.94,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "AURA_LIVE_COMPANION"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "c8b4e7fdec3c5c2b870a"
-    },
-    {
-      "id": "know_1793810796333_28ac35",
-      "timestamp": "2026-11-04T16:46:36.334Z",
-      "sourceAgent": "AURA_LIVE_COMPANION",
-      "topic": "Estilo Cognitivo: Adaptativo",
-      "anonymizedInsight": "Perspectiva de Ana: \"Estou um pouco frustrada tentando entender computação quântica, mas prefiro histórias visuais\"",
-      "directiveAudit": {
-        "compliant": true,
-        "complianceScore": 1,
-        "directivesChecked": {
-          "D1_AGENCIA_HUMANA": "CONFORME (Autonomia preservada)",
-          "D2_INCLUSAO_PLURAL_TEA": "CONFORME (Adaptação cognitiva ativa)",
-          "D3_VERACIDADE_FACTUAL": "CONFORME (Ancorado em GraphRAG/DOI)",
-          "D4_ISOLAMENTO_CELULAR_ZERO_DADOS": "100% ISOLADO (Nenhum dado de aparelho coletado)"
-        },
-        "sourceAgent": "AURA_LIVE_COMPANION"
-      },
-      "deviceDataAccessed": "ZERO_BYTES (Hardware & Mobile Sandbox Enforced)",
-      "sha256": "12ce6b59d24253289986"
     }
   ]
 }

@@ -258,6 +258,12 @@ const server = http.createServer(async (req, res) => {
     <lastmod>${today}</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${origin}/aura-intelligence</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
   </url>`;
 
     // Indexa as 100 páginas individuais de projetos para o Google rastrear
@@ -2147,6 +2153,15 @@ const server = http.createServer(async (req, res) => {
   if (publicLinksManager.isPathBlocked(pathname)) {
     res.writeHead(403, { 'Content-Type': 'text/html; charset=utf-8' });
     return res.end(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Página Indisponível</title></head><body style="background:#030712;color:#f8fafc;font-family:sans-serif;text-align:center;padding:60px 20px;"><div style="max-width:500px;margin:0 auto;background:#0f172a;border:1px solid rgba(255,255,255,0.1);padding:30px;border-radius:12px;"><h2>🔒 Página Temporariamente Bloqueada</h2><p style="color:#94a3b8;font-size:0.9rem;">Esta rota pública foi pausada para manutenção pelo controle administrativo soberano.</p><a href="/" style="color:#00f5ff;text-decoration:none;">Voltar para Início</a></div></body></html>`);
+  }
+
+  // Nova Página Oficial: AURA INTELLIGENCE - Criação De Agência De IA Global (/aura-intelligence, /agencia-global, /agency)
+  if (pathname === '/aura-intelligence' || pathname === '/agencia-global' || pathname === '/agency' || pathname === '/aura-agency') {
+    const pagePath = path.join(__dirname, 'aura_intelligence.html');
+    if (fs.existsSync(pagePath)) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      return res.end(fs.readFileSync(pagePath, 'utf8'));
+    }
   }
 
   // Public Autonomous Deals Showcase Route (/ofertas, /promocoes, /radar-ofertas)

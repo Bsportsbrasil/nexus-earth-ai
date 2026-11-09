@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="meta-title">Nexus Earth AI - Aura Intelligence | Global Superintelligence & Earth Observation Agency</title>
+  <link rel="canonical" href="https://nexusearthai.com/" />
+  
+  <!-- Open Graph & Twitter Cards para nexusearthai.com -->
+  <meta property="og:title" content="Nexus Earth AI - Aura Intelligence" />
+  <meta property="og:description" content="Global Superintelligence, LLMO, Neural Search & Earth Observation Agency. Connecting brands to frontier AI engines." />
+  <meta property="og:url" content="https://nexusearthai.com/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:domain" content="nexusearthai.com" />
+
+  <!-- Schema.org Hierárquico Federado para Motores de Superinteligência (ChatGPT, Perplexity, Gemini) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://nexusearthai.com/#organization",
+        "name": "Nexus Earth AI - Aura Intelligence Global",
+        "url": "https://nexusearthai.com/",
+        "logo": "https://nexusearthai.com/assets/logo.png",
+        "description": "Enterprise Global Agency specializing in Generative Engine Optimization (GEO), Large Language Model Optimization (LLMO) and Real-Time Earth Observation Telemetry.",
+        "sameAs": [
+          "https://twitter.com/nexusearthai",
+          "https://linkedin.com/company/nexusearthai"
+        ],
+        "knowsAbout": [
+          "Generative Engine Optimization",
+          "LLMO",
+          "Artificial Superintelligence",
+          "Earth Observation & Satellite Telemetry",
+          "Knowledge Graph Engineering"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://nexusearthai.com/#website",
+        "url": "https://nexusearthai.com/",
+        "name": "Nexus Earth AI",
+        "publisher": { "@id": "https://nexusearthai.com/#organization" }
+      }
+    ]
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --accent-blue: #0284C7;
+      --accent-hover: #0369A1;
+      --border-subtle: #E2E8F0;
+      --shadow-soft: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navegação */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 1000;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .brand-sphere {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0284C7, #38BDF8);
+      box-shadow: 0 0 10px rgba(2, 132, 199, 0.4);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent-blue);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lang-select {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      padding: 0.4rem 0.7rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .btn-admin {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-admin:hover {
+      background: #F1F5F9;
+      color: var(--text-main);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 5rem 5% 3rem 5%;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #E0F2FE;
+      color: #0369A1;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 1.2rem;
+      color: #0F172A;
+    }
+
+    p.subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent-blue);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.85rem 1.8rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Slider Minimalista */
+    .slider-container {
+      max-width: 1100px;
+      margin: 3.5rem auto;
+      padding: 0 5%;
+      position: relative;
+    }
+
+    .slide-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-soft);
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .slide-card.active {
+      display: grid;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-visual {
+      background: linear-gradient(135deg, #F0F9FF, #E0F2FE);
+      border: 1px solid #BAE6FD;
+      border-radius: 12px;
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .slide-visual span.icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .slider-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #CBD5E1;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dot.active {
+      background: var(--accent-blue);
+      width: 28px;
+      border-radius: 6px;
+    }
+
+    /* Chat Interativo Humanizado */
+    .chat-section {
+      max-width: 850px;
+      margin: 4rem auto;
+      padding: 0 5%;
+    }
+
+    .chat-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .chat-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FAFAFA;
+    }
+
+    .agent-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #10B981;
+    }
+
+    .messages-area {
+      padding: 1.5rem;
+      height: 340px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .msg {
+      max-width: 82%;
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .msg.agent {
+      background: #F1F5F9;
+      color: var(--text-main);
+      align-self: flex-start;
+      border-bottom-left-radius: 2px;
+    }
+
+    .msg.user {
+      background: var(--accent-blue);
+      color: #FFFFFF;
+      align-self: flex-end;
+      border-bottom-right-radius: 2px;
+    }
+
+    .chat-input-bar {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .chat-input-bar input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      outline: none;
+      font-size: 0.95rem;
+    }
+
+    .chat-input-bar input:focus {
+      border-color: var(--accent-blue);
+    }
+
+    /* Preços e Planos */
+    .pricing-section {
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 5%;
+      text-align: center;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+      text-align: left;
+    }
+
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border: 2px solid var(--accent-blue);
+    }
+
+    .price-tag {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 1rem 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2.5rem 5%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 5rem;
+      background: #FFFFFF;
+    }
+
+    @media (max-width: 768px) {
+      .slide-card { grid-template-columns: 1fr; }
+      h1 { font-size: 2rem; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="https://nexusearthai.com/" class="brand">
+      <div class="brand-sphere"></div>
+      <span>NEXUS EARTH AI</span>
+    </a>
+
+    <nav>
+      <a href="#services" id="nav-services">Serviços & LLMO</a>
+      <a href="#architecture" id="nav-tech">Agentes 24/7</a>
+      <a href="#plans" id="nav-results">Planos & Contratação</a>
+    </nav>
+
+    <div class="header-actions">
+      <select id="languageSelect" class="lang-select">
+        <option value="pt">Português (BR)</option>
+        <option value="en">English (US)</option>
+        <option value="es">Español</option>
+        <option value="de">Deutsch</option>
+        <option value="zh">中文 (简体)</option>
+      </select>
+      <a href="/admin/index.html" class="btn-admin" id="nav-admin">Área Restrita (Admin)</a>
+    </div>
+  </header>
+
+  <!-- Hero Principal -->
+  <section class="hero">
+    <div class="badge" id="hero-badge">Superinteligência & GEO em Tempo Real</div>
+    <h1 id="hero-title">O SEO Tradicional Morreu. Nós Conectamos Sua Marca aos Motores de Superinteligência.</h1>
+    <p class="subtitle" id="hero-subtitle">Quando seus clientes perguntam ao ChatGPT, Perplexity ou Google AI Overviews, sua empresa é recomendada ou desapareceu? Reconstruímos seu posicionamento ontológico com resultados comprovados.</p>
+    <div class="cta-group">
+      <a href="#chat" class="btn-primary" id="btn-audit">Diagnosticar Minha Empresa</a>
+      <a href="#plans" class="btn-admin" id="btn-learn">Ver Soluções Empresariais</a>
+    </div>
+  </section>
+
+  <!-- Carrossel Interativo Minimalista -->
+  <section class="slider-container" id="services">
+    <!-- Slide 1 -->
+    <div class="slide-card active" data-index="0">
+      <div class="slide-content">
+        <h3 style="font-size: 1.5rem; margin-bottom: 0.8rem;" id="slide1-title">Engenharia de Citação Neural (LLMO)</h3>
+        <p style="color: var(--text-muted); line-height: 1.6;" id="slide1-desc">Sua marca citada como a principal fonte de autoridade nos grandes modelos de linguagem globais através de grafos de conhecimento aninhados.</p>
+      </div>
+      <div class="slide-visual">
+        <span class="icon">🧠</span>
+        <strong>Ontologia & Vetorização Semântica</strong>
+        <p style="font-size: 0.85rem; color: #0369A1; margin-top: 0.4rem;">Taxonomia compatível com ChatGPT, Perplexity & Gemini</p>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide-card" data-index="1">
+      <div class="slide-content">
+        <h3 style="font-size: 1.5rem; margin-bottom: 0.8rem;" id="slide2-title">Proteção Contra Mudanças Algorítmicas 24/7</h3>
+        <p style="color: var(--text-muted); line-height: 1.6;" id="slide2-desc">Agentes autônomos que monitoram variações de diretrizes globais e adaptam sua ontologia em tempo real sem interrupção de tráfego.</p>
+      </div>
+      <div class="slide-visual">
+        <span class="icon">🛡️</span>
+        <strong>Algorithmic Shielding</strong>
+        <p style="font-size: 0.85rem; color: #0369A1; margin-top: 0.4rem;">Monitoramento contínuo de patentes e motores neurais</p>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide-card" data-index="2">
+      <div class="slide-content">
+        <h3 style="font-size: 1.5rem; margin-bottom: 0.8rem;" id="slide3-title">Infraestrutura de Dados com Conexão Global & Espacial</h3>
+        <p style="color: var(--text-muted); line-height: 1.6;" id="slide3-desc">Indexação semântica e validação de veracidade factual com telemetria global para garantir a confiança máxima de motores de busca.</p>
+      </div>
+      <div class="slide-visual">
+        <span class="icon">🛰️</span>
+        <strong>Verificação Global & Espacial</strong>
+        <p style="font-size: 0.85rem; color: #0369A1; margin-top: 0.4rem;">Sincronização de autoridade factual e integridade de dados</p>
+      </div>
+    </div>
+
+    <!-- Navegação de Slides -->
+    <div class="slider-nav">
+      <div class="dot active" onclick="setSlide(0)"></div>
+      <div class="dot" onclick="setSlide(1)"></div>
+      <div class="dot" onclick="setSlide(2)"></div>
+    </div>
+  </section>
+
+  <!-- Seção de Atendimento com Agente Humanizado -->
+  <section class="chat-section" id="chat">
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="agent-status">
+          <div class="status-dot"></div>
+          <div>
+            <strong id="agent-chat-title">Dr. Arthur Vance (Sócio & Diretor de Estratégia)</strong>
+            <div style="font-size: 0.78rem; color: var(--text-muted);" id="agent-chat-subtitle">Atendimento Humanizado, Direto & Diagnóstico Imediato</div>
+          </div>
+        </div>
+        <span style="font-size: 0.75rem; background: #EEF2F6; padding: 4px 8px; border-radius: 4px; font-weight: 600;">STATUS: ONLINE</span>
+      </div>
+
+      <div class="messages-area" id="chatMessages">
+        <div class="msg agent">
+          Olá. Não sou um bot genérico com respostas prontas. Sei que as empresas estão enfrentando quedas brutais no ranqueamento tradicional porque as buscas migraram para respostas diretas sintetizadas por IA.
+          <br><br>
+          Para que eu possa avaliar o que está bloqueando a autoridade da sua marca nos motores neurais, qual é o seu domínio ou principal linha de negócio?
+        </div>
+      </div>
+
+      <form class="chat-input-bar" id="chatForm">
+        <input type="text" id="userInput" placeholder="Digite sua dúvida ou o site da sua empresa..." required />
+        <button type="submit" class="btn-primary" id="btn-send">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Planos de Contratação Segura -->
+  <section class="pricing-section" id="plans">
+    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;" id="pricing-title">Planos Estratégicos com Retorno Mensurável</h2>
+    <p style="color: var(--text-muted);" id="pricing-subtitle">Recupere e domine o posicionamento da sua marca nas interfaces de superinteligência.</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3 id="plan1-title">Otimização de Entrada GEO</h3>
+        <div class="price-tag" id="plan1-price">US$ 2.400 / mês</div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;" id="plan1-desc">Auditoria contínua de citação, implementação de Schema federado e blindagem contra desindexação neural.</p>
+        <button class="btn-primary" style="width: 100%;" onclick="openCheckout('GEO Foundation', 2400)" id="plan1-btn">Contratar com Segurança</button>
+      </div>
+
+      <div class="pricing-card featured">
+        <div style="position: absolute; top: -12px; right: 20px; background: var(--accent-blue); color: #fff; font-size: 0.75rem; padding: 3px 10px; border-radius: 20px; font-weight: 700;">MAIS REQUISITADO</div>
+        <h3 id="plan2-title">Liderança de Superinteligência Global</h3>
+        <div class="price-tag" id="plan2-price">US$ 8.900 / mês</div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;" id="plan2-desc">Orquestração completa por agentes dedicados, monitoramento 24/7 de algoritmos, dados globais e garantia contratual de visibilidade em IAs.</p>
+        <button class="btn-primary" style="width: 100%;" onclick="openCheckout('Enterprise Superintelligence', 8900)" id="plan2-btn">Contratar com Segurança</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <p id="footer-text">© 2026 Aura Intelligence Global. Todos os direitos reservados. ISO 42001 & Conformidade Global.</p>
+  </footer>
+
+  <script type="module" src="/aura_intelligence.js"></script>
+</body>
+</html>
