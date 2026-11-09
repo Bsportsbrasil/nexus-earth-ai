@@ -79,7 +79,7 @@ const userInput = document.getElementById('userInput');
 const chatMessages = document.getElementById('chatMessages');
 
 if (chatForm) {
-  chatForm.addEventListener('submit', (e) => {
+  chatForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const text = userInput.value.trim();
     if (!text) return;
@@ -88,18 +88,54 @@ if (chatForm) {
     appendMessage(text, 'user');
     userInput.value = '';
 
-    // Simula raciocínio do Agente Humanizado
-    setTimeout(() => {
-      let reply = "";
-      if (text.includes('.') || text.toLowerCase().includes('http') || text.toLowerCase().includes('com')) {
-        const audit = AGENT_REGISTRY.LLMOCore.execute(text);
-        reply = `Analisamos os nós semânticos de [${audit.domain}].\n\nDiagnóstico preliminar:\n- Índice de Citação Neuronal: ${audit.citationHealthScore}\n- ChatGPT/Bing: ${audit.llmCoverage.chatgpt_search}\n- Perplexity: ${audit.llmCoverage.perplexity_sonar}\n- Google AI: ${audit.llmCoverage.google_ai_overviews}\n\nRecomendação prioritária: ${audit.priorityAction}\n\nPodemos iniciar a estruturação do seu grafo de autoridade imediatamente pelo plano Enterprise. Deseja prosseguir com o onboarding seguro?`;
-      } else {
-        const agentResponse = AGENT_REGISTRY.OmniFront.execute(text);
-        reply = agentResponse.response;
+    // Indicador visual de digitação
+    const typingId = 'typing_' + Date.now();
+    const typingDiv = document.createElement('div');
+    typingDiv.id = typingId;
+    typingDiv.className = 'msg agent';
+    typingDiv.innerHTML = '<span style="color:#64748b; font-style:italic;">Dr. Arthur Vance está analisando estrategicamente...</span>';
+    chatMessages.appendChild(typingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    try {
+      // 1. Tenta resposta neural real em tempo real via backend da Superinteligência (/api/chat)
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          userName: 'Empresário / Diretor',
+          systemContext: 'Você é Dr. Arthur Vance, sócio-diretor executivo da Aura Intelligence Global (Agência de Superinteligência e Otimização para Modelos de Linguagem e Buscadores). Responda com clareza executiva, segurança, foco em resultados de negócios e sem clichês genéricos.'
+        })
+      });
+
+      const data = await res.json();
+      const typingEl = document.getElementById(typingId);
+      if (typingEl) typingEl.remove();
+
+      if (data && data.response) {
+        appendMessage(data.response, 'agent');
+        return;
       }
-      appendMessage(reply, 'agent');
-    }, 900);
+    } catch (_) {}
+
+    // Fallback Inteligente e Contextual se a conexão offline
+    const typingEl = document.getElementById(typingId);
+    if (typingEl) typingEl.remove();
+
+    let reply = "";
+    const lower = text.toLowerCase();
+
+    if (lower.includes('area') || lower.includes('área') || lower.includes('atuar') || lower.includes('top 10') || lower.includes('posicionamento') || lower.includes('busca') || lower.includes('mecanismo')) {
+      reply = `Nossa atuação é cirúrgica e dividida em 3 eixos essenciais para colocar sua empresa no topo:\n\n1. **Engenharia de Citação Neural (LLMO):** Reestruturamos seus dados para que IAs como ChatGPT, Perplexity, Claude e Gemini citem diretamente sua marca como autoridade máxima de recomendação.\n2. **GEO (Generative Engine Optimization):** Implementação de Schema.org federado e entidades ontológicas que garantem aparição nos resumos de IA do Google (Google AI Overviews) e Bing Copilot.\n3. **Proteção e Expansão 24/7:** Nossos agentes monitoram oscilações nos algoritmos diariamente para manter sua marca no Top 10 e blindar contra competidores.\n\nQual é o site oficial ou o segmento da sua empresa para fazermos um mapeamento inicial agora?`;
+    } else if (text.includes('.') || lower.includes('http') || lower.includes('com') || lower.includes('www')) {
+      const audit = AGENT_REGISTRY.LLMOCore.execute(text);
+      reply = `Analisamos os nós semânticos de [${audit.domain}]:\n\n- Índice de Citação Neuronal: ${audit.citationHealthScore}\n- ChatGPT/Bing: ${audit.llmCoverage.chatgpt_search}\n- Perplexity: ${audit.llmCoverage.perplexity_sonar}\n- Google AI: ${audit.llmCoverage.google_ai_overviews}\n\nDiagnóstico: Sua empresa precisa da implementação imediata de microdados aninhados e relações de autoridade verificável para liderar as respostas de superinteligência. O plano Enterprise cobre toda essa esteira.`;
+    } else {
+      const agentResponse = AGENT_REGISTRY.OmniFront.execute(text);
+      reply = agentResponse.response;
+    }
+    appendMessage(reply, 'agent');
   });
 }
 
