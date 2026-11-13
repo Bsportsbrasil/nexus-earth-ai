@@ -2258,8 +2258,34 @@ const server = http.createServer(async (req, res) => {
       fs.createReadStream(resolvedPath).pipe(res);
     }
   } else {
-    res.writeHead(404);
-    res.end('Not found');
+    // 404 Amigável com Metatags & Layout Visual Padronizado
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(`<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Não Encontrada (404) — NEXUS Earth AI</title>
+  <meta name="description" content="A página solicitada não foi encontrada ou foi movida. Acesse a plataforma oficial NEXUS Earth AI." />
+  <meta name="robots" content="noindex, follow" />
+  <style>
+    body { background: #030712; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; text-align: center; }
+    .box { background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(0, 245, 255, 0.25); border-radius: 16px; padding: 40px 24px; max-width: 480px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7); }
+    h1 { color: #00f5ff; font-size: 2.2rem; margin: 0 0 10px; font-weight: 800; }
+    p { color: #94a3b8; font-size: 0.95rem; line-height: 1.5; margin-bottom: 24px; }
+    .btn { display: inline-block; background: linear-gradient(90deg, #00f5ff, #0284c7); color: #020617; font-weight: 700; padding: 12px 24px; border-radius: 8px; text-decoration: none; transition: opacity 0.2s; }
+    .btn:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>404</h1>
+    <h2>Página Não Encontrada</h2>
+    <p>A rota solicitada não existe ou foi temporariamente realocada pelos nossos agentes cognitivos.</p>
+    <a href="/" class="btn">Retornar ao Início da NEXUS</a>
+  </div>
+</body>
+</html>`);
   }
 });
 
