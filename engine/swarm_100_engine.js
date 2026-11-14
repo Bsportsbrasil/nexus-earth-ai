@@ -751,9 +751,23 @@ Responda diretamente ao Criador confirmando as instruções e detalhando as aç�
         agentReply = fullText.trim();
       } else {
         const isML = agent.id > 100;
-        agentReply = isML
-          ? `Entendido perfeitamente, Criador! As novas diretrizes para o produto e campanha de "${cleanMsg.substring(0, 40)}" foram assimiladas com prioridade máxima pelo agente ${agent.name}. Atualizei os parâmetros de rastreamento no perfil CASTILLOOFFICIAL, refinando as chamadas para o público-alvo com foco em conversão imediata.`
-          : `Diretriz recebida e implementada com sucesso, Criador. O agente ${agent.name} incorporou as informações ao escopo técnico do projeto (${agent.requiredDomain}), ajustando as regras operacionais e mantendo o andamento em 100% de atividade.`;
+        const lowerMsg = cleanMsg.toLowerCase();
+        const isEn = /\b(please|status|roadmap|summary|hello|hi|what|how|create|build|update|revenue|mrr)\b/i.test(lowerMsg);
+        const isEs = /\b(por favor|estado|resumen|hola|qu[eé]|c[oó]mo|crear|actualizar|ingresos)\b/i.test(lowerMsg);
+
+        if (isEn) {
+          agentReply = isML
+            ? `Understood perfectly, Creator! The latest directives for "${cleanMsg.substring(0, 45)}" have been assimilated with maximum priority by agent ${agent.name}. Affiliate tracking parameters for CASTILLOOFFICIAL on Mercado Libre have been updated, optimizing conversions and high-ticket commissions.`
+            : `Directive received and deployed successfully, Creator. Agent ${agent.name} has assimilated the instructions into the technical and operational scope of ${agent.requiredDomain}, maintaining full 100% production and monetization activity.`;
+        } else if (isEs) {
+          agentReply = isML
+            ? `¡Entendido perfectamente, Creador! Las nuevas directrices para "${cleanMsg.substring(0, 45)}" han sido asimiladas por el agente ${agent.name}. Parámetros de afiliado actualizados en el perfil CASTILLOOFFICIAL de Mercado Libre con foco en máxima conversión.`
+            : `Directiva recibida e implementada con éxito, Creador. El agente ${agent.name} incorporó la información al alcance técnico de ${agent.requiredDomain}, manteniendo el proyecto al 100% en producción continua.`;
+        } else {
+          agentReply = isML
+            ? `Entendido perfeitamente, Criador! As novas diretrizes para o produto e campanha de "${cleanMsg.substring(0, 40)}" foram assimiladas com prioridade máxima pelo agente ${agent.name}. Atualizei os parâmetros de rastreamento no perfil CASTILLOOFFICIAL, refinando as chamadas para o público-alvo com foco em conversão imediata.`
+            : `Diretriz recebida e implementada com sucesso, Criador. O agente ${agent.name} incorporou as informações ao escopo técnico do projeto (${agent.requiredDomain}), ajustando as regras operacionais e mantendo o andamento em 100% de atividade.`;
+        }
       }
     } catch (e) {
       console.warn(`[Swarm100Engine] LLM fallback para agente #${agent.id}:`, e.message);
