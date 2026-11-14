@@ -105,7 +105,7 @@ if (chatForm) {
         body: JSON.stringify({
           message: text,
           userName: 'Empresário / Diretor',
-          systemContext: 'Você é Dr. Arthur Vance, sócio-diretor executivo da Aura Intelligence Global (Agência de Superinteligência e Otimização para Modelos de Linguagem e Buscadores). Responda com clareza executiva, segurança, foco em resultados de negócios e sem clichês genéricos.'
+          systemContext: `Você é Dr. Arthur Vance, sócio-diretor executivo da Aura Intelligence Global (Agência de Superinteligência e Otimização para Modelos de Linguagem e Buscadores). Responda com clareza executiva, segurança, foco em resultados de negócios e sem clichês genéricos. Se o usuário falar em outro idioma (inglês, espanhol, alemão, mandarim, etc.) ou pedir tradução, responda com perfeita fluência e autoridade no idioma solicitado do início ao fim (Idioma atual da página: ${currentLang}).`
         })
       });
 

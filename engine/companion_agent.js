@@ -41,7 +41,11 @@ Siga rigorosamente estas diretrizes:
 4. Veracidade e Pluralidade Humana (1% -> 100%):
 - Utilize apenas fatos reais verificados em tempo real (relógio sincronizado, Wikipedia REST e Crossref DOI). Nunca invente dados.
 - Ao final de sua resposta, se descobrir algo novo sobre o usuário, inclua opcionalmente uma única linha oculta:
-<INSIGHT>Resumo curto do aprendizado sobre o usuário</INSIGHT>`;
+<INSIGHT>Resumo curto do aprendizado sobre o usuário</INSIGHT>
+
+5. Fluência Multilíngue Absoluta e Aprendizado Global:
+- Você é nativamente poliglota e compreende perfeitamente qualquer idioma falado pelo interlocutor.
+- Se o usuário falar em outro idioma (ex: Inglês, Espanhol, Francês, Alemão, Italiano, Mandarim, Japonês, etc.) ou pedir para conversar ou traduzir para outra língua, responda no idioma solicitado com total naturalidade, perfeição gramatical e empatia, do início ao fim.`;
 
 class CompanionAgentEngine {
   constructor() {
@@ -239,14 +243,28 @@ class CompanionAgentEngine {
       this.addInsight(`Perspectiva de ${activeName}: "${cleanMsg.slice(0, 110)}"`, this.state.learningStyle);
     }
 
-    // 1a. Warm & Short Greeting Fast-Path (Directive 3: Warm, short greeting + ask how to help)
-    if (/^(oi|ol[aá]|bom\s+dia|boa\s+tarde|boa\s+noite|tudo\s+bem|e\s+a[ií]|opa|hey|hello)\b[!?.\s]*$/i.test(cleanMsg)) {
-      const greetReply = `Olá, ${activeName}! Tudo ótimo por aqui. Como posso te ajudar agora?`;
+    // 1a. Warm & Short Greeting Fast-Path (Multi-language aware: Portuguese, English, Spanish, French, German, Italian)
+    const lowerClean = cleanMsg.toLowerCase().replace(/[!?.,]/g, '').trim();
+    const isEnGreet = /^(hello|hi|hey|good morning|good afternoon|good evening|how are you)\b/i.test(lowerClean);
+    const isEsGreet = /^(hola|buenos d[ií]as|buenas tardes|buenas noches|qu[eé] tal|c[oó]mo est[aá]s)\b/i.test(lowerClean);
+    const isFrGreet = /^(bonjour|salut|bonsoir|comment [cç]a va)\b/i.test(lowerClean);
+    const isDeGreet = /^(hallo|guten morgen|guten tag|guten abend|wie gehts)\b/i.test(lowerClean);
+    const isItGreet = /^(ciao|buongiorno|buonasera|come stai)\b/i.test(lowerClean);
+    const isPtGreet = /^(oi|ol[aá]|bom dia|boa tarde|boa noite|tudo bem|e a[ií]|opa)\b/i.test(lowerClean);
+
+    if (isEnGreet || isEsGreet || isFrGreet || isDeGreet || isItGreet || isPtGreet) {
+      let greetReply = `Olá, ${activeName}! Tudo ótimo por aqui. Como posso te ajudar agora?`;
+      if (isEnGreet) greetReply = `Hello, ${activeName}! Everything is great here. How can I assist you right now?`;
+      else if (isEsGreet) greetReply = `¡Hola, ${activeName}! Todo excelente por aquí. ¿En qué puedo ayudarte hoy?`;
+      else if (isFrGreet) greetReply = `Bonjour, ${activeName} ! Tout va très bien ici. Comment puis-je vous aider aujourd'hui ?`;
+      else if (isDeGreet) greetReply = `Hallo, ${activeName}! Hier ist alles bestens. Wie kann ich dir jetzt helfen?`;
+      else if (isItGreet) greetReply = `Ciao, ${activeName}! Tutto benissimo qui. Come posso aiutarti oggi?`;
+
       if (onChunk) onChunk(greetReply);
       this._save();
       return {
         reply: greetReply,
-        thought: `[Saudação curta e acolhedora para ${activeName}]`,
+        thought: `[Saudação acolhedora multi-idioma para ${activeName}]`,
         memory: this.state,
         emotionProfile,
         temporal
