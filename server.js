@@ -214,13 +214,16 @@ const server = http.createServer(async (req, res) => {
       'Allow: /og-image.png',
       'Allow: /ofertas',
       'Allow: /projetos',
-      'Allow: /solucoes',
-      'Allow: /resultados',
       'Allow: /api/swarm/solution/',
       'Allow: /api/swarm/deals-feed',
       'Allow: /api/swarm/projects-feed',
       'Disallow: /admin.html',
       'Disallow: /security_ui.js',
+      'Disallow: /solutions_admin_ui.js',
+      'Disallow: /solucoes',
+      'Disallow: /resultados',
+      'Disallow: /central-solucoes',
+      'Disallow: /plano-real',
       'Disallow: /api/admin/',
       'Disallow: /api/security',
       '',
@@ -267,60 +270,6 @@ const server = http.createServer(async (req, res) => {
     <lastmod>${today}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>${origin}/solucoes</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>${origin}/solucoes/pagamentos</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>${origin}/solucoes/afiliados-ml</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>${origin}/solucoes/monetizacao-aura</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>${origin}/solucoes/micro-saas-b2b</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>${origin}/solucoes/aquisicao-trafego</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>${origin}/resultados/ordem-1</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>${origin}/resultados/ordem-2</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>${origin}/resultados/ordem-3</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
   </url>`;
 
     // Indexa as 100 páginas individuais de projetos para o Google rastrear
@@ -2244,7 +2193,28 @@ const server = http.createServer(async (req, res) => {
     return res.end(autonomousDistributionEngine.generateProjectsShowcaseHTML(fullState.agents));
   }
 
-  // Dedicated Real Solutions Portal & Recommended Order Result Pages (/solucoes/* & /resultados/*)
+  // Owner-Only Admin API for Private Solutions & Recommended Order Result Pages
+  if (req.method === 'GET' && pathname === '/api/admin/solutions-page') {
+    const authHeader = req.headers['authorization'] || req.headers['x-nexus-admin-key'] || '';
+    if (!securityController.verifyAdminToken(authHeader)) {
+      return jsonResponse(res, 401, {
+        error: 'UNAUTHORIZED_CREATOR_ONLY: Acesso exclusivo à proprietária autenticada no Painel Admin C2.'
+      });
+    }
+    const targetRoute = (url.searchParams.get('route') || '/solucoes').trim();
+    const portalHtml = solutionsPortalEngine.resolveRouteHTML(targetRoute);
+    if (!portalHtml) {
+      return jsonResponse(res, 404, { error: 'Página de solução privada não encontrada.' });
+    }
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-store, no-cache, must-revalidate, private',
+      'X-Robots-Tag': 'noindex, nofollow, noarchive'
+    });
+    return res.end(portalHtml);
+  }
+
+  // Strictly Private Routes (/solucoes/* & /resultados/*): Block ALL unauthenticated public access with HTTP 403
   if (
     pathname === '/solucoes' ||
     pathname === '/central-solucoes' ||
@@ -2253,9 +2223,22 @@ const server = http.createServer(async (req, res) => {
     pathname.startsWith('/solucoes/') ||
     pathname.startsWith('/resultados/')
   ) {
+    const authHeader = req.headers['authorization'] || req.headers['x-nexus-admin-key'] || '';
+    if (!securityController.verifyAdminToken(authHeader)) {
+      res.writeHead(403, {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-store, private',
+        'X-Robots-Tag': 'noindex, nofollow'
+      });
+      return res.end(solutionsPortalEngine.renderForbiddenHTML());
+    }
     const portalHtml = solutionsPortalEngine.resolveRouteHTML(pathname);
     if (portalHtml) {
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.writeHead(200, {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-store, private',
+        'X-Robots-Tag': 'noindex, nofollow'
+      });
       return res.end(portalHtml);
     }
   }

@@ -757,6 +757,10 @@
             <span class="tab-icon">🌐</span>
             <span class="tab-text" style="color:#38bdf8;font-weight:700">13. Central de Links &amp; Páginas Públicas</span>
           </button>
+          <button class="c2-tab-btn" data-tab="tab-solutions-portal" style="border-left:2px solid #f59e0b;">
+            <span class="tab-icon">🔒</span>
+            <span class="tab-text" style="color:#fbbf24;font-weight:700">14. Soluções Reais &amp; Resultados (Privado)</span>
+          </button>
         </div>
       </aside>
 
@@ -1812,9 +1816,9 @@
             <button id="swarm-hard-reset-btn" class="btn-secondary" style="font-size:0.75rem; padding:0.45rem 0.85rem; border-color:rgba(239,68,68,0.3); color:#fca5a5;" title="Restaurar Configuração Inicial do Enxame">
               ⚠️ Resetar Enxame
             </button>
-            <a href="/solucoes" target="_blank" rel="noopener" class="btn-secondary" style="font-size:0.75rem; padding:0.45rem 0.85rem; border-color:rgba(0,245,255,0.4); color:#00f5ff; text-decoration:none;" title="Abrir Central de Soluções Reais e Resultados das Ordens">
-              🎯 Soluções &amp; Resultados ➔
-            </a>
+            <button type="button" onclick="SolutionsAdminUI.openTab('/solucoes')" class="btn-secondary" style="font-size:0.75rem; padding:0.45rem 0.85rem; border-color:rgba(245,158,11,0.45); color:#fbbf24;" title="Abrir Central Privada de Soluções Reais e Resultados (Somente Admin)">
+              🔒 Soluções &amp; Resultados (Privado) ➔
+            </button>
           </div>
         </div>
 
@@ -2098,6 +2102,46 @@
       </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 14: SOLUÇÕES REAIS & RESULTADOS DAS ORDENS (EXCLUSIVO ADMIN C2)
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-solutions-portal" class="c2-pane">
+      <div style="background: linear-gradient(135deg, rgba(245,158,11,0.10) 0%, rgba(16,185,129,0.08) 50%, rgba(2,6,23,0.96) 100%); border: 1px solid rgba(245,158,11,0.35); border-radius: 12px; padding: 1.15rem 1.35rem; margin-bottom: 1rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:0.85rem;">
+          <div>
+            <span class="agent-badge DONE" style="background:rgba(245,158,11,0.16); color:#fbbf24; border-color:rgba(245,158,11,0.45); font-size:0.7rem; font-weight:800;">
+              🔒 ACESSO RESTRITO EXCLUSIVO DA PROPRIETÁRIA • BLOQUEADO PARA O PÚBLICO (HTTP 403 EXTERNO)
+            </span>
+            <h2 style="margin:6px 0 4px; font-size:1.18rem; color:#fff;">Central Privada de Soluções Reais &amp; Resultados das Ordens Recomendadas</h2>
+            <div id="admin-solutions-status" style="font-family:var(--font-mono); font-size:0.72rem; color:#38bdf8;">
+              🔒 Modo Privado Autenticado • Clique em qualquer página abaixo para abrir
+            </div>
+          </div>
+          <button type="button" onclick="SolutionsAdminUI.loadPage()" class="btn-secondary" style="font-size:0.74rem; padding:0.42rem 0.85rem;">
+            ↻ Recarregar Página Ativa
+          </button>
+        </div>
+
+        <!-- Quick Switcher Bar for All 9 Private Pages -->
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button type="button" class="admin-sol-nav-btn" data-route="/solucoes" onclick="SolutionsAdminUI.loadPage('/solucoes')" style="padding:6px 11px; border-radius:8px; border:1px solid #00f5ff; background:rgba(0,245,255,0.18); color:#00f5ff; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; cursor:pointer;">🎯 Central</button>
+          <button type="button" class="admin-sol-nav-btn" data-route="/solucoes/pagamentos" onclick="SolutionsAdminUI.loadPage('/solucoes/pagamentos')" style="padding:6px 11px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(15,23,42,0.75); color:#cbd5e1; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; cursor:pointer;">01 Pagamentos</button>
+          <button type="button" class="admin-sol-nav-btn" data-route="/solucoes/afiliados-ml" onclick="SolutionsAdminUI.loadPage('/solucoes/afiliados-ml')" style="padding:6px 11px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(15,23,42,0.75); color:#cbd5e1; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; cursor:pointer;">02 Mercado Livre</button>
+          <button type="button" class="admin-sol-nav-btn" data-route="/solucoes/monetizacao-aura" onclick="SolutionsAdminUI.loadPage('/solucoes/monetizacao-aura')" style="padding:6px 11px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(15,23,42,0.75); color:#cbd5e1; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; cursor:pointer;">03 AURA Pro</button>
+          <button type="button" class="admin-sol-nav-btn" data-route="/solucoes/micro-saas-b2b" onclick="SolutionsAdminUI.loadPage('/solucoes/micro-saas-b2b')" style="padding:6px 11px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(15,23,42,0.75); color:#cbd5e1; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; cursor:pointer;">04 B2B &amp; SaaS</button>
+          <button type="button" class="admin-sol-nav-btn" data-route="/solucoes/aquisicao-trafego" onclick="SolutionsAdminUI.loadPage('/solucoes/aquisicao-trafego')" style="padding:6px 11px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(15,23,42,0.75); color:#cbd5e1; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; cursor:pointer;">05 Tráfego</button>
+          <button type="button" class="admin-sol-nav-btn" data-route="/resultados/ordem-1" onclick="SolutionsAdminUI.loadPage('/resultados/ordem-1')" style="padding:6px 11px; border-radius:8px; border:1px solid rgba(16,185,129,0.35); background:rgba(16,185,129,0.12); color:#34d399; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; cursor:pointer;">✅ Resultado Ordem 1</button>
+          <button type="button" class="admin-sol-nav-btn" data-route="/resultados/ordem-2" onclick="SolutionsAdminUI.loadPage('/resultados/ordem-2')" style="padding:6px 11px; border-radius:8px; border:1px solid rgba(245,158,11,0.35); background:rgba(245,158,11,0.12); color:#fbbf24; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; cursor:pointer;">✅ Resultado Ordem 2</button>
+          <button type="button" class="admin-sol-nav-btn" data-route="/resultados/ordem-3" onclick="SolutionsAdminUI.loadPage('/resultados/ordem-3')" style="padding:6px 11px; border-radius:8px; border:1px solid rgba(0,245,255,0.35); background:rgba(0,245,255,0.12); color:#00f5ff; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; cursor:pointer;">✅ Resultado Ordem 3</button>
+        </div>
+      </div>
+
+      <!-- Private Authenticated Viewer Frame -->
+      <div style="border: 1px solid rgba(0,245,255,0.28); border-radius: 12px; overflow: hidden; background: #030712; box-shadow: 0 12px 34px rgba(0,0,0,0.6);">
+        <iframe id="admin-solutions-frame" title="Central Privada de Soluções e Resultados (Admin C2)" style="width:100%; height:78vh; min-height:640px; border:none; display:block; background:#030712;"></iframe>
+      </div>
+    </div>
+
     <!-- Edit Link Modal -->
     <div id="public-link-edit-modal" class="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:99999; align-items:center; justify-content:center;">
       <div class="modal-box glass-panel" style="width:min(600px, 94vw); display:flex; flex-direction:column; padding:1.25rem; border:1px solid rgba(0,245,255,0.4); border-radius:12px; background:rgba(10,15,30,0.96);">
@@ -2147,6 +2191,7 @@
   <script src="world_organism_ui.js"></script>
   <script src="swarm_100_ui.js"></script>
   <script src="public_links_ui.js"></script>
+  <script src="solutions_admin_ui.js"></script>
   <script src="floating_nexus.js"></script>
 </body>
 </html>

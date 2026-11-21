@@ -23,36 +23,24 @@ export class PublicLinksManager {
   constructor() {
     this.links = new Map();
     this.loadState();
-    this.ensureSolutionsRoutesRegistered();
+    this.purgePrivateSolutionsFromPublicRegistry();
   }
 
-  ensureSolutionsRoutesRegistered() {
-    const solutionEntries = [
-      { id: 'route_solucoes_hub', category: 'Soluções Reais & Resultados', title: 'Central de Soluções Reais & Resultados das Ordens', path: '/solucoes', description: 'Hub central das 5 soluções detalhadas de monetização real e das 3 páginas de resultados após conclusão das ordens recomendadas.' },
-      { id: 'route_solucao_pagamentos', category: 'Soluções Reais & Resultados', title: 'Solução 01 — Infraestrutura Real de Pagamentos & Pix Oficial', path: '/solucoes/pagamentos', description: 'Guia técnico de integração Mercado Pago / Asaas com QR Code EMVCo oficial, webhook automático e simulador de taxas.' },
-      { id: 'route_solucao_afiliados_ml', category: 'Soluções Reais & Resultados', title: 'Solução 02 — Máquina Real de Afiliados Mercado Livre', path: '/solucoes/afiliados-ml', description: 'Correção de links oficiais meli.la, vitrine /ofertas e automação gratuita no Telegram e WhatsApp.' },
-      { id: 'route_solucao_aura_pro', category: 'Soluções Reais & Resultados', title: 'Solução 03 — Monetização Direta AURA Live & NEXUS Pro', path: '/solucoes/monetizacao-aura', description: 'Planos Freemium, AURA Plus (R$ 29,90/mês) e NEXUS Pro (R$ 97/mês) com simulador de margem líquida.' },
-      { id: 'route_solucao_b2b_saas', category: 'Soluções Reais & Resultados', title: 'Solução 04 — Subdomínios Gratuitos + Agentes WhatsApp B2B', path: '/solucoes/micro-saas-b2b', description: 'Substituição de 100 domínios por subdomínios gratuitos e serviços B2B de atendimento WhatsApp IA.' },
-      { id: 'route_solucao_trafego', category: 'Soluções Reais & Resultados', title: 'Solução 05 — Motor Real de Aquisição de Clientes & Tráfego', path: '/solucoes/aquisicao-trafego', description: 'Funil real de geração diária de clientes via Telegram, WhatsApp, Reels/TikTok/Shorts, prospecção B2B e SEO.' },
-      { id: 'route_resultado_ordem_1', category: 'Resultados das Ordens', title: 'Resultado Após Conclusão — Ordem 1 (Segurança & Checkout Real)', path: '/resultados/ordem-1', description: 'Antes e depois visual + prévia do checkout oficial EMVCo após concluir a Ordem 1.' },
-      { id: 'route_resultado_ordem_2', category: 'Resultados das Ordens', title: 'Resultado Após Conclusão — Ordem 2 (Afiliados ML + Telegram 24/7)', path: '/resultados/ordem-2', description: 'Antes e depois visual + prévia da postagem automática no Telegram e projeção 30/60/90 dias.' },
-      { id: 'route_resultado_ordem_3', category: 'Resultados das Ordens', title: 'Resultado Após Conclusão — Ordem 3 (AURA Pro + B2B Consolidado)', path: '/resultados/ordem-3', description: 'Painel de caixa real consolidado com cenários conservador, moderado e escala.' }
+  purgePrivateSolutionsFromPublicRegistry() {
+    const privateIds = [
+      'route_solucoes_hub',
+      'route_solucao_pagamentos',
+      'route_solucao_afiliados_ml',
+      'route_solucao_aura_pro',
+      'route_solucao_b2b_saas',
+      'route_solucao_trafego',
+      'route_resultado_ordem_1',
+      'route_resultado_ordem_2',
+      'route_resultado_ordem_3'
     ];
     let changed = false;
-    for (const entry of solutionEntries) {
-      if (!this.links.has(entry.id)) {
-        this.links.set(entry.id, {
-          ...entry,
-          fullUrl: `https://nexusearthai.com${entry.path}`,
-          status: 'ATIVO',
-          accessType: 'PUBLICO',
-          allowEdit: true,
-          allowBlock: true,
-          viewsCount: 0,
-          createdAt: new Date().toISOString()
-        });
-        changed = true;
-      }
+    for (const id of privateIds) {
+      if (this.links.delete(id)) changed = true;
     }
     if (changed) this.saveState();
   }

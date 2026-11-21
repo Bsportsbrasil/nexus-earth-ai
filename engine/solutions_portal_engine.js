@@ -174,6 +174,7 @@ export class SolutionsPortalEngine {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${this._escape(title)} • NEXUS Earth AI</title>
   <meta name="description" content="${this._escape(description)}">
+  <meta name="robots" content="noindex, nofollow, noarchive">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#030712">
@@ -574,13 +575,13 @@ export class SolutionsPortalEngine {
       <div class="sp-brand-row">
         <a href="/solucoes" class="sp-brand">
           <span style="color:var(--cyan);">⚡ NEXUS</span>
-          <span class="sp-brand-tag">CENTRAL DE SOLUÇÕES REAIS</span>
+          <span class="sp-brand-tag" style="color:#10b981; border-color:rgba(16,185,129,0.45); background:rgba(16,185,129,0.12);">🔒 EXCLUSIVO ADMIN C2 • PRIVADO</span>
         </a>
         <div class="sp-ext-links">
-          <a href="/" class="sp-ext-btn">🏠 Site Principal</a>
-          <a href="/mobile/aura-live" class="sp-ext-btn">🤖 App AURA Live</a>
-          <a href="/ofertas" class="sp-ext-btn">🛒 Vitrine /ofertas</a>
-          <a href="/projetos" class="sp-ext-btn">💼 /projetos</a>
+          <a href="/" target="_blank" rel="noopener" class="sp-ext-btn">🏠 Site Principal</a>
+          <a href="/mobile/aura-live" target="_blank" rel="noopener" class="sp-ext-btn">🤖 App AURA Live</a>
+          <a href="/ofertas" target="_blank" rel="noopener" class="sp-ext-btn">🛒 Vitrine /ofertas</a>
+          <a href="/projetos" target="_blank" rel="noopener" class="sp-ext-btn">💼 /projetos</a>
         </div>
       </div>
       <nav class="sp-nav-scroll" aria-label="Navegação de Soluções e Resultados">
@@ -594,9 +595,24 @@ export class SolutionsPortalEngine {
   </main>
 
   <footer class="sp-footer">
-    NEXUS Earth AI (nexusearthai.com) • Arquitetura 100% Verídica, Auditável &amp; Blindada (LGPD) • Zero Dados Pessoais Expostos
+    🔒 ÁREA PRIVADA EXCLUSIVA DA PROPRIETÁRIA • NEXUS Master C2 • Acesso bloqueado para o público externo
   </footer>
 
+  <script>
+    (function() {
+      document.addEventListener('click', function(e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        if (href.startsWith('/solucoes') || href.startsWith('/resultados')) {
+          if (window.parent && window.parent !== window) {
+            e.preventDefault();
+            window.parent.postMessage({ type: 'nexus_admin_open_solution', route: href }, '*');
+          }
+        }
+      });
+    })();
+  </script>
   ${extraScript ? `<script>${extraScript}</script>` : ''}
 </body>
 </html>`;
@@ -1690,6 +1706,33 @@ export class SolutionsPortalEngine {
       bodyHtml,
       extraScript
     });
+  }
+
+  renderForbiddenHTML() {
+    return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>403 — Acesso Restrito • NEXUS</title>
+  <style>
+    body { margin: 0; min-height: 100vh; background: #030712; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .box { max-width: 460px; width: 100%; background: rgba(15,23,42,0.92); border: 1px solid rgba(244,63,94,0.45); border-radius: 16px; padding: 28px; text-align: center; box-shadow: 0 18px 45px rgba(0,0,0,0.65); }
+    h1 { margin: 8px 0; font-size: 1.45rem; color: #fda4af; }
+    p { color: #94a3b8; font-size: 0.9rem; line-height: 1.55; margin: 0 0 18px; }
+    a { display: inline-block; padding: 10px 18px; border-radius: 10px; background: #00f5ff; color: #020617; font-weight: 800; text-decoration: none; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div style="font-size:2.4rem;">🔒</div>
+    <h1>Acesso Restrito à Área Administrativa</h1>
+    <p>Este conteúdo é estritamente privado e acessível somente pela proprietária autenticada dentro do Painel Master C2.</p>
+    <a href="/">← Voltar à Página Inicial</a>
+  </div>
+</body>
+</html>`;
   }
 
   /**
