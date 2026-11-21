@@ -197,7 +197,7 @@ class CompanionAgentEngine {
     return this.state;
   }
 
-  async converse({ message, userName, learningStyle, history = [], clientTemporal = null, apiKey, onThought, onChunk }) {
+  async converse({ message, userName, learningStyle, history = [], clientTemporal = null, lang = 'pt', apiKey, onThought, onChunk }) {
     const cleanMsg = (message || '').trim();
     if (learningStyle) this.state.learningStyle = learningStyle;
     if (userName && userName.trim()) this.state.userName = userName.trim();
@@ -347,8 +347,29 @@ class CompanionAgentEngine {
       ? `\n\n${mapIntel.promptContext}`
       : '';
 
+    const langNames = {
+      pt: 'Português (Brasil)',
+      en: 'English (US / Global)',
+      es: 'Español (Latinoamérica / España)',
+      fr: 'Français',
+      de: 'Deutsch',
+      it: 'Italiano',
+      zh: '中文 (Mandarin / Simplified Chinese)',
+      ja: '日本語 (Japanese)',
+      ar: 'العربية (Arabic)',
+      ru: 'Русский (Russian)',
+      hi: 'हिन्दी (Hindi)'
+    };
+    const activeLangCode = (lang || 'pt').toLowerCase().slice(0, 2);
+    const activeLangName = langNames[activeLangCode] || 'Português (Brasil)';
+    const languageMandate = activeLangCode !== 'pt'
+      ? `[MANDATO COGNITIVO DE IDIOMA ATIVO DA INTERFACE]:
+O usuário selecionou a interface no idioma "${activeLangName}" (código "${activeLangCode}"). Em estrito cumprimento à LEI 10 de Internacionalização e Poliglotismo Total, você DEVE raciocinar, responder, acolher e concluir TODO o seu diálogo exclusivamente em ${activeLangName}, do início ao fim, mesmo se a pergunta contiver palavras em português. A empatia humana e a clareza vocal devem soar totalmente naturais no idioma ${activeLangName}.`
+      : `[IDIOMA ATIVO DA INTERFACE]: Português (Brasil).`;
+
     const systemPrompt = [
       CORE_PHILOSOPHY,
+      languageMandate,
       `[NOME DO USUÁRIO ATUAL]: Chame sempre a pessoa pelo nome "${activeName}" de forma natural, acolhedora e humana.`,
       `[ANÁLISE EMOCIONAL DETECTADA NESTA FALA]: ${emotionProfile.label} (${emotionProfile.code}). Adapte seu tom exatamente a este estado emocional antes de entregar os fatos práticos.`,
       `[ESTILO COGNITIVO PREFERIDO DE ${activeName.toUpperCase()}]: ${this.state.learningStyle}`,

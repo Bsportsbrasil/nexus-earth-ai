@@ -275,6 +275,7 @@ const CompanionUI = (function () {
     if (stateLabel) stateLabel.textContent = `⚡ Analisando contexto emocional de ${userName} (${clientTemporal.localeTime})...`;
 
     try {
+      const currentActiveLang = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
       const resp = await fetch('/api/companion', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -284,6 +285,7 @@ const CompanionUI = (function () {
           learningStyle,
           history,
           clientTemporal,
+          lang: currentActiveLang,
           apiKey: window.Gemini ? Gemini.getKey() : ''
         })
       });

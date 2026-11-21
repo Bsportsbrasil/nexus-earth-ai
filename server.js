@@ -37,6 +37,7 @@ import { worldLearnerOrganism } from './engine/world_learner_organism.js';
 import { swarm100Engine } from './engine/swarm_100_engine.js';
 import { autonomousDistributionEngine } from './engine/autonomous_distribution_engine.js';
 import { publicLinksManager } from './engine/public_links_manager.js';
+import { solutionsPortalEngine } from './engine/solutions_portal_engine.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -213,6 +214,8 @@ const server = http.createServer(async (req, res) => {
       'Allow: /og-image.png',
       'Allow: /ofertas',
       'Allow: /projetos',
+      'Allow: /solucoes',
+      'Allow: /resultados',
       'Allow: /api/swarm/solution/',
       'Allow: /api/swarm/deals-feed',
       'Allow: /api/swarm/projects-feed',
@@ -264,6 +267,60 @@ const server = http.createServer(async (req, res) => {
     <lastmod>${today}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${origin}/solucoes</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>${origin}/solucoes/pagamentos</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${origin}/solucoes/afiliados-ml</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${origin}/solucoes/monetizacao-aura</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${origin}/solucoes/micro-saas-b2b</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${origin}/solucoes/aquisicao-trafego</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${origin}/resultados/ordem-1</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${origin}/resultados/ordem-2</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${origin}/resultados/ordem-3</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>`;
 
     // Indexa as 100 páginas individuais de projetos para o Google rastrear
@@ -667,12 +724,14 @@ const server = http.createServer(async (req, res) => {
     try {
       const body = await parseJsonBody(req);
       const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+      const reqLang = (body.lang || body.language || 'pt').toLowerCase().slice(0, 2);
       const convRes = await agentMemoryStore.converse({
         agentId: body.agentId || 'aura',
         message: body.message || '',
         userName: body.userName || 'Criador',
         apiKey: body.apiKey || process.env.GEMINI_API_KEY || '',
         voiceEnabled: !!body.voiceEnabled,
+        lang: reqLang,
         clientTemporal: body.clientTemporal || null,
         clientGeo: body.clientGeo || null,
         clientIp
@@ -1462,12 +1521,14 @@ const server = http.createServer(async (req, res) => {
         if (!lineage.clean) {
           throw new Error(lineage.reason);
         }
+        const reqLang = (body.lang || body.language || 'pt').toLowerCase().slice(0, 2);
         const resCompanion = await companionEngine.converse({
           message: body.message,
           userName: body.userName,
           learningStyle: body.learningStyle,
           history: body.history || [],
           clientTemporal: body.clientTemporal,
+          lang: reqLang,
           apiKey: body.apiKey,
           onThought: (fullThought) => broadcastWs({ type: 'aura_thought', fullThought }),
           onChunk: (visibleText) => broadcastWs({ type: 'aura_stream', visibleText })
@@ -2181,6 +2242,22 @@ const server = http.createServer(async (req, res) => {
     const fullState = swarm100Engine.getSwarmState();
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     return res.end(autonomousDistributionEngine.generateProjectsShowcaseHTML(fullState.agents));
+  }
+
+  // Dedicated Real Solutions Portal & Recommended Order Result Pages (/solucoes/* & /resultados/*)
+  if (
+    pathname === '/solucoes' ||
+    pathname === '/central-solucoes' ||
+    pathname === '/plano-real' ||
+    pathname === '/resultados' ||
+    pathname.startsWith('/solucoes/') ||
+    pathname.startsWith('/resultados/')
+  ) {
+    const portalHtml = solutionsPortalEngine.resolveRouteHTML(pathname);
+    if (portalHtml) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      return res.end(portalHtml);
+    }
   }
 
   // Creator-Only Redirect: /supervisor navigates to Master C2 Tab 10

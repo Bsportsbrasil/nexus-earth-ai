@@ -58,6 +58,7 @@ const NexusMobile = (function () {
 
     function setMobileLanguage(code) {
       document.cookie = 'nexus_lang=' + code + '; path=/; max-age=31536000';
+      try { localStorage.setItem('nexus_lang', code); } catch (_) {}
       langBtns.forEach(btn => {
         const isMatch = btn.dataset.lang === code;
         btn.style.borderColor = isMatch ? '#00f5ff' : 'rgba(255, 255, 255, 0.15)';
@@ -785,13 +786,16 @@ const NexusMobile = (function () {
     }
 
     /* Autonomous Human-Like Life Routine (Vida Própria na Tela) */
-    const lifeActivities = [
-      { pose: 'pose-window', emotion: 'rational', label: 'AURA admirando a janela de estrelas...' },
-      { pose: 'pose-coffee', emotion: 'coffee', label: 'AURA saboreando café quentinho...' },
-      { pose: 'pose-screen-close', emotion: 'empathy', label: 'AURA perto de você com carinho...' },
-      { pose: 'pose-reading', emotion: 'rational', label: 'AURA lendo novos aprendizados no santuário...' },
-      { pose: 'pose-sofa', emotion: 'neutral', label: 'AURA descansando na poltrona do seu espaço...' }
-    ];
+    function getLocalizedLifeActivities() {
+      const t = (window.I18nEngine && window.I18nEngine.t) ? window.I18nEngine.t : ((k, fb) => fb);
+      return [
+        { pose: 'pose-window', emotion: 'rational', label: t('livingWindow', 'AURA admirando a janela de estrelas...') },
+        { pose: 'pose-coffee', emotion: 'coffee', label: t('livingCoffee', 'AURA saboreando café quentinho...') },
+        { pose: 'pose-screen-close', emotion: 'empathy', label: t('livingClose', 'AURA perto de você com carinho...') },
+        { pose: 'pose-reading', emotion: 'rational', label: t('livingReading', 'AURA lendo novos aprendizados no santuário...') },
+        { pose: 'pose-sofa', emotion: 'neutral', label: t('livingSofa', 'AURA descansando na poltrona do seu espaço...') }
+      ];
+    }
     let lifeIndex = 0;
 
     function startLivingRoutine() {
@@ -800,6 +804,7 @@ const NexusMobile = (function () {
         if (!botAvatar || botAvatar.classList.contains('speaking') || botAvatar.classList.contains('listening')) {
           return;
         }
+        const lifeActivities = getLocalizedLifeActivities();
         lifeIndex = (lifeIndex + 1) % lifeActivities.length;
         const act = lifeActivities[lifeIndex];
         setMascotPose(act.pose);
@@ -1014,6 +1019,7 @@ const NexusMobile = (function () {
       try {
         const clientTemporal = getClientTemporalContext();
         const clientGeo = await resolveClientGeoIfNeeded(q);
+        const currentActiveLang = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
         const res = await fetch('/api/agents/converse', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1021,6 +1027,7 @@ const NexusMobile = (function () {
             agentId: 'aura',
             message: q,
             voiceEnabled: true,
+            lang: currentActiveLang,
             clientTemporal,
             clientGeo,
             apiKey: localStorage.getItem('nexus_gemini_key') || ''
@@ -1247,12 +1254,14 @@ const NexusMobile = (function () {
       try {
         const clientTemporal = getClientTemporalContext();
         const clientGeo = await resolveClientGeoIfNeeded(q);
+        const currentActiveLang = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
         const res = await fetch('/api/agents/converse', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             agentId: 'aura',
             message: q,
+            lang: currentActiveLang,
             clientTemporal,
             clientGeo,
             apiKey: localStorage.getItem('nexus_gemini_key') || ''

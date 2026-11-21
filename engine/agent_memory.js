@@ -330,7 +330,7 @@ export class AgentMemoryStore {
   /**
    * Executes a conversational turn with an agent (supports both text and voice transcript input)
    */
-  async converse({ agentId, message, userName = 'Criador', apiKey = '', voiceEnabled = false, clientTemporal = null, clientGeo = null, clientIp = '' }) {
+  async converse({ agentId, message, userName = 'Criador', apiKey = '', voiceEnabled = false, lang = 'pt', clientTemporal = null, clientGeo = null, clientIp = '' }) {
     const agent = this.agents.get(agentId);
     if (!agent) {
       throw new Error(`Agente "${agentId}" não encontrado.`);
@@ -439,8 +439,29 @@ export class AgentMemoryStore {
           ? `DIRETRIZ ESTRITA DE VOZ HUMANA DE RESPOSTA IMEDIATA: Você fala diretamente por uma interface de áudio em tempo real. 1) Comece SEMPRE com uma primeira frase curta e direta (de 8 a 14 palavras) respondendo imediatamente ao ponto principal, seguida de mais 1 ou 2 frases concisas com os fatos e sua opinião/recomendação (total de 28 a 48 palavras, sempre concluindo até o ponto final). 2) Proibido usar listas numeradas, marcadores (*, -), negrito ou markdown. 3) Proibido usar apelidos íntimos como "meu amor" ou "meu bem". 4) Escreva números de forma fluida para fala.`
           : `Diretriz de Tom: Gentil, educado, inteligente, profissional, humanizado e direto ao ponto. Nunca use apelidos íntimos ("meu amor", "meu bem", etc.) e nunca dê respostas genéricas.`;
 
+        const langNames = {
+          pt: 'Português (Brasil)',
+          en: 'English (US / Global)',
+          es: 'Español (Latinoamérica / España)',
+          fr: 'Français',
+          de: 'Deutsch',
+          it: 'Italiano',
+          zh: '中文 (Mandarin / Simplified Chinese)',
+          ja: '日本語 (Japanese)',
+          ar: 'العربية (Arabic)',
+          ru: 'Русский (Russian)',
+          hi: 'हिन्दी (Hindi)'
+        };
+        const activeLangCode = (lang || 'pt').toLowerCase().slice(0, 2);
+        const activeLangName = langNames[activeLangCode] || 'Português (Brasil)';
+        const languageMandate = activeLangCode !== 'pt'
+          ? `[MANDATO COGNITIVO DE IDIOMA ATIVO DA INTERFACE]:
+O usuário selecionou a interface no idioma "${activeLangName}" (código "${activeLangCode}"). Em estrito cumprimento à LEI 10 de Internacionalização e Poliglotismo Total, você DEVE raciocinar, responder, argumentar e concluir TODO o seu diálogo exclusivamente em ${activeLangName}, do início ao fim, mesmo se a pergunta tiver termos em português ou poucas palavras. Adapte também a entonação vocal para ser 100% natural em ${activeLangName}.`
+          : `[IDIOMA ATIVO DA INTERFACE]: Português (Brasil).`;
+
         const sysInstruction = [
           MANDATORY_SYSTEM_DIRECTIVE,
+          languageMandate,
           `\nIdentidade Específica do Agente: ${agent.name} (${agent.role}).`,
           personaDirective,
           agent.instructions ? `Instruções Customizadas do Administrador: ${agent.instructions}` : '',

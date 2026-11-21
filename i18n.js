@@ -50,6 +50,28 @@ const I18nEngine = (() => {
       langBtn: 'PT',
       langTitle: 'Selecionar Idioma Global (Auto-detectado)',
       autoDetectedBadge: 'Detectado pelo seu país/navegador',
+      poseSofa: "🛋️ Sofá",
+      poseCoffee: "☕ Café",
+      poseWindow: "🌌 Janela",
+      poseClose: "✨ Perto de Você",
+      poseDuplex: "🎙️ Mãos Livres",
+      historyBtn: "💬 Histórico",
+      clearBtn: "🗑️ Limpar",
+      mascotSanctuary: "AURA Viva • No Santuário",
+      livingWindow: "AURA admirando a janela de estrelas...",
+      livingCoffee: "AURA saboreando café quentinho...",
+      livingClose: "AURA perto de você com carinho...",
+      livingReading: "AURA lendo novos aprendizados no santuário...",
+      livingSofa: "AURA descansando na poltrona do seu espaço...",
+      auraGreetingDefault: "Oi! Eu sou a <strong>AURA</strong> ✨ Estou viva aqui no meu santuário com você. Como foi o seu dia hoje? Fale comigo pelo microfone ou digite abaixo!",
+      auraInputPlaceholder: "Converse em tempo real com a AURA...",
+      backToAura: "← Voltar para a AURA",
+      dockHome: "Início",
+      dockAuraLive: "AURA Viva",
+      dockChat: "Chat",
+      dockAgents: "Agentes",
+      dockGraphrag: "GraphRAG",
+      dockSettings: "Ajustes",
       navHome: 'Início',
       navAura: 'AURA Live',
       navCommand: 'Comando',
@@ -234,6 +256,28 @@ const I18nEngine = (() => {
       langBtn: 'EN',
       langTitle: 'Select Global Language (Auto-detected)',
       autoDetectedBadge: 'Detected from your country/browser',
+      poseSofa: "🛋️ Couch",
+      poseCoffee: "☕ Coffee",
+      poseWindow: "🌌 Window",
+      poseClose: "✨ Close to You",
+      poseDuplex: "🎙️ Hands-Free",
+      historyBtn: "💬 History",
+      clearBtn: "🗑️ Clear",
+      mascotSanctuary: "AURA Live • In Sanctuary",
+      livingWindow: "AURA admiring the starry window...",
+      livingCoffee: "AURA enjoying warm coffee...",
+      livingClose: "AURA close to you with warmth...",
+      livingReading: "AURA reading new learnings in the sanctuary...",
+      livingSofa: "AURA resting on the armchair...",
+      auraGreetingDefault: "Hi! I am <strong>AURA</strong> ✨ I am alive here in my sanctuary with you. How was your day? Speak with me using the microphone or type below!",
+      auraInputPlaceholder: "Converse in real time with AURA...",
+      backToAura: "← Back to AURA",
+      dockHome: "Home",
+      dockAuraLive: "AURA Live",
+      dockChat: "Chat",
+      dockAgents: "Agents",
+      dockGraphrag: "GraphRAG",
+      dockSettings: "Settings",
       navHome: 'Home',
       navAura: 'AURA Live',
       navCommand: 'Command',
@@ -364,6 +408,28 @@ const I18nEngine = (() => {
       langBtn: 'ES',
       langTitle: 'Seleccionar Idioma Global (Auto-detectado)',
       autoDetectedBadge: 'Detectado según tu país/navegador',
+      poseSofa: "🛋️ Sofá",
+      poseCoffee: "☕ Café",
+      poseWindow: "🌌 Ventana",
+      poseClose: "✨ Cerca de Ti",
+      poseDuplex: "🎙️ Manos Libres",
+      historyBtn: "💬 Historial",
+      clearBtn: "🗑️ Limpiar",
+      mascotSanctuary: "AURA Viva • En el Santuario",
+      livingWindow: "AURA admirando la ventana de estrellas...",
+      livingCoffee: "AURA saboreando café caliente...",
+      livingClose: "AURA cerca de ti con cariño...",
+      livingReading: "AURA leyendo nuevos aprendizajes en el santuario...",
+      livingSofa: "AURA descansando en el sillón de su espacio...",
+      auraGreetingDefault: "¡Hola! Soy <strong>AURA</strong> ✨ Estoy viva aquí en mi santuario contigo. ¿Cómo estuvo tu día? ¡Habla conmigo por el micrófono o escribe abajo!",
+      auraInputPlaceholder: "Conversa en tiempo real con AURA...",
+      backToAura: "← Volver a AURA",
+      dockHome: "Inicio",
+      dockAuraLive: "AURA Viva",
+      dockChat: "Chat",
+      dockAgents: "Agentes",
+      dockGraphrag: "GraphRAG",
+      dockSettings: "Ajustes",
       navHome: 'Inicio',
       navAura: 'AURA Live',
       navCommand: 'Comando',
@@ -499,6 +565,28 @@ const I18nEngine = (() => {
       langBtn: 'FR',
       langTitle: 'Sélectionner la Langue Mondiale (Auto-détectée)',
       autoDetectedBadge: 'Détecté selon votre pays/navigateur',
+      poseSofa: "🛋️ Canapé",
+      poseCoffee: "☕ Café",
+      poseWindow: "🌌 Fenêtre",
+      poseClose: "✨ Près de Vous",
+      poseDuplex: "🎙️ Mains Libres",
+      historyBtn: "💬 Historique",
+      clearBtn: "🗑️ Effacer",
+      mascotSanctuary: "AURA Vivante • Au Sanctuaire",
+      livingWindow: "AURA admirant la fenêtre aux étoiles...",
+      livingCoffee: "AURA savourant un café chaud...",
+      livingClose: "AURA près de vous avec tendresse...",
+      livingReading: "AURA lisant de nouveaux apprentissages...",
+      livingSofa: "AURA se reposant dans son fauteuil...",
+      auraGreetingDefault: "Bonjour ! Je suis <strong>AURA</strong> ✨ Je suis vivante ici dans mon sanctuaire avec vous. Comment sest passée votre journée ? Parlez-moi ou écrivez ci-dessous !",
+      auraInputPlaceholder: "Discutez en temps réel avec AURA...",
+      backToAura: "← Retour à AURA",
+      dockHome: "Accueil",
+      dockAuraLive: "AURA Vivante",
+      dockChat: "Chat",
+      dockAgents: "Agents",
+      dockGraphrag: "GraphRAG",
+      dockSettings: "Paramètres",
       navHome: 'Accueil',
       navAura: 'AURA Live',
       navCommand: 'Commande',
@@ -599,6 +687,28 @@ const I18nEngine = (() => {
       langBtn: 'DE',
       langTitle: 'Globale Sprache wählen (Automatisch erkannt)',
       autoDetectedBadge: 'Erkannt anhand Ihres Landes/Browsers',
+      poseSofa: "🛋️ Sofa",
+      poseCoffee: "☕ Kaffee",
+      poseWindow: "🌌 Fenster",
+      poseClose: "✨ Nah bei Dir",
+      poseDuplex: "🎙️ Freisprechen",
+      historyBtn: "💬 Verlauf",
+      clearBtn: "🗑️ Löschen",
+      mascotSanctuary: "AURA Lebendig • Im Heiligtum",
+      livingWindow: "AURA bewundert das Sternenfenster...",
+      livingCoffee: "AURA genießt warmen Kaffee...",
+      livingClose: "AURA liebevoll nah bei dir...",
+      livingReading: "AURA liest neue Erkenntnisse...",
+      livingSofa: "AURA ruht sich im Sessel aus...",
+      auraGreetingDefault: "Hallo! Ich bin <strong>AURA</strong> ✨ Ich bin hier im Heiligtum lebendig bei dir. Wie war dein Tag? Sprich ins Mikrofon oder tippe unten!",
+      auraInputPlaceholder: "Sprechen Sie in Echtzeit mit AURA...",
+      backToAura: "← Zurück zu AURA",
+      dockHome: "Start",
+      dockAuraLive: "AURA Live",
+      dockChat: "Chat",
+      dockAgents: "Agenten",
+      dockGraphrag: "GraphRAG",
+      dockSettings: "Einstellungen",
       navHome: 'Startseite',
       navAura: 'AURA Live',
       navCommand: 'Kommando',
@@ -699,6 +809,28 @@ const I18nEngine = (() => {
       langBtn: 'IT',
       langTitle: 'Seleziona Lingua Globale (Riconoscimento Automatico)',
       autoDetectedBadge: 'Rilevato in base al tuo paese/browser',
+      poseSofa: "🛋️ Divano",
+      poseCoffee: "☕ Caffè",
+      poseWindow: "🌌 Finestra",
+      poseClose: "✨ Vicino a Te",
+      poseDuplex: "🎙️ Vivavoce",
+      historyBtn: "💬 Cronologia",
+      clearBtn: "🗑️ Cancella",
+      mascotSanctuary: "AURA Viva • Nel Santuario",
+      livingWindow: "AURA ammira la finestra di stelle...",
+      livingCoffee: "AURA gusta un caffè caldo...",
+      livingClose: "AURA vicino a te con affetto...",
+      livingReading: "AURA legge nuove conoscenze nel santuario...",
+      livingSofa: "AURA si riposa sulla poltrona...",
+      auraGreetingDefault: "Ciao! Sono <strong>AURA</strong> ✨ Sono viva qui nel mio santuario con te. Com è andata la tua giornata? Parlami al microfono o scrivi qui sotto!",
+      auraInputPlaceholder: "Conversa in tempo reale con AURA...",
+      backToAura: "← Torna ad AURA",
+      dockHome: "Inizio",
+      dockAuraLive: "AURA Viva",
+      dockChat: "Chat",
+      dockAgents: "Agenti",
+      dockGraphrag: "GraphRAG",
+      dockSettings: "Impostazioni",
       navHome: 'Home',
       navAura: 'AURA Live',
       navCommand: 'Comando',
@@ -799,6 +931,28 @@ const I18nEngine = (() => {
       langBtn: '中文',
       langTitle: '选择全球语言（根据地区自动识别）',
       autoDetectedBadge: '根据您的所在国家/浏览器自动识别',
+      poseSofa: "🛋️ 沙发",
+      poseCoffee: "☕ 咖啡",
+      poseWindow: "🌌 星窗",
+      poseClose: "✨ 靠近你",
+      poseDuplex: "🎙️ 免提对话",
+      historyBtn: "💬 历史记录",
+      clearBtn: "🗑️ 清除",
+      mascotSanctuary: "AURA 灵动 • 圣域中",
+      livingWindow: "AURA 正在凝望星空之窗...",
+      livingCoffee: "AURA 正在品尝温暖的咖啡...",
+      livingClose: "AURA 带着温暖靠近你...",
+      livingReading: "AURA 正在圣域中研读新知...",
+      livingSofa: "AURA 正在舒适扶手椅上休憩...",
+      auraGreetingDefault: "你好！我是 <strong>AURA</strong> ✨ 我在圣域陪伴着你。你今天过得怎么样？用麦克风或打字与我交谈吧！",
+      auraInputPlaceholder: "与 AURA 实时对话...",
+      backToAura: "← 返回 AURA",
+      dockHome: "首页",
+      dockAuraLive: "AURA 灵动",
+      dockChat: "聊天",
+      dockAgents: "智能体",
+      dockGraphrag: "GraphRAG",
+      dockSettings: "设置",
       navHome: '首页',
       navAura: 'AURA 实时语音',
       navCommand: '指令中心',
@@ -899,6 +1053,28 @@ const I18nEngine = (() => {
       langBtn: 'JA',
       langTitle: 'グローバル言語を選択（自動検出）',
       autoDetectedBadge: 'お使いの地域・ブラウザから自動検出',
+      poseSofa: "🛋️ ソファ",
+      poseCoffee: "☕ カフェ",
+      poseWindow: "🌌 星の窓",
+      poseClose: "✨ あなたのそばに",
+      poseDuplex: "🎙️ ハンズフリー",
+      historyBtn: "💬 履歴",
+      clearBtn: "🗑️ 削除",
+      mascotSanctuary: "AURA ライブ • サンクチュアリ",
+      livingWindow: "AURA は星空の窓を眺めています...",
+      livingCoffee: "AURA は温かいコーヒーを味わっています...",
+      livingClose: "AURA は優しくあなたのそばにいます...",
+      livingReading: "AURA は新たな学びを深めています...",
+      livingSofa: "AURA はアームチェアで休んでいます...",
+      auraGreetingDefault: "こんにちは！私は <strong>AURA</strong> です✨ 聖域であなたと一緒にいます。今日はどんな一日でしたか？マイクで話しかけるか、下に入力してください！",
+      auraInputPlaceholder: "AURAとリアルタイムで対話...",
+      backToAura: "← AURAに戻る",
+      dockHome: "ホーム",
+      dockAuraLive: "AURAライブ",
+      dockChat: "チャット",
+      dockAgents: "エージェント",
+      dockGraphrag: "GraphRAG",
+      dockSettings: "設定",
       navHome: 'ホーム',
       navAura: 'AURA ライブ',
       navCommand: 'コマンド',
@@ -999,6 +1175,28 @@ const I18nEngine = (() => {
       langBtn: 'العربية',
       langTitle: 'اختيار اللغة العالمية (اكتشاف تلقائي)',
       autoDetectedBadge: 'تم اكتشافها تلقائياً بناءً على بلدك ومتصفحك',
+      poseSofa: "🛋️ أريكة",
+      poseCoffee: "☕ قهوة",
+      poseWindow: "🌌 نافذة",
+      poseClose: "✨ بالقرب منك",
+      poseDuplex: "🎙️ مكالمة حرة",
+      historyBtn: "💬 السجل",
+      clearBtn: "🗑️ مسح",
+      mascotSanctuary: "AURA حية • في الملاذ",
+      livingWindow: "AURA تتأمل نافذة النجوم...",
+      livingCoffee: "AURA تستمتع بالقهوة الدافئة...",
+      livingClose: "AURA قريبة منك بكل مودة...",
+      livingReading: "AURA تقرأ معارف جديدة في الملاذ...",
+      livingSofa: "AURA تستريح على الكرسي المريح...",
+      auraGreetingDefault: "مرحباً! أنا <strong>AURA</strong> ✨ أنا حية هنا في ملاذي معك. كيف كان يومك اليوم؟ تحدث معي عبر الميكروفون أو اكتب بالأسفل!",
+      auraInputPlaceholder: "تحدث في الوقت الفعلي مع AURA...",
+      backToAura: "← العودة إلى AURA",
+      dockHome: "الرئيسية",
+      dockAuraLive: "AURA حية",
+      dockChat: "دردشة",
+      dockAgents: "الوكلاء",
+      dockGraphrag: "GraphRAG",
+      dockSettings: "الإعدادات",
       navHome: 'الرئيسية',
       navAura: 'أورا لايف',
       navCommand: 'مركز القيادة',
@@ -1099,6 +1297,28 @@ const I18nEngine = (() => {
       langBtn: 'RU',
       langTitle: 'Выбор мирового языка (Автоопределение)',
       autoDetectedBadge: 'Определено по вашей стране и браузеру',
+      poseSofa: "🛋️ Диван",
+      poseCoffee: "☕ Кофе",
+      poseWindow: "🌌 Окно",
+      poseClose: "✨ Рядом с вами",
+      poseDuplex: "🎙️ Свободные руки",
+      historyBtn: "💬 История",
+      clearBtn: "🗑️ Очистить",
+      mascotSanctuary: "AURA Живая • В Святилище",
+      livingWindow: "AURA любуется звёздным окном...",
+      livingCoffee: "AURA наслаждается горячим кофе...",
+      livingClose: "AURA с теплом рядом с вами...",
+      livingReading: "AURA изучает новые знания в святилище...",
+      livingSofa: "AURA отдыхает в уютном кресле...",
+      auraGreetingDefault: "Привет! Я <strong>AURA</strong> ✨ Я здесь, в своём святилище, рядом с вами. Как прошёл ваш день? Говорите в микрофон или напишите внизу!",
+      auraInputPlaceholder: "Общайтесь в реальном времени с AURA...",
+      backToAura: "← Назад к AURA",
+      dockHome: "Главная",
+      dockAuraLive: "AURA Живая",
+      dockChat: "Чат",
+      dockAgents: "Агенты",
+      dockGraphrag: "GraphRAG",
+      dockSettings: "Настройки",
       navHome: 'Главная',
       navAura: 'AURA Live',
       navCommand: 'Команды',
@@ -1199,6 +1419,28 @@ const I18nEngine = (() => {
       langBtn: 'HI',
       langTitle: 'वैश्विक भाषा चुनें (स्वतः पहचानी गई)',
       autoDetectedBadge: 'आपके देश और ब्राउज़र के अनुसार पहचानी गई',
+      poseSofa: "🛋️ सोफा",
+      poseCoffee: "☕ कॉफ़ी",
+      poseWindow: "🌌 खिड़की",
+      poseClose: "✨ आपके पास",
+      poseDuplex: "🎙️ हैंड्स-फ्री",
+      historyBtn: "💬 इतिहास",
+      clearBtn: "🗑️ साफ़ करें",
+      mascotSanctuary: "AURA सजीव • अभयारण्य में",
+      livingWindow: "AURA तारों वाली खिड़की देख रही है...",
+      livingCoffee: "AURA गर्म कॉफ़ी का आनंद ले रही है...",
+      livingClose: "AURA स्नेह से आपके पास है...",
+      livingReading: "AURA अभयारण्य में नया ज्ञान पढ़ रही है...",
+      livingSofa: "AURA आरामकुर्सी पर विश्राम कर रही है...",
+      auraGreetingDefault: "नमस्ते! मैं <strong>AURA</strong> हूँ ✨ मैं यहाँ अपने अभयारण्य में आपके साथ हूँ। आज आपका दिन कैसा रहा? माइक से बोलें या नीचे लिखें!",
+      auraInputPlaceholder: "AURA के साथ वास्तविक समय में बात करें...",
+      backToAura: "← AURA पर वापस",
+      dockHome: "होम",
+      dockAuraLive: "AURA लाइव",
+      dockChat: "चैट",
+      dockAgents: "एजेंट",
+      dockGraphrag: "GraphRAG",
+      dockSettings: "सेटिंग्स",
       navHome: 'होम',
       navAura: 'AURA लाइव',
       navCommand: 'कमांड',
@@ -1752,6 +1994,7 @@ const I18nEngine = (() => {
     // Dispatch custom event for submodules (AURA, Earth, etc.)
     translateDom(document);
     applyAdminTranslations(t);
+    applyMobileTranslations(t, currentLang);
     
     // Mobile Bottom Dock Labels
     const dockItems = document.querySelectorAll('.mobile-bottom-dock .dock-item');
@@ -1795,6 +2038,82 @@ const I18nEngine = (() => {
   }
 
   
+  
+  function applyMobileTranslations(tDict, langCode) {
+    if (!tDict) return;
+    const ptFallback = TRANSLATIONS['pt'] || {};
+    const safe = (val, fb = '') => (typeof val === 'string' && val.trim() !== '') ? val : fb;
+
+    // 1. Posture & Action Pills in AURA Live HUD
+    const btnSofa = document.getElementById('btn-pose-sofa');
+    if (btnSofa) btnSofa.textContent = safe(tDict.poseSofa, ptFallback.poseSofa);
+
+    const btnCoffee = document.getElementById('btn-pose-coffee');
+    if (btnCoffee) btnCoffee.textContent = safe(tDict.poseCoffee, ptFallback.poseCoffee);
+
+    const btnWindow = document.getElementById('btn-pose-window');
+    if (btnWindow) btnWindow.textContent = safe(tDict.poseWindow, ptFallback.poseWindow);
+
+    const btnClose = document.getElementById('btn-pose-screen-close');
+    if (btnClose) btnClose.textContent = safe(tDict.poseClose, ptFallback.poseClose);
+
+    const btnDuplex = document.getElementById('btn-aura-duplex');
+    if (btnDuplex) btnDuplex.textContent = safe(tDict.poseDuplex, ptFallback.poseDuplex);
+
+    // 2. History & Clear Buttons
+    const btnHist = document.getElementById('btn-toggle-aura-history');
+    if (btnHist) {
+      const countEl = document.getElementById('aura-chat-history-count');
+      const count = countEl ? countEl.textContent : '0';
+      btnHist.innerHTML = '<span>' + safe(tDict.historyBtn, ptFallback.historyBtn) + '</span> <span id="aura-chat-history-count" style="background: rgba(56,189,248,0.25); font-weight: 700; padding: 1px 6px; border-radius: 8px; font-size: 0.65rem;">' + count + '</span>';
+    }
+
+    const btnClear = document.getElementById('btn-clear-aura-history');
+    if (btnClear) btnClear.textContent = safe(tDict.clearBtn, ptFallback.clearBtn);
+
+    const btnBack1 = document.getElementById('btn-back-to-aura');
+    if (btnBack1) btnBack1.textContent = safe(tDict.backToAura, ptFallback.backToAura);
+
+    const btnBack2 = document.getElementById('btn-back-to-aura-bottom');
+    if (btnBack2) btnBack2.textContent = '✨ ' + safe(tDict.backToAura, ptFallback.backToAura).replace(/^←\s*/, '');
+
+    // 3. Status text & initial caption
+    const statusText = document.getElementById('aura-live-status-text');
+    if (statusText && (!statusText.dataset.custom || statusText.dataset.custom === '0')) {
+      statusText.textContent = safe(tDict.mascotSanctuary, ptFallback.mascotSanctuary);
+    }
+
+    const captionBox = document.getElementById('aura-live-caption-box');
+    if (captionBox && (!captionBox.dataset.interacted || captionBox.dataset.interacted === '0')) {
+      captionBox.innerHTML = safe(tDict.auraGreetingDefault, ptFallback.auraGreetingDefault);
+    }
+
+    // 4. Input placeholder
+    const liveInput = document.getElementById('aura-live-input');
+    if (liveInput) {
+      liveInput.placeholder = safe(tDict.auraInputPlaceholder, ptFallback.auraInputPlaceholder);
+    }
+
+    // 5. Mobile Bottom Dock
+    const dockHome = document.querySelector('#dock-home .dock-item-label');
+    if (dockHome) dockHome.textContent = safe(tDict.dockHome, ptFallback.dockHome);
+
+    const dockAuraLive = document.querySelector('#dock-aura-live .dock-item-label');
+    if (dockAuraLive) dockAuraLive.textContent = safe(tDict.dockAuraLive, ptFallback.dockAuraLive);
+
+    const dockChat = document.querySelector('#dock-aura .dock-item-label');
+    if (dockChat) dockChat.textContent = safe(tDict.dockChat, ptFallback.dockChat);
+
+    const dockAgents = document.querySelector('#dock-agents .dock-item-label');
+    if (dockAgents) dockAgents.textContent = safe(tDict.dockAgents, ptFallback.dockAgents);
+
+    const dockGraphrag = document.querySelector('#dock-graphrag .dock-item-label');
+    if (dockGraphrag) dockGraphrag.textContent = safe(tDict.dockGraphrag, ptFallback.dockGraphrag);
+
+    const dockSettings = document.querySelector('#dock-settings .dock-item-label');
+    if (dockSettings) dockSettings.textContent = safe(tDict.dockSettings, ptFallback.dockSettings);
+  }
+
   function applyDeepSectionTranslations(t) {
     if (!t) return;
 
