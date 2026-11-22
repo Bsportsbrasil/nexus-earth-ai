@@ -41,6 +41,7 @@ import { solutionsPortalEngine } from './engine/solutions_portal_engine.js';
 import { paymentsEngine } from './engine/payments_engine.js';
 import { mlOffersManager } from './engine/ml_offers_manager.js';
 import { cloudDbBridge, writeJsonAtomic } from './engine/storage_adapter.js';
+import { adminVaultConfig } from './engine/admin_vault_config.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
@@ -80,11 +81,16 @@ function checkRateLimit(req, bucket = 'ai', maxPerMin = 45) {
 
 function resolveScopedUserId(req, body = {}) {
   if (isAdminReq(req)) return 'creator';
+  const cookieHeader = String(req.headers['cookie'] || '');
   const authHeader = req.headers['authorization'] || '';
-  if (authHeader.startsWith('Bearer ')) {
-    const token = authHeader.slice(7).trim();
+  const bearerTok = authHeader.startsWith('Bearer ') ? authHeader.slice(7).trim() : '';
+  const cookieSessMatch = cookieHeader.match(/(?:^|;\s*)nexus_session=([^;]+)/);
+  const cookieTok = cookieSessMatch ? decodeURIComponent(cookieSessMatch[1]) : '';
+  const sessionToken = bearerTok || cookieTok;
+  if (sessionToken) {
     try {
-      const verified = authEngine.verifySession ? authEngine.verifySession(token) : null;
+      const verifyFn = authEngine.verifySessionToken || authEngine.verifySession;
+      const verified = verifyFn ? verifyFn.call(authEngine, sessionToken) : null;
       if (verified && verified.user && verified.user.id) return verified.user.id;
     } catch (_) {}
   }
@@ -92,7 +98,6 @@ function resolveScopedUserId(req, body = {}) {
   if (clientSid && clientSid.length >= 6) {
     return 'sess_' + clientSid.replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 32);
   }
-  const cookieHeader = String(req.headers['cookie'] || '');
   const sidMatch = cookieHeader.match(/(?:^|;\s*)nexus_sid=([a-zA-Z0-9_-]{6,40})/);
   if (sidMatch && sidMatch[1]) return 'sess_' + sidMatch[1];
   const rawIp = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'guest').split(',')[0].trim();
@@ -277,6 +282,7 @@ const server = http.createServer(async (req, res) => {
       'Disallow: /admin.html',
       'Disallow: /security_ui.js',
       'Disallow: /solutions_admin_ui.js',
+      'Disallow: /activation_admin_ui.js',
       'Disallow: /solucoes',
       'Disallow: /resultados',
       'Disallow: /central-solucoes',
@@ -1792,6 +1798,33 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // 5j. Owner-Only Commercial Activation Vault (.env.local chmod 600 + Live Test)
+  if (pathname === '/api/admin/vault-config' && req.method === 'GET') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
+    return jsonResponse(res, 200, adminVaultConfig.getMaskedStatus());
+  }
+
+  if (pathname === '/api/admin/vault-config' && req.method === 'POST') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
+    try {
+      const body = await parseJsonBody(req);
+      const saved = adminVaultConfig.saveConfig(body);
+      return jsonResponse(res, 200, saved);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/admin/vault-test' && req.method === 'POST') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
+    try {
+      const testRes = await adminVaultConfig.testIntegrations();
+      return jsonResponse(res, 200, testRes);
+    } catch (e) {
+      return jsonResponse(res, 500, { error: e.message });
+    }
+  }
+
   // 6. Gemini LLM Endpoint with Thinking & GraphRAG Grounding (/api/gemini)
   if (req.method === 'POST' && pathname === '/api/gemini') {
     try {
@@ -2568,7 +2601,11 @@ const server = http.createServer(async (req, res) => {
   if (fs.existsSync(resolvedPath) && fs.statSync(resolvedPath).isFile()) {
     const ext = path.extname(resolvedPath).toLowerCase();
     const isManifest = filePath === '/manifest.json';
-    const isRestrictedAdmin = filePath === '/admin.html' || filePath === '/security_ui.js';
+    const isRestrictedAdmin =
+      filePath === '/admin.html' ||
+      filePath === '/security_ui.js' ||
+      filePath === '/solutions_admin_ui.js' ||
+      filePath === '/activation_admin_ui.js';
     const headers = {
       'Content-Type': isManifest ? 'application/manifest+json; charset=utf-8' : (MIME_TYPES[ext] || 'application/octet-stream'),
       'X-Content-Type-Options': 'nosniff',
@@ -2749,6 +2786,29 @@ graphDB.ingestTopic('Artificial intelligence').catch(() => {});
 
 // Synchronize all registered users into Master C2 Sovereign Engine on startup
 try { c2Engine.syncWithAuthEngine(authEngine); } catch (_) {}
+
+// 24/7 Autonomous Telegram Offer Broadcaster (Active only when configured via Admin Vault Tab 15)
+if (!process.env.NEXUS_TEST_MODE) {
+  let _lastTgBroadcastAt = 0;
+  let _tgOfferCursor = 0;
+  setInterval(async () => {
+    try {
+      const intervalMin = parseInt(process.env.TELEGRAM_AUTO_INTERVAL_MIN || '0', 10);
+      if (!intervalMin || intervalMin < 15) return;
+      if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_CHANNEL_ID) return;
+      const now = Date.now();
+      if (_lastTgBroadcastAt > 0 && (now - _lastTgBroadcastAt) < intervalMin * 60_000) return;
+
+      const verified = mlOffersManager.getAllOffers().filter(o => o.verifiedLink);
+      if (!verified.length) return;
+
+      const chosen = verified[_tgOfferCursor % verified.length];
+      _tgOfferCursor += 1;
+      _lastTgBroadcastAt = now;
+      await mlOffersManager.broadcastToTelegram(chosen.id);
+    } catch (_) {}
+  }, 60_000).unref?.();
+}
 
 const HOST = process.env.HOST || '0.0.0.0';
 server.listen(PORT, HOST, () => {

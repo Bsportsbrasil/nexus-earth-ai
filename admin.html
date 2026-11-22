@@ -761,6 +761,10 @@
             <span class="tab-icon">🔒</span>
             <span class="tab-text" style="color:#fbbf24;font-weight:700">14. Soluções Reais &amp; Resultados (Privado)</span>
           </button>
+          <button class="c2-tab-btn" data-tab="tab-activation-commerce" style="border-left:2px solid #10b981;">
+            <span class="tab-icon">💰</span>
+            <span class="tab-text" style="color:#34d399;font-weight:800">15. Ativação Comercial (Pix Real, ML &amp; Telegram)</span>
+          </button>
         </div>
       </aside>
 
@@ -2142,6 +2146,202 @@
       </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PILLAR 15: ATIVAÇÃO COMERCIAL REAL (PIX OFICIAL, PAYWALL, ML & TELEGRAM)
+         Exclusivo da Proprietária • Credenciais salvas em .env.local (chmod 600)
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div id="tab-activation-commerce" class="c2-pane">
+      <!-- Header Banner -->
+      <div style="background: linear-gradient(135deg, rgba(16,185,129,0.14) 0%, rgba(0,245,255,0.08) 55%, rgba(2,6,23,0.96) 100%); border: 1px solid rgba(16,185,129,0.4); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+          <div>
+            <span class="agent-badge DONE" style="background:rgba(16,185,129,0.18); color:#34d399; border-color:rgba(16,185,129,0.5); font-size:0.7rem; font-weight:800;">
+              🔐 COFRE SOBERANO CHMOD 600 • ZERO EXPOSIÇÃO PÚBLICA • DINHEIRO REAL EM CONTA
+            </span>
+            <h2 style="font-family:var(--font-display); font-size:1.35rem; font-weight:800; color:#f8fafc; margin:8px 0 4px;">
+              Central de Ativação Comercial — Pix Oficial, Afiliados Mercado Livre &amp; Telegram 24/7
+            </h2>
+            <p style="font-size:0.8rem; color:#cbd5e1; margin:0; max-width:880px; line-height:1.5;">
+              Conecte seu <strong>Mercado Pago ou Asaas</strong>, cadastre seus <strong>links oficiais <code>meli.la</code></strong> e ative seu <strong>Bot do Telegram 24/7</strong> sem mexer em código. Todas as chaves ficam isoladas no arquivo protegido <code>.env.local (0600)</code> do servidor e nunca aparecem no navegador dos visitantes.
+            </p>
+          </div>
+          <button type="button" onclick="ActivationAdminUI.loadAll()" class="btn-secondary" style="font-size:0.75rem; padding:0.45rem 0.9rem;">
+            ↻ Atualizar Dados Reais
+          </button>
+        </div>
+      </div>
+
+      <!-- 1. Live Real Revenue Ledger KPIs -->
+      <div class="coop-scores-grid" style="margin-bottom:1.25rem;">
+        <div class="cc-mini-stat">
+          <span id="act-kpi-revenue" style="color:#10b981; font-size:1.35rem;">R$ 0,00</span>
+          <small>Receita Real Confirmada (Webhook Oficial)</small>
+        </div>
+        <div class="cc-mini-stat">
+          <span id="act-kpi-approved" style="color:#00f5ff; font-size:1.05rem;">0 pagos / 0 pendentes</span>
+          <small>Pedidos Pix &amp; Assinaturas</small>
+        </div>
+        <div class="cc-mini-stat">
+          <span id="act-kpi-gateway" style="color:#fbbf24; font-size:1.05rem;">Aguardando Token</span>
+          <small>Gateway de Liquidação Ativo</small>
+        </div>
+        <div class="cc-mini-stat">
+          <span id="act-kpi-storage" style="color:#a78bfa; font-size:0.95rem;">LOCAL_ATOMIC_FS</span>
+          <small>Persistência Atômica / Cloud</small>
+        </div>
+      </div>
+
+      <!-- 2. Gateway de Pagamentos Oficiais (Mercado Pago / Asaas) + Paywall -->
+      <div class="panel glass-panel" style="padding:1.25rem; margin-bottom:1.25rem; border:1px solid rgba(16,185,129,0.32);">
+        <div class="cc-pane-header" style="margin-bottom:0.85rem; flex-wrap:wrap; gap:8px;">
+          <div>
+            <span class="panel-title">💳 1. Cofre de Pagamentos Oficiais (Pix Banco Central + Assinaturas AURA Plus / Pro)</span>
+            <span style="display:block; font-size:0.74rem; color:#94a3b8; margin-top:2px;">
+              Basta preencher <strong>Mercado Pago</strong> (recomendado, R$ 0/mês) <strong>ou</strong> <strong>Asaas</strong>. O dinheiro cai direto na sua conta bancária assim que o cliente paga o Pix.
+            </span>
+          </div>
+          <span class="agent-badge DONE" style="background:rgba(16,185,129,0.16); color:#34d399;">WEBHOOK AUTOMÁTICO</span>
+        </div>
+
+        <!-- Webhook URL Copy Box -->
+        <div style="background:rgba(2,6,23,0.8); border:1px solid rgba(0,245,255,0.28); border-radius:8px; padding:10px 12px; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div style="font-size:0.76rem; color:#cbd5e1;">
+            <strong style="color:#38bdf8;">URL Oficial de Webhook (cole no painel do Mercado Pago ou Asaas):</strong>
+            <code style="color:#34d399; margin-left:6px; font-size:0.78rem;">https://nexusearthai.com/api/payments/webhook</code>
+          </div>
+          <button type="button" class="btn-secondary" style="font-size:0.72rem; padding:4px 10px;" onclick="navigator.clipboard.writeText('https://nexusearthai.com/api/payments/webhook'); this.textContent='✓ URL Copiada!'">📋 Copiar Webhook</button>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:0.85rem; margin-bottom:0.95rem;">
+          <div>
+            <label for="vault-mp-token" style="font-size:0.72rem; color:#94a3b8; font-family:var(--font-mono); display:block; margin-bottom:4px;">MERCADO PAGO — ACCESS TOKEN DE PRODUÇÃO:</label>
+            <input type="password" id="vault-mp-token" class="text-input" autocomplete="new-password" placeholder="APP_USR-..." style="width:100%;" />
+            <small style="color:#64748b; font-size:0.68rem;">Onde pegar: mercadopago.com.br/developers → Suas integrações → Credenciais de produção.</small>
+          </div>
+          <div>
+            <label for="vault-asaas-key" style="font-size:0.72rem; color:#94a3b8; font-family:var(--font-mono); display:block; margin-bottom:4px;">ASAAS — API KEY (OPCIONAL / ALTERNATIVO):</label>
+            <input type="password" id="vault-asaas-key" class="text-input" autocomplete="new-password" placeholder="$aact_..." style="width:100%;" />
+            <small style="color:#64748b; font-size:0.68rem;">Onde pegar: Painel Asaas → Integrações → Chaves de API.</small>
+          </div>
+          <div>
+            <label for="vault-asaas-wh" style="font-size:0.72rem; color:#94a3b8; font-family:var(--font-mono); display:block; margin-bottom:4px;">ASAAS — TOKEN DE SEGURANÇA DO WEBHOOK:</label>
+            <input type="password" id="vault-asaas-wh" class="text-input" autocomplete="new-password" placeholder="Token secreto opcional..." style="width:100%;" />
+            <small style="color:#64748b; font-size:0.68rem;">Valida que os avisos de pagamento vieram realmente do Asaas.</small>
+          </div>
+          <div>
+            <label for="vault-enforce-paywall" style="font-size:0.72rem; color:#94a3b8; font-family:var(--font-mono); display:block; margin-bottom:4px;">ATIVAR PAYWALL AURA PLUS / PRO (COBRANÇA):</label>
+            <select id="vault-enforce-paywall" class="select-input" style="width:100%;">
+              <option value="0">Desligado (Modo Degustação Aberta — 0)</option>
+              <option value="1">LIGADO (Cobra AURA Plus R$ 29,90 após cota gratuita — 1)</option>
+            </select>
+            <small style="color:#64748b; font-size:0.68rem;">Ligue somente após testar o Pix de R$ 1,00 com sucesso.</small>
+          </div>
+          <div>
+            <label for="vault-free-limit" style="font-size:0.72rem; color:#94a3b8; font-family:var(--font-mono); display:block; margin-bottom:4px;">MENSAGENS GRATUITAS POR DIA (CONTA FREE):</label>
+            <input type="number" id="vault-free-limit" class="text-input" value="15" min="1" max="500" style="width:100%;" />
+            <small style="color:#64748b; font-size:0.68rem;">Recomendado: 15 mensagens/dia antes de convidar para o AURA Plus.</small>
+          </div>
+          <div>
+            <label for="vault-openai-key" style="font-size:0.72rem; color:#94a3b8; font-family:var(--font-mono); display:block; margin-bottom:4px;">OPENAI API KEY (OPCIONAL — FALLBACK VOZ/IA):</label>
+            <input type="password" id="vault-openai-key" class="text-input" autocomplete="new-password" placeholder="sk-... (opcional)" style="width:100%;" />
+            <small style="color:#64748b; font-size:0.68rem;">Usada apenas como redundância automática caso o Gemini oscile.</small>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <button type="button" class="btn-primary" onclick="ActivationAdminUI.saveGatewayConfig()" style="background:linear-gradient(90deg,#10b981,#06b6d4); color:#020617; font-weight:800;">💾 Salvar no Cofre Seguro (chmod 600)</button>
+          <button type="button" class="btn-secondary" onclick="ActivationAdminUI.testConnections()">🧪 Testar Conexões Oficiais</button>
+          <button type="button" class="btn-secondary" style="border-color:#10b981; color:#34d399;" onclick="ActivationAdminUI.testRealPix1Real()">⚡ Testar Pix Real (R$ 1,00)</button>
+        </div>
+        <div id="act-vault-feedback" style="margin-top:0.75rem; font-size:0.8rem; min-height:20px;"></div>
+
+        <!-- Recent Real Transactions -->
+        <div style="margin-top:1rem; padding-top:0.85rem; border-top:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:0.74rem; font-family:var(--font-mono); color:#94a3b8; margin-bottom:6px; font-weight:700;">📜 HISTÓRICO REAL DE PEDIDOS &amp; LIQUIDAÇÕES PIX (LIVRO-RAZÃO AUDITÁVEL):</div>
+          <div id="act-recent-orders" style="background:rgba(2,6,23,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:220px; overflow-y:auto;"></div>
+        </div>
+      </div>
+
+      <!-- 3. Cadastro de Ofertas Reais Mercado Livre (meli.la) + Bot Telegram 24/7 -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:1.25rem; margin-bottom:1.25rem;">
+        <!-- Left: Add & Manage Verified meli.la Offers -->
+        <div class="panel glass-panel" style="padding:1.25rem; border:1px solid rgba(245,158,11,0.35);">
+          <div class="cc-pane-header" style="margin-bottom:0.75rem; flex-wrap:wrap; gap:6px;">
+            <span class="panel-title">🛒 2. Ofertas Reais Mercado Livre (Links <code>meli.la</code>)</span>
+            <span class="agent-badge DONE" style="background:rgba(245,158,11,0.18); color:#fbbf24;">COMISSÃO DIRETA</span>
+          </div>
+          <p style="font-size:0.75rem; color:#94a3b8; margin:0 0 0.75rem; line-height:1.45;">
+            No painel <strong>Afiliados Mercado Livre (CASTILLOOFFICIAL)</strong>, clique em <em>"Gerar Link"</em> para qualquer produto e cole o link encurtado (<code>https://meli.la/...</code> ou <code>mercadolivre.com/sec/...</code>) abaixo. Ele entra na hora no topo da sua vitrine <a href="/ofertas" target="_blank" style="color:#38bdf8;">/ofertas</a>.
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:0.55rem; margin-bottom:0.85rem;">
+            <input type="text" id="ml-new-title" class="text-input" placeholder="Título do Produto (ex: Samsung Galaxy A55 5G 256GB)..." />
+            <input type="url" id="ml-new-url" class="text-input" placeholder="Link Oficial de Afiliado (https://meli.la/... ou https://mercadolivre.com/sec/...)" />
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;">
+              <input type="text" id="ml-new-price" class="text-input" placeholder="Preço (R$ 1.599)" />
+              <input type="text" id="ml-new-oldprice" class="text-input" placeholder="De (R$ 2.299)" />
+              <input type="text" id="ml-new-discount" class="text-input" placeholder="Desconto (30% OFF)" />
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+              <select id="ml-new-category" class="select-input">
+                <option value="Celulares">Celulares &amp; Tech</option>
+                <option value="Eletrodomésticos">Casa &amp; Eletro</option>
+                <option value="Informática">Informática &amp; Gamer</option>
+                <option value="Beleza &amp; Saúde">Beleza &amp; Saúde</option>
+                <option value="Ofertas">Ofertas Relâmpago</option>
+              </select>
+              <input type="url" id="ml-new-image" class="text-input" placeholder="URL da Foto do Produto (opcional)" />
+            </div>
+            <button type="button" class="btn-primary" onclick="ActivationAdminUI.addMlOffer()" style="justify-content:center; background:#f59e0b; color:#020617; font-weight:800;">➕ Publicar Oferta Real em /ofertas</button>
+          </div>
+          <div id="act-ml-feedback" style="font-size:0.78rem; margin-bottom:0.6rem;"></div>
+          <div id="act-ml-counter" style="font-size:0.75rem; color:#cbd5e1; margin-bottom:0.5rem;"></div>
+          <div id="act-ml-offers-list" style="display:flex; flex-direction:column; gap:6px; max-height:320px; overflow-y:auto;"></div>
+        </div>
+
+        <!-- Right: 24/7 Free Telegram Channel Auto-Broadcaster -->
+        <div class="panel glass-panel" style="padding:1.25rem; border:1px solid rgba(56,189,248,0.35);">
+          <div class="cc-pane-header" style="margin-bottom:0.75rem; flex-wrap:wrap; gap:6px;">
+            <span class="panel-title">✈️ 3. Bot Automático do Telegram 24/7 (Tráfego Grátis R$ 0)</span>
+            <span class="agent-badge DONE" style="background:rgba(56,189,248,0.18); color:#38bdf8;">AUTO-POSTER 24H</span>
+          </div>
+          <div style="background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.25); border-radius:8px; padding:10px 12px; font-size:0.74rem; color:#cbd5e1; line-height:1.5; margin-bottom:0.85rem;">
+            <strong>Como ativar em 2 minutos (100% gratuito):</strong><br/>
+            1. Abra o Telegram, procure <code>@BotFather</code>, envie <code>/newbot</code> e copie o Token.<br/>
+            2. Crie um Canal Público (ex: <code>@OfertasCastilloOficial</code>) e adicione seu Bot como <strong>Administrador</strong> do canal.<br/>
+            3. Cole o Token e o <code>@canal</code> abaixo e escolha o intervalo automático!
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:0.65rem; margin-bottom:0.9rem;">
+            <div>
+              <label for="vault-tg-token" style="font-size:0.72rem; color:#94a3b8; font-family:var(--font-mono); display:block; margin-bottom:4px;">TELEGRAM BOT TOKEN (@BotFather):</label>
+              <input type="password" id="vault-tg-token" class="text-input" autocomplete="new-password" placeholder="123456789:AAH..." style="width:100%;" />
+            </div>
+            <div>
+              <label for="vault-tg-channel" style="font-size:0.72rem; color:#94a3b8; font-family:var(--font-mono); display:block; margin-bottom:4px;">CANAL OU CHAT ID DE DESTINO:</label>
+              <input type="text" id="vault-tg-channel" class="text-input" placeholder="@SeuCanalDeOfertas ou -1001234567890" style="width:100%;" />
+            </div>
+            <div>
+              <label for="vault-tg-interval" style="font-size:0.72rem; color:#94a3b8; font-family:var(--font-mono); display:block; margin-bottom:4px;">INTERVALO DE POSTAGEM AUTOMÁTICA 24/7:</label>
+              <select id="vault-tg-interval" class="select-input" style="width:100%;">
+                <option value="0">Manual (somente quando eu clicar no botão)</option>
+                <option value="60">A cada 1 hora (60 min) — Alta frequência</option>
+                <option value="120">A cada 2 horas (120 min) — Recomendado</option>
+                <option value="240">A cada 4 horas (240 min) — Moderado</option>
+                <option value="360">A cada 6 horas (360 min) — Leve</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" class="btn-primary" onclick="ActivationAdminUI.saveTelegramConfig()" style="background:#38bdf8; color:#020617; font-weight:800;">💾 Salvar &amp; Ligar Agendador 24/7</button>
+            <button type="button" class="btn-secondary" style="border-color:#38bdf8; color:#38bdf8;" onclick="ActivationAdminUI.broadcastOffer()">🚀 Postar 1 Oferta Agora</button>
+          </div>
+          <div id="act-tg-feedback" style="margin-top:0.75rem; font-size:0.8rem; min-height:20px;"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Edit Link Modal -->
     <div id="public-link-edit-modal" class="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); z-index:99999; align-items:center; justify-content:center;">
       <div class="modal-box glass-panel" style="width:min(600px, 94vw); display:flex; flex-direction:column; padding:1.25rem; border:1px solid rgba(0,245,255,0.4); border-radius:12px; background:rgba(10,15,30,0.96);">
@@ -2192,6 +2392,7 @@
   <script src="swarm_100_ui.js"></script>
   <script src="public_links_ui.js"></script>
   <script src="solutions_admin_ui.js"></script>
+  <script src="activation_admin_ui.js"></script>
   <script src="floating_nexus.js"></script>
 </body>
 </html>

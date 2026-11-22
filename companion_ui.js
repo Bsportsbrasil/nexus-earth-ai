@@ -293,12 +293,15 @@ const CompanionUI = (function () {
     try {
       const currentActiveLang = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
       const sid = getCompanionSessionId();
+      const sessionToken = (() => { try { return localStorage.getItem('nexus_session_token') || ''; } catch (_) { return ''; } })();
+      const reqHeaders = {
+        'Content-Type': 'application/json',
+        'x-nexus-session-id': sid
+      };
+      if (sessionToken) reqHeaders['Authorization'] = 'Bearer ' + sessionToken;
       const resp = await fetch('/api/companion', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-nexus-session-id': sid
-        },
+        headers: reqHeaders,
         body: JSON.stringify({
           message: msg,
           userName,
@@ -312,6 +315,15 @@ const CompanionUI = (function () {
       });
 
       const data = await resp.json();
+      if (resp.status === 402 && data.upgradeRequired) {
+        isProcessingTurn = false;
+        if (orb) orb.classList.remove('speaking');
+        if (replyEl) {
+          replyEl.innerHTML = `${esc(data.message || 'Limite gratuito diário atingido.')} <button type="button" onclick="window.NexusCheckoutModal && window.NexusCheckoutModal.open('aura_plus')" style="margin-left:8px;padding:4px 10px;border-radius:6px;border:none;background:#10b981;color:#020617;font-weight:800;cursor:pointer;">Assinar AURA Plus</button>`;
+        }
+        if (window.NexusCheckoutModal) window.NexusCheckoutModal.open('aura_plus', data.message || '');
+        return;
+      }
       if (!resp.ok) {
         throw new Error(data.error || `HTTP ${resp.status}`);
       }

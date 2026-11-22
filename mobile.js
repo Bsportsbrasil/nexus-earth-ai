@@ -1062,12 +1062,15 @@ const NexusMobile = (function () {
         const clientGeo = await resolveClientGeoIfNeeded(q);
         const currentActiveLang = curL;
         const sid = getDeviceSessionId();
+        const sessionToken = (() => { try { return localStorage.getItem('nexus_session_token') || ''; } catch (_) { return ''; } })();
+        const reqHeaders = {
+          'Content-Type': 'application/json',
+          'x-nexus-session-id': sid
+        };
+        if (sessionToken) reqHeaders['Authorization'] = 'Bearer ' + sessionToken;
         const res = await fetch('/api/agents/converse', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-nexus-session-id': sid
-          },
+          headers: reqHeaders,
           body: JSON.stringify({
             agentId: 'aura',
             message: q,
@@ -1079,6 +1082,18 @@ const NexusMobile = (function () {
             apiKey: localStorage.getItem('nexus_gemini_key') || ''
           })
         });
+
+        if (res.status === 402) {
+          const payData = await res.json().catch(() => ({}));
+          setBotState('idle', 'AURA Plus • Limite gratuito diário atingido');
+          if (captionBox) {
+            captionBox.innerHTML = `<strong>AURA ✨:</strong> ${escapeHtml(payData.message || 'Você atingiu o limite gratuito diário.')} <button type="button" onclick="window.NexusCheckoutModal && window.NexusCheckoutModal.open('aura_plus')" style="margin-left:6px;padding:4px 10px;border-radius:8px;border:none;background:#10b981;color:#020617;font-weight:800;cursor:pointer;">Desbloquear AURA Plus</button>`;
+          }
+          if (window.NexusCheckoutModal) {
+            window.NexusCheckoutModal.open('aura_plus', payData.message || '');
+          }
+          return;
+        }
 
         if (res.ok) {
           const data = await res.json();
