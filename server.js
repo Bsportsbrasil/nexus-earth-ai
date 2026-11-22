@@ -38,9 +38,66 @@ import { swarm100Engine } from './engine/swarm_100_engine.js';
 import { autonomousDistributionEngine } from './engine/autonomous_distribution_engine.js';
 import { publicLinksManager } from './engine/public_links_manager.js';
 import { solutionsPortalEngine } from './engine/solutions_portal_engine.js';
+import { paymentsEngine } from './engine/payments_engine.js';
+import { mlOffersManager } from './engine/ml_offers_manager.js';
+import { cloudDbBridge, writeJsonAtomic } from './engine/storage_adapter.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 5173);
+
+const LANG_TO_BCP47 = {
+  pt: 'pt-BR', en: 'en-US', es: 'es-ES', fr: 'fr-FR', de: 'de-DE',
+  it: 'it-IT', zh: 'zh-CN', ja: 'ja-JP', ar: 'ar-SA', ru: 'ru-RU', hi: 'hi-IN'
+};
+const LANG_TO_NAME = {
+  pt: 'Portuguese (Brazil)', en: 'English', es: 'Spanish', fr: 'French', de: 'German',
+  it: 'Italian', zh: 'Mandarin Chinese', ja: 'Japanese', ar: 'Arabic', ru: 'Russian', hi: 'Hindi'
+};
+
+const __rateLimitBuckets = new Map();
+function isAdminReq(req) {
+  const authHeader = req.headers['authorization'] || req.headers['x-nexus-admin-key'] || '';
+  return securityController.verifyAdminToken(authHeader);
+}
+
+function checkRateLimit(req, bucket = 'ai', maxPerMin = 45) {
+  if (process.env.NEXUS_TEST_MODE || isAdminReq(req)) return { allowed: true };
+  const rawIp = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown').split(',')[0].trim();
+  const key = `${bucket}:${rawIp}`;
+  const now = Date.now();
+  const windowMs = 60 * 1000;
+  let arr = __rateLimitBuckets.get(key) || [];
+  arr = arr.filter(ts => now - ts < windowMs);
+  if (arr.length >= maxPerMin) {
+    __rateLimitBuckets.set(key, arr);
+    return { allowed: false, retryAfterSec: Math.ceil((windowMs - (now - arr[0])) / 1000) };
+  }
+  arr.push(now);
+  __rateLimitBuckets.set(key, arr);
+  if (__rateLimitBuckets.size > 5000) __rateLimitBuckets.clear();
+  return { allowed: true };
+}
+
+function resolveScopedUserId(req, body = {}) {
+  if (isAdminReq(req)) return 'creator';
+  const authHeader = req.headers['authorization'] || '';
+  if (authHeader.startsWith('Bearer ')) {
+    const token = authHeader.slice(7).trim();
+    try {
+      const verified = authEngine.verifySession ? authEngine.verifySession(token) : null;
+      if (verified && verified.user && verified.user.id) return verified.user.id;
+    } catch (_) {}
+  }
+  const clientSid = String(req.headers['x-nexus-session-id'] || body.sessionId || '').trim();
+  if (clientSid && clientSid.length >= 6) {
+    return 'sess_' + clientSid.replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 32);
+  }
+  const cookieHeader = String(req.headers['cookie'] || '');
+  const sidMatch = cookieHeader.match(/(?:^|;\s*)nexus_sid=([a-zA-Z0-9_-]{6,40})/);
+  if (sidMatch && sidMatch[1]) return 'sess_' + sidMatch[1];
+  const rawIp = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'guest').split(',')[0].trim();
+  return 'guest_' + crypto.createHash('sha256').update(rawIp).digest('hex').slice(0, 12);
+}
 
 // Load .env.local automatically if present (gitignored for security)
 try {
@@ -670,33 +727,53 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (pathname === '/api/agents/converse' && req.method === 'POST') {
+    const rl = checkRateLimit(req, 'converse', 45);
+    if (!rl.allowed) {
+      return jsonResponse(res, 429, { error: `Muitas requisições. Aguarde ${rl.retryAfterSec}s.` });
+    }
     try {
       const body = await parseJsonBody(req);
       const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
       const reqLang = (body.lang || body.language || 'pt').toLowerCase().slice(0, 2);
+      const scopedUserId = resolveScopedUserId(req, body);
+      const quota = authEngine.checkAndConsumeQuota(scopedUserId, isAdminReq(req));
+      if (!quota.allowed) {
+        return jsonResponse(res, 402, {
+          error: 'FREE_QUOTA_EXCEEDED',
+          upgradeRequired: true,
+          message: 'Você atingiu o limite diário gratuito. Assine o plano AURA Plus para acesso ilimitado.',
+          quota
+        });
+      }
+
       const convRes = await agentMemoryStore.converse({
         agentId: body.agentId || 'aura',
         message: body.message || '',
-        userName: body.userName || 'Criador',
+        userName: body.userName || (isAdminReq(req) ? 'Criador' : 'Usuário'),
+        userId: scopedUserId,
         apiKey: body.apiKey || process.env.GEMINI_API_KEY || '',
         voiceEnabled: !!body.voiceEnabled,
         lang: reqLang,
+        attachments: Array.isArray(body.attachments) ? body.attachments : [],
+        useGoogleSearch: body.useGoogleSearch !== false,
         clientTemporal: body.clientTemporal || null,
         clientGeo: body.clientGeo || null,
         clientIp
       });
+      convRes.quota = quota;
       // Automated Supreme Supervisor Evaluation of Subordinate Turn
       convRes.supervisorFeedback = supremeSupervisor.evaluateAgentTurn({
         agentId: convRes.agentId,
         userMessage: body.message || '',
         agentReply: convRes.reply || ''
       });
-      // Immediately pre-synthesize the first sentence in background so /api/tts is already warm/in-flight when client requests it
+      // Immediately pre-synthesize the first sentence in the ACTIVE LANGUAGE (not hardcoded pt-BR!)
       if (body.voiceEnabled && convRes.voiceText && !process.env.NEXUS_TEST_MODE) {
         const firstSentMatch = convRes.voiceText.match(/[^.!?…]+[.!?…]*/);
         const firstSent = (firstSentMatch ? firstSentMatch[0] : convRes.voiceText).trim().slice(0, 115);
+        const bcp47 = LANG_TO_BCP47[reqLang] || 'pt-BR';
         if (firstSent) {
-          fetch(`http://127.0.0.1:${PORT}/api/tts?persona=${encodeURIComponent(convRes.agentId || 'aura')}&tl=pt-BR&emotion=${encodeURIComponent(convRes.emotion || 'neutral')}&q=${encodeURIComponent(firstSent)}`).catch(() => {});
+          fetch(`http://127.0.0.1:${PORT}/api/tts?persona=${encodeURIComponent(convRes.agentId || 'aura')}&tl=${encodeURIComponent(bcp47)}&emotion=${encodeURIComponent(convRes.emotion || 'neutral')}&q=${encodeURIComponent(firstSent)}`).catch(() => {});
         }
       }
       return jsonResponse(res, 200, convRes);
@@ -705,7 +782,63 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // Real Token-by-Token SSE Streaming Conversation Endpoint (/api/agents/converse-stream)
+  if (pathname === '/api/agents/converse-stream' && req.method === 'POST') {
+    const rl = checkRateLimit(req, 'converse', 45);
+    if (!rl.allowed) {
+      return jsonResponse(res, 429, { error: `Muitas requisições. Aguarde ${rl.retryAfterSec}s.` });
+    }
+    try {
+      const body = await parseJsonBody(req);
+      const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+      const reqLang = (body.lang || body.language || 'pt').toLowerCase().slice(0, 2);
+      const scopedUserId = resolveScopedUserId(req, body);
+      const quota = authEngine.checkAndConsumeQuota(scopedUserId, isAdminReq(req));
+      if (!quota.allowed) {
+        return jsonResponse(res, 402, { error: 'FREE_QUOTA_EXCEEDED', upgradeRequired: true, quota });
+      }
+
+      res.writeHead(200, {
+        'Content-Type': 'text/event-stream; charset=utf-8',
+        'Cache-Control': 'no-cache, no-transform',
+        'Connection': 'keep-alive',
+        'X-Accel-Buffering': 'no'
+      });
+
+      const sendSse = (event, data) => {
+        try {
+          res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
+        } catch (_) {}
+      };
+
+      const convRes = await agentMemoryStore.converse({
+        agentId: body.agentId || 'aura',
+        message: body.message || '',
+        userName: body.userName || (isAdminReq(req) ? 'Criador' : 'Usuário'),
+        userId: scopedUserId,
+        apiKey: body.apiKey || process.env.GEMINI_API_KEY || '',
+        voiceEnabled: !!body.voiceEnabled,
+        lang: reqLang,
+        attachments: Array.isArray(body.attachments) ? body.attachments : [],
+        useGoogleSearch: body.useGoogleSearch !== false,
+        onAnswerChunk: (delta) => sendSse('delta', { delta }),
+        clientTemporal: body.clientTemporal || null,
+        clientGeo: body.clientGeo || null,
+        clientIp
+      });
+      convRes.quota = quota;
+      sendSse('done', convRes);
+      return res.end();
+    } catch (e) {
+      try {
+        res.write(`event: error\ndata: ${JSON.stringify({ error: e.message })}\n\n`);
+      } catch (_) {}
+      return res.end();
+    }
+  }
+
   if (pathname === '/api/agents/block' && req.method === 'POST') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
     try {
       const body = await parseJsonBody(req);
       const updated = agentMemoryStore.setAgentStatus(body.agentId, body.blocked ? 'BLOCKED' : 'ACTIVE');
@@ -716,6 +849,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (pathname === '/api/agents/purge-memory' && req.method === 'POST') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
     try {
       const body = await parseJsonBody(req);
       const purgeRes = agentMemoryStore.purgeAgentMemory(body.agentId);
@@ -726,6 +860,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (pathname === '/api/agents/update-vector' && req.method === 'POST') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
     try {
       const body = await parseJsonBody(req);
       if (!body.agentId || !body.vectorId || !body.text) {
@@ -739,6 +874,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (pathname === '/api/agents/delete-vector' && req.method === 'POST') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
     try {
       const body = await parseJsonBody(req);
       if (!body.agentId || !body.vectorId) {
@@ -752,6 +888,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (pathname === '/api/agents/delete' && req.method === 'POST') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
     try {
       const body = await parseJsonBody(req);
       const delRes = agentMemoryStore.deleteAgent(body.agentId);
@@ -801,6 +938,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (pathname === '/api/agents/create' && req.method === 'POST') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
     try {
       const body = await parseJsonBody(req);
       const created = agentMemoryStore.createCustomAgent(body);
@@ -811,6 +949,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (pathname === '/api/agents/update' && req.method === 'POST') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
     try {
       const body = await parseJsonBody(req);
       const updated = agentMemoryStore.updateAgent(body.agentId, body);
@@ -1037,17 +1176,26 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 5a-3. Expressive Gemini Neural Audio TTS Proxy (/api/tts) — Sweet, Cute, Gentle & Human Voice (Leda)
-  if (pathname === '/api/tts' && req.method === 'GET') {
-    const q = (url.searchParams.get('q') || '').trim().slice(0, 1200);
-    const tl = (url.searchParams.get('tl') || 'pt-BR').trim();
-    const persona = (url.searchParams.get('persona') || 'aura').trim().toLowerCase();
-    const emotion = (url.searchParams.get('emotion') || 'neutral').trim().toLowerCase();
-    const clientKey = (url.searchParams.get('key') || '').trim();
+  // 5a-3. Expressive Neural Audio TTS Proxy (/api/tts — GET & POST, 11 Languages, Zero Dead Models)
+  if (pathname === '/api/tts' && (req.method === 'GET' || req.method === 'POST')) {
+    const rlTts = checkRateLimit(req, 'tts', 60);
+    if (!rlTts.allowed) {
+      res.writeHead(429);
+      return res.end('Rate limit exceeded');
+    }
+    const postBody = req.method === 'POST' ? await parseJsonBody(req).catch(() => ({})) : {};
+    const q = String(postBody.q || postBody.text || url.searchParams.get('q') || '').trim().slice(0, 1200);
+    const tl = String(postBody.tl || postBody.lang || url.searchParams.get('tl') || 'pt-BR').trim();
+    const persona = String(postBody.persona || url.searchParams.get('persona') || 'aura').trim().toLowerCase();
+    const emotion = String(postBody.emotion || url.searchParams.get('emotion') || 'neutral').trim().toLowerCase();
+    const clientKey = String(req.headers['x-goog-api-key'] || postBody.apiKey || '').trim();
     if (!q) {
       res.writeHead(400);
       return res.end('Missing q');
     }
+
+    const shortLang = tl.toLowerCase().slice(0, 2);
+    const spokenLangName = LANG_TO_NAME[shortLang] || 'Portuguese (Brazil)';
 
     const cacheKey = `${persona}:${tl}:${emotion}:${q}`;
     if (!globalThis.__nexusTtsCache) {
@@ -1151,108 +1299,73 @@ const server = http.createServer(async (req, res) => {
       const synthPromise = (async () => {
         let wavBuffer = null;
         let usedModel = '';
+        let outContentType = 'audio/wav';
 
-        // Tier A: /v1beta/interactions neural TTS models
-        const interactionModels = [
-          { name: 'gemini-3.8-flash-lite-tts', supportsMeta: true },
-          { name: 'gemini-3.8-flash-tts', supportsMeta: true },
-          { name: 'gemini-3.1-flash-tts-preview', supportsMeta: false }
-        ];
-
-        for (const m of interactionModels) {
-          const cooldownUntil = ttsCooldowns.get(m.name) || 0;
-          if (Date.now() < cooldownUntil) continue;
-
+        // Tier A (Primary): Gemini 2.5 Flash Neural TTS with explicit Language + Emotional Prosody (zero dead calls!)
+        for (const genModel of ['gemini-2.5-flash-preview-tts', 'gemini-2.5-pro-preview-tts']) {
+          const cooldownKey = `gen:${genModel}`;
+          if (Date.now() < (ttsCooldowns.get(cooldownKey) || 0)) continue;
           try {
-            const contentObj = { type: 'text', text: q };
-            if (m.supportsMeta) {
-              contentObj.annotations = [{ type: 'speech_metadata', style: voiceStyle }];
-            }
-            const gResp = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
+            const styledText = `Say naturally in ${spokenLangName} with a ${voiceStyle}: ${q}`;
+            const gResp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${genModel}:generateContent`, {
               method: 'POST',
-              signal: AbortSignal.timeout(16000),
+              signal: AbortSignal.timeout(18000),
               headers: {
-                'x-goog-api-key': geminiKey,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-goog-api-key': geminiKey
               },
               body: JSON.stringify({
-                model: m.name,
-                input: [{
-                  type: 'user_input',
-                  content: [contentObj]
-                }],
-                response_format: { type: 'audio' },
-                generation_config: {
-                  speech_config: [{ voice: voiceName }]
+                contents: [{ parts: [{ text: styledText }] }],
+                generationConfig: {
+                  responseModalities: ['AUDIO'],
+                  speechConfig: {
+                    voiceConfig: { prebuiltVoiceConfig: { voiceName } }
+                  }
                 }
               })
             });
-
             if (gResp.status === 429) {
-              recordCooldown(m.name, 30 * 60 * 1000);
+              recordCooldown(cooldownKey, 15 * 60 * 1000);
               continue;
             }
-
             if (gResp.ok) {
               const gJson = await gResp.json();
-              let b64Audio = null;
-              if (Array.isArray(gJson.steps)) {
-                for (const step of gJson.steps) {
-                  if (step.type === 'model_output' && Array.isArray(step.content)) {
-                    for (const item of step.content) {
-                      if (item.type === 'audio' && item.data) {
-                        b64Audio = item.data;
-                      }
-                    }
-                  }
-                }
-              }
-              if (b64Audio) {
-                const rawBuf = Buffer.from(b64Audio, 'base64');
+              const b64 = gJson?.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+              if (b64) {
+                const rawBuf = Buffer.from(b64, 'base64');
                 wavBuffer = (rawBuf.slice(0, 4).toString('ascii') === 'RIFF') ? rawBuf : pcm24kToWav(rawBuf);
-                usedModel = m.name;
+                usedModel = genModel;
                 break;
               }
             }
           } catch (_) {}
         }
 
-        // Tier B: /v1beta/models/:generateContent AUDIO modality (24kHz PCM -> WAV)
-        if (!wavBuffer) {
-          for (const genModel of ['gemini-2.5-flash-preview-tts', 'gemini-3.1-flash-tts-preview']) {
-            const cooldownKey = `gen:${genModel}`;
-            if (Date.now() < (ttsCooldowns.get(cooldownKey) || 0)) continue;
-            try {
-              const gResp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${genModel}:generateContent?key=${encodeURIComponent(geminiKey)}`, {
-                method: 'POST',
-                signal: AbortSignal.timeout(18000),
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  contents: [{ parts: [{ text: q }] }],
-                  generationConfig: {
-                    responseModalities: ['AUDIO'],
-                    speechConfig: {
-                      voiceConfig: { prebuiltVoiceConfig: { voiceName } }
-                    }
-                  }
-                })
-              });
-              if (gResp.status === 429) {
-                recordCooldown(cooldownKey, 30 * 60 * 1000);
-                continue;
-              }
-              if (gResp.ok) {
-                const gJson = await gResp.json();
-                const b64 = gJson?.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
-                if (b64) {
-                  const rawBuf = Buffer.from(b64, 'base64');
-                  wavBuffer = (rawBuf.slice(0, 4).toString('ascii') === 'RIFF') ? rawBuf : pcm24kToWav(rawBuf);
-                  usedModel = genModel;
-                  break;
-                }
-              }
-            } catch (_) {}
-          }
+        // Tier B (Commercial Fallback): OpenAI Neural TTS (gpt-4o-mini-tts / tts-1) if OPENAI_API_KEY is configured
+        const openAiTtsKey = (process.env.OPENAI_API_KEY || '').trim();
+        if (!wavBuffer && openAiTtsKey) {
+          try {
+            const oaResp = await fetch('https://api.openai.com/v1/audio/speech', {
+              method: 'POST',
+              signal: AbortSignal.timeout(16000),
+              headers: {
+                'Authorization': `Bearer ${openAiTtsKey}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                model: 'gpt-4o-mini-tts',
+                voice: isSupervisor ? 'onyx' : 'nova',
+                input: q,
+                instructions: `Speak naturally in ${spokenLangName} with a ${voiceStyle}.`,
+                response_format: 'mp3'
+              })
+            });
+            if (oaResp.ok) {
+              wavBuffer = Buffer.from(await oaResp.arrayBuffer());
+              outContentType = 'audio/mpeg';
+              usedModel = 'openai-gpt-4o-mini-tts';
+            }
+          } catch (_) {}
         }
 
         if (wavBuffer && wavBuffer.length > 100) {
@@ -1260,10 +1373,10 @@ const server = http.createServer(async (req, res) => {
             const oldestKey = ttsCache.keys().next().value;
             if (oldestKey) ttsCache.delete(oldestKey);
           }
-          const engineTag = `gemini-neural-${voiceName.toLowerCase()}-${usedModel}`;
+          const engineTag = `neural-${voiceName.toLowerCase()}-${usedModel}`;
           const entry = {
             buffer: wavBuffer,
-            contentType: 'audio/wav',
+            contentType: outContentType,
             engine: engineTag
           };
           ttsCache.set(cacheKey, entry);
@@ -1471,17 +1584,25 @@ const server = http.createServer(async (req, res) => {
           throw new Error(lineage.reason);
         }
         const reqLang = (body.lang || body.language || 'pt').toLowerCase().slice(0, 2);
+        const scopedUserId = resolveScopedUserId(req, body);
+        const quota = authEngine.checkAndConsumeQuota(scopedUserId, isAdminReq(req));
+        if (!quota.allowed) {
+          return jsonResponse(res, 402, { error: 'FREE_QUOTA_EXCEEDED', upgradeRequired: true, quota });
+        }
         const resCompanion = await companionEngine.converse({
           message: body.message,
           userName: body.userName,
+          userId: scopedUserId,
           learningStyle: body.learningStyle,
           history: body.history || [],
           clientTemporal: body.clientTemporal,
           lang: reqLang,
+          attachments: Array.isArray(body.attachments) ? body.attachments : [],
           apiKey: body.apiKey,
           onThought: (fullThought) => broadcastWs({ type: 'aura_thought', fullThought }),
           onChunk: (visibleText) => broadcastWs({ type: 'aura_stream', visibleText })
         });
+        resCompanion.quota = quota;
         return jsonResponse(res, 200, resCompanion);
       } catch (e) {
         return jsonResponse(res, 423, { error: e.message });
@@ -1489,33 +1610,185 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 5f. Universal Interactive Chat & Assistant Endpoint (/api/chat)
+  // 5f. Universal Interactive Chat & Assistant Endpoint (/api/chat) — Multilingual + Isolated + Real Reply Fix
   if (req.method === 'POST' && pathname === '/api/chat') {
+    const rlChat = checkRateLimit(req, 'chat', 45);
+    if (!rlChat.allowed) {
+      return jsonResponse(res, 429, { error: `Muitas requisições. Aguarde ${rlChat.retryAfterSec}s.` });
+    }
     try {
       const body = await parseJsonBody(req);
       const query = (body.prompt || body.message || '').trim();
       if (!query) {
         return jsonResponse(res, 400, { error: 'Mensagem vazia.' });
       }
+      const reqLang = (body.lang || body.language || 'pt').toLowerCase().slice(0, 2);
+      const scopedUserId = resolveScopedUserId(req, body);
+      const quota = authEngine.checkAndConsumeQuota(scopedUserId, isAdminReq(req));
+      if (!quota.allowed) {
+        return jsonResponse(res, 402, { error: 'FREE_QUOTA_EXCEEDED', upgradeRequired: true, quota });
+      }
 
-      // Conecta com companionEngine para resposta inteligente real
       const resCompanion = await companionEngine.converse({
         message: query,
-        userName: body.userName || 'Criador',
-        learningStyle: 'EXECUTIVE',
+        userName: body.userName || (isAdminReq(req) ? 'Criador' : 'Usuário'),
+        userId: scopedUserId,
+        learningStyle: body.learningStyle || 'EXECUTIVE',
+        lang: reqLang,
+        attachments: Array.isArray(body.attachments) ? body.attachments : [],
+        clientTemporal: body.clientTemporal || null,
+        apiKey: body.apiKey || process.env.GEMINI_API_KEY || '',
         history: body.history || []
       });
 
+      const finalReply = resCompanion.reply || resCompanion.response || resCompanion.text || '';
       return jsonResponse(res, 200, {
         ok: true,
-        response: resCompanion.response || resCompanion.text || 'Entendido pelo NEXUS.',
-        thought: resCompanion.thought || ''
+        reply: finalReply,
+        response: finalReply,
+        thought: resCompanion.thought || '',
+        groundingSources: resCompanion.groundingSources || [],
+        lang: reqLang,
+        quota
       });
     } catch (e) {
-      return jsonResponse(res, 200, {
-        ok: true,
-        response: `Entendido perfeitamente, Criador. O NEXUS está operando em alta intensidade com os 150 agentes ativos e sua instrução foi processada com sucesso no núcleo do sistema.`
+      return jsonResponse(res, 500, { ok: false, error: e.message });
+    }
+  }
+
+  // 5g. Universal Server-Side Speech-to-Text Endpoint (/api/stt — works on Firefox, Safari iOS & all 11 languages)
+  if (req.method === 'POST' && pathname === '/api/stt') {
+    const rlStt = checkRateLimit(req, 'stt', 30);
+    if (!rlStt.allowed) return jsonResponse(res, 429, { error: `Aguarde ${rlStt.retryAfterSec}s.` });
+    try {
+      const body = await parseJsonBody(req);
+      const audioBase64 = String(body.audioBase64 || '').trim();
+      const mimeType = String(body.mimeType || 'audio/webm').trim();
+      const reqLang = (body.lang || 'pt').toLowerCase().slice(0, 2);
+      const langName = LANG_TO_NAME[reqLang] || 'Portuguese (Brazil)';
+      if (!audioBase64) return jsonResponse(res, 400, { error: 'audioBase64 é obrigatório.' });
+
+      const geminiKey = (req.headers['x-goog-api-key'] || body.apiKey || process.env.GEMINI_API_KEY || '').trim();
+      if (!geminiKey) {
+        return jsonResponse(res, 503, { error: 'SERVER_KEY_NOT_CONFIGURED' });
+      }
+
+      const gResp = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent', {
+        method: 'POST',
+        signal: AbortSignal.timeout(20000),
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': geminiKey
+        },
+        body: JSON.stringify({
+          contents: [{
+            role: 'user',
+            parts: [
+              { text: `Transcribe this spoken audio accurately in ${langName}. Return ONLY the exact transcribed text with punctuation, no commentary.` },
+              { inlineData: { mimeType, data: audioBase64 } }
+            ]
+          }],
+          generationConfig: { temperature: 0.1, maxOutputTokens: 1024 }
+        })
       });
+      if (!gResp.ok) {
+        return jsonResponse(res, 502, { error: `STT upstream HTTP ${gResp.status}` });
+      }
+      const gData = await gResp.json();
+      const transcript = (gData?.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join(' ').trim();
+      return jsonResponse(res, 200, { ok: true, transcript, lang: reqLang });
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  // 5h. Official Real Payments & Webhook Engine (/api/payments/* — Mercado Pago & Asaas)
+  if (pathname === '/api/payments/gateway-status' && req.method === 'GET') {
+    return jsonResponse(res, 200, paymentsEngine.getGatewayStatus());
+  }
+
+  if (pathname === '/api/payments/create-checkout' && req.method === 'POST') {
+    const rlPay = checkRateLimit(req, 'payments', 20);
+    if (!rlPay.allowed) return jsonResponse(res, 429, { error: `Aguarde ${rlPay.retryAfterSec}s.` });
+    try {
+      const body = await parseJsonBody(req);
+      const scopedUserId = resolveScopedUserId(req, body);
+      const result = await paymentsEngine.createPixCheckout({
+        planId: body.planId || 'aura_plus',
+        userId: body.userId || scopedUserId,
+        payerEmail: body.payerEmail || '',
+        payerName: body.payerName || 'Cliente NEXUS',
+        productLabel: body.productLabel || '',
+        customAmountBRL: typeof body.amountBRL === 'number' ? body.amountBRL : null,
+        origin
+      });
+      return jsonResponse(res, result.success ? 200 : (result.setupRequired ? 503 : 400), result);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname === '/api/payments/webhook' && req.method === 'POST') {
+    try {
+      const body = await parseJsonBody(req);
+      const whRes = await paymentsEngine.processWebhook({
+        body,
+        headers: req.headers,
+        identityAuthEngine: authEngine
+      });
+      return jsonResponse(res, whRes.statusCode || 200, whRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname.startsWith('/api/payments/status/') && req.method === 'GET') {
+    const orderId = pathname.slice('/api/payments/status/'.length).trim();
+    const st = paymentsEngine.getOrderStatus(orderId);
+    if (!st) return jsonResponse(res, 404, { error: 'Pedido não encontrado.' });
+    return jsonResponse(res, 200, st);
+  }
+
+  // 5i. Admin-Only Real Revenue Ledger, ML Offers CRUD & Telegram Auto-Publisher
+  if (pathname === '/api/admin/revenue-ledger' && req.method === 'GET') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
+    return jsonResponse(res, 200, {
+      ...paymentsEngine.getAdminRevenueLedger(),
+      storage: cloudDbBridge.getStatus()
+    });
+  }
+
+  if (pathname === '/api/admin/ml-offers' && req.method === 'GET') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
+    return jsonResponse(res, 200, { success: true, offers: mlOffersManager.getAllOffers() });
+  }
+
+  if (pathname === '/api/admin/ml-offers' && req.method === 'POST') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
+    try {
+      const body = await parseJsonBody(req);
+      const resOffer = mlOffersManager.upsertOffer(body);
+      return jsonResponse(res, resOffer.success ? 200 : 400, resOffer);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
+    }
+  }
+
+  if (pathname.startsWith('/api/admin/ml-offers/') && req.method === 'DELETE') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
+    const id = pathname.slice('/api/admin/ml-offers/'.length).trim();
+    const del = mlOffersManager.deleteOffer(id);
+    return jsonResponse(res, del.success ? 200 : 404, del);
+  }
+
+  if (pathname === '/api/admin/telegram/broadcast' && req.method === 'POST') {
+    if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
+    try {
+      const body = await parseJsonBody(req).catch(() => ({}));
+      const tgRes = await mlOffersManager.broadcastToTelegram(body.offerId || null);
+      return jsonResponse(res, tgRes.success ? 200 : (tgRes.configured === false ? 503 : 400), tgRes);
+    } catch (e) {
+      return jsonResponse(res, 400, { error: e.message });
     }
   }
 
@@ -1976,8 +2249,9 @@ const server = http.createServer(async (req, res) => {
         return jsonResponse(res, 200, state);
       }
 
-      // 2. Transmissão de Ordem Soberana (Global ou Agente Individual)
+      // 2. Transmissão de Ordem Soberana (Global ou Agente Individual) — EXCLUSIVO ADMIN
       if (req.method === 'POST' && pathname === '/api/swarm/order') {
+        if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
         const body = await parseJsonBody(req);
         const orderRes = swarm100Engine.executeCreatorOrder({
           agentId: body.agentId,
@@ -1988,21 +2262,24 @@ const server = http.createServer(async (req, res) => {
         return jsonResponse(res, orderRes.success ? 200 : 400, orderRes);
       }
 
-      // 2b. Aceleração Soberana de Conclusão para 100% (Produção Imediata)
+      // 2b. Aceleração Soberana de Conclusão para 100% — EXCLUSIVO ADMIN
       if (req.method === 'POST' && pathname === '/api/swarm/accelerate') {
+        if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
         const accRes = swarm100Engine.accelerateAllToProduction();
         return jsonResponse(res, 200, accRes);
       }
 
-      // 3. Controle Perpétuo de Estado (Pausar / Retomar Execução)
+      // 3. Controle Perpétuo de Estado (Pausar / Retomar Execução) — EXCLUSIVO ADMIN
       if (req.method === 'POST' && pathname === '/api/swarm/agent-control') {
+        if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
         const body = await parseJsonBody(req);
         const ctrlRes = swarm100Engine.setAgentState(body.agentId, body.status);
         return jsonResponse(res, ctrlRes.success ? 200 : 400, ctrlRes);
       }
 
-      // 3b. Atualização e Confirmação de Parâmetros, Domínios e Credenciais (/api/swarm/agent-config)
+      // 3b. Atualização e Confirmação de Parâmetros, Domínios e Credenciais — EXCLUSIVO ADMIN
       if (req.method === 'POST' && pathname === '/api/swarm/agent-config') {
+        if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
         const body = await parseJsonBody(req);
         const cfgRes = swarm100Engine.updateAgentConfig(body.agentId, {
           domain: body.domain,
@@ -2013,22 +2290,25 @@ const server = http.createServer(async (req, res) => {
         return jsonResponse(res, cfgRes.success ? 200 : 400, cfgRes);
       }
 
-      // 3c. Chat Interativo em Tempo Real com o Agente (/api/swarm/agent-chat)
+      // 3c. Chat Interativo em Tempo Real com o Agente — EXCLUSIVO ADMIN
       if (req.method === 'POST' && pathname === '/api/swarm/agent-chat') {
+        if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
         const body = await parseJsonBody(req);
         const chatRes = await swarm100Engine.chatWithAgent(body.agentId, body.message);
         return jsonResponse(res, chatRes.success ? 200 : 400, chatRes);
       }
 
-      // 4. Exclusão Permanente de Agente pelo Criador
+      // 4. Exclusão Permanente de Agente pelo Criador — EXCLUSIVO ADMIN
       if (req.method === 'DELETE' && pathname.startsWith('/api/swarm/agent/')) {
+        if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
         const agentId = pathname.slice('/api/swarm/agent/'.length).trim();
         const delRes = swarm100Engine.deleteAgent(agentId);
         return jsonResponse(res, delRes.success ? 200 : 400, delRes);
       }
 
-      // 5. Restauração do Enxame (Hard Reset)
+      // 5. Restauração do Enxame (Hard Reset) — EXCLUSIVO ADMIN
       if (req.method === 'POST' && pathname === '/api/swarm/reset') {
+        if (!isAdminReq(req)) return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY' });
         const resetRes = swarm100Engine.resetSwarm();
         return jsonResponse(res, 200, resetRes);
       }
@@ -2055,8 +2335,11 @@ const server = http.createServer(async (req, res) => {
         return res.end(autonomousDistributionEngine.generateSingleSolutionHTML(agent));
       }
 
-      // 6d. Configurações de Recebimento Direto (Chave Pix / Conta Bancária)
+      // 6d. Configurações de Recebimento Direto (Chave Pix / Conta Bancária) — EXCLUSIVO ADMIN (LGPD BLINDADO)
       if (req.method === 'GET' && pathname === '/api/swarm/payout-settings') {
+        if (!isAdminReq(req)) {
+          return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY: Dados bancários protegidos exclusivamente para a proprietária.' });
+        }
         const payoutFile = path.join(__dirname, 'data', 'creator_payout_settings.json');
         if (fs.existsSync(payoutFile)) {
           try {
@@ -2068,6 +2351,9 @@ const server = http.createServer(async (req, res) => {
       }
 
       if (req.method === 'POST' && pathname === '/api/swarm/payout-settings') {
+        if (!isAdminReq(req)) {
+          return jsonResponse(res, 401, { error: 'UNAUTHORIZED_CREATOR_ONLY: Alteração de chave Pix bloqueada para não-administradores.' });
+        }
         const body = await parseJsonBody(req);
         const payoutFile = path.join(__dirname, 'data', 'creator_payout_settings.json');
         const payoutData = {
@@ -2078,7 +2364,7 @@ const server = http.createServer(async (req, res) => {
           bankName: String(body.bankName || '').trim(),
           updatedAt: new Date().toISOString()
         };
-        fs.writeFileSync(payoutFile, JSON.stringify(payoutData, null, 2), 'utf8');
+        writeJsonAtomic(payoutFile, payoutData);
         return jsonResponse(res, 200, { success: true, message: 'Dados de recebimento salvos com sucesso.', payoutData });
       }
 

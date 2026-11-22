@@ -9,6 +9,7 @@ import { graphDB } from './graph_db.js';
 import { globalIntel } from './global_intelligence.js';
 import { taskEngine } from './tasks.js';
 import { isPriceIntent, searchRealPrices, buildPriceReply } from './price_engine.js';
+import { writeJsonAtomic } from './storage_adapter.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -196,11 +197,17 @@ export class AgentMemoryStore {
     }
   }
 
+  _resolveScopeKey(agentId, userId = '') {
+    const cleanUid = String(userId || '').trim();
+    if (!cleanUid || cleanUid === 'creator' || cleanUid === 'admin' || cleanUid === 'default') {
+      return agentId;
+    }
+    const safeUid = cleanUid.replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 48);
+    return safeUid ? `${agentId}::${safeUid}` : agentId;
+  }
+
   _save() {
     try {
-      const dir = path.dirname(AGENTS_STORE_PATH);
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-
       const obj = {
         updatedAt: new Date().toISOString(),
         systemDirective: MANDATORY_SYSTEM_DIRECTIVE,
@@ -209,7 +216,7 @@ export class AgentMemoryStore {
         patterns: Object.fromEntries(this.patterns),
         history: Object.fromEntries(this.history)
       };
-      fs.writeFileSync(AGENTS_STORE_PATH, JSON.stringify(obj, null, 2), 'utf8');
+      writeJsonAtomic(AGENTS_STORE_PATH, obj);
     } catch (e) {
       console.error('AgentMemoryStore save error:', e.message);
     }
@@ -219,7 +226,8 @@ export class AgentMemoryStore {
    * Adds a new isolated vector memory into the agent's private vector store
    */
   addAgentVectorMemory(agentId, text, category = 'conversation_fact', metadata = {}) {
-    if (!this.agents.has(agentId)) {
+    const baseAgentId = String(agentId || '').split('::')[0];
+    if (!this.agents.has(baseAgentId)) {
       throw new Error(`Agente [${agentId}] não cadastrado no ecossistema.`);
     }
 
@@ -330,7 +338,21 @@ export class AgentMemoryStore {
   /**
    * Executes a conversational turn with an agent (supports both text and voice transcript input)
    */
-  async converse({ agentId, message, userName = 'Criador', apiKey = '', voiceEnabled = false, lang = 'pt', clientTemporal = null, clientGeo = null, clientIp = '' }) {
+  async converse({
+    agentId,
+    message,
+    userName = 'Criador',
+    userId = '',
+    apiKey = '',
+    voiceEnabled = false,
+    lang = 'pt',
+    attachments = [],
+    useGoogleSearch = true,
+    onAnswerChunk = null,
+    clientTemporal = null,
+    clientGeo = null,
+    clientIp = ''
+  }) {
     const agent = this.agents.get(agentId);
     if (!agent) {
       throw new Error(`Agente "${agentId}" não encontrado.`);
@@ -350,12 +372,14 @@ export class AgentMemoryStore {
       };
     }
 
-    const temporal = buildRealtimeTemporalContext(clientTemporal);
+    const scopeKey = this._resolveScopeKey(agentId, userId);
+    const activeLang = (lang || 'pt').toLowerCase().slice(0, 2);
+    const temporal = buildRealtimeTemporalContext(clientTemporal, activeLang);
     const cleanMsg = (message || '').trim();
 
-    // 1. CONSULTA: Query agent's private vector knowledge base + Real-Time Maps/Places + GraphRAG + Web/Social Intel + Price Intel
-    const vectorMatches = this.queryAgentVectorMemory(agentId, cleanMsg, 3);
-    const pat = this.patterns.get(agentId);
+    // 1. CONSULTA (ISOLADA POR USUÁRIO): Query user-scoped private vector store + Real-Time Maps/Places + GraphRAG + Web/Social Intel + Price Intel
+    const vectorMatches = this.queryAgentVectorMemory(scopeKey, cleanMsg, 3);
+    const pat = this.patterns.get(scopeKey) || { turnCount: 0, avgSentenceLength: 12, topics: [] };
 
     const isMapOrPlaceQuery = cleanMsg && geoEngine.isPlaceOrMapQuery(cleanMsg);
     const wantsPriceAnalysis = cleanMsg && isPriceIntent(cleanMsg);
@@ -411,11 +435,12 @@ export class AgentMemoryStore {
 
     const mapContextBlock = mapIntel?.promptContext ? `\n${mapIntel.promptContext}` : '';
 
-    const recentHistory = (this.history.get(agentId) || []).slice(-4);
-    const histLines = recentHistory.map(h => `${h.role === 'user' ? 'Criador' : agent.name}: ${this._sanitizeRespectfulTone(h.text)}`).join('\n');
+    const recentHistory = (this.history.get(scopeKey) || []).slice(-6);
+    const histLines = recentHistory.map(h => `${h.role === 'user' ? (userName || 'Usuário') : agent.name}: ${this._sanitizeRespectfulTone(h.text)}`).join('\n');
 
     let reply = '';
-    const hasKey = !!(apiKey || process.env.GEMINI_API_KEY);
+    let groundingSources = [];
+    const hasKey = !!(apiKey || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY || process.env.ANTHROPIC_API_KEY);
 
     if (wantsPriceAnalysis && priceIntel) {
       reply = this._sanitizeRespectfulTone(buildPriceReply(priceIntel, voiceEnabled));
@@ -486,33 +511,40 @@ O usuário selecionou a interface no idioma "${activeLangName}" (código "${acti
           contents: prompt,
           systemInstruction: sysInstruction,
           fastVoiceMode: !!voiceEnabled,
-          clientTemporal
+          clientTemporal,
+          lang: activeLang,
+          attachments: Array.isArray(attachments) ? attachments : [],
+          useGoogleSearch: Boolean(useGoogleSearch && !voiceEnabled && !isMapOrPlaceQuery),
+          onAnswerChunk
         });
         reply = this._sanitizeRespectfulTone(res.answer || '');
+        if (Array.isArray(res.groundingSources)) groundingSources = res.groundingSources;
       } catch (err) {
         console.warn(`Fallback local para agente ${agentId}:`, err.message);
       }
     }
 
-    // High-fidelity fallback synthesis honoring tone, local time, maps and private vector knowledge
+    // High-fidelity multilingual fallback synthesis honoring tone, active language, local time, maps and private vector knowledge
     if (!reply) {
-      reply = this._sanitizeRespectfulTone(this._synthesizeGroundedResponse(agent, cleanMsg, userName, vectorMatches, pat, temporal, mapIntel, ragRes));
+      reply = this._sanitizeRespectfulTone(this._synthesizeGroundedResponse(agent, cleanMsg, userName, vectorMatches, pat, temporal, mapIntel, ragRes, activeLang));
     }
 
-    // 3. ATUALIZAÇÃO: Store new learned insight into agent's private vector knowledge base
-    const learnedFact = `[Interação #${pat?.turnCount + 1}] O criador perguntou/instruiu: "${cleanMsg.slice(0, 100)}". Resposta gerada com foco em ${agent.role}.`;
-    const newLearned = this.addAgentVectorMemory(agentId, learnedFact, 'turn_insight', {
+    // 3. ATUALIZAÇÃO ISOLADA POR USUÁRIO (ZERO VAZAMENTO CRUZADO ENTRE CLIENTES):
+    const learnedFact = `[Interação #${(pat?.turnCount || 0) + 1}] (${userName}): "${cleanMsg.slice(0, 100)}". Foco: ${agent.role}.`;
+    const newLearned = this.addAgentVectorMemory(scopeKey, learnedFact, 'turn_insight', {
       user: userName,
+      userId: userId || 'creator',
       hasKey,
-      voice: voiceEnabled
+      voice: voiceEnabled,
+      lang: activeLang
     });
 
-    // Record turn in history
-    const hist = this.history.get(agentId) || [];
+    // Record turn in isolated user history
+    const hist = this.history.get(scopeKey) || [];
     hist.push({ role: 'user', text: cleanMsg, timestamp: new Date().toISOString() });
     hist.push({ role: 'agent', text: reply, timestamp: new Date().toISOString() });
-    if (hist.length > 20) hist.shift(), hist.shift();
-    this.history.set(agentId, hist);
+    if (hist.length > 24) hist.shift(), hist.shift();
+    this.history.set(scopeKey, hist);
     this._save();
 
     // 4. REGULATORY EXPLAINABILITY: Automated XAI Decision Passport
@@ -684,10 +716,13 @@ O usuário selecionou a interface no idioma "${activeLangName}" (código "${acti
       spreadsheetCard,
       priceCard: priceIntel,
       vectorMatches,
+      groundingSources,
+      lang: activeLang,
+      isolatedScope: scopeKey,
       newLearnedMemory: newLearned,
       xaiPassport: xaiPass,
-      patterns: this.patterns.get(agentId),
-      totalVectors: (this.vectorStores.get(agentId) || []).length
+      patterns: this.patterns.get(scopeKey) || this.patterns.get(agentId),
+      totalVectors: (this.vectorStores.get(scopeKey) || []).length
     };
   }
 
@@ -699,7 +734,26 @@ O usuário selecionou a interface no idioma "${activeLangName}" (código "${acti
       .trim();
   }
 
-  _synthesizeGroundedResponse(agent, msg, userName, vectorMatches, pat, temporal = null, mapIntel = null, ragRes = null) {
+  _synthesizeGroundedResponse(agent, msg, userName, vectorMatches, pat, temporal = null, mapIntel = null, ragRes = null, lang = 'pt') {
+    const cleanLang = (lang || 'pt').toLowerCase().slice(0, 2);
+    if (cleanLang !== 'pt') {
+      const i18nFallbacks = {
+        en: `Hello ${userName}! I am ${agent.name}. I received your message ("${(msg || '').slice(0, 90)}"). I am ready to help with analysis, real-time reasoning, planning, or answers in English. Tell me what you would like to dive deeper into!`,
+        es: `¡Hola ${userName}! Soy ${agent.name}. Recibí tu mensaje ("${(msg || '').slice(0, 90)}"). Estoy lista para ayudarte con análisis, razonamiento en tiempo real y respuestas claras en español. ¿En qué profundizamos ahora?`,
+        fr: `Bonjour ${userName} ! Je suis ${agent.name}. J'ai bien reçu votre message ("${(msg || '').slice(0, 90)}"). Je suis prête à vous accompagner en français avec analyse et clarté. Comment puis-je vous aider ?`,
+        de: `Hallo ${userName}! Ich bin ${agent.name}. Ich habe Ihre Nachricht erhalten ("${(msg || '').slice(0, 90)}"). Ich stehe Ihnen auf Deutsch mit präziser Analyse und klaren Antworten zur Verfügung.`,
+        it: `Ciao ${userName}! Sono ${agent.name}. Ho ricevuto il tuo messaggio ("${(msg || '').slice(0, 90)}"). Sono qui con te in italiano, pronta ad aiutarti con analisi, ragionamento e risposte chiare. Di cosa vuoi parlare adesso?`,
+        zh: `你好 ${userName}！我是 ${agent.name}。我已收到你的消息（"${(msg || '').slice(0, 80)}"）。我随时准备用中文为你提供深度分析与清晰解答。`,
+        ja: `こんにちは ${userName}さん！私は${agent.name}です。メッセージ（「${(msg || '').slice(0, 80)}」）を受け取りました。日本語で丁寧かつ的確にサポートいたします。`,
+        ar: `مرحباً ${userName}! أنا ${agent.name}. لقد استلمت رسالتك ("${(msg || '').slice(0, 80)}"). أنا جاهزة لمساعدتك باللغة العربية بوضوح وتحليل دقيق.`,
+        ru: `Привет, ${userName}! Я ${agent.name}. Я получила ваше сообщение («${(msg || '').slice(0, 80)}»). Готова помочь вам на русском языке с точным анализом и ясными ответами.`,
+        hi: `नमस्ते ${userName}! मैं ${agent.name} हूँ। मुझे आपका संदेश ("${(msg || '').slice(0, 80)}") मिल गया है। मैं हिंदी में स्पष्ट विश्लेषण और उत्तर के साथ आपकी सहायता के लिए तैयार हूँ।`
+      };
+      if (i18nFallbacks[cleanLang]) {
+        return i18nFallbacks[cleanLang];
+      }
+    }
+
     const memoryGrounding = vectorMatches.length > 0 && vectorMatches[0].similarity > 0.4
       ? ` Com base no que aprendi anteriormente em minha base vetorial ("${vectorMatches[0].text.slice(0, 75)}..."), `
       : ' ';

@@ -1,16 +1,26 @@
 import { telemetry } from './telemetry.js';
 
-// Frontier multi-model priority list spanning highest reasoning benchmarks (Gemini 2.5/3.5, Flash & Pro)
+// Frontier multi-model priority list (verified active Google Gemini models only — zero dead endpoints)
 const GEMINI_MODELS_PRIORITY = [
   'gemini-2.5-flash',
   'gemini-2.5-pro',
   'gemini-2.0-flash',
-  'gemini-flash-lite-latest',
-  'gemini-3.5-flash-lite',
-  'gemini-3.5-flash',
-  'gemini-3-flash-preview',
-  'gemini-1.5-flash'
+  'gemini-flash-latest'
 ];
+
+const LANG_BCP47_MAP = {
+  pt: 'pt-BR',
+  en: 'en-US',
+  es: 'es-ES',
+  fr: 'fr-FR',
+  de: 'de-DE',
+  it: 'it-IT',
+  zh: 'zh-CN',
+  ja: 'ja-JP',
+  ar: 'ar-SA',
+  ru: 'ru-RU',
+  hi: 'hi-IN'
+};
 
 /**
  * UNIVERSAL SUPERINTELLIGENCE MANDATE
@@ -71,19 +81,22 @@ Você é a Aura, a superinteligência viva e mascote interativa do NEXUS. Seu es
  * Builds an authoritative, real-time temporal context string (Date, Time, Weekday, Timezone)
  * so every AI agent knows the exact moment the user is speaking.
  */
-export function buildRealtimeTemporalContext(clientTemporal = null) {
+export function buildRealtimeTemporalContext(clientTemporal = null, lang = 'pt') {
   const now = new Date();
   const sysTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const fallbackTz = (!sysTz || sysTz === 'UTC' || sysTz === 'Etc/UTC') ? 'America/Sao_Paulo' : sysTz;
   const tz = clientTemporal?.timeZone || fallbackTz;
-  const localeDate = clientTemporal?.localeDate || now.toLocaleDateString('pt-BR', {
+  const cleanLang = (lang || clientTemporal?.lang || 'pt').toLowerCase().slice(0, 2);
+  const bcp47 = LANG_BCP47_MAP[cleanLang] || 'pt-BR';
+
+  const localeDate = clientTemporal?.localeDate || now.toLocaleDateString(bcp47, {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
     timeZone: tz
   });
-  const localeTime = clientTemporal?.localeTime || now.toLocaleTimeString('pt-BR', {
+  const localeTime = clientTemporal?.localeTime || now.toLocaleTimeString(bcp47, {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
@@ -91,8 +104,8 @@ export function buildRealtimeTemporalContext(clientTemporal = null) {
   });
   const hour = typeof clientTemporal?.hour === 'number'
     ? clientTemporal.hour
-    : (Number(now.toLocaleTimeString('pt-BR', { hour: '2-digit', hour12: false, timeZone: tz })) || now.getHours());
-  const period = hour < 6 ? 'madrugada' : hour < 12 ? 'manhã' : hour < 18 ? 'tarde' : 'noite';
+    : (Number(now.toLocaleTimeString('en-GB', { hour: '2-digit', hour12: false, timeZone: tz })) || now.getHours());
+  const period = hour < 6 ? 'late night' : hour < 12 ? 'morning' : hour < 18 ? 'afternoon' : 'evening';
 
   return {
     iso: now.toISOString(),
@@ -102,13 +115,82 @@ export function buildRealtimeTemporalContext(clientTemporal = null) {
     hour,
     period,
     year: now.getFullYear(),
-    promptHeader: `[METADADO SILENCIOSO DE RELÓGIO LOCAL DO USUÁRIO]: Data: ${localeDate} | Hora local exata: ${localeTime} (${period}, fuso ${tz}). REGRA ESTRITA: NÃO mencione que horas são nem que dia é hoje na sua resposta, A MENOS QUE o usuário pergunte explicitamente as horas ou a data.`
+    promptHeader: `[SILENT LOCAL CLOCK METADATA]: Date: ${localeDate} | Local time: ${localeTime} (${period}, timezone ${tz}). STRICT RULE: Do NOT mention the time or date in your response UNLESS the user explicitly asks for the time or date.`
   };
 }
 
 /**
- * Frontier LLM Reasoning Engine with Native Chain-of-Thought Extraction & Fast Voice Streaming
- * Authenticates via `x-goog-api-key` header or query param and streams via Server-Sent Events (SSE).
+ * Computes real neural semantic embeddings via Gemini Embedding API (768D/3072D)
+ * Returns Float array or null gracefully if offline/unauthenticated.
+ */
+export async function computeSemanticEmbedding(text, apiKey = '') {
+  const resolvedKey = (apiKey || process.env.GEMINI_API_KEY || '').trim();
+  const cleanText = String(text || '').trim().slice(0, 4000);
+  if (!resolvedKey || !cleanText || process.env.NEXUS_TEST_MODE) return null;
+
+  for (const embModel of ['gemini-embedding-001', 'text-embedding-004']) {
+    try {
+      const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${embModel}:embedContent`, {
+        method: 'POST',
+        signal: AbortSignal.timeout(8000),
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': resolvedKey
+        },
+        body: JSON.stringify({
+          model: `models/${embModel}`,
+          content: { parts: [{ text: cleanText }] }
+        })
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        const vals = data?.embedding?.values;
+        if (Array.isArray(vals) && vals.length > 0) return vals;
+      }
+    } catch (_) {}
+  }
+  return null;
+}
+
+/**
+ * Helper: converts Gemini-style contents + optional attachments into OpenAI/Anthropic multi-turn messages
+ */
+function buildStandardChatMessages(contents, attachments = []) {
+  const messages = [];
+  if (typeof contents === 'string') {
+    messages.push({ role: 'user', content: contents });
+  } else if (Array.isArray(contents)) {
+    for (const turn of contents) {
+      const role = turn.role === 'model' || turn.role === 'assistant' ? 'assistant' : 'user';
+      const txt = (turn.parts || []).map(p => p.text || '').filter(Boolean).join('\n').trim();
+      if (txt) messages.push({ role, content: txt });
+    }
+  }
+  if (!messages.length) messages.push({ role: 'user', content: String(contents || '') });
+
+  if (Array.isArray(attachments) && attachments.length > 0) {
+    const last = messages[messages.length - 1];
+    if (last && last.role === 'user') {
+      const contentArr = [{ type: 'text', text: String(last.content || '') }];
+      for (const att of attachments.slice(0, 4)) {
+        if (att && att.mimeType && att.mimeType.startsWith('image/') && att.data) {
+          contentArr.push({
+            type: 'image_url',
+            image_url: { url: `data:${att.mimeType};base64,${att.data}` }
+          });
+        } else if (att && att.textContent) {
+          contentArr.push({ type: 'text', text: `\n[Attached file: ${att.name || 'document'}]\n${att.textContent.slice(0, 12000)}` });
+        }
+      }
+      last.content = contentArr;
+    }
+  }
+  return messages;
+}
+
+/**
+ * Frontier LLM Reasoning Engine with Native Chain-of-Thought, Multimodal Attachments,
+ * Google Search Grounding, True Multi-Provider Fallback & Streaming SSE.
  */
 export async function streamWithThinking({
   apiKey,
@@ -117,19 +199,46 @@ export async function streamWithThinking({
   thinkingLevel = 'MEDIUM',
   fastVoiceMode = false,
   clientTemporal = null,
+  lang = 'pt',
+  attachments = [],
+  useGoogleSearch = false,
   onThoughtChunk,
   onAnswerChunk
 }) {
   const resolvedKey = (apiKey || process.env.GEMINI_API_KEY || '').trim();
-  if (!resolvedKey) {
+  const openAiKey = (process.env.OPENAI_API_KEY || '').trim();
+  const anthropicKey = (process.env.ANTHROPIC_API_KEY || '').trim();
+
+  if (!resolvedKey && !openAiKey && !anthropicKey) {
     throw new Error('NO_API_KEY');
   }
 
   const t0 = performance.now();
-  const temporal = buildRealtimeTemporalContext(clientTemporal);
+  const temporal = buildRealtimeTemporalContext(clientTemporal, lang);
+
+  // Format Gemini contents + attach multimodal inlineData (images, PDFs, audio, CSV/text)
   const formattedContents = typeof contents === 'string'
     ? [{ role: 'user', parts: [{ text: contents }] }]
-    : contents;
+    : JSON.parse(JSON.stringify(contents || [{ role: 'user', parts: [{ text: '' }] }]));
+
+  if (Array.isArray(attachments) && attachments.length > 0 && formattedContents.length > 0) {
+    const lastTurn = formattedContents[formattedContents.length - 1];
+    if (!Array.isArray(lastTurn.parts)) lastTurn.parts = [];
+    for (const att of attachments.slice(0, 4)) {
+      if (att && att.mimeType && att.data) {
+        lastTurn.parts.push({
+          inlineData: {
+            mimeType: att.mimeType,
+            data: att.data
+          }
+        });
+      } else if (att && att.textContent) {
+        lastTurn.parts.push({
+          text: `\n[Attached file: ${att.name || 'file'}]\n${String(att.textContent).slice(0, 15000)}`
+        });
+      }
+    }
+  }
 
   const fullSystemInstruction = [
     temporal.promptHeader,
@@ -144,105 +253,120 @@ export async function streamWithThinking({
   ].join('\n\n');
 
   let lastError = null;
+  const reqTimeoutMs = fastVoiceMode ? 22000 : 48000;
 
   // 1. Google Gemini Frontier Models
-  for (const modelName of GEMINI_MODELS_PRIORITY) {
-    const payload = {
-      contents: formattedContents,
-      systemInstruction: {
-        parts: [{ text: fullSystemInstruction }]
-      },
-      generationConfig: {
-        temperature: fastVoiceMode ? 0.65 : 0.72,
-        maxOutputTokens: fastVoiceMode ? 700 : 2048
-      }
-    };
-
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse`;
-    try {
-      const resp = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-goog-api-key': resolvedKey
+  if (resolvedKey) {
+    for (const modelName of GEMINI_MODELS_PRIORITY) {
+      const payload = {
+        contents: formattedContents,
+        systemInstruction: {
+          parts: [{ text: fullSystemInstruction }]
         },
-        body: JSON.stringify(payload)
-      });
+        generationConfig: {
+          temperature: fastVoiceMode ? 0.65 : 0.72,
+          maxOutputTokens: fastVoiceMode ? 1024 : 8192
+        }
+      };
 
-      if (!resp.ok) {
-        const errText = await resp.text();
-        lastError = new Error(`Gemini API (${modelName}) HTTP ${resp.status}: ${errText.slice(0, 200)}`);
-        continue;
+      // Native Google Search Grounding on Gemini 2.5+ when real-time web verification is needed
+      if (useGoogleSearch && !fastVoiceMode && (modelName.startsWith('gemini-2.5') || modelName.startsWith('gemini-2.0'))) {
+        payload.tools = [{ google_search: {} }];
       }
 
-      let fullThought = '';
-      let fullAnswer = '';
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse`;
+      try {
+        const resp = await fetch(url, {
+          method: 'POST',
+          signal: AbortSignal.timeout(reqTimeoutMs),
+          headers: {
+            'Content-Type': 'application/json',
+            'x-goog-api-key': resolvedKey
+          },
+          body: JSON.stringify(payload)
+        });
 
-      const reader = resp.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = '';
+        if (!resp.ok) {
+          const errText = await resp.text();
+          lastError = new Error(`Gemini API (${modelName}) HTTP ${resp.status}: ${errText.slice(0, 200)}`);
+          continue;
+        }
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split('\n');
-        buffer = lines.pop() || '';
+        let fullThought = '';
+        let fullAnswer = '';
+        const groundingSources = [];
 
-        for (const line of lines) {
-          if (!line.startsWith('data:')) continue;
-          const jsonStr = line.slice(5).trim();
-          if (!jsonStr || jsonStr === '[DONE]') continue;
-          try {
-            const chunk = JSON.parse(jsonStr);
-            const parts = chunk.candidates?.[0]?.content?.parts || [];
-            for (const part of parts) {
-              if (part.thought) {
-                fullThought += part.text || '';
-                if (onThoughtChunk) onThoughtChunk(part.text || '');
-              } else if (part.text) {
-                fullAnswer += part.text;
-                if (onAnswerChunk) onAnswerChunk(part.text);
+        const reader = resp.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+
+          for (const line of lines) {
+            if (!line.startsWith('data:')) continue;
+            const jsonStr = line.slice(5).trim();
+            if (!jsonStr || jsonStr === '[DONE]') continue;
+            try {
+              const chunk = JSON.parse(jsonStr);
+              const cand = chunk.candidates?.[0];
+              const parts = cand?.content?.parts || [];
+              for (const part of parts) {
+                if (part.thought) {
+                  fullThought += part.text || '';
+                  if (onThoughtChunk) onThoughtChunk(part.text || '');
+                } else if (part.text) {
+                  fullAnswer += part.text;
+                  if (onAnswerChunk) onAnswerChunk(part.text);
+                }
               }
+              const chunksMeta = cand?.groundingMetadata?.groundingChunks || [];
+              for (const gc of chunksMeta) {
+                if (gc?.web?.uri && !groundingSources.some(s => s.url === gc.web.uri)) {
+                  groundingSources.push({ title: gc.web.title || gc.web.uri, url: gc.web.uri });
+                }
+              }
+            } catch (_) {}
+          }
+        }
+
+        if (fullAnswer.trim()) {
+          const totalLatencyMs = Math.round(performance.now() - t0);
+          try {
+            if (telemetry && typeof telemetry.recordCall === 'function') {
+              telemetry.recordCall(modelName, totalLatencyMs);
+            } else if (telemetry && typeof telemetry.recordApiCall === 'function') {
+              telemetry.recordApiCall(totalLatencyMs);
             }
           } catch (_) {}
+
+          return {
+            model: modelName,
+            provider: 'google',
+            thought: fullThought.trim(),
+            answer: fullAnswer.trim(),
+            groundingSources: groundingSources.slice(0, 8),
+            latencyMs: totalLatencyMs
+          };
         }
+      } catch (err) {
+        lastError = err;
       }
-
-      if (fullAnswer.trim()) {
-        const totalLatencyMs = Math.round(performance.now() - t0);
-        try {
-          if (telemetry && typeof telemetry.recordCall === 'function') {
-            telemetry.recordCall(modelName, totalLatencyMs);
-          } else if (telemetry && typeof telemetry.recordApiCall === 'function') {
-            telemetry.recordApiCall(totalLatencyMs);
-          }
-        } catch (_) {}
-
-        return {
-          model: modelName,
-          provider: 'google',
-          thought: fullThought.trim(),
-          answer: fullAnswer.trim(),
-          latencyMs: totalLatencyMs
-        };
-      }
-    } catch (err) {
-      lastError = err;
     }
   }
 
-  // 2. OpenAI Frontier Fallback (GPT-4o / GPT-4o-mini) if OPENAI_API_KEY is present
-  const openAiKey = (process.env.OPENAI_API_KEY || '').trim();
+  // 2. OpenAI Frontier Fallback (GPT-4o / GPT-4o-mini) — preserves multi-turn history & vision
   if (openAiKey) {
+    const chatMessages = buildStandardChatMessages(contents, attachments);
     for (const openAiModel of ['gpt-4o', 'gpt-4o-mini']) {
       try {
-        const userPrompt = typeof contents === 'string'
-          ? contents
-          : (Array.isArray(contents) ? contents.map(c => c.parts?.map(p => p.text).join(' ')).join('\n') : String(contents));
-
         const resp = await fetch('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
+          signal: AbortSignal.timeout(reqTimeoutMs),
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${openAiKey}`
@@ -251,10 +375,10 @@ export async function streamWithThinking({
             model: openAiModel,
             messages: [
               { role: 'system', content: fullSystemInstruction },
-              { role: 'user', content: userPrompt }
+              ...chatMessages
             ],
             temperature: fastVoiceMode ? 0.65 : 0.72,
-            max_tokens: fastVoiceMode ? 700 : 2048,
+            max_tokens: fastVoiceMode ? 1024 : 8192,
             stream: true
           })
         });
@@ -294,6 +418,7 @@ export async function streamWithThinking({
               provider: 'openai',
               thought: '',
               answer: fullAnswer.trim(),
+              groundingSources: [],
               latencyMs: totalLatencyMs
             };
           }
@@ -304,17 +429,18 @@ export async function streamWithThinking({
     }
   }
 
-  // 3. Anthropic Frontier Fallback (Claude 3.5 Sonnet) if ANTHROPIC_API_KEY is present
-  const anthropicKey = (process.env.ANTHROPIC_API_KEY || '').trim();
+  // 3. Anthropic Frontier Fallback (Claude Sonnet / Haiku) — preserves multi-turn history
   if (anthropicKey) {
-    for (const claudeModel of ['claude-3-5-sonnet-20241022', 'claude-3-haiku-20240307']) {
+    const rawMsgs = buildStandardChatMessages(contents, []);
+    const claudeMessages = rawMsgs.map(m => ({
+      role: m.role,
+      content: typeof m.content === 'string' ? m.content : JSON.stringify(m.content)
+    }));
+    for (const claudeModel of ['claude-sonnet-4-20250514', 'claude-3-5-sonnet-20241022', 'claude-3-5-haiku-20241022']) {
       try {
-        const userPrompt = typeof contents === 'string'
-          ? contents
-          : (Array.isArray(contents) ? contents.map(c => c.parts?.map(p => p.text).join(' ')).join('\n') : String(contents));
-
         const resp = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
+          signal: AbortSignal.timeout(reqTimeoutMs),
           headers: {
             'Content-Type': 'application/json',
             'x-api-key': anthropicKey,
@@ -323,8 +449,8 @@ export async function streamWithThinking({
           body: JSON.stringify({
             model: claudeModel,
             system: fullSystemInstruction,
-            messages: [{ role: 'user', content: userPrompt }],
-            max_tokens: fastVoiceMode ? 700 : 2048,
+            messages: claudeMessages,
+            max_tokens: fastVoiceMode ? 1024 : 8192,
             temperature: fastVoiceMode ? 0.65 : 0.72
           })
         });
@@ -340,6 +466,7 @@ export async function streamWithThinking({
               provider: 'anthropic',
               thought: '',
               answer: fullAnswer.trim(),
+              groundingSources: [],
               latencyMs: totalLatencyMs
             };
           }

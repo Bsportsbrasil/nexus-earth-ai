@@ -197,7 +197,7 @@ class CompanionAgentEngine {
     return this.state;
   }
 
-  async converse({ message, userName, learningStyle, history = [], clientTemporal = null, lang = 'pt', apiKey, onThought, onChunk }) {
+  async converse({ message, userName, userId = '', learningStyle, history = [], clientTemporal = null, lang = 'pt', attachments = [], apiKey, onThought, onChunk }) {
     const cleanMsg = (message || '').trim();
     if (learningStyle) this.state.learningStyle = learningStyle;
     if (userName && userName.trim()) this.state.userName = userName.trim();
@@ -376,7 +376,7 @@ O usuário selecionou a interface no idioma "${activeLangName}" (código "${acti
       `[MEMÓRIA DO DIÁRIO DE APRENDIZADO COM ${activeName.toUpperCase()}]:\n${recentInsights || '- Iniciando conexão genuína.'}`
     ].join('\n\n');
 
-    const resolvedKey = apiKey || process.env.GEMINI_API_KEY;
+    const resolvedKey = apiKey || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY || process.env.ANTHROPIC_API_KEY;
 
     if (resolvedKey) {
       try {
@@ -390,16 +390,25 @@ O usuário selecionou a interface no idioma "${activeLangName}" (código "${acti
           { role: 'user', parts: [{ text: contextualizedMsg }] }
         ];
 
+        let accThought = '';
+        let accAnswer = '';
         const res = await streamWithThinking({
-          apiKey: resolvedKey,
+          apiKey: apiKey || process.env.GEMINI_API_KEY || '',
           contents,
           systemInstruction: systemPrompt,
-          fastVoiceMode: true,
+          fastVoiceMode: false,
           clientTemporal,
-          onThoughtChunk: (delta, fullThought) => onThought && onThought(fullThought),
-          onAnswerChunk: (delta, fullAnswer) => {
-            const visible = fullAnswer.replace(/<INSIGHT>[\s\S]*?<\/INSIGHT>/gi, '').trim();
-            onChunk && onChunk(visible);
+          lang: activeLangCode,
+          attachments: Array.isArray(attachments) ? attachments : [],
+          useGoogleSearch: true,
+          onThoughtChunk: (delta) => {
+            accThought += delta || '';
+            if (onThought) onThought(accThought);
+          },
+          onAnswerChunk: (delta) => {
+            accAnswer += delta || '';
+            const visible = accAnswer.replace(/<INSIGHT>[\s\S]*?<\/INSIGHT>/gi, '').trim();
+            if (onChunk) onChunk(visible, delta || '');
           }
         });
 
@@ -420,13 +429,15 @@ O usuário selecionou a interface no idioma "${activeLangName}" (código "${acti
           response: cleanAnswer,
           sourceAgent: 'AURA_LIVE_COMPANION',
           userName: activeName,
-          accountId: 'acc_public_live',
+          accountId: userId || 'acc_public_live',
           ragEvidence: rag
         });
 
         return {
           reply: cleanAnswer,
           thought: res.thought,
+          groundingSources: res.groundingSources || [],
+          lang: activeLangCode,
           newInsight,
           memory: this.state,
           emotionProfile,
@@ -435,8 +446,37 @@ O usuário selecionou a interface no idioma "${activeLangName}" (código "${acti
           xaiPassport
         };
       } catch (e) {
-        console.error('AURA Gemini LLM call failed:', e.message || e);
+        console.error('AURA LLM call failed:', e.message || e);
         // Proceed to verified empathetic & factual synthesis below if offline or quota reached
+      }
+    }
+
+    // Multilingual offline fallback so non-Portuguese UI languages NEVER leak Portuguese!
+    if (activeLangCode !== 'pt') {
+      const i18nCompanionFallbacks = {
+        en: `Hi ${activeName}! I'm AURA. I received your message ("${cleanMsg.slice(0, 80)}") and I'm right here with you in English. Let me know how I can help you step by step.`,
+        es: `¡Hola ${activeName}! Soy AURA. Recibí tu mensaje ("${cleanMsg.slice(0, 80)}") y estoy aquí contigo en español. Dime cómo puedo ayudarte ahora.`,
+        fr: `Bonjour ${activeName} ! Je suis AURA. J'ai bien reçu votre message ("${cleanMsg.slice(0, 80)}") et je vous réponds en français. Comment puis-je vous aider ?`,
+        de: `Hallo ${activeName}! Ich bin AURA. Ich habe deine Nachricht erhalten ("${cleanMsg.slice(0, 80)}") und antworte dir auf Deutsch. Wie kann ich dir helfen?`,
+        it: `Ciao ${activeName}! Sono AURA. Ho ricevuto il tuo messaggio ("${cleanMsg.slice(0, 80)}") e sono qui con te in italiano. Dimmi come posso aiutarti!`,
+        zh: `你好 ${activeName}！我是 AURA。我已收到你的消息（"${cleanMsg.slice(0, 80)}"），正在用中文为你服务。`,
+        ja: `こんにちは ${activeName}さん！AURAです。メッセージ（「${cleanMsg.slice(0, 80)}」）を受け取りました。日本語でお手伝いします。`,
+        ar: `مرحباً ${activeName}! أنا AURA. استلمت رسالتك ("${cleanMsg.slice(0, 80)}") وأتحدث معك الآن باللغة العربية. كيف أساعدك؟`,
+        ru: `Привет, ${activeName}! Я AURA. Я получила ваше сообщение («${cleanMsg.slice(0, 80)}») и отвечаю на русском языке.`,
+        hi: `नमस्ते ${activeName}! मैं AURA हूँ। मुझे आपका संदेश ("${cleanMsg.slice(0, 80)}") मिल गया है और मैं हिंदी में आपकी मदद के लिए तैयार हूँ।`
+      };
+      if (i18nCompanionFallbacks[activeLangCode]) {
+        return {
+          reply: i18nCompanionFallbacks[activeLangCode],
+          thought: '',
+          groundingSources: [],
+          lang: activeLangCode,
+          newInsight: null,
+          memory: this.state,
+          emotionProfile,
+          rag,
+          temporal
+        };
       }
     }
 

@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { broker } from './broker.js';
 import { c2Engine } from './c2_sovereign.js';
+import { writeJsonAtomic } from './storage_adapter.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const IDENTITY_STORE_PATH = path.join(__dirname, '..', 'data', 'users_identity.enc');
@@ -52,18 +53,14 @@ export class IdentityAuthEngine {
       const encrypted = Buffer.concat([cipher.update(payload, 'utf8'), cipher.final()]);
       const authTag = cipher.getAuthTag();
 
-      fs.writeFileSync(
-        IDENTITY_STORE_PATH,
-        JSON.stringify({
-          cipher: 'AES-256-GCM',
-          kdf: 'PBKDF2-SHA256',
-          salt: salt.toString('hex'),
-          iv: iv.toString('hex'),
-          authTag: authTag.toString('hex'),
-          ciphertext: encrypted.toString('base64')
-        }, null, 2),
-        'utf8'
-      );
+      writeJsonAtomic(IDENTITY_STORE_PATH, {
+        cipher: 'AES-256-GCM',
+        kdf: 'PBKDF2-SHA256',
+        salt: salt.toString('hex'),
+        iv: iv.toString('hex'),
+        authTag: authTag.toString('hex'),
+        ciphertext: encrypted.toString('base64')
+      });
     } catch (_) {}
   }
 
@@ -499,6 +496,57 @@ export class IdentityAuthEngine {
     return this.deleteOwnAccount(userId);
   }
 
+  activateUserPlan({ userId = '', email = '', tier = 'PLUS', durationDays = 30, paymentOrderId = '' }) {
+    const user = (userId && this.usersById.get(userId)) || (email && this.usersByEmail.get(String(email).toLowerCase().trim()));
+    if (!user) return { activated: false, reason: 'USER_NOT_FOUND' };
+    const now = Date.now();
+    const baseExp = user.planExpiresAt ? Math.max(now, new Date(user.planExpiresAt).getTime()) : now;
+    user.plan = tier;
+    user.planExpiresAt = new Date(baseExp + durationDays * 24 * 3600 * 1000).toISOString();
+    user.lastPaymentOrderId = paymentOrderId;
+    this._saveEncryptedStore();
+    broker.publish('billing.plan_activated', { userId: user.id, tier, expiresAt: user.planExpiresAt, paymentOrderId });
+    return { activated: true, userId: user.id, plan: user.plan, planExpiresAt: user.planExpiresAt };
+  }
+
+  checkAndConsumeQuota(userId = '', isAdmin = false) {
+    if (isAdmin || process.env.NEXUS_TEST_MODE) {
+      return { allowed: true, plan: 'SOVEREIGN_UNLIMITED', remaining: 999999 };
+    }
+    const enforcePaywall = process.env.NEXUS_ENFORCE_PAYWALL === '1';
+    const user = userId ? this.usersById.get(userId) : null;
+    if (!user) {
+      return { allowed: true, plan: 'GUEST', remaining: enforcePaywall ? 10 : 9999 };
+    }
+    const now = Date.now();
+    const hasPaidPlan = (user.plan === 'PLUS' || user.plan === 'PRO') && (!user.planExpiresAt || new Date(user.planExpiresAt).getTime() > now);
+    if (hasPaidPlan) {
+      return { allowed: true, plan: user.plan, remaining: 999999 };
+    }
+    const today = new Date().toISOString().slice(0, 10);
+    if (!user.dailyUsage || user.dailyUsage.date !== today) {
+      user.dailyUsage = { date: today, count: 0 };
+    }
+    const dailyLimit = Number(process.env.NEXUS_FREE_DAILY_LIMIT || 15);
+    if (enforcePaywall && user.dailyUsage.count >= dailyLimit) {
+      return {
+        allowed: false,
+        upgradeRequired: true,
+        plan: 'FREE',
+        remaining: 0,
+        limit: dailyLimit
+      };
+    }
+    user.dailyUsage.count++;
+    this._saveEncryptedStore();
+    return {
+      allowed: true,
+      plan: 'FREE',
+      remaining: Math.max(0, dailyLimit - user.dailyUsage.count),
+      limit: dailyLimit
+    };
+  }
+
   getAllRegisteredUsers() {
     return Array.from(this.usersById.values()).map(u => ({
       id: u.id,
@@ -506,6 +554,8 @@ export class IdentityAuthEngine {
       email: u.email,
       company: u.company || 'Usuário Cadastrado Web/App',
       role: u.role || 'TENANT_PRO',
+      plan: u.plan || 'FREE',
+      planExpiresAt: u.planExpiresAt || null,
       learningStyle: u.learningStyle,
       mfaEnabled: !!u.mfaEnabled,
       lgpdConsent: !!u.lgpdConsent,

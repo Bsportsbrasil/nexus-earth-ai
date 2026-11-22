@@ -317,20 +317,45 @@ const NexusMobile = (function () {
   /* --- Real-Time User Local Clock, Timezone & Geolocation Helper --- */
   let cachedClientGeo = null;
 
+  function getDeviceSessionId() {
+    try {
+      let sid = localStorage.getItem('nexus_sid');
+      if (!sid || sid.length < 10) {
+        sid = 'u_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+        localStorage.setItem('nexus_sid', sid);
+      }
+      return sid;
+    } catch (_) {
+      return 'u_mem_' + Date.now().toString(36);
+    }
+  }
+
+  function getActiveBcp47Safe() {
+    if (window.VoiceEngine && typeof window.VoiceEngine.getActiveBcp47 === 'function') {
+      return window.VoiceEngine.getActiveBcp47();
+    }
+    const lang = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
+    const map = { pt: 'pt-BR', en: 'en-US', es: 'es-ES', fr: 'fr-FR', de: 'de-DE', it: 'it-IT', zh: 'zh-CN', ja: 'ja-JP', ar: 'ar-SA', ru: 'ru-RU', hi: 'hi-IN' };
+    return map[lang] || 'pt-BR';
+  }
+
   function getClientTemporalContext() {
     const now = new Date();
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Sao_Paulo';
+    const bcp47 = getActiveBcp47Safe();
+    const lang = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
     return {
       iso: now.toISOString(),
       timeZone: tz,
-      localeDate: now.toLocaleDateString('pt-BR', {
+      lang,
+      localeDate: now.toLocaleDateString(bcp47, {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric',
         timeZone: tz
       }),
-      localeTime: now.toLocaleTimeString('pt-BR', {
+      localeTime: now.toLocaleTimeString(bcp47, {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
@@ -1010,24 +1035,45 @@ const NexusMobile = (function () {
       if (window.VoiceEngine) window.VoiceEngine.stop();
       else if (window.speechSynthesis) window.speechSynthesis.cancel();
 
-      setBotState('listening', 'AURA escutando atentamente...');
+      const curL = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
+      const liveStrs = {
+        pt: { listen: 'AURA escutando atentamente...', you: 'Você', think: 'AURA sintonizando emoção e raciocínio...' },
+        en: { listen: 'AURA listening attentively...', you: 'You', think: 'AURA tuning emotion and reasoning...' },
+        es: { listen: 'AURA escuchando atentamente...', you: 'Tú', think: 'AURA sintonizando emoción y razonamiento...' },
+        fr: { listen: 'AURA vous écoute attentivement...', you: 'Vous', think: 'AURA synchronise émotion et raisonnement...' },
+        de: { listen: 'AURA hört aufmerksam zu...', you: 'Du', think: 'AURA stimmt Emotion und Logik ab...' },
+        it: { listen: 'AURA ti ascolta attentamente...', you: 'Tu', think: 'AURA sta sintonizzando emozione e ragionamento...' },
+        zh: { listen: 'AURA 正在专注聆听...', you: '你', think: 'AURA 正在同步情感与推理...' },
+        ja: { listen: 'AURA が注意深く聴いています...', you: 'あなた', think: 'AURA が感情と推論を同調中...' },
+        ar: { listen: 'AURA تستمع باهتمام...', you: 'أنت', think: 'AURA توائم العاطفة والتفكير...' },
+        ru: { listen: 'AURA внимательно слушает...', you: 'Вы', think: 'AURA настраивает эмпатию и логику...' },
+        hi: { listen: 'AURA ध्यान से सुन रही है...', you: 'आप', think: 'AURA भावना और तर्क को जोड़ रही है...' }
+      }[curL] || { listen: 'AURA escutando atentamente...', you: 'Você', think: 'AURA sintonizando emoção e raciocínio...' };
+
+      setBotState('listening', liveStrs.listen);
       addTurnToHistory('user', q);
       if (captionBox) {
-        captionBox.innerHTML = `<span style="color:var(--cyan);">Você: "${escapeHtml(q)}"</span><br/><em>AURA sintonizando emoção e raciocínio...</em>`;
+        captionBox.dataset.interacted = '1';
+        captionBox.innerHTML = `<span style="color:var(--cyan);">${liveStrs.you}: "${escapeHtml(q)}"</span><br/><em>${liveStrs.think}</em>`;
       }
 
       try {
         const clientTemporal = getClientTemporalContext();
         const clientGeo = await resolveClientGeoIfNeeded(q);
-        const currentActiveLang = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
+        const currentActiveLang = curL;
+        const sid = getDeviceSessionId();
         const res = await fetch('/api/agents/converse', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'x-nexus-session-id': sid
+          },
           body: JSON.stringify({
             agentId: 'aura',
             message: q,
             voiceEnabled: true,
             lang: currentActiveLang,
+            sessionId: sid,
             clientTemporal,
             clientGeo,
             apiKey: localStorage.getItem('nexus_gemini_key') || ''
@@ -1099,7 +1145,7 @@ const NexusMobile = (function () {
     const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRec && micBtn) {
       liveRec = new SpeechRec();
-      liveRec.lang = 'pt-BR';
+      liveRec.lang = getActiveBcp47Safe();
       liveRec.continuous = false;
       liveRec.interimResults = false;
 
@@ -1180,7 +1226,7 @@ const NexusMobile = (function () {
     const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRec) {
       recognition = new SpeechRec();
-      recognition.lang = 'pt-BR';
+      recognition.lang = getActiveBcp47Safe();
       recognition.continuous = false;
       recognition.interimResults = false;
 
@@ -1255,13 +1301,18 @@ const NexusMobile = (function () {
         const clientTemporal = getClientTemporalContext();
         const clientGeo = await resolveClientGeoIfNeeded(q);
         const currentActiveLang = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
+        const sid = getDeviceSessionId();
         const res = await fetch('/api/agents/converse', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'x-nexus-session-id': sid
+          },
           body: JSON.stringify({
             agentId: 'aura',
             message: q,
             lang: currentActiveLang,
+            sessionId: sid,
             clientTemporal,
             clientGeo,
             apiKey: localStorage.getItem('nexus_gemini_key') || ''
@@ -1767,7 +1818,7 @@ const NexusMobile = (function () {
       window.speechSynthesis.cancel();
       const clean = text.replace(/[*#_`>]/g, '').trim();
       const utt = new SpeechSynthesisUtterance(clean);
-      utt.lang = 'pt-BR';
+      utt.lang = getActiveBcp47Safe();
       utt.rate = 1.02;
 
       utt.onstart = () => { isSpeaking = true; };

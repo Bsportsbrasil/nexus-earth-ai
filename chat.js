@@ -229,11 +229,14 @@ Siga rigorosamente estas diretrizes operacionais:
         const thoughtEl = chain ? setStep(chain, 3, 'Streaming native reasoning tokens...', true) : null;
         const d = new Date();
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Sao_Paulo';
-        const timeStr = `${d.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} às ${d.toLocaleTimeString('pt-BR')}`;
+        const activeLang = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
+        const bcp47 = (window.VoiceEngine && window.VoiceEngine.getActiveBcp47) ? window.VoiceEngine.getActiveBcp47() : 'pt-BR';
+        const timeStr = `${d.toLocaleDateString(bcp47, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} ${d.toLocaleTimeString(bcp47)}`;
+        const langDirective = activeLang !== 'pt' ? `[ACTIVE INTERFACE LANGUAGE: "${activeLang}" (${bcp47}). Reply strictly in this language.]\n` : '';
         const groundedPrompt = facts && facts.extract
-          ? `[Data/Hora Atual do Usuário: ${timeStr} (${tz})]\nPergunta do usuário: ${q}\n\n[Evidências Verificadas do GraphRAG — Fonte: ${facts.title} (${facts.url})]:\n${facts.extract}\n` +
-            (facts.papers?.length ? `Artigos Científicos:\n` + facts.papers.map(p => `- ${p.title} (${p.year}) ${p.doi}`).join('\n') : '')
-          : `[Data/Hora Atual do Usuário: ${timeStr} (${tz})]\nPergunta do usuário: ${q}`;
+          ? `${langDirective}[User Local Date/Time: ${timeStr} (${tz})]\nUser query: ${q}\n\n[Verified GraphRAG Evidence — Source: ${facts.title} (${facts.url})]:\n${facts.extract}\n` +
+            (facts.papers?.length ? `Scientific Papers:\n` + facts.papers.map(p => `- ${p.title} (${p.year}) ${p.doi}`).join('\n') : '')
+          : `${langDirective}[User Local Date/Time: ${timeStr} (${tz})]\nUser query: ${q}`;
 
         history.push({ role: 'user', parts: [{ text: groundedPrompt }] });
         const t0 = performance.now();

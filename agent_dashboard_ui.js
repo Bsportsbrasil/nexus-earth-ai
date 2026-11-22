@@ -39,9 +39,20 @@ const AgentDashboardUI = (function () {
     };
   }
 
+
+  function _adminFetch(url, opts = {}) {
+    const token = (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('nexus_admin_token')) || '';
+    const headers = Object.assign({}, opts.headers || {});
+    if (token) {
+      headers['Authorization'] = 'Bearer ' + token;
+      headers['x-nexus-admin-key'] = token;
+    }
+    return fetch(url, Object.assign({}, opts, { headers }));
+  }
+
   async function loadDashboardState() {
     try {
-      const res = await fetch('/api/agents/dashboard');
+      const res = await _adminFetch('/api/agents/dashboard');
       if (!res.ok) return;
       currentOverview = await res.json();
       renderAgentsList();
@@ -297,7 +308,7 @@ const AgentDashboardUI = (function () {
     if (newText === null || newText.trim() === '' || newText.trim() === currentText) return;
 
     try {
-      const res = await fetch('/api/agents/update-vector', {
+      const res = await _adminFetch('/api/agents/update-vector', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ agentId: activeAgentId, vectorId: vecId, text: newText.trim() })
@@ -320,7 +331,7 @@ const AgentDashboardUI = (function () {
     if (!confirm('Tem certeza de que deseja excluir permanentemente este vetor de memória do agente?')) return;
 
     try {
-      const res = await fetch('/api/agents/delete-vector', {
+      const res = await _adminFetch('/api/agents/delete-vector', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ agentId: activeAgentId, vectorId: vecId })
@@ -397,7 +408,7 @@ const AgentDashboardUI = (function () {
       const user = window.AuthUI ? window.AuthUI.getCurrentUser() : null;
       const userName = isAdminMode() ? 'Criador' : (user?.name || 'Usuário');
 
-      const res = await fetch('/api/agents/converse', {
+      const res = await _adminFetch('/api/agents/converse', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -536,7 +547,7 @@ const AgentDashboardUI = (function () {
     if (!confirm(confirmMsg)) return;
 
     try {
-      const res = await fetch('/api/agents/block', {
+      const res = await _adminFetch('/api/agents/block', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ agentId: ag.id, blocked: willBlock })
@@ -565,7 +576,7 @@ const AgentDashboardUI = (function () {
     if (!confirm(confirmMsg)) return;
 
     try {
-      const res = await fetch('/api/agents/purge-memory', {
+      const res = await _adminFetch('/api/agents/purge-memory', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ agentId: ag.id })
@@ -595,7 +606,7 @@ const AgentDashboardUI = (function () {
     }
 
     try {
-      const res = await fetch('/api/agents/delete', {
+      const res = await _adminFetch('/api/agents/delete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ agentId: ag.id })
@@ -630,7 +641,7 @@ const AgentDashboardUI = (function () {
     if (newInst === null) return;
 
     try {
-      const res = await fetch('/api/agents/update', {
+      const res = await _adminFetch('/api/agents/update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -661,7 +672,7 @@ const AgentDashboardUI = (function () {
     const desc = prompt('Descrição curta da persona e objetivo:') || '';
 
     try {
-      const res = await fetch('/api/agents/create', {
+      const res = await _adminFetch('/api/agents/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name.trim(), role: role.trim(), description: desc.trim() })

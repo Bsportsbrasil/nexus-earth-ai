@@ -42,9 +42,20 @@ const Swarm100UI = (() => {
     startPolling();
   }
 
+
+  function _adminFetch(url, opts = {}) {
+    const token = (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('nexus_admin_token')) || '';
+    const headers = Object.assign({}, opts.headers || {});
+    if (token) {
+      headers['Authorization'] = 'Bearer ' + token;
+      headers['x-nexus-admin-key'] = token;
+    }
+    return fetch(url, Object.assign({}, opts, { headers }));
+  }
+
   async function fetchPayoutSettings() {
     try {
-      const res = await fetch('/api/swarm/payout-settings');
+      const res = await _adminFetch('/api/swarm/payout-settings');
       if (!res.ok) return;
       const data = await res.json();
       if (data && data.pixKey) {
@@ -85,7 +96,7 @@ const Swarm100UI = (() => {
     }
 
     try {
-      const res = await fetch('/api/swarm/payout-settings', {
+      const res = await _adminFetch('/api/swarm/payout-settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -124,7 +135,7 @@ const Swarm100UI = (() => {
         accBtn.textContent = '🚀 Acelerando...';
         accBtn.disabled = true;
         try {
-          const res = await fetch('/api/swarm/accelerate', {
+          const res = await _adminFetch('/api/swarm/accelerate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
           });
@@ -158,7 +169,7 @@ const Swarm100UI = (() => {
           return;
         }
         try {
-          const res = await fetch('/api/swarm/reset', { method: 'POST' });
+          const res = await _adminFetch('/api/swarm/reset', { method: 'POST' });
           const json = await res.json();
           alert(json.message || 'Enxame restaurado com sucesso.');
           await fetchState();
@@ -197,7 +208,7 @@ const Swarm100UI = (() => {
             sectorId: scope === 'sector' ? (activeSector || 'micro_saas') : null
           };
 
-          const res = await fetch('/api/swarm/order', {
+          const res = await _adminFetch('/api/swarm/order', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -271,7 +282,7 @@ const Swarm100UI = (() => {
   async function fetchState() {
     try {
       const url = activeSector ? `/api/swarm/state?sector=${activeSector}` : '/api/swarm/state';
-      const res = await fetch(url);
+      const res = await _adminFetch(url);
       if (!res.ok) throw new Error('Status ' + res.status);
       swarmState = await res.json();
       renderKPIs();
@@ -483,7 +494,7 @@ const Swarm100UI = (() => {
 
   async function toggleAgent(agentId, newStatus) {
     try {
-      const res = await fetch('/api/swarm/agent-control', {
+      const res = await _adminFetch('/api/swarm/agent-control', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ agentId, status: newStatus })
@@ -504,7 +515,7 @@ const Swarm100UI = (() => {
       return;
     }
     try {
-      const res = await fetch(`/api/swarm/agent/${agentId}`, { method: 'DELETE' });
+      const res = await _adminFetch(`/api/swarm/agent/${agentId}`, { method: 'DELETE' });
       const json = await res.json();
       if (json.success) {
         await fetchState();
@@ -520,7 +531,7 @@ const Swarm100UI = (() => {
     const order = prompt(`[ORDEM SOBERANA] Digite a instrução direta para o Agente #${agentId} (${agentName}):\nEx: Crie o código-fonte da API com integração Stripe pronta.`);
     if (!order || !order.trim()) return;
 
-    fetch('/api/swarm/order', {
+    _adminFetch('/api/swarm/order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -616,7 +627,7 @@ const Swarm100UI = (() => {
     saveBtn.textContent = 'Salvando & Confirmando...';
 
     try {
-      const res = await fetch('/api/swarm/agent-config', {
+      const res = await _adminFetch('/api/swarm/agent-config', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -736,7 +747,7 @@ const Swarm100UI = (() => {
     msgsContainer.scrollTop = msgsContainer.scrollHeight;
 
     try {
-      const res = await fetch('/api/swarm/agent-chat', {
+      const res = await _adminFetch('/api/swarm/agent-chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ agentId, message })

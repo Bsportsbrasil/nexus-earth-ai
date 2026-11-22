@@ -21,12 +21,28 @@ const CompanionUI = (function () {
   function getClientTemporal() {
     const d = new Date();
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Sao_Paulo';
+    const bcp47 = (window.VoiceEngine && window.VoiceEngine.getActiveBcp47) ? window.VoiceEngine.getActiveBcp47() : 'pt-BR';
+    const lang = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
     return {
       iso: d.toISOString(),
       timeZone,
-      localeDate: d.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
-      localeTime: d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+      lang,
+      localeDate: d.toLocaleDateString(bcp47, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+      localeTime: d.toLocaleTimeString(bcp47, { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     };
+  }
+
+  function getCompanionSessionId() {
+    try {
+      let sid = localStorage.getItem('nexus_sid');
+      if (!sid || sid.length < 10) {
+        sid = 'u_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+        localStorage.setItem('nexus_sid', sid);
+      }
+      return sid;
+    } catch (_) {
+      return 'u_mem_' + Date.now().toString(36);
+    }
   }
 
   /**
@@ -276,9 +292,13 @@ const CompanionUI = (function () {
 
     try {
       const currentActiveLang = (window.I18nEngine && window.I18nEngine.currentLang) || (localStorage.getItem('nexus_lang') || 'pt');
+      const sid = getCompanionSessionId();
       const resp = await fetch('/api/companion', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-nexus-session-id': sid
+        },
         body: JSON.stringify({
           message: msg,
           userName,
@@ -286,6 +306,7 @@ const CompanionUI = (function () {
           history,
           clientTemporal,
           lang: currentActiveLang,
+          sessionId: sid,
           apiKey: window.Gemini ? Gemini.getKey() : ''
         })
       });
